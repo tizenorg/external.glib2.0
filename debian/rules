@@ -126,8 +126,6 @@ $(STAMP_DIR)/configure-stamp-%: $(STAMP_DIR)/patch-stamp
 		CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" \
 			$(CURDIR)/configure $($*_configure_flags)
 	touch $@
-	mv /usr/lib/libdl.so /usr/lib/libdl.so.tmp
-	ln -sf /lib/libdl.so.2 /usr/lib/libdl.so
 
 configure: $(addprefix $(STAMP_DIR)/configure-stamp-, $(FLAVORS))
 
