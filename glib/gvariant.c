@@ -2619,14 +2619,10 @@ g_variant_make_array_type (GVariant *element)
  *
  * Ends the builder process and returns the constructed value.
  *
- * This call automatically reduces the reference count on @builder by
- * one, unless it has previously had g_variant_builder_no_autofree()
- * called on it.  Unless you've taken other actions, this is usually
- * sufficient to free @builder.
- *
- * Even if additional references are held, it is not permissible to use
- * @builder in any way after this call except for further reference
- * counting operations.
+ * It is not permissible to use @builder in any way after this call
+ * except for reference counting operations (in the case of a
+ * heap-allocated #GVariantBuilder) or by reinitialising it with
+ * g_variant_builder_init() (in the case of stack-allocated).
  *
  * It is an error to call this function in any way that would create an
  * inconsistent value to be constructed (ie: insufficient number of
@@ -3473,17 +3469,21 @@ g_variant_valist_get (const gchar **str,
 
   else /* tuple, dictionary entry */
     {
-      GVariantIter iter;
+      gint index = 0;
 
       g_assert (**str == '(' || **str == '{');
-      g_variant_iter_init (&iter, value);
 
       (*str)++;
       while (**str != ')' && **str != '}')
         {
-          value = g_variant_iter_next_value (&iter);
-          g_variant_valist_get (str, value, free, app);
-          g_variant_unref (value);
+          if (value != NULL)
+            {
+              GVariant *child = g_variant_get_child_value (value, index++);
+              g_variant_valist_get (str, child, free, app);
+              g_variant_unref (child);
+            }
+          else
+            g_variant_valist_get (str, NULL, free, app);
         }
       (*str)++;
     }
@@ -4087,7 +4087,7 @@ g_variant_byteswap (GVariant *value)
 
 /**
  * g_variant_new_from_data:
- * @type: a #GVariantType
+ * @type: a definite #GVariantType
  * @data: the serialised data
  * @size: the size of @data
  * @trusted: %TRUE if @data is definitely in normal form
@@ -4128,6 +4128,9 @@ g_variant_new_from_data (const GVariantType *type,
 {
   GVariant *value;
   GBuffer *buffer;
+
+  g_return_val_if_fail (g_variant_type_is_definite (type), NULL);
+  g_return_val_if_fail (data != NULL || size == 0, NULL);
 
   if (notify)
     buffer = g_buffer_new_from_pointer (data, size, notify, user_data);

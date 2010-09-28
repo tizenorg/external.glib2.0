@@ -8,38 +8,8 @@
 <link rel="up" href="chapter-gobject.html" title="The GObject base class">
 <link rel="prev" href="gobject-memory.html" title="Object memory management">
 <link rel="next" href="chapter-signal.html" title="The GObject messaging system">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="preface" href="pr01.html" title="Introduction">
-<link rel="part" href="pt01.html" title="Part I. Concepts">
-<link rel="chapter" href="chapter-intro.html" title="Background">
-<link rel="chapter" href="chapter-gtype.html" title="The GLib Dynamic Type System">
-<link rel="chapter" href="chapter-gobject.html" title="The GObject base class">
-<link rel="chapter" href="chapter-signal.html" title="The GObject messaging system">
-<link rel="reference" href="rn01.html" title="API Reference">
-<link rel="reference" href="rn02.html" title="Tools Reference">
-<link rel="part" href="pt02.html" title="Part IV. Tutorial">
-<link rel="chapter" href="howto-gobject.html" title="How to define and implement a new GObject">
-<link rel="chapter" href="howto-interface.html" title="How to define and implement interfaces">
-<link rel="chapter" href="howto-signals.html" title="How to create and use signals">
-<link rel="part" href="pt03.html" title="Part V. Related Tools">
-<link rel="chapter" href="tools-vala.html" title="Vala">
-<link rel="chapter" href="tools-gob.html" title="GObject builder">
-<link rel="chapter" href="tools-ginspector.html" title="Graphical inspection of GObjects">
-<link rel="chapter" href="tools-refdb.html" title="Debugging reference count problems">
-<link rel="chapter" href="tools-gtkdoc.html" title="Writing API docs">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
@@ -192,7 +162,7 @@ g_value_unset (&amp;val);
       <code class="function"><a class="link" href="gobject-Generic-values.html#g-value-transform" title="g_value_transform ()">g_value_transform</a></code> will try to transform the input signed char into
       an unsigned int. Of course, the success of the transformation depends on the availability
       of the required transform function. In practice, there will almost always be a transformation
-      <sup>[<a name="id600805" href="#ftn.id600805" class="footnote">4</a>]</sup>
+      <sup>[<a name="id545244" href="#ftn.id545244" class="footnote">4</a>]</sup>
       which matches and conversion will be carried out if needed.
     </p>
 <p>
@@ -212,7 +182,7 @@ g_value_unset (&amp;val);
       implementation of Foo did override this method, the code path would jump to
       <code class="function">foo_set_property</code> after having retrieved from the 
       <span class="type"><a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec">GParamSpec</a></span> the <span class="emphasis"><em>param_id</em></span>
-      <sup>[<a name="id600895" href="#ftn.id600895" class="footnote">5</a>]</sup>
+      <sup>[<a name="id545334" href="#ftn.id545334" class="footnote">5</a>]</sup>
       which had been stored by
       <code class="function"><a class="link" href="gobject-The-Base-Object-Type.html#g-object-class-install-property" title="g_object_class_install_property ()">g_object_class_install_property</a></code>.
     </p>
@@ -281,10 +251,10 @@ g_object_set (G_OBJECT (foo),
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a name="ftn.id600805" href="#id600805" class="para">4</a>] </sup>Its behaviour might not be what you expect but it is up to you to actually avoid
+<div class="footnote"><p><sup>[<a name="ftn.id545244" href="#id545244" class="para">4</a>] </sup>Its behaviour might not be what you expect but it is up to you to actually avoid
           relying on these transformations.
         </p></div>
-<div class="footnote"><p><sup>[<a name="ftn.id600895" href="#id600895" class="para">5</a>] </sup>
+<div class="footnote"><p><sup>[<a name="ftn.id545334" href="#id545334" class="para">5</a>] </sup>
           It should be noted that the param_id used here need only to uniquely identify each 
           <span class="type"><a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec">GParamSpec</a></span> within the <span class="type">FooClass</span> such that the switch
           used in the set and get methods actually works. Of course, this locally-unique 
@@ -295,6 +265,6 @@ g_object_set (G_OBJECT (foo),
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

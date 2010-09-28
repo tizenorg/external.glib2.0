@@ -8,38 +8,8 @@
 <link rel="up" href="volume_mon.html" title="Volumes and Drives">
 <link rel="prev" href="GVolumeMonitor.html" title="GVolumeMonitor">
 <link rel="next" href="GMount.html" title="GMount">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="pt01.html" title="Part I. GIO Overview">
-<link rel="chapter" href="ch01.html" title="Introduction">
-<link rel="chapter" href="ch02.html" title="Compiling GIO applications">
-<link rel="chapter" href="ch03.html" title="Running GIO applications">
-<link rel="chapter" href="extending-gio.html" title="Extending GIO">
-<link rel="part" href="pt02.html" title="Part II. API Reference">
-<link rel="chapter" href="file_ops.html" title="File Operations">
-<link rel="chapter" href="file_mon.html" title="File System Monitoring">
-<link rel="chapter" href="async.html" title="Asynchronous I/O">
-<link rel="chapter" href="conversion.html" title="Data conversion">
-<link rel="chapter" href="streaming.html" title="Streaming I/O">
-<link rel="chapter" href="types.html" title="File types and applications">
-<link rel="chapter" href="volume_mon.html" title="Volumes and Drives">
-<link rel="chapter" href="icons.html" title="Icons">
-<link rel="chapter" href="failable_initialization.html" title="Failable Initialization">
-<link rel="chapter" href="networking.html" title="Lowlevel platform-independent network support">
-<link rel="chapter" href="resolver.html" title="DNS resolution">
-<link rel="chapter" href="highlevel-socket.html" title="Highlevel network functionallity">
-<link rel="chapter" href="utils.html" title="Utilities">
-<link rel="chapter" href="extending.html" title="Extending GIO">
-<link rel="part" href="migrating.html" title="Part III. Migrating to GIO">
-<link rel="chapter" href="ch19.html" title="Migrating from POSIX to GIO">
-<link rel="chapter" href="ch20.html" title="Migrating from GnomeVFS to GIO">
-<link rel="chapter" href="gio-hierarchy.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -78,50 +48,50 @@
 
                     <a class="link" href="GVolume.html#GVolume-struct" title="GVolume">GVolume</a>;
                     <a class="link" href="GVolume.html#GVolumeIface" title="GVolumeIface">GVolumeIface</a>;
-<span class="returnvalue">char</span> *              <a class="link" href="GVolume.html#g-volume-get-name" title="g_volume_get_name ()">g_volume_get_name</a>                   (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<span class="returnvalue">char</span> *              <a class="link" href="GVolume.html#g-volume-get-uuid" title="g_volume_get_uuid ()">g_volume_get_uuid</a>                   (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             <a class="link" href="GVolume.html#g-volume-get-icon" title="g_volume_get_icon ()">g_volume_get_icon</a>                   (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<a class="link" href="GDrive.html" title="GDrive"><span class="returnvalue">GDrive</span></a> *            <a class="link" href="GVolume.html#g-volume-get-drive" title="g_volume_get_drive ()">g_volume_get_drive</a>                  (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *            <a class="link" href="GVolume.html#g-volume-get-mount" title="g_volume_get_mount ()">g_volume_get_mount</a>                  (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-can-mount" title="g_volume_can_mount ()">g_volume_can_mount</a>                  (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-should-automount" title="g_volume_should_automount ()">g_volume_should_automount</a>           (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<a class="link" href="GFile.html" title="GFile"><span class="returnvalue">GFile</span></a> *             <a class="link" href="GVolume.html#g-volume-get-activation-root" title="g_volume_get_activation_root ()">g_volume_get_activation_root</a>        (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<span class="returnvalue">void</span>                <a class="link" href="GVolume.html#g-volume-mount" title="g_volume_mount ()">g_volume_mount</a>                      (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GMount.html#GMountMountFlags" title="enum GMountMountFlags"><span class="returnvalue">GMountMountFlags</span></a> flags,
-                                                         <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="returnvalue">GMountOperation</span></a> *mount_operation,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="returnvalue">GAsyncReadyCallback</span></a> callback,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a> user_data);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-mount-finish" title="g_volume_mount_finish ()">g_volume_mount_finish</a>               (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="returnvalue">GAsyncResult</span></a> *result,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-can-eject" title="g_volume_can_eject ()">g_volume_can_eject</a>                  (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<span class="returnvalue">void</span>                <a class="link" href="GVolume.html#g-volume-eject" title="g_volume_eject ()">g_volume_eject</a>                      (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GMount.html#GMountUnmountFlags" title="enum GMountUnmountFlags"><span class="returnvalue">GMountUnmountFlags</span></a> flags,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="returnvalue">GAsyncReadyCallback</span></a> callback,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a> user_data);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-eject-finish" title="g_volume_eject_finish ()">g_volume_eject_finish</a>               (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="returnvalue">GAsyncResult</span></a> *result,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
-<span class="returnvalue">void</span>                <a class="link" href="GVolume.html#g-volume-eject-with-operation" title="g_volume_eject_with_operation ()">g_volume_eject_with_operation</a>       (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GMount.html#GMountUnmountFlags" title="enum GMountUnmountFlags"><span class="returnvalue">GMountUnmountFlags</span></a> flags,
-                                                         <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="returnvalue">GMountOperation</span></a> *mount_operation,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="returnvalue">GAsyncReadyCallback</span></a> callback,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a> user_data);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-eject-with-operation-finish" title="g_volume_eject_with_operation_finish ()">g_volume_eject_with_operation_finish</a>
-                                                        (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="returnvalue">GAsyncResult</span></a> *result,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
+<span class="returnvalue">char</span> *              <a class="link" href="GVolume.html#g-volume-get-name" title="g_volume_get_name ()">g_volume_get_name</a>                   (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<span class="returnvalue">char</span> *              <a class="link" href="GVolume.html#g-volume-get-uuid" title="g_volume_get_uuid ()">g_volume_get_uuid</a>                   (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             <a class="link" href="GVolume.html#g-volume-get-icon" title="g_volume_get_icon ()">g_volume_get_icon</a>                   (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<a class="link" href="GDrive.html" title="GDrive"><span class="returnvalue">GDrive</span></a> *            <a class="link" href="GVolume.html#g-volume-get-drive" title="g_volume_get_drive ()">g_volume_get_drive</a>                  (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *            <a class="link" href="GVolume.html#g-volume-get-mount" title="g_volume_get_mount ()">g_volume_get_mount</a>                  (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-can-mount" title="g_volume_can_mount ()">g_volume_can_mount</a>                  (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-should-automount" title="g_volume_should_automount ()">g_volume_should_automount</a>           (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<a class="link" href="GFile.html" title="GFile"><span class="returnvalue">GFile</span></a> *             <a class="link" href="GVolume.html#g-volume-get-activation-root" title="g_volume_get_activation_root ()">g_volume_get_activation_root</a>        (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVolume.html#g-volume-mount" title="g_volume_mount ()">g_volume_mount</a>                      (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMount.html#GMountMountFlags" title="enum GMountMountFlags"><span class="type">GMountMountFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> *mount_operation</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-mount-finish" title="g_volume_mount_finish ()">g_volume_mount_finish</a>               (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-can-eject" title="g_volume_can_eject ()">g_volume_can_eject</a>                  (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVolume.html#g-volume-eject" title="g_volume_eject ()">g_volume_eject</a>                      (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMount.html#GMountUnmountFlags" title="enum GMountUnmountFlags"><span class="type">GMountUnmountFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-eject-finish" title="g_volume_eject_finish ()">g_volume_eject_finish</a>               (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GVolume.html#g-volume-eject-with-operation" title="g_volume_eject_with_operation ()">g_volume_eject_with_operation</a>       (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMount.html#GMountUnmountFlags" title="enum GMountUnmountFlags"><span class="type">GMountUnmountFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> *mount_operation</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GVolume.html#g-volume-eject-with-operation-finish" title="g_volume_eject_with_operation_finish ()">g_volume_eject_with_operation_finish</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 #define             <a class="link" href="GVolume.html#G-VOLUME-IDENTIFIER-KIND-HAL-UDI:CAPS" title="G_VOLUME_IDENTIFIER_KIND_HAL_UDI">G_VOLUME_IDENTIFIER_KIND_HAL_UDI</a>
 #define             <a class="link" href="GVolume.html#G-VOLUME-IDENTIFIER-KIND-LABEL:CAPS" title="G_VOLUME_IDENTIFIER_KIND_LABEL">G_VOLUME_IDENTIFIER_KIND_LABEL</a>
 #define             <a class="link" href="GVolume.html#G-VOLUME-IDENTIFIER-KIND-NFS-MOUNT:CAPS" title="G_VOLUME_IDENTIFIER_KIND_NFS_MOUNT">G_VOLUME_IDENTIFIER_KIND_NFS_MOUNT</a>
 #define             <a class="link" href="GVolume.html#G-VOLUME-IDENTIFIER-KIND-UNIX-DEVICE:CAPS" title="G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE">G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE</a>
 #define             <a class="link" href="GVolume.html#G-VOLUME-IDENTIFIER-KIND-UUID:CAPS" title="G_VOLUME_IDENTIFIER_KIND_UUID">G_VOLUME_IDENTIFIER_KIND_UUID</a>
-<span class="returnvalue">char</span> **             <a class="link" href="GVolume.html#g-volume-enumerate-identifiers" title="g_volume_enumerate_identifiers ()">g_volume_enumerate_identifiers</a>      (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);
-<span class="returnvalue">char</span> *              <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()">g_volume_get_identifier</a>             (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         const <span class="returnvalue">char</span> *kind);
+<span class="returnvalue">char</span> **             <a class="link" href="GVolume.html#g-volume-enumerate-identifiers" title="g_volume_enumerate_identifiers ()">g_volume_enumerate_identifiers</a>      (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);
+<span class="returnvalue">char</span> *              <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()">g_volume_get_identifier</a>             (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *kind</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
@@ -135,7 +105,7 @@
 <a name="GVolume.prerequisites"></a><h2>Prerequisites</h2>
 <p>
 GVolume requires
- <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>.</p>
+ <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>.</p>
 </div>
 <div class="refsect1" title="Signals">
 <a name="GVolume.signals"></a><h2>Signals</h2>
@@ -149,7 +119,7 @@ GVolume requires
 <p>
 The <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> interface represents user-visible objects that can be
 mounted. Note, when porting from GnomeVFS, <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> is the moral
-equivalent of <a href="/usr/share/gtk-doc/html/gnome-vfs-2.0/gnome-vfs-2.0-gnome-vfs-drive.html#GnomeVFSDrive"><span class="type">GnomeVFSDrive</span></a>.
+equivalent of <span class="type">GnomeVFSDrive</span>.
 </p>
 <p>
 Mounting a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> instance is an asynchronous operation. For more
@@ -159,7 +129,7 @@ information about asynchronous operations, see <span class="type">GAsyncReady</s
 a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> object and a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. 
 </p>
 <p>
-Typically, one will only want to pass <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> for the
+Typically, one will only want to pass <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> for the
 <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> if automounting all volumes when a desktop session
 starts since it's not desirable to put up a lot of dialogs asking
 for credentials.
@@ -194,7 +164,8 @@ Note that <a class="link" href="GVolume.html#G-VOLUME-IDENTIFIER-KIND-HAL-UDI:CA
 when the gvfs hal volume monitor is in use. Other volume monitors
 will generally be able to provide the <a class="link" href="GVolume.html#G-VOLUME-IDENTIFIER-KIND-UNIX-DEVICE:CAPS" title="G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE"><span class="type">G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE</span></a>
 identifier, which can be used to obtain a hal device by means of
-<code class="function">libhal_manger_find_device_string_match()</code>.</p>
+<code class="function">libhal_manger_find_device_string_match()</code>.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="GVolume.details"></a><h2>Details</h2>
@@ -202,7 +173,8 @@ identifier, which can be used to obtain a hal device by means of
 <a name="GVolume-struct"></a><h3>GVolume</h3>
 <pre class="programlisting">typedef struct _GVolume GVolume;</pre>
 <p>
-Opaque mountable volume object.</p>
+Opaque mountable volume object.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="GVolumeIface">
@@ -262,63 +234,64 @@ Opaque mountable volume object.</p>
 } GVolumeIface;
 </pre>
 <p>
-Interface for implementing operations for mountable volumes.</p>
+Interface for implementing operations for mountable volumes.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
-<td><p><span class="term"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GVolumeIface.g-iface"></a>g_iface</code></em>;</span></p></td>
-<td> The parent interface.
+<td><p><span class="term"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GTypeInterface"><span class="type">GTypeInterface</span></a> <em class="structfield"><code><a name="GVolumeIface.g-iface"></a>g_iface</code></em>;</span></p></td>
+<td>The parent interface.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.changed"></a>changed</code></em> ()</span></p></td>
-<td> Changed signal that is emitted when the volume's state has changed.
+<td>Changed signal that is emitted when the volume's state has changed.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.removed"></a>removed</code></em> ()</span></p></td>
-<td> The removed signal that is emitted when the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> have been removed. If the recipient is holding references to the object they should release them so the object can be finalized.
+<td>The removed signal that is emitted when the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> have been removed. If the recipient is holding references to the object they should release them so the object can be finalized.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.get-name"></a>get_name</code></em> ()</span></p></td>
-<td> Gets a string containing the name of the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>Gets a string containing the name of the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.get-icon"></a>get_icon</code></em> ()</span></p></td>
-<td> Gets a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a> for the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>Gets a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a> for the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.get-uuid"></a>get_uuid</code></em> ()</span></p></td>
-<td> Gets the UUID for the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>. The reference is typically based on the file system UUID for the mount in question and should be considered an opaque string. Returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if there is no UUID available.
+<td>Gets the UUID for the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>. The reference is typically based on the file system UUID for the mount in question and should be considered an opaque string. Returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if there is no UUID available.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.get-drive"></a>get_drive</code></em> ()</span></p></td>
-<td> Gets a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> the volume is located on. Returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> is not associated with a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a>.
+<td>Gets a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> the volume is located on. Returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> is not associated with a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.get-mount"></a>get_mount</code></em> ()</span></p></td>
-<td> Gets a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> representing the mounted volume. Returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> is not mounted.
+<td>Gets a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> representing the mounted volume. Returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> is not mounted.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.can-mount"></a>can_mount</code></em> ()</span></p></td>
-<td> Returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> can be mounted.
+<td>Returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> can be mounted.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.can-eject"></a>can_eject</code></em> ()</span></p></td>
-<td> Checks if a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> can be ejected.
+<td>Checks if a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> can be ejected.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.mount-fn"></a>mount_fn</code></em> ()</span></p></td>
-<td> Mounts a given <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>. 
+<td>Mounts a given <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>. 
     <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> implementations must emit the <a class="link" href="GMountOperation.html#GMountOperation-aborted" title='The "aborted" signal'><span class="type">"aborted"</span></a> 
     signal before completing a mount operation that is aborted while 
     awaiting input from the user through a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> instance.
@@ -326,50 +299,50 @@ Interface for implementing operations for mountable volumes.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.mount-finish"></a>mount_finish</code></em> ()</span></p></td>
-<td> Finishes a mount operation.
+<td>Finishes a mount operation.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.eject"></a>eject</code></em> ()</span></p></td>
-<td> Ejects a given <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>Ejects a given <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.eject-finish"></a>eject_finish</code></em> ()</span></p></td>
-<td> Finishes an eject operation.
+<td>Finishes an eject operation.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.get-identifier"></a>get_identifier</code></em> ()</span></p></td>
-<td> Returns the <a class="link" href="GVolume.html#volume-identifier">identifier</a> of the given kind, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if
+<td>Returns the <a class="link" href="GVolume.html#volume-identifier">identifier</a> of the given kind, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if
    the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> doesn't have one.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.enumerate-identifiers"></a>enumerate_identifiers</code></em> ()</span></p></td>
-<td> Returns an array strings listing the kinds
+<td>Returns an array strings listing the kinds
    of <a class="link" href="GVolume.html#volume-identifier">identifiers</a> which the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> has.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.should-automount"></a>should_automount</code></em> ()</span></p></td>
-<td> Returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> should be automatically mounted.
+<td>Returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> should be automatically mounted.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.get-activation-root"></a>get_activation_root</code></em> ()</span></p></td>
-<td> Returns the activation root for the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> if it is known in advance or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if
+<td>Returns the activation root for the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> if it is known in advance or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if
   it is not known.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.eject-with-operation"></a>eject_with_operation</code></em> ()</span></p></td>
-<td> Starts ejecting a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> using a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a>. Since 2.22.
+<td>Starts ejecting a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> using a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a>. Since 2.22.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GVolumeIface.eject-with-operation-finish"></a>eject_with_operation_finish</code></em> ()</span></p></td>
-<td> Finishes an eject operation using a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a>. Since 2.22.
+<td>Finishes an eject operation using a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a>. Since 2.22.
 </td>
 </tr>
 </tbody>
@@ -378,21 +351,22 @@ Interface for implementing operations for mountable volumes.</p>
 <hr>
 <div class="refsect2" title="g_volume_get_name ()">
 <a name="g-volume-get-name"></a><h3>g_volume_get_name ()</h3>
-<pre class="programlisting"><span class="returnvalue">char</span> *              g_volume_get_name                   (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><span class="returnvalue">char</span> *              g_volume_get_name                   (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
-Gets the name of <em class="parameter"><code>volume</code></em>.</p>
+Gets the name of <em class="parameter"><code>volume</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> the name for the given <em class="parameter"><code>volume</code></em>. The returned string should 
-be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a> when no longer needed.
+be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a> when no longer needed.
 </td>
 </tr>
 </tbody>
@@ -401,24 +375,25 @@ be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-
 <hr>
 <div class="refsect2" title="g_volume_get_uuid ()">
 <a name="g-volume-get-uuid"></a><h3>g_volume_get_uuid ()</h3>
-<pre class="programlisting"><span class="returnvalue">char</span> *              g_volume_get_uuid                   (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><span class="returnvalue">char</span> *              g_volume_get_uuid                   (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
 Gets the UUID for the <em class="parameter"><code>volume</code></em>. The reference is typically based on
 the file system UUID for the volume in question and should be
-considered an opaque string. Returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if there is no UUID
-available.</p>
+considered an opaque string. Returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if there is no UUID
+available.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the UUID for <em class="parameter"><code>volume</code></em> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no UUID can be computed.
-    The returned string should be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a> 
+<td> the UUID for <em class="parameter"><code>volume</code></em> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no UUID can be computed.
+    The returned string should be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a> 
     when no longer needed.
 </td>
 </tr>
@@ -428,21 +403,22 @@ available.</p>
 <hr>
 <div class="refsect2" title="g_volume_get_icon ()">
 <a name="g-volume-get-icon"></a><h3>g_volume_get_icon ()</h3>
-<pre class="programlisting"><a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             g_volume_get_icon                   (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             g_volume_get_icon                   (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
-Gets the icon for <em class="parameter"><code>volume</code></em>.</p>
+Gets the icon for <em class="parameter"><code>volume</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>.
-    The returned object should be unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>
+    The returned object should be unreffed with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>
     when no longer needed.
 </td>
 </tr>
@@ -452,21 +428,22 @@ Gets the icon for <em class="parameter"><code>volume</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_volume_get_drive ()">
 <a name="g-volume-get-drive"></a><h3>g_volume_get_drive ()</h3>
-<pre class="programlisting"><a class="link" href="GDrive.html" title="GDrive"><span class="returnvalue">GDrive</span></a> *            g_volume_get_drive                  (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><a class="link" href="GDrive.html" title="GDrive"><span class="returnvalue">GDrive</span></a> *            g_volume_get_drive                  (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
-Gets the drive for the <em class="parameter"><code>volume</code></em>.</p>
+Gets the drive for the <em class="parameter"><code>volume</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>volume</code></em> is not associated with a drive.
-    The returned object should be unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>
+<td> a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>volume</code></em> is not associated with a drive.
+    The returned object should be unreffed with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>
     when no longer needed.
 </td>
 </tr>
@@ -476,21 +453,22 @@ Gets the drive for the <em class="parameter"><code>volume</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_volume_get_mount ()">
 <a name="g-volume-get-mount"></a><h3>g_volume_get_mount ()</h3>
-<pre class="programlisting"><a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *            g_volume_get_mount                  (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *            g_volume_get_mount                  (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
-Gets the mount for the <em class="parameter"><code>volume</code></em>.</p>
+Gets the mount for the <em class="parameter"><code>volume</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>volume</code></em> isn't mounted.
-    The returned object should be unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>
+<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>volume</code></em> isn't mounted.
+    The returned object should be unreffed with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>
     when no longer needed.
 </td>
 </tr>
@@ -500,20 +478,21 @@ Gets the mount for the <em class="parameter"><code>volume</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_volume_can_mount ()">
 <a name="g-volume-can-mount"></a><h3>g_volume_can_mount ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_can_mount                  (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_can_mount                  (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
-Checks if a volume can be mounted.</p>
+Checks if a volume can be mounted.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the <em class="parameter"><code>volume</code></em> can be mounted. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the <em class="parameter"><code>volume</code></em> can be mounted. <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
 </td>
 </tr>
 </tbody>
@@ -522,20 +501,21 @@ Checks if a volume can be mounted.</p>
 <hr>
 <div class="refsect2" title="g_volume_should_automount ()">
 <a name="g-volume-should-automount"></a><h3>g_volume_should_automount ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_should_automount           (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_should_automount           (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
-Returns whether the volume should be automatically mounted.</p>
+Returns whether the volume should be automatically mounted.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the volume should be automatically mounted.
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the volume should be automatically mounted.
 </td>
 </tr>
 </tbody>
@@ -544,10 +524,10 @@ Returns whether the volume should be automatically mounted.</p>
 <hr>
 <div class="refsect2" title="g_volume_get_activation_root ()">
 <a name="g-volume-get-activation-root"></a><h3>g_volume_get_activation_root ()</h3>
-<pre class="programlisting"><a class="link" href="GFile.html" title="GFile"><span class="returnvalue">GFile</span></a> *             g_volume_get_activation_root        (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><a class="link" href="GFile.html" title="GFile"><span class="returnvalue">GFile</span></a> *             g_volume_get_activation_root        (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
 Gets the activation root for a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> if it is known ahead of
-mount time. Returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> otherwise. If not <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and if <em class="parameter"><code>volume</code></em>
+mount time. Returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> otherwise. If not <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and if <em class="parameter"><code>volume</code></em>
 is mounted, then the result of <a class="link" href="GMount.html#g-mount-get-root" title="g_mount_get_root ()"><code class="function">g_mount_get_root()</code></a> on the
 <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> object obtained from <a class="link" href="GVolume.html#g-volume-get-mount" title="g_volume_get_mount ()"><code class="function">g_volume_get_mount()</code></a> will always
 either be equal or a prefix of what this function returns. In
@@ -578,24 +558,25 @@ then the expression
 <p>
 </p>
 <p>
-will always be <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.
+will always be <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>.
 </p>
 <p>
 Activation roots are typically used in <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>
 implementations to find the underlying mount to shadow, see
-<a class="link" href="GMount.html#g-mount-is-shadowed" title="g_mount_is_shadowed ()"><code class="function">g_mount_is_shadowed()</code></a> for more details.</p>
+<a class="link" href="GMount.html#g-mount-is-shadowed" title="g_mount_is_shadowed ()"><code class="function">g_mount_is_shadowed()</code></a> for more details.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the activation root of <em class="parameter"><code>volume</code></em> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. Use
-<a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> to free.
+<td> the activation root of <em class="parameter"><code>volume</code></em> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. Use
+<a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> to free.
 
 </td>
 </tr>
@@ -606,47 +587,48 @@ implementations to find the underlying mount to shadow, see
 <hr>
 <div class="refsect2" title="g_volume_mount ()">
 <a name="g-volume-mount"></a><h3>g_volume_mount ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_volume_mount                      (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GMount.html#GMountMountFlags" title="enum GMountMountFlags"><span class="returnvalue">GMountMountFlags</span></a> flags,
-                                                         <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="returnvalue">GMountOperation</span></a> *mount_operation,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="returnvalue">GAsyncReadyCallback</span></a> callback,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_volume_mount                      (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMount.html#GMountMountFlags" title="enum GMountMountFlags"><span class="type">GMountMountFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> *mount_operation</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Mounts a volume. This is an asynchronous operation, and is
 finished by calling <a class="link" href="GVolume.html#g-volume-mount-finish" title="g_volume_mount_finish ()"><code class="function">g_volume_mount_finish()</code></a> with the <em class="parameter"><code>volume</code></em>
-and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> returned in the <em class="parameter"><code>callback</code></em>.</p>
+and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> returned in the <em class="parameter"><code>callback</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td> flags affecting the operation
+<td>flags affecting the operation
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount_operation</code></em> :</span></p></td>
-<td> a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to avoid user interaction.
+<td>a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to avoid user interaction.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td> a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> user data that gets passed to <em class="parameter"><code>callback</code></em>
+<td>user data that gets passed to <em class="parameter"><code>callback</code></em>
 </td>
 </tr>
 </tbody>
@@ -655,39 +637,40 @@ and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="t
 <hr>
 <div class="refsect2" title="g_volume_mount_finish ()">
 <a name="g-volume-mount-finish"></a><h3>g_volume_mount_finish ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_mount_finish               (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="returnvalue">GAsyncResult</span></a> *result,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_mount_finish               (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Finishes mounting a volume. If any errors occured during the operation,
-<em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.
+<em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.
 </p>
 <p>
 If the mount operation succeeded, <a class="link" href="GVolume.html#g-volume-get-mount" title="g_volume_get_mount ()"><code class="function">g_volume_get_mount()</code></a> on <em class="parameter"><code>volume</code></em>
 is guaranteed to return the mount right after calling this
 function; there's no need to listen for the 'mount-added' signal on
-<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.</p>
+<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td> a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store an error, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store an error, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if operation failed.
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if operation failed.
 </td>
 </tr>
 </tbody>
@@ -696,20 +679,21 @@ function; there's no need to listen for the 'mount-added' signal on
 <hr>
 <div class="refsect2" title="g_volume_can_eject ()">
 <a name="g-volume-can-eject"></a><h3>g_volume_can_eject ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_can_eject                  (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_can_eject                  (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
-Checks if a volume can be ejected.</p>
+Checks if a volume can be ejected.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the <em class="parameter"><code>volume</code></em> can be ejected. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the <em class="parameter"><code>volume</code></em> can be ejected. <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
 </td>
 </tr>
 </tbody>
@@ -718,11 +702,11 @@ Checks if a volume can be ejected.</p>
 <hr>
 <div class="refsect2" title="g_volume_eject ()">
 <a name="g-volume-eject"></a><h3>g_volume_eject ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_volume_eject                      (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GMount.html#GMountUnmountFlags" title="enum GMountUnmountFlags"><span class="returnvalue">GMountUnmountFlags</span></a> flags,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="returnvalue">GAsyncReadyCallback</span></a> callback,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_volume_eject                      (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMount.html#GMountUnmountFlags" title="enum GMountUnmountFlags"><span class="type">GMountUnmountFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_volume_eject</code> has been deprecated since version 2.22 and should not be used in newly-written code. Use <a class="link" href="GVolume.html#g-volume-eject-with-operation" title="g_volume_eject_with_operation ()"><code class="function">g_volume_eject_with_operation()</code></a> instead.</p>
@@ -730,33 +714,34 @@ Checks if a volume can be ejected.</p>
 <p>
 Ejects a volume. This is an asynchronous operation, and is
 finished by calling <a class="link" href="GVolume.html#g-volume-eject-finish" title="g_volume_eject_finish ()"><code class="function">g_volume_eject_finish()</code></a> with the <em class="parameter"><code>volume</code></em>
-and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> returned in the <em class="parameter"><code>callback</code></em>.</p>
+and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> returned in the <em class="parameter"><code>callback</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td> flags affecting the unmount if required for eject
+<td>flags affecting the unmount if required for eject
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td> a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> user data that gets passed to <em class="parameter"><code>callback</code></em>
+<td>user data that gets passed to <em class="parameter"><code>callback</code></em>
 </td>
 </tr>
 </tbody>
@@ -765,37 +750,38 @@ and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="t
 <hr>
 <div class="refsect2" title="g_volume_eject_finish ()">
 <a name="g-volume-eject-finish"></a><h3>g_volume_eject_finish ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_eject_finish               (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="returnvalue">GAsyncResult</span></a> *result,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_eject_finish               (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_volume_eject_finish</code> has been deprecated since version 2.22 and should not be used in newly-written code. Use <a class="link" href="GVolume.html#g-volume-eject-with-operation-finish" title="g_volume_eject_with_operation_finish ()"><code class="function">g_volume_eject_with_operation_finish()</code></a> instead.</p>
 </div>
 <p>
 Finishes ejecting a volume. If any errors occured during the operation,
-<em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.</p>
+<em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> pointer to a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>pointer to a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td> a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store an error, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store an error, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if operation failed.
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if operation failed.
 
 </td>
 </tr>
@@ -805,47 +791,48 @@ Finishes ejecting a volume. If any errors occured during the operation,
 <hr>
 <div class="refsect2" title="g_volume_eject_with_operation ()">
 <a name="g-volume-eject-with-operation"></a><h3>g_volume_eject_with_operation ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_volume_eject_with_operation       (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GMount.html#GMountUnmountFlags" title="enum GMountUnmountFlags"><span class="returnvalue">GMountUnmountFlags</span></a> flags,
-                                                         <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="returnvalue">GMountOperation</span></a> *mount_operation,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="returnvalue">GAsyncReadyCallback</span></a> callback,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_volume_eject_with_operation       (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMount.html#GMountUnmountFlags" title="enum GMountUnmountFlags"><span class="type">GMountUnmountFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> *mount_operation</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Ejects a volume. This is an asynchronous operation, and is
 finished by calling <a class="link" href="GVolume.html#g-volume-eject-with-operation-finish" title="g_volume_eject_with_operation_finish ()"><code class="function">g_volume_eject_with_operation_finish()</code></a> with the <em class="parameter"><code>volume</code></em>
-and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> data returned in the <em class="parameter"><code>callback</code></em>.</p>
+and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> data returned in the <em class="parameter"><code>callback</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td> flags affecting the unmount if required for eject
+<td>flags affecting the unmount if required for eject
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount_operation</code></em> :</span></p></td>
-<td> a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to avoid user interaction.
+<td>a <a class="link" href="GMountOperation.html" title="GMountOperation"><span class="type">GMountOperation</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to avoid user interaction.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td> a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>callback</code></em>.
+<td>user data passed to <em class="parameter"><code>callback</code></em>.
 </td>
 </tr>
 </tbody>
@@ -855,35 +842,36 @@ and <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="t
 <hr>
 <div class="refsect2" title="g_volume_eject_with_operation_finish ()">
 <a name="g-volume-eject-with-operation-finish"></a><h3>g_volume_eject_with_operation_finish ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_eject_with_operation_finish
-                                                        (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="returnvalue">GAsyncResult</span></a> *result,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_volume_eject_with_operation_finish
+                                                        (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Finishes ejecting a volume. If any errors occurred during the operation,
-<em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.</p>
+<em class="parameter"><code>error</code></em> will be set to contain the errors and <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> will be returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td> a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
     ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the volume was successfully ejected. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the volume was successfully ejected. <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
 
 </td>
 </tr>
@@ -897,7 +885,8 @@ Finishes ejecting a volume. If any errors occurred during the operation,
 <pre class="programlisting">#define G_VOLUME_IDENTIFIER_KIND_HAL_UDI "hal-udi"
 </pre>
 <p>
-The string used to obtain a Hal UDI with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.</p>
+The string used to obtain a Hal UDI with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="G_VOLUME_IDENTIFIER_KIND_LABEL">
@@ -905,7 +894,8 @@ The string used to obtain a Hal UDI with <a class="link" href="GVolume.html#g-vo
 <pre class="programlisting">#define G_VOLUME_IDENTIFIER_KIND_LABEL "label"
 </pre>
 <p>
-The string used to obtain a filesystem label with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.</p>
+The string used to obtain a filesystem label with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="G_VOLUME_IDENTIFIER_KIND_NFS_MOUNT">
@@ -913,7 +903,8 @@ The string used to obtain a filesystem label with <a class="link" href="GVolume.
 <pre class="programlisting">#define G_VOLUME_IDENTIFIER_KIND_NFS_MOUNT "nfs-mount"
 </pre>
 <p>
-The string used to obtain a NFS mount with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.</p>
+The string used to obtain a NFS mount with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE">
@@ -921,7 +912,8 @@ The string used to obtain a NFS mount with <a class="link" href="GVolume.html#g-
 <pre class="programlisting">#define G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE "unix-device"
 </pre>
 <p>
-The string used to obtain a Unix device path with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.</p>
+The string used to obtain a Unix device path with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="G_VOLUME_IDENTIFIER_KIND_UUID">
@@ -929,28 +921,30 @@ The string used to obtain a Unix device path with <a class="link" href="GVolume.
 <pre class="programlisting">#define G_VOLUME_IDENTIFIER_KIND_UUID "uuid"
 </pre>
 <p>
-The string used to obtain a UUID with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.</p>
+The string used to obtain a UUID with <a class="link" href="GVolume.html#g-volume-get-identifier" title="g_volume_get_identifier ()"><code class="function">g_volume_get_identifier()</code></a>.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="g_volume_enumerate_identifiers ()">
 <a name="g-volume-enumerate-identifiers"></a><h3>g_volume_enumerate_identifiers ()</h3>
-<pre class="programlisting"><span class="returnvalue">char</span> **             g_volume_enumerate_identifiers      (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume);</pre>
+<pre class="programlisting"><span class="returnvalue">char</span> **             g_volume_enumerate_identifiers      (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>);</pre>
 <p>
 Gets the kinds of <a class="link" href="GVolume.html#volume-identifier">identifiers</a>
 that <em class="parameter"><code>volume</code></em> has. Use <code class="function">g_volume_get_identifer()</code> to obtain 
-the identifiers themselves.</p>
+the identifiers themselves.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings containing
-  kinds of identifiers. Use <a href="http://library.gnome.org/devel/glib/unstable/glib-String-Utility-Functions.html#g-strfreev"><code class="function">g_strfreev()</code></a> to free.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings containing
+  kinds of identifiers. Use <a href="/usr/share/gtk-doc/html/glib/glib-String-Utility-Functions.html#g-strfreev"><code class="function">g_strfreev()</code></a> to free.
 </td>
 </tr>
 </tbody>
@@ -959,29 +953,30 @@ the identifiers themselves.</p>
 <hr>
 <div class="refsect2" title="g_volume_get_identifier ()">
 <a name="g-volume-get-identifier"></a><h3>g_volume_get_identifier ()</h3>
-<pre class="programlisting"><span class="returnvalue">char</span> *              g_volume_get_identifier             (<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *volume,
-                                                         const <span class="returnvalue">char</span> *kind);</pre>
+<pre class="programlisting"><span class="returnvalue">char</span> *              g_volume_get_identifier             (<em class="parameter"><code><a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *kind</code></em>);</pre>
 <p>
 Gets the identifier of the given kind for <em class="parameter"><code>volume</code></em>. 
 See the <a class="link" href="GVolume.html#volume-identifier">introduction</a>
-for more information about volume identifiers.</p>
+for more information about volume identifiers.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>kind</code></em> :</span></p></td>
-<td> the kind of identifier to return
+<td>the kind of identifier to return
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> a newly allocated string containing the
-  requested identfier, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
+  requested identfier, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>
   doesn't have this kind of identifier
 </td>
 </tr>
@@ -994,9 +989,10 @@ for more information about volume identifiers.</p>
 <div class="refsect2" title='The "changed" signal'>
 <a name="GVolume-changed"></a><h3>The <code class="literal">"changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *arg0,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data)      : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data)      : Run Last</pre>
 <p>
-Emitted when the volume has been changed.</p>
+Emitted when the volume has been changed.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -1009,11 +1005,12 @@ Emitted when the volume has been changed.</p>
 <div class="refsect2" title='The "removed" signal'>
 <a name="GVolume-removed"></a><h3>The <code class="literal">"removed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> *arg0,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data)      : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data)      : Run Last</pre>
 <p>
 This signal is emitted when the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> have been removed. If
 the recipient is holding references to the object they should
-release them so the object can be finalized.</p>
+release them so the object can be finalized.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -1026,6 +1023,6 @@ release them so the object can be finalized.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

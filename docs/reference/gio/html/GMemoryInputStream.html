@@ -8,38 +8,8 @@
 <link rel="up" href="streaming.html" title="Streaming I/O">
 <link rel="prev" href="GFilterOutputStream.html" title="GFilterOutputStream">
 <link rel="next" href="GMemoryOutputStream.html" title="GMemoryOutputStream">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="pt01.html" title="Part I. GIO Overview">
-<link rel="chapter" href="ch01.html" title="Introduction">
-<link rel="chapter" href="ch02.html" title="Compiling GIO applications">
-<link rel="chapter" href="ch03.html" title="Running GIO applications">
-<link rel="chapter" href="extending-gio.html" title="Extending GIO">
-<link rel="part" href="pt02.html" title="Part II. API Reference">
-<link rel="chapter" href="file_ops.html" title="File Operations">
-<link rel="chapter" href="file_mon.html" title="File System Monitoring">
-<link rel="chapter" href="async.html" title="Asynchronous I/O">
-<link rel="chapter" href="conversion.html" title="Data conversion">
-<link rel="chapter" href="streaming.html" title="Streaming I/O">
-<link rel="chapter" href="types.html" title="File types and applications">
-<link rel="chapter" href="volume_mon.html" title="Volumes and Drives">
-<link rel="chapter" href="icons.html" title="Icons">
-<link rel="chapter" href="failable_initialization.html" title="Failable Initialization">
-<link rel="chapter" href="networking.html" title="Lowlevel platform-independent network support">
-<link rel="chapter" href="resolver.html" title="DNS resolution">
-<link rel="chapter" href="highlevel-socket.html" title="Highlevel network functionallity">
-<link rel="chapter" href="utils.html" title="Utilities">
-<link rel="chapter" href="extending.html" title="Extending GIO">
-<link rel="part" href="migrating.html" title="Part III. Migrating to GIO">
-<link rel="chapter" href="ch19.html" title="Migrating from POSIX to GIO">
-<link rel="chapter" href="ch20.html" title="Migrating from GnomeVFS to GIO">
-<link rel="chapter" href="gio-hierarchy.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -75,20 +45,20 @@
 #include &lt;gio/gio.h&gt;
 
                     <a class="link" href="GMemoryInputStream.html#GMemoryInputStream-struct" title="GMemoryInputStream">GMemoryInputStream</a>;
-<a class="link" href="GInputStream.html" title="GInputStream"><span class="returnvalue">GInputStream</span></a> *      <a class="link" href="GMemoryInputStream.html#g-memory-input-stream-new" title="g_memory_input_stream_new ()">g_memory_input_stream_new</a>           (void);
-<a class="link" href="GInputStream.html" title="GInputStream"><span class="returnvalue">GInputStream</span></a> *      <a class="link" href="GMemoryInputStream.html#g-memory-input-stream-new-from-data" title="g_memory_input_stream_new_from_data ()">g_memory_input_stream_new_from_data</a> (const <span class="returnvalue">void</span> *data,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a> len,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="returnvalue">GDestroyNotify</span></a> destroy);
-<span class="returnvalue">void</span>                <a class="link" href="GMemoryInputStream.html#g-memory-input-stream-add-data" title="g_memory_input_stream_add_data ()">g_memory_input_stream_add_data</a>      (<a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="returnvalue">GMemoryInputStream</span></a> *stream,
-                                                         const <span class="returnvalue">void</span> *data,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a> len,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="returnvalue">GDestroyNotify</span></a> destroy);
+<a class="link" href="GInputStream.html" title="GInputStream"><span class="returnvalue">GInputStream</span></a> *      <a class="link" href="GMemoryInputStream.html#g-memory-input-stream-new" title="g_memory_input_stream_new ()">g_memory_input_stream_new</a>           (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="GInputStream.html" title="GInputStream"><span class="returnvalue">GInputStream</span></a> *      <a class="link" href="GMemoryInputStream.html#g-memory-input-stream-new-from-data" title="g_memory_input_stream_new_from_data ()">g_memory_input_stream_new_from_data</a> (<em class="parameter"><code>const <span class="type">void</span> *data</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> len</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="GMemoryInputStream.html#g-memory-input-stream-add-data" title="g_memory_input_stream_add_data ()">g_memory_input_stream_add_data</a>      (<em class="parameter"><code><a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">void</span> *data</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> len</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="GMemoryInputStream.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----<a class="link" href="GInputStream.html" title="GInputStream">GInputStream</a>
          +----GMemoryInputStream
 </pre>
@@ -103,7 +73,8 @@ GMemoryInputStream implements
 <a name="GMemoryInputStream.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a> is a class for using arbitrary
-memory chunks as input for GIO streaming input operations.</p>
+memory chunks as input for GIO streaming input operations.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="GMemoryInputStream.details"></a><h2>Details</h2>
@@ -111,14 +82,16 @@ memory chunks as input for GIO streaming input operations.</p>
 <a name="GMemoryInputStream-struct"></a><h3>GMemoryInputStream</h3>
 <pre class="programlisting">typedef struct _GMemoryInputStream GMemoryInputStream;</pre>
 <p>
-Implements <a class="link" href="GInputStream.html" title="GInputStream"><span class="type">GInputStream</span></a> for arbitrary memory chunks.</p>
+Implements <a class="link" href="GInputStream.html" title="GInputStream"><span class="type">GInputStream</span></a> for arbitrary memory chunks.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="g_memory_input_stream_new ()">
 <a name="g-memory-input-stream-new"></a><h3>g_memory_input_stream_new ()</h3>
-<pre class="programlisting"><a class="link" href="GInputStream.html" title="GInputStream"><span class="returnvalue">GInputStream</span></a> *      g_memory_input_stream_new           (void);</pre>
+<pre class="programlisting"><a class="link" href="GInputStream.html" title="GInputStream"><span class="returnvalue">GInputStream</span></a> *      g_memory_input_stream_new           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Creates a new empty <a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a>.</p>
+Creates a new empty <a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -131,27 +104,28 @@ Creates a new empty <a class="link" href="GMemoryInputStream.html" title="GMemor
 <hr>
 <div class="refsect2" title="g_memory_input_stream_new_from_data ()">
 <a name="g-memory-input-stream-new-from-data"></a><h3>g_memory_input_stream_new_from_data ()</h3>
-<pre class="programlisting"><a class="link" href="GInputStream.html" title="GInputStream"><span class="returnvalue">GInputStream</span></a> *      g_memory_input_stream_new_from_data (const <span class="returnvalue">void</span> *data,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a> len,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="returnvalue">GDestroyNotify</span></a> destroy);</pre>
+<pre class="programlisting"><a class="link" href="GInputStream.html" title="GInputStream"><span class="returnvalue">GInputStream</span></a> *      g_memory_input_stream_new_from_data (<em class="parameter"><code>const <span class="type">void</span> *data</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> len</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>);</pre>
 <p>
-Creates a new <a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a> with data in memory of a given size.</p>
+Creates a new <a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a> with data in memory of a given size.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> input data
+<td>input data
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
-<td> length of the data, may be -1 if <em class="parameter"><code>data</code></em> is a nul-terminated string
+<td>length of the data, may be -1 if <em class="parameter"><code>data</code></em> is a nul-terminated string
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
-<td> function that is called to free <em class="parameter"><code>data</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>function that is called to free <em class="parameter"><code>data</code></em>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -165,33 +139,34 @@ Creates a new <a class="link" href="GMemoryInputStream.html" title="GMemoryInput
 <hr>
 <div class="refsect2" title="g_memory_input_stream_add_data ()">
 <a name="g-memory-input-stream-add-data"></a><h3>g_memory_input_stream_add_data ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_memory_input_stream_add_data      (<a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="returnvalue">GMemoryInputStream</span></a> *stream,
-                                                         const <span class="returnvalue">void</span> *data,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a> len,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="returnvalue">GDestroyNotify</span></a> destroy);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_memory_input_stream_add_data      (<em class="parameter"><code><a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">void</span> *data</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> len</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> destroy</code></em>);</pre>
 <p>
-Appends <em class="parameter"><code>data</code></em> to data that can be read from the input stream</p>
+Appends <em class="parameter"><code>data</code></em> to data that can be read from the input stream
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>stream</code></em> :</span></p></td>
-<td> a <a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a>
+<td>a <a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> input data
+<td>input data
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
-<td> length of the data, may be -1 if <em class="parameter"><code>data</code></em> is a nul-terminated string
+<td>length of the data, may be -1 if <em class="parameter"><code>data</code></em> is a nul-terminated string
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>destroy</code></em> :</span></p></td>
-<td> function that is called to free <em class="parameter"><code>data</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>function that is called to free <em class="parameter"><code>data</code></em>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 </tbody>
@@ -205,6 +180,6 @@ Appends <em class="parameter"><code>data</code></em> to data that can be read fr
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

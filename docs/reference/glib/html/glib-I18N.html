@@ -8,28 +8,8 @@
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Data-Checksums.html" title="Data Checksums">
 <link rel="next" href="glib-Date-and-Time-Functions.html" title="Date and Time Functions">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -62,25 +42,27 @@
 #include &lt;glib/gi18n.h&gt;
 
 #define             <a class="link" href="glib-I18N.html#Q-:CAPS" title="Q_()">Q_</a>                                  (String)
-#define             <a class="link" href="glib-I18N.html#C-:CAPS" title="C_()">C_</a>                                  (Context,String)
+#define             <a class="link" href="glib-I18N.html#C-:CAPS" title="C_()">C_</a>                                  (Context,
+                                                         String)
 #define             <a class="link" href="glib-I18N.html#N-:CAPS" title="N_()">N_</a>                                  (String)
-#define             <a class="link" href="glib-I18N.html#NC-:CAPS" title="NC_()">NC_</a>                                 (Context, String)
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-dgettext" title="g_dgettext ()">g_dgettext</a>                          (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *domain,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-dngettext" title="g_dngettext ()">g_dngettext</a>                         (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *domain,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid_plural,
-                                                         <a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="returnvalue">gulong</span></a> n);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-dpgettext" title="g_dpgettext ()">g_dpgettext</a>                         (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *domain,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgctxtid,
-                                                         <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="returnvalue">gsize</span></a> msgidoffset);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-dpgettext2" title="g_dpgettext2 ()">g_dpgettext2</a>                        (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *domain,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *context,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-strip-context" title="g_strip_context ()">g_strip_context</a>                     (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgval);
+#define             <a class="link" href="glib-I18N.html#NC-:CAPS" title="NC_()">NC_</a>                                 (Context,
+                                                         String)
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-dgettext" title="g_dgettext ()">g_dgettext</a>                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid</code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-dngettext" title="g_dngettext ()">g_dngettext</a>                         (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid_plural</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="type">gulong</span></a> n</code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-dpgettext" title="g_dpgettext ()">g_dpgettext</a>                         (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgctxtid</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> msgidoffset</code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-dpgettext2" title="g_dpgettext2 ()">g_dpgettext2</a>                        (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *context</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid</code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-I18N.html#g-strip-context" title="g_strip_context ()">g_strip_context</a>                     (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgval</code></em>);
 
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * <a class="link" href="glib-I18N.html#g-get-language-names" title="g_get_language_names ()">g_get_language_names</a>               (void);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * <a class="link" href="glib-I18N.html#g-get-language-names" title="g_get_language_names ()">g_get_language_names</a>               (<em class="parameter"><code><span class="type">void</span></code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -97,10 +79,19 @@ In order to use these macros in an application, you must include
 <code class="filename">glib/gi18n-lib.h</code> <span class="emphasis"><em>after</em></span> defining
 the GETTEXT_PACKAGE macro suitably for your library:
 </p>
-<div class="informalexample"><pre class="programlisting">
-#define GETTEXT_PACKAGE "gtk20"
-#include &lt;glib/gi18n-lib.h&gt;
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="preproc">#define</span><span class="normal"> GETTEXT_PACKAGE </span><span class="string">"gtk20"</span>
+<span class="preproc">#include</span><span class="normal"> </span><span class="string">&lt;glib/gi18n-lib.h&gt;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 The gettext manual covers details of how to set up message extraction
 with xgettext.
@@ -166,10 +157,19 @@ used as a context. This is mainly useful for short strings which
 may need different translations, depending on the context in which
 they are used.
 </p>
-<div class="informalexample"><pre class="programlisting">
-label1 = C_("Navigation", "Back");
-label2 = C_("Body part", "Back");
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">label1 </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-I18N.html#C-:CAPS">C_</a></span><span class="symbol">(</span><span class="string">"Navigation"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Back"</span><span class="symbol">);</span>
+<span class="normal">label2 </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-I18N.html#C-:CAPS">C_</a></span><span class="symbol">(</span><span class="string">"Body part"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Back"</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 </p>
 <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
@@ -212,21 +212,41 @@ This is useful in situations where the translated strings can't
 be directly used, e.g. in string array initializers.
 To get the translated string, call <code class="function">gettext()</code> at runtime.
 </p>
-<div class="informalexample"><pre class="programlisting">
-     {
-       static const char *messages[] = {
-         N_("some very meaningful message"),
-         N_("and another one")
-       };
-       const char *string;
-       ...
-       string
-         = index &gt; 1 ? _("a default message") : gettext (messages[index]);
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="cbracket">{</span>
+<span class="normal">  </span><span class="keyword">static</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">messages</span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="function"><a href="glib-I18N.html#N-:CAPS">N_</a></span><span class="symbol">(</span><span class="string">"some very meaningful message"</span><span class="symbol">),</span>
+<span class="normal">    </span><span class="function"><a href="glib-I18N.html#N-:CAPS">N_</a></span><span class="symbol">(</span><span class="string">"and another one"</span><span class="symbol">)</span>
+<span class="normal">  </span><span class="cbracket">}</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">string</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="symbol">...</span>
+<span class="normal">  string</span>
+<span class="normal">    </span><span class="symbol">=</span><span class="normal"> index </span><span class="symbol">&gt;</span><span class="normal"> </span><span class="number">1</span><span class="normal"> </span><span class="symbol">?</span><span class="normal"> </span><span class="function">_</span><span class="symbol">(</span><span class="string">"a default message"</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">:</span><span class="normal"> </span><span class="function">gettext</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">messages</span><span class="symbol">[</span><span class="normal">index</span><span class="symbol">]);</span>
 
-       fputs (string);
-       ...
-     }
-</pre></div>
+<span class="normal">  </span><span class="function">fputs</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">string</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="symbol">...</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -247,21 +267,41 @@ This is useful in situations where the translated strings can't
 be directly used, e.g. in string array initializers.
 To get the translated string, you should call <a class="link" href="glib-I18N.html#g-dpgettext2" title="g_dpgettext2 ()"><code class="function">g_dpgettext2()</code></a> at runtime.
 </p>
-<div class="informalexample"><pre class="programlisting">
-     {
-       static const char *messages[] = {
-         NC_("some context", "some very meaningful message"),
-         NC_("some context", "and another one")
-       };
-       const char *string;
-       ...
-       string
-         = index &gt; 1 ? g_dpgettext2 (NULL, "some context", "a default message") : g_dpgettext2 (NULL, "some context", messages[index]);
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="cbracket">{</span>
+<span class="normal">  </span><span class="keyword">static</span><span class="normal"> </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">messages</span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="function"><a href="glib-I18N.html#NC-:CAPS">NC_</a></span><span class="symbol">(</span><span class="string">"some context"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"some very meaningful message"</span><span class="symbol">),</span>
+<span class="normal">    </span><span class="function"><a href="glib-I18N.html#NC-:CAPS">NC_</a></span><span class="symbol">(</span><span class="string">"some context"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"and another one"</span><span class="symbol">)</span>
+<span class="normal">  </span><span class="cbracket">}</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">string</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="symbol">...</span>
+<span class="normal">  string</span>
+<span class="normal">    </span><span class="symbol">=</span><span class="normal"> index </span><span class="symbol">&gt;</span><span class="normal"> </span><span class="number">1</span><span class="normal"> </span><span class="symbol">?</span><span class="normal"> </span><span class="function"><a href="glib-I18N.html#g-dpgettext2">g_dpgettext2</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> </span><span class="string">"some context"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"a default message"</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">:</span><span class="normal"> </span><span class="function"><a href="glib-I18N.html#g-dpgettext2">g_dpgettext2</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> </span><span class="string">"some context"</span><span class="symbol">,</span><span class="normal"> messages</span><span class="symbol">[</span><span class="normal">index</span><span class="symbol">]);</span>
 
-       fputs (string);
-       ...
-     }
-</pre></div>
+<span class="normal">  </span><span class="function">fputs</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">string</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="symbol">...</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 <p>
@@ -291,8 +331,8 @@ Intltool has support for the <a class="link" href="glib-I18N.html#NC-:CAPS" titl
 <hr>
 <div class="refsect2" title="g_dgettext ()">
 <a name="g-dgettext"></a><h3>g_dgettext ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dgettext                          (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *domain,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dgettext                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid</code></em>);</pre>
 <p>
 This function is a wrapper of <code class="function">dgettext()</code> which does not translate
 the message if the default domain as set with <code class="function">textdomain()</code> has no
@@ -332,19 +372,20 @@ cases the application should call <code class="function">textdomain()</code> aft
 </p>
 <p>
 Applications should normally not use this function directly,
-but use the <code class="function">_()</code> macro for translations.</p>
+but use the <code class="function">_()</code> macro for translations.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> the translation domain to use, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to use
+<td>the translation domain to use, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to use
   the domain set with <code class="function">textdomain()</code>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>msgid</code></em> :</span></p></td>
-<td> message to translate
+<td>message to translate
 </td>
 </tr>
 <tr>
@@ -360,10 +401,10 @@ but use the <code class="function">_()</code> macro for translations.</p>
 <hr>
 <div class="refsect2" title="g_dngettext ()">
 <a name="g-dngettext"></a><h3>g_dngettext ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dngettext                         (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *domain,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid_plural,
-                                                         <a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="returnvalue">gulong</span></a> n);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dngettext                         (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid_plural</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="type">gulong</span></a> n</code></em>);</pre>
 <p>
 This function is a wrapper of <code class="function">dngettext()</code> which does not translate
 the message if the default domain as set with <code class="function">textdomain()</code> has no
@@ -371,29 +412,30 @@ translations for the current locale.
 </p>
 <p>
 See <a class="link" href="glib-I18N.html#g-dgettext" title="g_dgettext ()"><code class="function">g_dgettext()</code></a> for details of how this differs from <code class="function">dngettext()</code>
-proper.</p>
+proper.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> the translation domain to use, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to use
+<td>the translation domain to use, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to use
   the domain set with <code class="function">textdomain()</code>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>msgid</code></em> :</span></p></td>
-<td> message to translate
+<td>message to translate
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>msgid_plural</code></em> :</span></p></td>
-<td> plural form of the message
+<td>plural form of the message
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n</code></em> :</span></p></td>
-<td> the quantity for which translation is needed
+<td>the quantity for which translation is needed
 </td>
 </tr>
 <tr>
@@ -409,9 +451,9 @@ proper.</p>
 <hr>
 <div class="refsect2" title="g_dpgettext ()">
 <a name="g-dpgettext"></a><h3>g_dpgettext ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dpgettext                         (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *domain,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgctxtid,
-                                                         <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="returnvalue">gsize</span></a> msgidoffset);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dpgettext                         (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgctxtid</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> msgidoffset</code></em>);</pre>
 <p>
 This function is a variant of <a class="link" href="glib-I18N.html#g-dgettext" title="g_dgettext ()"><code class="function">g_dgettext()</code></a> which supports
 a disambiguating message context. GNU gettext uses the
@@ -427,25 +469,26 @@ with <code class="function">dgettext()</code> proper.
 </p>
 <p>
 Applications should normally not use this function directly,
-but use the <a class="link" href="glib-I18N.html#C-:CAPS" title="C_()"><code class="function">C_()</code></a> macro for translations with context.</p>
+but use the <a class="link" href="glib-I18N.html#C-:CAPS" title="C_()"><code class="function">C_()</code></a> macro for translations with context.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> the translation domain to use, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to use
+<td>the translation domain to use, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to use
   the domain set with <code class="function">textdomain()</code>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>msgctxtid</code></em> :</span></p></td>
-<td> a combined message context and message id, separated
+<td>a combined message context and message id, separated
   by a \004 character
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>msgidoffset</code></em> :</span></p></td>
-<td> the offset of the message id in <em class="parameter"><code>msgctxid</code></em>
+<td>the offset of the message id in <em class="parameter"><code>msgctxid</code></em>
 </td>
 </tr>
 <tr>
@@ -461,9 +504,9 @@ but use the <a class="link" href="glib-I18N.html#C-:CAPS" title="C_()"><code cla
 <hr>
 <div class="refsect2" title="g_dpgettext2 ()">
 <a name="g-dpgettext2"></a><h3>g_dpgettext2 ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dpgettext2                        (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *domain,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *context,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dpgettext2                        (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *domain</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *context</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid</code></em>);</pre>
 <p>
 This function is a variant of <a class="link" href="glib-I18N.html#g-dgettext" title="g_dgettext ()"><code class="function">g_dgettext()</code></a> which supports
 a disambiguating message context. GNU gettext uses the
@@ -476,24 +519,25 @@ with <code class="function">dgettext()</code> proper.
 </p>
 <p>
 This function differs from <a class="link" href="glib-I18N.html#C-:CAPS" title="C_()"><code class="function">C_()</code></a> in that it is not a macro and 
-thus you may use non-string-literals as context and msgid arguments.</p>
+thus you may use non-string-literals as context and msgid arguments.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> the translation domain to use, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to use
+<td>the translation domain to use, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> to use
   the domain set with <code class="function">textdomain()</code>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
-<td> the message context
+<td>the message context
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>msgid</code></em> :</span></p></td>
-<td> the message
+<td>the message
 </td>
 </tr>
 <tr>
@@ -509,21 +553,22 @@ thus you may use non-string-literals as context and msgid arguments.</p>
 <hr>
 <div class="refsect2" title="g_strip_context ()">
 <a name="g-strip-context"></a><h3>g_strip_context ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_strip_context                     (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgid,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *msgval);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_strip_context                     (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgid</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *msgval</code></em>);</pre>
 <p>
-An auxiliary function for <code class="function">gettext()</code> support (see <a class="link" href="glib-I18N.html#Q-:CAPS" title="Q_()"><code class="function">Q_()</code></a>).</p>
+An auxiliary function for <code class="function">gettext()</code> support (see <a class="link" href="glib-I18N.html#Q-:CAPS" title="Q_()"><code class="function">Q_()</code></a>).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>msgid</code></em> :</span></p></td>
-<td> a string
+<td>a string
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>msgval</code></em> :</span></p></td>
-<td> another string
+<td>another string
 </td>
 </tr>
 <tr>
@@ -541,7 +586,7 @@ An auxiliary function for <code class="function">gettext()</code> support (see <
 <hr>
 <div class="refsect2" title="g_get_language_names ()">
 <a name="g-get-language-names"></a><h3>g_get_language_names ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * g_get_language_names               (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * g_get_language_names               (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Computes a list of applicable locale names, which can be used to 
 e.g. construct locale-dependent filenames or search paths. The returned 
@@ -555,7 +600,8 @@ For example, if LANGUAGE=de:en_US, then the returned list is
 <p>
 This function consults the environment variables <code class="envar">LANGUAGE</code>, 
 <code class="envar">LC_ALL</code>, <code class="envar">LC_MESSAGES</code> and <code class="envar">LANG</code> 
-to find the list of locales specified by the user.</p>
+to find the list of locales specified by the user.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -578,6 +624,6 @@ The gettext manual.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

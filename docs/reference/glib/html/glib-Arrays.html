@@ -8,28 +8,8 @@
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-String-Chunks.html" title="String Chunks">
 <link rel="next" href="glib-Pointer-Arrays.html" title="Pointer Arrays">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -62,46 +42,52 @@
 #include &lt;glib.h&gt;
 
                     <a class="link" href="glib-Arrays.html#GArray" title="GArray">GArray</a>;
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-new" title="g_array_new ()">g_array_new</a>                         (<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> zero_terminated,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> clear_,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> element_size);
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-sized-new" title="g_array_sized_new ()">g_array_sized_new</a>                   (<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> zero_terminated,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> clear_,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> element_size,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> reserved_size);
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *            <a class="link" href="glib-Arrays.html#g-array-ref" title="g_array_ref ()">g_array_ref</a>                         (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Arrays.html#g-array-unref" title="g_array_unref ()">g_array_unref</a>                       (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array);
-<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Arrays.html#g-array-get-element-size" title="g_array_get_element_size ()">g_array_get_element_size</a>            (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array);
-#define             <a class="link" href="glib-Arrays.html#g-array-append-val" title="g_array_append_val()">g_array_append_val</a>                  (a,v)
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-append-vals" title="g_array_append_vals ()">g_array_append_vals</a>                 (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="returnvalue">gconstpointer</span></a> data,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> len);
-#define             <a class="link" href="glib-Arrays.html#g-array-prepend-val" title="g_array_prepend_val()">g_array_prepend_val</a>                 (a,v)
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-prepend-vals" title="g_array_prepend_vals ()">g_array_prepend_vals</a>                (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="returnvalue">gconstpointer</span></a> data,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> len);
-#define             <a class="link" href="glib-Arrays.html#g-array-insert-val" title="g_array_insert_val()">g_array_insert_val</a>                  (a,i,v)
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-insert-vals" title="g_array_insert_vals ()">g_array_insert_vals</a>                 (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_,
-                                                         <a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="returnvalue">gconstpointer</span></a> data,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> len);
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-remove-index" title="g_array_remove_index ()">g_array_remove_index</a>                (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_);
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-remove-index-fast" title="g_array_remove_index_fast ()">g_array_remove_index_fast</a>           (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_);
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-remove-range" title="g_array_remove_range ()">g_array_remove_range</a>                (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> length);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Arrays.html#g-array-sort" title="g_array_sort ()">g_array_sort</a>                        (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="returnvalue">GCompareFunc</span></a> compare_func);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Arrays.html#g-array-sort-with-data" title="g_array_sort_with_data ()">g_array_sort_with_data</a>              (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> compare_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
-#define             <a class="link" href="glib-Arrays.html#g-array-index" title="g_array_index()">g_array_index</a>                       (a,t,i)
-<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-set-size" title="g_array_set_size ()">g_array_set_size</a>                    (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> length);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Arrays.html#g-array-free" title="g_array_free ()">g_array_free</a>                        (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> free_segment);
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-new" title="g_array_new ()">g_array_new</a>                         (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> zero_terminated</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> clear_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> element_size</code></em>);
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-sized-new" title="g_array_sized_new ()">g_array_sized_new</a>                   (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> zero_terminated</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> clear_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> element_size</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> reserved_size</code></em>);
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *            <a class="link" href="glib-Arrays.html#g-array-ref" title="g_array_ref ()">g_array_ref</a>                         (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Arrays.html#g-array-unref" title="g_array_unref ()">g_array_unref</a>                       (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>);
+<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Arrays.html#g-array-get-element-size" title="g_array_get_element_size ()">g_array_get_element_size</a>            (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>);
+#define             <a class="link" href="glib-Arrays.html#g-array-append-val" title="g_array_append_val()">g_array_append_val</a>                  (a,
+                                                         v)
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-append-vals" title="g_array_append_vals ()">g_array_append_vals</a>                 (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> len</code></em>);
+#define             <a class="link" href="glib-Arrays.html#g-array-prepend-val" title="g_array_prepend_val()">g_array_prepend_val</a>                 (a,
+                                                         v)
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-prepend-vals" title="g_array_prepend_vals ()">g_array_prepend_vals</a>                (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> len</code></em>);
+#define             <a class="link" href="glib-Arrays.html#g-array-insert-val" title="g_array_insert_val()">g_array_insert_val</a>                  (a,
+                                                         i,
+                                                         v)
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-insert-vals" title="g_array_insert_vals ()">g_array_insert_vals</a>                 (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> len</code></em>);
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-remove-index" title="g_array_remove_index ()">g_array_remove_index</a>                (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>);
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-remove-index-fast" title="g_array_remove_index_fast ()">g_array_remove_index_fast</a>           (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>);
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-remove-range" title="g_array_remove_range ()">g_array_remove_range</a>                (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> length</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Arrays.html#g-array-sort" title="g_array_sort ()">g_array_sort</a>                        (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> compare_func</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Arrays.html#g-array-sort-with-data" title="g_array_sort_with_data ()">g_array_sort_with_data</a>              (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> compare_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+#define             <a class="link" href="glib-Arrays.html#g-array-index" title="g_array_index()">g_array_index</a>                       (a,
+                                                         t,
+                                                         i)
+<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             <a class="link" href="glib-Arrays.html#g-array-set-size" title="g_array_set_size ()">g_array_set_size</a>                    (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> length</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Arrays.html#g-array-free" title="g_array_free ()">g_array_free</a>                        (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> free_segment</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -135,23 +121,43 @@ To free an array, use <a class="link" href="glib-Arrays.html#g-array-free" title
 <p>
 </p>
 <div class="example">
-<a name="id712603"></a><p class="title"><b>Example 19. Using a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> to store <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> values</b></p>
-<div class="example-contents"><pre class="programlisting">
-  GArray *garray;
-  gint i;
-  /* We create a new array to store gint values.
-     We don't want it zero-terminated or cleared to 0's. */
-  garray = g_array_new (FALSE, FALSE, sizeof (gint));
-  for (i = 0; i &lt; 10000; i++)
-    g_array_append_val (garray, i);
-  for (i = 0; i &lt; 10000; i++)
-    if (g_array_index (garray, gint, i) != i)
-      g_print ("ERROR: got %d instead of %d\n",
-               g_array_index (garray, gint, i), i);
-  g_array_free (garray, TRUE);
- </pre></div>
+<a name="id850256"></a><p class="title"><b>Example 19. Using a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> to store <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> values</b></p>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="usertype">GArray</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">garray</span><span class="symbol">;</span>
+<span class="usertype">gint</span><span class="normal"> i</span><span class="symbol">;</span>
+<span class="comment">/* We create a new array to store gint values.</span>
+<span class="comment">   We don't want it zero-terminated or cleared to 0's. */</span>
+<span class="normal">garray </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Arrays.html#g-array-new">g_array_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">,</span><span class="normal"> </span><span class="keyword">sizeof</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Basic-Types.html#gint">gint</a></span><span class="symbol">));</span>
+<span class="keyword">for</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">i </span><span class="symbol">=</span><span class="normal"> </span><span class="number">0</span><span class="symbol">;</span><span class="normal"> i </span><span class="symbol">&lt;</span><span class="normal"> </span><span class="number">10000</span><span class="symbol">;</span><span class="normal"> i</span><span class="symbol">++)</span>
+<span class="normal">  </span><span class="function"><a href="glib-Arrays.html#g-array-append-val">g_array_append_val</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">garray</span><span class="symbol">,</span><span class="normal"> i</span><span class="symbol">);</span>
+<span class="keyword">for</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">i </span><span class="symbol">=</span><span class="normal"> </span><span class="number">0</span><span class="symbol">;</span><span class="normal"> i </span><span class="symbol">&lt;</span><span class="normal"> </span><span class="number">10000</span><span class="symbol">;</span><span class="normal"> i</span><span class="symbol">++)</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="glib-Arrays.html#g-array-index">g_array_index</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">garray</span><span class="symbol">,</span><span class="normal"> <a href="glib-Basic-Types.html#gint">gint</a></span><span class="symbol">,</span><span class="normal"> i</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">!=</span><span class="normal"> i</span><span class="symbol">)</span>
+<span class="normal">    </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"ERROR: got %d instead of %d</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span>
+<span class="normal">             </span><span class="function"><a href="glib-Arrays.html#g-array-index">g_array_index</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">garray</span><span class="symbol">,</span><span class="normal"> <a href="glib-Basic-Types.html#gint">gint</a></span><span class="symbol">,</span><span class="normal"> i</span><span class="symbol">),</span><span class="normal"> i</span><span class="symbol">);</span>
+<span class="function"><a href="glib-Arrays.html#g-array-free">g_array_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">garray</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#TRUE:CAPS">TRUE</a></span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<p><br class="example-break"></p>
+
+</div>
+<p><br class="example-break">
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="glib-Arrays.details"></a><h2>Details</h2>
@@ -163,19 +169,20 @@ To free an array, use <a class="link" href="glib-Arrays.html#g-array-free" title
 } GArray;
 </pre>
 <p>
-Contains the public fields of an Array.</p>
+Contains the public fields of an Array.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *<em class="structfield"><code><a name="GArray.data"></a>data</code></em>;</span></p></td>
-<td> a pointer to the element data. The data may be moved as
+<td>a pointer to the element data. The data may be moved as
        elements are added to the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GArray.len"></a>len</code></em>;</span></p></td>
-<td> the number of elements in the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> not including the
+<td>the number of elements in the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> not including the
       possible terminating zero element.
 </td>
 </tr>
@@ -185,34 +192,37 @@ Contains the public fields of an Array.</p>
 <hr>
 <div class="refsect2" title="g_array_new ()">
 <a name="g-array-new"></a><h3>g_array_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_new                         (<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> zero_terminated,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> clear_,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> element_size);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_new                         (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> zero_terminated</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> clear_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> element_size</code></em>);</pre>
 <p>
-Creates a new <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> with a reference count of 1.</p>
+Creates a new <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> with a reference count of 1.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>zero_terminated</code></em> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the array should have an extra element at
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the array should have an extra element at
                   the end which is set to 0.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>clear_</code></em> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> elements should be automatically cleared
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> elements should be automatically cleared
          to 0 when they are allocated.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>element_size</code></em> :</span></p></td>
-<td> the size of each element in bytes.
+<td>the size of each element in bytes.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the new <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -221,43 +231,46 @@ Creates a new <a class="link" href="glib-Arrays.html#GArray" title="GArray"><spa
 <hr>
 <div class="refsect2" title="g_array_sized_new ()">
 <a name="g-array-sized-new"></a><h3>g_array_sized_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_sized_new                   (<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> zero_terminated,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> clear_,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> element_size,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> reserved_size);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_sized_new                   (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> zero_terminated</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> clear_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> element_size</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> reserved_size</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> with <em class="parameter"><code>reserved_size</code></em> elements preallocated and
 a reference count of 1. This avoids frequent reallocation, if you
 are going to add many elements to the array. Note however that the
-size of the array is still 0.</p>
+size of the array is still 0.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>zero_terminated</code></em> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the array should have an extra element at
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the array should have an extra element at
                   the end with all bits cleared.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>clear_</code></em> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if all bits in the array should be cleared to 0 on
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if all bits in the array should be cleared to 0 on
          allocation.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>element_size</code></em> :</span></p></td>
-<td> size of each element in the array.
+<td>size of each element in the array.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>reserved_size</code></em> :</span></p></td>
-<td> number of elements preallocated.
+<td>number of elements preallocated.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the new <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -266,16 +279,17 @@ size of the array is still 0.</p>
 <hr>
 <div class="refsect2" title="g_array_ref ()">
 <a name="g-array-ref"></a><h3>g_array_ref ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *            g_array_ref                         (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *            g_array_ref                         (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>);</pre>
 <p>
 Atomically increments the reference count of <em class="parameter"><code>array</code></em> by one. This
-function is MT-safe and may be called from any thread.</p>
+function is MT-safe and may be called from any thread.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> A <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>A <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
@@ -291,17 +305,18 @@ function is MT-safe and may be called from any thread.</p>
 <hr>
 <div class="refsect2" title="g_array_unref ()">
 <a name="g-array-unref"></a><h3>g_array_unref ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_array_unref                       (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_array_unref                       (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>);</pre>
 <p>
 Atomically decrements the reference count of <em class="parameter"><code>array</code></em> by one. If the
 reference count drops to 0, all memory allocated by the array is
 released. This function is MT-safe and may be called from any
-thread.</p>
+thread.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> A <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>A <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr></tbody>
 </table></div>
@@ -310,15 +325,16 @@ thread.</p>
 <hr>
 <div class="refsect2" title="g_array_get_element_size ()">
 <a name="g-array-get-element-size"></a><h3>g_array_get_element_size ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_array_get_element_size            (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_array_get_element_size            (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>);</pre>
 <p>
-Gets the size of the elements in <em class="parameter"><code>array</code></em>.</p>
+Gets the size of the elements in <em class="parameter"><code>array</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> A <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>A <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
@@ -347,22 +363,24 @@ size automatically if necessary.
 to the value parameter <em class="parameter"><code>v</code></em>. This means that you cannot use it with
 literal values such as "27". You must use variables.</p>
 </div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>v</code></em> :</span></p></td>
-<td> the value to append to the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the value to append to the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -371,32 +389,33 @@ literal values such as "27". You must use variables.</p>
 <hr>
 <div class="refsect2" title="g_array_append_vals ()">
 <a name="g-array-append-vals"></a><h3>g_array_append_vals ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_append_vals                 (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="returnvalue">gconstpointer</span></a> data,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> len);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_append_vals                 (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> len</code></em>);</pre>
 <p>
-Adds <em class="parameter"><code>len</code></em> elements onto the end of the array.</p>
+Adds <em class="parameter"><code>len</code></em> elements onto the end of the array.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> a pointer to the elements to append to the end of the array.
+<td>a pointer to the elements to append to the end of the array.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
-<td> the number of elements to append.
+<td>the number of elements to append.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -423,22 +442,24 @@ the new element.
 to the value parameter <em class="parameter"><code>v</code></em>. This means that you cannot use it with
 literal values such as "27". You must use variables.</p>
 </div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>v</code></em> :</span></p></td>
-<td> the value to prepend to the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the value to prepend to the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -447,38 +468,39 @@ literal values such as "27". You must use variables.</p>
 <hr>
 <div class="refsect2" title="g_array_prepend_vals ()">
 <a name="g-array-prepend-vals"></a><h3>g_array_prepend_vals ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_prepend_vals                (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="returnvalue">gconstpointer</span></a> data,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> len);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_prepend_vals                (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> len</code></em>);</pre>
 <p>
 Adds <em class="parameter"><code>len</code></em> elements onto the start of the array.
 </p>
 <p>
 This operation is slower than <a class="link" href="glib-Arrays.html#g-array-append-vals" title="g_array_append_vals ()"><code class="function">g_array_append_vals()</code></a> since the
 existing elements in the array have to be moved to make space for
-the new elements.</p>
+the new elements.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> a pointer to the elements to prepend to the start of the
+<td>a pointer to the elements to prepend to the start of the
        array.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
-<td> the number of elements to prepend.
+<td>the number of elements to prepend.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -499,27 +521,29 @@ Inserts an element into an array at the given index.
 to the value parameter <em class="parameter"><code>v</code></em>. This means that you cannot use it with
 literal values such as "27". You must use variables.</p>
 </div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
-<td> the index to place the element at.
+<td>the index to place the element at.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>v</code></em> :</span></p></td>
-<td> the value to insert into the array.
+<td>the value to insert into the array.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -528,38 +552,39 @@ literal values such as "27". You must use variables.</p>
 <hr>
 <div class="refsect2" title="g_array_insert_vals ()">
 <a name="g-array-insert-vals"></a><h3>g_array_insert_vals ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_insert_vals                 (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_,
-                                                         <a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="returnvalue">gconstpointer</span></a> data,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> len);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_insert_vals                 (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> len</code></em>);</pre>
 <p>
-Inserts <em class="parameter"><code>len</code></em> elements into a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> at the given index.</p>
+Inserts <em class="parameter"><code>len</code></em> elements into a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> at the given index.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index to place the elements at.
+<td>the index to place the elements at.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> a pointer to the elements to insert.
+<td>a pointer to the elements to insert.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
-<td> the number of elements to insert.
+<td>the number of elements to insert.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -568,27 +593,28 @@ Inserts <em class="parameter"><code>len</code></em> elements into a <a class="li
 <hr>
 <div class="refsect2" title="g_array_remove_index ()">
 <a name="g-array-remove-index"></a><h3>g_array_remove_index ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_remove_index                (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_remove_index                (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>);</pre>
 <p>
 Removes the element at the given index from a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>. The following
-elements are moved down one place.</p>
+elements are moved down one place.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index of the element to remove.
+<td>the index of the element to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -597,29 +623,30 @@ elements are moved down one place.</p>
 <hr>
 <div class="refsect2" title="g_array_remove_index_fast ()">
 <a name="g-array-remove-index-fast"></a><h3>g_array_remove_index_fast ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_remove_index_fast           (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_remove_index_fast           (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>);</pre>
 <p>
 Removes the element at the given index from a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>. The last
 element in the array is used to fill in the space, so this function
 does not preserve the order of the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>. But it is faster than
-<a class="link" href="glib-Arrays.html#g-array-remove-index" title="g_array_remove_index ()"><code class="function">g_array_remove_index()</code></a>.</p>
+<a class="link" href="glib-Arrays.html#g-array-remove-index" title="g_array_remove_index ()"><code class="function">g_array_remove_index()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <em class="parameter"><code>GArray</code></em>.
+<td>a <em class="parameter"><code>GArray</code></em>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index of the element to remove.
+<td>the index of the element to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -628,33 +655,34 @@ does not preserve the order of the <a class="link" href="glib-Arrays.html#GArray
 <hr>
 <div class="refsect2" title="g_array_remove_range ()">
 <a name="g-array-remove-range"></a><h3>g_array_remove_range ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_remove_range                (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> length);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_remove_range                (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> length</code></em>);</pre>
 <p>
 Removes the given number of elements starting at the given index
-from a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.  The following elements are moved to close the gap.</p>
+from a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.  The following elements are moved to close the gap.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <em class="parameter"><code>GArray</code></em>.
+<td>a <em class="parameter"><code>GArray</code></em>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index of the first element to remove.
+<td>the index of the first element to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td> the number of elements to remove.
+<td>the number of elements to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -664,8 +692,8 @@ from a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class
 <hr>
 <div class="refsect2" title="g_array_sort ()">
 <a name="g-array-sort"></a><h3>g_array_sort ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_array_sort                        (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="returnvalue">GCompareFunc</span></a> compare_func);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_array_sort                        (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> compare_func</code></em>);</pre>
 <p>
 Sorts a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> using <em class="parameter"><code>compare_func</code></em> which should be a <code class="function">qsort()</code>-style
 comparison function (returns less than zero for first arg is less
@@ -674,18 +702,19 @@ greater than second arg).
 </p>
 <p>
 If two array elements compare equal, their order in the sorted array
-is undefined.</p>
+is undefined.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>compare_func</code></em> :</span></p></td>
-<td> comparison function.
+<td>comparison function.
 </td>
 </tr>
 </tbody>
@@ -694,28 +723,29 @@ is undefined.</p>
 <hr>
 <div class="refsect2" title="g_array_sort_with_data ()">
 <a name="g-array-sort-with-data"></a><h3>g_array_sort_with_data ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_array_sort_with_data              (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> compare_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_array_sort_with_data              (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> compare_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Like <a class="link" href="glib-Arrays.html#g-array-sort" title="g_array_sort ()"><code class="function">g_array_sort()</code></a>, but the comparison function receives an extra
-user data argument.</p>
+user data argument.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>compare_func</code></em> :</span></p></td>
-<td> comparison function.
+<td>comparison function.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> data to pass to <em class="parameter"><code>compare_func</code></em>.
+<td>data to pass to <em class="parameter"><code>compare_func</code></em>.
 </td>
 </tr>
 </tbody>
@@ -732,36 +762,48 @@ value is cast to the given type.
 <p>
 </p>
 <div class="example">
-<a name="id785584"></a><p class="title"><b>Example 20. Getting a pointer to an element in a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a></b></p>
-<div class="example-contents"><pre class="programlisting">
-  EDayViewEvent *event;
-  /* This gets a pointer to the 4th element
-     in the array of EDayViewEvent structs. */
-  event = &amp;g_array_index (events, EDayViewEvent, 3);
- </pre></div>
+<a name="id863742"></a><p class="title"><b>Example 20. Getting a pointer to an element in a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a></b></p>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="usertype">EDayViewEvent</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">event</span><span class="symbol">;</span>
+<span class="comment">/* This gets a pointer to the 4th element</span>
+<span class="comment">   in the array of EDayViewEvent structs. */</span>
+<span class="normal">event </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="function"><a href="glib-Arrays.html#g-array-index">g_array_index</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">events</span><span class="symbol">,</span><span class="normal"> EDayViewEvent</span><span class="symbol">,</span><span class="normal"> </span><span class="number">3</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<p><br class="example-break"></p>
+
+</div>
+<p><br class="example-break">
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>t</code></em> :</span></p></td>
-<td> the type of the elements.
+<td>the type of the elements.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
-<td> the index of the element to return.
+<td>the index of the element to return.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the element of the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> at the index given by <em class="parameter"><code>i</code></em>.
+<td>the element of the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> at the index given by <em class="parameter"><code>i</code></em>.
 </td>
 </tr>
 </tbody>
@@ -770,27 +812,28 @@ value is cast to the given type.
 <hr>
 <div class="refsect2" title="g_array_set_size ()">
 <a name="g-array-set-size"></a><h3>g_array_set_size ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_set_size                    (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> length);</pre>
+<pre class="programlisting"><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a>*             g_array_set_size                    (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> length</code></em>);</pre>
 <p>
 Sets the size of the array, expanding it if necessary. If the array
-was created with <em class="parameter"><code>clear_</code></em> set to <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, the new elements are set to 0.</p>
+was created with <em class="parameter"><code>clear_</code></em> set to <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, the new elements are set to 0.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td> the new size of the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the new size of the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -799,8 +842,8 @@ was created with <em class="parameter"><code>clear_</code></em> set to <a class=
 <hr>
 <div class="refsect2" title="g_array_free ()">
 <a name="g-array-free"></a><h3>g_array_free ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_array_free                        (<a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="returnvalue">GArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> free_segment);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_array_free                        (<em class="parameter"><code><a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> free_segment</code></em>);</pre>
 <p>
 Frees the memory allocated for the <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>. If <em class="parameter"><code>free_segment</code></em> is
 <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> it frees the memory block holding the elements as well and
@@ -817,22 +860,24 @@ of <em class="parameter"><code>array</code></em> will be set to zero.
 <p>If array elements contain dynamically-allocated memory,
 they should be freed separately.</p>
 </div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>a <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>free_segment</code></em> :</span></p></td>
-<td> if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> the actual element data is freed as well.
+<td>if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> the actual element data is freed as well.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the element data if <em class="parameter"><code>free_segment</code></em> is <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>, otherwise
+<td>the element data if <em class="parameter"><code>free_segment</code></em> is <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>, otherwise
           <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.  The element data should be freed using <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>.
 </td>
 </tr>
@@ -843,6 +888,6 @@ they should be freed separately.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

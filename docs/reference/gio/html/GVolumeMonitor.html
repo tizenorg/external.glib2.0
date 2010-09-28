@@ -8,38 +8,8 @@
 <link rel="up" href="volume_mon.html" title="Volumes and Drives">
 <link rel="prev" href="volume_mon.html" title="Volumes and Drives">
 <link rel="next" href="GVolume.html" title="GVolume">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="pt01.html" title="Part I. GIO Overview">
-<link rel="chapter" href="ch01.html" title="Introduction">
-<link rel="chapter" href="ch02.html" title="Compiling GIO applications">
-<link rel="chapter" href="ch03.html" title="Running GIO applications">
-<link rel="chapter" href="extending-gio.html" title="Extending GIO">
-<link rel="part" href="pt02.html" title="Part II. API Reference">
-<link rel="chapter" href="file_ops.html" title="File Operations">
-<link rel="chapter" href="file_mon.html" title="File System Monitoring">
-<link rel="chapter" href="async.html" title="Asynchronous I/O">
-<link rel="chapter" href="conversion.html" title="Data conversion">
-<link rel="chapter" href="streaming.html" title="Streaming I/O">
-<link rel="chapter" href="types.html" title="File types and applications">
-<link rel="chapter" href="volume_mon.html" title="Volumes and Drives">
-<link rel="chapter" href="icons.html" title="Icons">
-<link rel="chapter" href="failable_initialization.html" title="Failable Initialization">
-<link rel="chapter" href="networking.html" title="Lowlevel platform-independent network support">
-<link rel="chapter" href="resolver.html" title="DNS resolution">
-<link rel="chapter" href="highlevel-socket.html" title="Highlevel network functionallity">
-<link rel="chapter" href="utils.html" title="Utilities">
-<link rel="chapter" href="extending.html" title="Extending GIO">
-<link rel="part" href="migrating.html" title="Part III. Migrating to GIO">
-<link rel="chapter" href="ch19.html" title="Migrating from POSIX to GIO">
-<link rel="chapter" href="ch20.html" title="Migrating from GnomeVFS to GIO">
-<link rel="chapter" href="gio-hierarchy.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -76,23 +46,23 @@
 
                     <a class="link" href="GVolumeMonitor.html#GVolumeMonitor-struct" title="GVolumeMonitor">GVolumeMonitor</a>;
 #define             <a class="link" href="GVolumeMonitor.html#G-VOLUME-MONITOR-EXTENSION-POINT-NAME:CAPS" title="G_VOLUME_MONITOR_EXTENSION_POINT_NAME">G_VOLUME_MONITOR_EXTENSION_POINT_NAME</a>
-<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *    <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get" title="g_volume_monitor_get ()">g_volume_monitor_get</a>                (void);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-connected-drives" title="g_volume_monitor_get_connected_drives ()">g_volume_monitor_get_connected_drives</a>
-                                                        (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-volumes" title="g_volume_monitor_get_volumes ()">g_volume_monitor_get_volumes</a>        (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-mounts" title="g_volume_monitor_get_mounts ()">g_volume_monitor_get_mounts</a>         (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor);
-<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *           <a class="link" href="GVolumeMonitor.html#g-volume-monitor-adopt-orphan-mount" title="g_volume_monitor_adopt_orphan_mount ()">g_volume_monitor_adopt_orphan_mount</a> (<a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *mount);
-<a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *            <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-mount-for-uuid" title="g_volume_monitor_get_mount_for_uuid ()">g_volume_monitor_get_mount_for_uuid</a> (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor,
-                                                         const <span class="returnvalue">char</span> *uuid);
+<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *    <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get" title="g_volume_monitor_get ()">g_volume_monitor_get</a>                (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-connected-drives" title="g_volume_monitor_get_connected_drives ()">g_volume_monitor_get_connected_drives</a>
+                                                        (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-volumes" title="g_volume_monitor_get_volumes ()">g_volume_monitor_get_volumes</a>        (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-mounts" title="g_volume_monitor_get_mounts ()">g_volume_monitor_get_mounts</a>         (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>);
+<a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *           <a class="link" href="GVolumeMonitor.html#g-volume-monitor-adopt-orphan-mount" title="g_volume_monitor_adopt_orphan_mount ()">g_volume_monitor_adopt_orphan_mount</a> (<em class="parameter"><code><a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> *mount</code></em>);
+<a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *            <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-mount-for-uuid" title="g_volume_monitor_get_mount_for_uuid ()">g_volume_monitor_get_mount_for_uuid</a> (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *uuid</code></em>);
 <a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *           <a class="link" href="GVolumeMonitor.html#g-volume-monitor-get-volume-for-uuid" title="g_volume_monitor_get_volume_for_uuid ()">g_volume_monitor_get_volume_for_uuid</a>
-                                                        (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor,
-                                                         const <span class="returnvalue">char</span> *uuid);
+                                                        (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *uuid</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="GVolumeMonitor.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GVolumeMonitor
 </pre>
 </div>
@@ -123,7 +93,8 @@ would show in a sidebar.
 <p>
 <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> is not <GTKDOCLINK HREF="g-main-context-push-thread-default">thread-default-context
 aware</GTKDOCLINK>, and so should not be used other than from the main
-thread, with no thread-default-context active.</p>
+thread, with no thread-default-context active.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="GVolumeMonitor.details"></a><h2>Details</h2>
@@ -131,7 +102,8 @@ thread, with no thread-default-context active.</p>
 <a name="GVolumeMonitor-struct"></a><h3>GVolumeMonitor</h3>
 <pre class="programlisting">typedef struct _GVolumeMonitor GVolumeMonitor;</pre>
 <p>
-A Volume Monitor that watches for volume events.</p>
+A Volume Monitor that watches for volume events.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody></tbody>
@@ -144,20 +116,22 @@ A Volume Monitor that watches for volume events.</p>
 </pre>
 <p>
 Extension point for volume monitor functionality.
-See Extending GIO.</p>
+See Extending GIO.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="g_volume_monitor_get ()">
 <a name="g-volume-monitor-get"></a><h3>g_volume_monitor_get ()</h3>
-<pre class="programlisting"><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *    g_volume_monitor_get                (void);</pre>
+<pre class="programlisting"><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *    g_volume_monitor_get                (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Gets the volume monitor used by gio.</p>
+Gets the volume monitor used by gio.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> a reference to the <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> used by gio. Call
-   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when done with it.
+   <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> when done with it.
 </td>
 </tr></tbody>
 </table></div>
@@ -165,25 +139,26 @@ Gets the volume monitor used by gio.</p>
 <hr>
 <div class="refsect2" title="g_volume_monitor_get_connected_drives ()">
 <a name="g-volume-monitor-get-connected-drives"></a><h3>g_volume_monitor_get_connected_drives ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_volume_monitor_get_connected_drives
-                                                        (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_volume_monitor_get_connected_drives
+                                                        (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>);</pre>
 <p>
 Gets a list of drives connected to the system.
 </p>
 <p>
-The returned list should be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after
-its elements have been unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</p>
+The returned list should be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after
+its elements have been unreffed with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
+<td>a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of connected <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> objects.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of connected <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> objects.
 </td>
 </tr>
 </tbody>
@@ -192,24 +167,25 @@ its elements have been unreffed with <a href="http://library.gnome.org/devel/gob
 <hr>
 <div class="refsect2" title="g_volume_monitor_get_volumes ()">
 <a name="g-volume-monitor-get-volumes"></a><h3>g_volume_monitor_get_volumes ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_volume_monitor_get_volumes        (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_volume_monitor_get_volumes        (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>);</pre>
 <p>
 Gets a list of the volumes on the system.
 </p>
 <p>
-The returned list should be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after
-its elements have been unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</p>
+The returned list should be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after
+its elements have been unreffed with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
+<td>a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> objects.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> objects.
 </td>
 </tr>
 </tbody>
@@ -218,24 +194,25 @@ its elements have been unreffed with <a href="http://library.gnome.org/devel/gob
 <hr>
 <div class="refsect2" title="g_volume_monitor_get_mounts ()">
 <a name="g-volume-monitor-get-mounts"></a><h3>g_volume_monitor_get_mounts ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_volume_monitor_get_mounts         (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_volume_monitor_get_mounts         (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>);</pre>
 <p>
 Gets a list of the mounts on the system.
 </p>
 <p>
-The returned list should be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after
-its elements have been unreffed with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</p>
+The returned list should be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>, after
+its elements have been unreffed with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
+<td>a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> objects.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> objects.
 </td>
 </tr>
 </tbody>
@@ -244,7 +221,7 @@ its elements have been unreffed with <a href="http://library.gnome.org/devel/gob
 <hr>
 <div class="refsect2" title="g_volume_monitor_adopt_orphan_mount ()">
 <a name="g-volume-monitor-adopt-orphan-mount"></a><h3>g_volume_monitor_adopt_orphan_mount ()</h3>
-<pre class="programlisting"><a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *           g_volume_monitor_adopt_orphan_mount (<a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *mount);</pre>
+<pre class="programlisting"><a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *           g_volume_monitor_adopt_orphan_mount (<em class="parameter"><code><a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> *mount</code></em>);</pre>
 <div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_volume_monitor_adopt_orphan_mount</code> has been deprecated since version 2.20 and should not be used in newly-written code. Instead of using this function, <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>
@@ -260,7 +237,7 @@ associated with a <a class="link" href="GVolume.html" title="GVolume"><span clas
 emitting the <em class="parameter"><code>mount_added</code></em> signal.
 </p>
 <p>
-If the return value is not <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the caller must associate the
+If the return value is not <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the caller must associate the
 returned <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> object with the <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a>. This involves returning
 it in its <a class="link" href="GMount.html#g-mount-get-volume" title="g_mount_get_volume ()"><code class="function">g_mount_get_volume()</code></a> implementation. The caller must
 also listen for the "removed" signal on the returned object
@@ -286,18 +263,19 @@ assoicated with the <a class="link" href="GVolume.html" title="GVolume"><span cl
 <p>
 The other is for implementing a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> whose sole purpose
 is to return <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> objects representing entries in the users
-"favorite servers" list or similar.</p>
+"favorite servers" list or similar.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount</code></em> :</span></p></td>
-<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> object to find a parent for
+<td>a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> object to find a parent for
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> object that is the parent for <em class="parameter"><code>mount</code></em> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td> the <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> object that is the parent for <em class="parameter"><code>mount</code></em> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 if no wants to adopt the <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a>.
 
 </td>
@@ -308,27 +286,28 @@ if no wants to adopt the <a class="link" href="GMount.html" title="GMount"><span
 <hr>
 <div class="refsect2" title="g_volume_monitor_get_mount_for_uuid ()">
 <a name="g-volume-monitor-get-mount-for-uuid"></a><h3>g_volume_monitor_get_mount_for_uuid ()</h3>
-<pre class="programlisting"><a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *            g_volume_monitor_get_mount_for_uuid (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor,
-                                                         const <span class="returnvalue">char</span> *uuid);</pre>
+<pre class="programlisting"><a class="link" href="GMount.html" title="GMount"><span class="returnvalue">GMount</span></a> *            g_volume_monitor_get_mount_for_uuid (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *uuid</code></em>);</pre>
 <p>
-Finds a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> object by its UUID (see <a class="link" href="GMount.html#g-mount-get-uuid" title="g_mount_get_uuid ()"><code class="function">g_mount_get_uuid()</code></a>)</p>
+Finds a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> object by its UUID (see <a class="link" href="GMount.html#g-mount-get-uuid" title="g_mount_get_uuid ()"><code class="function">g_mount_get_uuid()</code></a>)
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
+<td>a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uuid</code></em> :</span></p></td>
-<td> the UUID to look for
+<td>the UUID to look for
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no such mount is available.
-    Free the returned object with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no such mount is available.
+    Free the returned object with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
 </td>
 </tr>
 </tbody>
@@ -338,27 +317,28 @@ Finds a <a class="link" href="GMount.html" title="GMount"><span class="type">GMo
 <div class="refsect2" title="g_volume_monitor_get_volume_for_uuid ()">
 <a name="g-volume-monitor-get-volume-for-uuid"></a><h3>g_volume_monitor_get_volume_for_uuid ()</h3>
 <pre class="programlisting"><a class="link" href="GVolume.html" title="GVolume"><span class="returnvalue">GVolume</span></a> *           g_volume_monitor_get_volume_for_uuid
-                                                        (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="returnvalue">GVolumeMonitor</span></a> *volume_monitor,
-                                                         const <span class="returnvalue">char</span> *uuid);</pre>
+                                                        (<em class="parameter"><code><a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor</code></em>,
+                                                         <em class="parameter"><code>const <span class="type">char</span> *uuid</code></em>);</pre>
 <p>
-Finds a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> object by its UUID (see <a class="link" href="GVolume.html#g-volume-get-uuid" title="g_volume_get_uuid ()"><code class="function">g_volume_get_uuid()</code></a>)</p>
+Finds a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> object by its UUID (see <a class="link" href="GVolume.html#g-volume-get-uuid" title="g_volume_get_uuid ()"><code class="function">g_volume_get_uuid()</code></a>)
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
+<td>a <a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uuid</code></em> :</span></p></td>
-<td> the UUID to look for
+<td>the UUID to look for
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no such volume is available.
-    Free the returned object with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no such volume is available.
+    Free the returned object with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
 </td>
 </tr>
 </tbody>
@@ -371,20 +351,21 @@ Finds a <a class="link" href="GVolume.html" title="GVolume"><span class="type">G
 <a name="GVolumeMonitor-drive-changed"></a><h3>The <code class="literal">"drive-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a>         *drive,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a drive changes.</p>
+Emitted when a drive changes.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
-<td> the drive that changed
+<td>the drive that changed
 </td>
 </tr>
 <tr>
@@ -399,20 +380,21 @@ Emitted when a drive changes.</p>
 <a name="GVolumeMonitor-drive-connected"></a><h3>The <code class="literal">"drive-connected"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a>         *drive,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a drive is connected to the system.</p>
+Emitted when a drive is connected to the system.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
-<td> a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> that was connected.
+<td>a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> that was connected.
 </td>
 </tr>
 <tr>
@@ -427,20 +409,21 @@ Emitted when a drive is connected to the system.</p>
 <a name="GVolumeMonitor-drive-disconnected"></a><h3>The <code class="literal">"drive-disconnected"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a>         *drive,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a drive is disconnected from the system.</p>
+Emitted when a drive is disconnected from the system.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
-<td> a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> that was disconnected.
+<td>a <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a> that was disconnected.
 </td>
 </tr>
 <tr>
@@ -455,20 +438,21 @@ Emitted when a drive is disconnected from the system.</p>
 <a name="GVolumeMonitor-drive-eject-button"></a><h3>The <code class="literal">"drive-eject-button"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a>         *drive,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when the eject button is pressed on <em class="parameter"><code>drive</code></em>.</p>
+Emitted when the eject button is pressed on <em class="parameter"><code>drive</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
-<td> the drive where the eject button was pressed
+<td>the drive where the eject button was pressed
 </td>
 </tr>
 <tr>
@@ -484,20 +468,21 @@ Emitted when the eject button is pressed on <em class="parameter"><code>drive</c
 <a name="GVolumeMonitor-drive-stop-button"></a><h3>The <code class="literal">"drive-stop-button"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GDrive.html" title="GDrive"><span class="type">GDrive</span></a>         *drive,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when the stop button is pressed on <em class="parameter"><code>drive</code></em>.</p>
+Emitted when the stop button is pressed on <em class="parameter"><code>drive</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
-<td> the drive where the stop button was pressed
+<td>the drive where the stop button was pressed
 </td>
 </tr>
 <tr>
@@ -513,20 +498,21 @@ Emitted when the stop button is pressed on <em class="parameter"><code>drive</co
 <a name="GVolumeMonitor-mount-added"></a><h3>The <code class="literal">"mount-added"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a>         *mount,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a mount is added.</p>
+Emitted when a mount is added.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount</code></em> :</span></p></td>
-<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> that was added.
+<td>a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> that was added.
 </td>
 </tr>
 <tr>
@@ -541,20 +527,21 @@ Emitted when a mount is added.</p>
 <a name="GVolumeMonitor-mount-changed"></a><h3>The <code class="literal">"mount-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a>         *mount,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a mount changes.</p>
+Emitted when a mount changes.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount</code></em> :</span></p></td>
-<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> that changed.
+<td>a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> that changed.
 </td>
 </tr>
 <tr>
@@ -569,20 +556,21 @@ Emitted when a mount changes.</p>
 <a name="GVolumeMonitor-mount-pre-unmount"></a><h3>The <code class="literal">"mount-pre-unmount"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a>         *mount,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a mount is about to be removed.</p>
+Emitted when a mount is about to be removed.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount</code></em> :</span></p></td>
-<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> that is being unmounted.
+<td>a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> that is being unmounted.
 </td>
 </tr>
 <tr>
@@ -597,20 +585,21 @@ Emitted when a mount is about to be removed.</p>
 <a name="GVolumeMonitor-mount-removed"></a><h3>The <code class="literal">"mount-removed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a>         *mount,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a mount is removed.</p>
+Emitted when a mount is removed.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount</code></em> :</span></p></td>
-<td> a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> that was removed.
+<td>a <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> that was removed.
 </td>
 </tr>
 <tr>
@@ -625,20 +614,21 @@ Emitted when a mount is removed.</p>
 <a name="GVolumeMonitor-volume-added"></a><h3>The <code class="literal">"volume-added"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>        *volume,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a mountable volume is added to the system.</p>
+Emitted when a mountable volume is added to the system.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> that was added.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> that was added.
 </td>
 </tr>
 <tr>
@@ -653,20 +643,21 @@ Emitted when a mountable volume is added to the system.</p>
 <a name="GVolumeMonitor-volume-changed"></a><h3>The <code class="literal">"volume-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>        *volume,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when mountable volume is changed.</p>
+Emitted when mountable volume is changed.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> that changed.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> that changed.
 </td>
 </tr>
 <tr>
@@ -681,20 +672,21 @@ Emitted when mountable volume is changed.</p>
 <a name="GVolumeMonitor-volume-removed"></a><h3>The <code class="literal">"volume-removed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GVolumeMonitor.html" title="GVolumeMonitor"><span class="type">GVolumeMonitor</span></a> *volume_monitor,
                                                         <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a>        *volume,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
+                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>        user_data)           : Run Last</pre>
 <p>
-Emitted when a mountable volume is removed from the system.</p>
+Emitted when a mountable volume is removed from the system.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume_monitor</code></em> :</span></p></td>
-<td> The volume monitor emitting the signal.
+<td>The volume monitor emitting the signal.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> that was removed.
+<td>a <a class="link" href="GVolume.html" title="GVolume"><span class="type">GVolume</span></a> that was removed.
 </td>
 </tr>
 <tr>
@@ -712,6 +704,6 @@ Emitted when a mountable volume is removed from the system.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

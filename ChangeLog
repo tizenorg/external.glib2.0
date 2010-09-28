@@ -1,3 +1,690 @@
+commit 2d765e1533321b5421b410217fe2acbe183375eb
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Sat Aug 7 19:58:12 2010 -0400
+
+    Bug 578295 - gtester has a race condition
+
+    Deal with the race in GMainLoop by installing a do-nothing timeout.
+
+ glib/gtester.c |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
+
+commit 17bde58552d91d90536458e36445c1eff9d4f0d0
+Author: Andika Triwidada <andika@gmail.com>
+Date:   Fri Aug 6 15:58:03 2010 +0700
+
+    Updated Indonesian translation
+
+ po/id.po | 2150
+ +++++++++++++++++++++++++++++++++++++++++---------------------
+ 1 files changed, 1425 insertions(+), 725 deletions(-)
+
+commit 0ca62609d72dff6b93f57be3a019ecb72f021869
+Author: Lucian Adrian Grijincu <lucian.grijincu@gmail.com>
+Date:   Thu Jul 15 02:07:08 2010 +0300
+
+    po: Updated Romanian translation
+
+ po/ro.po | 1051
+ +++++++++++++++++++++++++++++---------------------------------
+ 1 files changed, 486 insertions(+), 565 deletions(-)
+
+commit 07ae0361da9347e4d2f5f6496b838b3dc4f2992c
+Author: Rudolfs Mazurs <rudolfs.mazurs@gmail.com>
+Date:   Mon Jun 21 00:12:02 2010 +0300
+
+    Updated Latvian translation.
+
+ po/lv.po | 1931
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 971 insertions(+), 960 deletions(-)
+
+commit 21ee3b69d3b47124950925beb79f237b8da6761f
+Author: Christian Dywan <christian@twotoasts.de>
+Date:   Fri Jun 11 09:46:47 2010 +0200
+
+    Add a regression test for GConverterOutputStream corruption
+
+    See bug #619945 for background
+    (cherry picked from commit 85ea72c0c5716b6ebd62272e17e8e4e3b9014f65)
+
+ gio/tests/converter-stream.c |   54
+ ++++++++++++++++++++++++++++++++++++++++++
+ 1 files changed, 54 insertions(+), 0 deletions(-)
+
+commit 1f0694e51b8c8ed894cf2d7b690c666dc03bb145
+Author: Jürg Billeter <j@bitron.ch>
+Date:   Fri May 28 11:00:37 2010 +0200
+
+    Use correct offset for buffer data in GConverterOutputStream
+
+    Otherwise we overwrite already converted data in the case that more
+    than one call to g_converter_convert is necessary in write() or
+    flush().
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=619945
+    (cherry picked from commit 6858ab20330ec31322dacbbdfaf66838fdcbfb78)
+
+ gio/gconverteroutputstream.c |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+commit efff840412e1de09f4dcc4d06aa8577a09dc7669
+Author: Jürg Billeter <j@bitron.ch>
+Date:   Thu May 27 16:55:53 2010 +0200
+
+    Ensure we always have some target space in GConverterOutputStream
+
+    When the converter fills the whole buffer without reading all input,
+    we need to enlarge the buffer. Otherwise we get an assertion failure
+    for `outbuf_size > 0' in g_converter_convert.
+
+    https://bugzilla.gnome.org/show_bug.cgi?id=619945
+    (cherry picked from commit 86592d675ff8f1bf0f647fe926ea6085e7b1f2bc)
+
+ gio/gconverteroutputstream.c |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
+
+commit f06f37e2b09763593ba840f7f99f427a42feefa4
+Author: Tor Lillqvist <tml@iki.fi>
+Date:   Thu Jun 10 11:52:25 2010 +0300
+
+    Plug memory leak on Windows
+
+    Intern the string returned from g_win32_getlocale() and then free it.
+    Fixes bug #621168.
+
+ glib/gutils.c |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
+
+commit b5d200de7ef973bbbcf35fa55b5756a8480a8330
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Fri May 14 17:06:24 2010 +0200
+
+    fix glaring inaccuracy in GVariant docs
+
+ glib/gvariant.c |   12 ++++--------
+ 1 files changed, 4 insertions(+), 8 deletions(-)
+
+commit 1fd2aa21e600384f2619e6899a15497c602eb1c9
+Author: Ivar Smolin <okul@linux.ee>
+Date:   Thu May 20 15:00:12 2010 +0300
+
+    Estonian translation updated
+
+ po/et.po |  489
+ ++------------------------------------------------------------
+ 1 files changed, 9 insertions(+), 480 deletions(-)
+
+commit 770efbbd8976c617a735acc1194b2d20a03f0f2c
+Merge: b3db4e4 2e43d1e
+Author: Fran Diéguez <fran.dieguez@mabishu.com>
+Date:   Thu May 13 01:02:23 2010 +0200
+
+    Updated Galician translations
+
+commit b3db4e4551ff445af009a232284b42a470357472
+Author: Fran Diéguez <fran.dieguez@mabishu.com>
+Date:   Thu May 13 00:59:38 2010 +0200
+
+    Updated Galician translations
+
+ po/gl.po |  949
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 479 insertions(+), 470 deletions(-)
+
+commit 2e43d1e614c328cf6514282307e06dfb63ca9ed7
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Thu Apr 22 19:31:39 2010 -0400
+
+    Fix !srcdir build
+
+    Bug 616216
+
+ gthread/tests/Makefile.am |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+commit ad9ff29e0c286ec44b470ac6bd9d9a87b29cded3
+Author: Jorge González <jorgegonz@svn.gnome.org>
+Date:   Mon May 10 19:55:45 2010 +0200
+
+    Updated Spanish translation
+
+ po/es.po |  952
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 481 insertions(+), 471 deletions(-)
+
+commit 001fed0c1489a66cd8903f4c1f1f64ebe8655c6f
+Author: Luca Ferretti <lferrett@gnome.org>
+Date:   Mon May 10 09:49:29 2010 +0200
+
+    Updated Italian translation
+
+ po/it.po |  951
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 480 insertions(+), 471 deletions(-)
+
+commit 335ab181596368c82e143820c6c30376f86dd418
+Author: Claude Paroz <claude@2xlibre.net>
+Date:   Mon May 10 08:43:21 2010 +0200
+
+    Updated French translation
+
+ po/fr.po |  951
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 480 insertions(+), 471 deletions(-)
+
+commit 4e44073e4640380a8dd409139f6b4b1c59be9c9d
+Author: Tor Lillqvist <tml@iki.fi>
+Date:   Wed May 5 09:43:30 2010 +0300
+
+    Minor updates to README.win32.
+
+ README.win32 |   57
+ ++++++++++++++++++++++++++++++++-------------------------
+ 1 files changed, 32 insertions(+), 25 deletions(-)
+
+commit aa6beb3559ce09baecd6c6801a7728a5d4e401c8
+Author: Tor Lillqvist <tml@iki.fi>
+Date:   Mon May 3 20:07:20 2010 +0300
+
+    Fix list of sources in the gio Visual Studio project
+
+    List the additional sources needed in gio/Makefile.am, not in
+    gio.vcprojin. Fix broken usage of sort. Filter out Unix-only source
+    files.
+
+ build/win32/vs9/gio.vcprojin |    9 ---------
+ gio/Makefile.am              |   14 ++++++++++++--
+ 2 files changed, 12 insertions(+), 11 deletions(-)
+
+commit d6434b89f495c1f31e61a025f973f350537e67e3
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sun May 2 21:50:14 2010 -0400
+
+    Bump version
+
+ configure.in |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+commit 3c822b423db4ad6e612f68adefd5cb5899793ade
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sun May 2 21:47:49 2010 -0400
+
+    2.24.1
+
+ docs/reference/glib/gtester-report.1            |    6 +-
+ docs/reference/glib/tmpl/async_queues.sgml      |    4 +
+ docs/reference/glib/tmpl/atomic_operations.sgml |   33 +-
+ docs/reference/glib/tmpl/bookmarkfile.sgml      |    4 +
+ docs/reference/glib/tmpl/byte_order.sgml        |    3 +
+ docs/reference/glib/tmpl/conversions.sgml       |    3 +
+ docs/reference/glib/tmpl/date.sgml              |    4 +
+ docs/reference/glib/tmpl/error_reporting.sgml   |    3 +
+ docs/reference/glib/tmpl/fileutils.sgml         |    3 +
+ docs/reference/glib/tmpl/gregex.sgml            |    3 +
+ docs/reference/glib/tmpl/hooks.sgml             |    3 +
+ docs/reference/glib/tmpl/i18n.sgml              |    4 +
+ docs/reference/glib/tmpl/keyfile.sgml           |    4 +
+ docs/reference/glib/tmpl/limits.sgml            |    3 +
+ docs/reference/glib/tmpl/macros.sgml            |    3 +
+ docs/reference/glib/tmpl/macros_misc.sgml       |    3 +
+ docs/reference/glib/tmpl/main.sgml              |   10 +
+ docs/reference/glib/tmpl/markup.sgml            |    3 +
+ docs/reference/glib/tmpl/memory.sgml            |    5 +
+ docs/reference/glib/tmpl/memory_slices.sgml     |    3 +
+ docs/reference/glib/tmpl/messages.sgml          |    3 +
+ docs/reference/glib/tmpl/misc_utils.sgml        |   19 +
+ docs/reference/glib/tmpl/modules.sgml           |    5 +
+ docs/reference/glib/tmpl/numerical.sgml         |    3 +
+ docs/reference/glib/tmpl/queue.sgml             |    4 +
+ docs/reference/glib/tmpl/scanner.sgml           |    3 +
+ docs/reference/glib/tmpl/spawn.sgml             |    3 +
+ docs/reference/glib/tmpl/string_utils.sgml      |    3 +
+ docs/reference/glib/tmpl/strings.sgml           |    3 +
+ docs/reference/glib/tmpl/testing.sgml           |   22 +-
+ docs/reference/glib/tmpl/trash_stack.sgml       |    3 +
+ docs/reference/glib/tmpl/type_conversion.sgml   |    3 +
+ docs/reference/glib/tmpl/types.sgml             |    3 +
+ docs/reference/glib/tmpl/unicode.sgml           |    3 +
+ docs/reference/glib/tmpl/version.sgml           |    3 +
+ docs/reference/glib/tmpl/warnings.sgml          |    3 +
+ docs/reference/glib/tmpl/windows.sgml           |    5 +
+ docs/reference/gobject/glib-genmarshal.1        |    6 +-
+ docs/reference/gobject/glib-mkenums.1           |    6 +-
+ po/af.po                                        |    2 +-
+ po/am.po                                        |    2 +-
+ po/ar.po                                        |    2 +-
+ po/as.po                                        |    2 +-
+ po/ast.po                                       |    2 +-
+ po/az.po                                        |    2 +-
+ po/be.po                                        |    2 +-
+ po/be@latin.po                                  |    2 +-
+ po/bg.po                                        |    2 +-
+ po/bn.po                                        |  978
+ +++++++++++------------
+ po/bn_IN.po                                     |    2 +-
+ po/bs.po                                        |    2 +-
+ po/ca.po                                        |  952
+ +++++++++++-----------
+ po/ca@valencia.po                               |  942
+ +++++++++++-----------
+ po/cs.po                                        |    2 +-
+ po/cy.po                                        |    2 +-
+ po/da.po                                        |  942
+ +++++++++++-----------
+ po/de.po                                        |    2 +-
+ po/dz.po                                        |    2 +-
+ po/el.po                                        |    2 +-
+ po/en@shaw.po                                   |    2 +-
+ po/en_CA.po                                     |    2 +-
+ po/en_GB.po                                     |    2 +-
+ po/eo.po                                        |    2 +-
+ po/es.po                                        |    2 +-
+ po/et.po                                        |    2 +-
+ po/eu.po                                        |    2 +-
+ po/fa.po                                        |    2 +-
+ po/fi.po                                        |    2 +-
+ po/fr.po                                        |    2 +-
+ po/ga.po                                        |    2 +-
+ po/gl.po                                        |    2 +-
+ po/gu.po                                        |    2 +-
+ po/he.po                                        |    2 +-
+ po/hi.po                                        |    2 +-
+ po/hr.po                                        |    2 +-
+ po/hu.po                                        |    2 +-
+ po/hy.po                                        |    2 +-
+ po/id.po                                        |    2 +-
+ po/is.po                                        |    2 +-
+ po/it.po                                        |    2 +-
+ po/ja.po                                        |    2 +-
+ po/ka.po                                        |    2 +-
+ po/kn.po                                        |  963
+ +++++++++++-----------
+ po/ko.po                                        |    2 +-
+ po/ku.po                                        |    2 +-
+ po/lt.po                                        |    2 +-
+ po/lv.po                                        |    2 +-
+ po/mai.po                                       |    2 +-
+ po/mg.po                                        |    2 +-
+ po/mk.po                                        |    2 +-
+ po/ml.po                                        |    2 +-
+ po/mn.po                                        |    2 +-
+ po/mr.po                                        |    2 +-
+ po/ms.po                                        |    2 +-
+ po/nb.po                                        |    2 +-
+ po/nds.po                                       |    2 +-
+ po/ne.po                                        |    2 +-
+ po/nl.po                                        |    2 +-
+ po/nn.po                                        |    2 +-
+ po/oc.po                                        |    2 +-
+ po/or.po                                        |    2 +-
+ po/pa.po                                        |    2 +-
+ po/pl.po                                        |    2 +-
+ po/ps.po                                        |    2 +-
+ po/pt.po                                        |    2 +-
+ po/pt_BR.po                                     |    2 +-
+ po/ro.po                                        |    2 +-
+ po/ru.po                                        |    2 +-
+ po/rw.po                                        |    2 +-
+ po/si.po                                        |    2 +-
+ po/sk.po                                        |    2 +-
+ po/sl.po                                        |    2 +-
+ po/sq.po                                        |    2 +-
+ po/sr.po                                        |    2 +-
+ po/sr@ije.po                                    |    2 +-
+ po/sr@latin.po                                  |    2 +-
+ po/sv.po                                        |    2 +-
+ po/ta.po                                        |    2 +-
+ po/te.po                                        |    2 +-
+ po/th.po                                        |    2 +-
+ po/tl.po                                        |    2 +-
+ po/tr.po                                        |    2 +-
+ po/tt.po                                        |    2 +-
+ po/uk.po                                        |    2 +-
+ po/vi.po                                        |    2 +-
+ po/wa.po                                        |    2 +-
+ po/xh.po                                        |    2 +-
+ po/yi.po                                        |    2 +-
+ po/zh_CN.po                                     |    2 +-
+ po/zh_HK.po                                     |  957
+ +++++++++++-----------
+ po/zh_TW.po                                     |  942
+ +++++++++++-----------
+ 131 files changed, 3580 insertions(+), 3476 deletions(-)
+
+commit 87e4516650bb0f01033268e3f7f77ecd5d4cab2a
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Sun May 2 20:56:24 2010 -0400
+
+    Updates
+
+ NEWS |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+
+commit 503949b12d100ff2d89b8bbb1771729f8a251688
+Author: Behdad Esfahbod <behdad@behdad.org>
+Date:   Thu Apr 22 19:48:13 2010 -0400
+
+    Bug 615379 - g_new macros crash if sizeof(struct_type) == 0
+    (cherry picked from commit 00a7c2e635a4fa95257779c271f0eaa5992e2b37)
+
+ glib/gmem.h |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+commit f2b4060717dc4bd63b21a6c1d554fe06ece59de7
+Author: Colin Walters <walters@verbum.org>
+Date:   Wed Apr 21 16:44:26 2010 -0400
+
+    Fix typo in GMutex error message
+    (cherry picked from commit 0d9a40b8943ec3b9926efad93a28687708cc2038)
+
+ gthread/gthread-impl.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+commit e7a7d6873cb49f6c8bba5c2a5d078dbe607d62bd
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Thu Apr 15 10:11:30 2010 -0400
+
+    g_string_append_len() accept NULL with length == 0
+    (cherry picked from commit 056326c1e96db2c2101fa320062e0c9146f0d73f)
+
+ glib/gstring.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+commit 7fb9b876fa6ec63c05df1c5e441bcc87e48397e2
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Wed Apr 14 23:35:56 2010 -0400
+
+    GVariant: fix for g_variant_iter_loop()
+    (cherry picked from commit d17f4bee175cd9149d5f2b1ed1ae6d262d6a1394)
+
+ glib/gvariant.c |   14 +++++++++-----
+ 1 files changed, 9 insertions(+), 5 deletions(-)
+
+commit e61a90b9eea2eac924f66c1d137381daff6cedfd
+Author: Benjamin Otte <otte@redhat.com>
+Date:   Fri Mar 26 20:37:09 2010 +0100
+
+    Fix race in g_cancellable_cancel()
+
+    We need to check priv->cancelled after taking the lock. Previously we
+    only checked it just before taking the lock, which left a small chance
+    for a race.
+    (cherry picked from commit e7763678b56e3be073cc55d707a6e92fc2055ee0)
+
+ gio/gcancellable.c |    5 +++++
+ 1 files changed, 5 insertions(+), 0 deletions(-)
+
+commit c25c40fdd9be7612882c4d3162d3bf3917ee2e6d
+Author: Benjamin Otte <otte@redhat.com>
+Date:   Fri Mar 26 20:36:10 2010 +0100
+
+    Remove unneccessary variable from g_cancellable_cancel()
+
+    The variable makes a complicated function even more complicated.
+    (cherry picked from commit 5527a2ac2ce2b5bea10867fb2e39d2f1914cfbe6)
+
+ gio/gcancellable.c |   25 ++++++++++---------------
+ 1 files changed, 10 insertions(+), 15 deletions(-)
+
+commit b28b1e589e0464bb92aef75e7b03797410a7ec56
+Author: Carles Ferrando <carles.ferrando@gmail.com>
+Date:   Fri Apr 23 00:42:04 2010 +0200
+
+    Updated Catalan (Valencian) translation
+
+ po/ca@valencia.po | 1252
+ +++++++++++++++++++++++++++--------------------------
+ 1 files changed, 636 insertions(+), 616 deletions(-)
+
+commit d4f50a33d46e61fe065a1cdfc266159d4a612197
+Author: Shankar Prasad <sprasad@git.gnome.org>
+Date:   Thu Apr 22 16:21:42 2010 +0530
+
+    Updated Kannada translations
+
+ po/kn.po | 1025
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 517 insertions(+), 508 deletions(-)
+
+commit f54c7f9c7736247b113bb643ac7e90150d8dd1b8
+Author: Javier Jardón <jjardon@gnome.org>
+Date:   Tue Apr 20 01:04:31 2010 +0200
+
+    [docs] Fix G_VALUE_COLLECT_INIT documentation
+
+    Add the documentation to the corresponding section
+
+    This macro was introduced in
+    commit 546fc0ca331c8d1b3393fe218a697b6a1a1c1072
+
+ docs/reference/gobject/gobject-sections.txt |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+commit 324f928af62d8a0aa132a5caaec107d4daa76429
+Author: David Zeuthen <davidz@redhat.com>
+Date:   Mon Apr 19 10:42:42 2010 -0400
+
+    Bug 615111 – GAsyncInitable's default implementation is broken
+
+    Signed-off-by: David Zeuthen <davidz@redhat.com>
+
+ gio/gasyncinitable.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+commit e51ec13ab4bc629f73b41f2ad3e96b3a787a8760
+Author: Ryan Lortie <desrt@desrt.ca>
+Date:   Sat Apr 10 22:01:02 2010 -0400
+
+    Add g_return_if_fail()s to g_variant_new_from_data()
+
+    also, document that @type must be definite
+
+ glib/gvariant.c |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
+
+commit 48cfffc7b185f3e3367bac0beb04e66f536ec25d
+Author: Jordi Serratosa <jordis.lists@gmail.com>
+Date:   Fri Apr 2 14:03:16 2010 +0200
+
+    Fixes to Catalan translation
+
+ po/ca.po |  958
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 482 insertions(+), 476 deletions(-)
+
+commit 634fdaa4ba91ee49fa95f5f62e045f0901ae4e4f
+Author: Theppitak Karoonboonyanan <thep@linux.thai.net>
+Date:   Tue Apr 6 14:41:11 2010 +0700
+
+    Updated Thai translation.
+
+ po/th.po |    9 ++++-----
+ 1 files changed, 4 insertions(+), 5 deletions(-)
+
+commit 70a4217ba35492cd8e3549ca8da3fcc950421790
+Author: Tor Lillqvist <tml@iki.fi>
+Date:   Tue Mar 30 19:39:19 2010 +0300
+
+    Clarify _g_stat_struct mess
+
+    Use "struct stat" instead of "struct _stat" in the MinGW-or-64-bit
+    case. Should fix bug #614372.
+
+ glib/gstdio.c |    2 +-
+ glib/gstdio.h |    2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit c3f1025c33ab295eedcf41beeea276171ae2dc27
+Author: Javier Jardón <jjardon@gnome.org>
+Date:   Mon Mar 29 18:20:03 2010 +0200
+
+    Remove g_type_class_get_private() public documentation
+
+    This is a internal function needed for the documented
+    G_TYPE_CLASS_GET_PRIVATE() macro
+
+    This was introduced by error in
+    commit 81e2aa941bbfd02bf1b6235da12834d282ceda0c
+
+ docs/reference/gobject/tmpl/gobject-unused.sgml |    9 ---------
+ 1 files changed, 0 insertions(+), 9 deletions(-)
+
+commit 0f51e995658a50dbecb74b006f05a1ea69f43558
+Author: Javier Jardón <jjardon@gnome.org>
+Date:   Sun Mar 28 17:43:33 2010 +0200
+
+    Fix g_type_class_add_private() documentation
+
+    This fixes commit 81e2aa941bbfd02bf1b6235da12834d282ceda0c
+
+    Fixes https://bugzilla.gnome.org/show_bug.cgi?id=614185
+
+ gobject/gtype.c |   48 ++++++++++++++++++++++++++++++++++++++++++++----
+ 1 files changed, 44 insertions(+), 4 deletions(-)
+
+commit 461a4097d1a0a10106254a8fe917fc4e78ccff92
+Author: Ask H. Larsen <asklarsen@gmail.com>
+Date:   Sun Mar 28 00:13:28 2010 +0100
+
+    Updated Danish translation
+
+ po/da.po |  951
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 479 insertions(+), 472 deletions(-)
+
+commit 2e27703a815e221052dd4db3e9e848e2401c3b8b
+Author: Chao-Hsiung Liao <j_h_liau@yahoo.com.tw>
+Date:   Sat Mar 27 20:50:57 2010 +0800
+
+    Updated Traditional Chinese translation(Hong Kong and Taiwan)
+
+ po/zh_HK.po |  966
+ +++++++++++++++++++++++++++++-----------------------------
+ po/zh_TW.po |  951
+ +++++++++++++++++++++++++++++-----------------------------
+ 2 files changed, 962 insertions(+), 955 deletions(-)
+
+commit 0e3c6ef848259051e4c8c8996a71c0d2d8c9b9f0
+Author: Jamil Ahmed <itsjamil@gmail.com>
+Date:   Sat Mar 27 17:44:03 2010 +0600
+
+    Updated Bengali translation
+
+ po/bn.po | 1181
+ +++++++++++++++++++++++++++++++-------------------------------
+ 1 files changed, 594 insertions(+), 587 deletions(-)
+
+commit 22dc3dd6487e2c794376a5c6850c3a3e7c2beea9
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Fri Mar 26 15:09:13 2010 -0400
+
+    Bump version
+
+ configure.in |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+commit ca631653acc1e1db0c3ebb05759d05f8bdc35ba6
+Author: Matthias Clasen <mclasen@redhat.com>
+Date:   Fri Mar 26 15:08:00 2010 -0400
+
+    2.24.0
+
+ po/af.po          |   24 +-
+ po/am.po          |   24 +-
+ po/ar.po          |   24 +-
+ po/as.po          |   24 +-
+ po/ast.po         |   24 +-
+ po/az.po          |   24 +-
+ po/be.po          |   24 +-
+ po/be@latin.po    |   24 +-
+ po/bg.po          |   24 +-
+ po/bn.po          |   24 +-
+ po/bn_IN.po       |   24 +-
+ po/bs.po          |   24 +-
+ po/ca.po          |   24 +-
+ po/ca@valencia.po |   24 +-
+ po/cs.po          |   24 +-
+ po/cy.po          |   24 +-
+ po/da.po          |   24 +-
+ po/de.po          |   24 +-
+ po/dz.po          |   24 +-
+ po/el.po          |   24 +-
+ po/en@shaw.po     |   24 +-
+ po/en_CA.po       |   24 +-
+ po/en_GB.po       |   24 +-
+ po/eo.po          |   24 +-
+ po/es.po          |   24 +-
+ po/et.po          |   24 +-
+ po/eu.po          |   82 ++--
+ po/fa.po          |   24 +-
+ po/fi.po          |   24 +-
+ po/fr.po          |   24 +-
+ po/ga.po          |   24 +-
+ po/gl.po          |   24 +-
+ po/gu.po          |   24 +-
+ po/he.po          |   24 +-
+ po/hi.po          |   24 +-
+ po/hr.po          |   24 +-
+ po/hu.po          |   24 +-
+ po/hy.po          |   24 +-
+ po/id.po          |   24 +-
+ po/is.po          |   24 +-
+ po/it.po          |   24 +-
+ po/ja.po          |   24 +-
+ po/ka.po          |   24 +-
+ po/kn.po          |   24 +-
+ po/ko.po          |   24 +-
+ po/ku.po          |   24 +-
+ po/lt.po          |   24 +-
+ po/lv.po          |   24 +-
+ po/mai.po         |   24 +-
+ po/mg.po          |   24 +-
+ po/mk.po          |   24 +-
+ po/ml.po          |   24 +-
+ po/mn.po          |   24 +-
+ po/mr.po          |   24 +-
+ po/ms.po          |   24 +-
+ po/nb.po          |   24 +-
+ po/nds.po         |   24 +-
+ po/ne.po          |   24 +-
+ po/nl.po          |   24 +-
+ po/nn.po          |   24 +-
+ po/oc.po          |   24 +-
+ po/or.po          |   24 +-
+ po/pa.po          |   24 +-
+ po/pl.po          |   24 +-
+ po/ps.po          |   24 +-
+ po/pt.po          |   24 +-
+ po/pt_BR.po       |   24 +-
+ po/ro.po          |   24 +-
+ po/ru.po          |   24 +-
+ po/rw.po          |   24 +-
+ po/si.po          |   24 +-
+ po/sk.po          |   24 +-
+ po/sl.po          |   24 +-
+ po/sq.po          |   24 +-
+ po/sr.po          |   24 +-
+ po/sr@ije.po      |   24 +-
+ po/sr@latin.po    |   24 +-
+ po/sv.po          |   24 +-
+ po/ta.po          |   24 +-
+ po/te.po          |   24 +-
+ po/th.po          |   24 +-
+ po/tl.po          |   24 +-
+ po/tr.po          |   24 +-
+ po/tt.po          |   24 +-
+ po/uk.po          |  946 +++++++++++++++++++-------------------
+ po/vi.po          | 1311
+ +++++++++++++++++++++++++----------------------------
+ po/wa.po          |   24 +-
+ po/xh.po          |   24 +-
+ po/yi.po          |   24 +-
+ po/zh_CN.po       |   24 +-
+ po/zh_HK.po       |   24 +-
+ po/zh_TW.po       |   24 +-
+ 92 files changed, 2209 insertions(+), 2266 deletions(-)
+
 commit 5ba8043f1217b338e220f0c6b427e58e28c241e8
 Author: Matthias Clasen <mclasen@redhat.com>
 Date:   Fri Mar 26 11:15:49 2010 -0400
@@ -1796,12 +2483,12 @@ Date:   Mon Feb 22 00:39:01 2010 -0500
  docs/reference/glib/tmpl/macros_misc.sgml |    5 +-
  docs/reference/glib/tmpl/version.sgml     |   68 ++
  glib/glib.symbols                         |   18 +
- glib/gvariant.c                           | 1387
- +++++++++++++++++++++++------
+ glib/gvariant.c                           | 1531
+ ++++++++++++++++++++++-------
  glib/gvariant.h                           |   36 +
  glib/gvarianttype.c                       |   17 +
  glib/gvarianttype.h                       |    1 +
- 9 files changed, 1295 insertions(+), 326 deletions(-)
+ 9 files changed, 1367 insertions(+), 398 deletions(-)
 
 commit b9d728474ebc51c0d4ff46cb44d97134730174fc
 Author: Ryan Lortie <desrt@desrt.ca>

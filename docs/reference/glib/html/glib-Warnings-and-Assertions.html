@@ -8,28 +8,8 @@
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-Error-Reporting.html" title="Error Reporting">
 <link rel="next" href="glib-Message-Logging.html" title="Message Logging">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -60,26 +40,27 @@
 <pre class="synopsis">
 #include &lt;glib.h&gt;
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Warnings-and-Assertions.html#g-print" title="g_print ()">g_print</a>                             (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);
-<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a>          <a class="link" href="glib-Warnings-and-Assertions.html#g-set-print-handler" title="g_set_print_handler ()">g_set_print_handler</a>                 (<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a> func);
-<span class="returnvalue">void</span>                (<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()">*GPrintFunc</a>)                       (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *string);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Warnings-and-Assertions.html#g-print" title="g_print ()">g_print</a>                             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a>          <a class="link" href="glib-Warnings-and-Assertions.html#g-set-print-handler" title="g_set_print_handler ()">g_set_print_handler</a>                 (<em class="parameter"><code><a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="type">GPrintFunc</span></a> func</code></em>);
+<span class="returnvalue">void</span>                (<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()">*GPrintFunc</a>)                       (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Warnings-and-Assertions.html#g-printerr" title="g_printerr ()">g_printerr</a>                          (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);
-<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a>          <a class="link" href="glib-Warnings-and-Assertions.html#g-set-printerr-handler" title="g_set_printerr_handler ()">g_set_printerr_handler</a>              (<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a> func);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Warnings-and-Assertions.html#g-printerr" title="g_printerr ()">g_printerr</a>                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a>          <a class="link" href="glib-Warnings-and-Assertions.html#g-set-printerr-handler" title="g_set_printerr_handler ()">g_set_printerr_handler</a>              (<em class="parameter"><code><a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="type">GPrintFunc</span></a> func</code></em>);
 
 #define             <a class="link" href="glib-Warnings-and-Assertions.html#g-return-if-fail" title="g_return_if_fail()">g_return_if_fail</a>                    (expr)
-#define             <a class="link" href="glib-Warnings-and-Assertions.html#g-return-val-if-fail" title="g_return_val_if_fail()">g_return_val_if_fail</a>                (expr,val)
-#define             <a class="link" href="glib-Warnings-and-Assertions.html#g-return-if-reached" title="g_return_if_reached()">g_return_if_reached</a>                 ()
+#define             <a class="link" href="glib-Warnings-and-Assertions.html#g-return-val-if-fail" title="g_return_val_if_fail()">g_return_val_if_fail</a>                (expr,
+                                                         val)
+#define             <a class="link" href="glib-Warnings-and-Assertions.html#g-return-if-reached" title="g_return_if_reached">g_return_if_reached</a>
 #define             <a class="link" href="glib-Warnings-and-Assertions.html#g-return-val-if-reached" title="g_return_val_if_reached()">g_return_val_if_reached</a>             (val)
 #define             <a class="link" href="glib-Warnings-and-Assertions.html#g-warn-if-fail" title="g_warn_if_fail()">g_warn_if_fail</a>                      (expr)
-#define             <a class="link" href="glib-Warnings-and-Assertions.html#g-warn-if-reached" title="g_warn_if_reached()">g_warn_if_reached</a>                   ()
+#define             <a class="link" href="glib-Warnings-and-Assertions.html#g-warn-if-reached" title="g_warn_if_reached">g_warn_if_reached</a>
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Warnings-and-Assertions.html#g-on-error-query" title="g_on_error_query ()">g_on_error_query</a>                    (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *prg_name);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Warnings-and-Assertions.html#g-on-error-stack-trace" title="g_on_error_stack_trace ()">g_on_error_stack_trace</a>              (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *prg_name);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Warnings-and-Assertions.html#g-on-error-query" title="g_on_error_query ()">g_on_error_query</a>                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prg_name</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Warnings-and-Assertions.html#g-on-error-stack-trace" title="g_on_error_stack_trace ()">g_on_error_stack_trace</a>              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prg_name</code></em>);
 
-#define             <a class="link" href="glib-Warnings-and-Assertions.html#G-BREAKPOINT:CAPS" title="G_BREAKPOINT()">G_BREAKPOINT</a>                        ()
+#define             <a class="link" href="glib-Warnings-and-Assertions.html#G-BREAKPOINT:CAPS" title="G_BREAKPOINT">G_BREAKPOINT</a>
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -89,7 +70,7 @@ These functions provide support for outputting messages.
 </p>
 <p>
 The <code class="function">g_return</code> family of macros (<a class="link" href="glib-Warnings-and-Assertions.html#g-return-if-fail" title="g_return_if_fail()"><code class="function">g_return_if_fail()</code></a>,
-<a class="link" href="glib-Warnings-and-Assertions.html#g-return-val-if-fail" title="g_return_val_if_fail()"><code class="function">g_return_val_if_fail()</code></a>, <a class="link" href="glib-Warnings-and-Assertions.html#g-return-if-reached" title="g_return_if_reached()"><code class="function">g_return_if_reached()</code></a>, <a class="link" href="glib-Warnings-and-Assertions.html#g-return-val-if-reached" title="g_return_val_if_reached()"><code class="function">g_return_val_if_reached()</code></a>)
+<a class="link" href="glib-Warnings-and-Assertions.html#g-return-val-if-fail" title="g_return_val_if_fail()"><code class="function">g_return_val_if_fail()</code></a>, <a class="link" href="glib-Warnings-and-Assertions.html#g-return-if-reached" title="g_return_if_reached"><code class="function">g_return_if_reached()</code></a>, <a class="link" href="glib-Warnings-and-Assertions.html#g-return-val-if-reached" title="g_return_val_if_reached()"><code class="function">g_return_val_if_reached()</code></a>)
 should only be used for programming errors, a typical use case is
 checking for invalid parameters at the beginning of a public function.
 They should not be used if you just mean "if (error) return", they
@@ -103,8 +84,8 @@ give a perhaps-helpful warning before giving up.
 <a name="glib-Warnings-and-Assertions.details"></a><h2>Details</h2>
 <div class="refsect2" title="g_print ()">
 <a name="g-print"></a><h3>g_print ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_print                             (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_print                             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Outputs a formatted message via the print handler.
 The default print handler simply outputs the message to stdout.
@@ -135,7 +116,7 @@ Instead, libraries should use <a class="link" href="glib-Message-Logging.html#g-
 <hr>
 <div class="refsect2" title="g_set_print_handler ()">
 <a name="g-set-print-handler"></a><h3>g_set_print_handler ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a>          g_set_print_handler                 (<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a> func);</pre>
+<pre class="programlisting"><a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a>          g_set_print_handler                 (<em class="parameter"><code><a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="type">GPrintFunc</span></a> func</code></em>);</pre>
 <p>
 Sets the print handler.
 Any messages passed to <a class="link" href="glib-Warnings-and-Assertions.html#g-print" title="g_print ()"><code class="function">g_print()</code></a> will be output via the new handler.
@@ -162,7 +143,7 @@ widget or a log file for example.
 <hr>
 <div class="refsect2" title="GPrintFunc ()">
 <a name="GPrintFunc"></a><h3>GPrintFunc ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                (*GPrintFunc)                       (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *string);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*GPrintFunc)                       (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);</pre>
 <p>
 Specifies the type of the print handler functions.
 These are called with the complete formatted string to output.
@@ -179,8 +160,8 @@ These are called with the complete formatted string to output.
 <hr>
 <div class="refsect2" title="g_printerr ()">
 <a name="g-printerr"></a><h3>g_printerr ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_printerr                          (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_printerr                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Outputs a formatted message via the error message handler.
 The default handler simply outputs the message to stderr.
@@ -208,7 +189,7 @@ be used, or the convenience functions <a class="link" href="glib-Message-Logging
 <hr>
 <div class="refsect2" title="g_set_printerr_handler ()">
 <a name="g-set-printerr-handler"></a><h3>g_set_printerr_handler ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a>          g_set_printerr_handler              (<a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a> func);</pre>
+<pre class="programlisting"><a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="returnvalue">GPrintFunc</span></a>          g_set_printerr_handler              (<em class="parameter"><code><a class="link" href="glib-Warnings-and-Assertions.html#GPrintFunc" title="GPrintFunc ()"><span class="type">GPrintFunc</span></a> func</code></em>);</pre>
 <p>
 Sets the handler for printing error messages.
 Any messages passed to <a class="link" href="glib-Warnings-and-Assertions.html#g-printerr" title="g_printerr ()"><code class="function">g_printerr()</code></a> will be output via the new handler.
@@ -279,8 +260,8 @@ true.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_return_if_reached()">
-<a name="g-return-if-reached"></a><h3>g_return_if_reached()</h3>
+<div class="refsect2" title="g_return_if_reached">
+<a name="g-return-if-reached"></a><h3>g_return_if_reached</h3>
 <pre class="programlisting">#define             g_return_if_reached()</pre>
 <p>
 Logs a critical message and returns from the current function.
@@ -321,8 +302,8 @@ Logs a warning if the expression is not true.
 <p class="since">Since 2.16</p>
 </div>
 <hr>
-<div class="refsect2" title="g_warn_if_reached()">
-<a name="g-warn-if-reached"></a><h3>g_warn_if_reached()</h3>
+<div class="refsect2" title="g_warn_if_reached">
+<a name="g-warn-if-reached"></a><h3>g_warn_if_reached</h3>
 <pre class="programlisting">#define             g_warn_if_reached()</pre>
 <p>
 Logs a critical warning.
@@ -332,33 +313,59 @@ Logs a critical warning.
 <hr>
 <div class="refsect2" title="g_on_error_query ()">
 <a name="g-on-error-query"></a><h3>g_on_error_query ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_on_error_query                    (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *prg_name);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_on_error_query                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prg_name</code></em>);</pre>
 <p>
 Prompts the user with <code class="computeroutput">[E]xit, [H]alt, show [S]tack trace or [P]roceed</code>.
 This function is intended to be used for debugging use only. The following
 example shows how it can be used together with the <a class="link" href="glib-Message-Logging.html#g-log" title="g_log ()"><code class="function">g_log()</code></a> functions.
 </p>
-<div class="informalexample"><pre class="programlisting">
-#include &lt;glib.h&gt;
-static void
-log_handler (const gchar   *log_domain,
-	     GLogLevelFlags log_level,
-	     const gchar   *message,
-	     gpointer       user_data)
-{
-  g_log_default_handler (log_domain, log_level, message, user_data);
-  g_on_error_query (MY_PROGRAM_NAME);
-}
-int main (int argc, char *argv[])
-{
-  g_log_set_handler (MY_LOG_DOMAIN,
-		     G_LOG_LEVEL_WARNING |
-                     G_LOG_LEVEL_ERROR |
-                     G_LOG_LEVEL_CRITICAL,
-		     log_handler,
-		     NULL);
- /* ... */
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="preproc">#include</span><span class="normal"> </span><span class="string">&lt;glib.h&gt;</span>
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">log_handler</span><span class="normal"> </span><span class="symbol">(</span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal">   </span><span class="symbol">*</span><span class="normal">log_domain</span><span class="symbol">,</span>
+<span class="normal">         </span><span class="usertype">GLogLevelFlags</span><span class="normal"> log_level</span><span class="symbol">,</span>
+<span class="normal">         </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal">   </span><span class="symbol">*</span><span class="normal">message</span><span class="symbol">,</span>
+<span class="normal">         </span><span class="usertype">gpointer</span><span class="normal">       user_data</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="function"><a href="glib-Message-Logging.html#g-log-default-handler">g_log_default_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">log_domain</span><span class="symbol">,</span><span class="normal"> log_level</span><span class="symbol">,</span><span class="normal"> message</span><span class="symbol">,</span><span class="normal"> user_data</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-on-error-query">g_on_error_query</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MY_PROGRAM_NAME</span><span class="symbol">);</span>
+<span class="cbracket">}</span>
+<span class="type">int</span><span class="normal"> </span><span class="function">main</span><span class="normal"> </span><span class="symbol">(</span><span class="type">int</span><span class="normal"> argc</span><span class="symbol">,</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">argv</span><span class="symbol">[])</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MY_LOG_DOMAIN</span><span class="symbol">,</span>
+<span class="normal">             <a href="glib-Message-Logging.html#G-LOG-LEVEL-WARNING:CAPS">G_LOG_LEVEL_WARNING</a> </span><span class="symbol">|</span>
+<span class="normal">                     <a href="glib-Message-Logging.html#G-LOG-LEVEL-ERROR:CAPS">G_LOG_LEVEL_ERROR</a> </span><span class="symbol">|</span>
+<span class="normal">                     <a href="glib-Message-Logging.html#G-LOG-LEVEL-CRITICAL:CAPS">G_LOG_LEVEL_CRITICAL</a></span><span class="symbol">,</span>
+<span class="normal">             log_handler</span><span class="symbol">,</span>
+<span class="normal">             <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal"> </span><span class="comment">/* ... */</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 If [E]xit is selected, the application terminates with a call to
 <code class="function">_exit(0)</code>.
@@ -385,7 +392,7 @@ This function may cause different actions on non-UNIX platforms.
 <td><p><span class="term"><em class="parameter"><code>prg_name</code></em> :</span></p></td>
 <td>the program name, needed by <span class="command"><strong>gdb</strong></span> for the [S]tack trace option.
 If <em class="parameter"><code>prg_name</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-prgname" title="g_get_prgname ()"><code class="function">g_get_prgname()</code></a> is called to get the program name
-(which will work correctly if <a href="http://library.gnome.org/devel/gdk/unstable/gdk-General.html#gdk-init"><code class="function">gdk_init()</code></a> or <a href="http://library.gnome.org/devel/gtk/unstable/gtk-General.html#gtk-init"><code class="function">gtk_init()</code></a> has been called).
+(which will work correctly if <code class="function">gdk_init()</code> or <code class="function">gtk_init()</code> has been called).
 </td>
 </tr></tbody>
 </table></div>
@@ -393,7 +400,7 @@ If <em class="parameter"><code>prg_name</code></em> is <a class="link" href="gli
 <hr>
 <div class="refsect2" title="g_on_error_stack_trace ()">
 <a name="g-on-error-stack-trace"></a><h3>g_on_error_stack_trace ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_on_error_stack_trace              (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *prg_name);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_on_error_stack_trace              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prg_name</code></em>);</pre>
 <p>
 Invokes <span class="command"><strong>gdb</strong></span>, which attaches to the current process and shows a stack trace.
 Called by <a class="link" href="glib-Warnings-and-Assertions.html#g-on-error-query" title="g_on_error_query ()"><code class="function">g_on_error_query()</code></a> when the [S]tack trace option is selected.
@@ -407,14 +414,14 @@ This function may cause different actions on non-UNIX platforms.
 <td><p><span class="term"><em class="parameter"><code>prg_name</code></em> :</span></p></td>
 <td>the program name, needed by <span class="command"><strong>gdb</strong></span> for the [S]tack trace option.
 If <em class="parameter"><code>prg_name</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-prgname" title="g_get_prgname ()"><code class="function">g_get_prgname()</code></a> is called to get the program name
-(which will work correctly if <a href="http://library.gnome.org/devel/gdk/unstable/gdk-General.html#gdk-init"><code class="function">gdk_init()</code></a> or <a href="http://library.gnome.org/devel/gtk/unstable/gtk-General.html#gtk-init"><code class="function">gtk_init()</code></a> has been called).
+(which will work correctly if <code class="function">gdk_init()</code> or <code class="function">gtk_init()</code> has been called).
 </td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="G_BREAKPOINT()">
-<a name="G-BREAKPOINT:CAPS"></a><h3>G_BREAKPOINT()</h3>
+<div class="refsect2" title="G_BREAKPOINT">
+<a name="G-BREAKPOINT:CAPS"></a><h3>G_BREAKPOINT</h3>
 <pre class="programlisting">#define             G_BREAKPOINT()</pre>
 <p>
 Inserts a breakpoint instruction into the code.  On x86 and alpha systems
@@ -426,6 +433,6 @@ a <code class="literal">SIGTRAP</code> signal.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

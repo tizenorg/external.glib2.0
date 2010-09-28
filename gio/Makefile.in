@@ -597,6 +597,14 @@ appinfo_sources = $(am__append_13) $(am__append_16)
 @OS_WIN32_TRUE@	gwin32volumemonitor.h \
 @OS_WIN32_TRUE@	$(NULL)
 
+@OS_WIN32_TRUE@win32_more_sources_for_vcproj = \
+@OS_WIN32_TRUE@	gwin32appinfo.c \
+@OS_WIN32_TRUE@	win32/gwin32directorymonitor.c \
+@OS_WIN32_TRUE@	win32/gwinhttpfile.c \
+@OS_WIN32_TRUE@	win32/gwinhttpfileinputstream.c \
+@OS_WIN32_TRUE@	win32/gwinhttpfileoutputstream.c \
+@OS_WIN32_TRUE@	win32/gwinhttpvfs.c
+
 libgio_2_0_la_SOURCES = \
 	gappinfo.c 		\
 	gasynchelper.c 		\
@@ -1672,13 +1680,15 @@ dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/gio.vcproj
 	  cp $$d/$$f $(distdir) || exit 1; done
 
 ../build/win32/vs9/gio.vcproj: $(top_srcdir)/build/win32/vs9/gio.vcprojin
-	for F in $(libgio_2_0_la_SOURCES); do \
+	for F in `echo $(libgio_2_0_la_SOURCES) $(win32_sources) $(win32_more_sources_for_vcproj) | tr '/' '\\'`; do \
 		case $$F in \
+		gunix*.c|gdesktopappinfo.c) ;; \
 		*.c) echo '   <File RelativePath="..\..\..\gio\'$$F'" />' \
 		     ;; \
 		esac; \
-	done >libgio.sourcefiles
+	done | sort -u >libgio.sourcefiles
 	$(CPP) -P - <$(top_srcdir)/build/win32/vs9/gio.vcprojin >$@
+	rm libgio.sourcefiles
 
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@install-data-hook:
 @HAVE_GLIB_RUNTIME_LIBDIR_TRUE@	mkdir -p $(DESTDIR)$(libdir)/$(GLIB_RUNTIME_LIBDIR)

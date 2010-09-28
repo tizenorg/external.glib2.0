@@ -8,28 +8,8 @@
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-IO-Channels.html" title="IO Channels">
 <link rel="next" href="glib-Warnings-and-Assertions.html" title="Message Output and Debugging Functions">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -61,41 +41,41 @@
 #include &lt;glib.h&gt;
 
                     <a class="link" href="glib-Error-Reporting.html#GError" title="GError">GError</a>;
-<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             <a class="link" href="glib-Error-Reporting.html#g-error-new" title="g_error_new ()">g_error_new</a>                         (<a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);
-<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             <a class="link" href="glib-Error-Reporting.html#g-error-new-literal" title="g_error_new_literal ()">g_error_new_literal</a>                 (<a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *message);
-<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             <a class="link" href="glib-Error-Reporting.html#g-error-new-valist" title="g_error_new_valist ()">g_error_new_valist</a>                  (<a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         <span class="returnvalue">va_list</span> args);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-error-free" title="g_error_free ()">g_error_free</a>                        (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *error);
-<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             <a class="link" href="glib-Error-Reporting.html#g-error-copy" title="g_error_copy ()">g_error_copy</a>                        (const <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *error);
-<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Error-Reporting.html#g-error-matches" title="g_error_matches ()">g_error_matches</a>                     (const <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *error,
-                                                         <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-set-error" title="g_set_error ()">g_set_error</a>                         (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **err,
-                                                         <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-set-error-literal" title="g_set_error_literal ()">g_set_error_literal</a>                 (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **err,
-                                                         <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *message);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-propagate-error" title="g_propagate_error ()">g_propagate_error</a>                   (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **dest,
-                                                         <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *src);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-clear-error" title="g_clear_error ()">g_clear_error</a>                       (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **err);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-prefix-error" title="g_prefix_error ()">g_prefix_error</a>                      (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **err,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-propagate-prefixed-error" title="g_propagate_prefixed_error ()">g_propagate_prefixed_error</a>          (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **dest,
-                                                         <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *src,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);
+<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             <a class="link" href="glib-Error-Reporting.html#g-error-new" title="g_error_new ()">g_error_new</a>                         (<em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             <a class="link" href="glib-Error-Reporting.html#g-error-new-literal" title="g_error_new_literal ()">g_error_new_literal</a>                 (<em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>);
+<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             <a class="link" href="glib-Error-Reporting.html#g-error-new-valist" title="g_error_new_valist ()">g_error_new_valist</a>                  (<em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code><span class="type">va_list</span> args</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-error-free" title="g_error_free ()">g_error_free</a>                        (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *error</code></em>);
+<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             <a class="link" href="glib-Error-Reporting.html#g-error-copy" title="g_error_copy ()">g_error_copy</a>                        (<em class="parameter"><code>const <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *error</code></em>);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Error-Reporting.html#g-error-matches" title="g_error_matches ()">g_error_matches</a>                     (<em class="parameter"><code>const <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *error</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-set-error" title="g_set_error ()">g_set_error</a>                         (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **err</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-set-error-literal" title="g_set_error_literal ()">g_set_error_literal</a>                 (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **err</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-propagate-error" title="g_propagate_error ()">g_propagate_error</a>                   (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **dest</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *src</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-clear-error" title="g_clear_error ()">g_clear_error</a>                       (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **err</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-prefix-error" title="g_prefix_error ()">g_prefix_error</a>                      (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **err</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Error-Reporting.html#g-propagate-prefixed-error" title="g_propagate_prefixed_error ()">g_propagate_prefixed_error</a>          (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **dest</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *src</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -130,34 +110,68 @@ This is why most functions in GLib and GTK+ do not use the <a class="link" href=
 Functions that can fail take a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> as their last argument.
 For example:
 </p>
-<div class="informalexample"><pre class="programlisting">
-gboolean g_file_get_contents (const gchar *filename,
-	                      gchar      **contents,
-                              gsize       *length,
-                              GError     **error);
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="usertype">gboolean</span><span class="normal"> </span><span class="function"><a href="glib-File-Utilities.html#g-file-get-contents">g_file_get_contents</a></span><span class="normal"> </span><span class="symbol">(</span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">filename</span><span class="symbol">,</span>
+<span class="normal">                          </span><span class="usertype">gchar</span><span class="normal">      </span><span class="symbol">**</span><span class="normal">contents</span><span class="symbol">,</span>
+<span class="normal">                              </span><span class="usertype">gsize</span><span class="normal">       </span><span class="symbol">*</span><span class="normal">length</span><span class="symbol">,</span>
+<span class="normal">                              </span><span class="usertype">GError</span><span class="normal">     </span><span class="symbol">**</span><span class="normal">error</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 If you pass a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> value for the <code class="literal">error</code> argument, it should
 point to a location where an error can be placed. For example:
 </p>
-<div class="informalexample"><pre class="programlisting">
-gchar *contents;
-GError *err = NULL;
-g_file_get_contents ("foo.txt", &amp;contents, NULL, &amp;err);
-g_assert ((contents == NULL &amp;&amp; err != NULL) || (contents != NULL &amp;&amp; err == NULL));
-if (err != NULL)
-  {
-    /* Report error to user, and free error */
-    g_assert (contents == NULL);
-    fprintf (stderr, "Unable to read file: %s\n", err-&gt;message);
-    g_error_free (err);
-  }
-else
-  {
-    /* Use file contents */
-    g_assert (contents != NULL);
-  }
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">contents</span><span class="symbol">;</span>
+<span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">err </span><span class="symbol">=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="function"><a href="glib-File-Utilities.html#g-file-get-contents">g_file_get_contents</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"foo.txt"</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">contents</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">err</span><span class="symbol">);</span>
+<span class="function"><a href="glib-Testing.html#g-assert">g_assert</a></span><span class="normal"> </span><span class="symbol">((</span><span class="normal">contents </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="symbol">&amp;&amp;</span><span class="normal"> err </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">||</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">contents </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="symbol">&amp;&amp;</span><span class="normal"> err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">));</span>
+<span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">  </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="comment">/* Report error to user, and free error */</span>
+<span class="normal">    </span><span class="function"><a href="glib-Testing.html#g-assert">g_assert</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">contents </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function">fprintf</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">stderr</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Unable to read file: %s</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> err</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="glib-Error-Reporting.html#g-error-free">g_error_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="cbracket">}</span>
+<span class="keyword">else</span>
+<span class="normal">  </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="comment">/* Use file contents */</span>
+<span class="normal">    </span><span class="function"><a href="glib-Testing.html#g-assert">g_assert</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">contents </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 Note that <code class="literal">err != NULL</code> in this example is a
 <span class="emphasis"><em>reliable</em></span> indicator of whether
@@ -169,12 +183,23 @@ Because <a class="link" href="glib-File-Utilities.html#g-file-get-contents" titl
 interested in whether it failed and don't need to display an error message, you
 can pass <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> for the <code class="literal">error</code> argument:
 </p>
-<div class="informalexample"><pre class="programlisting">
-if (g_file_get_contents ("foo.txt", &amp;contents, NULL, NULL)) /* ignore errors */
-  /* no error occurred */ ;
-else
-  /* error */ ;
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="glib-File-Utilities.html#g-file-get-contents">g_file_get_contents</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"foo.txt"</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">contents</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">))</span><span class="normal"> </span><span class="comment">/* ignore errors */</span>
+<span class="normal">  </span><span class="comment">/* no error occurred */</span><span class="normal"> </span><span class="symbol">;</span>
+<span class="keyword">else</span>
+<span class="normal">  </span><span class="comment">/* error */</span><span class="normal"> </span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 </p>
 <p>
@@ -198,25 +223,49 @@ When implementing a function that can report errors, the basic tool is
 then return immediately. <a class="link" href="glib-Error-Reporting.html#g-set-error" title="g_set_error ()"><code class="function">g_set_error()</code></a> does nothing if the error location passed
 to it is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. Here's an example:
 </p>
-<div class="informalexample"><pre class="programlisting">
-gint
-foo_open_file (GError **error)
-{
-  gint fd;
-  fd = open ("file.txt", O_RDONLY);
-  if (fd &lt; 0)
-    {
-      g_set_error (error,
-                   FOO_ERROR,                 /* error domain */
-                   FOO_ERROR_BLAH,            /* error code */
-                   "Failed to open file: %s", /* error message format string */
-                   g_strerror (errno));
-      return -1;
-    }
-  else
-    return fd;
-}
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal"><a href="glib-Basic-Types.html#gint">gint</a></span>
+<span class="function">foo_open_file</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">**</span><span class="normal">error</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">gint</span><span class="normal"> fd</span><span class="symbol">;</span>
+<span class="normal">  fd </span><span class="symbol">=</span><span class="normal"> </span><span class="function">open</span><span class="normal"> </span><span class="symbol">(</span><span class="string">"file.txt"</span><span class="symbol">,</span><span class="normal"> O_RDONLY</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">fd </span><span class="symbol">&lt;</span><span class="normal"> </span><span class="number">0</span><span class="symbol">)</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">      </span><span class="function"><a href="glib-Error-Reporting.html#g-set-error">g_set_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">error</span><span class="symbol">,</span>
+<span class="normal">                   FOO_ERROR</span><span class="symbol">,</span><span class="normal">                 </span><span class="comment">/* error domain */</span>
+<span class="normal">                   FOO_ERROR_BLAH</span><span class="symbol">,</span><span class="normal">            </span><span class="comment">/* error code */</span>
+<span class="normal">                   </span><span class="string">"Failed to open file: %s"</span><span class="symbol">,</span><span class="normal"> </span><span class="comment">/* error message format string */</span>
+<span class="normal">                   </span><span class="function"><a href="glib-String-Utility-Functions.html#g-strerror">g_strerror</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">errno</span><span class="symbol">));</span>
+<span class="normal">      </span><span class="keyword">return</span><span class="normal"> </span><span class="symbol">-</span><span class="number">1</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="normal">  </span><span class="keyword">else</span>
+<span class="normal">    </span><span class="keyword">return</span><span class="normal"> fd</span><span class="symbol">;</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 </p>
 <p>
@@ -225,21 +274,41 @@ can report a <a class="link" href="glib-Error-Reporting.html#GError" title="GErr
 other than reporting a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, such as by returning <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> on success, you can
 simply do the following:
 </p>
-<div class="informalexample"><pre class="programlisting">
-gboolean
-my_function_that_can_fail (GError **err)
-{
-  g_return_val_if_fail (err == NULL || *err == NULL, FALSE);
-  if (!sub_function_that_can_fail (err))
-    {
-       /* assert that error was set by the sub-function */
-       g_assert (err == NULL || *err != NULL);
-       return FALSE;
-    }
-  /* otherwise continue, no error occurred */
-  g_assert (err == NULL || *err == NULL);
-}
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal"><a href="glib-Basic-Types.html#gboolean">gboolean</a></span>
+<span class="function">my_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">**</span><span class="normal">err</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="symbol">||</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(!</span><span class="function">sub_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err</span><span class="symbol">))</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">       </span><span class="comment">/* assert that error was set by the sub-function */</span>
+<span class="normal">       </span><span class="function"><a href="glib-Testing.html#g-assert">g_assert</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="symbol">||</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">err </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">       </span><span class="keyword">return</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="normal">  </span><span class="comment">/* otherwise continue, no error occurred */</span>
+<span class="normal">  </span><span class="function"><a href="glib-Testing.html#g-assert">g_assert</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="symbol">||</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 </p>
 <p>
@@ -247,46 +316,91 @@ If the sub-function does not indicate errors other than by reporting a <a class=
 you need to create a temporary <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> since the passed-in one may be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 <a class="link" href="glib-Error-Reporting.html#g-propagate-error" title="g_propagate_error ()"><code class="function">g_propagate_error()</code></a> is intended for use in this case.
 </p>
-<div class="informalexample"><pre class="programlisting">
-gboolean
-my_function_that_can_fail (GError **err)
-{
-  GError *tmp_error;
-  g_return_val_if_fail (err == NULL || *err == NULL, FALSE);
-  tmp_error = NULL;
-  sub_function_that_can_fail (&amp;tmp_error);
-  if (tmp_error != NULL)
-    {
-       /* store tmp_error in err, if err != NULL,
-        * otherwise call g_error_free() on tmp_error
-        */
-       g_propagate_error (err, tmp_error);
-       return FALSE;
-    }
-  /* otherwise continue, no error occurred */
-}
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal"><a href="glib-Basic-Types.html#gboolean">gboolean</a></span>
+<span class="function">my_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">**</span><span class="normal">err</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">tmp_error</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="symbol">||</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">);</span>
+<span class="normal">  tmp_error </span><span class="symbol">=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="function">sub_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">tmp_error</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">tmp_error </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">       </span><span class="comment">/* store tmp_error in err, if err != NULL,</span>
+<span class="comment">        * otherwise call g_error_free() on tmp_error</span>
+<span class="comment">        */</span>
+<span class="normal">       </span><span class="function"><a href="glib-Error-Reporting.html#g-propagate-error">g_propagate_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err</span><span class="symbol">,</span><span class="normal"> tmp_error</span><span class="symbol">);</span>
+<span class="normal">       </span><span class="keyword">return</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="normal">  </span><span class="comment">/* otherwise continue, no error occurred */</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 </p>
 <p>
 Error pileups are always a bug. For example, this code is incorrect:
 </p>
-<div class="informalexample"><pre class="programlisting">
-gboolean
-my_function_that_can_fail (GError **err)
-{
-  GError *tmp_error;
-  g_return_val_if_fail (err == NULL || *err == NULL, FALSE);
-  tmp_error = NULL;
-  sub_function_that_can_fail (&amp;tmp_error);
-  other_function_that_can_fail (&amp;tmp_error);
-  if (tmp_error != NULL)
-    {
-       g_propagate_error (err, tmp_error);
-       return FALSE;
-    }
-}
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal"><a href="glib-Basic-Types.html#gboolean">gboolean</a></span>
+<span class="function">my_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">**</span><span class="normal">err</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">tmp_error</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="symbol">||</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">);</span>
+<span class="normal">  tmp_error </span><span class="symbol">=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="function">sub_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">tmp_error</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function">other_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">tmp_error</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">tmp_error </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">       </span><span class="function"><a href="glib-Error-Reporting.html#g-propagate-error">g_propagate_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err</span><span class="symbol">,</span><span class="normal"> tmp_error</span><span class="symbol">);</span>
+<span class="normal">       </span><span class="keyword">return</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 <code class="literal">tmp_error</code> should be checked immediately after
 <code class="function"><code class="function">sub_function_that_can_fail()</code></code>, and either cleared or propagated upward.  The rule
@@ -296,22 +410,43 @@ equivalent of handling an error by always doing nothing about it. So the
 following code is fine, assuming errors in <code class="function"><code class="function">sub_function_that_can_fail()</code></code> are not
 fatal to <code class="function"><code class="function">my_function_that_can_fail()</code></code>:
 </p>
-<div class="informalexample"><pre class="programlisting">
-gboolean
-my_function_that_can_fail (GError **err)
-{
-  GError *tmp_error;
-  g_return_val_if_fail (err == NULL || *err == NULL, FALSE);
-  sub_function_that_can_fail (NULL); /* ignore errors */
-  tmp_error = NULL;
-  other_function_that_can_fail (&amp;tmp_error);
-  if (tmp_error != NULL)
-    {
-       g_propagate_error (err, tmp_error);
-       return FALSE;
-    }
-}
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal"><a href="glib-Basic-Types.html#gboolean">gboolean</a></span>
+<span class="function">my_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">**</span><span class="normal">err</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">tmp_error</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-return-val-if-fail">g_return_val_if_fail</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="symbol">||</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">err </span><span class="symbol">==</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function">sub_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span><span class="normal"> </span><span class="comment">/* ignore errors */</span>
+<span class="normal">  tmp_error </span><span class="symbol">=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
+<span class="normal">  </span><span class="function">other_function_that_can_fail</span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">tmp_error</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">tmp_error </span><span class="symbol">!=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">)</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">       </span><span class="function"><a href="glib-Error-Reporting.html#g-propagate-error">g_propagate_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">err</span><span class="symbol">,</span><span class="normal"> tmp_error</span><span class="symbol">);</span>
+<span class="normal">       </span><span class="keyword">return</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">;</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 </p>
 <p>
@@ -330,14 +465,27 @@ The error domain is called
 <code class="literal">&lt;NAMESPACE&gt;_&lt;MODULE&gt;_ERROR</code>, for example
 <a class="link" href="glib-Spawning-Processes.html#G-SPAWN-ERROR:CAPS" title="G_SPAWN_ERROR"><code class="literal">G_SPAWN_ERROR</code></a> or <a class="link" href="glib-Threads.html#G-THREAD-ERROR:CAPS" title="G_THREAD_ERROR"><code class="literal">G_THREAD_ERROR</code></a>:
 </p>
-<div class="informalexample"><pre class="programlisting">
-#define G_SPAWN_ERROR g_spawn_error_quark ()
-GQuark
-g_spawn_error_quark (void)
-{
-  return g_quark_from_static_string ("g-spawn-error-quark");
-}
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="preproc">#define</span><span class="normal"> </span><span class="usertype">G_SPAWN_ERROR</span><span class="normal"> </span><span class="function">g_spawn_error_quark</span><span class="normal"> </span><span class="symbol">()</span>
+<span class="normal"><a href="glib-Quarks.html#GQuark">GQuark</a></span>
+<span class="function">g_spawn_error_quark</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="keyword">return</span><span class="normal"> </span><span class="function"><a href="glib-Quarks.html#g-quark-from-static-string">g_quark_from_static_string</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"g-spawn-error-quark"</span><span class="symbol">);</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 </p>
 </li>
@@ -461,34 +609,35 @@ information about an error that has occurred.
 <hr>
 <div class="refsect2" title="g_error_new ()">
 <a name="g-error-new"></a><h3>g_error_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             g_error_new                         (<a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);</pre>
+<pre class="programlisting"><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             g_error_new                         (<em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> with the given <em class="parameter"><code>domain</code></em> and <em class="parameter"><code>code</code></em>,
-and a message formatted with <em class="parameter"><code>format</code></em>.</p>
+and a message formatted with <em class="parameter"><code>format</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> error domain
+<td>error domain
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td> error code
+<td>error code
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td> <code class="function">printf()</code>-style format for error message
+<td>printf()-style format for error message
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td> parameters for message format
+<td>parameters for message format
 </td>
 </tr>
 <tr>
@@ -502,30 +651,31 @@ and a message formatted with <em class="parameter"><code>format</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_error_new_literal ()">
 <a name="g-error-new-literal"></a><h3>g_error_new_literal ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             g_error_new_literal                 (<a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *message);</pre>
+<pre class="programlisting"><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             g_error_new_literal                 (<em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>; unlike <a class="link" href="glib-Error-Reporting.html#g-error-new" title="g_error_new ()"><code class="function">g_error_new()</code></a>, <em class="parameter"><code>message</code></em> is
 not a <code class="function">printf()</code>-style format string. Use this function if
 <em class="parameter"><code>message</code></em> contains text you don't have control over,
-that could include <code class="function">printf()</code> escape sequences.</p>
+that could include <code class="function">printf()</code> escape sequences.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> error domain
+<td>error domain
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td> error code
+<td>error code
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
-<td> error message
+<td>error message
 </td>
 </tr>
 <tr>
@@ -539,34 +689,36 @@ that could include <code class="function">printf()</code> escape sequences.</p>
 <hr>
 <div class="refsect2" title="g_error_new_valist ()">
 <a name="g-error-new-valist"></a><h3>g_error_new_valist ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             g_error_new_valist                  (<a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         <span class="returnvalue">va_list</span> args);</pre>
+<pre class="programlisting"><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             g_error_new_valist                  (<em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code><span class="type">va_list</span> args</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> with the given <em class="parameter"><code>domain</code></em> and <em class="parameter"><code>code</code></em>,
-and a message formatted with <em class="parameter"><code>format</code></em>.</p>
+and a message formatted with <em class="parameter"><code>format</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> error domain
+<td>error domain
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td> error code
+<td>error code
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td> <code class="function">printf()</code>-style format for error message
+<td>printf()-style format for error message
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
-<td> <span class="type">va_list</span> of parameters for the message format
+<td>
+<span class="type">va_list</span> of parameters for the message format
 </td>
 </tr>
 <tr>
@@ -582,14 +734,15 @@ and a message formatted with <em class="parameter"><code>format</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_error_free ()">
 <a name="g-error-free"></a><h3>g_error_free ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_error_free                        (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *error);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_error_free                        (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *error</code></em>);</pre>
 <p>
-Frees a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> and associated resources.</p>
+Frees a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> and associated resources.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
 </td>
 </tr></tbody>
 </table></div>
@@ -597,15 +750,16 @@ Frees a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><
 <hr>
 <div class="refsect2" title="g_error_copy ()">
 <a name="g-error-copy"></a><h3>g_error_copy ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             g_error_copy                        (const <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *error);</pre>
+<pre class="programlisting"><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a>*             g_error_copy                        (<em class="parameter"><code>const <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *error</code></em>);</pre>
 <p>
-Makes a copy of <em class="parameter"><code>error</code></em>.</p>
+Makes a copy of <em class="parameter"><code>error</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
@@ -619,29 +773,30 @@ Makes a copy of <em class="parameter"><code>error</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_error_matches ()">
 <a name="g-error-matches"></a><h3>g_error_matches ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_error_matches                     (const <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *error,
-                                                         <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_error_matches                     (<em class="parameter"><code>const <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *error</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>);</pre>
 <p>
 Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>error</code></em> matches <em class="parameter"><code>domain</code></em> and <em class="parameter"><code>code</code></em>, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>
 otherwise. In particular, when <em class="parameter"><code>error</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> will
-be returned.</p>
+be returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> an error domain
+<td>an error domain
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td> an error code
+<td>an error code
 </td>
 </tr>
 <tr>
@@ -655,40 +810,41 @@ be returned.</p>
 <hr>
 <div class="refsect2" title="g_set_error ()">
 <a name="g-set-error"></a><h3>g_set_error ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_set_error                         (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **err,
-                                                         <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_set_error                         (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **err</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Does nothing if <em class="parameter"><code>err</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>; if <em class="parameter"><code>err</code></em> is non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, then *<em class="parameter"><code>err</code></em>
-must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. A new <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> is created and assigned to *<em class="parameter"><code>err</code></em>.</p>
+must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. A new <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> is created and assigned to *<em class="parameter"><code>err</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td> a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> error domain
+<td>error domain
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td> error code
+<td>error code
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td> <code class="function">printf()</code>-style format
+<td>printf()-style format
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td> args for <em class="parameter"><code>format</code></em>
+<td>args for <em class="parameter"><code>format</code></em>
 </td>
 </tr>
 </tbody>
@@ -697,37 +853,38 @@ must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL">
 <hr>
 <div class="refsect2" title="g_set_error_literal ()">
 <a name="g-set-error-literal"></a><h3>g_set_error_literal ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_set_error_literal                 (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **err,
-                                                         <a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="returnvalue">GQuark</span></a> domain,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> code,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *message);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_set_error_literal                 (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **err</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Quarks.html#GQuark" title="GQuark"><span class="type">GQuark</span></a> domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> code</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>);</pre>
 <p>
 Does nothing if <em class="parameter"><code>err</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>; if <em class="parameter"><code>err</code></em> is non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, then *<em class="parameter"><code>err</code></em>
 must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. A new <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> is created and assigned to *<em class="parameter"><code>err</code></em>.
 Unlike <a class="link" href="glib-Error-Reporting.html#g-set-error" title="g_set_error ()"><code class="function">g_set_error()</code></a>, <em class="parameter"><code>message</code></em> is not a <code class="function">printf()</code>-style format string.
 Use this function if <em class="parameter"><code>message</code></em> contains text you don't have control over,
-that could include <code class="function">printf()</code> escape sequences.</p>
+that could include <code class="function">printf()</code> escape sequences.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td> a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td> error domain
+<td>error domain
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td> error code
+<td>error code
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
-<td> error message
+<td>error message
 </td>
 </tr>
 </tbody>
@@ -737,22 +894,23 @@ that could include <code class="function">printf()</code> escape sequences.</p>
 <hr>
 <div class="refsect2" title="g_propagate_error ()">
 <a name="g-propagate-error"></a><h3>g_propagate_error ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_propagate_error                   (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **dest,
-                                                         <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *src);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_propagate_error                   (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **dest</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *src</code></em>);</pre>
 <p>
 If <em class="parameter"><code>dest</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, free <em class="parameter"><code>src</code></em>; otherwise, moves <em class="parameter"><code>src</code></em> into *<em class="parameter"><code>dest</code></em>.
-The error variable <em class="parameter"><code>dest</code></em> points to must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</p>
+The error variable <em class="parameter"><code>dest</code></em> points to must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>dest</code></em> :</span></p></td>
-<td> error return location
+<td>error return location
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>src</code></em> :</span></p></td>
-<td> error to move into the return location
+<td>error to move into the return location
 </td>
 </tr>
 </tbody>
@@ -761,15 +919,16 @@ The error variable <em class="parameter"><code>dest</code></em> points to must b
 <hr>
 <div class="refsect2" title="g_clear_error ()">
 <a name="g-clear-error"></a><h3>g_clear_error ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_clear_error                       (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **err);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_clear_error                       (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **err</code></em>);</pre>
 <p>
 If <em class="parameter"><code>err</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, does nothing. If <em class="parameter"><code>err</code></em> is non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>,
-calls <a class="link" href="glib-Error-Reporting.html#g-error-free" title="g_error_free ()"><code class="function">g_error_free()</code></a> on *<em class="parameter"><code>err</code></em> and sets *<em class="parameter"><code>err</code></em> to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</p>
+calls <a class="link" href="glib-Error-Reporting.html#g-error-free" title="g_error_free ()"><code class="function">g_error_free()</code></a> on *<em class="parameter"><code>err</code></em> and sets *<em class="parameter"><code>err</code></em> to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> return location
+<td>a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> return location
 </td>
 </tr></tbody>
 </table></div>
@@ -777,9 +936,9 @@ calls <a class="link" href="glib-Error-Reporting.html#g-error-free" title="g_err
 <hr>
 <div class="refsect2" title="g_prefix_error ()">
 <a name="g-prefix-error"></a><h3>g_prefix_error ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_prefix_error                      (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **err,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_prefix_error                      (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **err</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Formats a string according to <em class="parameter"><code>format</code></em> and
 prefix it to an existing error message.  If
@@ -791,23 +950,24 @@ If *<em class="parameter"><code>err</code></em> is <a class="link" href="glib-St
 present but there is no error condition) then
 also do nothing.  Whether or not it makes
 sense to take advantage of this feature is up
-to you.</p>
+to you.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>err</code></em> :</span></p></td>
-<td> a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td> <code class="function">printf()</code>-style format string
+<td>printf()-style format string
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td> arguments to <em class="parameter"><code>format</code></em>
+<td>arguments to <em class="parameter"><code>format</code></em>
 </td>
 </tr>
 </tbody>
@@ -817,36 +977,37 @@ to you.</p>
 <hr>
 <div class="refsect2" title="g_propagate_prefixed_error ()">
 <a name="g-propagate-prefixed-error"></a><h3>g_propagate_prefixed_error ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_propagate_prefixed_error          (<a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> **dest,
-                                                         <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="returnvalue">GError</span></a> *src,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_propagate_prefixed_error          (<em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **dest</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> *src</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 If <em class="parameter"><code>dest</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, free <em class="parameter"><code>src</code></em>; otherwise,
 moves <em class="parameter"><code>src</code></em> into *<em class="parameter"><code>dest</code></em>. *<em class="parameter"><code>dest</code></em> must be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 After the move, add a prefix as with
-<a class="link" href="glib-Error-Reporting.html#g-prefix-error" title="g_prefix_error ()"><code class="function">g_prefix_error()</code></a>.</p>
+<a class="link" href="glib-Error-Reporting.html#g-prefix-error" title="g_prefix_error ()"><code class="function">g_prefix_error()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>dest</code></em> :</span></p></td>
-<td> error return location
+<td>error return location
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>src</code></em> :</span></p></td>
-<td> error to move into the return location
+<td>error to move into the return location
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td> <code class="function">printf()</code>-style format string
+<td>printf()-style format string
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td> arguments to <em class="parameter"><code>format</code></em>
+<td>arguments to <em class="parameter"><code>format</code></em>
 </td>
 </tr>
 </tbody>
@@ -857,6 +1018,6 @@ After the move, add a prefix as with
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

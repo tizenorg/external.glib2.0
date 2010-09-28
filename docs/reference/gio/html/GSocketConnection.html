@@ -8,38 +8,8 @@
 <link rel="up" href="highlevel-socket.html" title="Highlevel network functionallity">
 <link rel="prev" href="GSocketClient.html" title="GSocketClient">
 <link rel="next" href="GSocketListener.html" title="GSocketListener">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="pt01.html" title="Part I. GIO Overview">
-<link rel="chapter" href="ch01.html" title="Introduction">
-<link rel="chapter" href="ch02.html" title="Compiling GIO applications">
-<link rel="chapter" href="ch03.html" title="Running GIO applications">
-<link rel="chapter" href="extending-gio.html" title="Extending GIO">
-<link rel="part" href="pt02.html" title="Part II. API Reference">
-<link rel="chapter" href="file_ops.html" title="File Operations">
-<link rel="chapter" href="file_mon.html" title="File System Monitoring">
-<link rel="chapter" href="async.html" title="Asynchronous I/O">
-<link rel="chapter" href="conversion.html" title="Data conversion">
-<link rel="chapter" href="streaming.html" title="Streaming I/O">
-<link rel="chapter" href="types.html" title="File types and applications">
-<link rel="chapter" href="volume_mon.html" title="Volumes and Drives">
-<link rel="chapter" href="icons.html" title="Icons">
-<link rel="chapter" href="failable_initialization.html" title="Failable Initialization">
-<link rel="chapter" href="networking.html" title="Lowlevel platform-independent network support">
-<link rel="chapter" href="resolver.html" title="DNS resolution">
-<link rel="chapter" href="highlevel-socket.html" title="Highlevel network functionallity">
-<link rel="chapter" href="utils.html" title="Utilities">
-<link rel="chapter" href="extending.html" title="Extending GIO">
-<link rel="part" href="migrating.html" title="Part III. Migrating to GIO">
-<link rel="chapter" href="ch19.html" title="Migrating from POSIX to GIO">
-<link rel="chapter" href="ch20.html" title="Migrating from GnomeVFS to GIO">
-<link rel="chapter" href="gio-hierarchy.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -76,59 +46,59 @@
 
                     <a class="link" href="GSocketConnection.html#GSocketConnection-struct" title="GSocketConnection">GSocketConnection</a>;
 <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    <a class="link" href="GSocketConnection.html#g-socket-connection-get-local-address" title="g_socket_connection_get_local_address ()">g_socket_connection_get_local_address</a>
-                                                        (<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *connection,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
+                                                        (<em class="parameter"><code><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    <a class="link" href="GSocketConnection.html#g-socket-connection-get-remote-address" title="g_socket_connection_get_remote_address ()">g_socket_connection_get_remote_address</a>
-                                                        (<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *connection,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
-<a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *           <a class="link" href="GSocketConnection.html#g-socket-connection-get-socket" title="g_socket_connection_get_socket ()">g_socket_connection_get_socket</a>      (<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *connection);
+                                                        (<em class="parameter"><code><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *           <a class="link" href="GSocketConnection.html#g-socket-connection-get-socket" title="g_socket_connection_get_socket ()">g_socket_connection_get_socket</a>      (<em class="parameter"><code><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> *connection</code></em>);
 
                     <a class="link" href="GSocketConnection.html#GTcpConnection-struct" title="GTcpConnection">GTcpConnection</a>;
 <span class="returnvalue">void</span>                <a class="link" href="GSocketConnection.html#g-tcp-connection-set-graceful-disconnect" title="g_tcp_connection_set_graceful_disconnect ()">g_tcp_connection_set_graceful_disconnect</a>
-                                                        (<a class="link" href="GSocketConnection.html#GTcpConnection"><span class="returnvalue">GTcpConnection</span></a> *connection,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a> graceful_disconnect);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketConnection.html#g-tcp-connection-get-graceful-disconnect" title="g_tcp_connection_get_graceful_disconnect ()">g_tcp_connection_get_graceful_disconnect</a>
-                                                        (<a class="link" href="GSocketConnection.html#GTcpConnection"><span class="returnvalue">GTcpConnection</span></a> *connection);
+                                                        (<em class="parameter"><code><a class="link" href="GSocketConnection.html#GTcpConnection"><span class="type">GTcpConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> graceful_disconnect</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketConnection.html#g-tcp-connection-get-graceful-disconnect" title="g_tcp_connection_get_graceful_disconnect ()">g_tcp_connection_get_graceful_disconnect</a>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketConnection.html#GTcpConnection"><span class="type">GTcpConnection</span></a> *connection</code></em>);
 
                     <a class="link" href="GSocketConnection.html#GUnixConnection-struct" title="GUnixConnection">GUnixConnection</a>;
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GSocketConnection.html#g-unix-connection-receive-fd" title="g_unix_connection_receive_fd ()">g_unix_connection_receive_fd</a>        (<a class="link" href="GSocketConnection.html#GUnixConnection"><span class="returnvalue">GUnixConnection</span></a> *connection,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketConnection.html#g-unix-connection-send-fd" title="g_unix_connection_send_fd ()">g_unix_connection_send_fd</a>           (<a class="link" href="GSocketConnection.html#GUnixConnection"><span class="returnvalue">GUnixConnection</span></a> *connection,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> fd,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GSocketConnection.html#g-unix-connection-receive-fd" title="g_unix_connection_receive_fd ()">g_unix_connection_receive_fd</a>        (<em class="parameter"><code><a class="link" href="GSocketConnection.html#GUnixConnection"><span class="type">GUnixConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketConnection.html#g-unix-connection-send-fd" title="g_unix_connection_send_fd ()">g_unix_connection_send_fd</a>           (<em class="parameter"><code><a class="link" href="GSocketConnection.html#GUnixConnection"><span class="type">GUnixConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 
 <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketConnection.html#g-socket-connection-factory-create-connection" title="g_socket_connection_factory_create_connection ()">g_socket_connection_factory_create_connection</a>
-                                                        (<a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *socket);
-<a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>               <a class="link" href="GSocketConnection.html#g-socket-connection-factory-lookup-type" title="g_socket_connection_factory_lookup_type ()">g_socket_connection_factory_lookup_type</a>
-                                                        (<a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a> family,
-                                                         <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="returnvalue">GSocketType</span></a> type,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> protocol_id);
+                                                        (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);
+<a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>               <a class="link" href="GSocketConnection.html#g-socket-connection-factory-lookup-type" title="g_socket_connection_factory_lookup_type ()">g_socket_connection_factory_lookup_type</a>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a> type</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> protocol_id</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketConnection.html#g-socket-connection-factory-register-type" title="g_socket_connection_factory_register_type ()">g_socket_connection_factory_register_type</a>
-                                                        (<a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a> g_type,
-                                                         <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a> family,
-                                                         <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="returnvalue">GSocketType</span></a> type,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> protocol);
+                                                        (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"><span class="type">GType</span></a> g_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a> type</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> protocol</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="GSocketConnection.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----<a class="link" href="GIOStream.html" title="GIOStream">GIOStream</a>
          +----GSocketConnection
                +----<a class="link" href="GSocketConnection.html#GTcpConnection">GTcpConnection</a>
                +----<a class="link" href="GSocketConnection.html#GUnixConnection">GUnixConnection</a>
 </pre>
 <pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----<a class="link" href="GIOStream.html" title="GIOStream">GIOStream</a>
          +----<a class="link" href="GSocketConnection.html" title="GSocketConnection">GSocketConnection</a>
                +----GTcpConnection
 </pre>
 <pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----<a class="link" href="GIOStream.html" title="GIOStream">GIOStream</a>
          +----<a class="link" href="GSocketConnection.html" title="GSocketConnection">GSocketConnection</a>
                +----GUnixConnection
@@ -138,7 +108,7 @@
 <a name="GSocketConnection.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GSocketConnection.html#GSocketConnection--socket" title='The "socket" property'>socket</a>"                   <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>*              : Read / Write / Construct Only
-  "<a class="link" href="GSocketConnection.html#GTcpConnection--graceful-disconnect" title='The "graceful-disconnect" property'>graceful-disconnect</a>"      <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
+  "<a class="link" href="GSocketConnection.html#GTcpConnection--graceful-disconnect" title='The "graceful-disconnect" property'>graceful-disconnect</a>"      <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -157,7 +127,8 @@ instance, for a TCP/IP connection it will be a <a class="link" href="GSocketConn
 Chosing what type of object to construct is done with the socket
 connection factory, and it is possible for 3rd parties to register
 custom socket connection types for specific combination of socket
-family/type/protocol using <a class="link" href="GSocketConnection.html#g-socket-connection-factory-register-type" title="g_socket_connection_factory_register_type ()"><code class="function">g_socket_connection_factory_register_type()</code></a>.</p>
+family/type/protocol using <a class="link" href="GSocketConnection.html#g-socket-connection-factory-register-type" title="g_socket_connection_factory_register_type ()"><code class="function">g_socket_connection_factory_register_type()</code></a>.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="GSocketConnection.details"></a><h2>Details</h2>
@@ -165,34 +136,37 @@ family/type/protocol using <a class="link" href="GSocketConnection.html#g-socket
 <a name="GSocketConnection-struct"></a><h3>GSocketConnection</h3>
 <pre class="programlisting">typedef struct _GSocketConnection GSocketConnection;</pre>
 <p>
-A socket connection GIOStream object for connection-oriented sockets.</p>
+A socket connection GIOStream object for connection-oriented sockets.
+</p>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
 <div class="refsect2" title="g_socket_connection_get_local_address ()">
 <a name="g-socket-connection-get-local-address"></a><h3>g_socket_connection_get_local_address ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    g_socket_connection_get_local_address
-                                                        (<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *connection,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
-Try to get the local address of a socket connection.</p>
+Try to get the local address of a socket connection.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
-    Free the returned object with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+<td> a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
+    Free the returned object with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
 
 </td>
 </tr>
@@ -204,27 +178,29 @@ Try to get the local address of a socket connection.</p>
 <div class="refsect2" title="g_socket_connection_get_remote_address ()">
 <a name="g-socket-connection-get-remote-address"></a><h3>g_socket_connection_get_remote_address ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    g_socket_connection_get_remote_address
-                                                        (<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *connection,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
-Try to get the remote address of a socket connection.</p>
+Try to get the remote address of a socket connection.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
-    Free the returned object with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+<td> a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
+    Free the returned object with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
 
 </td>
 </tr>
@@ -235,22 +211,23 @@ Try to get the remote address of a socket connection.</p>
 <hr>
 <div class="refsect2" title="g_socket_connection_get_socket ()">
 <a name="g-socket-connection-get-socket"></a><h3>g_socket_connection_get_socket ()</h3>
-<pre class="programlisting"><a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *           g_socket_connection_get_socket      (<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *connection);</pre>
+<pre class="programlisting"><a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *           g_socket_connection_get_socket      (<em class="parameter"><code><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> *connection</code></em>);</pre>
 <p>
 Gets the underlying <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> object of the connection.
 This can be useful if you want to do something unusual on it
-not supported by the <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> APIs.</p>
+not supported by the <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> APIs.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
+<td> a <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
 
 </td>
 </tr>
@@ -263,15 +240,16 @@ not supported by the <a class="link" href="GSocketConnection.html" title="GSocke
 <a name="GTcpConnection-struct"></a><h3>GTcpConnection</h3>
 <pre class="programlisting">typedef struct _GTcpConnection GTcpConnection;</pre>
 <p>
-A <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> for UNIX domain socket connections.</p>
+A <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> for TCP/IP connections.
+</p>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
 <div class="refsect2" title="g_tcp_connection_set_graceful_disconnect ()">
 <a name="g-tcp-connection-set-graceful-disconnect"></a><h3>g_tcp_connection_set_graceful_disconnect ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_tcp_connection_set_graceful_disconnect
-                                                        (<a class="link" href="GSocketConnection.html#GTcpConnection"><span class="returnvalue">GTcpConnection</span></a> *connection,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a> graceful_disconnect);</pre>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketConnection.html#GTcpConnection"><span class="type">GTcpConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> graceful_disconnect</code></em>);</pre>
 <p>
 This enabled graceful disconnects on close. A graceful disconnect
 means that we signal the recieving end that the connection is terminated
@@ -282,18 +260,19 @@ A graceful disconnect means that we can be sure that we successfully sent
 all the outstanding data to the other end, or get an error reported.
 However, it also means we have to wait for all the data to reach the
 other side and for it to acknowledge this by closing the socket, which may
-take a while. For this reason it is disabled by default.</p>
+take a while. For this reason it is disabled by default.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html#GTcpConnection"><span class="type">GTcpConnection</span></a>
+<td>a <a class="link" href="GSocketConnection.html#GTcpConnection"><span class="type">GTcpConnection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>graceful_disconnect</code></em> :</span></p></td>
-<td> Whether to do graceful disconnects or not
+<td>Whether to do graceful disconnects or not
 </td>
 </tr>
 </tbody>
@@ -303,22 +282,23 @@ take a while. For this reason it is disabled by default.</p>
 <hr>
 <div class="refsect2" title="g_tcp_connection_get_graceful_disconnect ()">
 <a name="g-tcp-connection-get-graceful-disconnect"></a><h3>g_tcp_connection_get_graceful_disconnect ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_tcp_connection_get_graceful_disconnect
-                                                        (<a class="link" href="GSocketConnection.html#GTcpConnection"><span class="returnvalue">GTcpConnection</span></a> *connection);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_tcp_connection_get_graceful_disconnect
+                                                        (<em class="parameter"><code><a class="link" href="GSocketConnection.html#GTcpConnection"><span class="type">GTcpConnection</span></a> *connection</code></em>);</pre>
 <p>
 Checks if graceful disconnects are used. See
-<a class="link" href="GSocketConnection.html#g-tcp-connection-set-graceful-disconnect" title="g_tcp_connection_set_graceful_disconnect ()"><code class="function">g_tcp_connection_set_graceful_disconnect()</code></a>.</p>
+<a class="link" href="GSocketConnection.html#g-tcp-connection-set-graceful-disconnect" title="g_tcp_connection_set_graceful_disconnect ()"><code class="function">g_tcp_connection_set_graceful_disconnect()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html#GTcpConnection"><span class="type">GTcpConnection</span></a>
+<td>a <a class="link" href="GSocketConnection.html#GTcpConnection"><span class="type">GTcpConnection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if graceful disconnect is used on close, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if graceful disconnect is used on close, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise
 
 </td>
 </tr>
@@ -336,9 +316,9 @@ Checks if graceful disconnects are used. See
 <hr>
 <div class="refsect2" title="g_unix_connection_receive_fd ()">
 <a name="g-unix-connection-receive-fd"></a><h3>g_unix_connection_receive_fd ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_connection_receive_fd        (<a class="link" href="GSocketConnection.html#GUnixConnection"><span class="returnvalue">GUnixConnection</span></a> *connection,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_connection_receive_fd        (<em class="parameter"><code><a class="link" href="GSocketConnection.html#GUnixConnection"><span class="type">GUnixConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Receives a file descriptor from the sending end of the connection.
 The sending end has to call <a class="link" href="GSocketConnection.html#g-unix-connection-send-fd" title="g_unix_connection_send_fd ()"><code class="function">g_unix_connection_send_fd()</code></a> for this
@@ -347,23 +327,25 @@ to work.
 <p>
 As well as reading the fd this also reads a single byte from the
 stream, as this is required for fd passing to work on some
-implementations.</p>
+implementations.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html#GUnixConnection"><span class="type">GUnixConnection</span></a>
+<td>a <a class="link" href="GSocketConnection.html#GUnixConnection"><span class="type">GUnixConnection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
 </td>
 </tr>
 <tr>
@@ -379,10 +361,10 @@ implementations.</p>
 <hr>
 <div class="refsect2" title="g_unix_connection_send_fd ()">
 <a name="g-unix-connection-send-fd"></a><h3>g_unix_connection_send_fd ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_connection_send_fd           (<a class="link" href="GSocketConnection.html#GUnixConnection"><span class="returnvalue">GUnixConnection</span></a> *connection,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> fd,
-                                                         <a class="link" href="GCancellable.html" title="GCancellable"><span class="returnvalue">GCancellable</span></a> *cancellable,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_connection_send_fd           (<em class="parameter"><code><a class="link" href="GSocketConnection.html#GUnixConnection"><span class="type">GUnixConnection</span></a> *connection</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Passes a file descriptor to the recieving side of the
 connection. The recieving end has to call <a class="link" href="GSocketConnection.html#g-unix-connection-receive-fd" title="g_unix_connection_receive_fd ()"><code class="function">g_unix_connection_receive_fd()</code></a>
@@ -391,33 +373,35 @@ to accept the file descriptor.
 <p>
 As well as sending the fd this also writes a single byte to the
 stream, as this is required for fd passing to work on some
-implementations.</p>
+implementations.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html#GUnixConnection"><span class="type">GUnixConnection</span></a>
+<td>a <a class="link" href="GSocketConnection.html#GUnixConnection"><span class="type">GUnixConnection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>fd</code></em> :</span></p></td>
-<td> a file descriptor
+<td>a file descriptor
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
 
 </td>
 </tr>
@@ -429,16 +413,17 @@ implementations.</p>
 <div class="refsect2" title="g_socket_connection_factory_create_connection ()">
 <a name="g-socket-connection-factory-create-connection"></a><h3>g_socket_connection_factory_create_connection ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_connection_factory_create_connection
-                                                        (<a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *socket);</pre>
+                                                        (<em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
 <p>
 Creates a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> subclass of the right type for
-<em class="parameter"><code>socket</code></em>.</p>
+<em class="parameter"><code>socket</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>
 </td>
 </tr>
 <tr>
@@ -454,37 +439,38 @@ Creates a <a class="link" href="GSocketConnection.html" title="GSocketConnection
 <hr>
 <div class="refsect2" title="g_socket_connection_factory_lookup_type ()">
 <a name="g-socket-connection-factory-lookup-type"></a><h3>g_socket_connection_factory_lookup_type ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>               g_socket_connection_factory_lookup_type
-                                                        (<a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a> family,
-                                                         <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="returnvalue">GSocketType</span></a> type,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> protocol_id);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a>               g_socket_connection_factory_lookup_type
+                                                        (<em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a> type</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> protocol_id</code></em>);</pre>
 <p>
-Looks up the <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GType"><span class="type">GType</span></a> to be used when creating socket connections on
+Looks up the <a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"><span class="type">GType</span></a> to be used when creating socket connections on
 sockets with the specified <em class="parameter"><code>family</code></em>,<em class="parameter"><code>type</code></em> and <em class="parameter"><code>protocol_id</code></em>.
 </p>
 <p>
-If no type is registered, the <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> base type is returned.</p>
+If no type is registered, the <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> base type is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>family</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>
+<td>a <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>
+<td>a <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>protocol_id</code></em> :</span></p></td>
-<td> a protocol id
+<td>a protocol id
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GType"><span class="type">GType</span></a>
+<td> a <a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"><span class="type">GType</span></a>
 
 </td>
 </tr>
@@ -496,37 +482,38 @@ If no type is registered, the <a class="link" href="GSocketConnection.html" titl
 <div class="refsect2" title="g_socket_connection_factory_register_type ()">
 <a name="g-socket-connection-factory-register-type"></a><h3>g_socket_connection_factory_register_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_connection_factory_register_type
-                                                        (<a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GType"><span class="returnvalue">GType</span></a> g_type,
-                                                         <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a> family,
-                                                         <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="returnvalue">GSocketType</span></a> type,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> protocol);</pre>
+                                                        (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"><span class="type">GType</span></a> g_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a> type</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> protocol</code></em>);</pre>
 <p>
-Looks up the <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GType"><span class="type">GType</span></a> to be used when creating socket connections on
+Looks up the <a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"><span class="type">GType</span></a> to be used when creating socket connections on
 sockets with the specified <em class="parameter"><code>family</code></em>,<em class="parameter"><code>type</code></em> and <em class="parameter"><code>protocol</code></em>.
 </p>
 <p>
-If no type is registered, the <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> base type is returned.</p>
+If no type is registered, the <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> base type is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>g_type</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#GType"><span class="type">GType</span></a>, inheriting from <code class="literal">G_TYPE_SOCKET_CONNECTION</code>
+<td>a <a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#GType"><span class="type">GType</span></a>, inheriting from <code class="literal">G_TYPE_SOCKET_CONNECTION</code>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>family</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>
+<td>a <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> a <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>
+<td>a <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>protocol</code></em> :</span></p></td>
-<td> a protocol id
+<td>a protocol id
 </td>
 </tr>
 </tbody>
@@ -544,7 +531,7 @@ If no type is registered, the <a class="link" href="GSocketConnection.html" titl
 <hr>
 <div class="refsect2" title='The "graceful-disconnect" property'>
 <a name="GTcpConnection--graceful-disconnect"></a><h3>The <code class="literal">"graceful-disconnect"</code> property</h3>
-<pre class="programlisting">  "graceful-disconnect"      <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
+<pre class="programlisting">  "graceful-disconnect"      <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
 <p>Whether or not close does a graceful disconnect.</p>
 <p>Default value: FALSE</p>
 </div>
@@ -556,6 +543,6 @@ If no type is registered, the <a class="link" href="GSocketConnection.html" titl
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

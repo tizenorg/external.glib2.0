@@ -8,28 +8,8 @@
 <link rel="up" href="glib-fundamentals.html" title="GLib Fundamentals">
 <link rel="prev" href="glib-fundamentals.html" title="GLib Fundamentals">
 <link rel="next" href="glib-Basic-Types.html" title="Basic Types">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -63,7 +43,9 @@
 #define             <a class="link" href="glib-Version-Information.html#GLIB-MAJOR-VERSION:CAPS" title="GLIB_MAJOR_VERSION">GLIB_MAJOR_VERSION</a>
 #define             <a class="link" href="glib-Version-Information.html#GLIB-MINOR-VERSION:CAPS" title="GLIB_MINOR_VERSION">GLIB_MINOR_VERSION</a>
 #define             <a class="link" href="glib-Version-Information.html#GLIB-MICRO-VERSION:CAPS" title="GLIB_MICRO_VERSION">GLIB_MICRO_VERSION</a>
-#define             <a class="link" href="glib-Version-Information.html#GLIB-CHECK-VERSION:CAPS" title="GLIB_CHECK_VERSION()">GLIB_CHECK_VERSION</a>                  (major,minor,micro)
+#define             <a class="link" href="glib-Version-Information.html#GLIB-CHECK-VERSION:CAPS" title="GLIB_CHECK_VERSION()">GLIB_CHECK_VERSION</a>                  (major,
+                                                         minor,
+                                                         micro)
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -94,7 +76,7 @@ at application run time.
 </pre>
 <p>
 The minor version number of the GLib library.
-Like <a href="http://library.gnome.org/devel/gtk/unstable/gtk-Feature-Test-Macros.html#gtk-minor-version"><span class="type">gtk_minor_version</span></a>, but from the headers used at
+Like <span class="type">gtk_minor_version</span>, but from the headers used at
 application compile time, rather than from the library linked against
 at application run time.
 </p>
@@ -102,11 +84,11 @@ at application run time.
 <hr>
 <div class="refsect2" title="GLIB_MICRO_VERSION">
 <a name="GLIB-MICRO-VERSION:CAPS"></a><h3>GLIB_MICRO_VERSION</h3>
-<pre class="programlisting">#define GLIB_MICRO_VERSION 0
+<pre class="programlisting">#define GLIB_MICRO_VERSION 2
 </pre>
 <p>
 The micro version number of the GLib library.
-Like <a href="http://library.gnome.org/devel/gtk/unstable/gtk-Feature-Test-Macros.html#gtk-micro-version"><span class="type">gtk_micro_version</span></a>, but from the headers used at
+Like <span class="type">gtk_micro_version</span>, but from the headers used at
 application compile time, rather than from the library linked against
 at application run time.
 </p>
@@ -121,11 +103,20 @@ Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE">
 as or newer than the passed-in version.
 </p>
 <div class="example">
-<a name="id480580"></a><p class="title"><b>Example 1. Checking the version of the GLib library</b></p>
-<div class="example-contents"><pre class="programlisting">
-  if (!GLIB_CHECK_VERSION (1, 2, 0))
-    g_error ("GLib version 1.2.0 or above is needed");
-</pre></div>
+<a name="id527572"></a><p class="title"><b>Example 1. Checking the version of the GLib library</b></p>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(!</span><span class="function"><a href="glib-Version-Information.html#GLIB-CHECK-VERSION:CAPS">GLIB_CHECK_VERSION</a></span><span class="normal"> </span><span class="symbol">(</span><span class="number">1</span><span class="symbol">,</span><span class="normal"> </span><span class="number">2</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">))</span>
+<span class="normal">  </span><span class="function"><a href="glib-Message-Logging.html#g-error">g_error</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"GLib version 1.2.0 or above is needed"</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 </div>
 <p><br class="example-break">
 </p>
@@ -154,6 +145,6 @@ as or newer than the passed-in version.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

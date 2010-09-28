@@ -8,28 +8,8 @@
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-Warnings-and-Assertions.html" title="Message Output and Debugging Functions">
 <link rel="next" href="glib-utilities.html" title="GLib Utilities">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -63,41 +43,41 @@
 #define             <a class="link" href="glib-Message-Logging.html#G-LOG-DOMAIN:CAPS" title="G_LOG_DOMAIN">G_LOG_DOMAIN</a>
 #define             <a class="link" href="glib-Message-Logging.html#G-LOG-FATAL-MASK:CAPS" title="G_LOG_FATAL_MASK">G_LOG_FATAL_MASK</a>
 #define             <a class="link" href="glib-Message-Logging.html#G-LOG-LEVEL-USER-SHIFT:CAPS" title="G_LOG_LEVEL_USER_SHIFT">G_LOG_LEVEL_USER_SHIFT</a>
-<span class="returnvalue">void</span>                (<a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()">*GLogFunc</a>)                         (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_level,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *message,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
+<span class="returnvalue">void</span>                (<a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()">*GLogFunc</a>)                         (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 enum                <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags">GLogLevelFlags</a>;
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Message-Logging.html#g-log" title="g_log ()">g_log</a>                               (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_level,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Message-Logging.html#g-logv" title="g_logv ()">g_logv</a>                              (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_level,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         <span class="returnvalue">va_list</span> args);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Message-Logging.html#g-log" title="g_log ()">g_log</a>                               (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Message-Logging.html#g-logv" title="g_logv ()">g_logv</a>                              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code><span class="type">va_list</span> args</code></em>);
 #define             <a class="link" href="glib-Message-Logging.html#g-message" title="g_message()">g_message</a>                           (...)
 #define             <a class="link" href="glib-Message-Logging.html#g-warning" title="g_warning()">g_warning</a>                           (...)
 #define             <a class="link" href="glib-Message-Logging.html#g-critical" title="g_critical()">g_critical</a>                          (...)
 #define             <a class="link" href="glib-Message-Logging.html#g-error" title="g_error()">g_error</a>                             (...)
 #define             <a class="link" href="glib-Message-Logging.html#g-debug" title="g_debug()">g_debug</a>                             (...)
 
-<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Message-Logging.html#g-log-set-handler" title="g_log_set_handler ()">g_log_set_handler</a>                   (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_levels,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="returnvalue">GLogFunc</span></a> log_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Message-Logging.html#g-log-remove-handler" title="g_log_remove_handler ()">g_log_remove_handler</a>                (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> handler_id);
-<a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a>      <a class="link" href="glib-Message-Logging.html#g-log-set-always-fatal" title="g_log_set_always_fatal ()">g_log_set_always_fatal</a>              (<a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> fatal_mask);
-<a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a>      <a class="link" href="glib-Message-Logging.html#g-log-set-fatal-mask" title="g_log_set_fatal_mask ()">g_log_set_fatal_mask</a>                (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> fatal_mask);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Message-Logging.html#g-log-default-handler" title="g_log_default_handler ()">g_log_default_handler</a>               (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_level,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *message,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> unused_data);
-<a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="returnvalue">GLogFunc</span></a>            <a class="link" href="glib-Message-Logging.html#g-log-set-default-handler" title="g_log_set_default_handler ()">g_log_set_default_handler</a>           (<a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="returnvalue">GLogFunc</span></a> log_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
+<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Message-Logging.html#g-log-set-handler" title="g_log_set_handler ()">g_log_set_handler</a>                   (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_levels</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="type">GLogFunc</span></a> log_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Message-Logging.html#g-log-remove-handler" title="g_log_remove_handler ()">g_log_remove_handler</a>                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> handler_id</code></em>);
+<a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a>      <a class="link" href="glib-Message-Logging.html#g-log-set-always-fatal" title="g_log_set_always_fatal ()">g_log_set_always_fatal</a>              (<em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> fatal_mask</code></em>);
+<a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a>      <a class="link" href="glib-Message-Logging.html#g-log-set-fatal-mask" title="g_log_set_fatal_mask ()">g_log_set_fatal_mask</a>                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> fatal_mask</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Message-Logging.html#g-log-default-handler" title="g_log_default_handler ()">g_log_default_handler</a>               (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> unused_data</code></em>);
+<a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="returnvalue">GLogFunc</span></a>            <a class="link" href="glib-Message-Logging.html#g-log-set-default-handler" title="g_log_set_default_handler ()">g_log_set_default_handler</a>           (<em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="type">GLogFunc</span></a> log_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -127,9 +107,17 @@ But be careful not to define it in any public header files.
 <p>
 For example, GTK+ uses this in its Makefile.am:
 </p>
-<div class="informalexample"><pre class="programlisting">
-INCLUDES = -DG_LOG_DOMAIN=\"Gtk\"
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal">INCLUDES </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">-</span><span class="normal">DG_LOG_DOMAIN</span><span class="symbol">=\</span><span class="string">"Gtk</span><span class="specialchar">\"</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 </div>
 <hr>
 <div class="refsect2" title="G_LOG_FATAL_MASK">
@@ -152,10 +140,10 @@ Log level shift offset for user defined log levels (0-7 are used by GLib).
 <hr>
 <div class="refsect2" title="GLogFunc ()">
 <a name="GLogFunc"></a><h3>GLogFunc ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                (*GLogFunc)                         (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_level,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *message,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*GLogFunc)                         (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Specifies the prototype of log handler functions.
 </p>
@@ -268,10 +256,10 @@ and <a class="link" href="glib-Message-Logging.html#g-log-set-fatal-mask" title=
 <hr>
 <div class="refsect2" title="g_log ()">
 <a name="g-log"></a><h3>g_log ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_log                               (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_level,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         ...);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_log                               (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Logs an error or debugging message.
 If the log level has been set as fatal, the <code class="function">abort()</code>
@@ -307,10 +295,10 @@ documentation.
 <hr>
 <div class="refsect2" title="g_logv ()">
 <a name="g-logv"></a><h3>g_logv ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_logv                              (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_level,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *format,
-                                                         <span class="returnvalue">va_list</span> args);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_logv                              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
+                                                         <em class="parameter"><code><span class="type">va_list</span> args</code></em>);</pre>
 <p>
 Logs an error or debugging message.
 If the log level has been set as fatal, the <code class="function">abort()</code>
@@ -445,10 +433,10 @@ A convenience function/macro to log a debug message.
 <hr>
 <div class="refsect2" title="g_log_set_handler ()">
 <a name="g-log-set-handler"></a><h3>g_log_set_handler ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_log_set_handler                   (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_levels,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="returnvalue">GLogFunc</span></a> log_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_log_set_handler                   (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_levels</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="type">GLogFunc</span></a> log_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Sets the log handler for a domain and a set of log levels.
 To handle fatal and recursive messages the <em class="parameter"><code>log_levels</code></em> parameter
@@ -461,27 +449,54 @@ you want to set a handler for this log level you must combine it with
 <a class="link" href="glib-Message-Logging.html#G-LOG-FLAG-FATAL:CAPS"><span class="type">G_LOG_FLAG_FATAL</span></a>.
 </p>
 <div class="example">
-<a name="id584331"></a><p class="title"><b>Example 12. Adding a log handler for all warning messages in the default
+<a name="id639618"></a><p class="title"><b>Example 12. Adding a log handler for all warning messages in the default
 (application) domain</b></p>
-<div class="example-contents"><pre class="programlisting">
-  g_log_set_handler (NULL, G_LOG_LEVEL_WARNING | G_LOG_FLAG_FATAL
-                     | G_LOG_FLAG_RECURSION, my_log_handler, NULL);
-</pre></div>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-LEVEL-WARNING:CAPS">G_LOG_LEVEL_WARNING</a> </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-FATAL:CAPS">G_LOG_FLAG_FATAL</a></span>
+<span class="normal">                   </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-RECURSION:CAPS">G_LOG_FLAG_RECURSION</a></span><span class="symbol">,</span><span class="normal"> my_log_handler</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 </div>
 <br class="example-break"><div class="example">
-<a name="id584346"></a><p class="title"><b>Example 13. Adding a log handler for all critical messages from GTK+</b></p>
-<div class="example-contents"><pre class="programlisting">
-  g_log_set_handler ("Gtk", G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL
-                     | G_LOG_FLAG_RECURSION, my_log_handler, NULL);
-</pre></div>
+<a name="id639631"></a><p class="title"><b>Example 13. Adding a log handler for all critical messages from GTK+</b></p>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"Gtk"</span><span class="symbol">,</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-LEVEL-CRITICAL:CAPS">G_LOG_LEVEL_CRITICAL</a> </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-FATAL:CAPS">G_LOG_FLAG_FATAL</a></span>
+<span class="normal">                   </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-RECURSION:CAPS">G_LOG_FLAG_RECURSION</a></span><span class="symbol">,</span><span class="normal"> my_log_handler</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 </div>
 <br class="example-break"><div class="example">
-<a name="id584360"></a><p class="title"><b>Example 14. Adding a log handler for <span class="emphasis"><em>all</em></span> messages from
+<a name="id639644"></a><p class="title"><b>Example 14. Adding a log handler for <span class="emphasis"><em>all</em></span> messages from
 GLib</b></p>
-<div class="example-contents"><pre class="programlisting">
-  g_log_set_handler ("GLib", G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL
-                     | G_LOG_FLAG_RECURSION, my_log_handler, NULL);
-</pre></div>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="glib-Message-Logging.html#g-log-set-handler">g_log_set_handler</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"GLib"</span><span class="symbol">,</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-LEVEL-MASK:CAPS">G_LOG_LEVEL_MASK</a> </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-FATAL:CAPS">G_LOG_FLAG_FATAL</a></span>
+<span class="normal">                   </span><span class="symbol">|</span><span class="normal"> <a href="glib-Message-Logging.html#G-LOG-FLAG-RECURSION:CAPS">G_LOG_FLAG_RECURSION</a></span><span class="symbol">,</span><span class="normal"> my_log_handler</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 </div>
 <br class="example-break"><div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -519,8 +534,8 @@ and recursive messages as well, combine the log levels with the
 <hr>
 <div class="refsect2" title="g_log_remove_handler ()">
 <a name="g-log-remove-handler"></a><h3>g_log_remove_handler ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_log_remove_handler                (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> handler_id);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_log_remove_handler                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> handler_id</code></em>);</pre>
 <p>
 Removes the log handler.
 </p>
@@ -543,7 +558,7 @@ Removes the log handler.
 <hr>
 <div class="refsect2" title="g_log_set_always_fatal ()">
 <a name="g-log-set-always-fatal"></a><h3>g_log_set_always_fatal ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a>      g_log_set_always_fatal              (<a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> fatal_mask);</pre>
+<pre class="programlisting"><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a>      g_log_set_always_fatal              (<em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> fatal_mask</code></em>);</pre>
 <p>
 Sets the message levels which are always fatal, in any log domain.
 When a message with any of these levels is logged the program terminates.
@@ -575,8 +590,8 @@ to be fatal.
 <hr>
 <div class="refsect2" title="g_log_set_fatal_mask ()">
 <a name="g-log-set-fatal-mask"></a><h3>g_log_set_fatal_mask ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a>      g_log_set_fatal_mask                (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> fatal_mask);</pre>
+<pre class="programlisting"><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a>      g_log_set_fatal_mask                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> fatal_mask</code></em>);</pre>
 <p>
 Sets the log levels which are fatal in the given domain.
 <a class="link" href="glib-Message-Logging.html#G-LOG-LEVEL-ERROR:CAPS"><code class="literal">G_LOG_LEVEL_ERROR</code></a> is always fatal.
@@ -605,10 +620,10 @@ Sets the log levels which are fatal in the given domain.
 <hr>
 <div class="refsect2" title="g_log_default_handler ()">
 <a name="g-log-default-handler"></a><h3>g_log_default_handler ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_log_default_handler               (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *log_domain,
-                                                         <a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="returnvalue">GLogLevelFlags</span></a> log_level,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *message,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> unused_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_log_default_handler               (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *log_domain</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogLevelFlags" title="enum GLogLevelFlags"><span class="type">GLogLevelFlags</span></a> log_level</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> unused_data</code></em>);</pre>
 <p>
 The default log handler set up by GLib; <a class="link" href="glib-Message-Logging.html#g-log-set-default-handler" title="g_log_set_default_handler ()"><code class="function">g_log_set_default_handler()</code></a>
 allows to install an alternate default log handler.
@@ -649,8 +664,8 @@ stderr is used for levels <a class="link" href="glib-Message-Logging.html#G-LOG-
 <hr>
 <div class="refsect2" title="g_log_set_default_handler ()">
 <a name="g-log-set-default-handler"></a><h3>g_log_set_default_handler ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="returnvalue">GLogFunc</span></a>            g_log_set_default_handler           (<a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="returnvalue">GLogFunc</span></a> log_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="returnvalue">GLogFunc</span></a>            g_log_set_default_handler           (<em class="parameter"><code><a class="link" href="glib-Message-Logging.html#GLogFunc" title="GLogFunc ()"><span class="type">GLogFunc</span></a> log_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Installs a default log handler which is used if no
 log handler has been set for the particular log domain
@@ -683,6 +698,6 @@ and log level combination. By default, GLib uses
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

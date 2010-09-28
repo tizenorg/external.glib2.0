@@ -8,28 +8,8 @@
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-Arrays.html" title="Arrays">
 <link rel="next" href="glib-Byte-Arrays.html" title="Byte Arrays">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -62,39 +42,40 @@
 #include &lt;glib.h&gt;
 
                     <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray">GPtrArray</a>;
-<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-new" title="g_ptr_array_new ()">g_ptr_array_new</a>                     (void);
-<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-sized-new" title="g_ptr_array_sized_new ()">g_ptr_array_sized_new</a>               (<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> reserved_size);
-<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-new-with-free-func" title="g_ptr_array_new_with_free_func ()">g_ptr_array_new_with_free_func</a>      (<a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="returnvalue">GDestroyNotify</span></a> element_free_func);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-set-free-func" title="g_ptr_array_set_free_func ()">g_ptr_array_set_free_func</a>           (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="returnvalue">GDestroyNotify</span></a> element_free_func);
-<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-ref" title="g_ptr_array_ref ()">g_ptr_array_ref</a>                     (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-unref" title="g_ptr_array_unref ()">g_ptr_array_unref</a>                   (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-add" title="g_ptr_array_add ()">g_ptr_array_add</a>                     (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
-<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove" title="g_ptr_array_remove ()">g_ptr_array_remove</a>                  (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
-<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-index" title="g_ptr_array_remove_index ()">g_ptr_array_remove_index</a>            (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_);
-<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-fast" title="g_ptr_array_remove_fast ()">g_ptr_array_remove_fast</a>             (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
-<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-index-fast" title="g_ptr_array_remove_index_fast ()">g_ptr_array_remove_index_fast</a>       (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-range" title="g_ptr_array_remove_range ()">g_ptr_array_remove_range</a>            (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> length);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-sort" title="g_ptr_array_sort ()">g_ptr_array_sort</a>                    (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="returnvalue">GCompareFunc</span></a> compare_func);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-sort-with-data" title="g_ptr_array_sort_with_data ()">g_ptr_array_sort_with_data</a>          (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> compare_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-set-size" title="g_ptr_array_set_size ()">g_ptr_array_set_size</a>                (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> length);
-#define             <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-index" title="g_ptr_array_index()">g_ptr_array_index</a>                   (array,index_)
-<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>*           <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-free" title="g_ptr_array_free ()">g_ptr_array_free</a>                    (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> free_seg);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-foreach" title="g_ptr_array_foreach ()">g_ptr_array_foreach</a>                 (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="returnvalue">GFunc</span></a> func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
+<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-new" title="g_ptr_array_new ()">g_ptr_array_new</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-sized-new" title="g_ptr_array_sized_new ()">g_ptr_array_sized_new</a>               (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> reserved_size</code></em>);
+<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-new-with-free-func" title="g_ptr_array_new_with_free_func ()">g_ptr_array_new_with_free_func</a>      (<em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> element_free_func</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-set-free-func" title="g_ptr_array_set_free_func ()">g_ptr_array_set_free_func</a>           (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> element_free_func</code></em>);
+<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-ref" title="g_ptr_array_ref ()">g_ptr_array_ref</a>                     (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-unref" title="g_ptr_array_unref ()">g_ptr_array_unref</a>                   (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-add" title="g_ptr_array_add ()">g_ptr_array_add</a>                     (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove" title="g_ptr_array_remove ()">g_ptr_array_remove</a>                  (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
+<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-index" title="g_ptr_array_remove_index ()">g_ptr_array_remove_index</a>            (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-fast" title="g_ptr_array_remove_fast ()">g_ptr_array_remove_fast</a>             (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
+<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-index-fast" title="g_ptr_array_remove_index_fast ()">g_ptr_array_remove_index_fast</a>       (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-range" title="g_ptr_array_remove_range ()">g_ptr_array_remove_range</a>            (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> length</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-sort" title="g_ptr_array_sort ()">g_ptr_array_sort</a>                    (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> compare_func</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-sort-with-data" title="g_ptr_array_sort_with_data ()">g_ptr_array_sort_with_data</a>          (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> compare_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-set-size" title="g_ptr_array_set_size ()">g_ptr_array_set_size</a>                (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> length</code></em>);
+#define             <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-index" title="g_ptr_array_index()">g_ptr_array_index</a>                   (array,
+                                                         index_)
+<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>*           <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-free" title="g_ptr_array_free ()">g_ptr_array_free</a>                    (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> free_seg</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-foreach" title="g_ptr_array_foreach ()">g_ptr_array_foreach</a>                 (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -137,24 +118,45 @@ To free a pointer array, use <a class="link" href="glib-Pointer-Arrays.html#g-pt
 <p>
 </p>
 <div class="example">
-<a name="id745814"></a><p class="title"><b>Example 21. Using a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a></b></p>
-<div class="example-contents"><pre class="programlisting">
-  GPtrArray *gparray;
-  gchar *string1 = "one", *string2 = "two", *string3 = "three";
+<a name="id839287"></a><p class="title"><b>Example 21. Using a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a></b></p>
+<div class="example-contents">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="usertype">GPtrArray</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">gparray</span><span class="symbol">;</span>
+<span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">string1 </span><span class="symbol">=</span><span class="normal"> </span><span class="string">"one"</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">string2 </span><span class="symbol">=</span><span class="normal"> </span><span class="string">"two"</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">string3 </span><span class="symbol">=</span><span class="normal"> </span><span class="string">"three"</span><span class="symbol">;</span>
 
-  gparray = g_ptr_array_new ();
-  g_ptr_array_add (gparray, (gpointer) string1);
-  g_ptr_array_add (gparray, (gpointer) string2);
-  g_ptr_array_add (gparray, (gpointer) string3);
+<span class="normal">gparray </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Pointer-Arrays.html#g-ptr-array-new">g_ptr_array_new</a></span><span class="normal"> </span><span class="symbol">();</span>
+<span class="function"><a href="glib-Pointer-Arrays.html#g-ptr-array-add">g_ptr_array_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gparray</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">)</span><span class="normal"> string1</span><span class="symbol">);</span>
+<span class="function"><a href="glib-Pointer-Arrays.html#g-ptr-array-add">g_ptr_array_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gparray</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">)</span><span class="normal"> string2</span><span class="symbol">);</span>
+<span class="function"><a href="glib-Pointer-Arrays.html#g-ptr-array-add">g_ptr_array_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gparray</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">)</span><span class="normal"> string3</span><span class="symbol">);</span>
 
-  if (g_ptr_array_index (gparray, 0) != (gpointer) string1)
-    g_print ("ERROR: got %p instead of %p\n",
-             g_ptr_array_index (gparray, 0), string1);
+<span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="glib-Pointer-Arrays.html#g-ptr-array-index">g_ptr_array_index</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gparray</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">!=</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Basic-Types.html#gpointer">gpointer</a></span><span class="symbol">)</span><span class="normal"> string1</span><span class="symbol">)</span>
+<span class="normal">  </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"ERROR: got %p instead of %p</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span>
+<span class="normal">           </span><span class="function"><a href="glib-Pointer-Arrays.html#g-ptr-array-index">g_ptr_array_index</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gparray</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">),</span><span class="normal"> string1</span><span class="symbol">);</span>
 
-  g_ptr_array_free (gparray, TRUE);
- </pre></div>
+<span class="function"><a href="glib-Pointer-Arrays.html#g-ptr-array-free">g_ptr_array_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gparray</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#TRUE:CAPS">TRUE</a></span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-<p><br class="example-break"></p>
+
+</div>
+<p><br class="example-break">
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="glib-Pointer-Arrays.details"></a><h2>Details</h2>
@@ -166,19 +168,20 @@ To free a pointer array, use <a class="link" href="glib-Pointer-Arrays.html#g-pt
 } GPtrArray;
 </pre>
 <p>
-Contains the public fields of a pointer array.</p>
+Contains the public fields of a pointer array.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> *<em class="structfield"><code><a name="GPtrArray.pdata"></a>pdata</code></em>;</span></p></td>
-<td> points to the array of pointers, which may be moved when the
+<td>points to the array of pointers, which may be moved when the
         array grows.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GPtrArray.len"></a>len</code></em>;</span></p></td>
-<td> number of pointers in the array.
+<td>number of pointers in the array.
 </td>
 </tr>
 </tbody>
@@ -187,14 +190,15 @@ Contains the public fields of a pointer array.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_new ()">
 <a name="g-ptr-array-new"></a><h3>g_ptr_array_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          g_ptr_array_new                     (void);</pre>
+<pre class="programlisting"><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          g_ptr_array_new                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Creates a new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> with a reference count of 1.</p>
+Creates a new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> with a reference count of 1.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>the new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr></tbody>
 </table></div>
@@ -202,23 +206,24 @@ Creates a new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="G
 <hr>
 <div class="refsect2" title="g_ptr_array_sized_new ()">
 <a name="g-ptr-array-sized-new"></a><h3>g_ptr_array_sized_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          g_ptr_array_sized_new               (<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> reserved_size);</pre>
+<pre class="programlisting"><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          g_ptr_array_sized_new               (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> reserved_size</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> with <em class="parameter"><code>reserved_size</code></em> pointers preallocated
 and a reference count of 1. This avoids frequent reallocation, if
 you are going to add many pointers to the array. Note however that
-the size of the array is still 0.</p>
+the size of the array is still 0.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>reserved_size</code></em> :</span></p></td>
-<td> number of pointers preallocated.
+<td>number of pointers preallocated.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>the new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 </tbody>
@@ -227,18 +232,19 @@ the size of the array is still 0.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_new_with_free_func ()">
 <a name="g-ptr-array-new-with-free-func"></a><h3>g_ptr_array_new_with_free_func ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          g_ptr_array_new_with_free_func      (<a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="returnvalue">GDestroyNotify</span></a> element_free_func);</pre>
+<pre class="programlisting"><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          g_ptr_array_new_with_free_func      (<em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> element_free_func</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> with a reference count of 1 and use <em class="parameter"><code>element_free_func</code></em>
 for freeing each element when the array is destroyed either via
 <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-unref" title="g_ptr_array_unref ()"><code class="function">g_ptr_array_unref()</code></a>, when <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-free" title="g_ptr_array_free ()"><code class="function">g_ptr_array_free()</code></a> is called with <em class="parameter"><code>free_segment</code></em>
-set to <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> or when removing elements.</p>
+set to <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> or when removing elements.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>element_free_func</code></em> :</span></p></td>
-<td> A function to free elements with destroy <em class="parameter"><code>array</code></em> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+<td>A function to free elements with destroy <em class="parameter"><code>array</code></em> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 <tr>
@@ -254,23 +260,24 @@ set to <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><
 <hr>
 <div class="refsect2" title="g_ptr_array_set_free_func ()">
 <a name="g-ptr-array-set-free-func"></a><h3>g_ptr_array_set_free_func ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_set_free_func           (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="returnvalue">GDestroyNotify</span></a> element_free_func);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_set_free_func           (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> element_free_func</code></em>);</pre>
 <p>
 Sets a function for freeing each element when <em class="parameter"><code>array</code></em> is destroyed
 either via <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-unref" title="g_ptr_array_unref ()"><code class="function">g_ptr_array_unref()</code></a>, when <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-free" title="g_ptr_array_free ()"><code class="function">g_ptr_array_free()</code></a> is called
-with <em class="parameter"><code>free_segment</code></em> set to <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> or when removing elements.</p>
+with <em class="parameter"><code>free_segment</code></em> set to <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> or when removing elements.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> A <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>A <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>element_free_func</code></em> :</span></p></td>
-<td> A function to free elements with destroy <em class="parameter"><code>array</code></em> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+<td>A function to free elements with destroy <em class="parameter"><code>array</code></em> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 </tbody>
@@ -280,16 +287,17 @@ with <em class="parameter"><code>free_segment</code></em> set to <a class="link"
 <hr>
 <div class="refsect2" title="g_ptr_array_ref ()">
 <a name="g-ptr-array-ref"></a><h3>g_ptr_array_ref ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          g_ptr_array_ref                     (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array);</pre>
+<pre class="programlisting"><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a>*          g_ptr_array_ref                     (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>);</pre>
 <p>
 Atomically increments the reference count of <em class="parameter"><code>array</code></em> by one. This
-function is MT-safe and may be called from any thread.</p>
+function is MT-safe and may be called from any thread.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> A <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
+<td>A <a class="link" href="glib-Arrays.html#GArray" title="GArray"><span class="type">GArray</span></a>.
 </td>
 </tr>
 <tr>
@@ -305,17 +313,18 @@ function is MT-safe and may be called from any thread.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_unref ()">
 <a name="g-ptr-array-unref"></a><h3>g_ptr_array_unref ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_unref                   (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_unref                   (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>);</pre>
 <p>
 Atomically decrements the reference count of <em class="parameter"><code>array</code></em> by one. If the
 reference count drops to 0, the effect is the same as calling
 <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-free" title="g_ptr_array_free ()"><code class="function">g_ptr_array_free()</code></a> with <em class="parameter"><code>free_segment</code></em> set to <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>. This function
-is MT-safe and may be called from any thread.</p>
+is MT-safe and may be called from any thread.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> A <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>A <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr></tbody>
 </table></div>
@@ -324,22 +333,23 @@ is MT-safe and may be called from any thread.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_add ()">
 <a name="g-ptr-array-add"></a><h3>g_ptr_array_add ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_add                     (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_add                     (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
 Adds a pointer to the end of the pointer array. The array will grow
-in size automatically if necessary.</p>
+in size automatically if necessary.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> the pointer to add.
+<td>the pointer to add.
 </td>
 </tr>
 </tbody>
@@ -348,8 +358,8 @@ in size automatically if necessary.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_remove ()">
 <a name="g-ptr-array-remove"></a><h3>g_ptr_array_remove ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_ptr_array_remove                  (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_ptr_array_remove                  (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
 Removes the first occurrence of the given pointer from the pointer
 array. The following elements are moved down one place. If <em class="parameter"><code>array</code></em>
@@ -358,23 +368,25 @@ removed element.
 </p>
 <p>
 It returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the pointer was removed, or <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if the
-pointer was not found.</p>
+pointer was not found.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> the pointer to remove.
+<td>the pointer to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the pointer is removed. <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if the pointer is
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the pointer is removed. <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if the pointer is
           not found in the array.
 </td>
 </tr>
@@ -384,29 +396,30 @@ pointer was not found.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_remove_index ()">
 <a name="g-ptr-array-remove-index"></a><h3>g_ptr_array_remove_index ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_ptr_array_remove_index            (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_ptr_array_remove_index            (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>);</pre>
 <p>
 Removes the pointer at the given index from the pointer array. The
 following elements are moved down one place. If <em class="parameter"><code>array</code></em> has a
 non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function it is called for the removed
-element.</p>
+element.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index of the pointer to remove.
+<td>the index of the pointer to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the pointer which was removed.
+<td>the pointer which was removed.
 </td>
 </tr>
 </tbody>
@@ -415,8 +428,8 @@ element.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_remove_fast ()">
 <a name="g-ptr-array-remove-fast"></a><h3>g_ptr_array_remove_fast ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_ptr_array_remove_fast             (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_ptr_array_remove_fast             (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
 Removes the first occurrence of the given pointer from the pointer
 array. The last element in the array is used to fill in the space,
@@ -426,23 +439,25 @@ faster than <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove" t
 </p>
 <p>
 It returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the pointer was removed, or <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if the
-pointer was not found.</p>
+pointer was not found.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> the pointer to remove.
+<td>the pointer to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the pointer was found in the array.
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the pointer was found in the array.
 </td>
 </tr>
 </tbody>
@@ -451,30 +466,31 @@ pointer was not found.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_remove_index_fast ()">
 <a name="g-ptr-array-remove-index-fast"></a><h3>g_ptr_array_remove_index_fast ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_ptr_array_remove_index_fast       (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_ptr_array_remove_index_fast       (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>);</pre>
 <p>
 Removes the pointer at the given index from the pointer array. The
 last element in the array is used to fill in the space, so this
 function does not preserve the order of the array. But it is faster
 than <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-index" title="g_ptr_array_remove_index ()"><code class="function">g_ptr_array_remove_index()</code></a>. If <em class="parameter"><code>array</code></em> has a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
-<a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function it is called for the removed element.</p>
+<a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function it is called for the removed element.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index of the pointer to remove.
+<td>the index of the pointer to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the pointer which was removed.
+<td>the pointer which was removed.
 </td>
 </tr>
 </tbody>
@@ -483,30 +499,31 @@ than <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-remove-index" ti
 <hr>
 <div class="refsect2" title="g_ptr_array_remove_range ()">
 <a name="g-ptr-array-remove-range"></a><h3>g_ptr_array_remove_range ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_remove_range            (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> index_,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> length);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_remove_range            (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> index_</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> length</code></em>);</pre>
 <p>
 Removes the given number of pointers starting at the given index
 from a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.  The following elements are moved to close the
 gap. If <em class="parameter"><code>array</code></em> has a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function it is called
-for the removed elements.</p>
+for the removed elements.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <em class="parameter"><code>GPtrArray</code></em>.
+<td>a <em class="parameter"><code>GPtrArray</code></em>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index of the first pointer to remove.
+<td>the index of the first pointer to remove.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td> the number of pointers to remove.
+<td>the number of pointers to remove.
 </td>
 </tr>
 </tbody>
@@ -516,8 +533,8 @@ for the removed elements.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_sort ()">
 <a name="g-ptr-array-sort"></a><h3>g_ptr_array_sort ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_sort                    (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="returnvalue">GCompareFunc</span></a> compare_func);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_sort                    (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> compare_func</code></em>);</pre>
 <p>
 Sorts the array, using <em class="parameter"><code>compare_func</code></em> which should be a <code class="function">qsort()</code>-style
 comparison function (returns less than zero for first arg is less
@@ -536,17 +553,19 @@ is undefined.
 take the pointers from the array as arguments, it takes pointers to
 the pointers in the array.</p>
 </div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>compare_func</code></em> :</span></p></td>
-<td> comparison function.
+<td>comparison function.
 </td>
 </tr>
 </tbody>
@@ -555,9 +574,9 @@ the pointers in the array.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_sort_with_data ()">
 <a name="g-ptr-array-sort-with-data"></a><h3>g_ptr_array_sort_with_data ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_sort_with_data          (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> compare_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_sort_with_data          (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> compare_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Like <a class="link" href="glib-Pointer-Arrays.html#g-ptr-array-sort" title="g_ptr_array_sort ()"><code class="function">g_ptr_array_sort()</code></a>, but the comparison function has an extra
 user data argument.
@@ -570,22 +589,24 @@ user data argument.
 doesn't take the pointers from the array as arguments, it takes
 pointers to the pointers in the array.</p>
 </div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>compare_func</code></em> :</span></p></td>
-<td> comparison function.
+<td>comparison function.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> data to pass to <em class="parameter"><code>compare_func</code></em>.
+<td>data to pass to <em class="parameter"><code>compare_func</code></em>.
 </td>
 </tr>
 </tbody>
@@ -594,24 +615,25 @@ pointers to the pointers in the array.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_set_size ()">
 <a name="g-ptr-array-set-size"></a><h3>g_ptr_array_set_size ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_set_size                (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> length);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_set_size                (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> length</code></em>);</pre>
 <p>
 Sets the size of the array. When making the array larger,
 newly-added elements will be set to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>. When making it smaller,
 if <em class="parameter"><code>array</code></em> has a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function then it will be
-called for the removed elements.</p>
+called for the removed elements.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td> the new length of the pointer array.
+<td>the new length of the pointer array.
 </td>
 </tr>
 </tbody>
@@ -622,23 +644,24 @@ called for the removed elements.</p>
 <a name="g-ptr-array-index"></a><h3>g_ptr_array_index()</h3>
 <pre class="programlisting">#define             g_ptr_array_index(array,index_)</pre>
 <p>
-Returns the pointer at the given index of the pointer array.</p>
+Returns the pointer at the given index of the pointer array.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index of the pointer to return.
+<td>the index of the pointer to return.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the pointer at the given index.
+<td>the pointer at the given index.
 </td>
 </tr>
 </tbody>
@@ -647,8 +670,8 @@ Returns the pointer at the given index of the pointer array.</p>
 <hr>
 <div class="refsect2" title="g_ptr_array_free ()">
 <a name="g-ptr-array-free"></a><h3>g_ptr_array_free ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>*           g_ptr_array_free                    (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> free_seg);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>*           g_ptr_array_free                    (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> free_seg</code></em>);</pre>
 <p>
 Frees the memory allocated for the <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>. If <em class="parameter"><code>free_seg</code></em> is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>
 it frees the memory block holding the elements as well. Pass <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>
@@ -665,22 +688,24 @@ size of <em class="parameter"><code>array</code></em> will be set to zero.
 memory, they should be freed separately if <em class="parameter"><code>free_seg</code></em> is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> and no
 <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function has been set for <em class="parameter"><code>array</code></em>.</p>
 </div>
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>free_seg</code></em> :</span></p></td>
-<td> if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> the actual pointer array is freed as well.
+<td>if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> the actual pointer array is freed as well.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the pointer array if <em class="parameter"><code>free_seg</code></em> is <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>, otherwise <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+<td>the pointer array if <em class="parameter"><code>free_seg</code></em> is <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>, otherwise <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
           The pointer array should be freed using <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>.
 </td>
 </tr>
@@ -690,27 +715,28 @@ memory, they should be freed separately if <em class="parameter"><code>free_seg<
 <hr>
 <div class="refsect2" title="g_ptr_array_foreach ()">
 <a name="g-ptr-array-foreach"></a><h3>g_ptr_array_foreach ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_foreach                 (<a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="returnvalue">GPtrArray</span></a> *array,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="returnvalue">GFunc</span></a> func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_ptr_array_foreach                 (<em class="parameter"><code><a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a> *array</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
-Calls a function for each element of a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.</p>
+Calls a function for each element of a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>array</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>
+<td>a <a class="link" href="glib-Pointer-Arrays.html#GPtrArray" title="GPtrArray"><span class="type">GPtrArray</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td> the function to call for each array element
+<td>the function to call for each array element
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> user data to pass to the function
+<td>user data to pass to the function
 </td>
 </tr>
 </tbody>
@@ -721,6 +747,6 @@ Calls a function for each element of a <a class="link" href="glib-Pointer-Arrays
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

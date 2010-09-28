@@ -8,8 +8,6 @@ GNOME_MODULE := glib
 
 STAMP_DIR := debian/stampdir
 
-PATCH_DIR := debian/patches
-
 # rules in this debian/rules Makefile can be built concurrently as well as
 # upstream rules in Makefile; all $(MAKE) invocations will inherit this flag,
 # if you recurse into debian/rules ($(MAKE)
@@ -44,7 +42,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.24.0
+SHVER := 2.24.2
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -107,9 +105,6 @@ $(STAMP_DIR)/patch-stamp:
 	# backup the original files to restore them in the clean target
 	-test -r config.sub && cp config.sub config.sub.orig
 	-test -r config.guess && cp config.guess config.guess.orig
-	# apply patches
-	QUILT_PATCHES=$(PATCH_DIR) \
-		quilt --quiltrc /dev/null push -a || test $$? = 2
 	-test -r /usr/share/misc/config.sub && \
 		cp -f /usr/share/misc/config.sub config.sub
 	-test -r /usr/share/misc/config.guess && \
@@ -188,9 +183,6 @@ clean: debian/control
 	# restore files from backup (before unpatching)
 	-test -r config.sub.orig && mv -f config.sub.orig config.sub
 	-test -r config.guess.orig && mv -f config.guess.orig config.guess
-	# unapply patches, if any
-	QUILT_PATCHES=$(PATCH_DIR) \
-		quilt --quiltrc /dev/null pop -a -R || test $$? = 2
 	-rm -rf .pc
 	-rm -rf $(STAMP_DIR)
 	dh_clean

@@ -8,28 +8,8 @@
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Hook-Functions.html" title="Hook Functions">
 <link rel="next" href="glib-Lexical-Scanner.html" title="Lexical Scanner">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -60,74 +40,74 @@
 <pre class="synopsis">
 #include &lt;glib.h&gt;
 
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-application-name" title="g_get_application_name ()">g_get_application_name</a>              (void);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()">g_set_application_name</a>              (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *application_name);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-prgname" title="g_get_prgname ()">g_get_prgname</a>                       (void);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()">g_set_prgname</a>                       (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *prgname);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()">g_getenv</a>                            (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *variable);
-<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-setenv" title="g_setenv ()">g_setenv</a>                            (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *variable,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *value,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> overwrite);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-unsetenv" title="g_unsetenv ()">g_unsetenv</a>                          (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *variable);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>**             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-listenv" title="g_listenv ()">g_listenv</a>                           (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-name" title="g_get_user_name ()">g_get_user_name</a>                     (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-real-name" title="g_get_real_name ()">g_get_real_name</a>                     (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-cache-dir" title="g_get_user_cache_dir ()">g_get_user_cache_dir</a>                (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-data-dir" title="g_get_user_data_dir ()">g_get_user_data_dir</a>                 (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir" title="g_get_user_config_dir ()">g_get_user_config_dir</a>               (void);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-application-name" title="g_get_application_name ()">g_get_application_name</a>              (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()">g_set_application_name</a>              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *application_name</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-prgname" title="g_get_prgname ()">g_get_prgname</a>                       (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()">g_set_prgname</a>                       (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prgname</code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()">g_getenv</a>                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-setenv" title="g_setenv ()">g_setenv</a>                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *value</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> overwrite</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-unsetenv" title="g_unsetenv ()">g_unsetenv</a>                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>**             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-listenv" title="g_listenv ()">g_listenv</a>                           (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-name" title="g_get_user_name ()">g_get_user_name</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-real-name" title="g_get_real_name ()">g_get_real_name</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-cache-dir" title="g_get_user_cache_dir ()">g_get_user_cache_dir</a>                (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-data-dir" title="g_get_user_data_dir ()">g_get_user_data_dir</a>                 (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir" title="g_get_user_config_dir ()">g_get_user_config_dir</a>               (<em class="parameter"><code><span class="type">void</span></code></em>);
 enum                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GUserDirectory" title="enum GUserDirectory">GUserDirectory</a>;
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-special-dir" title="g_get_user_special_dir ()">g_get_user_special_dir</a>              (<a class="link" href="glib-Miscellaneous-Utility-Functions.html#GUserDirectory" title="enum GUserDirectory"><span class="returnvalue">GUserDirectory</span></a> directory);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-system-data-dirs" title="g_get_system_data_dirs ()">g_get_system_data_dirs</a>             (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-system-config-dirs" title="g_get_system_config_dirs ()">g_get_system_config_dirs</a>           (void);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-reload-user-special-dirs-cache" title="g_reload_user_special_dirs_cache ()">g_reload_user_special_dirs_cache</a>    (void);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-special-dir" title="g_get_user_special_dir ()">g_get_user_special_dir</a>              (<em class="parameter"><code><a class="link" href="glib-Miscellaneous-Utility-Functions.html#GUserDirectory" title="enum GUserDirectory"><span class="type">GUserDirectory</span></a> directory</code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-system-data-dirs" title="g_get_system_data_dirs ()">g_get_system_data_dirs</a>             (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-system-config-dirs" title="g_get_system_config_dirs ()">g_get_system_config_dirs</a>           (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-reload-user-special-dirs-cache" title="g_reload_user_special_dirs_cache ()">g_reload_user_special_dirs_cache</a>    (<em class="parameter"><code><span class="type">void</span></code></em>);
 
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-host-name" title="g_get_host_name ()">g_get_host_name</a>                     (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-home-dir" title="g_get_home_dir ()">g_get_home_dir</a>                      (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-tmp-dir" title="g_get_tmp_dir ()">g_get_tmp_dir</a>                       (void);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-current-dir" title="g_get_current_dir ()">g_get_current_dir</a>                   (void);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-basename" title="g_basename ()">g_basename</a>                          (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-host-name" title="g_get_host_name ()">g_get_host_name</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-home-dir" title="g_get_home_dir ()">g_get_home_dir</a>                      (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-tmp-dir" title="g_get_tmp_dir ()">g_get_tmp_dir</a>                       (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-current-dir" title="g_get_current_dir ()">g_get_current_dir</a>                   (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-basename" title="g_basename ()">g_basename</a>                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);
 #define             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-dirname" title="g_dirname">g_dirname</a>
-<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-is-absolute" title="g_path_is_absolute ()">g_path_is_absolute</a>                  (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);
-const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-skip-root" title="g_path_skip_root ()">g_path_skip_root</a>                    (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-basename" title="g_path_get_basename ()">g_path_get_basename</a>                 (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-dirname" title="g_path_get_dirname ()">g_path_get_dirname</a>                  (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-filename" title="g_build_filename ()">g_build_filename</a>                    (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *first_element,
-                                                         ...);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-filenamev" title="g_build_filenamev ()">g_build_filenamev</a>                   (<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **args);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-path" title="g_build_path ()">g_build_path</a>                        (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *separator,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *first_element,
-                                                         ...);
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-pathv" title="g_build_pathv ()">g_build_pathv</a>                       (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *separator,
-                                                         <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **args);
-<span class="returnvalue">char</span> *              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size-for-display" title="g_format_size_for_display ()">g_format_size_for_display</a>           (<a class="link" href="glib-Basic-Types.html#goffset" title="goffset"><span class="returnvalue">goffset</span></a> size);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-is-absolute" title="g_path_is_absolute ()">g_path_is_absolute</a>                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-skip-root" title="g_path_skip_root ()">g_path_skip_root</a>                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-basename" title="g_path_get_basename ()">g_path_get_basename</a>                 (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-dirname" title="g_path_get_dirname ()">g_path_get_dirname</a>                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-filename" title="g_build_filename ()">g_build_filename</a>                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *first_element</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-filenamev" title="g_build_filenamev ()">g_build_filenamev</a>                   (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **args</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-path" title="g_build_path ()">g_build_path</a>                        (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *separator</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *first_element</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-pathv" title="g_build_pathv ()">g_build_pathv</a>                       (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *separator</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **args</code></em>);
+<span class="returnvalue">char</span> *              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-format-size-for-display" title="g_format_size_for_display ()">g_format_size_for_display</a>           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#goffset" title="goffset"><span class="type">goffset</span></a> size</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-find-program-in-path" title="g_find_program_in_path ()">g_find_program_in_path</a>              (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *program);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-find-program-in-path" title="g_find_program_in_path ()">g_find_program_in_path</a>              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *program</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-bit-nth-lsf" title="g_bit_nth_lsf ()">g_bit_nth_lsf</a>                       (<a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="returnvalue">gulong</span></a> mask,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> nth_bit);
-<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-bit-nth-msf" title="g_bit_nth_msf ()">g_bit_nth_msf</a>                       (<a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="returnvalue">gulong</span></a> mask,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> nth_bit);
-<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-bit-storage" title="g_bit_storage ()">g_bit_storage</a>                       (<a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="returnvalue">gulong</span></a> number);
+<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-bit-nth-lsf" title="g_bit_nth_lsf ()">g_bit_nth_lsf</a>                       (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="type">gulong</span></a> mask</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> nth_bit</code></em>);
+<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-bit-nth-msf" title="g_bit_nth_msf ()">g_bit_nth_msf</a>                       (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="type">gulong</span></a> mask</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> nth_bit</code></em>);
+<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-bit-storage" title="g_bit_storage ()">g_bit_storage</a>                       (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="type">gulong</span></a> number</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-spaced-primes-closest" title="g_spaced_primes_closest ()">g_spaced_primes_closest</a>             (<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> num);
+<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-spaced-primes-closest" title="g_spaced_primes_closest ()">g_spaced_primes_closest</a>             (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> num</code></em>);
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-atexit" title="g_atexit ()">g_atexit</a>                            (<a class="link" href="glib-Miscellaneous-Utility-Functions.html#GVoidFunc" title="GVoidFunc ()"><span class="returnvalue">GVoidFunc</span></a> func);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-atexit" title="g_atexit ()">g_atexit</a>                            (<em class="parameter"><code><a class="link" href="glib-Miscellaneous-Utility-Functions.html#GVoidFunc" title="GVoidFunc ()"><span class="type">GVoidFunc</span></a> func</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-parse-debug-string" title="g_parse_debug_string ()">g_parse_debug_string</a>                (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *string,
-                                                         const <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey"><span class="returnvalue">GDebugKey</span></a> *keys,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> nkeys);
+<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-parse-debug-string" title="g_parse_debug_string ()">g_parse_debug_string</a>                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey"><span class="type">GDebugKey</span></a> *keys</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> nkeys</code></em>);
                     <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey">GDebugKey</a>;
 
-<span class="returnvalue">void</span>                (<a class="link" href="glib-Miscellaneous-Utility-Functions.html#GVoidFunc" title="GVoidFunc ()">*GVoidFunc</a>)                        (void);
-<span class="returnvalue">void</span>                (<a class="link" href="glib-Miscellaneous-Utility-Functions.html#GFreeFunc" title="GFreeFunc ()">*GFreeFunc</a>)                        (<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
+<span class="returnvalue">void</span>                (<a class="link" href="glib-Miscellaneous-Utility-Functions.html#GVoidFunc" title="GVoidFunc ()">*GVoidFunc</a>)                        (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                (<a class="link" href="glib-Miscellaneous-Utility-Functions.html#GFreeFunc" title="GFreeFunc ()">*GFreeFunc</a>)                        (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-qsort-with-data" title="g_qsort_with_data ()">g_qsort_with_data</a>                   (<a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="returnvalue">gconstpointer</span></a> pbase,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> total_elems,
-                                                         <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="returnvalue">gsize</span></a> size,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> compare_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-qsort-with-data" title="g_qsort_with_data ()">g_qsort_with_data</a>                   (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> pbase</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> total_elems</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> size</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> compare_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-nullify-pointer" title="g_nullify_pointer ()">g_nullify_pointer</a>                   (<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> *nullify_location);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-nullify-pointer" title="g_nullify_pointer ()">g_nullify_pointer</a>                   (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> *nullify_location</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -140,7 +120,7 @@ These are portable utility functions.
 <a name="glib-Miscellaneous-Utility-Functions.details"></a><h2>Details</h2>
 <div class="refsect2" title="g_get_application_name ()">
 <a name="g-get-application-name"></a><h3>g_get_application_name ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_application_name              (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_application_name              (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets a human-readable name for the application, as set by
 <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()"><code class="function">g_set_application_name()</code></a>. This name should be localized if
@@ -148,7 +128,8 @@ possible, and is intended for display to the user.  Contrast with
 <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-prgname" title="g_get_prgname ()"><code class="function">g_get_prgname()</code></a>, which gets a non-localized name. If
 <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()"><code class="function">g_set_application_name()</code></a> has not been called, returns the result of
 <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-prgname" title="g_get_prgname ()"><code class="function">g_get_prgname()</code></a> (which may be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a> has also not
-been called).</p>
+been called).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -163,12 +144,12 @@ been called).</p>
 <hr>
 <div class="refsect2" title="g_set_application_name ()">
 <a name="g-set-application-name"></a><h3>g_set_application_name ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_set_application_name              (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *application_name);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_set_application_name              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *application_name</code></em>);</pre>
 <p>
 Sets a human-readable name for the application. This name should be
 localized if possible, and is intended for display to the user.
 Contrast with <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a>, which sets a non-localized name.
-<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a> will be called automatically by <a href="http://library.gnome.org/devel/gtk/unstable/gtk-General.html#gtk-init"><code class="function">gtk_init()</code></a>,
+<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a> will be called automatically by <code class="function">gtk_init()</code>,
 but <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()"><code class="function">g_set_application_name()</code></a> will not.
 </p>
 <p>
@@ -177,12 +158,13 @@ be called once.
 </p>
 <p>
 The application name will be used in contexts such as error messages,
-or when displaying an application's name in the task list.</p>
+or when displaying an application's name in the task list.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>application_name</code></em> :</span></p></td>
-<td> localized name of the application
+<td>localized name of the application
 </td>
 </tr></tbody>
 </table></div>
@@ -191,13 +173,14 @@ or when displaying an application's name in the task list.</p>
 <hr>
 <div class="refsect2" title="g_get_prgname ()">
 <a name="g-get-prgname"></a><h3>g_get_prgname ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_get_prgname                       (void);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_get_prgname                       (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets the name of the program. This name should <span class="emphasis"><em>not</em></span> 
 be localized, contrast with <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-application-name" title="g_get_application_name ()"><code class="function">g_get_application_name()</code></a>.
-(If you are using GDK or GTK+ the program name is set in <a href="http://library.gnome.org/devel/gdk/unstable/gdk-General.html#gdk-init"><code class="function">gdk_init()</code></a>, 
-which is called by <a href="http://library.gnome.org/devel/gtk/unstable/gtk-General.html#gtk-init"><code class="function">gtk_init()</code></a>. The program name is found by taking 
-the last component of <code class="literal">argv[0]</code>.)</p>
+(If you are using GDK or GTK+ the program name is set in <code class="function">gdk_init()</code>, 
+which is called by <code class="function">gtk_init()</code>. The program name is found by taking 
+the last component of <code class="literal">argv[0]</code>.)
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -211,16 +194,17 @@ to GLib and must not be modified or freed.
 <hr>
 <div class="refsect2" title="g_set_prgname ()">
 <a name="g-set-prgname"></a><h3>g_set_prgname ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_set_prgname                       (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *prgname);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_set_prgname                       (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prgname</code></em>);</pre>
 <p>
 Sets the name of the program. This name should <span class="emphasis"><em>not</em></span> 
 be localized, contrast with <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()"><code class="function">g_set_application_name()</code></a>. Note that for 
-thread-safety reasons this function can only be called once.</p>
+thread-safety reasons this function can only be called once.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>prgname</code></em> :</span></p></td>
-<td> the name of the program.
+<td>the name of the program.
 </td>
 </tr></tbody>
 </table></div>
@@ -228,20 +212,21 @@ thread-safety reasons this function can only be called once.</p>
 <hr>
 <div class="refsect2" title="g_getenv ()">
 <a name="g-getenv"></a><h3>g_getenv ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_getenv                            (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *variable);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_getenv                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);</pre>
 <p>
 Returns the value of an environment variable. The name and value
 are in the GLib file name encoding. On UNIX, this means the actual
 bytes which might or might not be in some consistent character set
 and encoding. On Windows, it is in UTF-8. On Windows, in case the
 environment variable's value contains references to other
-environment variables, they are expanded.</p>
+environment variables, they are expanded.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>variable</code></em> :</span></p></td>
-<td> the environment variable to get, in the GLib file name encoding.
+<td>the environment variable to get, in the GLib file name encoding.
 </td>
 </tr>
 <tr>
@@ -258,9 +243,9 @@ overwritten by the next call to <a class="link" href="glib-Miscellaneous-Utility
 <hr>
 <div class="refsect2" title="g_setenv ()">
 <a name="g-setenv"></a><h3>g_setenv ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_setenv                            (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *variable,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *value,
-                                                         <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> overwrite);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_setenv                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *value</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> overwrite</code></em>);</pre>
 <p>
 Sets an environment variable. Both the variable's name and value
 should be in the GLib file name encoding. On UNIX, this means that
@@ -269,23 +254,24 @@ UTF-8.
 </p>
 <p>
 Note that on some systems, when variables are overwritten, the memory 
-used for the previous variables and its value isn't reclaimed.</p>
+used for the previous variables and its value isn't reclaimed.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>variable</code></em> :</span></p></td>
-<td> the environment variable to set, must not contain '='.
+<td>the environment variable to set, must not contain '='.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> the value for to set the variable to.
+<td>the value for to set the variable to.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>overwrite</code></em> :</span></p></td>
-<td> whether to change the variable if it already exists.
+<td>whether to change the variable if it already exists.
 </td>
 </tr>
 <tr>
@@ -301,7 +287,7 @@ used for the previous variables and its value isn't reclaimed.</p>
 <hr>
 <div class="refsect2" title="g_unsetenv ()">
 <a name="g-unsetenv"></a><h3>g_unsetenv ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_unsetenv                          (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *variable);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_unsetenv                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);</pre>
 <p>
 Removes an environment variable from the environment.
 </p>
@@ -309,12 +295,13 @@ Removes an environment variable from the environment.
 Note that on some systems, when variables are overwritten, the memory 
 used for the previous variables and its value isn't reclaimed.
 Furthermore, this function can't be guaranteed to operate in a 
-threadsafe way.</p>
+threadsafe way.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>variable</code></em> :</span></p></td>
-<td> the environment variable to remove, must not contain '='.
+<td>the environment variable to remove, must not contain '='.
 </td>
 </tr></tbody>
 </table></div>
@@ -323,9 +310,10 @@ threadsafe way.</p>
 <hr>
 <div class="refsect2" title="g_listenv ()">
 <a name="g-listenv"></a><h3>g_listenv ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>**             g_listenv                           (void);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>**             g_listenv                           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Gets the names of all variables set in the environment.</p>
+Gets the names of all variables set in the environment.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -348,12 +336,13 @@ the UTF-8 encoding that this function and <a class="link" href="glib-Miscellaneo
 <hr>
 <div class="refsect2" title="g_get_user_name ()">
 <a name="g-get-user-name"></a><h3>g_get_user_name ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_name                     (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_name                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets the user name of the current user. The encoding of the returned
 string is system-defined. On UNIX, it might be the preferred file name
 encoding, or something else, and there is no guarantee that it is even
-consistent on a machine. On Windows, it is always UTF-8.</p>
+consistent on a machine. On Windows, it is always UTF-8.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -366,13 +355,14 @@ consistent on a machine. On Windows, it is always UTF-8.</p>
 <hr>
 <div class="refsect2" title="g_get_real_name ()">
 <a name="g-get-real-name"></a><h3>g_get_real_name ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_real_name                     (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_real_name                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets the real name of the user. This usually comes from the user's entry 
 in the <code class="filename">passwd</code> file. The encoding of the returned 
 string is system-defined. (On Windows, it is, however, always UTF-8.) 
 If the real user name cannot be determined, the string "Unknown" is 
-returned.</p>
+returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -385,7 +375,7 @@ returned.</p>
 <hr>
 <div class="refsect2" title="g_get_user_cache_dir ()">
 <a name="g-get-user-cache-dir"></a><h3>g_get_user_cache_dir ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_cache_dir                (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_cache_dir                (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Returns a base directory in which to store non-essential, cached
 data specific to particular user.
@@ -393,7 +383,8 @@ data specific to particular user.
 <p>
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
-XDG Base Directory Specification</a></p>
+XDG Base Directory Specification</a>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -408,7 +399,7 @@ XDG Base Directory Specification</a></p>
 <hr>
 <div class="refsect2" title="g_get_user_data_dir ()">
 <a name="g-get-user-data-dir"></a><h3>g_get_user_data_dir ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_data_dir                 (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_data_dir                 (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Returns a base directory in which to access application data such
 as icons that is customized for a particular user.  
@@ -416,7 +407,8 @@ as icons that is customized for a particular user.
 <p>
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
-XDG Base Directory Specification</a></p>
+XDG Base Directory Specification</a>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -431,7 +423,7 @@ XDG Base Directory Specification</a></p>
 <hr>
 <div class="refsect2" title="g_get_user_config_dir ()">
 <a name="g-get-user-config-dir"></a><h3>g_get_user_config_dir ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_config_dir               (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_config_dir               (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Returns a base directory in which to store user-specific application 
 configuration information such as user preferences and settings. 
@@ -439,7 +431,8 @@ configuration information such as user preferences and settings.
 <p>
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
-XDG Base Directory Specification</a></p>
+XDG Base Directory Specification</a>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -475,53 +468,54 @@ to retrieve the full path associated to the logical id.
 <p>
 The <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GUserDirectory" title="enum GUserDirectory"><span class="type">GUserDirectory</span></a> enumeration can be extended at later date. Not
 every platform has a directory for every logical id in this
-enumeration.</p>
+enumeration.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><a name="G-USER-DIRECTORY-DESKTOP:CAPS"></a><span class="term"><code class="literal">G_USER_DIRECTORY_DESKTOP</code></span></p></td>
-<td> the user's Desktop directory
+<td>the user's Desktop directory
 </td>
 </tr>
 <tr>
 <td><p><a name="G-USER-DIRECTORY-DOCUMENTS:CAPS"></a><span class="term"><code class="literal">G_USER_DIRECTORY_DOCUMENTS</code></span></p></td>
-<td> the user's Documents directory
+<td>the user's Documents directory
 </td>
 </tr>
 <tr>
 <td><p><a name="G-USER-DIRECTORY-DOWNLOAD:CAPS"></a><span class="term"><code class="literal">G_USER_DIRECTORY_DOWNLOAD</code></span></p></td>
-<td> the user's Downloads directory
+<td>the user's Downloads directory
 </td>
 </tr>
 <tr>
 <td><p><a name="G-USER-DIRECTORY-MUSIC:CAPS"></a><span class="term"><code class="literal">G_USER_DIRECTORY_MUSIC</code></span></p></td>
-<td> the user's Music directory
+<td>the user's Music directory
 </td>
 </tr>
 <tr>
 <td><p><a name="G-USER-DIRECTORY-PICTURES:CAPS"></a><span class="term"><code class="literal">G_USER_DIRECTORY_PICTURES</code></span></p></td>
-<td> the user's Pictures directory
+<td>the user's Pictures directory
 </td>
 </tr>
 <tr>
 <td><p><a name="G-USER-DIRECTORY-PUBLIC-SHARE:CAPS"></a><span class="term"><code class="literal">G_USER_DIRECTORY_PUBLIC_SHARE</code></span></p></td>
-<td> the user's shared directory
+<td>the user's shared directory
 </td>
 </tr>
 <tr>
 <td><p><a name="G-USER-DIRECTORY-TEMPLATES:CAPS"></a><span class="term"><code class="literal">G_USER_DIRECTORY_TEMPLATES</code></span></p></td>
-<td> the user's Templates directory
+<td>the user's Templates directory
 </td>
 </tr>
 <tr>
 <td><p><a name="G-USER-DIRECTORY-VIDEOS:CAPS"></a><span class="term"><code class="literal">G_USER_DIRECTORY_VIDEOS</code></span></p></td>
-<td> the user's Movies directory
+<td>the user's Movies directory
 </td>
 </tr>
 <tr>
 <td><p><a name="G-USER-N-DIRECTORIES:CAPS"></a><span class="term"><code class="literal">G_USER_N_DIRECTORIES</code></span></p></td>
-<td> the number of enum values
+<td>the number of enum values
 </td>
 </tr>
 </tbody>
@@ -531,7 +525,7 @@ enumeration.</p>
 <hr>
 <div class="refsect2" title="g_get_user_special_dir ()">
 <a name="g-get-user-special-dir"></a><h3>g_get_user_special_dir ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_special_dir              (<a class="link" href="glib-Miscellaneous-Utility-Functions.html#GUserDirectory" title="enum GUserDirectory"><span class="returnvalue">GUserDirectory</span></a> directory);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_user_special_dir              (<em class="parameter"><code><a class="link" href="glib-Miscellaneous-Utility-Functions.html#GUserDirectory" title="enum GUserDirectory"><span class="type">GUserDirectory</span></a> directory</code></em>);</pre>
 <p>
 Returns the full path of a special directory using its logical id.
 </p>
@@ -544,13 +538,14 @@ user directories have not been set up.
 <p>
 Depending on the platform, the user might be able to change the path
 of the special directory without requiring the session to restart; GLib
-will not reflect any change once the special directories are loaded.</p>
+will not reflect any change once the special directories are loaded.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>directory</code></em> :</span></p></td>
-<td> the logical id of special directory
+<td>the logical id of special directory
 </td>
 </tr>
 <tr>
@@ -568,7 +563,7 @@ will not reflect any change once the special directories are loaded.</p>
 <hr>
 <div class="refsect2" title="g_get_system_data_dirs ()">
 <a name="g-get-system-data-dirs"></a><h3>g_get_system_data_dirs ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * g_get_system_data_dirs             (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * g_get_system_data_dirs             (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Returns an ordered list of base directories in which to access 
 system-wide application data.
@@ -603,7 +598,8 @@ itself.
 </p>
 <p>
 Note that on Windows the returned list can vary depending on where
-this function is called.</p>
+this function is called.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -618,7 +614,7 @@ this function is called.</p>
 <hr>
 <div class="refsect2" title="g_get_system_config_dirs ()">
 <a name="g-get-system-config-dirs"></a><h3>g_get_system_config_dirs ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * g_get_system_config_dirs           (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * g_get_system_config_dirs           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Returns an ordered list of base directories in which to access 
 system-wide configuration information.
@@ -626,7 +622,8 @@ system-wide configuration information.
 <p>
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
-XDG Base Directory Specification</a></p>
+XDG Base Directory Specification</a>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -641,7 +638,7 @@ XDG Base Directory Specification</a></p>
 <hr>
 <div class="refsect2" title="g_reload_user_special_dirs_cache ()">
 <a name="g-reload-user-special-dirs-cache"></a><h3>g_reload_user_special_dirs_cache ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_reload_user_special_dirs_cache    (void);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_reload_user_special_dirs_cache    (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Resets the cache used for <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-special-dir" title="g_get_user_special_dir ()"><code class="function">g_get_user_special_dir()</code></a>, so
 that the latest on-disk version is used. Call this only
@@ -651,13 +648,14 @@ if you just changed the data on disk yourself.
 Due to threadsafety issues this may cause leaking of strings
 that were previously returned from <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-special-dir" title="g_get_user_special_dir ()"><code class="function">g_get_user_special_dir()</code></a>
 that can't be freed. We ensure to only leak the data for
-the directories that actually changed value though.</p>
+the directories that actually changed value though.
+</p>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
 <div class="refsect2" title="g_get_host_name ()">
 <a name="g-get-host-name"></a><h3>g_get_host_name ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_host_name                     (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_host_name                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Return a name for the machine. 
 </p>
@@ -671,7 +669,8 @@ of the machine is changed while an application is running, the
 return value from this function does not change. The returned
 string is owned by GLib and should not be modified or freed. If no
 name can be determined, a default fixed string "localhost" is
-returned.</p>
+returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -686,7 +685,7 @@ returned.</p>
 <hr>
 <div class="refsect2" title="g_get_home_dir ()">
 <a name="g-get-home-dir"></a><h3>g_get_home_dir ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_home_dir                      (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_home_dir                      (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets the current user's home directory as defined in the 
 password database.
@@ -713,11 +712,23 @@ to deal with these situations it was considered better to make
 return the real home directory for the user. If applications
 want to pay attention to <code class="envar">HOME</code>, they can do:
 </p>
-<div class="informalexample"><pre class="programlisting">
- const char *homedir = g_getenv ("HOME");
-  if (!homedir)
-     homedir = g_get_home_dir ();
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">const</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">homedir </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Miscellaneous-Utility-Functions.html#g-getenv">g_getenv</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"HOME"</span><span class="symbol">);</span>
+<span class="normal"> </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(!</span><span class="normal">homedir</span><span class="symbol">)</span>
+<span class="normal">    homedir </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Miscellaneous-Utility-Functions.html#g-get-home-dir">g_get_home_dir</a></span><span class="normal"> </span><span class="symbol">();</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -730,14 +741,15 @@ want to pay attention to <code class="envar">HOME</code>, they can do:
 <hr>
 <div class="refsect2" title="g_get_tmp_dir ()">
 <a name="g-get-tmp-dir"></a><h3>g_get_tmp_dir ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_tmp_dir                       (void);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_get_tmp_dir                       (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets the directory to use for temporary files. This is found from 
 inspecting the environment variables <code class="envar">TMPDIR</code>, 
 <code class="envar">TMP</code>, and <code class="envar">TEMP</code> in that order. If none 
 of those are defined "/tmp" is returned on UNIX and "C:\" on Windows. 
 The encoding of the returned string is system-defined. On Windows, 
-it is always UTF-8. The return value is never <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</p>
+it is always UTF-8. The return value is never <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -750,11 +762,12 @@ it is always UTF-8. The return value is never <a class="link" href="glib-Standar
 <hr>
 <div class="refsect2" title="g_get_current_dir ()">
 <a name="g-get-current-dir"></a><h3>g_get_current_dir ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_get_current_dir                   (void);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_get_current_dir                   (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Gets the current directory.
 The returned string should be freed when no longer needed. The encoding 
-of the returned string is system defined. On Windows, it is always UTF-8.</p>
+of the returned string is system defined. On Windows, it is always UTF-8.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -767,7 +780,7 @@ of the returned string is system defined. On Windows, it is always UTF-8.</p>
 <hr>
 <div class="refsect2" title="g_basename ()">
 <a name="g-basename"></a><h3>g_basename ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_basename                          (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_basename                          (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_basename</code> has been deprecated since version 2.2 and should not be used in newly-written code. Use <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-path-get-basename" title="g_path_get_basename ()"><code class="function">g_path_get_basename()</code></a> instead, but notice that
@@ -776,13 +789,14 @@ this function which returns a pointer into the argument.</p>
 </div>
 <p>
 Gets the name of the file without any leading directory components.  
-It returns a pointer into the given file name string.</p>
+It returns a pointer into the given file name string.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td> the name of the file.
+<td>the name of the file.
 </td>
 </tr>
 <tr>
@@ -823,17 +837,18 @@ The returned string should be freed when no longer needed.
 <hr>
 <div class="refsect2" title="g_path_is_absolute ()">
 <a name="g-path-is-absolute"></a><h3>g_path_is_absolute ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_path_is_absolute                  (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_path_is_absolute                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <p>
 Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the given <em class="parameter"><code>file_name</code></em> is an absolute file name,
 i.e. it contains a full path from the root directory such as "/usr/local"
-on UNIX or "C:\windows" on Windows systems.</p>
+on UNIX or "C:\windows" on Windows systems.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td> a file name.
+<td>a file name.
 </td>
 </tr>
 <tr>
@@ -847,17 +862,18 @@ on UNIX or "C:\windows" on Windows systems.</p>
 <hr>
 <div class="refsect2" title="g_path_skip_root ()">
 <a name="g-path-skip-root"></a><h3>g_path_skip_root ()</h3>
-<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_path_skip_root                    (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);</pre>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        g_path_skip_root                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <p>
 Returns a pointer into <em class="parameter"><code>file_name</code></em> after the root component, i.e. after
 the "/" in UNIX or "C:\" under Windows. If <em class="parameter"><code>file_name</code></em> is not an absolute
-path it returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</p>
+path it returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td> a file name.
+<td>a file name.
 </td>
 </tr>
 <tr>
@@ -871,19 +887,20 @@ path it returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title
 <hr>
 <div class="refsect2" title="g_path_get_basename ()">
 <a name="g-path-get-basename"></a><h3>g_path_get_basename ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_path_get_basename                 (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_path_get_basename                 (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <p>
 Gets the last component of the filename. If <em class="parameter"><code>file_name</code></em> ends with a 
 directory separator it gets the component before the last slash. If 
 <em class="parameter"><code>file_name</code></em> consists only of directory separators (and on Windows, 
 possibly a drive letter), a single separator is returned. If
-<em class="parameter"><code>file_name</code></em> is empty, it gets ".".</p>
+<em class="parameter"><code>file_name</code></em> is empty, it gets ".".
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td> the name of the file.
+<td>the name of the file.
 </td>
 </tr>
 <tr>
@@ -898,17 +915,18 @@ possibly a drive letter), a single separator is returned. If
 <hr>
 <div class="refsect2" title="g_path_get_dirname ()">
 <a name="g-path-get-dirname"></a><h3>g_path_get_dirname ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_path_get_dirname                  (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *file_name);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_path_get_dirname                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <p>
 Gets the directory components of a file name.  If the file name has no
 directory components "." is returned.  The returned string should be
-freed when no longer needed.</p>
+freed when no longer needed.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file_name</code></em> :</span></p></td>
-<td> the name of the file.
+<td>the name of the file.
 </td>
 </tr>
 <tr>
@@ -922,8 +940,8 @@ freed when no longer needed.</p>
 <hr>
 <div class="refsect2" title="g_build_filename ()">
 <a name="g-build-filename"></a><h3>g_build_filename ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_build_filename                    (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *first_element,
-                                                         ...);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_build_filename                    (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *first_element</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Creates a filename from a series of elements using the correct
 separator for filenames.
@@ -943,18 +961,19 @@ is used.
 <p>
 No attempt is made to force the resulting filename to be an absolute
 path. If the first element is a relative path, the result will
-be a relative path.</p>
+be a relative path.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>first_element</code></em> :</span></p></td>
-<td> the first element in the path
+<td>the first element in the path
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td> remaining elements in path, terminated by <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>remaining elements in path, terminated by <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -968,17 +987,19 @@ be a relative path.</p>
 <hr>
 <div class="refsect2" title="g_build_filenamev ()">
 <a name="g-build-filenamev"></a><h3>g_build_filenamev ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_build_filenamev                   (<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **args);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_build_filenamev                   (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **args</code></em>);</pre>
 <p>
 Behaves exactly like <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-filename" title="g_build_filename ()"><code class="function">g_build_filename()</code></a>, but takes the path elements 
 as a string array, instead of varargs. This function is mainly
-meant for language bindings.</p>
+meant for language bindings.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of strings containing the path elements.
+<td>
+<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of strings containing the path elements.
 </td>
 </tr>
 <tr>
@@ -994,9 +1015,9 @@ meant for language bindings.</p>
 <hr>
 <div class="refsect2" title="g_build_path ()">
 <a name="g-build-path"></a><h3>g_build_path ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_build_path                        (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *separator,
-                                                         const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *first_element,
-                                                         ...);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_build_path                        (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *separator</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *first_element</code></em>,
+                                                         <em class="parameter"><code>...</code></em>);</pre>
 <p>
 Creates a path from a series of elements using <em class="parameter"><code>separator</code></em> as the
 separator between elements. At the boundary between two elements,
@@ -1029,23 +1050,24 @@ of that element.
 <p>
 Other than for determination of the number of leading and trailing
 copies of the separator, elements consisting only of copies
-of the separator are ignored.</p>
+of the separator are ignored.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>separator</code></em> :</span></p></td>
-<td> a string used to separator the elements of the path.
+<td>a string used to separator the elements of the path.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>first_element</code></em> :</span></p></td>
-<td> the first element in the path
+<td>the first element in the path
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td> remaining elements in path, terminated by <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>remaining elements in path, terminated by <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -1059,23 +1081,25 @@ of the separator are ignored.</p>
 <hr>
 <div class="refsect2" title="g_build_pathv ()">
 <a name="g-build-pathv"></a><h3>g_build_pathv ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_build_pathv                       (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *separator,
-                                                         <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **args);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_build_pathv                       (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *separator</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **args</code></em>);</pre>
 <p>
 Behaves exactly like <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-build-path" title="g_build_path ()"><code class="function">g_build_path()</code></a>, but takes the path elements 
 as a string array, instead of varargs. This function is mainly
-meant for language bindings.</p>
+meant for language bindings.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>separator</code></em> :</span></p></td>
-<td> a string used to separator the elements of the path.
+<td>a string used to separator the elements of the path.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of strings containing the path elements.
+<td>
+<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of strings containing the path elements.
 </td>
 </tr>
 <tr>
@@ -1091,7 +1115,7 @@ meant for language bindings.</p>
 <hr>
 <div class="refsect2" title="g_format_size_for_display ()">
 <a name="g-format-size-for-display"></a><h3>g_format_size_for_display ()</h3>
-<pre class="programlisting"><span class="returnvalue">char</span> *              g_format_size_for_display           (<a class="link" href="glib-Basic-Types.html#goffset" title="goffset"><span class="returnvalue">goffset</span></a> size);</pre>
+<pre class="programlisting"><span class="returnvalue">char</span> *              g_format_size_for_display           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#goffset" title="goffset"><span class="type">goffset</span></a> size</code></em>);</pre>
 <p>
 Formats a size (for example the size of a file) into a human readable string.
 Sizes are rounded to the nearest size prefix (KB, MB, GB) and are displayed 
@@ -1102,13 +1126,14 @@ converted into the string "3.1 MB".
 The prefix units base is 1024 (i.e. 1 KB is 1024 bytes).
 </p>
 <p>
-This string should be freed with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a> when not needed any longer.</p>
+This string should be freed with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a> when not needed any longer.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
-<td> a size in bytes.
+<td>a size in bytes.
 </td>
 </tr>
 <tr>
@@ -1125,7 +1150,7 @@ This string should be freed with <a class="link" href="glib-Memory-Allocation.ht
 <hr>
 <div class="refsect2" title="g_find_program_in_path ()">
 <a name="g-find-program-in-path"></a><h3>g_find_program_in_path ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_find_program_in_path              (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *program);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              g_find_program_in_path              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *program</code></em>);</pre>
 <p>
 Locates the first executable named <em class="parameter"><code>program</code></em> in the user's path, in the
 same way that <code class="function">execvp()</code> would locate it. Returns an allocated string
@@ -1144,13 +1169,14 @@ program was loaded from, then in the current directory, then in the
 Windows 32-bit system directory, then in the Windows directory, and
 finally in the directories in the <code class="envar">PATH</code> environment 
 variable. If the program is found, the return value contains the 
-full name including the type suffix.</p>
+full name including the type suffix.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
-<td> a program name in the GLib file name encoding
+<td>a program name in the GLib file name encoding
 </td>
 </tr>
 <tr>
@@ -1164,8 +1190,8 @@ full name including the type suffix.</p>
 <hr>
 <div class="refsect2" title="g_bit_nth_lsf ()">
 <a name="g-bit-nth-lsf"></a><h3>g_bit_nth_lsf ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_bit_nth_lsf                       (<a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="returnvalue">gulong</span></a> mask,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> nth_bit);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_bit_nth_lsf                       (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="type">gulong</span></a> mask</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> nth_bit</code></em>);</pre>
 <p>
 Find the position of the first bit set in <em class="parameter"><code>mask</code></em>, searching from (but not
 including) <em class="parameter"><code>nth_bit</code></em> upwards. Bits are numbered from 0 (least significant)
@@ -1196,8 +1222,8 @@ to sizeof(<a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><sp
 <hr>
 <div class="refsect2" title="g_bit_nth_msf ()">
 <a name="g-bit-nth-msf"></a><h3>g_bit_nth_msf ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_bit_nth_msf                       (<a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="returnvalue">gulong</span></a> mask,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> nth_bit);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_bit_nth_msf                       (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="type">gulong</span></a> mask</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> nth_bit</code></em>);</pre>
 <p>
 Find the position of the first bit set in <em class="parameter"><code>mask</code></em>, searching from (but not
 including) <em class="parameter"><code>nth_bit</code></em> downwards. Bits are numbered from 0 (least significant)
@@ -1228,7 +1254,7 @@ last bit, set <em class="parameter"><code>nth_bit</code></em> to -1 or GLIB_SIZE
 <hr>
 <div class="refsect2" title="g_bit_storage ()">
 <a name="g-bit-storage"></a><h3>g_bit_storage ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_bit_storage                       (<a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="returnvalue">gulong</span></a> number);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_bit_storage                       (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gulong" title="gulong"><span class="type">gulong</span></a> number</code></em>);</pre>
 <p>
 Gets the number of bits used to hold <em class="parameter"><code>number</code></em>,
 e.g. if <em class="parameter"><code>number</code></em> is 4, 3 bits are needed.
@@ -1252,7 +1278,7 @@ e.g. if <em class="parameter"><code>number</code></em> is 4, 3 bits are needed.
 <hr>
 <div class="refsect2" title="g_spaced_primes_closest ()">
 <a name="g-spaced-primes-closest"></a><h3>g_spaced_primes_closest ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_spaced_primes_closest             (<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> num);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_spaced_primes_closest             (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> num</code></em>);</pre>
 <p>
 Gets the smallest prime number from a built-in array of primes which
 is larger than <em class="parameter"><code>num</code></em>. This is used within GLib to calculate the optimum
@@ -1282,7 +1308,7 @@ larger than <em class="parameter"><code>num</code></em>.
 <hr>
 <div class="refsect2" title="g_atexit ()">
 <a name="g-atexit"></a><h3>g_atexit ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_atexit                            (<a class="link" href="glib-Miscellaneous-Utility-Functions.html#GVoidFunc" title="GVoidFunc ()"><span class="returnvalue">GVoidFunc</span></a> func);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_atexit                            (<em class="parameter"><code><a class="link" href="glib-Miscellaneous-Utility-Functions.html#GVoidFunc" title="GVoidFunc ()"><span class="type">GVoidFunc</span></a> func</code></em>);</pre>
 <p>
 Specifies a function to be called at normal program termination.
 </p>
@@ -1319,12 +1345,13 @@ resided. This is presumably the most robust approach.
 <p>
 As can be seen from the above, for portability it's best to avoid
 calling <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-atexit" title="g_atexit ()"><code class="function">g_atexit()</code></a> (or <code class="function">atexit()</code>) except in the main executable of a
-program.</p>
+program.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td> the function to call on normal program termination.
+<td>the function to call on normal program termination.
 </td>
 </tr></tbody>
 </table></div>
@@ -1332,9 +1359,9 @@ program.</p>
 <hr>
 <div class="refsect2" title="g_parse_debug_string ()">
 <a name="g-parse-debug-string"></a><h3>g_parse_debug_string ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_parse_debug_string                (const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *string,
-                                                         const <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey"><span class="returnvalue">GDebugKey</span></a> *keys,
-                                                         <a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a> nkeys);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_parse_debug_string                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey"><span class="type">GDebugKey</span></a> *keys</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> nkeys</code></em>);</pre>
 <p>
 Parses a string containing debugging options
 into a <a class="link" href="glib-Basic-Types.html#guint" title="guint"><code class="literal">guint</code></a> containing bit flags. This is used 
@@ -1344,25 +1371,26 @@ command line or through environment variables.
 <p>
 If <em class="parameter"><code>string</code></em> is equal to "all", all flags are set.  If <em class="parameter"><code>string</code></em>
 is equal to "help", all the available keys in <em class="parameter"><code>keys</code></em> are printed
-out to standard error.</p>
+out to standard error.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
-<td> a list of debug options separated by colons, spaces, or
+<td>a list of debug options separated by colons, spaces, or
 commas, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>keys</code></em> :</span></p></td>
-<td> pointer to an array of <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey"><span class="type">GDebugKey</span></a> which associate 
+<td>pointer to an array of <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey"><span class="type">GDebugKey</span></a> which associate 
     strings with bit flags.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>nkeys</code></em> :</span></p></td>
-<td> the number of <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey"><span class="type">GDebugKey</span></a>s in the array.
+<td>the number of <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GDebugKey" title="GDebugKey"><span class="type">GDebugKey</span></a>s in the array.
 </td>
 </tr>
 <tr>
@@ -1404,7 +1432,7 @@ Used in <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-parse-
 <hr>
 <div class="refsect2" title="GVoidFunc ()">
 <a name="GVoidFunc"></a><h3>GVoidFunc ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                (*GVoidFunc)                        (void);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*GVoidFunc)                        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Declares a type of function which takes no arguments and has no return value.
 It is used to specify the type function passed to <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-atexit" title="g_atexit ()"><code class="function">g_atexit()</code></a>.
@@ -1413,7 +1441,7 @@ It is used to specify the type function passed to <a class="link" href="glib-Mis
 <hr>
 <div class="refsect2" title="GFreeFunc ()">
 <a name="GFreeFunc"></a><h3>GFreeFunc ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                (*GFreeFunc)                        (<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*GFreeFunc)                        (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
 Declares a type of function which takes an arbitrary data pointer argument
 and has no return value. It is not currently used in GLib or GTK+.
@@ -1430,40 +1458,41 @@ and has no return value. It is not currently used in GLib or GTK+.
 <hr>
 <div class="refsect2" title="g_qsort_with_data ()">
 <a name="g-qsort-with-data"></a><h3>g_qsort_with_data ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_qsort_with_data                   (<a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="returnvalue">gconstpointer</span></a> pbase,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> total_elems,
-                                                         <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="returnvalue">gsize</span></a> size,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> compare_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_qsort_with_data                   (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> pbase</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> total_elems</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> size</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> compare_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 This is just like the standard C <code class="function">qsort()</code> function, but
-the comparison routine accepts a user data argument.</p>
+the comparison routine accepts a user data argument.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pbase</code></em> :</span></p></td>
-<td> start of array to sort
+<td>start of array to sort
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>total_elems</code></em> :</span></p></td>
-<td> elements in the array
+<td>elements in the array
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
-<td> size of each element
+<td>size of each element
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>compare_func</code></em> :</span></p></td>
-<td> function to compare elements
+<td>function to compare elements
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> data to pass to <em class="parameter"><code>compare_func</code></em>
+<td>data to pass to <em class="parameter"><code>compare_func</code></em>
 </td>
 </tr>
 </tbody>
@@ -1472,14 +1501,15 @@ the comparison routine accepts a user data argument.</p>
 <hr>
 <div class="refsect2" title="g_nullify_pointer ()">
 <a name="g-nullify-pointer"></a><h3>g_nullify_pointer ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_nullify_pointer                   (<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> *nullify_location);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_nullify_pointer                   (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> *nullify_location</code></em>);</pre>
 <p>
-Set the pointer at the specified location to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</p>
+Set the pointer at the specified location to <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>nullify_location</code></em> :</span></p></td>
-<td> the memory address of the pointer.
+<td>the memory address of the pointer.
 </td>
 </tr></tbody>
 </table></div>
@@ -1488,6 +1518,6 @@ Set the pointer at the specified location to <a class="link" href="glib-Standard
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

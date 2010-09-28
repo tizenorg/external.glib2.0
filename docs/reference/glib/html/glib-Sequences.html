@@ -8,28 +8,8 @@
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-Double-ended-Queues.html" title="Double-ended Queues">
 <link rel="next" href="glib-Trash-Stacks.html" title="Trash Stacks">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -62,87 +42,87 @@
 
                     <a class="link" href="glib-Sequences.html#GSequence" title="GSequence">GSequence</a>;
 typedef             <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter">GSequenceIter</a>;
-<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                (<a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()">*GSequenceIterCompareFunc</a>)         (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *a,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *b,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
+<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                (<a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()">*GSequenceIterCompareFunc</a>)         (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *a</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *b</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
 
-<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *         <a class="link" href="glib-Sequences.html#g-sequence-new" title="g_sequence_new ()">g_sequence_new</a>                      (<a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="returnvalue">GDestroyNotify</span></a> data_destroy);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-free" title="g_sequence_free ()">g_sequence_free</a>                     (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq);
-<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Sequences.html#g-sequence-get-length" title="g_sequence_get_length ()">g_sequence_get_length</a>               (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-foreach" title="g_sequence_foreach ()">g_sequence_foreach</a>                  (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="returnvalue">GFunc</span></a> func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-foreach-range" title="g_sequence_foreach_range ()">g_sequence_foreach_range</a>            (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *begin,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *end,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="returnvalue">GFunc</span></a> func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-sort" title="g_sequence_sort ()">g_sequence_sort</a>                     (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-sort-iter" title="g_sequence_sort_iter ()">g_sequence_sort_iter</a>                (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="returnvalue">GSequenceIterCompareFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);
+<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *         <a class="link" href="glib-Sequences.html#g-sequence-new" title="g_sequence_new ()">g_sequence_new</a>                      (<em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> data_destroy</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-free" title="g_sequence_free ()">g_sequence_free</a>                     (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>);
+<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Sequences.html#g-sequence-get-length" title="g_sequence_get_length ()">g_sequence_get_length</a>               (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-foreach" title="g_sequence_foreach ()">g_sequence_foreach</a>                  (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-foreach-range" title="g_sequence_foreach_range ()">g_sequence_foreach_range</a>            (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *begin</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *end</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-sort" title="g_sequence_sort ()">g_sequence_sort</a>                     (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-sort-iter" title="g_sequence_sort_iter ()">g_sequence_sort_iter</a>                (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);
 
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-get-begin-iter" title="g_sequence_get_begin_iter ()">g_sequence_get_begin_iter</a>           (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-get-end-iter" title="g_sequence_get_end_iter ()">g_sequence_get_end_iter</a>             (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-get-iter-at-pos" title="g_sequence_get_iter_at_pos ()">g_sequence_get_iter_at_pos</a>          (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> pos);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-append" title="g_sequence_append ()">g_sequence_append</a>                   (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-prepend" title="g_sequence_prepend ()">g_sequence_prepend</a>                  (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-insert-before" title="g_sequence_insert_before ()">g_sequence_insert_before</a>            (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-move" title="g_sequence_move ()">g_sequence_move</a>                     (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *src,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *dest);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-swap" title="g_sequence_swap ()">g_sequence_swap</a>                     (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *a,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *b);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted" title="g_sequence_insert_sorted ()">g_sequence_insert_sorted</a>            (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted-iter" title="g_sequence_insert_sorted_iter ()">g_sequence_insert_sorted_iter</a>       (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="returnvalue">GSequenceIterCompareFunc</span></a> iter_cmp,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-sort-changed" title="g_sequence_sort_changed ()">g_sequence_sort_changed</a>             (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-sort-changed-iter" title="g_sequence_sort_changed_iter ()">g_sequence_sort_changed_iter</a>        (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="returnvalue">GSequenceIterCompareFunc</span></a> iter_cmp,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-remove" title="g_sequence_remove ()">g_sequence_remove</a>                   (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-remove-range" title="g_sequence_remove_range ()">g_sequence_remove_range</a>             (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *begin,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *end);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-move-range" title="g_sequence_move_range ()">g_sequence_move_range</a>               (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *dest,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *begin,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *end);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-search" title="g_sequence_search ()">g_sequence_search</a>                   (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-search-iter" title="g_sequence_search_iter ()">g_sequence_search_iter</a>              (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="returnvalue">GSequenceIterCompareFunc</span></a> iter_cmp,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-get-begin-iter" title="g_sequence_get_begin_iter ()">g_sequence_get_begin_iter</a>           (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-get-end-iter" title="g_sequence_get_end_iter ()">g_sequence_get_end_iter</a>             (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-get-iter-at-pos" title="g_sequence_get_iter_at_pos ()">g_sequence_get_iter_at_pos</a>          (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> pos</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-append" title="g_sequence_append ()">g_sequence_append</a>                   (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-prepend" title="g_sequence_prepend ()">g_sequence_prepend</a>                  (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-insert-before" title="g_sequence_insert_before ()">g_sequence_insert_before</a>            (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-move" title="g_sequence_move ()">g_sequence_move</a>                     (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *src</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *dest</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-swap" title="g_sequence_swap ()">g_sequence_swap</a>                     (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *a</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *b</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted" title="g_sequence_insert_sorted ()">g_sequence_insert_sorted</a>            (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted-iter" title="g_sequence_insert_sorted_iter ()">g_sequence_insert_sorted_iter</a>       (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> iter_cmp</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-sort-changed" title="g_sequence_sort_changed ()">g_sequence_sort_changed</a>             (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-sort-changed-iter" title="g_sequence_sort_changed_iter ()">g_sequence_sort_changed_iter</a>        (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> iter_cmp</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-remove" title="g_sequence_remove ()">g_sequence_remove</a>                   (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-remove-range" title="g_sequence_remove_range ()">g_sequence_remove_range</a>             (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *begin</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *end</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-move-range" title="g_sequence_move_range ()">g_sequence_move_range</a>               (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *dest</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *begin</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *end</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-search" title="g_sequence_search ()">g_sequence_search</a>                   (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-search-iter" title="g_sequence_search_iter ()">g_sequence_search_iter</a>              (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> iter_cmp</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Sequences.html#g-sequence-get" title="g_sequence_get ()">g_sequence_get</a>                      (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-set" title="g_sequence_set ()">g_sequence_set</a>                      (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);
+<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Sequences.html#g-sequence-get" title="g_sequence_get ()">g_sequence_get</a>                      (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Sequences.html#g-sequence-set" title="g_sequence_set ()">g_sequence_set</a>                      (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Sequences.html#g-sequence-iter-is-begin" title="g_sequence_iter_is_begin ()">g_sequence_iter_is_begin</a>            (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);
-<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Sequences.html#g-sequence-iter-is-end" title="g_sequence_iter_is_end ()">g_sequence_iter_is_end</a>              (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-iter-next" title="g_sequence_iter_next ()">g_sequence_iter_next</a>                (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-iter-prev" title="g_sequence_iter_prev ()">g_sequence_iter_prev</a>                (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);
-<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Sequences.html#g-sequence-iter-get-position" title="g_sequence_iter_get_position ()">g_sequence_iter_get_position</a>        (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-iter-move" title="g_sequence_iter_move ()">g_sequence_iter_move</a>                (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> delta);
-<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *         <a class="link" href="glib-Sequences.html#g-sequence-iter-get-sequence" title="g_sequence_iter_get_sequence ()">g_sequence_iter_get_sequence</a>        (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Sequences.html#g-sequence-iter-is-begin" title="g_sequence_iter_is_begin ()">g_sequence_iter_is_begin</a>            (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Sequences.html#g-sequence-iter-is-end" title="g_sequence_iter_is_end ()">g_sequence_iter_is_end</a>              (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-iter-next" title="g_sequence_iter_next ()">g_sequence_iter_next</a>                (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-iter-prev" title="g_sequence_iter_prev ()">g_sequence_iter_prev</a>                (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);
+<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Sequences.html#g-sequence-iter-get-position" title="g_sequence_iter_get_position ()">g_sequence_iter_get_position</a>        (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-iter-move" title="g_sequence_iter_move ()">g_sequence_iter_move</a>                (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> delta</code></em>);
+<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *         <a class="link" href="glib-Sequences.html#g-sequence-iter-get-sequence" title="g_sequence_iter_get_sequence ()">g_sequence_iter_get_sequence</a>        (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Sequences.html#g-sequence-iter-compare" title="g_sequence_iter_compare ()">g_sequence_iter_compare</a>             (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *a,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *b);
-<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-range-get-midpoint" title="g_sequence_range_get_midpoint ()">g_sequence_range_get_midpoint</a>       (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *begin,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *end);
+<a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Sequences.html#g-sequence-iter-compare" title="g_sequence_iter_compare ()">g_sequence_iter_compare</a>             (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *a</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *b</code></em>);
+<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     <a class="link" href="glib-Sequences.html#g-sequence-range-get-midpoint" title="g_sequence_range_get_midpoint ()">g_sequence_range_get_midpoint</a>       (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *begin</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *end</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -185,7 +165,8 @@ continue to point to that element even after the sequence is sorted.
 Even moving an element to another sequence using for example
 <a class="link" href="glib-Sequences.html#g-sequence-move-range" title="g_sequence_move_range ()"><code class="function">g_sequence_move_range()</code></a> will not invalidate the iterators pointing
 to it. The only operation that will invalidate an iterator is when
-the element it points to is removed from any sequence.</p>
+the element it points to is removed from any sequence.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="glib-Sequences.details"></a><h2>Details</h2>
@@ -194,7 +175,8 @@ the element it points to is removed from any sequence.</p>
 <pre class="programlisting">typedef struct _GSequence GSequence;</pre>
 <p>
 The <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> struct is an opaque data type representing a
-<a class="link" href="glib-Sequences.html" title="Sequences">Sequence</a> data type.</p>
+<a class="link" href="glib-Sequences.html" title="Sequences">Sequence</a> data type.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="GSequenceIter">
@@ -203,39 +185,41 @@ The <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span
 </pre>
 <p>
 The <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> struct is an opaque data type representing an
-iterator pointing into a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>.</p>
+iterator pointing into a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="GSequenceIterCompareFunc ()">
 <a name="GSequenceIterCompareFunc"></a><h3>GSequenceIterCompareFunc ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                (*GSequenceIterCompareFunc)         (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *a,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *b,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                (*GSequenceIterCompareFunc)         (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *a</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *b</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
 A <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> is a function used to compare iterators.
 It must return zero if the iterators compare equal, a negative value
-if <em class="parameter"><code>a</code></em> comes before <em class="parameter"><code>b</code></em>, and a positive value if <em class="parameter"><code>b</code></em> comes before <em class="parameter"><code>a</code></em>.</p>
+if <em class="parameter"><code>a</code></em> comes before <em class="parameter"><code>b</code></em>, and a positive value if <em class="parameter"><code>b</code></em> comes before <em class="parameter"><code>a</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>b</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> user data
+<td>user data
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> zero if the iterators are equal, a negative value if <em class="parameter"><code>a</code></em>
+<td>zero if the iterators are equal, a negative value if <em class="parameter"><code>a</code></em>
           comes before <em class="parameter"><code>b</code></em>, and a positive value if <em class="parameter"><code>b</code></em> comes before
           <em class="parameter"><code>a</code></em>.
 </td>
@@ -246,17 +230,18 @@ if <em class="parameter"><code>a</code></em> comes before <em class="parameter">
 <hr>
 <div class="refsect2" title="g_sequence_new ()">
 <a name="g-sequence-new"></a><h3>g_sequence_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *         g_sequence_new                      (<a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="returnvalue">GDestroyNotify</span></a> data_destroy);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *         g_sequence_new                      (<em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> data_destroy</code></em>);</pre>
 <p>
 Creates a new GSequence. The <em class="parameter"><code>data_destroy</code></em> function, if non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> will
 be called on all items when the sequence is destroyed and on items that
-are removed from the sequence.</p>
+are removed from the sequence.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data_destroy</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> function, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -272,16 +257,17 @@ are removed from the sequence.</p>
 <hr>
 <div class="refsect2" title="g_sequence_free ()">
 <a name="g-sequence-free"></a><h3>g_sequence_free ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_free                     (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_free                     (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>);</pre>
 <p>
 Frees the memory allocated for <em class="parameter"><code>seq</code></em>. If <em class="parameter"><code>seq</code></em> has a data destroy 
 function associated with it, that function is called on all items in
-<em class="parameter"><code>seq</code></em>.</p>
+<em class="parameter"><code>seq</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr></tbody>
 </table></div>
@@ -290,15 +276,16 @@ function associated with it, that function is called on all items in
 <hr>
 <div class="refsect2" title="g_sequence_get_length ()">
 <a name="g-sequence-get-length"></a><h3>g_sequence_get_length ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_sequence_get_length               (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_sequence_get_length               (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>);</pre>
 <p>
-Returns the length of <em class="parameter"><code>seq</code></em></p>
+Returns the length of <em class="parameter"><code>seq</code></em>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
@@ -314,28 +301,29 @@ Returns the length of <em class="parameter"><code>seq</code></em></p>
 <hr>
 <div class="refsect2" title="g_sequence_foreach ()">
 <a name="g-sequence-foreach"></a><h3>g_sequence_foreach ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_foreach                  (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="returnvalue">GFunc</span></a> func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_foreach                  (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Calls <em class="parameter"><code>func</code></em> for each item in the sequence passing <em class="parameter"><code>user_data</code></em>
-to the function.</p>
+to the function.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td> the function to call for each item in <em class="parameter"><code>seq</code></em>
+<td>the function to call for each item in <em class="parameter"><code>seq</code></em>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>func</code></em>
+<td>user data passed to <em class="parameter"><code>func</code></em>
 </td>
 </tr>
 </tbody>
@@ -345,34 +333,35 @@ to the function.</p>
 <hr>
 <div class="refsect2" title="g_sequence_foreach_range ()">
 <a name="g-sequence-foreach-range"></a><h3>g_sequence_foreach_range ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_foreach_range            (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *begin,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *end,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="returnvalue">GFunc</span></a> func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> user_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_foreach_range            (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *begin</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *end</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a> func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Calls <em class="parameter"><code>func</code></em> for each item in the range (<em class="parameter"><code>begin</code></em>, <em class="parameter"><code>end</code></em>) passing
-<em class="parameter"><code>user_data</code></em> to the function.</p>
+<em class="parameter"><code>user_data</code></em> to the function.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>begin</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>end</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a>
+<td>a <a class="link" href="glib-Doubly-Linked-Lists.html#GFunc" title="GFunc ()"><span class="type">GFunc</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>func</code></em>
+<td>user data passed to <em class="parameter"><code>func</code></em>
 </td>
 </tr>
 </tbody>
@@ -382,22 +371,23 @@ Calls <em class="parameter"><code>func</code></em> for each item in the range (<
 <hr>
 <div class="refsect2" title="g_sequence_sort ()">
 <a name="g-sequence-sort"></a><h3>g_sequence_sort ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_sort                     (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_sort                     (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);</pre>
 <p>
-Sorts <em class="parameter"><code>seq</code></em> using <em class="parameter"><code>cmp_func</code></em>.</p>
+Sorts <em class="parameter"><code>seq</code></em> using <em class="parameter"><code>cmp_func</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_func</code></em> :</span></p></td>
-<td> the <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> used to sort <em class="parameter"><code>seq</code></em>. This function is
+<td>the <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> used to sort <em class="parameter"><code>seq</code></em>. This function is
       passed two items of <em class="parameter"><code>seq</code></em> and should return 0 if they are equal,
       a negative value if the first comes before the second, and a
       positive value if the second comes before the first.
@@ -405,7 +395,7 @@ Sorts <em class="parameter"><code>seq</code></em> using <em class="parameter"><c
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>cmp_func</code></em>
+<td>user data passed to <em class="parameter"><code>cmp_func</code></em>
 </td>
 </tr>
 </tbody>
@@ -415,23 +405,24 @@ Sorts <em class="parameter"><code>seq</code></em> using <em class="parameter"><c
 <hr>
 <div class="refsect2" title="g_sequence_sort_iter ()">
 <a name="g-sequence-sort-iter"></a><h3>g_sequence_sort_iter ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_sort_iter                (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="returnvalue">GSequenceIterCompareFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_sort_iter                (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);</pre>
 <p>
 Like <a class="link" href="glib-Sequences.html#g-sequence-sort" title="g_sequence_sort ()"><code class="function">g_sequence_sort()</code></a>, but uses a <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> instead
-of a GCompareDataFunc as the compare function</p>
+of a GCompareDataFunc as the compare function
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_func</code></em> :</span></p></td>
-<td> the <span class="type">GSequenceItercompare</span> used to compare iterators in the
+<td>the <span class="type">GSequenceItercompare</span> used to compare iterators in the
     sequence. It is called with two iterators pointing into <em class="parameter"><code>seq</code></em>. It should
     return 0 if the iterators are equal, a negative value if the first
     iterator comes before the second, and a positive value if the second
@@ -440,7 +431,7 @@ of a GCompareDataFunc as the compare function</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>cmp_func</code></em>
+<td>user data passed to <em class="parameter"><code>cmp_func</code></em>
 </td>
 </tr>
 </tbody>
@@ -450,15 +441,16 @@ of a GCompareDataFunc as the compare function</p>
 <hr>
 <div class="refsect2" title="g_sequence_get_begin_iter ()">
 <a name="g-sequence-get-begin-iter"></a><h3>g_sequence_get_begin_iter ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_get_begin_iter           (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_get_begin_iter           (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>);</pre>
 <p>
-Returns the begin iterator for <em class="parameter"><code>seq</code></em>.</p>
+Returns the begin iterator for <em class="parameter"><code>seq</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
@@ -474,15 +466,16 @@ Returns the begin iterator for <em class="parameter"><code>seq</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_sequence_get_end_iter ()">
 <a name="g-sequence-get-end-iter"></a><h3>g_sequence_get_end_iter ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_get_end_iter             (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_get_end_iter             (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>);</pre>
 <p>
-Returns the end iterator for <em class="parameter"><code>seg</code></em></p>
+Returns the end iterator for <em class="parameter"><code>seg</code></em>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> 
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> 
 </td>
 </tr>
 <tr>
@@ -498,22 +491,23 @@ Returns the end iterator for <em class="parameter"><code>seg</code></em></p>
 <hr>
 <div class="refsect2" title="g_sequence_get_iter_at_pos ()">
 <a name="g-sequence-get-iter-at-pos"></a><h3>g_sequence_get_iter_at_pos ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_get_iter_at_pos          (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> pos);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_get_iter_at_pos          (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> pos</code></em>);</pre>
 <p>
 Returns the iterator at position <em class="parameter"><code>pos</code></em>. If <em class="parameter"><code>pos</code></em> is negative or larger
-than the number of items in <em class="parameter"><code>seq</code></em>, the end iterator is returned.</p>
+than the number of items in <em class="parameter"><code>seq</code></em>, the end iterator is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
-<td> a position in <em class="parameter"><code>seq</code></em>, or -1 for the end.
+<td>a position in <em class="parameter"><code>seq</code></em>, or -1 for the end.
 </td>
 </tr>
 <tr>
@@ -529,21 +523,22 @@ than the number of items in <em class="parameter"><code>seq</code></em>, the end
 <hr>
 <div class="refsect2" title="g_sequence_append ()">
 <a name="g-sequence-append"></a><h3>g_sequence_append ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_append                   (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_append                   (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
-Adds a new item to the end of <em class="parameter"><code>seq</code></em>.</p>
+Adds a new item to the end of <em class="parameter"><code>seq</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <span class="type">GSequencePointer</span>
+<td>a <span class="type">GSequencePointer</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> the data for the new item
+<td>the data for the new item
 </td>
 </tr>
 <tr>
@@ -559,21 +554,22 @@ Adds a new item to the end of <em class="parameter"><code>seq</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_sequence_prepend ()">
 <a name="g-sequence-prepend"></a><h3>g_sequence_prepend ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_prepend                  (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_prepend                  (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
-Adds a new item to the front of <em class="parameter"><code>seq</code></em></p>
+Adds a new item to the front of <em class="parameter"><code>seq</code></em>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> the data for the new item
+<td>the data for the new item
 </td>
 </tr>
 <tr>
@@ -589,21 +585,22 @@ Adds a new item to the front of <em class="parameter"><code>seq</code></em></p>
 <hr>
 <div class="refsect2" title="g_sequence_insert_before ()">
 <a name="g-sequence-insert-before"></a><h3>g_sequence_insert_before ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_insert_before            (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_insert_before            (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
-Inserts a new item just before the item pointed to by <em class="parameter"><code>iter</code></em>.</p>
+Inserts a new item just before the item pointed to by <em class="parameter"><code>iter</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> the data for the new item
+<td>the data for the new item
 </td>
 </tr>
 <tr>
@@ -619,24 +616,25 @@ Inserts a new item just before the item pointed to by <em class="parameter"><cod
 <hr>
 <div class="refsect2" title="g_sequence_move ()">
 <a name="g-sequence-move"></a><h3>g_sequence_move ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_move                     (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *src,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *dest);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_move                     (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *src</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *dest</code></em>);</pre>
 <p>
 Moves the item pointed to by <em class="parameter"><code>src</code></em> to the position indicated by <em class="parameter"><code>dest</code></em>.
 After calling this function <em class="parameter"><code>dest</code></em> will point to the position immediately
 after <em class="parameter"><code>src</code></em>. It is allowed for <em class="parameter"><code>src</code></em> and <em class="parameter"><code>dest</code></em> to point into different
-sequences.</p>
+sequences.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>src</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> pointing to the item to move
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> pointing to the item to move
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>dest</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> pointing to the position to which
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> pointing to the position to which
        the item is moved.
 </td>
 </tr>
@@ -647,22 +645,23 @@ sequences.</p>
 <hr>
 <div class="refsect2" title="g_sequence_swap ()">
 <a name="g-sequence-swap"></a><h3>g_sequence_swap ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_swap                     (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *a,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *b);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_swap                     (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *a</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *b</code></em>);</pre>
 <p>
 Swaps the items pointed to by <em class="parameter"><code>a</code></em> and <em class="parameter"><code>b</code></em>. It is allowed for <em class="parameter"><code>a</code></em> and <em class="parameter"><code>b</code></em>
-to point into difference sequences.</p>
+to point into difference sequences.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>b</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 </tbody>
@@ -672,30 +671,31 @@ to point into difference sequences.</p>
 <hr>
 <div class="refsect2" title="g_sequence_insert_sorted ()">
 <a name="g-sequence-insert-sorted"></a><h3>g_sequence_insert_sorted ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_insert_sorted            (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_insert_sorted            (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);</pre>
 <p>
 Inserts <em class="parameter"><code>data</code></em> into <em class="parameter"><code>sequence</code></em> using <em class="parameter"><code>func</code></em> to determine the new position.
 The sequence must already be sorted according to <em class="parameter"><code>cmp_func</code></em>; otherwise the
-new position of <em class="parameter"><code>data</code></em> is undefined.</p>
+new position of <em class="parameter"><code>data</code></em> is undefined.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> the data to insert
+<td>the data to insert
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_func</code></em> :</span></p></td>
-<td> the <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> used to compare items in the sequence. It
+<td>the <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> used to compare items in the sequence. It
     is called with two items of the <em class="parameter"><code>seq</code></em> and <em class="parameter"><code>user_data</code></em>. It should
     return 0 if the items are equal, a negative value if the first
     item comes before the second, and a positive value if the second
@@ -704,7 +704,7 @@ new position of <em class="parameter"><code>data</code></em> is undefined.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>cmp_func</code></em>.
+<td>user data passed to <em class="parameter"><code>cmp_func</code></em>.
 </td>
 </tr>
 <tr>
@@ -720,30 +720,31 @@ new position of <em class="parameter"><code>data</code></em> is undefined.</p>
 <hr>
 <div class="refsect2" title="g_sequence_insert_sorted_iter ()">
 <a name="g-sequence-insert-sorted-iter"></a><h3>g_sequence_insert_sorted_iter ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_insert_sorted_iter       (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="returnvalue">GSequenceIterCompareFunc</span></a> iter_cmp,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_insert_sorted_iter       (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> iter_cmp</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);</pre>
 <p>
 Like <a class="link" href="glib-Sequences.html#g-sequence-insert-sorted" title="g_sequence_insert_sorted ()"><code class="function">g_sequence_insert_sorted()</code></a>, but uses
 a <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> instead of a <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> as
-the compare function.</p>
+the compare function.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> data for the new item
+<td>data for the new item
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter_cmp</code></em> :</span></p></td>
-<td> the <span class="type">GSequenceItercompare</span> used to compare iterators in the
+<td>the <span class="type">GSequenceItercompare</span> used to compare iterators in the
     sequence. It is called with two iterators pointing into <em class="parameter"><code>seq</code></em>. It should
     return 0 if the iterators are equal, a negative value if the first
     iterator comes before the second, and a positive value if the second
@@ -752,7 +753,7 @@ the compare function.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>cmp_func</code></em>
+<td>user data passed to <em class="parameter"><code>cmp_func</code></em>
 </td>
 </tr>
 <tr>
@@ -768,25 +769,26 @@ the compare function.</p>
 <hr>
 <div class="refsect2" title="g_sequence_sort_changed ()">
 <a name="g-sequence-sort-changed"></a><h3>g_sequence_sort_changed ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_sort_changed             (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_sort_changed             (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);</pre>
 <p>
 Moves the data pointed to a new position as indicated by <em class="parameter"><code>cmp_func</code></em>. This
 function should be called for items in a sequence already sorted according
 to <em class="parameter"><code>cmp_func</code></em> whenever some aspect of an item changes so that <em class="parameter"><code>cmp_func</code></em>
-may return different values for that item.</p>
+may return different values for that item.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> A <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>A <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_func</code></em> :</span></p></td>
-<td> the <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> used to compare items in the sequence. It
+<td>the <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> used to compare items in the sequence. It
     is called with two items of the <em class="parameter"><code>seq</code></em> and <em class="parameter"><code>user_data</code></em>. It should
     return 0 if the items are equal, a negative value if the first
     item comes before the second, and a positive value if the second
@@ -795,7 +797,7 @@ may return different values for that item.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>cmp_func</code></em>.
+<td>user data passed to <em class="parameter"><code>cmp_func</code></em>.
 </td>
 </tr>
 </tbody>
@@ -805,24 +807,25 @@ may return different values for that item.</p>
 <hr>
 <div class="refsect2" title="g_sequence_sort_changed_iter ()">
 <a name="g-sequence-sort-changed-iter"></a><h3>g_sequence_sort_changed_iter ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_sort_changed_iter        (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="returnvalue">GSequenceIterCompareFunc</span></a> iter_cmp,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_sort_changed_iter        (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> iter_cmp</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);</pre>
 <p>
 Like <a class="link" href="glib-Sequences.html#g-sequence-sort-changed" title="g_sequence_sort_changed ()"><code class="function">g_sequence_sort_changed()</code></a>, but uses
 a <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> instead of a <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> as
-the compare function.</p>
+the compare function.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter_cmp</code></em> :</span></p></td>
-<td> the <span class="type">GSequenceItercompare</span> used to compare iterators in the
+<td>the <span class="type">GSequenceItercompare</span> used to compare iterators in the
     sequence. It is called with two iterators pointing into <em class="parameter"><code>seq</code></em>. It should
     return 0 if the iterators are equal, a negative value if the first
     iterator comes before the second, and a positive value if the second
@@ -831,7 +834,7 @@ the compare function.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>cmp_func</code></em>
+<td>user data passed to <em class="parameter"><code>cmp_func</code></em>
 </td>
 </tr>
 </tbody>
@@ -841,19 +844,20 @@ the compare function.</p>
 <hr>
 <div class="refsect2" title="g_sequence_remove ()">
 <a name="g-sequence-remove"></a><h3>g_sequence_remove ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_remove                   (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_remove                   (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);</pre>
 <p>
 Removes the item pointed to by <em class="parameter"><code>iter</code></em>. It is an error to pass the
 end iterator to this function.
 </p>
 <p>
 If the sequnce has a data destroy function associated with it, this
-function is called on the data for the removed item.</p>
+function is called on the data for the removed item.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr></tbody>
 </table></div>
@@ -862,25 +866,26 @@ function is called on the data for the removed item.</p>
 <hr>
 <div class="refsect2" title="g_sequence_remove_range ()">
 <a name="g-sequence-remove-range"></a><h3>g_sequence_remove_range ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_remove_range             (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *begin,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *end);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_remove_range             (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *begin</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *end</code></em>);</pre>
 <p>
 Removes all items in the (<em class="parameter"><code>begin</code></em>, <em class="parameter"><code>end</code></em>) range.
 </p>
 <p>
 If the sequence has a data destroy function associated with it, this
-function is called on the data for the removed items.</p>
+function is called on the data for the removed items.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>begin</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>end</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 </tbody>
@@ -890,9 +895,9 @@ function is called on the data for the removed items.</p>
 <hr>
 <div class="refsect2" title="g_sequence_move_range ()">
 <a name="g-sequence-move-range"></a><h3>g_sequence_move_range ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_move_range               (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *dest,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *begin,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *end);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_move_range               (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *dest</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *begin</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *end</code></em>);</pre>
 <p>
 Inserts the (<em class="parameter"><code>begin</code></em>, <em class="parameter"><code>end</code></em>) range at the destination pointed to by ptr.
 The <em class="parameter"><code>begin</code></em> and <em class="parameter"><code>end</code></em> iters must point into the same sequence. It is
@@ -902,23 +907,24 @@ into by <em class="parameter"><code>begin</code></em> and <em class="parameter">
 <p>
 If <em class="parameter"><code>dest</code></em> is NULL, the range indicated by <em class="parameter"><code>begin</code></em> and <em class="parameter"><code>end</code></em> is
 removed from the sequence. If <em class="parameter"><code>dest</code></em> iter points to a place within
-the (<em class="parameter"><code>begin</code></em>, <em class="parameter"><code>end</code></em>) range, the range does not move.</p>
+the (<em class="parameter"><code>begin</code></em>, <em class="parameter"><code>end</code></em>) range, the range does not move.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>dest</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>begin</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>end</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 </tbody>
@@ -928,29 +934,30 @@ the (<em class="parameter"><code>begin</code></em>, <em class="parameter"><code>
 <hr>
 <div class="refsect2" title="g_sequence_search ()">
 <a name="g-sequence-search"></a><h3>g_sequence_search ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_search                   (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data,
-                                                         <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="returnvalue">GCompareDataFunc</span></a> cmp_func,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_search                   (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> cmp_func</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);</pre>
 <p>
 Returns an iterator pointing to the position where <em class="parameter"><code>data</code></em> would
-be inserted according to <em class="parameter"><code>cmp_func</code></em> and <em class="parameter"><code>cmp_data</code></em>.</p>
+be inserted according to <em class="parameter"><code>cmp_func</code></em> and <em class="parameter"><code>cmp_data</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> data for the new item
+<td>data for the new item
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_func</code></em> :</span></p></td>
-<td> the <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> used to compare items in the sequence. It
+<td>the <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> used to compare items in the sequence. It
     is called with two items of the <em class="parameter"><code>seq</code></em> and <em class="parameter"><code>user_data</code></em>. It should
     return 0 if the items are equal, a negative value if the first
     item comes before the second, and a positive value if the second
@@ -959,7 +966,7 @@ be inserted according to <em class="parameter"><code>cmp_func</code></em> and <e
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>cmp_func</code></em>.
+<td>user data passed to <em class="parameter"><code>cmp_func</code></em>.
 </td>
 </tr>
 <tr>
@@ -976,30 +983,31 @@ would have been inserted according to <em class="parameter"><code>cmp_func</code
 <hr>
 <div class="refsect2" title="g_sequence_search_iter ()">
 <a name="g-sequence-search-iter"></a><h3>g_sequence_search_iter ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_search_iter              (<a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *seq,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="returnvalue">GSequenceIterCompareFunc</span></a> iter_cmp,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> cmp_data);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_search_iter              (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> *seq</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> iter_cmp</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> cmp_data</code></em>);</pre>
 <p>
 Like <a class="link" href="glib-Sequences.html#g-sequence-search" title="g_sequence_search ()"><code class="function">g_sequence_search()</code></a>, but uses
 a <a class="link" href="glib-Sequences.html#GSequenceIterCompareFunc" title="GSequenceIterCompareFunc ()"><span class="type">GSequenceIterCompareFunc</span></a> instead of a <a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> as
-the compare function.</p>
+the compare function.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>seq</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> data for the new item
+<td>data for the new item
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter_cmp</code></em> :</span></p></td>
-<td> the <span class="type">GSequenceIterCompare</span> function used to compare iterators
+<td>the <span class="type">GSequenceIterCompare</span> function used to compare iterators
     in the sequence. It is called with two iterators pointing into <em class="parameter"><code>seq</code></em>.
     It should return 0 if the iterators are equal, a negative value if the
     first iterator comes before the second, and a positive value if the
@@ -1008,7 +1016,7 @@ the compare function.</p>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cmp_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>iter_cmp</code></em>
+<td>user data passed to <em class="parameter"><code>iter_cmp</code></em>
 </td>
 </tr>
 <tr>
@@ -1025,15 +1033,16 @@ where <em class="parameter"><code>data</code></em> would have been inserted acco
 <hr>
 <div class="refsect2" title="g_sequence_get ()">
 <a name="g-sequence-get"></a><h3>g_sequence_get ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_sequence_get                      (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_sequence_get                      (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);</pre>
 <p>
-Returns the data that <em class="parameter"><code>iter</code></em> points to.</p>
+Returns the data that <em class="parameter"><code>iter</code></em> points to.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1049,23 +1058,24 @@ Returns the data that <em class="parameter"><code>iter</code></em> points to.</p
 <hr>
 <div class="refsect2" title="g_sequence_set ()">
 <a name="g-sequence-set"></a><h3>g_sequence_set ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_set                      (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a> data);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_sequence_set                      (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
 <p>
 Changes the data for the item pointed to by <em class="parameter"><code>iter</code></em> to be <em class="parameter"><code>data</code></em>. If
 the sequence has a data destroy function associated with it, that
-function is called on the existing data that <em class="parameter"><code>iter</code></em> pointed to.</p>
+function is called on the existing data that <em class="parameter"><code>iter</code></em> pointed to.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td> new data for the item
+<td>new data for the item
 </td>
 </tr>
 </tbody>
@@ -1075,15 +1085,16 @@ function is called on the existing data that <em class="parameter"><code>iter</c
 <hr>
 <div class="refsect2" title="g_sequence_iter_is_begin ()">
 <a name="g-sequence-iter-is-begin"></a><h3>g_sequence_iter_is_begin ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_sequence_iter_is_begin            (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_sequence_iter_is_begin            (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);</pre>
 <p>
-Returns whether <em class="parameter"><code>iter</code></em> is the begin iterator</p>
+Returns whether <em class="parameter"><code>iter</code></em> is the begin iterator
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1099,15 +1110,16 @@ Returns whether <em class="parameter"><code>iter</code></em> is the begin iterat
 <hr>
 <div class="refsect2" title="g_sequence_iter_is_end ()">
 <a name="g-sequence-iter-is-end"></a><h3>g_sequence_iter_is_end ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_sequence_iter_is_end              (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_sequence_iter_is_end              (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);</pre>
 <p>
-Returns whether <em class="parameter"><code>iter</code></em> is the end iterator</p>
+Returns whether <em class="parameter"><code>iter</code></em> is the end iterator
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1123,16 +1135,17 @@ Returns whether <em class="parameter"><code>iter</code></em> is the end iterator
 <hr>
 <div class="refsect2" title="g_sequence_iter_next ()">
 <a name="g-sequence-iter-next"></a><h3>g_sequence_iter_next ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_iter_next                (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_iter_next                (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);</pre>
 <p>
 Returns an iterator pointing to the next position after <em class="parameter"><code>iter</code></em>. If
-<em class="parameter"><code>iter</code></em> is the end iterator, the end iterator is returned.</p>
+<em class="parameter"><code>iter</code></em> is the end iterator, the end iterator is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1148,16 +1161,17 @@ Returns an iterator pointing to the next position after <em class="parameter"><c
 <hr>
 <div class="refsect2" title="g_sequence_iter_prev ()">
 <a name="g-sequence-iter-prev"></a><h3>g_sequence_iter_prev ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_iter_prev                (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_iter_prev                (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);</pre>
 <p>
 Returns an iterator pointing to the previous position before <em class="parameter"><code>iter</code></em>. If
-<em class="parameter"><code>iter</code></em> is the begin iterator, the begin iterator is returned.</p>
+<em class="parameter"><code>iter</code></em> is the begin iterator, the begin iterator is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1174,15 +1188,16 @@ Returns an iterator pointing to the previous position before <em class="paramete
 <hr>
 <div class="refsect2" title="g_sequence_iter_get_position ()">
 <a name="g-sequence-iter-get-position"></a><h3>g_sequence_iter_get_position ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_sequence_iter_get_position        (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_sequence_iter_get_position        (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);</pre>
 <p>
-Returns the position of <em class="parameter"><code>iter</code></em></p>
+Returns the position of <em class="parameter"><code>iter</code></em>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1198,24 +1213,25 @@ Returns the position of <em class="parameter"><code>iter</code></em></p>
 <hr>
 <div class="refsect2" title="g_sequence_iter_move ()">
 <a name="g-sequence-iter-move"></a><h3>g_sequence_iter_move ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_iter_move                (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter,
-                                                         <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> delta);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_iter_move                (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> delta</code></em>);</pre>
 <p>
 Returns the <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> which is <em class="parameter"><code>delta</code></em> positions away from <em class="parameter"><code>iter</code></em>.
 If <em class="parameter"><code>iter</code></em> is closer than -<em class="parameter"><code>delta</code></em> positions to the beginning of the sequence,
 the begin iterator is returned. If <em class="parameter"><code>iter</code></em> is closer than <em class="parameter"><code>delta</code></em> positions
-to the end of the sequence, the end iterator is returned.</p>
+to the end of the sequence, the end iterator is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>delta</code></em> :</span></p></td>
-<td> A positive or negative number indicating how many positions away
+<td>A positive or negative number indicating how many positions away
    from <em class="parameter"><code>iter</code></em> the returned <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> will be.
 </td>
 </tr>
@@ -1232,15 +1248,16 @@ to the end of the sequence, the end iterator is returned.</p>
 <hr>
 <div class="refsect2" title="g_sequence_iter_get_sequence ()">
 <a name="g-sequence-iter-get-sequence"></a><h3>g_sequence_iter_get_sequence ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *         g_sequence_iter_get_sequence        (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *iter);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="returnvalue">GSequence</span></a> *         g_sequence_iter_get_sequence        (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *iter</code></em>);</pre>
 <p>
-Returns the <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> that <em class="parameter"><code>iter</code></em> points into.</p>
+Returns the <a class="link" href="glib-Sequences.html#GSequence" title="GSequence"><span class="type">GSequence</span></a> that <em class="parameter"><code>iter</code></em> points into.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>iter</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1256,25 +1273,26 @@ Returns the <a class="link" href="glib-Sequences.html#GSequence" title="GSequenc
 <hr>
 <div class="refsect2" title="g_sequence_iter_compare ()">
 <a name="g-sequence-iter-compare"></a><h3>g_sequence_iter_compare ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_sequence_iter_compare             (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *a,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *b);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_sequence_iter_compare             (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *a</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *b</code></em>);</pre>
 <p>
 Returns a negative number if <em class="parameter"><code>a</code></em> comes before <em class="parameter"><code>b</code></em>, 0 if they are equal,
 and a positive number if <em class="parameter"><code>a</code></em> comes after <em class="parameter"><code>b</code></em>.
 </p>
 <p>
-The <em class="parameter"><code>a</code></em> and <em class="parameter"><code>b</code></em> iterators must point into the same sequence.</p>
+The <em class="parameter"><code>a</code></em> and <em class="parameter"><code>b</code></em> iterators must point into the same sequence.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>a</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>b</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1291,8 +1309,8 @@ equal, and a positive number if <em class="parameter"><code>a</code></em> comes 
 <hr>
 <div class="refsect2" title="g_sequence_range_get_midpoint ()">
 <a name="g-sequence-range-get-midpoint"></a><h3>g_sequence_range_get_midpoint ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_range_get_midpoint       (<a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *begin,
-                                                         <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *end);</pre>
+<pre class="programlisting"><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="returnvalue">GSequenceIter</span></a> *     g_sequence_range_get_midpoint       (<em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *begin</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a> *end</code></em>);</pre>
 <p>
 Finds an iterator somewhere in the range (<em class="parameter"><code>begin</code></em>, <em class="parameter"><code>end</code></em>). This
 iterator will be close to the middle of the range, but is not
@@ -1300,18 +1318,19 @@ guaranteed to be <span class="emphasis"><em>exactly</em></span> in the middle.
 </p>
 <p>
 The <em class="parameter"><code>begin</code></em> and <em class="parameter"><code>end</code></em> iterators must both point to the same sequence and
-<em class="parameter"><code>begin</code></em> must come before or be equal to <em class="parameter"><code>end</code></em> in the sequence.</p>
+<em class="parameter"><code>begin</code></em> must come before or be equal to <em class="parameter"><code>end</code></em> in the sequence.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>begin</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>end</code></em> :</span></p></td>
-<td> a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
+<td>a <a class="link" href="glib-Sequences.html#GSequenceIter" title="GSequenceIter"><span class="type">GSequenceIter</span></a>
 </td>
 </tr>
 <tr>
@@ -1329,6 +1348,6 @@ The <em class="parameter"><code>begin</code></em> and <em class="parameter"><cod
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

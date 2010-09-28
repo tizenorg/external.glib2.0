@@ -8,38 +8,8 @@
 <link rel="up" href="networking.html" title="Lowlevel platform-independent network support">
 <link rel="prev" href="GSocketControlMessage.html" title="GSocketControlMessage">
 <link rel="next" href="GUnixFDMessage.html" title="GUnixFDMessage">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="pt01.html" title="Part I. GIO Overview">
-<link rel="chapter" href="ch01.html" title="Introduction">
-<link rel="chapter" href="ch02.html" title="Compiling GIO applications">
-<link rel="chapter" href="ch03.html" title="Running GIO applications">
-<link rel="chapter" href="extending-gio.html" title="Extending GIO">
-<link rel="part" href="pt02.html" title="Part II. API Reference">
-<link rel="chapter" href="file_ops.html" title="File Operations">
-<link rel="chapter" href="file_mon.html" title="File System Monitoring">
-<link rel="chapter" href="async.html" title="Asynchronous I/O">
-<link rel="chapter" href="conversion.html" title="Data conversion">
-<link rel="chapter" href="streaming.html" title="Streaming I/O">
-<link rel="chapter" href="types.html" title="File types and applications">
-<link rel="chapter" href="volume_mon.html" title="Volumes and Drives">
-<link rel="chapter" href="icons.html" title="Icons">
-<link rel="chapter" href="failable_initialization.html" title="Failable Initialization">
-<link rel="chapter" href="networking.html" title="Lowlevel platform-independent network support">
-<link rel="chapter" href="resolver.html" title="DNS resolution">
-<link rel="chapter" href="highlevel-socket.html" title="Highlevel network functionallity">
-<link rel="chapter" href="utils.html" title="Utilities">
-<link rel="chapter" href="extending.html" title="Extending GIO">
-<link rel="part" href="migrating.html" title="Part III. Migrating to GIO">
-<link rel="chapter" href="ch19.html" title="Migrating from POSIX to GIO">
-<link rel="chapter" href="ch20.html" title="Migrating from GnomeVFS to GIO">
-<link rel="chapter" href="gio-hierarchy.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -70,26 +40,26 @@
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="GUnixFDList.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GUnixFDList.html#GUnixFDList-struct" title="GUnixFDList">GUnixFDList</a>;
-<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       <a class="link" href="GUnixFDList.html#g-unix-fd-list-new-from-array" title="g_unix_fd_list_new_from_array ()">g_unix_fd_list_new_from_array</a>       (const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *fds,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> n_fds);
-<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       <a class="link" href="GUnixFDList.html#g-unix-fd-list-new" title="g_unix_fd_list_new ()">g_unix_fd_list_new</a>                  (void);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GUnixFDList.html#g-unix-fd-list-get-length" title="g_unix_fd_list_get_length ()">g_unix_fd_list_get_length</a>           (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GUnixFDList.html#g-unix-fd-list-get" title="g_unix_fd_list_get ()">g_unix_fd_list_get</a>                  (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> index_,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
-const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *        <a class="link" href="GUnixFDList.html#g-unix-fd-list-peek-fds" title="g_unix_fd_list_peek_fds ()">g_unix_fd_list_peek_fds</a>             (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *length);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *              <a class="link" href="GUnixFDList.html#g-unix-fd-list-steal-fds" title="g_unix_fd_list_steal_fds ()">g_unix_fd_list_steal_fds</a>            (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *length);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GUnixFDList.html#g-unix-fd-list-append" title="g_unix_fd_list_append ()">g_unix_fd_list_append</a>               (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> fd,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
+<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       <a class="link" href="GUnixFDList.html#g-unix-fd-list-new-from-array" title="g_unix_fd_list_new_from_array ()">g_unix_fd_list_new_from_array</a>       (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> *fds</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> n_fds</code></em>);
+<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       <a class="link" href="GUnixFDList.html#g-unix-fd-list-new" title="g_unix_fd_list_new ()">g_unix_fd_list_new</a>                  (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GUnixFDList.html#g-unix-fd-list-get-length" title="g_unix_fd_list_get_length ()">g_unix_fd_list_get_length</a>           (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GUnixFDList.html#g-unix-fd-list-get" title="g_unix_fd_list_get ()">g_unix_fd_list_get</a>                  (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> index_</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *        <a class="link" href="GUnixFDList.html#g-unix-fd-list-peek-fds" title="g_unix_fd_list_peek_fds ()">g_unix_fd_list_peek_fds</a>             (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> *length</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *              <a class="link" href="GUnixFDList.html#g-unix-fd-list-steal-fds" title="g_unix_fd_list_steal_fds ()">g_unix_fd_list_steal_fds</a>            (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> *length</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="GUnixFDList.html#g-unix-fd-list-append" title="g_unix_fd_list_append ()">g_unix_fd_list_append</a>               (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="GUnixFDList.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GUnixFDList
 </pre>
 </div>
@@ -102,7 +72,8 @@ descriptors that it contains, closing them when finalized.
 <p>
 It may be wrapped in a <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> and sent over a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> in
 the <code class="literal">G_SOCKET_ADDRESS_UNIX</code> family by using <a class="link" href="GSocket.html#g-socket-send-message" title="g_socket_send_message ()"><code class="function">g_socket_send_message()</code></a>
-and received using <a class="link" href="GSocket.html#g-socket-receive-message" title="g_socket_receive_message ()"><code class="function">g_socket_receive_message()</code></a>.</p>
+and received using <a class="link" href="GSocket.html#g-socket-receive-message" title="g_socket_receive_message ()"><code class="function">g_socket_receive_message()</code></a>.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="GUnixFDList.details"></a><h2>Details</h2>
@@ -115,8 +86,8 @@ and received using <a class="link" href="GSocket.html#g-socket-receive-message" 
 <hr>
 <div class="refsect2" title="g_unix_fd_list_new_from_array ()">
 <a name="g-unix-fd-list-new-from-array"></a><h3>g_unix_fd_list_new_from_array ()</h3>
-<pre class="programlisting"><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       g_unix_fd_list_new_from_array       (const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *fds,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> n_fds);</pre>
+<pre class="programlisting"><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       g_unix_fd_list_new_from_array       (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> *fds</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> n_fds</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> containing the file descriptors given in
 <em class="parameter"><code>fds</code></em>.  The file descriptors become the property of the new list and
@@ -127,18 +98,19 @@ the caller.
 Each file descriptor in the array should be set to close-on-exec.
 </p>
 <p>
-If <em class="parameter"><code>n_fds</code></em> is -1 then <em class="parameter"><code>fds</code></em> must be terminated with -1.</p>
+If <em class="parameter"><code>n_fds</code></em> is -1 then <em class="parameter"><code>fds</code></em> must be terminated with -1.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>fds</code></em> :</span></p></td>
-<td> the initial list of file descriptors
+<td>the initial list of file descriptors
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_fds</code></em> :</span></p></td>
-<td> the length of <span class="type">fds</span>, or -1
+<td>the length of <span class="type">fds</span>, or -1
 </td>
 </tr>
 <tr>
@@ -154,9 +126,10 @@ If <em class="parameter"><code>n_fds</code></em> is -1 then <em class="parameter
 <hr>
 <div class="refsect2" title="g_unix_fd_list_new ()">
 <a name="g-unix-fd-list-new"></a><h3>g_unix_fd_list_new ()</h3>
-<pre class="programlisting"><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       g_unix_fd_list_new                  (void);</pre>
+<pre class="programlisting"><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       g_unix_fd_list_new                  (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Creates a new <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> containing no file descriptors.</p>
+Creates a new <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> containing no file descriptors.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -171,16 +144,17 @@ Creates a new <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span 
 <hr>
 <div class="refsect2" title="g_unix_fd_list_get_length ()">
 <a name="g-unix-fd-list-get-length"></a><h3>g_unix_fd_list_get_length ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_fd_list_get_length           (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_fd_list_get_length           (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>);</pre>
 <p>
 Gets the length of <em class="parameter"><code>list</code></em> (ie: the number of file descriptors
-contained within).</p>
+contained within).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
+<td>a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
 </td>
 </tr>
 <tr>
@@ -196,9 +170,9 @@ contained within).</p>
 <hr>
 <div class="refsect2" title="g_unix_fd_list_get ()">
 <a name="g-unix-fd-list-get"></a><h3>g_unix_fd_list_get ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_fd_list_get                  (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> index_,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_fd_list_get                  (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> index_</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Gets a file descriptor out of <em class="parameter"><code>list</code></em>.
 </p>
@@ -214,23 +188,24 @@ when you are done.
 </p>
 <p>
 A possible cause of failure is exceeding the per-process or
-system-wide file descriptor limit.</p>
+system-wide file descriptor limit.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
+<td>a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>index_</code></em> :</span></p></td>
-<td> the index into the list
+<td>the index into the list
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> pointer
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> pointer
 </td>
 </tr>
 <tr>
@@ -246,8 +221,8 @@ system-wide file descriptor limit.</p>
 <hr>
 <div class="refsect2" title="g_unix_fd_list_peek_fds ()">
 <a name="g-unix-fd-list-peek-fds"></a><h3>g_unix_fd_list_peek_fds ()</h3>
-<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *        g_unix_fd_list_peek_fds             (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *length);</pre>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *        g_unix_fd_list_peek_fds             (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> *length</code></em>);</pre>
 <p>
 Returns the array of file descriptors that is contained in this
 object.
@@ -258,24 +233,25 @@ caller must not close them and must not free the array.  The array is
 valid only until <em class="parameter"><code>list</code></em> is changed in any way.
 </p>
 <p>
-If <em class="parameter"><code>length</code></em> is non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> then it is set to the number of file
+If <em class="parameter"><code>length</code></em> is non-<a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> then it is set to the number of file
 descriptors in the returned array. The returned array is also
 terminated with -1.
 </p>
 <p>
-This function never returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. In case there are no file
-descriptors contained in <em class="parameter"><code>list</code></em>, an empty array is returned.</p>
+This function never returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. In case there are no file
+descriptors contained in <em class="parameter"><code>list</code></em>, an empty array is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
+<td>a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td> pointer to the length of the returned array, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>pointer to the length of the returned array, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -291,8 +267,8 @@ descriptors contained in <em class="parameter"><code>list</code></em>, an empty 
 <hr>
 <div class="refsect2" title="g_unix_fd_list_steal_fds ()">
 <a name="g-unix-fd-list-steal-fds"></a><h3>g_unix_fd_list_steal_fds ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *              g_unix_fd_list_steal_fds            (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *length);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *              g_unix_fd_list_steal_fds            (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> *length</code></em>);</pre>
 <p>
 Returns the array of file descriptors that is contained in this
 object.
@@ -303,30 +279,31 @@ After this call, the descriptors are no longer contained in
 descriptors have been added).
 </p>
 <p>
-The return result of this function must be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.
+The return result of this function must be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.
 The caller is also responsible for closing all of the file
 descriptors.  The file descriptors in the array are set to
 close-on-exec.
 </p>
 <p>
-If <em class="parameter"><code>length</code></em> is non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> then it is set to the number of file
+If <em class="parameter"><code>length</code></em> is non-<a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> then it is set to the number of file
 descriptors in the returned array. The returned array is also
 terminated with -1.
 </p>
 <p>
-This function never returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. In case there are no file
-descriptors contained in <em class="parameter"><code>list</code></em>, an empty array is returned.</p>
+This function never returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. In case there are no file
+descriptors contained in <em class="parameter"><code>list</code></em>, an empty array is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
+<td>a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td> pointer to the length of the returned array, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>pointer to the length of the returned array, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -342,9 +319,9 @@ descriptors contained in <em class="parameter"><code>list</code></em>, an empty 
 <hr>
 <div class="refsect2" title="g_unix_fd_list_append ()">
 <a name="g-unix-fd-list-append"></a><h3>g_unix_fd_list_append ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_fd_list_append               (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *list,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> fd,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_fd_list_append               (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Adds a file descriptor to <em class="parameter"><code>list</code></em>.
 </p>
@@ -360,23 +337,24 @@ system-wide file descriptor limit.
 <p>
 The index of the file descriptor in the list is returned.  If you use
 this index with <a class="link" href="GUnixFDList.html#g-unix-fd-list-get" title="g_unix_fd_list_get ()"><code class="function">g_unix_fd_list_get()</code></a> then you will receive back a
-duplicated copy of the same file descriptor.</p>
+duplicated copy of the same file descriptor.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
+<td>a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>fd</code></em> :</span></p></td>
-<td> a valid open file descriptor
+<td>a valid open file descriptor
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> pointer
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> pointer
 </td>
 </tr>
 <tr>
@@ -398,6 +376,6 @@ duplicated copy of the same file descriptor.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

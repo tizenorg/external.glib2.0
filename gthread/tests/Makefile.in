@@ -320,7 +320,7 @@ GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 # initialize variables for unconditional += appending
 EXTRA_DIST = 
 TEST_PROGS = 1bit-mutex 1bit-emufutex
-INCLUDES = -g -I$(top_srcdir) -I$(top_srcdir)/glib $(GLIB_DEBUG_FLAGS)
+INCLUDES = -g -I$(top_srcdir) -I$(top_srcdir)/glib -I$(top_builddir)/glib $(GLIB_DEBUG_FLAGS)
 progs_ldadd = $(top_builddir)/glib/libglib-2.0.la \
 		  $(top_builddir)/gthread/libgthread-2.0.la
 

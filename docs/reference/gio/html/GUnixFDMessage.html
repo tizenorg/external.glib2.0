@@ -8,38 +8,8 @@
 <link rel="up" href="networking.html" title="Lowlevel platform-independent network support">
 <link rel="prev" href="GUnixFDList.html" title="GUnixFDList">
 <link rel="next" href="resolver.html" title="DNS resolution">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="pt01.html" title="Part I. GIO Overview">
-<link rel="chapter" href="ch01.html" title="Introduction">
-<link rel="chapter" href="ch02.html" title="Compiling GIO applications">
-<link rel="chapter" href="ch03.html" title="Running GIO applications">
-<link rel="chapter" href="extending-gio.html" title="Extending GIO">
-<link rel="part" href="pt02.html" title="Part II. API Reference">
-<link rel="chapter" href="file_ops.html" title="File Operations">
-<link rel="chapter" href="file_mon.html" title="File System Monitoring">
-<link rel="chapter" href="async.html" title="Asynchronous I/O">
-<link rel="chapter" href="conversion.html" title="Data conversion">
-<link rel="chapter" href="streaming.html" title="Streaming I/O">
-<link rel="chapter" href="types.html" title="File types and applications">
-<link rel="chapter" href="volume_mon.html" title="Volumes and Drives">
-<link rel="chapter" href="icons.html" title="Icons">
-<link rel="chapter" href="failable_initialization.html" title="Failable Initialization">
-<link rel="chapter" href="networking.html" title="Lowlevel platform-independent network support">
-<link rel="chapter" href="resolver.html" title="DNS resolution">
-<link rel="chapter" href="highlevel-socket.html" title="Highlevel network functionallity">
-<link rel="chapter" href="utils.html" title="Utilities">
-<link rel="chapter" href="extending.html" title="Extending GIO">
-<link rel="part" href="migrating.html" title="Part III. Migrating to GIO">
-<link rel="chapter" href="ch19.html" title="Migrating from POSIX to GIO">
-<link rel="chapter" href="ch20.html" title="Migrating from GnomeVFS to GIO">
-<link rel="chapter" href="gio-hierarchy.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -73,20 +43,20 @@
 <a name="GUnixFDMessage.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GUnixFDMessage.html#GUnixFDMessage-struct" title="GUnixFDMessage">GUnixFDMessage</a>;
 <a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="returnvalue">GSocketControlMessage</span></a> * <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-new-with-fd-list" title="g_unix_fd_message_new_with_fd_list ()">g_unix_fd_message_new_with_fd_list</a>
-                                                        (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *fd_list);
-<a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="returnvalue">GSocketControlMessage</span></a> * <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-new" title="g_unix_fd_message_new ()">g_unix_fd_message_new</a>           (void);
-<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-get-fd-list" title="g_unix_fd_message_get_fd_list ()">g_unix_fd_message_get_fd_list</a>       (<a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="returnvalue">GUnixFDMessage</span></a> *message);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-append-fd" title="g_unix_fd_message_append_fd ()">g_unix_fd_message_append_fd</a>         (<a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="returnvalue">GUnixFDMessage</span></a> *message,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> fd,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *              <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-steal-fds" title="g_unix_fd_message_steal_fds ()">g_unix_fd_message_steal_fds</a>         (<a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="returnvalue">GUnixFDMessage</span></a> *message,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *length);
+                                                        (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *fd_list</code></em>);
+<a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="returnvalue">GSocketControlMessage</span></a> * <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-new" title="g_unix_fd_message_new ()">g_unix_fd_message_new</a>           (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-get-fd-list" title="g_unix_fd_message_get_fd_list ()">g_unix_fd_message_get_fd_list</a>       (<em class="parameter"><code><a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> *message</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-append-fd" title="g_unix_fd_message_append_fd ()">g_unix_fd_message_append_fd</a>         (<em class="parameter"><code><a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> *message</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *              <a class="link" href="GUnixFDMessage.html#g-unix-fd-message-steal-fds" title="g_unix_fd_message_steal_fds ()">g_unix_fd_message_steal_fds</a>         (<em class="parameter"><code><a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> *message</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> *length</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="GUnixFDMessage.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----<a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage">GSocketControlMessage</a>
          +----GUnixFDMessage
 </pre>
@@ -109,7 +79,8 @@ between processes by the kernel.
 <p>
 For an easier way to send and receive file descriptors over
 stream-oriented UNIX sockets, see <a class="link" href="GSocketConnection.html#g-unix-connection-send-fd" title="g_unix_connection_send_fd ()"><code class="function">g_unix_connection_send_fd()</code></a> and
-<a class="link" href="GSocketConnection.html#g-unix-connection-receive-fd" title="g_unix_connection_receive_fd ()"><code class="function">g_unix_connection_receive_fd()</code></a>.</p>
+<a class="link" href="GSocketConnection.html#g-unix-connection-receive-fd" title="g_unix_connection_receive_fd ()"><code class="function">g_unix_connection_receive_fd()</code></a>.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="GUnixFDMessage.details"></a><h2>Details</h2>
@@ -123,15 +94,16 @@ stream-oriented UNIX sockets, see <a class="link" href="GSocketConnection.html#g
 <div class="refsect2" title="g_unix_fd_message_new_with_fd_list ()">
 <a name="g-unix-fd-message-new-with-fd-list"></a><h3>g_unix_fd_message_new_with_fd_list ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="returnvalue">GSocketControlMessage</span></a> * g_unix_fd_message_new_with_fd_list
-                                                        (<a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *fd_list);</pre>
+                                                        (<em class="parameter"><code><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> *fd_list</code></em>);</pre>
 <p>
-Creates a new <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> containing <em class="parameter"><code>list</code></em>.</p>
+Creates a new <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> containing <em class="parameter"><code>list</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>fd_list</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
+<td>a <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a>
 </td>
 </tr>
 <tr>
@@ -147,10 +119,11 @@ Creates a new <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage">
 <hr>
 <div class="refsect2" title="g_unix_fd_message_new ()">
 <a name="g-unix-fd-message-new"></a><h3>g_unix_fd_message_new ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="returnvalue">GSocketControlMessage</span></a> * g_unix_fd_message_new           (void);</pre>
+<pre class="programlisting"><a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="returnvalue">GSocketControlMessage</span></a> * g_unix_fd_message_new           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> containing an empty file descriptor
-list.</p>
+list.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -165,17 +138,18 @@ list.</p>
 <hr>
 <div class="refsect2" title="g_unix_fd_message_get_fd_list ()">
 <a name="g-unix-fd-message-get-fd-list"></a><h3>g_unix_fd_message_get_fd_list ()</h3>
-<pre class="programlisting"><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       g_unix_fd_message_get_fd_list       (<a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="returnvalue">GUnixFDMessage</span></a> *message);</pre>
+<pre class="programlisting"><a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="returnvalue">GUnixFDList</span></a> *       g_unix_fd_message_get_fd_list       (<em class="parameter"><code><a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> *message</code></em>);</pre>
 <p>
 Gets the <a class="link" href="GUnixFDList.html" title="GUnixFDList"><span class="type">GUnixFDList</span></a> contained in <em class="parameter"><code>message</code></em>.  This function does not
 return a reference to the caller, but the returned list is valid for
-the lifetime of <em class="parameter"><code>message</code></em>.</p>
+the lifetime of <em class="parameter"><code>message</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a>
+<td>a <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a>
 </td>
 </tr>
 <tr>
@@ -191,9 +165,9 @@ the lifetime of <em class="parameter"><code>message</code></em>.</p>
 <hr>
 <div class="refsect2" title="g_unix_fd_message_append_fd ()">
 <a name="g-unix-fd-message-append-fd"></a><h3>g_unix_fd_message_append_fd ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_fd_message_append_fd         (<a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="returnvalue">GUnixFDMessage</span></a> *message,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> fd,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_fd_message_append_fd         (<em class="parameter"><code><a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> *message</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> fd</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Adds a file descriptor to <em class="parameter"><code>message</code></em>.
 </p>
@@ -204,28 +178,29 @@ when <em class="parameter"><code>message</code></em> is finalized.
 </p>
 <p>
 A possible cause of failure is exceeding the per-process or
-system-wide file descriptor limit.</p>
+system-wide file descriptor limit.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a>
+<td>a <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>fd</code></em> :</span></p></td>
-<td> a valid open file descriptor
+<td>a valid open file descriptor
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> pointer
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> pointer
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> in case of success, else <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> (and <em class="parameter"><code>error</code></em> is set)
+<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> in case of success, else <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> (and <em class="parameter"><code>error</code></em> is set)
 
 </td>
 </tr>
@@ -236,8 +211,8 @@ system-wide file descriptor limit.</p>
 <hr>
 <div class="refsect2" title="g_unix_fd_message_steal_fds ()">
 <a name="g-unix-fd-message-steal-fds"></a><h3>g_unix_fd_message_steal_fds ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *              g_unix_fd_message_steal_fds         (<a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="returnvalue">GUnixFDMessage</span></a> *message,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *length);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a> *              g_unix_fd_message_steal_fds         (<em class="parameter"><code><a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a> *message</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a> *length</code></em>);</pre>
 <p>
 Returns the array of file descriptors that is contained in this
 object.
@@ -248,29 +223,30 @@ After this call, the descriptors are no longer contained in
 descriptors have been added).
 </p>
 <p>
-The return result of this function must be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.
+The return result of this function must be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.
 The caller is also responsible for closing all of the file
 descriptors.
 </p>
 <p>
-If <em class="parameter"><code>length</code></em> is non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> then it is set to the number of file
+If <em class="parameter"><code>length</code></em> is non-<a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> then it is set to the number of file
 descriptors in the returned array. The returned array is also
 terminated with -1.
 </p>
 <p>
-This function never returns <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. In case there are no file
-descriptors contained in <em class="parameter"><code>message</code></em>, an empty array is returned.</p>
+This function never returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. In case there are no file
+descriptors contained in <em class="parameter"><code>message</code></em>, an empty array is returned.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
-<td> a <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a>
+<td>a <a class="link" href="GUnixFDMessage.html" title="GUnixFDMessage"><span class="type">GUnixFDMessage</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td> pointer to the length of the returned array, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>pointer to the length of the returned array, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -299,6 +275,6 @@ descriptors contained in <em class="parameter"><code>message</code></em>, an emp
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

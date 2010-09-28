@@ -8,28 +8,8 @@
 <link rel="up" href="glib-fundamentals.html" title="GLib Fundamentals">
 <link rel="prev" href="glib-Standard-Macros.html" title="Standard Macros">
 <link rel="next" href="glib-Byte-Order-Macros.html" title="Byte Order Macros">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="glib.html" title="GLib Overview">
-<link rel="chapter" href="glib-fundamentals.html" title="GLib Fundamentals">
-<link rel="chapter" href="glib-core.html" title="GLib Core Application Support">
-<link rel="chapter" href="glib-utilities.html" title="GLib Utilities">
-<link rel="chapter" href="glib-data-types.html" title="GLib Data Types">
-<link rel="chapter" href="tools.html" title="GLib Tools">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-16.html" title="Index of new symbols in 2.16">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -77,10 +57,19 @@ data" to a callback, in the form of a void pointer. From time to time
 you want to pass an integer instead of a pointer. You could allocate
 an integer, with something like:
 </p>
-<div class="informalexample"><pre class="programlisting">
- int *ip = g_new (int, 1);
- *ip = 42;
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="type">int</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">ip </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Memory-Allocation.html#g-new">g_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="type">int</span><span class="symbol">,</span><span class="normal"> </span><span class="number">1</span><span class="symbol">);</span>
+<span class="symbol">*</span><span class="normal">ip </span><span class="symbol">=</span><span class="normal"> </span><span class="number">42</span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 But this is inconvenient, and it's annoying to have to free the
 memory at some later time.
@@ -90,22 +79,44 @@ Pointers are always at least 32 bits in size (on all platforms GLib
 intends to support). Thus you can store at least 32-bit integer values
 in a pointer value. Naively, you might try this, but it's incorrect:
 </p>
-<div class="informalexample"><pre class="programlisting">
- gpointer p;
- int i;
- p = (void*) 42;
- i = (int) p;
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="usertype">gpointer</span><span class="normal"> p</span><span class="symbol">;</span>
+<span class="type">int</span><span class="normal"> i</span><span class="symbol">;</span>
+<span class="normal">p </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">*)</span><span class="normal"> </span><span class="number">42</span><span class="symbol">;</span>
+<span class="normal">i </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="type">int</span><span class="symbol">)</span><span class="normal"> p</span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 Again, that example was <span class="emphasis"><em>not</em></span> correct, don't copy it.
 The problem is that on some systems you need to do this:
 </p>
-<div class="informalexample"><pre class="programlisting">
- gpointer p;
- int i;
- p = (void*) (long) 42;
- i = (int) (long) p;
-</pre></div>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="usertype">gpointer</span><span class="normal"> p</span><span class="symbol">;</span>
+<span class="type">int</span><span class="normal"> i</span><span class="symbol">;</span>
+<span class="normal">p </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">*)</span><span class="normal"> </span><span class="symbol">(</span><span class="type">long</span><span class="symbol">)</span><span class="normal"> </span><span class="number">42</span><span class="symbol">;</span>
+<span class="normal">i </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="type">int</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">(</span><span class="type">long</span><span class="symbol">)</span><span class="normal"> p</span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
 So <a class="link" href="glib-Type-Conversion-Macros.html#GPOINTER-TO-INT:CAPS" title="GPOINTER_TO_INT()"><code class="function">GPOINTER_TO_INT()</code></a>, <a class="link" href="glib-Type-Conversion-Macros.html#GINT-TO-POINTER:CAPS" title="GINT_TO_POINTER()"><code class="function">GINT_TO_POINTER()</code></a>, etc. do the right thing
 on the current platform.
@@ -247,6 +258,6 @@ been stored in the pointer with <a class="link" href="glib-Type-Conversion-Macro
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

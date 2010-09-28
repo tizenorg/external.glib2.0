@@ -8,38 +8,8 @@
 <link rel="up" href="chapter-signal.html" title="The GObject messaging system">
 <link rel="prev" href="chapter-signal.html" title="The GObject messaging system">
 <link rel="next" href="rn01.html" title="API Reference">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="preface" href="pr01.html" title="Introduction">
-<link rel="part" href="pt01.html" title="Part I. Concepts">
-<link rel="chapter" href="chapter-intro.html" title="Background">
-<link rel="chapter" href="chapter-gtype.html" title="The GLib Dynamic Type System">
-<link rel="chapter" href="chapter-gobject.html" title="The GObject base class">
-<link rel="chapter" href="chapter-signal.html" title="The GObject messaging system">
-<link rel="reference" href="rn01.html" title="API Reference">
-<link rel="reference" href="rn02.html" title="Tools Reference">
-<link rel="part" href="pt02.html" title="Part IV. Tutorial">
-<link rel="chapter" href="howto-gobject.html" title="How to define and implement a new GObject">
-<link rel="chapter" href="howto-interface.html" title="How to define and implement interfaces">
-<link rel="chapter" href="howto-signals.html" title="How to create and use signals">
-<link rel="part" href="pt03.html" title="Part V. Related Tools">
-<link rel="chapter" href="tools-vala.html" title="Vala">
-<link rel="chapter" href="tools-gob.html" title="GObject builder">
-<link rel="chapter" href="tools-ginspector.html" title="Graphical inspection of GObjects">
-<link rel="chapter" href="tools-refdb.html" title="Debugging reference count problems">
-<link rel="chapter" href="tools-gtkdoc.html" title="Writing API docs">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
@@ -220,7 +190,7 @@ void g_signal_emitv (const GValue *instance_and_params,
 			no accumulator was specified. If an accumulator was specified during signal creation,
 			this accumulator is used to calculate the return_value as a function of the return
 			values of all the closures invoked during emission. 
-			<sup>[<a name="id601249" href="#ftn.id601249" class="footnote">8</a>]</sup>
+			<sup>[<a name="id545696" href="#ftn.id545696" class="footnote">8</a>]</sup>
 			If no closure is invoked during
 			emission, the return_value is nonetheless initialized to zero/null.
 			</p></li>
@@ -302,7 +272,7 @@ void g_signal_emitv (const GValue *instance_and_params,
 <p>
 	    Of the three main connection functions,
 		only one has an explicit detail parameter as a <span class="type"><a href="./../glib/glib/glib-Quarks.html#GQuark">GQuark</a></span>
-		<sup>[<a name="id601435" href="#ftn.id601435" class="footnote">9</a>]</sup>:
+		<sup>[<a name="id545882" href="#ftn.id545882" class="footnote">9</a>]</sup>:
 </p>
 <pre class="programlisting">
 gulong     g_signal_connect_closure_by_id          (gpointer          instance,
@@ -386,7 +356,7 @@ void                  g_signal_emit_by_name (gpointer            instance,
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a name="ftn.id601249" href="#id601249" class="para">8</a>] </sup>
+<div class="footnote"><p><sup>[<a name="ftn.id545696" href="#id545696" class="para">8</a>] </sup>
 			  James (again!!) gives a few non-trivial examples of accumulators:
 			  <span class="quote">“<span class="quote">
 				For instance, you may have an accumulator that ignores NULL returns from 
@@ -394,7 +364,7 @@ void                  g_signal_emit_by_name (gpointer            instance,
 				to return the list of values returned by the closures.
 			  </span>”</span>
 			</p></div>
-<div class="footnote"><p><sup>[<a name="ftn.id601435" href="#id601435" class="para">9</a>] </sup>A GQuark is an integer which uniquely represents a string. It is possible to transform
+<div class="footnote"><p><sup>[<a name="ftn.id545882" href="#id545882" class="para">9</a>] </sup>A GQuark is an integer which uniquely represents a string. It is possible to transform
 		   back and forth between the integer and string representations with the functions 
 		   <code class="function"><a href="./../glib/glib/glib-Quarks.html#g-quark-from-string">g_quark_from_string</a></code> and <code class="function"><a href="./../glib/glib/glib-Quarks.html#g-quark-to-string">g_quark_to_string</a></code>.
 		  </p></div>
@@ -402,6 +372,6 @@ void                  g_signal_emit_by_name (gpointer            instance,
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

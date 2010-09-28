@@ -8,38 +8,8 @@
 <link rel="up" href="resolver.html" title="DNS resolution">
 <link rel="prev" href="GSocketConnectable.html" title="GSocketConnectable">
 <link rel="next" href="GNetworkService.html" title="GNetworkService">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="part" href="pt01.html" title="Part I. GIO Overview">
-<link rel="chapter" href="ch01.html" title="Introduction">
-<link rel="chapter" href="ch02.html" title="Compiling GIO applications">
-<link rel="chapter" href="ch03.html" title="Running GIO applications">
-<link rel="chapter" href="extending-gio.html" title="Extending GIO">
-<link rel="part" href="pt02.html" title="Part II. API Reference">
-<link rel="chapter" href="file_ops.html" title="File Operations">
-<link rel="chapter" href="file_mon.html" title="File System Monitoring">
-<link rel="chapter" href="async.html" title="Asynchronous I/O">
-<link rel="chapter" href="conversion.html" title="Data conversion">
-<link rel="chapter" href="streaming.html" title="Streaming I/O">
-<link rel="chapter" href="types.html" title="File types and applications">
-<link rel="chapter" href="volume_mon.html" title="Volumes and Drives">
-<link rel="chapter" href="icons.html" title="Icons">
-<link rel="chapter" href="failable_initialization.html" title="Failable Initialization">
-<link rel="chapter" href="networking.html" title="Lowlevel platform-independent network support">
-<link rel="chapter" href="resolver.html" title="DNS resolution">
-<link rel="chapter" href="highlevel-socket.html" title="Highlevel network functionallity">
-<link rel="chapter" href="utils.html" title="Utilities">
-<link rel="chapter" href="extending.html" title="Extending GIO">
-<link rel="part" href="migrating.html" title="Part III. Migrating to GIO">
-<link rel="chapter" href="ch19.html" title="Migrating from POSIX to GIO">
-<link rel="chapter" href="ch20.html" title="Migrating from GnomeVFS to GIO">
-<link rel="chapter" href="gio-hierarchy.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -77,19 +47,19 @@
 #include &lt;gio/gio.h&gt;
 
                     <a class="link" href="GNetworkAddress.html#GNetworkAddress-struct" title="GNetworkAddress">GNetworkAddress</a>;
-<a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="returnvalue">GSocketConnectable</span></a> * <a class="link" href="GNetworkAddress.html#g-network-address-new" title="g_network_address_new ()">g_network_address_new</a>              (const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *hostname,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a> port);
-const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GNetworkAddress.html#g-network-address-get-hostname" title="g_network_address_get_hostname ()">g_network_address_get_hostname</a>      (<a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="returnvalue">GNetworkAddress</span></a> *addr);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="GNetworkAddress.html#g-network-address-get-port" title="g_network_address_get_port ()">g_network_address_get_port</a>          (<a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="returnvalue">GNetworkAddress</span></a> *addr);
-<a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="returnvalue">GSocketConnectable</span></a> * <a class="link" href="GNetworkAddress.html#g-network-address-parse" title="g_network_address_parse ()">g_network_address_parse</a>            (const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *host_and_port,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a> default_port,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);
+<a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="returnvalue">GSocketConnectable</span></a> * <a class="link" href="GNetworkAddress.html#g-network-address-new" title="g_network_address_new ()">g_network_address_new</a>              (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *hostname</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> port</code></em>);
+const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GNetworkAddress.html#g-network-address-get-hostname" title="g_network_address_get_hostname ()">g_network_address_get_hostname</a>      (<em class="parameter"><code><a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a> *addr</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="GNetworkAddress.html#g-network-address-get-port" title="g_network_address_get_port ()">g_network_address_get_port</a>          (<em class="parameter"><code><a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a> *addr</code></em>);
+<a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="returnvalue">GSocketConnectable</span></a> * <a class="link" href="GNetworkAddress.html#g-network-address-parse" title="g_network_address_parse ()">g_network_address_parse</a>            (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *host_and_port</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> default_port</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="GNetworkAddress.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GNetworkAddress
 </pre>
 </div>
@@ -102,8 +72,8 @@ GNetworkAddress implements
 <div class="refsect1" title="Properties">
 <a name="GNetworkAddress.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GNetworkAddress.html#GNetworkAddress--hostname" title='The "hostname" property'>hostname</a>"                 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
-  "<a class="link" href="GNetworkAddress.html#GNetworkAddress--port" title='The "port" property'>port</a>"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only
+  "<a class="link" href="GNetworkAddress.html#GNetworkAddress--hostname" title='The "hostname" property'>hostname</a>"                 <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
+  "<a class="link" href="GNetworkAddress.html#GNetworkAddress--port" title='The "port" property'>port</a>"                     <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -115,7 +85,8 @@ multiple IP addresses and multiple address families.
 </p>
 <p>
 See <a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> for and example of using the connectable
-interface.</p>
+interface.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="GNetworkAddress.details"></a><h2>Details</h2>
@@ -124,27 +95,29 @@ interface.</p>
 <pre class="programlisting">typedef struct _GNetworkAddress GNetworkAddress;</pre>
 <p>
 A <a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> for resolving a hostname and connecting to
-that host.</p>
+that host.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="g_network_address_new ()">
 <a name="g-network-address-new"></a><h3>g_network_address_new ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="returnvalue">GSocketConnectable</span></a> * g_network_address_new              (const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *hostname,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a> port);</pre>
+<pre class="programlisting"><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="returnvalue">GSocketConnectable</span></a> * g_network_address_new              (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *hostname</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> port</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> for connecting to the given
-<em class="parameter"><code>hostname</code></em> and <em class="parameter"><code>port</code></em>.</p>
+<em class="parameter"><code>hostname</code></em> and <em class="parameter"><code>port</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>hostname</code></em> :</span></p></td>
-<td> the hostname
+<td>the hostname
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>port</code></em> :</span></p></td>
-<td> the port
+<td>the port
 </td>
 </tr>
 <tr>
@@ -160,16 +133,17 @@ Creates a new <a class="link" href="GSocketConnectable.html" title="GSocketConne
 <hr>
 <div class="refsect2" title="g_network_address_get_hostname ()">
 <a name="g-network-address-get-hostname"></a><h3>g_network_address_get_hostname ()</h3>
-<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_network_address_get_hostname      (<a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="returnvalue">GNetworkAddress</span></a> *addr);</pre>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_network_address_get_hostname      (<em class="parameter"><code><a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a> *addr</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>addr</code></em>'s hostname. This might be either UTF-8 or ASCII-encoded,
-depending on what <em class="parameter"><code>addr</code></em> was created with.</p>
+depending on what <em class="parameter"><code>addr</code></em> was created with.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>addr</code></em> :</span></p></td>
-<td> a <a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a>
+<td>a <a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a>
 </td>
 </tr>
 <tr>
@@ -185,15 +159,16 @@ depending on what <em class="parameter"><code>addr</code></em> was created with.
 <hr>
 <div class="refsect2" title="g_network_address_get_port ()">
 <a name="g-network-address-get-port"></a><h3>g_network_address_get_port ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_network_address_get_port          (<a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="returnvalue">GNetworkAddress</span></a> *addr);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_network_address_get_port          (<em class="parameter"><code><a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a> *addr</code></em>);</pre>
 <p>
-Gets <em class="parameter"><code>addr</code></em>'s port number</p>
+Gets <em class="parameter"><code>addr</code></em>'s port number
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>addr</code></em> :</span></p></td>
-<td> a <a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a>
+<td>a <a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a>
 </td>
 </tr>
 <tr>
@@ -209,12 +184,12 @@ Gets <em class="parameter"><code>addr</code></em>'s port number</p>
 <hr>
 <div class="refsect2" title="g_network_address_parse ()">
 <a name="g-network-address-parse"></a><h3>g_network_address_parse ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="returnvalue">GSocketConnectable</span></a> * g_network_address_parse            (const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *host_and_port,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a> default_port,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> **error);</pre>
+<pre class="programlisting"><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="returnvalue">GSocketConnectable</span></a> * g_network_address_parse            (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *host_and_port</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> default_port</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> for connecting to the given
-<em class="parameter"><code>hostname</code></em> and <em class="parameter"><code>port</code></em>. May fail and return <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> in case
+<em class="parameter"><code>hostname</code></em> and <em class="parameter"><code>port</code></em>. May fail and return <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> in case
 parsing <em class="parameter"><code>host_and_port</code></em> fails.
 </p>
 <p>
@@ -232,28 +207,29 @@ used as the port number to connect to.
 <p>
 In general, <em class="parameter"><code>host_and_port</code></em> is expected to be provided by the user
 (allowing them to give the hostname, and a port overide if necessary)
-and <em class="parameter"><code>default_port</code></em> is expected to be provided by the application.</p>
+and <em class="parameter"><code>default_port</code></em> is expected to be provided by the application.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>host_and_port</code></em> :</span></p></td>
-<td> the hostname and optionally a port
+<td>the hostname and optionally a port
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>default_port</code></em> :</span></p></td>
-<td> the default port if not in <em class="parameter"><code>host_and_port</code></em>
+<td>the default port if not in <em class="parameter"><code>host_and_port</code></em>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a pointer to a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a pointer to a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new <a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error
+<td> the new <a class="link" href="GNetworkAddress.html" title="GNetworkAddress"><span class="type">GNetworkAddress</span></a>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error
 
 </td>
 </tr>
@@ -266,14 +242,14 @@ and <em class="parameter"><code>default_port</code></em> is expected to be provi
 <a name="GNetworkAddress.property-details"></a><h2>Property Details</h2>
 <div class="refsect2" title='The "hostname" property'>
 <a name="GNetworkAddress--hostname"></a><h3>The <code class="literal">"hostname"</code> property</h3>
-<pre class="programlisting">  "hostname"                 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "hostname"                 <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
 <p>Hostname to resolve.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
 <div class="refsect2" title='The "port" property'>
 <a name="GNetworkAddress--port"></a><h3>The <code class="literal">"port"</code> property</h3>
-<pre class="programlisting">  "port"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "port"                     <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct Only</pre>
 <p>Network port.</p>
 <p>Allowed values: &lt;= 65535</p>
 <p>Default value: 0</p>
@@ -282,6 +258,6 @@ and <em class="parameter"><code>default_port</code></em> is expected to be provi
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>
