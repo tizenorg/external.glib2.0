@@ -31,7 +31,7 @@ CFLAGS += -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
 
 # Ensure the build aborts when there are still references to undefined
 # symbols
-LDFLAGS += -Wl,-z,defs
+LDFLAGS += -Wl,-z,defs -Wl,--as-needed
 
 # NB: do NOT use -Wl,--as-needed to build glib; for instance the link to
 # pthread is carefully crafted to allow dlopen()ing pthread-using libs; see
