@@ -27,11 +27,11 @@ DEB_BUILD_ARCH ?= $(shell dpkg-architecture -qDEB_BUILD_ARCH)
 DEB_HOST_ARCH  ?= $(shell dpkg-architecture -qDEB_HOST_ARCH)
 
 
-CFLAGS += -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
+CFLAGS += -fPIC -Wall -g -O$(if $(findstring noopt,$(DEB_BUILD_OPTIONS)),0,2)
 
 # Ensure the build aborts when there are still references to undefined
 # symbols
-LDFLAGS += -Wl,-z,defs -Wl,--as-needed
+LDFLAGS += -Wl,-z,defs -Wl,--hash-style=both -Wl,--as-needed 
 
 # NB: do NOT use -Wl,--as-needed to build glib; for instance the link to
 # pthread is carefully crafted to allow dlopen()ing pthread-using libs; see
