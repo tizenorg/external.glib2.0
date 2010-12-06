@@ -48,13 +48,14 @@ fi
 	DIE=1
 }
 
-if automake-1.11 --version < /dev/null > /dev/null 2>&1 ; then
-    AUTOMAKE=automake-1.11
-    ACLOCAL=aclocal-1.11
-else if automake-1.10 --version < /dev/null > /dev/null 2>&1 ; then
-    AUTOMAKE=automake-1.10
-    ACLOCAL=aclocal-1.10
-else if automake-1.9 --version < /dev/null > /dev/null 2>&1 ; then
+#if automake-1.11 --version < /dev/null > /dev/null 2>&1 ; then
+#    AUTOMAKE=automake-1.11
+#    ACLOCAL=aclocal-1.11
+#else if automake-1.10 --version < /dev/null > /dev/null 2>&1 ; then
+#    AUTOMAKE=automake-1.10
+#    ACLOCAL=aclocal-1.10
+#else if automake-1.9 --version < /dev/null > /dev/null 2>&1 ; then
+if automake-1.9 --version < /dev/null > /dev/null 2>&1 ; then
     AUTOMAKE=automake-1.9
     ACLOCAL=aclocal-1.9
 else
@@ -64,8 +65,8 @@ else
 	echo "or get the source tarball at http://ftp.gnu.org/gnu/automake/"
 	DIE=1
 fi
-fi
-fi
+#fi
+#fi
 
 if test "$DIE" -eq 1; then
 	exit 1

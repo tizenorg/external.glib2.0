@@ -1,8 +1,5 @@
 /* config.h.in.  Generated from configure.in by autoheader.  */
 
-/* Define if building universal (internal helper macro) */
-#undef AC_APPLE_UNIVERSAL_BUILD
-
 /* define if asm blocks can use numeric local labels */
 #undef ASM_NUMERIC_LABELS
 
@@ -430,37 +427,37 @@
 /* Define to 1 if you have the `strsignal' function. */
 #undef HAVE_STRSIGNAL
 
-/* Define to 1 if `f_bavail' is a member of `struct statfs'. */
+/* Define to 1 if `f_bavail' is member of `struct statfs'. */
 #undef HAVE_STRUCT_STATFS_F_BAVAIL
 
-/* Define to 1 if `f_fstypename' is a member of `struct statfs'. */
+/* Define to 1 if `f_fstypename' is member of `struct statfs'. */
 #undef HAVE_STRUCT_STATFS_F_FSTYPENAME
 
-/* Define to 1 if `f_basetype' is a member of `struct statvfs'. */
+/* Define to 1 if `f_basetype' is member of `struct statvfs'. */
 #undef HAVE_STRUCT_STATVFS_F_BASETYPE
 
-/* Define to 1 if `st_atimensec' is a member of `struct stat'. */
+/* Define to 1 if `st_atimensec' is member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_ATIMENSEC
 
-/* Define to 1 if `st_atim.tv_nsec' is a member of `struct stat'. */
+/* Define to 1 if `st_atim.tv_nsec' is member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_ATIM_TV_NSEC
 
-/* Define to 1 if `st_blksize' is a member of `struct stat'. */
+/* Define to 1 if `st_blksize' is member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_BLKSIZE
 
-/* Define to 1 if `st_blocks' is a member of `struct stat'. */
+/* Define to 1 if `st_blocks' is member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_BLOCKS
 
-/* Define to 1 if `st_ctimensec' is a member of `struct stat'. */
+/* Define to 1 if `st_ctimensec' is member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_CTIMENSEC
 
-/* Define to 1 if `st_ctim.tv_nsec' is a member of `struct stat'. */
+/* Define to 1 if `st_ctim.tv_nsec' is member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_CTIM_TV_NSEC
 
-/* Define to 1 if `st_mtimensec' is a member of `struct stat'. */
+/* Define to 1 if `st_mtimensec' is member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_MTIMENSEC
 
-/* Define to 1 if `st_mtim.tv_nsec' is a member of `struct stat'. */
+/* Define to 1 if `st_mtim.tv_nsec' is member of `struct stat'. */
 #undef HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC
 
 /* Define to 1 if you have the `symlink' function. */
@@ -621,9 +618,6 @@
 /* Define to the one symbol short name of this package. */
 #undef PACKAGE_TARNAME
 
-/* Define to the home page for this package. */
-#undef PACKAGE_URL
-
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
 
@@ -692,17 +686,9 @@
 /* using the system-supplied PCRE library */
 #undef USE_SYSTEM_PCRE
 
-/* Define WORDS_BIGENDIAN to 1 if your processor stores words with the most
-   significant byte first (like Motorola and SPARC, unlike Intel). */
-#if defined AC_APPLE_UNIVERSAL_BUILD
-# if defined __BIG_ENDIAN__
-#  define WORDS_BIGENDIAN 1
-# endif
-#else
-# ifndef WORDS_BIGENDIAN
-#  undef WORDS_BIGENDIAN
-# endif
-#endif
+/* Define to 1 if your processor stores words with the most significant byte
+   first (like Motorola and SPARC, unlike Intel and VAX). */
+#undef WORDS_BIGENDIAN
 
 /* Number of bits in a file offset, on hosts where this is settable. */
 #undef _FILE_OFFSET_BITS
