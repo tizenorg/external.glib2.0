@@ -302,6 +302,7 @@ $(libgio_2_0_la_OBJECTS): $(marshal_sources)
 libgio_2_0_la_LIBADD = \
 	$(top_builddir)/glib/libglib-2.0.la 		\
 	$(top_builddir)/gobject/libgobject-2.0.la 	\
+	$(top_builddir)/gthread/libgthread-2.0.la 	\
 	$(top_builddir)/gmodule/libgmodule-2.0.la 	\
 	$(platform_libadd) 				\
 	$(ZLIB_LIBS)					\
@@ -473,6 +474,7 @@ gio_querymodules_SOURCES = gio-querymodules.c
 gio_querymodules_LDADD	 = \
 	$(top_builddir)/glib/libglib-2.0.la		\
 	$(top_builddir)/gobject/libgobject-2.0.la	\
+	$(top_builddir)/gthread/libgthread-2.0.la 	\
 	$(top_builddir)/gmodule/libgmodule-2.0.la	\
 	libgio-2.0.la					\
 	$(NULL)

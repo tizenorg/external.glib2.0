@@ -102,6 +102,7 @@ refdbg_configure_flags := $(common_configure_flags) \
 
 $(STAMP_DIR)/patch-stamp:
 	dh_testdir
+	env AUTOGEN_SUBDIR_MODE=1 $(CURDIR)/autogen.sh
 	# backup the original files to restore them in the clean target
 	-test -r config.sub && cp config.sub config.sub.orig
 	-test -r config.guess && cp config.guess config.guess.orig

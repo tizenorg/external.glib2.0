@@ -85,8 +85,8 @@ unicode_normalize_LDADD = $(libglib)
 errorcheck_mutex_test_LDADD = $(libglib) $(libgthread) $(G_THREAD_LIBS) 
 assert_msg_test_LDADD = $(libglib)
 if ENABLE_TIMELOOP
-timeloop_LDADD = $(libglib)
-timeloop_closure_LDADD = $(libglib) $(libgobject)
+timeloop_LDADD = $(libglib) $(libgthread)
+timeloop_closure_LDADD = $(libglib) $(libgthread) $(libgobject)
 endif
 
 test_programs =					\
