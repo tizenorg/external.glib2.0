@@ -598,6 +598,7 @@ gio_querymodules_LDADD	 = \
 	$(top_builddir)/glib/libglib-2.0.la		\
 	$(top_builddir)/gobject/libgobject-2.0.la	\
 	$(top_builddir)/gmodule/libgmodule-2.0.la	\
+	$(top_builddir)/gthread/libgthread-2.0.la	\
 	libgio-2.0.la					\
 	$(NULL)
 
@@ -611,6 +612,8 @@ glib_compile_schemas_SOURCES = \
 gsettings_LDADD = \
 	$(top_builddir)/glib/libglib-2.0.la		\
 	$(top_builddir)/gobject/libgobject-2.0.la	\
+	$(top_builddir)/gthread/libgthread-2.0.la	\
+	$(top_builddir)/gmodule/libgmodule-2.0.la	\
 	libgio-2.0.la
 gsettings_SOURCES = gsettings-tool.c
 
@@ -624,7 +627,9 @@ bin_PROGRAMS += gdbus
 gdbus_SOURCES = gdbus-tool.c
 gdbus_LDADD = libgio-2.0.la \
 	$(top_builddir)/glib/libglib-2.0.la 		\
-	$(top_builddir)/gobject/libgobject-2.0.la
+	$(top_builddir)/gobject/libgobject-2.0.la	\
+	$(top_builddir)/gthread/libgthread-2.0.la	\
+	$(top_builddir)/gmodule/libgmodule-2.0.la
 
 completiondir = $(sysconfdir)/bash_completion.d
 completion_SCRIPTS = \
