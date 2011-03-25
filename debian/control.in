@@ -3,24 +3,24 @@ Section: libs
 Priority: optional
 Maintainer: Sanghyun Park <sh.ad.park@samsung.com>, Wonsik Jung <sidein@samsung.com>, Boram Park <boram1288.park@samsung.com>, Eunok Kim <eunok26.kim@samsung.com>
 Build-Depends: debhelper (>> 5.0.22),
-               pkg-config (>= 0.14.0),
+               pkg-config (>= 0.16.0),
                gettext,
                autotools-dev,
                gnome-pkg-tools (>= 0.11),
-               quilt,
-               zlib1g-dev,
-               gtk-doc-tools
-Standards-Version: 3.8.3
+               gtk-doc-tools (>= 1.15),
+               zlib1g-dev
+Standards-Version: 3.9.1
+Homepage: http://www.gtk.org/
 
 Package: @SHARED_PKG@
 Section: libs
 Architecture: any
 Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         zlib1g
+         ${shlibs:Depends}
 Recommends: @DATA_PKG@,
             shared-mime-info
 Conflicts: libpango1.0-0 (<< 1.11)
+Replaces: @DEV_PKG@ (<< 2.23.2-2)
 Description: The GLib library of C routines
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -28,14 +28,33 @@ Description: The GLib library of C routines
  .
  This package contains the shared libraries.
 
+Package: @BIN_PKG@
+Section: misc
+Architecture: any
+Depends: ${shlibs:Depends},
+         ${misc:Depends},
+         @SHARED_PKG@ (= ${binary:Version}),
+         @DATA_PKG@
+Conflicts: @SHARED_PKG@ (<< 2.25.11-2),
+Replaces: @SHARED_PKG@ (<< 2.25.11-2),
+          @DEV_PKG@ (<< 2.25.11-2)
+Description: The programs for the GLib library
+ GLib is a library containing many useful C routines for things such
+ as trees, hashes, lists, and strings.  It is a useful general-purpose
+ C library used by projects such as GTK+, GIMP, and GNOME.
+ .
+ This package contains the program files which is used for the libraries
+ and others.
+
 Package: @DEV_PKG@
 Section: libdevel
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          @SHARED_PKG@ (= ${binary:Version}),
-         zlib1g-dev,
-         pkg-config (>= 0.14.0)
+         @BIN_PKG@ (= ${binary:Version}),
+         pkg-config (>= 0.16.0),
+         zlib1g-dev
 Recommends: python
 Suggests: @DOC_PKG@
 Replaces: libglib1.3-dev
