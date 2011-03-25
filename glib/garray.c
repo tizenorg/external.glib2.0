@@ -40,7 +40,6 @@
 #include "gmessages.h"
 #include "gqsort.h"
 
-#include "galias.h"
 
 /**
  * SECTION: arrays
@@ -693,8 +692,6 @@ g_array_maybe_expand (GRealArray *array,
     }
 }
 
-/* Pointer Array
- */
 /**
  * SECTION: arrays_pointer
  * @title: Pointer Arrays
@@ -1075,13 +1072,12 @@ g_ptr_array_remove_index_fast (GPtrArray *farray,
   g_return_val_if_fail (index_ < array->len, NULL);
 
   result = array->pdata[index_];
-  
+
+  if (array->element_free_func != NULL)
+    array->element_free_func (array->pdata[index_]);
+
   if (index_ != array->len - 1)
-    {
-      if (array->element_free_func != NULL)
-        array->element_free_func (array->pdata[index_]);
-      array->pdata[index_] = array->pdata[array->len - 1];
-    }
+    array->pdata[index_] = array->pdata[array->len - 1];
 
   array->len -= 1;
 
@@ -1310,8 +1306,6 @@ g_ptr_array_foreach (GPtrArray *array,
     (*func) (array->pdata[i], user_data);
 }
 
-/* Byte arrays 
- */
 /**
  * SECTION: arrays_byte
  * @title: Byte Arrays
@@ -1591,6 +1585,3 @@ g_byte_array_sort_with_data (GByteArray       *array,
 {
   g_array_sort_with_data ((GArray *) array, compare_func, user_data);
 }
-
-#define __G_ARRAY_C__
-#include "galiasdef.c"

@@ -28,14 +28,20 @@
 #include "gsocketoutputstream.h"
 #include "gsocket.h"
 
-#include <gio/gsimpleasyncresult.h>
-#include <gio/gcancellable.h>
+#include "gsimpleasyncresult.h"
+#include "gcancellable.h"
+#include "gpollableinputstream.h"
+#include "gpollableoutputstream.h"
+#include "gioerror.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
+
+static void g_socket_output_stream_pollable_iface_init (GPollableOutputStreamInterface *iface);
 
 #define g_socket_output_stream_get_type _g_socket_output_stream_get_type
-G_DEFINE_TYPE (GSocketOutputStream, g_socket_output_stream, G_TYPE_OUTPUT_STREAM);
+G_DEFINE_TYPE_WITH_CODE (GSocketOutputStream, g_socket_output_stream, G_TYPE_OUTPUT_STREAM,
+			 G_IMPLEMENT_INTERFACE (G_TYPE_POLLABLE_OUTPUT_STREAM, g_socket_output_stream_pollable_iface_init)
+			 )
 
 enum
 {
@@ -50,7 +56,6 @@ struct _GSocketOutputStreamPrivate
   /* pending operation metadata */
   GSimpleAsyncResult *result;
   GCancellable *cancellable;
-  gboolean from_mainloop;
   gconstpointer buffer;
   gsize count;
 };
@@ -114,8 +119,9 @@ g_socket_output_stream_write (GOutputStream  *stream,
 {
   GSocketOutputStream *onput_stream = G_SOCKET_OUTPUT_STREAM (stream);
 
-  return g_socket_send (onput_stream->priv->socket, buffer, count,
-			cancellable, error);
+  return g_socket_send_with_blocking (onput_stream->priv->socket,
+				      buffer, count, TRUE,
+				      cancellable, error);
 }
 
 static gboolean
@@ -127,31 +133,29 @@ g_socket_output_stream_write_ready (GSocket *socket,
   GError *error = NULL;
   gssize result;
 
+  result = g_socket_send_with_blocking (stream->priv->socket,
+					stream->priv->buffer,
+					stream->priv->count,
+					FALSE,
+					stream->priv->cancellable,
+					&error);
+
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_WOULD_BLOCK))
+    return TRUE;
+
   simple = stream->priv->result;
   stream->priv->result = NULL;
 
-  result = g_socket_send (stream->priv->socket,
-			  stream->priv->buffer,
-			  stream->priv->count,
-			  stream->priv->cancellable,
-			  &error);
   if (result >= 0)
     g_simple_async_result_set_op_res_gssize (simple, result);
 
   if (error)
-    {
-      g_simple_async_result_set_from_error (simple, error);
-      g_error_free (error);
-    }
+    g_simple_async_result_take_error (simple, error);
 
   if (stream->priv->cancellable)
     g_object_unref (stream->priv->cancellable);
 
-  if (stream->priv->from_mainloop)
-    g_simple_async_result_complete (simple);
-  else
-    g_simple_async_result_complete_in_idle (simple);
-
+  g_simple_async_result_complete (simple);
   g_object_unref (simple);
 
   return FALSE;
@@ -167,6 +171,7 @@ g_socket_output_stream_write_async (GOutputStream        *stream,
                                     gpointer              user_data)
 {
   GSocketOutputStream *output_stream = G_SOCKET_OUTPUT_STREAM (stream);
+  GSource *source;
 
   g_assert (output_stream->priv->result == NULL);
 
@@ -179,25 +184,14 @@ g_socket_output_stream_write_async (GOutputStream        *stream,
   output_stream->priv->buffer = buffer;
   output_stream->priv->count = count;
 
-  if (!g_socket_condition_check (output_stream->priv->socket, G_IO_OUT))
-    {
-      GSource *source;
-
-      output_stream->priv->from_mainloop = TRUE;
-      source = g_socket_create_source (output_stream->priv->socket,
-                                       G_IO_OUT | G_IO_HUP | G_IO_ERR,
-                                       cancellable);
-      g_source_set_callback (source,
-                             (GSourceFunc) g_socket_output_stream_write_ready,
-                             g_object_ref (output_stream), g_object_unref);
-      g_source_attach (source, g_main_context_get_thread_default ());
-      g_source_unref (source);
-    }
-  else
-    {
-      output_stream->priv->from_mainloop = FALSE;
-      g_socket_output_stream_write_ready (output_stream->priv->socket, G_IO_OUT, output_stream);
-    }
+  source = g_socket_create_source (output_stream->priv->socket,
+				   G_IO_OUT | G_IO_HUP | G_IO_ERR,
+				   cancellable);
+  g_source_set_callback (source,
+			 (GSourceFunc) g_socket_output_stream_write_ready,
+			 g_object_ref (output_stream), g_object_unref);
+  g_source_attach (source, g_main_context_get_thread_default ());
+  g_source_unref (source);
 }
 
 static gssize
@@ -217,6 +211,44 @@ g_socket_output_stream_write_finish (GOutputStream  *stream,
   count = g_simple_async_result_get_op_res_gssize (simple);
 
   return count;
+}
+
+static gboolean
+g_socket_output_stream_pollable_is_writable (GPollableOutputStream *pollable)
+{
+  GSocketOutputStream *output_stream = G_SOCKET_OUTPUT_STREAM (pollable);
+
+  return g_socket_condition_check (output_stream->priv->socket, G_IO_OUT);
+}
+
+static GSource *
+g_socket_output_stream_pollable_create_source (GPollableOutputStream *pollable,
+					       GCancellable          *cancellable)
+{
+  GSocketOutputStream *output_stream = G_SOCKET_OUTPUT_STREAM (pollable);
+  GSource *socket_source, *pollable_source;
+
+  pollable_source = g_pollable_source_new (G_OBJECT (output_stream));
+  socket_source = g_socket_create_source (output_stream->priv->socket,
+					  G_IO_OUT, cancellable);
+  g_source_set_dummy_callback (socket_source);
+  g_source_add_child_source (pollable_source, socket_source);
+  g_source_unref (socket_source);
+
+  return pollable_source;
+}
+
+static gssize
+g_socket_output_stream_pollable_write_nonblocking (GPollableOutputStream  *pollable,
+						   const void             *buffer,
+						   gsize                   size,
+						   GError                **error)
+{
+  GSocketOutputStream *output_stream = G_SOCKET_OUTPUT_STREAM (pollable);
+
+  return g_socket_send_with_blocking (output_stream->priv->socket,
+				      buffer, size, FALSE,
+				      NULL, error);
 }
 
 static void
@@ -244,6 +276,14 @@ g_socket_output_stream_class_init (GSocketOutputStreamClass *klass)
 }
 
 static void
+g_socket_output_stream_pollable_iface_init (GPollableOutputStreamInterface *iface)
+{
+  iface->is_writable = g_socket_output_stream_pollable_is_writable;
+  iface->create_source = g_socket_output_stream_pollable_create_source;
+  iface->write_nonblocking = g_socket_output_stream_pollable_write_nonblocking;
+}
+
+static void
 g_socket_output_stream_init (GSocketOutputStream *stream)
 {
   stream->priv = G_TYPE_INSTANCE_GET_PRIVATE (stream, G_TYPE_SOCKET_OUTPUT_STREAM, GSocketOutputStreamPrivate);
@@ -254,6 +294,3 @@ _g_socket_output_stream_new (GSocket *socket)
 {
   return G_SOCKET_OUTPUT_STREAM (g_object_new (G_TYPE_SOCKET_OUTPUT_STREAM, "socket", socket, NULL));
 }
-
-#define __G_SOCKET_OUTPUT_STREAM_C__
-#include "gioaliasdef.c"

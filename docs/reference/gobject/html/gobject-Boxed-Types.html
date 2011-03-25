@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Boxed Types</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="rn01.html" title="API Reference">
 <link rel="prev" href="gobject-Enumeration-and-Flag-Types.html" title="Enumeration and Flag Types">
 <link rel="next" href="gobject-Generic-values.html" title="Generic values">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -60,8 +60,9 @@
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-ARRAY:CAPS" title="G_TYPE_ARRAY">G_TYPE_ARRAY</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-BYTE-ARRAY:CAPS" title="G_TYPE_BYTE_ARRAY">G_TYPE_BYTE_ARRAY</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-PTR-ARRAY:CAPS" title="G_TYPE_PTR_ARRAY">G_TYPE_PTR_ARRAY</a>
-#define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-VARIANT:CAPS" title="G_TYPE_VARIANT">G_TYPE_VARIANT</a>
 #define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-VARIANT-TYPE:CAPS" title="G_TYPE_VARIANT_TYPE">G_TYPE_VARIANT_TYPE</a>
+#define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-ERROR:CAPS" title="G_TYPE_ERROR">G_TYPE_ERROR</a>
+#define             <a class="link" href="gobject-Boxed-Types.html#G-TYPE-DATE-TIME:CAPS" title="G_TYPE_DATE_TIME">G_TYPE_DATE_TIME</a>
 typedef             <a class="link" href="gobject-Boxed-Types.html#GStrv" title="GStrv">GStrv</a>;
 </pre>
 </div>
@@ -301,8 +302,8 @@ and <a class="link" href="gobject-The-Base-Object-Type.html#g-object-get" title=
         <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-class-install-property">g_object_class_install_property</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">object_class</span><span class="symbol">,</span>
 <span class="normal">                                 PROP_AUTHORS</span><span class="symbol">,</span>
 <span class="normal">                                 </span><span class="function"><a href="gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-boxed">g_param_spec_boxed</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"authors"</span><span class="symbol">,</span>
-<span class="normal">                                                     </span><span class="function">_</span><span class="symbol">(</span><span class="string">"Authors"</span><span class="symbol">),</span>
-<span class="normal">                                                     </span><span class="function">_</span><span class="symbol">(</span><span class="string">"List of authors"</span><span class="symbol">),</span>
+<span class="normal">                                                     </span><span class="function"><a href="./../glib/glib/glib-I18N.html#gettext-macro">_</a></span><span class="symbol">(</span><span class="string">"Authors"</span><span class="symbol">),</span>
+<span class="normal">                                                     </span><span class="function"><a href="./../glib/glib/glib-I18N.html#gettext-macro">_</a></span><span class="symbol">(</span><span class="string">"List of authors"</span><span class="symbol">),</span>
 <span class="normal">                                                     <a href="gobject-Boxed-Types.html#G-TYPE-STRV:CAPS">G_TYPE_STRV</a></span><span class="symbol">,</span>
 <span class="normal">                                                     <a href="gobject-GParamSpec.html#G-PARAM-READWRITE:CAPS">G_PARAM_READWRITE</a></span><span class="symbol">));</span>
 
@@ -365,16 +366,6 @@ The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><sp
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="G_TYPE_VARIANT">
-<a name="G-TYPE-VARIANT:CAPS"></a><h3>G_TYPE_VARIANT</h3>
-<pre class="programlisting">#define G_TYPE_VARIANT (g_variant_get_gtype ())
-</pre>
-<p>
-The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> for a boxed type holding a <a href="./../glib/glib/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> reference.
-</p>
-<p class="since">Since 2.24</p>
-</div>
-<hr>
 <div class="refsect2" title="G_TYPE_VARIANT_TYPE">
 <a name="G-TYPE-VARIANT-TYPE:CAPS"></a><h3>G_TYPE_VARIANT_TYPE</h3>
 <pre class="programlisting">#define G_TYPE_VARIANT_TYPE (g_variant_type_get_gtype ())
@@ -383,6 +374,26 @@ The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><sp
 The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> for a boxed type holding a <a href="./../glib/glib/glib-GVariantType.html#GVariantType"><span class="type">GVariantType</span></a>.
 </p>
 <p class="since">Since 2.24</p>
+</div>
+<hr>
+<div class="refsect2" title="G_TYPE_ERROR">
+<a name="G-TYPE-ERROR:CAPS"></a><h3>G_TYPE_ERROR</h3>
+<pre class="programlisting">#define G_TYPE_ERROR (g_error_get_type ())
+</pre>
+<p>
+The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> for a boxed type holding a <a href="./../glib/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>.
+</p>
+<p class="since">Since 2.26</p>
+</div>
+<hr>
+<div class="refsect2" title="G_TYPE_DATE_TIME">
+<a name="G-TYPE-DATE-TIME:CAPS"></a><h3>G_TYPE_DATE_TIME</h3>
+<pre class="programlisting">#define G_TYPE_DATE_TIME (g_date_time_get_type ())
+</pre>
+<p>
+The <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> for a boxed type holding a <a href="./../glib/glib/glib-GDateTime.html#GDateTime"><span class="type">GDateTime</span></a>.
+</p>
+<p class="since">Since 2.26</p>
 </div>
 <hr>
 <div class="refsect2" title="GStrv">
@@ -401,6 +412,6 @@ A C representable type name for <a class="link" href="gobject-Boxed-Types.html#G
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

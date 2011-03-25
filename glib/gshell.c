@@ -24,14 +24,13 @@
 
 #include <string.h>
 
-#include "glib.h"
+#include "gshell.h"
 
-#ifdef _
-#warning "FIXME remove gettext hack"
-#endif
-
+#include "gslist.h"
+#include "gstrfuncs.h"
+#include "gstring.h"
+#include "gtestutils.h"
 #include "glibintl.h"
-#include "galias.h"
 
 /**
  * SECTION: shell
@@ -433,7 +432,7 @@ tokenize_command_line (const gchar *command_line,
   const gchar *p;
   GString *current_token = NULL;
   GSList *retval = NULL;
-  gboolean quoted;;
+  gboolean quoted;
 
   current_quote = '\0';
   quoted = FALSE;
@@ -690,6 +689,3 @@ g_shell_parse_argv (const gchar *command_line,
   
   return FALSE;
 }
-
-#define __G_SHELL_C__
-#include "galiasdef.c"

@@ -26,14 +26,17 @@
 #include "goutputstream.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gfilteroutputstream
  * @short_description: Filter Output Stream
  * @include: gio/gio.h
  *
- **/
+ * Base class for output stream implementations that perform some
+ * kind of filtering operation on a base stream. Typical examples
+ * of filtering operations are character set conversion, compression
+ * and byte order flipping.
+ */
 
 enum {
   PROP_0,
@@ -65,7 +68,7 @@ static gboolean g_filter_output_stream_close        (GOutputStream  *stream,
                                                      GCancellable   *cancellable,
                                                      GError        **error);
 
-G_DEFINE_TYPE (GFilterOutputStream, g_filter_output_stream, G_TYPE_OUTPUT_STREAM)
+G_DEFINE_ABSTRACT_TYPE (GFilterOutputStream, g_filter_output_stream, G_TYPE_OUTPUT_STREAM)
 
 #define GET_PRIVATE(inst) G_TYPE_INSTANCE_GET_PRIVATE (inst, \
   G_TYPE_FILTER_OUTPUT_STREAM, GFilterOutputStreamPrivate)
@@ -196,7 +199,7 @@ g_filter_output_stream_init (GFilterOutputStream *stream)
  * 
  * Gets the base stream for the filter stream.
  *
- * Returns: a #GOutputStream.
+ * Returns: (transfer none): a #GOutputStream.
  **/
 GOutputStream *
 g_filter_output_stream_get_base_stream (GFilterOutputStream *stream)
@@ -307,6 +310,3 @@ g_filter_output_stream_close (GOutputStream  *stream,
 
   return res;
 }
-
-#define __G_FILTER_OUTPUT_STREAM_C__
-#include "gioaliasdef.c"

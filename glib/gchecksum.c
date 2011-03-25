@@ -22,12 +22,14 @@
 
 #include <string.h>
 
-#include "glibconfig.h"
 #include "gchecksum.h"
-#include "glib.h"
+
+#include "gmem.h"
+#include "gstrfuncs.h"
+#include "gtestutils.h"
+#include "gtypes.h"
 #include "glibintl.h"
 
-#include "galias.h"
 
 /**
  * SECTION: checksum
@@ -63,7 +65,7 @@ typedef struct
 {
   guint32 buf[4];
   guint32 bits[2];
-  
+
   guchar data[MD5_DATASIZE];
 
   guchar digest[MD5_DIGEST_LEN];
@@ -209,9 +211,9 @@ md5_sum_init (Md5sum *md5)
  * reflect the addition of 16 longwords of new data.  md5_sum_update()
  * blocks the data and converts bytes into longwords for this routine.
  */
-static void 
-md5_transform (guint32	     buf[4],
-	       guint32 const in[16])
+static void
+md5_transform (guint32       buf[4],
+               guint32 const in[16])
 {
   register guint32 a, b, c, d;
 
@@ -223,7 +225,7 @@ md5_transform (guint32	     buf[4],
 
 /* This is the central step in the MD5 algorithm. */
 #define md5_step(f, w, x, y, z, data, s) \
-	( w += f (x, y, z) + data,  w = w << s | w >> (32 - s),  w += x )
+        ( w += f (x, y, z) + data,  w = w << s | w >> (32 - s),  w += x )
 
   a = buf[0];
   b = buf[1];
@@ -246,7 +248,7 @@ md5_transform (guint32	     buf[4],
   md5_step (F1, d, a, b, c, in[13] + 0xfd987193, 12);
   md5_step (F1, c, d, a, b, in[14] + 0xa679438e, 17);
   md5_step (F1, b, c, d, a, in[15] + 0x49b40821, 22);
-	
+        
   md5_step (F2, a, b, c, d, in[1]  + 0xf61e2562,  5);
   md5_step (F2, d, a, b, c, in[6]  + 0xc040b340,  9);
   md5_step (F2, c, d, a, b, in[11] + 0x265e5a51, 14);
@@ -342,7 +344,7 @@ md5_sum_update (Md5sum       *md5,
         }
 
       memcpy (p, data, bit);
-      
+
       md5_byte_reverse (md5->data, 16);
       md5_transform (md5->buf, (guint32 *) md5->data);
 
@@ -354,7 +356,7 @@ md5_sum_update (Md5sum       *md5,
   while (length >= MD5_DATASIZE)
     {
       memcpy (md5->data, data, MD5_DATASIZE);
-      
+
       md5_byte_reverse (md5->data, 16);
       md5_transform (md5->buf, (guint32 *) md5->data);
 
@@ -390,7 +392,7 @@ md5_sum_close (Md5sum *md5)
     {
       /* Two lots of padding:  Pad the first block to 64 bytes */
       memset (p, 0, count);
-      
+
       md5_byte_reverse (md5->data, 16);
       md5_transform (md5->buf, (guint32 *) md5->data);
 
@@ -411,7 +413,7 @@ md5_sum_close (Md5sum *md5)
 
   md5_transform (md5->buf, (guint32 *) md5->data);
   md5_byte_reverse ((guchar *) md5->buf, 4);
-  
+
   memcpy (md5->digest, md5->buf, 16);
 
   /* Reset buffers in case they contain sensitive data */
@@ -603,7 +605,7 @@ sha1_transform (guint32  buf[5],
   subRound (D, E, A, B, C, f2, K2, expand (in, 37));
   subRound (C, D, E, A, B, f2, K2, expand (in, 38));
   subRound (B, C, D, E, A, f2, K2, expand (in, 39));
-  
+
   subRound (A, B, C, D, E, f3, K3, expand (in, 40));
   subRound (E, A, B, C, D, f3, K3, expand (in, 41));
   subRound (D, E, A, B, C, f3, K3, expand (in, 42));
@@ -694,7 +696,7 @@ sha1_sum_update (Sha1sum      *sha1,
           memcpy (p, buffer, count);
           return;
         }
-      
+
       memcpy (p, buffer, dataCount);
 
       sha_byte_reverse (sha1->data, SHA1_DATASIZE);
@@ -708,7 +710,7 @@ sha1_sum_update (Sha1sum      *sha1,
   while (count >= SHA1_DATASIZE)
     {
       memcpy (sha1->data, buffer, SHA1_DATASIZE);
-      
+
       sha_byte_reverse (sha1->data, SHA1_DATASIZE);
       sha1_transform (sha1->buf, sha1->data);
 
@@ -1076,7 +1078,7 @@ sha256_sum_digest (Sha256sum *sha256,
  *
  * Return value: the checksum length, or -1 if @checksum_type is
  * not supported.
- * 
+ *
  * Since: 2.16
  */
 gssize
@@ -1107,7 +1109,7 @@ g_checksum_type_get_length (GChecksumType checksum_type)
  * g_checksum_new:
  * @checksum_type: the desired type of checksum
  *
- * Creates a new #GChecksum, using the checksum algorithm @checksum_type. 
+ * Creates a new #GChecksum, using the checksum algorithm @checksum_type.
  * If the @checksum_type is not known, %NULL is returned.
  * A #GChecksum can be used to compute the checksum, or digest, of an
  * arbitrary binary blob, using different hashing algorithms.
@@ -1121,7 +1123,7 @@ g_checksum_type_get_length (GChecksumType checksum_type)
  * will be closed and it won't be possible to call g_checksum_update()
  * on it anymore.
  *
- * Return value: the newly created #GChecksum, or %NULL. 
+ * Return value: the newly created #GChecksum, or %NULL.
  *   Use g_checksum_free() to free the memory allocated by it.
  *
  * Since: 2.16
@@ -1240,7 +1242,7 @@ g_checksum_update (GChecksum    *checksum,
                    gssize        length)
 {
   g_return_if_fail (checksum != NULL);
-  g_return_if_fail (data != NULL);
+  g_return_if_fail (length == 0 || data != NULL);
 
   if (length < 0)
     length = strlen ((const gchar *) data);
@@ -1278,13 +1280,13 @@ g_checksum_update (GChecksum    *checksum,
  *
  * Once this function has been called the #GChecksum can no longer be
  * updated with g_checksum_update().
- * 
- * The hexadecimal characters will be lower case. 
+ *
+ * The hexadecimal characters will be lower case.
  *
  * Return value: the hexadecimal representation of the checksum. The
  *   returned string is owned by the checksum and should not be modified
  *   or freed.
- * 
+ *
  * Since: 2.16
  */
 G_CONST_RETURN gchar *
@@ -1293,7 +1295,7 @@ g_checksum_get_string (GChecksum *checksum)
   gchar *str = NULL;
 
   g_return_val_if_fail (checksum != NULL, NULL);
-  
+
   if (checksum->digest_str)
     return checksum->digest_str;
 
@@ -1398,7 +1400,7 @@ g_checksum_get_digest (GChecksum  *checksum,
  * Computes the checksum for a binary @data of @length. This is a
  * convenience wrapper for g_checksum_new(), g_checksum_get_string()
  * and g_checksum_free().
- * 
+ *
  * The hexadecimal string returned will be in lower case.
  *
  * Return value: the digest of the binary data as a string in hexadecimal.
@@ -1415,7 +1417,7 @@ g_compute_checksum_for_data (GChecksumType  checksum_type,
   gchar *retval;
 
   g_return_val_if_fail (IS_VALID_TYPE (checksum_type), NULL);
-  g_return_val_if_fail (data != NULL, NULL);
+  g_return_val_if_fail (length == 0 || data != NULL, NULL);
 
   checksum = g_checksum_new (checksum_type);
   if (!checksum)
@@ -1435,7 +1437,7 @@ g_compute_checksum_for_data (GChecksumType  checksum_type,
  * @length: the length of the string, or -1 if the string is null-terminated.
  *
  * Computes the checksum of a string.
- * 
+ *
  * The hexadecimal string returned will be in lower case.
  *
  * Return value: the checksum as a hexadecimal string. The returned string
@@ -1449,13 +1451,10 @@ g_compute_checksum_for_string (GChecksumType  checksum_type,
                                gssize         length)
 {
   g_return_val_if_fail (IS_VALID_TYPE (checksum_type), NULL);
-  g_return_val_if_fail (str != NULL, NULL);
+  g_return_val_if_fail (length == 0 || str != NULL, NULL);
 
   if (length < 0)
     length = strlen (str);
 
   return g_compute_checksum_for_data (checksum_type, (const guchar *) str, length);
 }
-
-#define __G_CHECKSUM_C__
-#include "galiasdef.c"

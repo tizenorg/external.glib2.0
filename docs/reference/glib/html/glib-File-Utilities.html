@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>File Utilities</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Spawning-Processes.html" title="Spawning Processes">
 <link rel="next" href="glib-URI-Functions.html" title="URI Functions">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -92,10 +92,11 @@ const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span cla
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *newfilename</code></em>);
 <span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-mkdir" title="g_mkdir ()">g_mkdir</a>                             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> mode</code></em>);
+typedef             <a class="link" href="glib-File-Utilities.html#GStatBuf" title="GStatBuf">GStatBuf</a>;
 <span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-stat" title="g_stat ()">g_stat</a>                              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
-                                                         <em class="parameter"><code><span class="type">struct _g_stat_struct</span> *buf</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-File-Utilities.html#GStatBuf" title="GStatBuf"><span class="type">GStatBuf</span></a> *buf</code></em>);
 <span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-lstat" title="g_lstat ()">g_lstat</a>                             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
-                                                         <em class="parameter"><code><span class="type">struct _g_stat_struct</span> *buf</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-File-Utilities.html#GStatBuf" title="GStatBuf"><span class="type">GStatBuf</span></a> *buf</code></em>);
 <span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-unlink" title="g_unlink ()">g_unlink</a>                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>);
 <span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-remove" title="g_remove ()">g_remove</a>                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>);
 <span class="returnvalue">int</span>                 <a class="link" href="glib-File-Utilities.html#g-rmdir" title="g_rmdir ()">g_rmdir</a>                             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>);
@@ -553,6 +554,10 @@ If the call was sucessful, it returns <a class="link" href="glib-Standard-Macros
 it returns <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> and sets <em class="parameter"><code>error</code></em>. The error domain is <a class="link" href="glib-File-Utilities.html#G-FILE-ERROR:CAPS" title="G_FILE_ERROR"><span class="type">G_FILE_ERROR</span></a>.
 Possible error codes are those in the <a class="link" href="glib-File-Utilities.html#GFileError" title="enum GFileError"><span class="type">GFileError</span></a> enumeration.
 </p>
+<p>
+Note that the name for the temporary file is constructed by appending up
+to 7 characters to <em class="parameter"><code>filename</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -904,7 +909,8 @@ An opaque structure representing an opened directory.
                                                          <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Opens a directory for reading. The names of the files in the
-directory can then be retrieved using <a class="link" href="glib-File-Utilities.html#g-dir-read-name" title="g_dir_read_name ()"><code class="function">g_dir_read_name()</code></a>.
+directory can then be retrieved using <a class="link" href="glib-File-Utilities.html#g-dir-read-name" title="g_dir_read_name ()"><code class="function">g_dir_read_name()</code></a>.  Note
+that the ordering is not defined.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -942,9 +948,18 @@ directory can then be retrieved using <a class="link" href="glib-File-Utilities.
 <a name="g-dir-read-name"></a><h3>g_dir_read_name ()</h3>
 <pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_dir_read_name                     (<em class="parameter"><code><a class="link" href="glib-File-Utilities.html#GDir" title="GDir"><span class="type">GDir</span></a> *dir</code></em>);</pre>
 <p>
-Retrieves the name of the next entry in the directory.  The '.' and
-'..' entries are omitted. On Windows, the returned name is in
-UTF-8. On Unix, it is in the on-disk encoding.
+Retrieves the name of another entry in the directory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+The order of entries returned from this function is not defined,
+and may vary by file system or other operating-system dependent
+factors. 
+</p>
+<p>
+On Unix, the '.' and '..' entries are omitted, and the returned
+name is in the on-disk encoding.
+</p>
+<p>
+On Windows, as is true of all GLib functions which operate on
+filenames, the returned name is in UTF-8.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1318,16 +1333,43 @@ See your C library manual for more details about <code class="function">mkdir()<
 <p class="since">Since 2.6</p>
 </div>
 <hr>
+<div class="refsect2" title="GStatBuf">
+<a name="GStatBuf"></a><h3>GStatBuf</h3>
+<p>
+A type corresponding to the appropriate struct type for the stat
+system call, depending on the platform and/or compiler being used.
+</p>
+<p>
+See <a class="link" href="glib-File-Utilities.html#g-stat" title="g_stat ()"><code class="function">g_stat()</code></a> for more information.
+</p>
+</div>
+<hr>
 <div class="refsect2" title="g_stat ()">
 <a name="g-stat"></a><h3>g_stat ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 g_stat                              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
-                                                         <em class="parameter"><code><span class="type">struct _g_stat_struct</span> *buf</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-File-Utilities.html#GStatBuf" title="GStatBuf"><span class="type">GStatBuf</span></a> *buf</code></em>);</pre>
 <p>
 A wrapper for the POSIX <code class="function">stat()</code> function. The <code class="function">stat()</code> function
 returns information about a file. On Windows the <code class="function">stat()</code> function in
 the C library checks only the FAT-style READONLY attribute and does
 not look at the ACL at all. Thus on Windows the protection bits in
 the st_mode field are a fabrication of little use.
+</p>
+<p>
+On Windows the Microsoft C libraries have several variants of the
+<span class="structname">stat</span> struct and <code class="function">stat()</code> function with names
+like "_stat", "_stat32", "_stat32i64" and "_stat64i32". The one
+used here is for 32-bit code the one with 32-bit size and time
+fields, specifically called "_stat32".
+</p>
+<p>
+In Microsoft's compiler, by default "struct stat" means one with
+64-bit time fields while in MinGW "struct stat" is the legacy one
+with 32-bit fields. To hopefully clear up this messs, the gstdio.h
+header defines a type GStatBuf which is the appropriate struct type
+depending on the platform and/or compiler being used. On POSIX it
+is just "struct stat", but note that even on POSIX platforms,
+"stat" might be a macro.
 </p>
 <p>
 See your C library manual for more details about <code class="function">stat()</code>.
@@ -1361,7 +1403,7 @@ See your C library manual for more details about <code class="function">stat()</
 <div class="refsect2" title="g_lstat ()">
 <a name="g-lstat"></a><h3>g_lstat ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 g_lstat                             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *filename</code></em>,
-                                                         <em class="parameter"><code><span class="type">struct _g_stat_struct</span> *buf</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-File-Utilities.html#GStatBuf" title="GStatBuf"><span class="type">GStatBuf</span></a> *buf</code></em>);</pre>
 <p>
 A wrapper for the POSIX <code class="function">lstat()</code> function. The <code class="function">lstat()</code> function is
 like <code class="function">stat()</code> except that in the case of symbolic links, it returns
@@ -1805,6 +1847,6 @@ on your system.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

@@ -36,7 +36,7 @@
 #include "gboxed.h"
 #include "gobject.h"
 #include "genums.h"
-#include "gobjectalias.h"
+#include "gobject_trace.h"
 
 
 /**
@@ -1608,6 +1608,8 @@ g_signal_newv (const gchar       *signal_name,
       node->name = g_intern_string (name);
       key.quark = g_quark_from_string (name);
       g_signal_key_bsa = g_bsearch_array_insert (g_signal_key_bsa, &g_signal_key_bconfig, &key);
+
+      TRACE(GOBJECT_SIGNAL_NEW(signal_id, name, itype));
     }
   node->destroyed = FALSE;
   node->test_class_offset = 0;
@@ -3124,7 +3126,9 @@ signal_emit_unlocked_R (SignalNode   *node,
 	G_BREAKPOINT ();
     }
 #endif	/* G_ENABLE_DEBUG */
-  
+
+  TRACE(GOBJECT_SIGNAL_EMIT(node->signal_id, detail, instance, G_TYPE_FROM_INSTANCE (instance)));
+
   SIGNAL_LOCK ();
   signal_id = node->signal_id;
   if (node->flags & G_SIGNAL_NO_RECURSE)
@@ -3382,7 +3386,9 @@ signal_emit_unlocked_R (SignalNode   *node,
   SIGNAL_UNLOCK ();
   if (accumulator)
     g_value_unset (&accu);
-  
+
+  TRACE(GOBJECT_SIGNAL_EMIT_END(node->signal_id, detail, instance, G_TYPE_FROM_INSTANCE (instance)));
+
   return return_value_altered;
 }
 
@@ -3409,7 +3415,7 @@ type_debug_name (GType type)
  * boolean values. The behavior that this accumulator gives is
  * that a return of %TRUE stops the signal emission: no further
  * callbacks will be invoked, while a return of %FALSE allows
- * the emission to coninue. The idea here is that a %TRUE return
+ * the emission to continue. The idea here is that a %TRUE return
  * indicates that the callback <emphasis>handled</emphasis> the signal,
  * and no further handling is needed.
  *
@@ -3433,8 +3439,38 @@ g_signal_accumulator_true_handled (GSignalInvocationHint *ihint,
   return continue_emission;
 }
 
+/**
+ * g_signal_accumulator_first_wins:
+ * @ihint: standard #GSignalAccumulator parameter
+ * @return_accu: standard #GSignalAccumulator parameter
+ * @handler_return: standard #GSignalAccumulator parameter
+ * @dummy: standard #GSignalAccumulator parameter
+ *
+ * A predefined #GSignalAccumulator for signals intended to be used as a
+ * hook for application code to provide a particular value.  Usually
+ * only one such value is desired and multiple handlers for the same
+ * signal don't make much sense (except for the case of the default
+ * handler defined in the class structure, in which case you will
+ * usually want the signal connection to override the class handler).
+ *
+ * This accumulator will use the return value from the first signal
+ * handler that is run as the return value for the signal and not run
+ * any further handlers (ie: the first handler "wins").
+ *
+ * Returns: standard #GSignalAccumulator result
+ *
+ * Since: 2.28
+ **/
+gboolean
+g_signal_accumulator_first_wins (GSignalInvocationHint *ihint,
+                                 GValue                *return_accu,
+                                 const GValue          *handler_return,
+                                 gpointer               dummy)
+{
+  g_value_copy (handler_return, return_accu);
+  return FALSE;
+}
+
+
 /* --- compile standard marshallers --- */
 #include "gmarshal.c"
-
-#define __G_SIGNAL_C__
-#include "gobjectaliasdef.c"

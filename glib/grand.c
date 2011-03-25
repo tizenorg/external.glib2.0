@@ -29,10 +29,10 @@
  * Modified by the GLib Team and others 1997-2000.  See the AUTHORS
  * file for a list of people on the GLib Team.  See the ChangeLog
  * files for a list of changes.  These files are distributed with
- * GLib at ftp://ftp.gtk.org/pub/gtk/.  
+ * GLib at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-/* 
+/*
  * MT safe
  */
 
@@ -47,9 +47,13 @@
 #include <unistd.h>
 #endif
 
-#include "glib.h"
+#include "grand.h"
+
+#include "gmain.h"
+#include "gmem.h"
+#include "gtestutils.h"
+#include "gthread.h"
 #include "gthreadprivate.h"
-#include "galias.h"
 
 #ifdef G_OS_WIN32
 #include <process.h>		/* For getpid() */
@@ -64,8 +68,8 @@
  * pseudo-random number generator (PRNG). It uses the Mersenne Twister
  * PRNG, which was originally developed by Makoto Matsumoto and Takuji
  * Nishimura. Further information can be found at
- * <ulink url="http://www.math.keio.ac.jp/~matumoto/emt.html">
- * www.math.keio.ac.jp/~matumoto/emt.html</ulink>.
+ * <ulink url="http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html">
+ * http://www.math.sci.hiroshima-u.ac.jp/~m-mat/MT/emt.html</ulink>.
  *
  * If you just need a random number, you simply call the
  * <function>g_random_*</function> functions, which will create a
@@ -694,7 +698,3 @@ g_random_set_seed (guint32 seed)
     g_rand_set_seed (global_random, seed);
   G_UNLOCK (global_random);
 }
-
-
-#define __G_RAND_C__
-#include "galiasdef.c"

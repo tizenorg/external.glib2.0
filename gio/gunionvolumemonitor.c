@@ -38,7 +38,6 @@
 
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 struct _GUnionVolumeMonitor {
   GVolumeMonitor parent;
@@ -556,7 +555,7 @@ g_union_volume_monitor_new (void)
  * 
  * Gets the volume monitor used by gio.
  *
- * Returns: a reference to the #GVolumeMonitor used by gio. Call
+ * Returns: (transfer full): a reference to the #GVolumeMonitor used by gio. Call
  *    g_object_unref() when done with it.
  **/
 GVolumeMonitor *
@@ -646,7 +645,7 @@ _g_mount_get_for_mount_path (const gchar  *mount_path,
  * is to return #GVolume objects representing entries in the users
  * "favorite servers" list or similar.
  *
- * Returns: the #GVolume object that is the parent for @mount or %NULL
+ * Returns: (transfer full): the #GVolume object that is the parent for @mount or %NULL
  * if no wants to adopt the #GMount.
  *
  * Deprecated: 2.20: Instead of using this function, #GVolumeMonitor
@@ -689,7 +688,3 @@ g_volume_monitor_adopt_orphan_mount (GMount *mount)
 
   return volume;
 }
-
-
-#define __G_UNION_VOLUME_MONITOR_C__
-#include "gioaliasdef.c"

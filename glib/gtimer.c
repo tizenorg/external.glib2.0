@@ -21,10 +21,10 @@
  * Modified by the GLib Team and others 1997-2000.  See the AUTHORS
  * file for a list of people on the GLib Team.  See the ChangeLog
  * files for a list of changes.  These files are distributed with
- * GLib at ftp://ftp.gtk.org/pub/gtk/. 
+ * GLib at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-/* 
+/*
  * MT safe
  */
 
@@ -37,9 +37,11 @@
 #include <unistd.h>
 #endif /* HAVE_UNISTD_H */
 
-#ifndef G_OS_WIN32
+#ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
+#endif
 #include <time.h>
+#ifndef G_OS_WIN32
 #include <errno.h>
 #endif /* G_OS_WIN32 */
 
@@ -47,9 +49,12 @@
 #include <windows.h>
 #endif /* G_OS_WIN32 */
 
-#include "glib.h"
-#include "gthread.h"
-#include "galias.h"
+#include "gtimer.h"
+
+#include "gmem.h"
+#include "gstrfuncs.h"
+#include "gtestutils.h"
+#include "gmain.h"
 
 /**
  * SECTION: timers
@@ -60,18 +65,7 @@
  * that time. This is done somewhat differently on different platforms,
  * and can be tricky to get exactly right, so #GTimer provides a
  * portable/convenient interface.
- *
- * <note><para>
- *  #GTimer uses a higher-quality clock when thread support is available.
- *  Therefore, calling g_thread_init() while timers are running may lead to
- *  unreliable results. It is best to call g_thread_init() before starting any
- *  timers, if you are using threads at all.
- * </para></note>
  **/
-
-#define G_NSEC_PER_SEC 1000000000
-
-#define GETTIME(v) (v = g_thread_gettime ())
 
 /**
  * GTimer:
@@ -101,7 +95,7 @@ g_timer_new (void)
   timer = g_new (GTimer, 1);
   timer->active = TRUE;
 
-  GETTIME (timer->start);
+  timer->start = g_get_monotonic_time ();
 
   return timer;
 }
@@ -136,7 +130,7 @@ g_timer_start (GTimer *timer)
 
   timer->active = TRUE;
 
-  GETTIME (timer->start);
+  timer->start = g_get_monotonic_time ();
 }
 
 /**
@@ -153,7 +147,7 @@ g_timer_stop (GTimer *timer)
 
   timer->active = FALSE;
 
-  GETTIME (timer->end);
+  timer->end = g_get_monotonic_time ();
 }
 
 /**
@@ -169,7 +163,7 @@ g_timer_reset (GTimer *timer)
 {
   g_return_if_fail (timer != NULL);
 
-  GETTIME (timer->start);
+  timer->start = g_get_monotonic_time ();
 }
 
 /**
@@ -197,7 +191,7 @@ g_timer_continue (GTimer *timer)
 
   elapsed = timer->end - timer->start;
 
-  GETTIME (timer->start);
+  timer->start = g_get_monotonic_time ();
 
   timer->start -= elapsed;
 
@@ -235,14 +229,14 @@ g_timer_elapsed (GTimer *timer,
   g_return_val_if_fail (timer != NULL, 0);
 
   if (timer->active)
-    GETTIME (timer->end);
+    timer->end = g_get_monotonic_time ();
 
   elapsed = timer->end - timer->start;
 
-  total = elapsed / 1e9;
+  total = elapsed / 1e6;
 
   if (microseconds)
-    *microseconds = (elapsed / 1000) % 1000000;
+    *microseconds = elapsed % 1000000;
 
   return total;
 }
@@ -252,57 +246,13 @@ g_usleep (gulong microseconds)
 {
 #ifdef G_OS_WIN32
   Sleep (microseconds / 1000);
-#else /* !G_OS_WIN32 */
-# ifdef HAVE_NANOSLEEP
+#else
   struct timespec request, remaining;
   request.tv_sec = microseconds / G_USEC_PER_SEC;
   request.tv_nsec = 1000 * (microseconds % G_USEC_PER_SEC);
   while (nanosleep (&request, &remaining) == -1 && errno == EINTR)
     request = remaining;
-# else /* !HAVE_NANOSLEEP */
-#  ifdef HAVE_NSLEEP
-  /* on AIX, nsleep is analogous to nanosleep */
-  struct timespec request, remaining;
-  request.tv_sec = microseconds / G_USEC_PER_SEC;
-  request.tv_nsec = 1000 * (microseconds % G_USEC_PER_SEC);
-  while (nsleep (&request, &remaining) == -1 && errno == EINTR)
-    request = remaining;
-#  else /* !HAVE_NSLEEP */
-  if (g_thread_supported ())
-    {
-      static GStaticMutex mutex = G_STATIC_MUTEX_INIT;
-      static GCond* cond = NULL;
-      GTimeVal end_time;
-      
-      g_get_current_time (&end_time);
-      if (microseconds > G_MAXLONG)
-	{
-	  microseconds -= G_MAXLONG;
-	  g_time_val_add (&end_time, G_MAXLONG);
-	}
-      g_time_val_add (&end_time, microseconds);
-
-      g_static_mutex_lock (&mutex);
-      
-      if (!cond)
-	cond = g_cond_new ();
-      
-      while (g_cond_timed_wait (cond, g_static_mutex_get_mutex (&mutex), 
-				&end_time))
-	/* do nothing */;
-      
-      g_static_mutex_unlock (&mutex);
-    }
-  else
-    {
-      struct timeval tv;
-      tv.tv_sec = microseconds / G_USEC_PER_SEC;
-      tv.tv_usec = microseconds % G_USEC_PER_SEC;
-      select(0, NULL, NULL, NULL, &tv);
-    }
-#  endif /* !HAVE_NSLEEP */
-# endif /* !HAVE_NANOSLEEP */
-#endif /* !G_OS_WIN32 */
+#endif
 }
 
 /**
@@ -430,9 +380,20 @@ g_time_val_from_iso8601 (const gchar *iso_date,
       tm.tm_year = val / 10000 - 1900;
     }
 
-  if (*iso_date++ != 'T')
+  if (*iso_date != 'T')
+    {
+      /* Date only */
+      if (*iso_date == '\0')
+        return TRUE;
+      return FALSE;
+    }
+
+  iso_date++;
+
+  /* If there is a 'T' then there has to be a time */
+  if (!g_ascii_isdigit (*iso_date))
     return FALSE;
-  
+
   val = strtoul (iso_date, (char **)&iso_date, 10);
   if (*iso_date == ':')
     {
@@ -563,6 +524,3 @@ g_time_val_to_iso8601 (GTimeVal *time_)
   
   return retval;
 }
-
-#define __G_TIMER_C__
-#include "galiasdef.c"

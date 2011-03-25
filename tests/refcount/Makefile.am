@@ -1,9 +1,7 @@
 include $(top_srcdir)/Makefile.decl
 
 INCLUDES =					\
-	-I$(top_srcdir)				\
-	-I$(top_srcdir)/glib			\
-	-I$(top_srcdir)/gmodule			\
+	$(gmodule_INCLUDES) 			\
 	$(GLIB_DEBUG_FLAGS)
 
 libglib = $(top_builddir)/glib/libglib-2.0.la
@@ -19,6 +17,8 @@ test_programs = 				\
 	objects2				\
 	properties				\
 	properties2				\
+	properties3				\
+	properties4				\
 	signal1					\
 	signal2					\
 	signal3

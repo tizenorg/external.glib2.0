@@ -27,8 +27,6 @@
 #endif
 #include <string.h>
 
-#include "glib.h"
-
 #ifdef G_PLATFORM_WIN32
 #include <stdio.h>
 #define STRICT
@@ -38,8 +36,13 @@
 
 #include "libcharset/libcharset.h"
 
+#include "gconvert.h"
+#include "ghash.h"
+#include "gstrfuncs.h"
+#include "gtestutils.h"
+#include "gtypes.h"
+#include "gthread.h"
 #include "glibintl.h"
-#include "galias.h"
 
 #define UTF8_COMPUTE(Char, Mask, Len)					      \
   if (Char < 128)							      \
@@ -96,7 +99,7 @@
       (Result) |= ((Chars)[(Count)] & 0x3f);				      \
     }
     
-/**
+/*
  * Check whether a Unicode (5.2) char is in a valid range.
  *
  * The first check comes from the Unicode guarantee to never encode
@@ -704,20 +707,23 @@ g_utf8_strrchr (const char *p,
 
 
 /* Like g_utf8_get_char, but take a maximum length
- * and return (gunichar)-2 on incomplete trailing character
+ * and return (gunichar)-2 on incomplete trailing character;
+ * also check for malformed or overlong sequences
+ * and return (gunichar)-1 in this case.
  */
 static inline gunichar
 g_utf8_get_char_extended (const  gchar *p,
-			  gssize max_len)  
+			  gssize max_len)
 {
   guint i, len;
+  gunichar min_code;
   gunichar wc = (guchar) *p;
 
   if (wc < 0x80)
     {
       return wc;
     }
-  else if (wc < 0xc0)
+  else if (G_UNLIKELY (wc < 0xc0))
     {
       return (gunichar)-1;
     }
@@ -725,33 +731,38 @@ g_utf8_get_char_extended (const  gchar *p,
     {
       len = 2;
       wc &= 0x1f;
+      min_code = 1 << 7;
     }
   else if (wc < 0xf0)
     {
       len = 3;
       wc &= 0x0f;
+      min_code = 1 << 11;
     }
   else if (wc < 0xf8)
     {
       len = 4;
       wc &= 0x07;
+      min_code = 1 << 16;
     }
   else if (wc < 0xfc)
     {
       len = 5;
       wc &= 0x03;
+      min_code = 1 << 21;
     }
   else if (wc < 0xfe)
     {
       len = 6;
       wc &= 0x01;
+      min_code = 1 << 26;
     }
   else
     {
       return (gunichar)-1;
     }
-  
-  if (max_len >= 0 && len > max_len)
+
+  if (G_UNLIKELY (max_len >= 0 && len > max_len))
     {
       for (i = 1; i < max_len; i++)
 	{
@@ -764,8 +775,8 @@ g_utf8_get_char_extended (const  gchar *p,
   for (i = 1; i < len; ++i)
     {
       gunichar ch = ((guchar *)p)[i];
-      
-      if ((ch & 0xc0) != 0x80)
+
+      if (G_UNLIKELY ((ch & 0xc0) != 0x80))
 	{
 	  if (ch)
 	    return (gunichar)-1;
@@ -777,9 +788,9 @@ g_utf8_get_char_extended (const  gchar *p,
       wc |= (ch & 0x3f);
     }
 
-  if (UTF8_LENGTH(wc) != len)
+  if (G_UNLIKELY (wc < min_code))
     return (gunichar)-1;
-  
+
   return wc;
 }
 
@@ -1889,7 +1900,3 @@ _g_utf8_make_valid (const gchar *name)
   
   return g_string_free (string, FALSE);
 }
-
-
-#define __G_UTF8_C__
-#include "galiasdef.c"

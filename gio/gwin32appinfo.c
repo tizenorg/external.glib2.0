@@ -35,7 +35,6 @@
 #include <windows.h>
 #include <shlwapi.h>
 
-#include "gioalias.h"
 
 #ifndef ASSOCF_INIT_BYEXENAME
 #define ASSOCF_INIT_BYEXENAME 0x00000002
@@ -586,6 +585,28 @@ g_app_info_get_all_for_type (const char *content_type)
   
   g_free (wc_key);
   return g_list_reverse (infos);
+}
+
+GList *
+g_app_info_get_recommended_for_type (const char *content_type)
+{
+  /* FIXME: this should generate a list of applications that are registered
+   * as direct handlers for the given content type, without using MIME subclassing.
+   * See g_app_info_get_recommended_for_type() in gdesktopappinfo.c for a reference
+   * UNIX implementation.
+   */
+  return g_app_info_get_all_for_type (content_type);
+}
+
+GList *
+g_app_info_get_fallback_for_type (const char *content_type)
+{
+  /* FIXME: this should generate a list of applications that are registered
+   * as handlers for a superclass of the given content type, but are not
+   * direct handlers for the content type itself. See g_app_info_get_fallback_for_type()
+   * in gdesktopappinfo.c for a reference UNIX implementation.
+   */
+  return g_app_info_get_all_for_type (content_type);
 }
 
 GAppInfo *

@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Unix Mounts</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="volume_mon.html" title="Volumes and Drives">
 <link rel="prev" href="GDrive.html" title="GDrive">
 <link rel="next" href="icons.html" title="Icons">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -35,7 +35,7 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="gio-Unix-Mounts.top_of_page"></a>Unix Mounts</span></h2>
-<p>Unix Mounts — Unix Mounts</p>
+<p>Unix Mounts — UNIX mounts</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
@@ -44,52 +44,51 @@
 <a name="GUnixMountMonitor"></a><pre class="synopsis">
 #include &lt;gio/gunixmounts.h&gt;
 
-                    <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount">GUnixMount</a>;
                     <a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint">GUnixMountPoint</a>;
                     <a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry">GUnixMountEntry</a>;
                     <a class="link" href="gio-Unix-Mounts.html#GUnixMountMonitor-struct" title="GUnixMountMonitor">GUnixMountMonitor</a>;
 <span class="returnvalue">void</span>                <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-free" title="g_unix_mount_free ()">g_unix_mount_free</a>                   (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-compare" title="g_unix_mount_compare ()">g_unix_mount_compare</a>                (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount1</code></em>,
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-compare" title="g_unix_mount_compare ()">g_unix_mount_compare</a>                (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount1</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount2</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-get-mount-path" title="g_unix_mount_get_mount_path ()">g_unix_mount_get_mount_path</a>         (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-get-device-path" title="g_unix_mount_get_device_path ()">g_unix_mount_get_device_path</a>        (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-get-fs-type" title="g_unix_mount_get_fs_type ()">g_unix_mount_get_fs_type</a>            (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-is-readonly" title="g_unix_mount_is_readonly ()">g_unix_mount_is_readonly</a>            (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-is-system-internal" title="g_unix_mount_is_system_internal ()">g_unix_mount_is_system_internal</a>     (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-is-readonly" title="g_unix_mount_is_readonly ()">g_unix_mount_is_readonly</a>            (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-is-system-internal" title="g_unix_mount_is_system_internal ()">g_unix_mount_is_system_internal</a>     (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
 <a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-guess-icon" title="g_unix_mount_guess_icon ()">g_unix_mount_guess_icon</a>             (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
 <span class="returnvalue">char</span> *              <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-guess-name" title="g_unix_mount_guess_name ()">g_unix_mount_guess_name</a>             (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-guess-can-eject" title="g_unix_mount_guess_can_eject ()">g_unix_mount_guess_can_eject</a>        (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-guess-should-display" title="g_unix_mount_guess_should_display ()">g_unix_mount_guess_should_display</a>   (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-guess-can-eject" title="g_unix_mount_guess_can_eject ()">g_unix_mount_guess_can_eject</a>        (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-guess-should-display" title="g_unix_mount_guess_should_display ()">g_unix_mount_guess_should_display</a>   (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-free" title="g_unix_mount_point_free ()">g_unix_mount_point_free</a>             (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-compare" title="g_unix_mount_point_compare ()">g_unix_mount_point_compare</a>          (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount1</code></em>,
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-compare" title="g_unix_mount_point_compare ()">g_unix_mount_point_compare</a>          (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount1</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount2</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-get-mount-path" title="g_unix_mount_point_get_mount_path ()">g_unix_mount_point_get_mount_path</a>   (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-get-device-path" title="g_unix_mount_point_get_device_path ()">g_unix_mount_point_get_device_path</a>  (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-get-fs-type" title="g_unix_mount_point_get_fs_type ()">g_unix_mount_point_get_fs_type</a>      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-is-readonly" title="g_unix_mount_point_is_readonly ()">g_unix_mount_point_is_readonly</a>      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-is-user-mountable" title="g_unix_mount_point_is_user_mountable ()">g_unix_mount_point_is_user_mountable</a>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-is-readonly" title="g_unix_mount_point_is_readonly ()">g_unix_mount_point_is_readonly</a>      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-is-user-mountable" title="g_unix_mount_point_is_user_mountable ()">g_unix_mount_point_is_user_mountable</a>
                                                         (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-is-loopback" title="g_unix_mount_point_is_loopback ()">g_unix_mount_point_is_loopback</a>      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-is-loopback" title="g_unix_mount_point_is_loopback ()">g_unix_mount_point_is_loopback</a>      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
 <a class="link" href="GIcon.html" title="GIcon"><span class="returnvalue">GIcon</span></a> *             <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-guess-icon" title="g_unix_mount_point_guess_icon ()">g_unix_mount_point_guess_icon</a>       (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
 <span class="returnvalue">char</span> *              <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-guess-name" title="g_unix_mount_point_guess_name ()">g_unix_mount_point_guess_name</a>       (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-guess-can-eject" title="g_unix_mount_point_guess_can_eject ()">g_unix_mount_point_guess_can_eject</a>  (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-points-get" title="g_unix_mount_points_get ()">g_unix_mount_points_get</a>             (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="gio-Unix-Mounts.html#g-unix-mounts-get" title="g_unix_mounts_get ()">g_unix_mounts_get</a>                   (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-point-guess-can-eject" title="g_unix_mount_point_guess_can_eject ()">g_unix_mount_point_guess_can_eject</a>  (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-points-get" title="g_unix_mount_points_get ()">g_unix_mount_points_get</a>             (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="gio-Unix-Mounts.html#g-unix-mounts-get" title="g_unix_mounts_get ()">g_unix_mounts_get</a>                   (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);
 <a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="returnvalue">GUnixMountEntry</span></a> *   <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-at" title="g_unix_mount_at ()">g_unix_mount_at</a>                     (<em class="parameter"><code>const <span class="type">char</span> *mount_path</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mounts-changed-since" title="g_unix_mounts_changed_since ()">g_unix_mounts_changed_since</a>         (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> time</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-points-changed-since" title="g_unix_mount_points_changed_since ()">g_unix_mount_points_changed_since</a>   (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> time</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mounts-changed-since" title="g_unix_mounts_changed_since ()">g_unix_mounts_changed_since</a>         (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> time</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-points-changed-since" title="g_unix_mount_points_changed_since ()">g_unix_mount_points_changed_since</a>   (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> time</code></em>);
 <a class="link" href="gio-Unix-Mounts.html#GUnixMountMonitor"><span class="returnvalue">GUnixMountMonitor</span></a> * <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-monitor-new" title="g_unix_mount_monitor_new ()">g_unix_mount_monitor_new</a>            (<em class="parameter"><code><span class="type">void</span></code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gio-Unix-Mounts.html#g-unix-mount-monitor-set-rate-limit" title="g_unix_mount_monitor_set_rate_limit ()">g_unix_mount_monitor_set_rate_limit</a> (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountMonitor"><span class="type">GUnixMountMonitor</span></a> *mount_monitor</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> limit_msec</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-is-mount-path-system-internal" title="g_unix_is_mount_path_system_internal ()">g_unix_is_mount_path_system_internal</a>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Unix-Mounts.html#g-unix-is-mount-path-system-internal" title="g_unix_is_mount_path_system_internal ()">g_unix_is_mount_path_system_internal</a>
                                                         (<em class="parameter"><code>const <span class="type">char</span> *mount_path</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="gio-Unix-Mounts.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GUnixMountMonitor
 </pre>
 </div>
@@ -106,21 +105,13 @@ const <span class="returnvalue">char</span> *        <a class="link" href="gio-U
 Routines for managing mounted UNIX mount points and paths.
 </p>
 <p>
-Note that <code class="filename">&lt;gio/gunixmounts.h&gt;</code> belongs to the 
-UNIX-specific GIO interfaces, thus you have to use the 
+Note that <code class="filename">&lt;gio/gunixmounts.h&gt;</code> belongs to the
+UNIX-specific GIO interfaces, thus you have to use the
 <code class="filename">gio-unix-2.0.pc</code> pkg-config file when using it.
 </p>
 </div>
 <div class="refsect1" title="Details">
 <a name="gio-Unix-Mounts.details"></a><h2>Details</h2>
-<div class="refsect2" title="GUnixMount">
-<a name="GUnixMount"></a><h3>GUnixMount</h3>
-<pre class="programlisting">typedef struct _GUnixMount GUnixMount;</pre>
-<p>
-Implementation of the <a class="link" href="GMount.html" title="GMount"><span class="type">GMount</span></a> interface for Unix systems.
-</p>
-</div>
-<hr>
 <div class="refsect2" title="GUnixMountPoint">
 <a name="GUnixMountPoint"></a><h3>GUnixMountPoint</h3>
 <pre class="programlisting">typedef struct _GUnixMountPoint GUnixMountPoint;</pre>
@@ -143,7 +134,7 @@ This corresponds roughly to a mtab entry.
 <a name="GUnixMountMonitor-struct"></a><h3>GUnixMountMonitor</h3>
 <pre class="programlisting">typedef struct _GUnixMountMonitor GUnixMountMonitor;</pre>
 <p>
-Watches <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>s for changes.
+Watches <span class="type">GUnixMount</span>s for changes.
 </p>
 </div>
 <hr>
@@ -157,7 +148,7 @@ Frees a unix mount.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>mount_entry</code></em> :</span></p></td>
-<td>a <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>.
+<td>a <span class="type">GUnixMount</span>.
 </td>
 </tr></tbody>
 </table></div>
@@ -165,7 +156,7 @@ Frees a unix mount.
 <hr>
 <div class="refsect2" title="g_unix_mount_compare ()">
 <a name="g-unix-mount-compare"></a><h3>g_unix_mount_compare ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_mount_compare                (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount1</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_mount_compare                (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount1</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount2</code></em>);</pre>
 <p>
 Compares two unix mounts.
@@ -227,7 +218,7 @@ Gets the device path for a unix mount.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount_entry</code></em> :</span></p></td>
-<td>a <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>.
+<td>a <span class="type">GUnixMount</span>.
 </td>
 </tr>
 <tr>
@@ -250,7 +241,7 @@ Gets the filesystem type for the unix mount.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount_entry</code></em> :</span></p></td>
-<td>a <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>.
+<td>a <span class="type">GUnixMount</span>.
 </td>
 </tr>
 <tr>
@@ -264,7 +255,7 @@ Gets the filesystem type for the unix mount.
 <hr>
 <div class="refsect2" title="g_unix_mount_is_readonly ()">
 <a name="g-unix-mount-is-readonly"></a><h3>g_unix_mount_is_readonly ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_is_readonly            (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_is_readonly            (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
 <p>
 Checks if a unix mount is mounted read only.
 </p>
@@ -273,12 +264,12 @@ Checks if a unix mount is mounted read only.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount_entry</code></em> :</span></p></td>
-<td>a <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>.
+<td>a <span class="type">GUnixMount</span>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_entry</code></em> is read only.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_entry</code></em> is read only.
 </td>
 </tr>
 </tbody>
@@ -287,7 +278,7 @@ Checks if a unix mount is mounted read only.
 <hr>
 <div class="refsect2" title="g_unix_mount_is_system_internal ()">
 <a name="g-unix-mount-is-system-internal"></a><h3>g_unix_mount_is_system_internal ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_is_system_internal     (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_is_system_internal     (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
 <p>
 Checks if a unix mount is a system path.
 </p>
@@ -296,12 +287,12 @@ Checks if a unix mount is a system path.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount_entry</code></em> :</span></p></td>
-<td>a <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>.
+<td>a <span class="type">GUnixMount</span>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the unix mount is for a system path.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the unix mount is for a system path.
 </td>
 </tr>
 </tbody>
@@ -324,7 +315,7 @@ Guesses the icon of a Unix mount.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>
+<td> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -349,7 +340,7 @@ The result is a translated string.
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> A newly allocated string that must
-    be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>
+    be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>
 </td>
 </tr>
 </tbody>
@@ -358,7 +349,7 @@ The result is a translated string.
 <hr>
 <div class="refsect2" title="g_unix_mount_guess_can_eject ()">
 <a name="g-unix-mount-guess-can-eject"></a><h3>g_unix_mount_guess_can_eject ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_guess_can_eject        (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_guess_can_eject        (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
 <p>
 Guesses whether a Unix mount can be ejected.
 </p>
@@ -372,7 +363,7 @@ Guesses whether a Unix mount can be ejected.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_entry</code></em> is deemed to be ejectable.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_entry</code></em> is deemed to be ejectable.
 </td>
 </tr>
 </tbody>
@@ -381,7 +372,7 @@ Guesses whether a Unix mount can be ejected.
 <hr>
 <div class="refsect2" title="g_unix_mount_guess_should_display ()">
 <a name="g-unix-mount-guess-should-display"></a><h3>g_unix_mount_guess_should_display ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_guess_should_display   (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_guess_should_display   (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> *mount_entry</code></em>);</pre>
 <p>
 Guesses whether a Unix mount should be displayed in the UI.
 </p>
@@ -395,7 +386,7 @@ Guesses whether a Unix mount should be displayed in the UI.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_entry</code></em> is deemed to be displayable.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_entry</code></em> is deemed to be displayable.
 </td>
 </tr>
 </tbody>
@@ -420,7 +411,7 @@ Frees a unix mount point.
 <hr>
 <div class="refsect2" title="g_unix_mount_point_compare ()">
 <a name="g-unix-mount-point-compare"></a><h3>g_unix_mount_point_compare ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_mount_point_compare          (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount1</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_unix_mount_point_compare          (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount1</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount2</code></em>);</pre>
 <p>
 Compares two unix mount points.
@@ -430,12 +421,12 @@ Compares two unix mount points.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount1</code></em> :</span></p></td>
-<td>a <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>.
+<td>a <span class="type">GUnixMount</span>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mount2</code></em> :</span></p></td>
-<td>a <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>.
+<td>a <span class="type">GUnixMount</span>.
 </td>
 </tr>
 <tr>
@@ -519,7 +510,7 @@ Gets the file system type for the mount point.
 <hr>
 <div class="refsect2" title="g_unix_mount_point_is_readonly ()">
 <a name="g-unix-mount-point-is-readonly"></a><h3>g_unix_mount_point_is_readonly ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_point_is_readonly      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_point_is_readonly      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);</pre>
 <p>
 Checks if a unix mount point is read only.
 </p>
@@ -533,7 +524,7 @@ Checks if a unix mount point is read only.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if a mount point is read only.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if a mount point is read only.
 </td>
 </tr>
 </tbody>
@@ -542,7 +533,7 @@ Checks if a unix mount point is read only.
 <hr>
 <div class="refsect2" title="g_unix_mount_point_is_user_mountable ()">
 <a name="g-unix-mount-point-is-user-mountable"></a><h3>g_unix_mount_point_is_user_mountable ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_point_is_user_mountable
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_point_is_user_mountable
                                                         (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);</pre>
 <p>
 Checks if a unix mount point is mountable by the user.
@@ -557,7 +548,7 @@ Checks if a unix mount point is mountable by the user.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the mount point is user mountable.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the mount point is user mountable.
 </td>
 </tr>
 </tbody>
@@ -566,7 +557,7 @@ Checks if a unix mount point is mountable by the user.
 <hr>
 <div class="refsect2" title="g_unix_mount_point_is_loopback ()">
 <a name="g-unix-mount-point-is-loopback"></a><h3>g_unix_mount_point_is_loopback ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_point_is_loopback      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_point_is_loopback      (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);</pre>
 <p>
 Checks if a unix mount point is a loopback device.
 </p>
@@ -580,7 +571,7 @@ Checks if a unix mount point is a loopback device.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the mount point is a loopback. <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise. 
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the mount point is a loopback. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise. 
 </td>
 </tr>
 </tbody>
@@ -603,7 +594,7 @@ Guesses the icon of a Unix mount point.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>
+<td> a <a class="link" href="GIcon.html" title="GIcon"><span class="type">GIcon</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -628,7 +619,7 @@ The result is a translated string.
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> A newly allocated string that must 
-    be freed with <a href="/usr/share/gtk-doc/html/glib/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>
+    be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>
 </td>
 </tr>
 </tbody>
@@ -637,7 +628,7 @@ The result is a translated string.
 <hr>
 <div class="refsect2" title="g_unix_mount_point_guess_can_eject ()">
 <a name="g-unix-mount-point-guess-can-eject"></a><h3>g_unix_mount_point_guess_can_eject ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_point_guess_can_eject  (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_point_guess_can_eject  (<em class="parameter"><code><a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> *mount_point</code></em>);</pre>
 <p>
 Guesses whether a Unix mount point can be ejected.
 </p>
@@ -651,7 +642,7 @@ Guesses whether a Unix mount point can be ejected.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_point</code></em> is deemed to be ejectable.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_point</code></em> is deemed to be ejectable.
 </td>
 </tr>
 </tbody>
@@ -660,11 +651,11 @@ Guesses whether a Unix mount point can be ejected.
 <hr>
 <div class="refsect2" title="g_unix_mount_points_get ()">
 <a name="g-unix-mount-points-get"></a><h3>g_unix_mount_points_get ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_unix_mount_points_get             (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_unix_mount_points_get             (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);</pre>
 <p>
-Gets a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of strings containing the unix mount points. 
+Gets a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="gio-Unix-Mounts.html#GUnixMountPoint" title="GUnixMountPoint"><span class="type">GUnixMountPoint</span></a> containing the unix mount points.
 If <em class="parameter"><code>time_read</code></em> is set, it will be filled with the mount timestamp,
-allowing for checking if the mounts have changed with 
+allowing for checking if the mounts have changed with
 <code class="function">g_unix_mounts_points_changed_since()</code>.
 </p>
 <div class="variablelist"><table border="0">
@@ -672,12 +663,12 @@ allowing for checking if the mounts have changed with
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>time_read</code></em> :</span></p></td>
-<td>guint64 to contain a timestamp.
+<td> guint64 to contain a timestamp. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of the UNIX mountpoints. 
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of the UNIX mountpoints. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> utf8]</span>
 </td>
 </tr>
 </tbody>
@@ -686,11 +677,11 @@ allowing for checking if the mounts have changed with
 <hr>
 <div class="refsect2" title="g_unix_mounts_get ()">
 <a name="g-unix-mounts-get"></a><h3>g_unix_mounts_get ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_unix_mounts_get                   (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_unix_mounts_get                   (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);</pre>
 <p>
-Gets a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of strings containing the unix mounts. 
-If <em class="parameter"><code>time_read</code></em> is set, it will be filled with the mount 
-timestamp, allowing for checking if the mounts have changed 
+Gets a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> containing the unix mounts.
+If <em class="parameter"><code>time_read</code></em> is set, it will be filled with the mount
+timestamp, allowing for checking if the mounts have changed
 with <a class="link" href="gio-Unix-Mounts.html#g-unix-mounts-changed-since" title="g_unix_mounts_changed_since ()"><code class="function">g_unix_mounts_changed_since()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
@@ -698,12 +689,12 @@ with <a class="link" href="gio-Unix-Mounts.html#g-unix-mounts-changed-since" tit
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>time_read</code></em> :</span></p></td>
-<td>guint64 to contain a timestamp.
+<td> guint64 to contain a timestamp, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of the UNIX mounts. 
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of the UNIX mounts. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> utf8]</span>
 </td>
 </tr>
 </tbody>
@@ -713,7 +704,7 @@ with <a class="link" href="gio-Unix-Mounts.html#g-unix-mounts-changed-since" tit
 <div class="refsect2" title="g_unix_mount_at ()">
 <a name="g-unix-mount-at"></a><h3>g_unix_mount_at ()</h3>
 <pre class="programlisting"><a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="returnvalue">GUnixMountEntry</span></a> *   g_unix_mount_at                     (<em class="parameter"><code>const <span class="type">char</span> *mount_path</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *time_read</code></em>);</pre>
 <p>
 Gets a <a class="link" href="gio-Unix-Mounts.html#GUnixMountEntry" title="GUnixMountEntry"><span class="type">GUnixMountEntry</span></a> for a given mount path. If <em class="parameter"><code>time_read</code></em>
 is set, it will be filled with a unix timestamp for checking
@@ -734,7 +725,7 @@ if the mounts have changed since with <a class="link" href="gio-Unix-Mounts.html
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="gio-Unix-Mounts.html#GUnixMount" title="GUnixMount"><span class="type">GUnixMount</span></a>. 
+<td> a <span class="type">GUnixMount</span>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -743,7 +734,7 @@ if the mounts have changed since with <a class="link" href="gio-Unix-Mounts.html
 <hr>
 <div class="refsect2" title="g_unix_mounts_changed_since ()">
 <a name="g-unix-mounts-changed-since"></a><h3>g_unix_mounts_changed_since ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mounts_changed_since         (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> time</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mounts_changed_since         (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> time</code></em>);</pre>
 <p>
 Checks if the unix mounts have changed since a given unix time.
 </p>
@@ -757,7 +748,7 @@ Checks if the unix mounts have changed since a given unix time.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the mounts have changed since <em class="parameter"><code>time</code></em>. 
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the mounts have changed since <em class="parameter"><code>time</code></em>. 
 </td>
 </tr>
 </tbody>
@@ -766,7 +757,7 @@ Checks if the unix mounts have changed since a given unix time.
 <hr>
 <div class="refsect2" title="g_unix_mount_points_changed_since ()">
 <a name="g-unix-mount-points-changed-since"></a><h3>g_unix_mount_points_changed_since ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_points_changed_since   (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> time</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_mount_points_changed_since   (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> time</code></em>);</pre>
 <p>
 Checks if the unix mount points have changed since a given unix time.
 </p>
@@ -780,7 +771,7 @@ Checks if the unix mount points have changed since a given unix time.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the mount points have changed since <em class="parameter"><code>time</code></em>. 
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the mount points have changed since <em class="parameter"><code>time</code></em>. 
 </td>
 </tr>
 </tbody>
@@ -835,7 +826,7 @@ consecutive change events to the mount and mount point entry files.
 <hr>
 <div class="refsect2" title="g_unix_is_mount_path_system_internal ()">
 <a name="g-unix-is-mount-path-system-internal"></a><h3>g_unix_is_mount_path_system_internal ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_is_mount_path_system_internal
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_is_mount_path_system_internal
                                                         (<em class="parameter"><code>const <span class="type">char</span> *mount_path</code></em>);</pre>
 <p>
 Determines if <em class="parameter"><code>mount_path</code></em> is considered an implementation of the
@@ -854,7 +845,7 @@ casual user.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_path</code></em> is considered an implementation detail 
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>mount_path</code></em> is considered an implementation detail 
     of the OS.
 </td>
 </tr>
@@ -867,7 +858,7 @@ casual user.
 <div class="refsect2" title='The "mountpoints-changed" signal'>
 <a name="GUnixMountMonitor-mountpoints-changed"></a><h3>The <code class="literal">"mountpoints-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="gio-Unix-Mounts.html#GUnixMountMonitor"><span class="type">GUnixMountMonitor</span></a> *monitor,
-                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>           user_data)      : Run Last</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>           user_data)      : Run Last</pre>
 <p>
 Emitted when the unix mount points have changed.
 </p>
@@ -890,7 +881,7 @@ Emitted when the unix mount points have changed.
 <div class="refsect2" title='The "mounts-changed" signal'>
 <a name="GUnixMountMonitor-mounts-changed"></a><h3>The <code class="literal">"mounts-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="gio-Unix-Mounts.html#GUnixMountMonitor"><span class="type">GUnixMountMonitor</span></a> *monitor,
-                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>           user_data)      : Run Last</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>           user_data)      : Run Last</pre>
 <p>
 Emitted when the unix mounts have changed.
 </p>
@@ -913,6 +904,6 @@ Emitted when the unix mounts have changed.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

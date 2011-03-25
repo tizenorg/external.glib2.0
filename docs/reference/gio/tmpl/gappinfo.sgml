@@ -9,12 +9,10 @@ GAppInfo
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -30,6 +28,7 @@ GAppInfo
 @G_APP_INFO_CREATE_NONE: 
 @G_APP_INFO_CREATE_NEEDS_TERMINAL: 
 @G_APP_INFO_CREATE_SUPPORTS_URIS: 
+@G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION: 
 
 <!-- ##### STRUCT GAppInfo ##### -->
 <para>
@@ -64,6 +63,7 @@ GAppInfo
 @do_delete: 
 @get_commandline: 
 @get_display_name: 
+@set_as_last_used_for_type: 
 
 <!-- ##### STRUCT GAppLaunchContext ##### -->
 <para>
@@ -264,6 +264,17 @@ GAppInfo
 @Returns: 
 
 
+<!-- ##### FUNCTION g_app_info_set_as_last_used_for_type ##### -->
+<para>
+
+</para>
+
+@appinfo: 
+@content_type: 
+@error: 
+@Returns: 
+
+
 <!-- ##### FUNCTION g_app_info_add_supports_type ##### -->
 <para>
 
@@ -329,6 +340,24 @@ GAppInfo
 </para>
 
 @uri_scheme: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_app_info_get_fallback_for_type ##### -->
+<para>
+
+</para>
+
+@content_type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_app_info_get_recommended_for_type ##### -->
+<para>
+
+</para>
+
+@content_type: 
 @Returns: 
 
 

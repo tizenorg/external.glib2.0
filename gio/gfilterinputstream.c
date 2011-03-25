@@ -26,13 +26,16 @@
 #include "gsimpleasyncresult.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gfilterinputstream
  * @short_description: Filter Input Stream
  * @include: gio/gio.h
  *
+ * Base class for input stream implementations that perform some
+ * kind of filtering operation on a base stream. Typical examples
+ * of filtering operations are character set conversion, compression
+ * and byte order flipping.
  **/
 
 enum {
@@ -66,7 +69,7 @@ static gboolean g_filter_input_stream_close        (GInputStream         *stream
                                                     GCancellable         *cancellable,
                                                     GError              **error);
 
-G_DEFINE_TYPE (GFilterInputStream, g_filter_input_stream, G_TYPE_INPUT_STREAM)
+G_DEFINE_ABSTRACT_TYPE (GFilterInputStream, g_filter_input_stream, G_TYPE_INPUT_STREAM)
 
 #define GET_PRIVATE(inst) G_TYPE_INSTANCE_GET_PRIVATE (inst, \
   G_TYPE_FILTER_INPUT_STREAM, GFilterInputStreamPrivate)
@@ -195,7 +198,7 @@ g_filter_input_stream_init (GFilterInputStream *stream)
  * 
  * Gets the base stream for the filter stream.
  *
- * Returns: a #GInputStream.
+ * Returns: (transfer none): a #GInputStream.
  **/
 GInputStream *
 g_filter_input_stream_get_base_stream (GFilterInputStream *stream)
@@ -313,6 +316,3 @@ g_filter_input_stream_close (GInputStream  *stream,
 
   return res;
 }
-
-#define __G_FILTER_INPUT_STREAM_C__
-#include "gioaliasdef.c"

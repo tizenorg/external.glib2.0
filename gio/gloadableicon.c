@@ -27,7 +27,6 @@
 #include "gloadableicon.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gloadableicon
@@ -71,7 +70,7 @@ g_loadable_icon_default_init (GLoadableIconIface *iface)
  * Loads a loadable icon. For the asynchronous version of this function, 
  * see g_loadable_icon_load_async().
  * 
- * Returns: a #GInputStream to read the icon from.
+ * Returns: (transfer full): a #GInputStream to read the icon from.
  **/
 GInputStream *
 g_loadable_icon_load (GLoadableIcon  *icon,
@@ -127,7 +126,7 @@ g_loadable_icon_load_async (GLoadableIcon       *icon,
  * 
  * Finishes an asynchronous icon load started in g_loadable_icon_load_async().
  * 
- * Returns: a #GInputStream to read the icon from.
+ * Returns: (transfer full): a #GInputStream to read the icon from.
  **/
 GInputStream *
 g_loadable_icon_load_finish (GLoadableIcon  *icon,
@@ -189,8 +188,7 @@ load_async_thread (GSimpleAsyncResult *res,
 
   if (stream == NULL)
     {
-      g_simple_async_result_set_from_error (res, error);
-      g_error_free (error);
+      g_simple_async_result_take_error (res, error);
     }
   else
     {
@@ -239,6 +237,3 @@ g_loadable_icon_real_load_finish (GLoadableIcon        *icon,
 
   return g_object_ref (data->stream);
 }
-
-#define __G_LOADABLE_ICON_C__
-#include "gioaliasdef.c"

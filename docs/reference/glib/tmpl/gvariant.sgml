@@ -9,12 +9,10 @@ GVariant
 
 </para>
 
-
 <!-- ##### SECTION See_Also ##### -->
 <para>
 
 </para>
-
 
 <!-- ##### SECTION Stability_Level ##### -->
 
@@ -46,6 +44,15 @@ GVariant
 
 
 <!-- ##### FUNCTION g_variant_ref_sink ##### -->
+<para>
+
+</para>
+
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_variant_is_floating ##### -->
 <para>
 
 </para>
@@ -88,6 +95,16 @@ GVariant
 </para>
 
 @value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_variant_compare ##### -->
+<para>
+
+</para>
+
+@one: 
+@two: 
 @Returns: 
 
 
@@ -320,6 +337,25 @@ GVariant
 @Returns: 
 
 
+<!-- ##### FUNCTION g_variant_new_bytestring ##### -->
+<para>
+
+</para>
+
+@string: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_variant_new_bytestring_array ##### -->
+<para>
+
+</para>
+
+@strv: 
+@length: 
+@Returns: 
+
+
 <!-- ##### FUNCTION g_variant_get_boolean ##### -->
 <para>
 
@@ -459,6 +495,45 @@ GVariant
 @Returns: 
 
 
+<!-- ##### FUNCTION g_variant_get_bytestring ##### -->
+<para>
+
+</para>
+
+@value: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_variant_dup_bytestring ##### -->
+<para>
+
+</para>
+
+@value: 
+@length: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_variant_get_bytestring_array ##### -->
+<para>
+
+</para>
+
+@value: 
+@length: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_variant_dup_bytestring_array ##### -->
+<para>
+
+</para>
+
+@value: 
+@length: 
+@Returns: 
+
+
 <!-- ##### FUNCTION g_variant_new_maybe ##### -->
 <para>
 
@@ -537,6 +612,29 @@ GVariant
 @index_: 
 @format_string: 
 @Varargs: 
+
+
+<!-- ##### FUNCTION g_variant_lookup_value ##### -->
+<para>
+
+</para>
+
+@dictionary: 
+@key: 
+@expected_type: 
+@Returns: 
+
+
+<!-- ##### FUNCTION g_variant_lookup ##### -->
+<para>
+
+</para>
+
+@dictionary: 
+@key: 
+@format_string: 
+@Varargs: 
+@Returns: 
 
 
 <!-- ##### FUNCTION g_variant_get_fixed_array ##### -->
@@ -808,6 +906,16 @@ GVariant
 @Varargs: 
 
 
+<!-- ##### FUNCTION g_variant_builder_add_parsed ##### -->
+<para>
+
+</para>
+
+@builder: 
+@format: 
+@Varargs: 
+
+
 <!-- ##### FUNCTION g_variant_builder_end ##### -->
 <para>
 
@@ -833,6 +941,30 @@ GVariant
 
 @builder: 
 
+
+<!-- ##### ENUM GVariantParseError ##### -->
+<para>
+
+</para>
+
+@G_VARIANT_PARSE_ERROR_FAILED: 
+@G_VARIANT_PARSE_ERROR_BASIC_TYPE_EXPECTED: 
+@G_VARIANT_PARSE_ERROR_CANNOT_INFER_TYPE: 
+@G_VARIANT_PARSE_ERROR_DEFINITE_TYPE_EXPECTED: 
+@G_VARIANT_PARSE_ERROR_INPUT_NOT_AT_END: 
+@G_VARIANT_PARSE_ERROR_INVALID_CHARACTER: 
+@G_VARIANT_PARSE_ERROR_INVALID_FORMAT_STRING: 
+@G_VARIANT_PARSE_ERROR_INVALID_OBJECT_PATH: 
+@G_VARIANT_PARSE_ERROR_INVALID_SIGNATURE: 
+@G_VARIANT_PARSE_ERROR_INVALID_TYPE_STRING: 
+@G_VARIANT_PARSE_ERROR_NO_COMMON_TYPE: 
+@G_VARIANT_PARSE_ERROR_NUMBER_OUT_OF_RANGE: 
+@G_VARIANT_PARSE_ERROR_NUMBER_TOO_BIG: 
+@G_VARIANT_PARSE_ERROR_TYPE_ERROR: 
+@G_VARIANT_PARSE_ERROR_UNEXPECTED_TOKEN: 
+@G_VARIANT_PARSE_ERROR_UNKNOWN_KEYWORD: 
+@G_VARIANT_PARSE_ERROR_UNTERMINATED_STRING_CONSTANT: 
+@G_VARIANT_PARSE_ERROR_VALUE_EXPECTED: 
 
 <!-- ##### MACRO G_VARIANT_PARSE_ERROR ##### -->
 <para>

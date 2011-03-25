@@ -1,8 +1,9 @@
-<refentry id="glib-mkenums">
+<refentry id="glib-mkenums" lang="en">
 
 <refmeta>
 <refentrytitle>glib-mkenums</refentrytitle>
 <manvolnum>1</manvolnum>
+<refmiscinfo class="manual">User Commands</refmiscinfo>
 </refmeta>
 
 <refnamediv>
@@ -200,6 +201,18 @@ minus (e.g. the-xvalue).
 </varlistentry>
 
 <varlistentry>
+<term>@valuenum@</term>
+<listitem><para>
+The integer value for the enum value currently being processed.  This is
+calculated by using <command>perl</command> to attempt to evaluate the
+expression as it appears in the C source code.  If evaluation fails then
+<command>glib-mkenums</command> will exit with an error status, but this
+only happens if <literal>@valuenum@</literal> appears in your value
+production template.  (Since: 2.26)
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
 <term>@type@</term>
 <listitem><para>
 This is substituted either by "enum" or "flags", depending on whether the 
@@ -271,7 +284,11 @@ typedef enum /*&lt; flags,prefix=PREFIX &gt;*/
 </refsect2>
 </refsect1>
 <refsect1><title>See also</title>
-<para><command>glib-genmarshal</command>(1)
+<para>
+<citerefentry>
+<refentrytitle>glib-genmarshal</refentrytitle>
+<manvolnum>1</manvolnum>
+</citerefentry>
 </para>
 </refsect1>
 </refentry>

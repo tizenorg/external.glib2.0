@@ -15,7 +15,8 @@
 /**
  * SECTION: gunixfdlist
  * @title: GUnixFDList
- * @short_description: An object containing a set of file descriptors
+ * @short_description: An object containing a set of UNIX file descriptors
+ * @include: gio/gunixfdlist.h
  * @see_also: #GUnixFDMessage
  *
  * A #GUnixFDList contains a list of file descriptors.  It owns the file
@@ -24,6 +25,10 @@
  * It may be wrapped in a #GUnixFDMessage and sent over a #GSocket in
  * the %G_SOCKET_ADDRESS_UNIX family by using g_socket_send_message()
  * and received using g_socket_receive_message().
+ *
+ * Note that <filename>&lt;gio/gunixfdlist.h&gt;</filename> belongs to
+ * the UNIX-specific GIO interfaces, thus you have to use the
+ * <filename>gio-unix-2.0.pc</filename> pkg-config file when using it.
  */
 
 #define _GNU_SOURCE /* for F_DUPFD_CLOEXEC */
@@ -40,7 +45,6 @@
 #include "gunixfdlist.h"
 #include "gioerror.h"
 
-#include "gioalias.h"
 
 
 G_DEFINE_TYPE (GUnixFDList, g_unix_fd_list, G_TYPE_OBJECT)
@@ -391,6 +395,3 @@ g_unix_fd_list_get_length (GUnixFDList *list)
 
   return list->priv->nfd;
 }
-
-#define __G_UNIX_FD_LIST_C__
-#include "gioaliasdef.c"

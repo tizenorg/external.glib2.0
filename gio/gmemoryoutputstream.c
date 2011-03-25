@@ -31,7 +31,6 @@
 #include "string.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gmemoryoutputstream
@@ -377,7 +376,7 @@ g_memory_output_stream_new (gpointer       data,
 }
 
 /**
- * g_memory_output_stream_get_data:
+ * g_memory_output_stream_get_data: (skip)
  * @ostream: a #GMemoryOutputStream
  *
  * Gets any loaded data from the @ostream.
@@ -439,6 +438,35 @@ g_memory_output_stream_get_data_size (GMemoryOutputStream *ostream)
   g_return_val_if_fail (G_IS_MEMORY_OUTPUT_STREAM (ostream), 0);
 
   return ostream->priv->valid_len;
+}
+
+/**
+ * g_memory_output_stream_steal_data:
+ * @ostream: a #GMemoryOutputStream
+ *
+ * Gets any loaded data from the @ostream. Ownership of the data
+ * is transferred to the caller; when no longer needed it must be
+ * freed using the free function set in @ostream's
+ * #GMemoryOutputStream:destroy-function property.
+ *
+ * @ostream must be closed before calling this function.
+ *
+ * Returns: (transfer full): the stream's data
+ *
+ * Since: 2.26
+ **/
+gpointer
+g_memory_output_stream_steal_data (GMemoryOutputStream *ostream)
+{
+  gpointer data;
+
+  g_return_val_if_fail (G_IS_MEMORY_OUTPUT_STREAM (ostream), NULL);
+  g_return_val_if_fail (g_output_stream_is_closed (G_OUTPUT_STREAM (ostream)), NULL);
+
+  data = ostream->priv->data;
+  ostream->priv->data = NULL;
+
+  return data;
 }
 
 static gboolean
@@ -768,6 +796,3 @@ g_memory_output_stream_truncate (GSeekable     *seekable,
 
   return TRUE;
 }
-
-#define __G_MEMORY_OUTPUT_STREAM_C__
-#include "gioaliasdef.c"

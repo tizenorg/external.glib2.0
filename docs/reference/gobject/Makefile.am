@@ -24,16 +24,15 @@ HFILE_GLOB=$(top_srcdir)/gobject/*.h
 CFILE_GLOB=$(top_srcdir)/gobject/*.c
 
 # Headers to ignore
-IGNORE_HFILES=gobjectalias.h
+IGNORE_HFILES = \
+	gobject_trace.h			\
+	gatomicarray.h
 
 # CFLAGS and LDFLAGS for compiling scan program. Only needed
 # if $(DOC_MODULE).types is non-empty.
 INCLUDES = \
 	-I$(srcdir) 			\
-	-I$(top_srcdir) 		\
-	-I$(top_srcdir)/glib 		\
-	-I$(top_builddir) 		\
-	-I$(top_builddir)/glib 		\
+	$(gobject_INCLUDES) 		\
 	$(GLIB_DEBUG_FLAGS)
 GTKDOC_LIBS = \
 	$(top_builddir)/glib/libglib-2.0.la	\
@@ -41,7 +40,7 @@ GTKDOC_LIBS = \
 
 # Images to copy into HTML directory
 HTML_IMAGES =  \
-	$(srcdir)/images/glue.png
+	images/glue.png
 
 # Extra SGML files that are included by $(DOC_MAIN_SGML_FILE)
 content_files = version.xml 		\
@@ -67,19 +66,36 @@ EXTRA_DIST += 		\
 
 ########################################################################
 
-man_MANS = glib-mkenums.1 glib-genmarshal.1 gobject-query.1
+man_MANS = 			\
+	glib-mkenums.1 		\
+	glib-genmarshal.1 	\
+	gobject-query.1
 
 if ENABLE_MAN
 
-%.1 : %.xml 
+.xml.1:
 	@XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+
+dist-local-check-mans-enabled:
+	if grep "Man generation disabled" $(man_MANS) >/dev/null; then $(RM) $(man_MANS); fi
+
+else
+
+$(man_MANS):
+	echo Man generation disabled.  Creating dummy $@.  Configure with --enable-man to enable it.
+	echo Man generation disabled.  Remove this file, configure with --enable-man, and rebuild > $@
+
+dist-local-check-mans-enabled:
+	echo "*** --enable-man must be used in order to make dist"
+	false
 
 endif
 
-BUILT_EXTRA_DIST = $(man_MANS)
+MAINTAINERCLEANFILES = $(man_MANS) $(BUILT_SOURCES)
 
-dist-hook-local: $(BUILT_EXTRA_DIST)
-	files='$(BUILT_EXTRA_DIST)';				\
-	for f in $$files; do					\
-	  if test -f $$f; then d=.; else d=$(srcdir); fi;	\
-	  cp $$d/$$f $(distdir) || exit 1; done
+EXTRA_DIST += $(man_MANS)
+
+dist-hook-local: dist-local-check-mans-enabled gobject-docs-clean all-local
+
+gobject-docs-clean: clean
+	cd $(srcdir) && rm -rf xml html

@@ -29,13 +29,12 @@
  */
 
 #include "config.h"
+#include "glibconfig.h"
 
 #define DEBUG_MSG(x)	/* */
 #ifdef G_ENABLE_DEBUG
 /* #define DEBUG_MSG(args)	g_message args ; */
 #endif
-
-#include "glib.h"
 
 #include <time.h>
 #include <string.h>
@@ -46,7 +45,18 @@
 #include <windows.h>
 #endif
 
-#include "galias.h"
+#include "gdate.h"
+
+#include "gconvert.h"
+#include "gmem.h"
+#include "gstrfuncs.h"
+#include "gtestutils.h"
+#include "gthread.h"
+#include "gunicode.h"
+
+#ifdef G_OS_WIN32
+#include "garray.h"
+#endif
 
 GDate*
 g_date_new (void)
@@ -945,6 +955,8 @@ g_date_set_time (GDate *date,
  * Sets the value of a date from a #GTimeVal value.  Note that the
  * @tv_usec member is ignored, because #GDate can't make use of the
  * additional precision.
+ *
+ * The time to date conversion is done using the user's current timezone.
  *
  * Since: 2.10
  */
@@ -1899,7 +1911,3 @@ g_date_strftime (gchar       *s,
   return retval;
 #endif
 }
-
-#define __G_DATE_C__
-#include "galiasdef.c"
-

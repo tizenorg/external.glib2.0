@@ -38,19 +38,18 @@
 #include "gasynchelper.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gunixoutputstream
- * @short_description: Streaming output operations for Unix file descriptors
+ * @short_description: Streaming output operations for UNIX file descriptors
  * @include: gio/gunixoutputstream.h
  * @see_also: #GOutputStream
  *
  * #GUnixOutputStream implements #GOutputStream for writing to a
- * unix file descriptor, including asynchronous operations. The file
+ * UNIX file descriptor, including asynchronous operations. The file
  * descriptor must be selectable, so it doesn't work with opened files.
  *
- * Note that <filename>&lt;gio/gunixoutputstream.h&gt;</filename> belongs 
+ * Note that <filename>&lt;gio/gunixoutputstream.h&gt;</filename> belongs
  * to the UNIX-specific GIO interfaces, thus you have to use the
  * <filename>gio-unix-2.0.pc</filename> pkg-config file when using it.
  */
@@ -61,8 +60,12 @@ enum {
   PROP_CLOSE_FD
 };
 
-G_DEFINE_TYPE (GUnixOutputStream, g_unix_output_stream, G_TYPE_OUTPUT_STREAM);
+static void g_unix_output_stream_pollable_iface_init (GPollableOutputStreamInterface *iface);
 
+G_DEFINE_TYPE_WITH_CODE (GUnixOutputStream, g_unix_output_stream, G_TYPE_OUTPUT_STREAM,
+			 G_IMPLEMENT_INTERFACE (G_TYPE_POLLABLE_OUTPUT_STREAM,
+						g_unix_output_stream_pollable_iface_init)
+			 );
 
 struct _GUnixOutputStreamPrivate {
   int fd;
@@ -104,6 +107,9 @@ static gboolean g_unix_output_stream_close_finish (GOutputStream        *stream,
 						   GAsyncResult         *result,
 						   GError              **error);
 
+static gboolean g_unix_output_stream_pollable_is_writable   (GPollableOutputStream *stream);
+static GSource *g_unix_output_stream_pollable_create_source (GPollableOutputStream *stream,
+							     GCancellable         *cancellable);
 
 static void
 g_unix_output_stream_finalize (GObject *object)
@@ -159,6 +165,13 @@ g_unix_output_stream_class_init (GUnixOutputStreamClass *klass)
 							 P_("Whether to close the file descriptor when the stream is closed"),
 							 TRUE,
 							 G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
+}
+
+static void
+g_unix_output_stream_pollable_iface_init (GPollableOutputStreamInterface *iface)
+{
+  iface->is_writable = g_unix_output_stream_pollable_is_writable;
+  iface->create_source = g_unix_output_stream_pollable_create_source;
 }
 
 static void
@@ -410,9 +423,9 @@ typedef struct {
 } WriteAsyncData;
 
 static gboolean
-write_async_cb (WriteAsyncData *data,
+write_async_cb (int             fd,
 		GIOCondition    condition,
-		int             fd)
+		WriteAsyncData *data)
 {
   GSimpleAsyncResult *simple;
   GError *error = NULL;
@@ -436,7 +449,7 @@ write_async_cb (WriteAsyncData *data,
 	  
 	  g_set_error (&error, G_IO_ERROR,
 		       g_io_error_from_errno (errsv),
-		       _("Error reading from unix: %s"),
+		       _("Error writing to unix: %s"),
 		       g_strerror (errsv));
 	}
       break;
@@ -450,10 +463,7 @@ write_async_cb (WriteAsyncData *data,
   g_simple_async_result_set_op_res_gssize (simple, count_written);
 
   if (count_written == -1)
-    {
-      g_simple_async_result_set_from_error (simple, error);
-      g_error_free (error);
-    }
+    g_simple_async_result_take_error (simple, error);
 
   /* Complete immediately, not in idle, since we're already in a mainloop callout */
   g_simple_async_result_complete (simple);
@@ -488,6 +498,7 @@ g_unix_output_stream_write_async (GOutputStream       *stream,
   source = _g_fd_source_new (unix_stream->priv->fd,
 			     G_IO_OUT,
 			     cancellable);
+  g_source_set_name (source, "GUnixOutputStream");
   
   g_source_set_callback (source, (GSourceFunc)write_async_cb, data, g_free);
   g_source_attach (source, g_main_context_get_thread_default ());
@@ -557,10 +568,7 @@ close_async_cb (CloseAsyncData *data)
 				      g_unix_output_stream_close_async);
 
   if (!result)
-    {
-      g_simple_async_result_set_from_error (simple, error);
-      g_error_free (error);
-    }
+    g_simple_async_result_take_error (simple, error);
 
   /* Complete immediately, not in idle, since we're already in a mainloop callout */
   g_simple_async_result_complete (simple);
@@ -600,5 +608,36 @@ g_unix_output_stream_close_finish (GOutputStream  *stream,
   return TRUE;
 }
 
-#define __G_UNIX_OUTPUT_STREAM_C__
-#include "gioaliasdef.c"
+static gboolean
+g_unix_output_stream_pollable_is_writable (GPollableOutputStream *stream)
+{
+  GUnixOutputStream *unix_stream = G_UNIX_OUTPUT_STREAM (stream);
+  GPollFD poll_fd;
+  gint result;
+
+  poll_fd.fd = unix_stream->priv->fd;
+  poll_fd.events = G_IO_OUT;
+
+  do
+    result = g_poll (&poll_fd, 1, 0);
+  while (result == -1 && errno == EINTR);
+
+  return poll_fd.revents != 0;
+}
+
+static GSource *
+g_unix_output_stream_pollable_create_source (GPollableOutputStream *stream,
+					     GCancellable          *cancellable)
+{
+  GUnixOutputStream *unix_stream = G_UNIX_OUTPUT_STREAM (stream);
+  GSource *inner_source, *pollable_source;
+
+  pollable_source = g_pollable_source_new (G_OBJECT (stream));
+
+  inner_source = _g_fd_source_new (unix_stream->priv->fd, G_IO_OUT, cancellable);
+  g_source_set_dummy_callback (inner_source);
+  g_source_add_child_source (pollable_source, inner_source);
+  g_source_unref (inner_source);
+
+  return pollable_source;
+}

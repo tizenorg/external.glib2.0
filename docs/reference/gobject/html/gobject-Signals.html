@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Signals</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="rn01.html" title="API Reference">
 <link rel="prev" href="gobject-Varargs-Value-Collection.html" title="Varargs Value Collection">
 <link rel="next" href="gobject-Closures.html" title="Closures">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -233,6 +233,10 @@ enum                <a class="link" href="gobject-Signals.html#GConnectFlags" ti
 <a class="link" href="gobject-Signals.html#GSignalInvocationHint" title="GSignalInvocationHint"><span class="returnvalue">GSignalInvocationHint</span></a>* <a class="link" href="gobject-Signals.html#g-signal-get-invocation-hint" title="g_signal_get_invocation_hint ()">g_signal_get_invocation_hint</a>     (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> instance</code></em>);
 <a class="link" href="gobject-Closures.html#GClosure" title="GClosure"><span class="returnvalue">GClosure</span></a>*           <a class="link" href="gobject-Signals.html#g-signal-type-cclosure-new" title="g_signal_type_cclosure_new ()">g_signal_type_cclosure_new</a>          (<em class="parameter"><code><a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> itype</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> struct_offset</code></em>);
+<a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gobject-Signals.html#g-signal-accumulator-first-wins" title="g_signal_accumulator_first_wins ()">g_signal_accumulator_first_wins</a>     (<em class="parameter"><code><a class="link" href="gobject-Signals.html#GSignalInvocationHint" title="GSignalInvocationHint"><span class="type">GSignalInvocationHint</span></a> *ihint</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *return_accu</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *handler_return</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> dummy</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gobject-Signals.html#g-signal-accumulator-true-handled" title="g_signal_accumulator_true_handled ()">g_signal_accumulator_true_handled</a>   (<em class="parameter"><code><a class="link" href="gobject-Signals.html#GSignalInvocationHint" title="GSignalInvocationHint"><span class="type">GSignalInvocationHint</span></a> *ihint</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *return_accu</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *handler_return</code></em>,
@@ -250,7 +254,7 @@ basically they are a per-type facility that is inherited.  A signal
 emission mainly involves invocation of a certain set of callbacks
 in precisely defined manner. There are two main categories of such
 callbacks, per-object 
-<sup>[<a name="id618909" href="#ftn.id618909" class="footnote">10</a>]</sup>
+<sup>[<a name="id581509" href="#ftn.id581509" class="footnote">10</a>]</sup>
 ones and user provided ones.
 The per-object callbacks are most often referred to as "object method
 handler" or "default (signal) handler", while user provided callbacks are
@@ -683,7 +687,7 @@ of <a class="link" href="gobject-Signals.html#g-signal-new" title="g_signal_new 
         <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Signals.html#g-signal-new">g_signal_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"size_request"</span><span class="symbol">,</span>
 <span class="normal">  </span><span class="function"><a href="gobject-Type-Information.html#G-TYPE-FROM-CLASS:CAPS">G_TYPE_FROM_CLASS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gobject_class</span><span class="symbol">),</span>
 <span class="normal">     <a href="gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS">G_SIGNAL_RUN_FIRST</a></span><span class="symbol">,</span>
-<span class="normal">     </span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-STRUCT-OFFSET:CAPS">G_STRUCT_OFFSET</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">GtkWidgetClass</span><span class="symbol">,</span><span class="normal"> size_request</span><span class="symbol">),</span>
+<span class="normal">     </span><span class="function"><a href="./../glib/glib/glib-Standard-Macros.html#G-STRUCT-OFFSET:CAPS">G_STRUCT_OFFSET</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html#GtkWidgetClass">GtkWidgetClass</a></span><span class="symbol">,</span><span class="normal"> size_request</span><span class="symbol">),</span>
 <span class="normal">     <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
 <span class="normal">     _gtk_marshal_VOID__BOXED</span><span class="symbol">,</span>
 <span class="normal">     <a href="gobject-Type-Information.html#G-TYPE-NONE:CAPS">G_TYPE_NONE</a></span><span class="symbol">,</span><span class="normal"> </span><span class="number">1</span><span class="symbol">,</span>
@@ -2678,6 +2682,59 @@ identified by <em class="parameter"><code>itype</code></em>.
 </table></div>
 </div>
 <hr>
+<div class="refsect2" title="g_signal_accumulator_first_wins ()">
+<a name="g-signal-accumulator-first-wins"></a><h3>g_signal_accumulator_first_wins ()</h3>
+<pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_signal_accumulator_first_wins     (<em class="parameter"><code><a class="link" href="gobject-Signals.html#GSignalInvocationHint" title="GSignalInvocationHint"><span class="type">GSignalInvocationHint</span></a> *ihint</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *return_accu</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *handler_return</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> dummy</code></em>);</pre>
+<p>
+A predefined <a class="link" href="gobject-Signals.html#GSignalAccumulator" title="GSignalAccumulator ()"><span class="type">GSignalAccumulator</span></a> for signals intended to be used as a
+hook for application code to provide a particular value.  Usually
+only one such value is desired and multiple handlers for the same
+signal don't make much sense (except for the case of the default
+handler defined in the class structure, in which case you will
+usually want the signal connection to override the class handler).
+</p>
+<p>
+This accumulator will use the return value from the first signal
+handler that is run as the return value for the signal and not run
+any further handlers (ie: the first handler "wins").
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>ihint</code></em> :</span></p></td>
+<td>standard <a class="link" href="gobject-Signals.html#GSignalAccumulator" title="GSignalAccumulator ()"><span class="type">GSignalAccumulator</span></a> parameter
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>return_accu</code></em> :</span></p></td>
+<td>standard <a class="link" href="gobject-Signals.html#GSignalAccumulator" title="GSignalAccumulator ()"><span class="type">GSignalAccumulator</span></a> parameter
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>handler_return</code></em> :</span></p></td>
+<td>standard <a class="link" href="gobject-Signals.html#GSignalAccumulator" title="GSignalAccumulator ()"><span class="type">GSignalAccumulator</span></a> parameter
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dummy</code></em> :</span></p></td>
+<td>standard <a class="link" href="gobject-Signals.html#GSignalAccumulator" title="GSignalAccumulator ()"><span class="type">GSignalAccumulator</span></a> parameter
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> standard <a class="link" href="gobject-Signals.html#GSignalAccumulator" title="GSignalAccumulator ()"><span class="type">GSignalAccumulator</span></a> result
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.28</p>
+</div>
+<hr>
 <div class="refsect2" title="g_signal_accumulator_true_handled ()">
 <a name="g-signal-accumulator-true-handled"></a><h3>g_signal_accumulator_true_handled ()</h3>
 <pre class="programlisting"><a href="./../glib/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_signal_accumulator_true_handled   (<em class="parameter"><code><a class="link" href="gobject-Signals.html#GSignalInvocationHint" title="GSignalInvocationHint"><span class="type">GSignalInvocationHint</span></a> *ihint</code></em>,
@@ -2689,7 +2746,7 @@ A predefined <a class="link" href="gobject-Signals.html#GSignalAccumulator" titl
 boolean values. The behavior that this accumulator gives is
 that a return of <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> stops the signal emission: no further
 callbacks will be invoked, while a return of <a href="./../glib/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> allows
-the emission to coninue. The idea here is that a <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> return
+the emission to continue. The idea here is that a <a href="./../glib/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> return
 indicates that the callback <span class="emphasis"><em>handled</em></span> the signal,
 and no further handling is needed.
 </p>
@@ -2728,7 +2785,7 @@ and no further handling is needed.
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a name="ftn.id618909" href="#id618909" class="para">10</a>] </sup>Although signals can deal with any kind of instantiatable 
+<div class="footnote"><p><sup>[<a id="ftn.id581509" href="#id581509" class="para">10</a>] </sup>Although signals can deal with any kind of instantiatable 
 type, i'm referring to those types as "object types" in the following, 
 simply because that is the context most users will encounter signals in.
 </p></div>
@@ -2736,6 +2793,6 @@ simply because that is the context most users will encounter signals in.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

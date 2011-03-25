@@ -29,7 +29,6 @@
 #include "gioerror.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gthemedicon
@@ -264,7 +263,7 @@ g_themed_icon_init (GThemedIcon *themed)
  * 
  * Creates a new themed icon for @iconname.
  * 
- * Returns: a new #GThemedIcon.
+ * Returns: (transfer full): a new #GThemedIcon.
  **/
 GIcon *
 g_themed_icon_new (const char *iconname)
@@ -282,7 +281,7 @@ g_themed_icon_new (const char *iconname)
  * 
  * Creates a new themed icon for @iconnames.
  * 
- * Returns: a new #GThemedIcon
+ * Returns: (transfer full): a new #GThemedIcon
  **/
 GIcon *
 g_themed_icon_new_from_names (char **iconnames,
@@ -334,7 +333,7 @@ g_themed_icon_new_from_names (char **iconnames,
  * icon2 = g_themed_icon_new_with_default_fallbacks ("gnome-dev-cdrom-audio");
  * ]|
  *
- * Returns: a new #GThemedIcon.
+ * Returns: (transfer full): a new #GThemedIcon.
  */
 GIcon *
 g_themed_icon_new_with_default_fallbacks (const char *iconname)
@@ -351,7 +350,7 @@ g_themed_icon_new_with_default_fallbacks (const char *iconname)
  *
  * Gets the names of icons from within @icon.
  *
- * Returns: a list of icon names.
+ * Returns: (transfer none): a list of icon names.
  */
 const char * const *
 g_themed_icon_get_names (GThemedIcon *icon)
@@ -521,6 +520,3 @@ g_themed_icon_icon_iface_init (GIconIface *iface)
   iface->to_tokens = g_themed_icon_to_tokens;
   iface->from_tokens = g_themed_icon_from_tokens;
 }
-
-#define __G_THEMED_ICON_C__
-#include "gioaliasdef.c"

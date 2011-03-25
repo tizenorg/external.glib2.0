@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Doubly-Linked Lists</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-Memory-Chunks.html" title="Memory Chunks">
 <link rel="next" href="glib-Singly-Linked-Lists.html" title="Singly-Linked Lists">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -66,6 +66,8 @@
 <a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="returnvalue">GList</span></a>*              <a class="link" href="glib-Doubly-Linked-Lists.html#g-list-remove-all" title="g_list_remove_all ()">g_list_remove_all</a>                   (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a> *list</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> data</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Doubly-Linked-Lists.html#g-list-free" title="g_list_free ()">g_list_free</a>                         (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a> *list</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Doubly-Linked-Lists.html#g-list-free-full" title="g_list_free_full ()">g_list_free_full</a>                    (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> free_func</code></em>);
 
 <a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="returnvalue">GList</span></a>*              <a class="link" href="glib-Doubly-Linked-Lists.html#g-list-alloc" title="g_list_alloc ()">g_list_alloc</a>                        (<em class="parameter"><code><span class="type">void</span></code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Doubly-Linked-Lists.html#g-list-free-1" title="g_list_free_1 ()">g_list_free_1</a>                       (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a> *list</code></em>);
@@ -608,7 +610,8 @@ The freed elements are returned to the slice allocator.
 <h3 class="title">Note</h3>
 <p>
 If list elements contain dynamically-allocated memory, 
-they should be freed first.
+you should either use <a class="link" href="glib-Doubly-Linked-Lists.html#g-list-free-full" title="g_list_free_full ()"><code class="function">g_list_free_full()</code></a> or free them manually
+first.
 </p>
 </div>
 <p>
@@ -621,6 +624,32 @@ they should be freed first.
 </td>
 </tr></tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2" title="g_list_free_full ()">
+<a name="g-list-free-full"></a><h3>g_list_free_full ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_list_free_full                    (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a> *list</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> free_func</code></em>);</pre>
+<p>
+Convenience method, which frees all the memory used by a <a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a>, and
+calls the specified destroy function on every element's data.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
+<td>a pointer to a <a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>free_func</code></em> :</span></p></td>
+<td>the function to be called to free each element's data
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.28</p>
 </div>
 <hr>
 <div class="refsect2" title="g_list_alloc ()">
@@ -1401,6 +1430,6 @@ with <code class="option">--disable-mem-pools</code>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

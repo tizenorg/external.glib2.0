@@ -30,8 +30,8 @@
 #include "gtypeplugin.h"
 #include "gvaluecollector.h"
 #include "gbsearcharray.h"
-#include "gobjectalias.h"
 #include "gatomicarray.h"
+#include "gobject_trace.h"
 
 
 /**
@@ -481,7 +481,9 @@ type_node_any_new_W (TypeNode             *pnode,
       pnode->children = g_renew (GType, pnode->children, pnode->n_children);
       pnode->children[i] = type;
     }
-  
+
+  TRACE(GOBJECT_TYPE_NEW(name, node->supers[1], type));
+
   node->plugin = plugin;
   node->n_children = 0;
   node->children = NULL;
@@ -1883,7 +1885,9 @@ g_type_create_instance (GType type)
   instance->g_class = class;
   if (node->data->instance.instance_init)
     node->data->instance.instance_init (instance, class);
-  
+
+  TRACE(GOBJECT_OBJECT_NEW(instance, type));
+
   return instance;
 }
 
@@ -4368,13 +4372,20 @@ g_type_init (void)
  * @g_class: class structure for an instantiatable type
  * @private_size: size of private structure.
  *
- * Registers a private structure for an instantiatable type;
- * when an object is allocated, the private structures for
+ * Registers a private structure for an instantiatable type.
+ *
+ * When an object is allocated, the private structures for
  * the type and all of its parent types are allocated
  * sequentially in the same memory block as the public
- * structures. This function should be called in the
- * type's class_init() function. The private structure can
- * be retrieved using the G_TYPE_INSTANCE_GET_PRIVATE() macro.
+ * structures.
+ *
+ * Note that the accumulated size of the private structures of
+ * a type and all its parent types cannot excced 64kB.
+ *
+ * This function should be called in the type's class_init() function.
+ * The private structure can be retrieved using the
+ * G_TYPE_INSTANCE_GET_PRIVATE() macro.
+ *
  * The following example shows attaching a private structure
  * <structname>MyObjectPrivate</structname> to an object
  * <structname>MyObject</structname> defined in the standard GObject
@@ -4429,6 +4440,7 @@ g_type_class_add_private (gpointer g_class,
   gsize offset;
 
   g_return_if_fail (private_size > 0);
+  g_return_if_fail (private_size <= 0xffff);
 
   if (!node || !node->is_instantiatable || !node->data || node->data->class.class != g_class)
     {
@@ -4450,6 +4462,9 @@ g_type_class_add_private (gpointer g_class,
   G_WRITE_LOCK (&type_rw_lock);
 
   offset = ALIGN_STRUCT (node->data->instance.private_size);
+
+  g_assert (offset + private_size <= 0xffff);
+
   node->data->instance.private_size = offset + private_size;
   
   G_WRITE_UNLOCK (&type_rw_lock);
@@ -4611,6 +4626,3 @@ g_type_class_get_private (GTypeClass *klass,
 
   return G_STRUCT_MEMBER_P (klass, offset);
 }
-
-#define __G_TYPE_C__
-#include "gobjectaliasdef.c"

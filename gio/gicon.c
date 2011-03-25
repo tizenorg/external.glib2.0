@@ -33,7 +33,6 @@
 
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /* There versioning of this is implicit, version 1 would be ".1 " */
 #define G_ICON_SERIALIZATION_MAGIC0 ". "
@@ -76,7 +75,8 @@ g_icon_default_init (GIconInterface *iface)
  * @icon: #gconstpointer to an icon object.
  * 
  * Gets a hash for an icon.
- * 
+ *
+ * Virtual: hash
  * Returns: a #guint containing a hash for the @icon, suitable for 
  * use in a #GHashTable or similar data structure.
  **/
@@ -199,6 +199,7 @@ g_icon_to_string_tokenized (GIcon *icon, GString *s)
  * </para></listitem>
  * </itemizedlist>
  *
+ * Virtual: to_tokens
  * Returns: An allocated NUL-terminated UTF8 string or %NULL if @icon can't
  * be serialized. Use g_free() to free.
  *
@@ -450,7 +451,3 @@ g_icon_new_for_string (const gchar   *str,
 
   return icon;
 }
-
-
-#define __G_ICON_C__
-#include "gioaliasdef.c"

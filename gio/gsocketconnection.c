@@ -37,7 +37,6 @@
 #include "gtcpconnection.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gsocketconnection
@@ -61,8 +60,7 @@
  * Since: 2.22
  */
 
-G_DEFINE_TYPE (GSocketConnection,
-	       g_socket_connection, G_TYPE_IO_STREAM);
+G_DEFINE_TYPE (GSocketConnection, g_socket_connection, G_TYPE_IO_STREAM);
 
 enum
 {
@@ -75,6 +73,8 @@ struct _GSocketConnectionPrivate
   GSocket       *socket;
   GInputStream  *input_stream;
   GOutputStream *output_stream;
+
+  gboolean       in_dispose;
 };
 
 static gboolean g_socket_connection_close         (GIOStream            *stream,
@@ -121,7 +121,7 @@ g_socket_connection_get_output_stream (GIOStream *io_stream)
  * This can be useful if you want to do something unusual on it
  * not supported by the #GSocketConnection APIs.
  *
- * Returns: a #GSocketAddress or %NULL on error.
+ * Returns: (transfer none): a #GSocketAddress or %NULL on error.
  *
  * Since: 2.22
  */
@@ -140,7 +140,7 @@ g_socket_connection_get_socket (GSocketConnection *connection)
  *
  * Try to get the local address of a socket connection.
  *
- * Returns: a #GSocketAddress or %NULL on error.
+ * Returns: (transfer full): a #GSocketAddress or %NULL on error.
  *     Free the returned object with g_object_unref().
  *
  * Since: 2.22
@@ -159,7 +159,7 @@ g_socket_connection_get_local_address (GSocketConnection  *connection,
  *
  * Try to get the remote address of a socket connection.
  *
- * Returns: a #GSocketAddress or %NULL on error.
+ * Returns: (transfer full): a #GSocketAddress or %NULL on error.
  *     Free the returned object with g_object_unref().
  *
  * Since: 2.22
@@ -218,6 +218,19 @@ g_socket_connection_constructed (GObject *object)
 }
 
 static void
+g_socket_connection_dispose (GObject *object)
+{
+  GSocketConnection *connection = G_SOCKET_CONNECTION (object);
+
+  connection->priv->in_dispose = TRUE;
+
+  G_OBJECT_CLASS (g_socket_connection_parent_class)
+    ->dispose (object);
+
+  connection->priv->in_dispose = FALSE;
+}
+
+static void
 g_socket_connection_finalize (GObject *object)
 {
   GSocketConnection *connection = G_SOCKET_CONNECTION (object);
@@ -246,6 +259,7 @@ g_socket_connection_class_init (GSocketConnectionClass *klass)
   gobject_class->get_property = g_socket_connection_get_property;
   gobject_class->constructed = g_socket_connection_constructed;
   gobject_class->finalize = g_socket_connection_finalize;
+  gobject_class->dispose = g_socket_connection_dispose;
 
   stream_class->get_input_stream = g_socket_connection_get_input_stream;
   stream_class->get_output_stream = g_socket_connection_get_output_stream;
@@ -286,6 +300,15 @@ g_socket_connection_close (GIOStream     *stream,
     g_input_stream_close (connection->priv->input_stream,
 			  cancellable, NULL);
 
+  /* Don't close the underlying socket if this is being called
+   * as part of dispose(); when destroying the GSocketConnection,
+   * we only want to close the socket if we're holding the last
+   * reference on it, and in that case it will close itself when
+   * we unref it in finalize().
+   */
+  if (connection->priv->in_dispose)
+    return TRUE;
+
   return g_socket_close (connection->priv->socket, error);
 }
 
@@ -308,10 +331,9 @@ g_socket_connection_close_async (GIOStream           *stream,
   if (class->close_fn &&
       !class->close_fn (stream, cancellable, &error))
     {
-      g_simple_async_report_gerror_in_idle (G_OBJECT (stream),
+      g_simple_async_report_take_gerror_in_idle (G_OBJECT (stream),
 					    callback, user_data,
 					    error);
-      g_error_free (error);
       return;
     }
 
@@ -480,7 +502,7 @@ g_socket_connection_factory_lookup_type (GSocketFamily family,
  * Creates a #GSocketConnection subclass of the right type for
  * @socket.
  *
- * Returns: a #GSocketConnection
+ * Returns: (transfer full): a #GSocketConnection
  *
  * Since: 2.22
  */
@@ -494,6 +516,3 @@ g_socket_connection_factory_create_connection (GSocket *socket)
 						  g_socket_get_protocol (socket));
   return g_object_new (type, "socket", socket, NULL);
 }
-
-#define __G_SOCKET_CONNECTION_C__
-#include "gioaliasdef.c"

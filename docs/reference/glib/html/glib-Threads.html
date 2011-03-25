@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Threads</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-The-Main-Event-Loop.html" title="The Main Event Loop">
 <link rel="next" href="glib-Thread-Pools.html" title="Thread Pools">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -207,10 +207,10 @@ this should be avoided if possible.
 </p>
 <p>
 Please note that since version 2.24 the GObject initialization
-function <a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#g-type-init"><code class="function">g_type_init()</code></a> initializes threads (with a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> argument),
+function <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#g-type-init"><code class="function">g_type_init()</code></a> initializes threads (with a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> argument),
 so most applications, including those using Gtk+ will run with
 threads enabled. If you want a special thread implementation, make
-sure you call <a class="link" href="glib-Threads.html#g-thread-init" title="g_thread_init ()"><code class="function">g_thread_init()</code></a> before <a href="/usr/share/gtk-doc/html/gobject/gobject-Type-Information.html#g-type-init"><code class="function">g_type_init()</code></a> is called.
+sure you call <a class="link" href="glib-Threads.html#g-thread-init" title="g_thread_init ()"><code class="function">g_thread_init()</code></a> before <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Type-Information.html#g-type-init"><code class="function">g_type_init()</code></a> is called.
 </p>
 <p>
 After calling <a class="link" href="glib-Threads.html#g-thread-init" title="g_thread_init ()"><code class="function">g_thread_init()</code></a>, GLib is completely thread safe (all
@@ -1023,7 +1023,7 @@ access. Take for example the following function:
 <p>
 </p>
 <div class="example">
-<a name="id605647"></a><p class="title"><b>Example 2. A function which will not work in a threaded environment</b></p>
+<a name="id472203"></a><p class="title"><b>Example 2. A function which will not work in a threaded environment</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1068,7 +1068,7 @@ access. A first naive implementation would be:
 <p>
 </p>
 <div class="example">
-<a name="id605678"></a><p class="title"><b>Example 3. The wrong way to write a thread-safe function</b></p>
+<a name="id472229"></a><p class="title"><b>Example 3. The wrong way to write a thread-safe function</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1120,7 +1120,7 @@ is:
 <p>
 </p>
 <div class="example">
-<a name="id605707"></a><p class="title"><b>Example 4. A correct thread-safe function</b></p>
+<a name="id472254"></a><p class="title"><b>Example 4. A correct thread-safe function</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1368,7 +1368,7 @@ example:
 <p>
 </p>
 <div class="example">
-<a name="id606617"></a><p class="title"><b>Example 5. 
+<a name="id473064"></a><p class="title"><b>Example 5. 
   Using <span class="structname">GStaticMutex</span>
   to simplify thread-safe programming
  </b></p>
@@ -1619,7 +1619,7 @@ of the variable you intent to protect with the lock. Look at our
 <p>
 </p>
 <div class="example">
-<a name="id607667"></a><p class="title"><b>Example 6. Using the <code class="literal">G_LOCK_</code>* convenience macros</b></p>
+<a name="id474114"></a><p class="title"><b>Example 6. Using the <code class="literal">G_LOCK_</code>* convenience macros</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1994,7 +1994,7 @@ example:
 <p>
 </p>
 <div class="example">
-<a name="id609282"></a><p class="title"><b>Example 7. An array with access functions</b></p>
+<a name="id475729"></a><p class="title"><b>Example 7. An array with access functions</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -2341,7 +2341,7 @@ threads to be woken up.
 <p>
 </p>
 <div class="example">
-<a name="id610685"></a><p class="title"><b>Example 8. 
+<a name="id477131"></a><p class="title"><b>Example 8. 
   Using GCond to block a thread until a condition is satisfied
  </b></p>
 <div class="example-contents">
@@ -2615,7 +2615,7 @@ This can be done as follows:
 <p>
 </p>
 <div class="example">
-<a name="id611735"></a><p class="title"><b>Example 9. Using GPrivate for per-thread data</b></p>
+<a name="id478182"></a><p class="title"><b>Example 9. Using GPrivate for per-thread data</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -2824,7 +2824,7 @@ look at our <code class="function"><code class="function">give_me_next_number()<
 <p>
 </p>
 <div class="example">
-<a name="id612504"></a><p class="title"><b>Example 10. Using GStaticPrivate for per-thread data</b></p>
+<a name="id478951"></a><p class="title"><b>Example 10. Using GStaticPrivate for per-thread data</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -3406,6 +3406,6 @@ reliably.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

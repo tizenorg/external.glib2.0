@@ -24,7 +24,6 @@
 #include "ginitable.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:ginitable
@@ -52,35 +51,12 @@
  * an exception on failure.
  */
 
-GType
-g_initable_get_type (void)
+typedef GInitableIface GInitableInterface;
+G_DEFINE_INTERFACE (GInitable, g_initable, G_TYPE_OBJECT)
+
+static void
+g_initable_default_init (GInitableInterface *iface)
 {
-  static volatile gsize g_define_type_id__volatile = 0;
-
-  if (g_once_init_enter (&g_define_type_id__volatile))
-    {
-      const GTypeInfo initable_info =
-      {
-	sizeof (GInitableIface), /* class_size */
-	NULL,           /* base_init */
-	NULL,		/* base_finalize */
-	NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	0,
-	0,              /* n_preallocs */
-	NULL
-      };
-      GType g_define_type_id =
-	g_type_register_static (G_TYPE_INTERFACE, I_("GInitable"),
-				&initable_info, 0);
-
-      g_type_interface_add_prerequisite (g_define_type_id, G_TYPE_OBJECT);
-
-      g_once_init_leave (&g_define_type_id__volatile, g_define_type_id);
-    }
-
-  return g_define_type_id__volatile;
 }
 
 /**
@@ -144,7 +120,7 @@ g_initable_init (GInitable     *initable,
  * similar to g_object_new() but also initializes the object
  * and returns %NULL, setting an error on failure.
  *
- * Return value: a newly allocated #GObject, or %NULL on error
+ * Return value: (transfer full): a newly allocated #GObject, or %NULL on error
  *
  * Since: 2.22
  */
@@ -180,7 +156,7 @@ g_initable_new (GType          object_type,
  * similar to g_object_newv() but also initializes the object
  * and returns %NULL, setting an error on failure.
  *
- * Return value: a newly allocated #GObject, or %NULL on error
+ * Return value: (transfer full): a newly allocated #GObject, or %NULL on error
  *
  * Since: 2.22
  */
@@ -220,7 +196,7 @@ g_initable_newv (GType          object_type,
  * similar to g_object_new_valist() but also initializes the object
  * and returns %NULL, setting an error on failure.
  *
- * Return value: a newly allocated #GObject, or %NULL on error
+ * Return value: (transfer full): a newly allocated #GObject, or %NULL on error
  *
  * Since: 2.22
  */
@@ -247,6 +223,3 @@ g_initable_new_valist (GType          object_type,
 
   return obj;
 }
-
-#define __G_INITABLE_C__
-#include "gioaliasdef.c"

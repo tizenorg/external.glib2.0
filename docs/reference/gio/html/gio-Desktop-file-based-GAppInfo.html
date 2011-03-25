@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Desktop file based GAppInfo</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<title>GDesktopAppInfo</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="types.html" title="File types and applications">
 <link rel="prev" href="GAppInfo.html" title="GAppInfo">
 <link rel="next" href="volume_mon.html" title="Volumes and Drives">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -28,55 +28,38 @@
                   <a href="#gio-Desktop-file-based-GAppInfo.object-hierarchy" class="shortcut">Object Hierarchy</a>
                    | 
                   <a href="#gio-Desktop-file-based-GAppInfo.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
-                   | 
-                  <a href="#gio-Desktop-file-based-GAppInfo.prerequisites" class="shortcut">Prerequisites</a>
 </td></tr>
 </table>
-<div class="refentry" title="Desktop file based GAppInfo">
+<div class="refentry" title="GDesktopAppInfo">
 <a name="gio-Desktop-file-based-GAppInfo"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
-<h2><span class="refentrytitle"><a name="gio-Desktop-file-based-GAppInfo.top_of_page"></a>Desktop file based GAppInfo</span></h2>
-<p>Desktop file based GAppInfo — Application information from desktop files</p>
+<h2><span class="refentrytitle"><a name="gio-Desktop-file-based-GAppInfo.top_of_page"></a>GDesktopAppInfo</span></h2>
+<p>GDesktopAppInfo — Application information from desktop files</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="gio-Desktop-file-based-GAppInfo.synopsis"></a><h2>Synopsis</h2>
-<a name="GDesktopAppInfo"></a><a name="GDesktopAppInfoLookup"></a><pre class="synopsis">
+<a name="GDesktopAppInfo"></a><pre class="synopsis">
 #include &lt;gio/gdesktopappinfo.h&gt;
 
                     <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo-struct" title="GDesktopAppInfo">GDesktopAppInfo</a>;
 <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="returnvalue">GDesktopAppInfo</span></a> *   <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new-from-filename" title="g_desktop_app_info_new_from_filename ()">g_desktop_app_info_new_from_filename</a>
                                                         (<em class="parameter"><code>const <span class="type">char</span> *filename</code></em>);
-<a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="returnvalue">GDesktopAppInfo</span></a> *   <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new-from-keyfile" title="g_desktop_app_info_new_from_keyfile ()">g_desktop_app_info_new_from_keyfile</a> (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Key-value-file-parser.html#GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>);
+<a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="returnvalue">GDesktopAppInfo</span></a> *   <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new-from-keyfile" title="g_desktop_app_info_new_from_keyfile ()">g_desktop_app_info_new_from_keyfile</a> (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Key-value-file-parser.html#GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>);
 <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="returnvalue">GDesktopAppInfo</span></a> *   <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new" title="g_desktop_app_info_new ()">g_desktop_app_info_new</a>              (<em class="parameter"><code>const <span class="type">char</span> *desktop_id</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-filename" title="g_desktop_app_info_get_filename ()">g_desktop_app_info_get_filename</a>     (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-is-hidden" title="g_desktop_app_info_get_is_hidden ()">g_desktop_app_info_get_is_hidden</a>    (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-get-is-hidden" title="g_desktop_app_info_get_is_hidden ()">g_desktop_app_info_get_is_hidden</a>    (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-set-desktop-env" title="g_desktop_app_info_set_desktop_env ()">g_desktop_app_info_set_desktop_env</a>  (<em class="parameter"><code>const <span class="type">char</span> *desktop_env</code></em>);
-                    <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfoLookup-struct" title="GDesktopAppInfoLookup">GDesktopAppInfoLookup</a>;
-#define             <a class="link" href="gio-Desktop-file-based-GAppInfo.html#G-DESKTOP-APP-INFO-LOOKUP-EXTENSION-POINT-NAME:CAPS" title="G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME">G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME</a>
-<a class="link" href="GAppInfo.html" title="GAppInfo"><span class="returnvalue">GAppInfo</span></a> *          <a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-lookup-get-default-for-uri-scheme" title="g_desktop_app_info_lookup_get_default_for_uri_scheme ()">g_desktop_app_info_lookup_get_default_for_uri_scheme</a>
-                                                        (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfoLookup"><span class="type">GDesktopAppInfoLookup</span></a> *lookup</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *uri_scheme</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="gio-Desktop-file-based-GAppInfo.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GDesktopAppInfo
 </pre>
-<pre class="synopsis">
-  GInterface
-   +----GDesktopAppInfoLookup
-</pre>
-</div>
-<div class="refsect1" title="Prerequisites">
-<a name="gio-Desktop-file-based-GAppInfo.prerequisites"></a><h2>Prerequisites</h2>
-<p>
-GDesktopAppInfoLookup requires
- <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>.</p>
 </div>
 <div class="refsect1" title="Implemented Interfaces">
 <a name="gio-Desktop-file-based-GAppInfo.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
@@ -91,8 +74,8 @@ GDesktopAppInfo implements
 desktop files.
 </p>
 <p>
-Note that <code class="filename">&lt;gio/gdesktopappinfo.h&gt;</code> belongs to 
-the UNIX-specific GIO interfaces, thus you have to use the 
+Note that <code class="filename">&lt;gio/gdesktopappinfo.h&gt;</code> belongs to
+the UNIX-specific GIO interfaces, thus you have to use the
 <code class="filename">gio-unix-2.0.pc</code> pkg-config file when using it.
 </p>
 </div>
@@ -123,7 +106,7 @@ Creates a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDeskto
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
+<td> a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
 </td>
 </tr>
 </tbody>
@@ -132,7 +115,7 @@ Creates a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDeskto
 <hr>
 <div class="refsect2" title="g_desktop_app_info_new_from_keyfile ()">
 <a name="g-desktop-app-info-new-from-keyfile"></a><h3>g_desktop_app_info_new_from_keyfile ()</h3>
-<pre class="programlisting"><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="returnvalue">GDesktopAppInfo</span></a> *   g_desktop_app_info_new_from_keyfile (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Key-value-file-parser.html#GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="returnvalue">GDesktopAppInfo</span></a> *   g_desktop_app_info_new_from_keyfile (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Key-value-file-parser.html#GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a>.
 </p>
@@ -141,12 +124,12 @@ Creates a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDeskto
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_file</code></em> :</span></p></td>
-<td>an opened <a href="/usr/share/gtk-doc/html/glib/glib-Key-value-file-parser.html#GKeyFile"><span class="type">GKeyFile</span></a>
+<td>an opened <a href="http://library.gnome.org/devel/glib/unstable/glib-Key-value-file-parser.html#GKeyFile"><span class="type">GKeyFile</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
+<td> a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
 
 </td>
 </tr>
@@ -182,7 +165,7 @@ described in the <a class="ulink" href="http://standards.freedesktop.org/menu-sp
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no desktop file with that id
+<td> a new <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no desktop file with that id
 </td>
 </tr>
 </tbody>
@@ -195,7 +178,7 @@ described in the <a class="ulink" href="http://standards.freedesktop.org/menu-sp
 <p>
 When <em class="parameter"><code>info</code></em> was created from a known filename, return it.  In some
 situations such as the <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> returned from
-<a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new-from-keyfile" title="g_desktop_app_info_new_from_keyfile ()"><code class="function">g_desktop_app_info_new_from_keyfile()</code></a>, this function will return <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+<a class="link" href="gio-Desktop-file-based-GAppInfo.html#g-desktop-app-info-new-from-keyfile" title="g_desktop_app_info_new_from_keyfile ()"><code class="function">g_desktop_app_info_new_from_keyfile()</code></a>, this function will return <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -207,7 +190,7 @@ situations such as the <a class="link" href="gio-Desktop-file-based-GAppInfo.htm
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> The full path to the file for <em class="parameter"><code>info</code></em>, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if not known.
+<td> The full path to the file for <em class="parameter"><code>info</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if not known.
 </td>
 </tr>
 </tbody>
@@ -217,7 +200,7 @@ situations such as the <a class="link" href="gio-Desktop-file-based-GAppInfo.htm
 <hr>
 <div class="refsect2" title="g_desktop_app_info_get_is_hidden ()">
 <a name="g-desktop-app-info-get-is-hidden"></a><h3>g_desktop_app_info_get_is_hidden ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_desktop_app_info_get_is_hidden    (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_desktop_app_info_get_is_hidden    (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfo"><span class="type">GDesktopAppInfo</span></a> *info</code></em>);</pre>
 <p>
 A desktop file is hidden if the Hidden key in it is
 set to True.
@@ -232,7 +215,7 @@ set to True.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if hidden, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise. 
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if hidden, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise. 
 </td>
 </tr>
 </tbody>
@@ -273,67 +256,10 @@ Should be called only once; subsequent calls are ignored.
 </tr></tbody>
 </table></div>
 </div>
-<hr>
-<div class="refsect2" title="GDesktopAppInfoLookup">
-<a name="GDesktopAppInfoLookup-struct"></a><h3>GDesktopAppInfoLookup</h3>
-<pre class="programlisting">typedef struct _GDesktopAppInfoLookup GDesktopAppInfoLookup;</pre>
-<p>
-Interface that is used by backends to associate default
-handlers with URI schemes.
-</p>
-</div>
-<hr>
-<div class="refsect2" title="G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME">
-<a name="G-DESKTOP-APP-INFO-LOOKUP-EXTENSION-POINT-NAME:CAPS"></a><h3>G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME</h3>
-<pre class="programlisting">#define G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME "gio-desktop-app-info-lookup"
-</pre>
-<p>
-Extension point for default handler to URI association. See
-Extending GIO.
-</p>
-</div>
-<hr>
-<div class="refsect2" title="g_desktop_app_info_lookup_get_default_for_uri_scheme ()">
-<a name="g-desktop-app-info-lookup-get-default-for-uri-scheme"></a><h3>g_desktop_app_info_lookup_get_default_for_uri_scheme ()</h3>
-<pre class="programlisting"><a class="link" href="GAppInfo.html" title="GAppInfo"><span class="returnvalue">GAppInfo</span></a> *          g_desktop_app_info_lookup_get_default_for_uri_scheme
-                                                        (<em class="parameter"><code><a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfoLookup"><span class="type">GDesktopAppInfoLookup</span></a> *lookup</code></em>,
-                                                         <em class="parameter"><code>const <span class="type">char</span> *uri_scheme</code></em>);</pre>
-<p>
-Gets the default application for launching applications 
-using this URI scheme for a particular GDesktopAppInfoLookup
-implementation.
-</p>
-<p>
-The GDesktopAppInfoLookup interface and this function is used
-to implement <a class="link" href="GAppInfo.html#g-app-info-get-default-for-uri-scheme" title="g_app_info_get_default_for_uri_scheme ()"><code class="function">g_app_info_get_default_for_uri_scheme()</code></a> backends
-in a GIO module. There is no reason for applications to use it
-directly. Applications should use <a class="link" href="GAppInfo.html#g-app-info-get-default-for-uri-scheme" title="g_app_info_get_default_for_uri_scheme ()"><code class="function">g_app_info_get_default_for_uri_scheme()</code></a>.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>lookup</code></em> :</span></p></td>
-<td>a <a class="link" href="gio-Desktop-file-based-GAppInfo.html#GDesktopAppInfoLookup"><span class="type">GDesktopAppInfoLookup</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>uri_scheme</code></em> :</span></p></td>
-<td>a string containing a URI scheme.
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="GAppInfo.html" title="GAppInfo"><span class="type">GAppInfo</span></a> for given <em class="parameter"><code>uri_scheme</code></em> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

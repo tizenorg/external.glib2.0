@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Miscellaneous Macros</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-fundamentals.html" title="GLib Fundamentals">
 <link rel="prev" href="glib-Numerical-Definitions.html" title="Numerical Definitions">
 <link rel="next" href="glib-Atomic-Operations.html" title="Atomic Operations">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -56,8 +56,6 @@
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-STRINGIFY:CAPS" title="G_STRINGIFY()">G_STRINGIFY</a>                         (macro_or_string)
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-PASTE:CAPS" title="G_PASTE()">G_PASTE</a>                             (identifier1,
                                                          identifier2)
-#define             <a class="link" href="glib-Miscellaneous-Macros.html#G-PASTE-ARGS:CAPS" title="G_PASTE_ARGS()">G_PASTE_ARGS</a>                        (identifier1,
-                                                         identifier2)
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-STATIC-ASSERT:CAPS" title="G_STATIC_ASSERT()">G_STATIC_ASSERT</a>                     (expr)
 
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-GNUC-EXTENSION:CAPS" title="G_GNUC_EXTENSION">G_GNUC_EXTENSION</a>
@@ -68,6 +66,7 @@
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-GNUC-ALLOC-SIZE2:CAPS" title="G_GNUC_ALLOC_SIZE2()">G_GNUC_ALLOC_SIZE2</a>                  (x,
                                                          y)
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-GNUC-DEPRECATED:CAPS" title="G_GNUC_DEPRECATED">G_GNUC_DEPRECATED</a>
+#define             <a class="link" href="glib-Miscellaneous-Macros.html#G-GNUC-DEPRECATED-FOR:CAPS" title="G_GNUC_DEPRECATED_FOR()">G_GNUC_DEPRECATED_FOR</a>               (f)
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-GNUC-NORETURN:CAPS" title="G_GNUC_NORETURN">G_GNUC_NORETURN</a>
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-GNUC-UNUSED:CAPS" title="G_GNUC_UNUSED">G_GNUC_UNUSED</a>
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-GNUC-PRINTF:CAPS" title="G_GNUC_PRINTF()">G_GNUC_PRINTF</a>                       (format_idx,
@@ -230,8 +229,35 @@ does not include <code class="function">string.h</code> for you.
 </pre>
 <p>
 Accepts a macro or a string and converts it into a string after
-preprocessor argument expansion.
+preprocessor argument expansion. For example, the following code:
 </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="preproc">#define</span><span class="normal"> AGE </span><span class="number">27</span>
+<span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">greeting </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Miscellaneous-Macros.html#G-STRINGIFY:CAPS">G_STRINGIFY</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">AGE</span><span class="symbol">)</span><span class="normal"> </span><span class="string">" today!"</span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+is transformed by the preprocessor into (code equivalent to):
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">greeting </span><span class="symbol">=</span><span class="normal"> </span><span class="string">"27 today!"</span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
@@ -247,9 +273,45 @@ preprocessor argument expansion.
 <pre class="programlisting">#define G_PASTE(identifier1,identifier2)      G_PASTE_ARGS (identifier1, identifier2)
 </pre>
 <p>
-Yields a new preprocessor pasted identifier 'identifier1identifier2'
-from its expanded arguments 'identifier1' and 'identifier2'.
+Yields a new preprocessor pasted identifier <code class="code">identifier1identifier2</code>
+from its expanded arguments <em class="parameter"><code>identifier1</code></em> and <em class="parameter"><code>identifier2</code></em>. For example, the
+following code:
 </p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="preproc">#define</span><span class="normal"> </span><span class="function">GET</span><span class="symbol">(</span><span class="normal">traveller</span><span class="symbol">,</span><span class="normal">method</span><span class="symbol">)</span><span class="normal"> </span><span class="function"><a href="glib-Miscellaneous-Macros.html#G-PASTE:CAPS">G_PASTE</a></span><span class="symbol">(</span><span class="normal">traveller_get_</span><span class="symbol">,</span><span class="normal"> method</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">traveller</span><span class="symbol">)</span>
+<span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">name </span><span class="symbol">=</span><span class="normal"> </span><span class="function">GET</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">traveller</span><span class="symbol">,</span><span class="normal"> name</span><span class="symbol">);</span>
+<span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">quest </span><span class="symbol">=</span><span class="normal"> </span><span class="function">GET</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">traveller</span><span class="symbol">,</span><span class="normal"> quest</span><span class="symbol">);</span>
+<span class="usertype">GdkColor</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">favourite </span><span class="symbol">=</span><span class="normal"> </span><span class="function">GET</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">traveller</span><span class="symbol">,</span><span class="normal"> favourite_colour</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+is transformed by the preprocessor into:
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">name </span><span class="symbol">=</span><span class="normal"> </span><span class="function">traveller_get_name</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">traveller</span><span class="symbol">);</span>
+<span class="keyword">const</span><span class="normal"> </span><span class="usertype">gchar</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">quest </span><span class="symbol">=</span><span class="normal"> </span><span class="function">traveller_get_quest</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">traveller</span><span class="symbol">);</span>
+<span class="usertype">GdkColor</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">favourite </span><span class="symbol">=</span><span class="normal"> </span><span class="function">traveller_get_favourite_colour</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">traveller</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -268,29 +330,6 @@ from its expanded arguments 'identifier1' and 'identifier2'.
 <p class="since">Since 2.20</p>
 </div>
 <hr>
-<div class="refsect2" title="G_PASTE_ARGS()">
-<a name="G-PASTE-ARGS:CAPS"></a><h3>G_PASTE_ARGS()</h3>
-<pre class="programlisting">#define G_PASTE_ARGS(identifier1,identifier2) identifier1 ## identifier2
-</pre>
-<p>
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>identifier1</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>identifier2</code></em> :</span></p></td>
-<td>
-</td>
-</tr>
-</tbody>
-</table></div>
-</div>
-<hr>
 <div class="refsect2" title="G_STATIC_ASSERT()">
 <a name="G-STATIC-ASSERT:CAPS"></a><h3>G_STATIC_ASSERT()</h3>
 <pre class="programlisting">#define G_STATIC_ASSERT(expr) typedef struct { char Compile_Time_Assertion[(expr) ? 1 : -1]; } G_PASTE (_GStaticAssert_, __LINE__)
@@ -299,6 +338,15 @@ from its expanded arguments 'identifier1' and 'identifier2'.
 The G_STATIC_ASSERT macro lets the programmer check a condition at compile time,
 the condition needs to be compile time computable.
 The macro can be used in any place where a <code class="literal">typedef</code> is valid.
+</p>
+<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Note</h3>
+<p>
+A <code class="literal">typedef</code> is generally allowed in exactly the same
+places that a variable declaration is allowed.  For this reason, you should not use <code class="literal">G_STATIC_ASSERT</code> in the middle of blocks of code.
+</p>
+</div>
+<p>
 The macro should only be used once per source code line.
 </p>
 <div class="variablelist"><table border="0">
@@ -430,6 +478,27 @@ generate warnings when deprecated interfaces are used.
 See the GNU C documentation for details.
 </p>
 <p class="since">Since 2.2</p>
+</div>
+<hr>
+<div class="refsect2" title="G_GNUC_DEPRECATED_FOR()">
+<a name="G-GNUC-DEPRECATED-FOR:CAPS"></a><h3>G_GNUC_DEPRECATED_FOR()</h3>
+<pre class="programlisting">#define             G_GNUC_DEPRECATED_FOR(f)</pre>
+<p>
+Like <a class="link" href="glib-Miscellaneous-Macros.html#G-GNUC-DEPRECATED:CAPS" title="G_GNUC_DEPRECATED"><code class="literal">G_GNUC_DEPRECATED</code></a>, but names the intended replacement for the
+deprecated symbol if the version of <span class="command"><strong>gcc</strong></span> in use is
+new enough to support custom deprecation messages.
+See the GNU C documentation for details.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
+<td>the intended replacement for the deprecated symbol, such as the name of a
+    function
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.25.3</p>
 </div>
 <hr>
 <div class="refsect2" title="G_GNUC_NORETURN">
@@ -1040,6 +1109,6 @@ printing values of type <a class="link" href="glib-Basic-Types.html#guintptr" ti
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

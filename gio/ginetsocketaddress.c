@@ -31,7 +31,6 @@
 #include "gioerror.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:ginetsocketaddress
@@ -167,7 +166,7 @@ g_inet_socket_address_to_native (GSocketAddress  *address,
   GInetSocketAddress *addr;
   GSocketFamily family;
 
-  g_return_val_if_fail (G_IS_INET_SOCKET_ADDRESS (address), 0);
+  g_return_val_if_fail (G_IS_INET_SOCKET_ADDRESS (address), FALSE);
 
   addr = G_INET_SOCKET_ADDRESS (address);
   family = g_inet_address_get_family (addr->priv->address);
@@ -290,7 +289,7 @@ g_inet_socket_address_new (GInetAddress *address,
  *
  * Gets @address's #GInetAddress.
  *
- * Returns: the #GInetAddress for @address, which must be
+ * Returns: (transfer full): the #GInetAddress for @address, which must be
  * g_object_ref()'d if it will be stored
  *
  * Since: 2.22
@@ -320,6 +319,3 @@ g_inet_socket_address_get_port (GInetSocketAddress *address)
 
   return address->priv->port;
 }
-
-#define __G_INET_SOCKET_ADDRESS_C__
-#include "gioaliasdef.c"

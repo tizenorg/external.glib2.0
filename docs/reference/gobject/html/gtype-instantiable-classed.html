@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Instantiable classed types: objects</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="chapter-gtype.html" title="The GLib Dynamic Type System">
 <link rel="prev" href="gtype-non-instantiable.html" title="Non-instantiable non-classed fundamental types">
 <link rel="next" href="gtype-non-instantiable-classed.html" title="Non-instantiable classed types: interfaces">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -25,7 +25,7 @@
 <p>
           Types which are registered with a class and are declared instantiable are
           what most closely resembles an <span class="emphasis"><em>object</em></span>. 
-          Although <span class="type"><a class="link" href="gobject-The-Base-Object-Type.html#GObject">GObject</a></span>s (detailed in <a class="xref" href="chapter-gobject.html" title="The GObject base class"><i>The GObject base class</i></a>) 
+          Although <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>s (detailed in <a class="xref" href="chapter-gobject.html" title="The GObject base class"><i>The GObject base class</i></a>) 
           are the most well known type of instantiable
           classed types, other kinds of similar objects used as the base of an inheritance 
           hierarchy have been externally developed and they are all built on the fundamental
@@ -83,8 +83,8 @@ maman_bar_get_type (void)
 <p>
           Every object must define two structures: its class structure and its 
           instance structure. All class structures must contain as first member
-          a <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeClass" title="GTypeClass">GTypeClass</a></span> structure. All instance structures must contain as first
-          member a <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeInstance" title="GTypeInstance">GTypeInstance</a></span> structure. The declaration of these C types,
+          a <a class="link" href="gobject-Type-Information.html#GTypeClass" title="GTypeClass"><span class="type">GTypeClass</span></a> structure. All instance structures must contain as first
+          member a <a class="link" href="gobject-Type-Information.html#GTypeInstance" title="GTypeInstance"><span class="type">GTypeInstance</span></a> structure. The declaration of these C types,
           coming from <code class="filename">gtype.h</code> is shown below:
 </p>
 <pre class="programlisting">
@@ -179,9 +179,9 @@ void           g_type_free_instance   (GTypeInstance *instance);
             a class structure: it allocates a buffer to hold the object's class structure and
             initializes it. It first copies the parent's class structure over this structure
             (if there is no parent, it initializes it to zero). It then invokes the 
-            base_class_initialization functions (<span class="type"><a class="link" href="gobject-Type-Information.html#GBaseInitFunc" title="GBaseInitFunc ()">GBaseInitFunc</a></span>) from topmost 
+            base_class_initialization functions (<a class="link" href="gobject-Type-Information.html#GBaseInitFunc" title="GBaseInitFunc ()"><span class="type">GBaseInitFunc</span></a>) from topmost 
             fundamental object to bottom-most most derived object. The object's class_init 
-            (<span class="type"><a class="link" href="gobject-Type-Information.html#GClassInitFunc" title="GClassInitFunc ()">GClassInitFunc</a></span>) function is invoked afterwards to complete
+            (<a class="link" href="gobject-Type-Information.html#GClassInitFunc" title="GClassInitFunc ()"><span class="type">GClassInitFunc</span></a>) function is invoked afterwards to complete
             initialization of the class structure.
             Finally, the object's interfaces are initialized (we will discuss interface initialization
             in more detail later).
@@ -189,7 +189,7 @@ void           g_type_free_instance   (GTypeInstance *instance);
 <p>
             Once the type system has a pointer to an initialized class structure, it sets the object's
             instance class pointer to the object's class structure and invokes the object's
-            instance_init (<span class="type"><a class="link" href="gobject-Type-Information.html#GInstanceInitFunc" title="GInstanceInitFunc ()">GInstanceInitFunc</a></span>)functions, from top-most fundamental 
+            instance_init (<a class="link" href="gobject-Type-Information.html#GInstanceInitFunc" title="GInstanceInitFunc ()"><span class="type">GInstanceInitFunc</span></a>)functions, from top-most fundamental 
             type to bottom-most most derived type.
           </p>
 <p>
@@ -203,7 +203,7 @@ void           g_type_free_instance   (GTypeInstance *instance);
             the initialization: interfaces are destroyed first. 
             Then, the most derived 
             class_finalize (<span class="type">ClassFinalizeFunc</span>) function is invoked. The 
-            base_class_finalize (<span class="type"><a class="link" href="gobject-Type-Information.html#GBaseFinalizeFunc" title="GBaseFinalizeFunc ()">GBaseFinalizeFunc</a></span>) functions are 
+            base_class_finalize (<a class="link" href="gobject-Type-Information.html#GBaseFinalizeFunc" title="GBaseFinalizeFunc ()"><span class="type">GBaseFinalizeFunc</span></a>) functions are 
             Finally invoked from bottom-most most-derived type to top-most fundamental type and 
             the class structure is freed.
           </p>
@@ -282,6 +282,6 @@ void           g_type_free_instance   (GTypeInstance *instance);
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

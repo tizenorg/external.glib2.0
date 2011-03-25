@@ -19,7 +19,6 @@
  * if advised of the possibility of such damage.
  */
 
-#include <glib/glib.h>
 #include <gio/gio.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixoutputstream.h>
@@ -33,6 +32,7 @@
 int writer_pipe[2], reader_pipe[2];
 GCancellable *writer_cancel, *reader_cancel, *main_cancel;
 GMainLoop *loop;
+
 
 static gpointer
 writer_thread (gpointer user_data)

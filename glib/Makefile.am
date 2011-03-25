@@ -1,6 +1,29 @@
 ## Process this file with automake to produce Makefile.in
 include $(top_srcdir)/Makefile.decl
 
+BUILT_SOURCES =
+DISTCLEANFILES =
+CLEANFILES =
+
+#
+# Generate glibconfig.h
+#
+# The timestamp of the stamp file is used to indicate if glibconfig.h is
+# up to date with respect to config.status.  In the usual case, changes
+# to config.status will not result in changes to glibconfig.h so we
+# avoid touching its timestamp (in order not to rebuild the whole tree).
+#
+DISTCLEANFILES += glibconfig-stamp glibconfig.h
+BUILT_SOURCES += glibconfig-stamp
+configexecincludedir = $(libdir)/glib-2.0/include
+nodist_configexecinclude_HEADERS = glibconfig.h
+glibconfig-stamp: ../config.status
+	$(AM_V_GEN) cd $(top_builddir) && \
+	  $(SHELL) ./config.status glib/glibconfig.h
+	@touch glibconfig-stamp
+
+
+
 if HAVE_GOOD_PRINTF
 else
 PRINTF_SUBDIR = gnulib
@@ -30,7 +53,7 @@ SUBDIRS = libcharset $(PRINTF_SUBDIR) $(MAYBE_PCRE) update-pcre . tests
 DIST_SUBDIRS = libcharset gnulib pcre update-pcre tests
 
 AM_CPPFLAGS = 				\
-	-I$(top_srcdir) 		\
+	$(glib_INCLUDES) 		\
 	$(pcre_inc) 			\
 	-DG_LOG_DOMAIN=\"GLib\" 	\
 	$(GLIB_DEBUG_FLAGS) 		\
@@ -39,22 +62,14 @@ AM_CPPFLAGS = 				\
 	-DPCRE_STATIC
 
 glib.def: glib.symbols
-	(echo -e EXPORTS; $(CPP) -P -DINCLUDE_VARIABLES -DINCLUDE_INTERNAL_SYMBOLS -DG_OS_WIN32 -DALL_FILES - <$(srcdir)/glib.symbols | sed -e '/^$$/d' -e 's/^/	/' -e 's/G_GNUC_[^ ]*//g') > glib.def
-
-galias.h: $(srcdir)/makegalias.pl glib.symbols
-	  $(PERL) $(srcdir)/makegalias.pl < $(srcdir)/glib.symbols > galias.h
-
-galiasdef.c: $(srcdir)/makegalias.pl glib.symbols
-	  $(PERL) $(srcdir)/makegalias.pl -def < $(srcdir)/glib.symbols > galiasdef.c
+	$(AM_V_GEN) (echo -e EXPORTS; $(CPP) -P -DINCLUDE_VARIABLES -DINCLUDE_INTERNAL_SYMBOLS -DG_OS_WIN32 -DALL_FILES - <$(srcdir)/glib.symbols | sed -e '/^$$/d' -e 's/^/	/' -e 's/G_GNUC_[^ ]*//g') > glib.def
 
 if OS_LINUX
 if HAVE_GNUC_VISIBILITY
 TESTS_ENVIRONMENT = GLIB_DEBUG_FLAGS="$(GLIB_DEBUG_FLAGS)"
-TESTS = abicheck.sh pltcheck.sh
+TESTS = abicheck.sh
 endif
 endif
-
-BUILT_SOURCES = galias.h galiasdef.c
 
 MIRRORING_TAB_SOURCE = 				\
 	glib-mirroring-tab/Makefile 		\
@@ -69,9 +84,8 @@ EXTRA_DIST += 			\
 	glib.rc.in		\
 	gen-unicode-tables.pl	\
 	gen-script-table.pl	\
-	makegalias.pl		\
+	glibconfig.h.win32.in	\
 	abicheck.sh		\
-	pltcheck.sh		\
 	glib.symbols		\
 	gregex.c		\
 	gregex.h		\
@@ -82,9 +96,8 @@ EXTRA_DIST += 			\
 # These may be in the builddir too
 BUILT_EXTRA_DIST = 		\
 	makefile.msc		\
-	glib.rc			\
-	galias.h		\
-	galiasdef.c
+	glibconfig.h.win32	\
+	glib.rc
 
 lib_LTLIBRARIES = libglib-2.0.la
 
@@ -104,6 +117,7 @@ uninstall-ms-lib:
 	$(uninstall_ms_lib_cmd)
 
 libglib_2_0_la_SOURCES = 	\
+	glib_probes.d		\
 	garray.c		\
 	gasyncqueue.c		\
 	$(gatomic_c)		\
@@ -120,7 +134,8 @@ libglib_2_0_la_SOURCES = 	\
 	gconvert.c		\
 	gdataset.c		\
 	gdatasetprivate.h	\
-	gdate.c         	\
+	gdate.c	 		\
+	gdatetime.c	 	\
 	gdir.c			\
 	gerror.c		\
 	gfileutils.c		\
@@ -128,10 +143,11 @@ libglib_2_0_la_SOURCES = 	\
 	ghook.c			\
 	ghostutils.c		\
 	giochannel.c    	\
-	gkeyfile.c        	\
+	gkeyfile.c		\
 	glibintl.h		\
+	glib_trace.h		\
 	glist.c			\
-	gmain.c         	\
+	gmain.c	 		\
 	gmappedfile.c		\
 	gmarkup.c		\
 	gmem.c			\
@@ -161,6 +177,7 @@ libglib_2_0_la_SOURCES = 	\
 	gthreadprivate.h	\
 	gthreadpool.c   	\
 	gtimer.c		\
+	gtimezone.c	 	\
 	gtree.c			\
 	guniprop.c		\
 	gutf8.c			\
@@ -218,6 +235,7 @@ glibsubinclude_HEADERS =   \
 	gconvert.h	\
 	gdataset.h	\
 	gdate.h		\
+	gdatetime.h     \
 	gdir.h		\
 	gerror.h	\
 	gfileutils.h	\
@@ -259,10 +277,11 @@ glibsubinclude_HEADERS =   \
 	gthread.h	\
 	gthreadpool.h	\
 	gtimer.h	\
+	gtimezone.h	\
 	gtree.h		\
 	gtypes.h	\
 	gunicode.h	\
-	gurifuncs.h 		\
+	gurifuncs.h 	\
 	gutils.h	\
 	gvarianttype.h	\
 	gvariant.h	\
@@ -274,7 +293,7 @@ install-data-local: install-ms-lib install-def-file
 	  echo "*** Old headers found in $(glibincludedir). You should remove the" ;	\
 	  echo "*** contents of this directory and type 'make install' again." ;	\
 	  false ;									\
-        fi
+	fi
 
 uninstall-local: uninstall-ms-lib uninstall-def-file
 
@@ -315,15 +334,33 @@ pcre_lib =
 pcre_inc =
 endif
 
-libglib_2_0_la_LIBADD = libcharset/libcharset.la $(printf_la) @GIO@ @GSPAWN@ @PLATFORMDEP@ @ICONV_LIBS@ @G_LIBS_EXTRA@ $(pcre_lib)
+libglib_2_0_la_LIBADD = libcharset/libcharset.la $(printf_la) @GIO@ @GSPAWN@ @PLATFORMDEP@ @ICONV_LIBS@ @G_LIBS_EXTRA@ $(pcre_lib) $(GLIB_RT_LIBS)
 libglib_2_0_la_DEPENDENCIES = libcharset/libcharset.la $(printf_la) @GIO@ @GSPAWN@ @PLATFORMDEP@ $(glib_win32_res) $(glib_def)
 
-libglib_2_0_la_LDFLAGS = \
+libglib_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) \
 	 $(glib_win32_res_ldflag) \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
 	-export-dynamic $(no_undefined) $(export_symbols)
 
 INSTALL_PROGS=
+
+if ENABLE_DTRACE
+glib_probes.h: glib_probes.d Makefile
+	$(DTRACE) -C -h -s $< -o $@.tmp
+	sed -e "s,define STAP_HAS_SEMAPHORES 1,undef STAP_HAS_SEMAPHORES," < $@.tmp > $@ && rm -f $@.tmp
+glib_probes.o: glib_probes.d Makefile
+	$(DTRACE) -G -s $< -o $@
+BUILT_SOURCES += glib_probes.h glib_probes.o
+CLEANFILES += glib_probes.h glib_probes.h.tmp
+libglib_2_0_la_LIBADD += glib_probes.o
+endif
+
+if ENABLE_SYSTEMTAP
+tapset_in_files = glib.stp.in
+tapsetdir   = @ABS_TAPSET_DIR@
+tapset_DATA = $(tapset_in_files:.stp.in=.stp)
+EXTRA_DIST += $(tapset_in_files)
+endif
 
 gspawn-win32-helper-console.c:
 	echo '#define HELPER_CONSOLE' >$@
@@ -335,6 +372,7 @@ gspawn-win64-helper.c:
 gspawn-win64-helper-console.c:
 	echo '#define HELPER_CONSOLE' >$@
 	echo '#include "gspawn-win32-helper.c"' >>$@
+
 
 if OS_WIN32
 if OS_WIN32_X64
@@ -366,8 +404,8 @@ bin_SCRIPTS = ${auto_config_binscripts}
 EXTRA_DIST += ${auto_config_binscripts}
 
 CONFIGVARS = \
-        "bindir"    	: "${bindir}",		\
-        "glib-version"  : "${GLIB_VERSION}"
+	"bindir"    	: "${bindir}",		\
+	"glib-version"  : "${GLIB_VERSION}"
 
 install-exec-hook:
 	for sf in ${auto_config_binscripts} ; do \
@@ -376,6 +414,7 @@ install-exec-hook:
 	    -e '1,24s|^ *#@PKGINSTALL_CONFIGVARS_IN24LINES@|  ${CONFIGVARS}|' \
 	    -e '1,1s|#! /usr/bin/env python\([0-9]\+\(\.[0-9]\+\)\?\)\?|#!${PYTHON}|' \
 	  || exit $$? ; \
+	  chmod a+x $(DESTDIR)$(bindir)/$$sf ; \
 	  rm -f "$(DESTDIR)$(bindir)/$$sf".tmp ; \
 	done
 
@@ -411,7 +450,7 @@ gdbdir = $(datadir)/glib-2.0/gdb
 dist_gdb_SCRIPTS = glib.py
 
 libglib-gdb.py: libglib-gdb.py.in
-	sed -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libglib-gdb.py.in > libglib-gdb.py
+	$(AM_V_GEN) $(SED) -e "s|\@datadir\@|$(datadir)|" $(srcdir)/libglib-gdb.py.in > libglib-gdb.py
 
 
 install-data-hook: libglib-gdb.py

@@ -26,14 +26,12 @@
 
 #include <wchar.h>
 
-#include "gioerror.h"
-#include "giomodule.h"
-#include "gvfs.h"
+#include "gio/gioerror.h"
+#include "gio/giomodule.h"
+#include "gio/gvfs.h"
 
 #include "gwinhttpfile.h"
 #include "gwinhttpvfs.h"
-
-#include "gioalias.h"
 
 static gboolean lookup_done = FALSE;
 static gboolean funcs_found = FALSE;
@@ -42,12 +40,23 @@ static GWinHttpDllFuncs funcs;
 static void
 lookup_funcs (void)
 {
-  HMODULE winhttp;
+  HMODULE winhttp = NULL;
+  char winhttp_dll[MAX_PATH + 100];
+  int n;
 
   if (lookup_done)
     return;
 
-  winhttp = LoadLibrary ("winhttp.dll");
+  n = GetSystemDirectory (winhttp_dll, MAX_PATH);
+  if (n > 0 && n < MAX_PATH)
+    {
+        if (winhttp_dll[n-1] != '\\' &&
+            winhttp_dll[n-1] != '/')
+            strcat (winhttp_dll, "\\");
+        strcat (winhttp_dll, "winhttp.dll");
+        winhttp = LoadLibrary (winhttp_dll);
+    }
+
   if (winhttp != NULL)
     {
       funcs.pWinHttpCloseHandle = (BOOL (WINAPI *) (HINTERNET)) GetProcAddress (winhttp, "WinHttpCloseHandle");

@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Automatic String Completion</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Lexical-Scanner.html" title="Lexical Scanner">
 <link rel="next" href="glib-Timers.html" title="Timers">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -86,6 +86,10 @@ retrieves the item's string from the data structure. You can change
 the way in which strings are compared by setting a different
 <a class="link" href="glib-Automatic-String-Completion.html#GCompletionStrncmpFunc" title="GCompletionStrncmpFunc ()"><span class="type">GCompletionStrncmpFunc</span></a> in <a class="link" href="glib-Automatic-String-Completion.html#g-completion-set-compare" title="g_completion_set_compare ()"><code class="function">g_completion_set_compare()</code></a>.
 </p>
+<p>
+GCompletion has been marked as deprecated, since this API is rarely
+used and not very actively maintained.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="glib-Automatic-String-Completion.details"></a><h2>Details</h2>
@@ -141,6 +145,10 @@ The data structure used for automatic completion.
 <div class="refsect2" title="g_completion_new ()">
 <a name="g-completion-new"></a><h3>g_completion_new ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="returnvalue">GCompletion</span></a>*        g_completion_new                    (<em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletionFunc" title="GCompletionFunc ()"><span class="type">GCompletionFunc</span></a> func</code></em>);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_completion_new</code> is deprecated and should not be used in newly-written code.</p>
+</div>
 <p>
 Creates a new <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a>.
 </p>
@@ -192,6 +200,10 @@ This is used when you use data structures as <a class="link" href="glib-Automati
 <a name="g-completion-add-items"></a><h3>g_completion_add_items ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_completion_add_items              (<em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a> *cmp</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a> *items</code></em>);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_completion_add_items</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
+</div>
 <p>
 Adds items to the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a>.
 </p>
@@ -216,6 +228,10 @@ Adds items to the <a class="link" href="glib-Automatic-String-Completion.html#GC
 <a name="g-completion-remove-items"></a><h3>g_completion_remove_items ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_completion_remove_items           (<em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a> *cmp</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="type">GList</span></a> *items</code></em>);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_completion_remove_items</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
+</div>
 <p>
 Removes items from a <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a>.
 </p>
@@ -239,6 +255,10 @@ Removes items from a <a class="link" href="glib-Automatic-String-Completion.html
 <div class="refsect2" title="g_completion_clear_items ()">
 <a name="g-completion-clear-items"></a><h3>g_completion_clear_items ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_completion_clear_items            (<em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a> *cmp</code></em>);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_completion_clear_items</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
+</div>
 <p>
 Removes all items from the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a>.
 </p>
@@ -257,6 +277,10 @@ Removes all items from the <a class="link" href="glib-Automatic-String-Completio
 <pre class="programlisting"><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="returnvalue">GList</span></a>*              g_completion_complete               (<em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a> *cmp</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prefix</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **new_prefix</code></em>);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_completion_complete</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
+</div>
 <p>
 Attempts to complete the string <em class="parameter"><code>prefix</code></em> using the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a>
 target items.
@@ -298,6 +322,10 @@ target items.
 <pre class="programlisting"><a class="link" href="glib-Doubly-Linked-Lists.html#GList" title="GList"><span class="returnvalue">GList</span></a>*              g_completion_complete_utf8          (<em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a> *cmp</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prefix</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **new_prefix</code></em>);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_completion_complete_utf8</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
+</div>
 <p>
 Attempts to complete the string <em class="parameter"><code>prefix</code></em> using the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a> target items.
 In contrast to <a class="link" href="glib-Automatic-String-Completion.html#g-completion-complete" title="g_completion_complete ()"><code class="function">g_completion_complete()</code></a>, this function returns the largest common
@@ -345,6 +373,10 @@ not be changed.
 <a name="g-completion-set-compare"></a><h3>g_completion_set_compare ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_completion_set_compare            (<em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a> *cmp</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletionStrncmpFunc" title="GCompletionStrncmpFunc ()"><span class="type">GCompletionStrncmpFunc</span></a> strncmp_func</code></em>);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_completion_set_compare</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
+</div>
 <p>
 Sets the function to use for string comparisons. The default string
 comparison function is <code class="function">strncmp()</code>.
@@ -409,6 +441,10 @@ Specifies the type of the function passed to
 <div class="refsect2" title="g_completion_free ()">
 <a name="g-completion-free"></a><h3>g_completion_free ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_completion_free                   (<em class="parameter"><code><a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a> *cmp</code></em>);</pre>
+<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<h3 class="title">Warning</h3>
+<p><code class="literal">g_completion_free</code> has been deprecated since version 2.26 and should not be used in newly-written code. Rarely used API</p>
+</div>
 <p>
 Frees all memory used by the <a class="link" href="glib-Automatic-String-Completion.html#GCompletion" title="GCompletion"><span class="type">GCompletion</span></a>.
 </p>
@@ -425,6 +461,6 @@ Frees all memory used by the <a class="link" href="glib-Automatic-String-Complet
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

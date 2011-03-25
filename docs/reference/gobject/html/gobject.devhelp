@@ -5,7 +5,7 @@
     <sub name="Introduction" link="pr01.html"/>
     <sub name="Concepts" link="pt01.html">
       <sub name="Background" link="chapter-intro.html">
-        <sub name="Data types and programming" link="chapter-intro.html#id465439"/>
+        <sub name="Data types and programming" link="chapter-intro.html#id480331"/>
         <sub name="Exporting a C API" link="ch01s02.html"/>
       </sub>
       <sub name="The GLib Dynamic Type System" link="chapter-gtype.html">
@@ -39,6 +39,7 @@
       <sub name="Signals" link="gobject-Signals.html"/>
       <sub name="Closures" link="gobject-Closures.html"/>
       <sub name="Value arrays" link="gobject-Value-arrays.html"/>
+      <sub name="GBinding" link="GBinding.html"/>
     </sub>
     <sub name="Tools Reference" link="rn02.html">
       <sub name="glib-mkenums" link="glib-mkenums.html"/>
@@ -83,6 +84,9 @@
     <sub name="Index of new symbols in 2.18" link="api-index-2-18.html"/>
     <sub name="Index of new symbols in 2.22" link="api-index-2-22.html"/>
     <sub name="Index of new symbols in 2.24" link="api-index-2-24.html"/>
+    <sub name="Index of new symbols in 2.26" link="api-index-2-26.html"/>
+    <sub name="Index of new symbols in 2.28" link="api-index-2-28.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
   <functions>
     <function name="GType" link="gobject-Type-Information.html#GType"/>
@@ -112,6 +116,7 @@
     <function name="G_TYPE_INSTANCE_GET_CLASS()" link="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-CLASS:CAPS"/>
     <function name="G_TYPE_INSTANCE_GET_INTERFACE()" link="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-INTERFACE:CAPS"/>
     <function name="G_TYPE_INSTANCE_GET_PRIVATE()" link="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-PRIVATE:CAPS"/>
+    <function name="G_TYPE_CLASS_GET_PRIVATE()" link="gobject-Type-Information.html#G-TYPE-CLASS-GET-PRIVATE:CAPS"/>
     <function name="G_TYPE_CHECK_INSTANCE()" link="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE:CAPS"/>
     <function name="G_TYPE_CHECK_INSTANCE_CAST()" link="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE-CAST:CAPS"/>
     <function name="G_TYPE_CHECK_INSTANCE_TYPE()" link="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE-TYPE:CAPS"/>
@@ -187,6 +192,10 @@
     <function name="G_DEFINE_INTERFACE_WITH_CODE()" link="gobject-Type-Information.html#G-DEFINE-INTERFACE-WITH-CODE:CAPS"/>
     <function name="G_IMPLEMENT_INTERFACE()" link="gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS"/>
     <function name="G_DEFINE_TYPE_EXTENDED()" link="gobject-Type-Information.html#G-DEFINE-TYPE-EXTENDED:CAPS"/>
+    <function name="G_DEFINE_BOXED_TYPE()" link="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE:CAPS"/>
+    <function name="G_DEFINE_BOXED_TYPE_WITH_CODE()" link="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE-WITH-CODE:CAPS"/>
+    <function name="G_DEFINE_POINTER_TYPE()" link="gobject-Type-Information.html#G-DEFINE-POINTER-TYPE:CAPS"/>
+    <function name="G_DEFINE_POINTER_TYPE_WITH_CODE()" link="gobject-Type-Information.html#G-DEFINE-POINTER-TYPE-WITH-CODE:CAPS"/>
     <function name="G_TYPE_INVALID" link="gobject-Type-Information.html#G-TYPE-INVALID:CAPS"/>
     <function name="G_TYPE_NONE" link="gobject-Type-Information.html#G-TYPE-NONE:CAPS"/>
     <function name="G_TYPE_INTERFACE" link="gobject-Type-Information.html#G-TYPE-INTERFACE:CAPS"/>
@@ -209,6 +218,7 @@
     <function name="G_TYPE_PARAM" link="gobject-Type-Information.html#G-TYPE-PARAM:CAPS"/>
     <function name="G_TYPE_OBJECT" link="gobject-Type-Information.html#G-TYPE-OBJECT:CAPS"/>
     <function name="G_TYPE_GTYPE" link="gobject-Type-Information.html#G-TYPE-GTYPE:CAPS"/>
+    <function name="G_TYPE_VARIANT" link="gobject-Type-Information.html#G-TYPE-VARIANT:CAPS"/>
     <function name="G_TYPE_RESERVED_GLIB_FIRST" link="gobject-Type-Information.html#G-TYPE-RESERVED-GLIB-FIRST:CAPS"/>
     <function name="G_TYPE_RESERVED_GLIB_LAST" link="gobject-Type-Information.html#G-TYPE-RESERVED-GLIB-LAST:CAPS"/>
     <function name="G_TYPE_RESERVED_BSE_FIRST" link="gobject-Type-Information.html#G-TYPE-RESERVED-BSE-FIRST:CAPS"/>
@@ -253,6 +263,7 @@
     <function name="G_OBJECT_CLASS_TYPE()" link="gobject-The-Base-Object-Type.html#G-OBJECT-CLASS-TYPE:CAPS"/>
     <function name="G_OBJECT_CLASS_NAME()" link="gobject-The-Base-Object-Type.html#G-OBJECT-CLASS-NAME:CAPS"/>
     <function name="g_object_class_install_property ()" link="gobject-The-Base-Object-Type.html#g-object-class-install-property"/>
+    <function name="g_object_class_install_properties ()" link="gobject-The-Base-Object-Type.html#g-object-class-install-properties"/>
     <function name="g_object_class_find_property ()" link="gobject-The-Base-Object-Type.html#g-object-class-find-property"/>
     <function name="g_object_class_list_properties ()" link="gobject-The-Base-Object-Type.html#g-object-class-list-properties"/>
     <function name="g_object_class_override_property ()" link="gobject-The-Base-Object-Type.html#g-object-class-override-property"/>
@@ -265,6 +276,7 @@
     <function name="g_object_ref ()" link="gobject-The-Base-Object-Type.html#g-object-ref"/>
     <function name="g_object_unref ()" link="gobject-The-Base-Object-Type.html#g-object-unref"/>
     <function name="g_object_ref_sink ()" link="gobject-The-Base-Object-Type.html#g-object-ref-sink"/>
+    <function name="g_clear_object ()" link="gobject-The-Base-Object-Type.html#g-clear-object"/>
     <function name="GInitiallyUnowned" link="gobject-The-Base-Object-Type.html#GInitiallyUnowned"/>
     <function name="GInitiallyUnownedClass" link="gobject-The-Base-Object-Type.html#GInitiallyUnownedClass"/>
     <function name="G_TYPE_INITIALLY_UNOWNED" link="gobject-The-Base-Object-Type.html#G-TYPE-INITIALLY-UNOWNED:CAPS"/>
@@ -283,6 +295,7 @@
     <function name="g_object_set ()" link="gobject-The-Base-Object-Type.html#g-object-set"/>
     <function name="g_object_get ()" link="gobject-The-Base-Object-Type.html#g-object-get"/>
     <function name="g_object_notify ()" link="gobject-The-Base-Object-Type.html#g-object-notify"/>
+    <function name="g_object_notify_by_pspec ()" link="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec"/>
     <function name="g_object_freeze_notify ()" link="gobject-The-Base-Object-Type.html#g-object-freeze-notify"/>
     <function name="g_object_thaw_notify ()" link="gobject-The-Base-Object-Type.html#g-object-thaw-notify"/>
     <function name="g_object_get_data ()" link="gobject-The-Base-Object-Type.html#g-object-get-data"/>
@@ -340,8 +353,9 @@
     <function name="G_TYPE_ARRAY" link="gobject-Boxed-Types.html#G-TYPE-ARRAY:CAPS"/>
     <function name="G_TYPE_BYTE_ARRAY" link="gobject-Boxed-Types.html#G-TYPE-BYTE-ARRAY:CAPS"/>
     <function name="G_TYPE_PTR_ARRAY" link="gobject-Boxed-Types.html#G-TYPE-PTR-ARRAY:CAPS"/>
-    <function name="G_TYPE_VARIANT" link="gobject-Boxed-Types.html#G-TYPE-VARIANT:CAPS"/>
     <function name="G_TYPE_VARIANT_TYPE" link="gobject-Boxed-Types.html#G-TYPE-VARIANT-TYPE:CAPS"/>
+    <function name="G_TYPE_ERROR" link="gobject-Boxed-Types.html#G-TYPE-ERROR:CAPS"/>
+    <function name="G_TYPE_DATE_TIME" link="gobject-Boxed-Types.html#G-TYPE-DATE-TIME:CAPS"/>
     <function name="GStrv" link="gobject-Boxed-Types.html#GStrv"/>
     <function name="G_VALUE_HOLDS()" link="gobject-Generic-values.html#G-VALUE-HOLDS:CAPS"/>
     <function name="G_VALUE_TYPE()" link="gobject-Generic-values.html#G-VALUE-TYPE:CAPS"/>
@@ -547,6 +561,16 @@
     <function name="g_param_spec_gtype ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-gtype"/>
     <function name="g_value_get_gtype ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-get-gtype"/>
     <function name="g_value_set_gtype ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-set-gtype"/>
+    <function name="G_IS_PARAM_SPEC_VARIANT()" link="gobject-Standard-Parameter-and-Value-Types.html#G-IS-PARAM-SPEC-VARIANT:CAPS"/>
+    <function name="G_PARAM_SPEC_VARIANT()" link="gobject-Standard-Parameter-and-Value-Types.html#G-PARAM-SPEC-VARIANT:CAPS"/>
+    <function name="G_VALUE_HOLDS_VARIANT()" link="gobject-Standard-Parameter-and-Value-Types.html#G-VALUE-HOLDS-VARIANT:CAPS"/>
+    <function name="G_TYPE_PARAM_VARIANT" link="gobject-Standard-Parameter-and-Value-Types.html#G-TYPE-PARAM-VARIANT:CAPS"/>
+    <function name="GParamSpecVariant" link="gobject-Standard-Parameter-and-Value-Types.html#GParamSpecVariant"/>
+    <function name="g_param_spec_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-variant"/>
+    <function name="g_value_get_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-get-variant"/>
+    <function name="g_value_dup_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-dup-variant"/>
+    <function name="g_value_set_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-set-variant"/>
+    <function name="g_value_take_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-take-variant"/>
     <function name="G_TYPE_IS_PARAM()" link="gobject-GParamSpec.html#G-TYPE-IS-PARAM:CAPS"/>
     <function name="G_PARAM_SPEC()" link="gobject-GParamSpec.html#G-PARAM-SPEC:CAPS"/>
     <function name="G_IS_PARAM_SPEC()" link="gobject-GParamSpec.html#G-IS-PARAM-SPEC:CAPS"/>
@@ -648,6 +672,7 @@
     <function name="g_signal_parse_name ()" link="gobject-Signals.html#g-signal-parse-name"/>
     <function name="g_signal_get_invocation_hint ()" link="gobject-Signals.html#g-signal-get-invocation-hint"/>
     <function name="g_signal_type_cclosure_new ()" link="gobject-Signals.html#g-signal-type-cclosure-new"/>
+    <function name="g_signal_accumulator_first_wins ()" link="gobject-Signals.html#g-signal-accumulator-first-wins"/>
     <function name="g_signal_accumulator_true_handled ()" link="gobject-Signals.html#g-signal-accumulator-true-handled"/>
     <function name="G_CLOSURE_NEEDS_MARSHAL()" link="gobject-Closures.html#G-CLOSURE-NEEDS-MARSHAL:CAPS"/>
     <function name="G_CLOSURE_N_NOTIFIERS()" link="gobject-Closures.html#G-CLOSURE-N-NOTIFIERS:CAPS"/>
@@ -678,6 +703,7 @@
     <function name="g_closure_add_marshal_guards ()" link="gobject-Closures.html#g-closure-add-marshal-guards"/>
     <function name="g_closure_set_meta_marshal ()" link="gobject-Closures.html#g-closure-set-meta-marshal"/>
     <function name="g_source_set_closure ()" link="gobject-Closures.html#g-source-set-closure"/>
+    <function name="g_source_set_dummy_callback ()" link="gobject-Closures.html#g-source-set-dummy-callback"/>
     <function name="G_TYPE_IO_CHANNEL" link="gobject-Closures.html#G-TYPE-IO-CHANNEL:CAPS"/>
     <function name="G_TYPE_IO_CONDITION" link="gobject-Closures.html#G-TYPE-IO-CONDITION:CAPS"/>
     <function name="g_cclosure_marshal_VOID__VOID ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--VOID"/>
@@ -697,6 +723,7 @@
     <function name="g_cclosure_marshal_VOID__BOXED ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--BOXED"/>
     <function name="g_cclosure_marshal_VOID__POINTER ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--POINTER"/>
     <function name="g_cclosure_marshal_VOID__OBJECT ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--OBJECT"/>
+    <function name="g_cclosure_marshal_VOID__VARIANT ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--VARIANT"/>
     <function name="g_cclosure_marshal_STRING__OBJECT_POINTER ()" link="gobject-Closures.html#g-cclosure-marshal-STRING--OBJECT-POINTER"/>
     <function name="g_cclosure_marshal_VOID__UINT_POINTER ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--UINT-POINTER"/>
     <function name="g_cclosure_marshal_BOOLEAN__FLAGS ()" link="gobject-Closures.html#g-cclosure-marshal-BOOLEAN--FLAGS"/>
@@ -712,12 +739,28 @@
     <function name="g_value_array_remove ()" link="gobject-Value-arrays.html#g-value-array-remove"/>
     <function name="g_value_array_sort ()" link="gobject-Value-arrays.html#g-value-array-sort"/>
     <function name="g_value_array_sort_with_data ()" link="gobject-Value-arrays.html#g-value-array-sort-with-data"/>
-    <function name="Options" link="glib-mkenums.html#id505964"/>
-    <function name="Production text substitutions" link="glib-mkenums.html#id542354"/>
-    <function name="Trigraph extensions" link="glib-mkenums.html#id542714"/>
-    <function name="Options" link="glib-genmarshal.html#id524832"/>
-    <function name="Marshaller list format" link="glib-genmarshal.html#id548262"/>
-    <function name="Parameter types" link="glib-genmarshal.html#id536853"/>
-    <function name="Options" link="gobject-query.html#id542064"/>
+    <function name="GBinding" link="GBinding.html#GBinding-struct"/>
+    <function name="enum GBindingFlags" link="GBinding.html#GBindingFlags"/>
+    <function name="g_binding_get_source ()" link="GBinding.html#g-binding-get-source"/>
+    <function name="g_binding_get_source_property ()" link="GBinding.html#g-binding-get-source-property"/>
+    <function name="g_binding_get_target ()" link="GBinding.html#g-binding-get-target"/>
+    <function name="g_binding_get_target_property ()" link="GBinding.html#g-binding-get-target-property"/>
+    <function name="g_binding_get_flags ()" link="GBinding.html#g-binding-get-flags"/>
+    <function name="g_object_bind_property ()" link="GBinding.html#g-object-bind-property"/>
+    <function name="GBindingTransformFunc ()" link="GBinding.html#GBindingTransformFunc"/>
+    <function name="g_object_bind_property_full ()" link="GBinding.html#g-object-bind-property-full"/>
+    <function name="g_object_bind_property_with_closures ()" link="GBinding.html#g-object-bind-property-with-closures"/>
+    <function name="The &quot;flags&quot; property" link="GBinding.html#GBinding--flags"/>
+    <function name="The &quot;source&quot; property" link="GBinding.html#GBinding--source"/>
+    <function name="The &quot;source-property&quot; property" link="GBinding.html#GBinding--source-property"/>
+    <function name="The &quot;target&quot; property" link="GBinding.html#GBinding--target"/>
+    <function name="The &quot;target-property&quot; property" link="GBinding.html#GBinding--target-property"/>
+    <function name="Options" link="glib-mkenums.html#id496048"/>
+    <function name="Production text substitutions" link="glib-mkenums.html#id492693"/>
+    <function name="Trigraph extensions" link="glib-mkenums.html#id479746"/>
+    <function name="Options" link="glib-genmarshal.html#id476163"/>
+    <function name="Marshaller list format" link="glib-genmarshal.html#id474223"/>
+    <function name="Parameter types" link="glib-genmarshal.html#id471051"/>
+    <function name="Options" link="gobject-query.html#id468332"/>
   </functions>
 </book>

@@ -5,7 +5,7 @@
     <sub name="Introduction" link="pr01.html"/>
     <sub name="Concepts" link="pt01.html">
       <sub name="Background" link="chapter-intro.html">
-        <sub name="Data types and programming" link="chapter-intro.html#id465439"/>
+        <sub name="Data types and programming" link="chapter-intro.html#id480331"/>
         <sub name="Exporting a C API" link="ch01s02.html"/>
       </sub>
       <sub name="The GLib Dynamic Type System" link="chapter-gtype.html">
@@ -39,6 +39,7 @@
       <sub name="Signals" link="gobject-Signals.html"/>
       <sub name="Closures" link="gobject-Closures.html"/>
       <sub name="Value arrays" link="gobject-Value-arrays.html"/>
+      <sub name="GBinding" link="GBinding.html"/>
     </sub>
     <sub name="Tools Reference" link="rn02.html">
       <sub name="glib-mkenums" link="glib-mkenums.html"/>
@@ -83,6 +84,9 @@
     <sub name="Index of new symbols in 2.18" link="api-index-2-18.html"/>
     <sub name="Index of new symbols in 2.22" link="api-index-2-22.html"/>
     <sub name="Index of new symbols in 2.24" link="api-index-2-24.html"/>
+    <sub name="Index of new symbols in 2.26" link="api-index-2-26.html"/>
+    <sub name="Index of new symbols in 2.28" link="api-index-2-28.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
   <functions>
     <keyword type="typedef" name="GType" link="gobject-Type-Information.html#GType"/>
@@ -112,6 +116,7 @@
     <keyword type="macro" name="G_TYPE_INSTANCE_GET_CLASS()" link="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-CLASS:CAPS"/>
     <keyword type="macro" name="G_TYPE_INSTANCE_GET_INTERFACE()" link="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-INTERFACE:CAPS"/>
     <keyword type="macro" name="G_TYPE_INSTANCE_GET_PRIVATE()" link="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-PRIVATE:CAPS" since="2.4"/>
+    <keyword type="macro" name="G_TYPE_CLASS_GET_PRIVATE()" link="gobject-Type-Information.html#G-TYPE-CLASS-GET-PRIVATE:CAPS" since="2.24"/>
     <keyword type="macro" name="G_TYPE_CHECK_INSTANCE()" link="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE:CAPS"/>
     <keyword type="macro" name="G_TYPE_CHECK_INSTANCE_CAST()" link="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE-CAST:CAPS"/>
     <keyword type="macro" name="G_TYPE_CHECK_INSTANCE_TYPE()" link="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE-TYPE:CAPS"/>
@@ -187,6 +192,10 @@
     <keyword type="macro" name="G_DEFINE_INTERFACE_WITH_CODE()" link="gobject-Type-Information.html#G-DEFINE-INTERFACE-WITH-CODE:CAPS" since="2.24"/>
     <keyword type="macro" name="G_IMPLEMENT_INTERFACE()" link="gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS" since="2.4"/>
     <keyword type="macro" name="G_DEFINE_TYPE_EXTENDED()" link="gobject-Type-Information.html#G-DEFINE-TYPE-EXTENDED:CAPS" since="2.4"/>
+    <keyword type="macro" name="G_DEFINE_BOXED_TYPE()" link="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE:CAPS" since="2.26"/>
+    <keyword type="macro" name="G_DEFINE_BOXED_TYPE_WITH_CODE()" link="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE-WITH-CODE:CAPS" since="2.26"/>
+    <keyword type="macro" name="G_DEFINE_POINTER_TYPE()" link="gobject-Type-Information.html#G-DEFINE-POINTER-TYPE:CAPS" since="2.26"/>
+    <keyword type="macro" name="G_DEFINE_POINTER_TYPE_WITH_CODE()" link="gobject-Type-Information.html#G-DEFINE-POINTER-TYPE-WITH-CODE:CAPS" since="2.26"/>
     <keyword type="macro" name="G_TYPE_INVALID" link="gobject-Type-Information.html#G-TYPE-INVALID:CAPS"/>
     <keyword type="macro" name="G_TYPE_NONE" link="gobject-Type-Information.html#G-TYPE-NONE:CAPS"/>
     <keyword type="macro" name="G_TYPE_INTERFACE" link="gobject-Type-Information.html#G-TYPE-INTERFACE:CAPS"/>
@@ -209,6 +218,7 @@
     <keyword type="macro" name="G_TYPE_PARAM" link="gobject-Type-Information.html#G-TYPE-PARAM:CAPS"/>
     <keyword type="macro" name="G_TYPE_OBJECT" link="gobject-Type-Information.html#G-TYPE-OBJECT:CAPS"/>
     <keyword type="macro" name="G_TYPE_GTYPE" link="gobject-Type-Information.html#G-TYPE-GTYPE:CAPS"/>
+    <keyword type="macro" name="G_TYPE_VARIANT" link="gobject-Type-Information.html#G-TYPE-VARIANT:CAPS" since="2.26"/>
     <keyword type="macro" name="G_TYPE_RESERVED_GLIB_FIRST" link="gobject-Type-Information.html#G-TYPE-RESERVED-GLIB-FIRST:CAPS"/>
     <keyword type="macro" name="G_TYPE_RESERVED_GLIB_LAST" link="gobject-Type-Information.html#G-TYPE-RESERVED-GLIB-LAST:CAPS"/>
     <keyword type="macro" name="G_TYPE_RESERVED_BSE_FIRST" link="gobject-Type-Information.html#G-TYPE-RESERVED-BSE-FIRST:CAPS"/>
@@ -253,6 +263,7 @@
     <keyword type="macro" name="G_OBJECT_CLASS_TYPE()" link="gobject-The-Base-Object-Type.html#G-OBJECT-CLASS-TYPE:CAPS"/>
     <keyword type="macro" name="G_OBJECT_CLASS_NAME()" link="gobject-The-Base-Object-Type.html#G-OBJECT-CLASS-NAME:CAPS"/>
     <keyword type="function" name="g_object_class_install_property ()" link="gobject-The-Base-Object-Type.html#g-object-class-install-property"/>
+    <keyword type="function" name="g_object_class_install_properties ()" link="gobject-The-Base-Object-Type.html#g-object-class-install-properties" since="2.26"/>
     <keyword type="function" name="g_object_class_find_property ()" link="gobject-The-Base-Object-Type.html#g-object-class-find-property"/>
     <keyword type="function" name="g_object_class_list_properties ()" link="gobject-The-Base-Object-Type.html#g-object-class-list-properties"/>
     <keyword type="function" name="g_object_class_override_property ()" link="gobject-The-Base-Object-Type.html#g-object-class-override-property" since="2.4"/>
@@ -265,6 +276,7 @@
     <keyword type="function" name="g_object_ref ()" link="gobject-The-Base-Object-Type.html#g-object-ref"/>
     <keyword type="function" name="g_object_unref ()" link="gobject-The-Base-Object-Type.html#g-object-unref"/>
     <keyword type="function" name="g_object_ref_sink ()" link="gobject-The-Base-Object-Type.html#g-object-ref-sink" since="2.10"/>
+    <keyword type="function" name="g_clear_object ()" link="gobject-The-Base-Object-Type.html#g-clear-object" since="2.28"/>
     <keyword type="typedef" name="GInitiallyUnowned" link="gobject-The-Base-Object-Type.html#GInitiallyUnowned"/>
     <keyword type="typedef" name="GInitiallyUnownedClass" link="gobject-The-Base-Object-Type.html#GInitiallyUnownedClass"/>
     <keyword type="macro" name="G_TYPE_INITIALLY_UNOWNED" link="gobject-The-Base-Object-Type.html#G-TYPE-INITIALLY-UNOWNED:CAPS"/>
@@ -283,6 +295,7 @@
     <keyword type="function" name="g_object_set ()" link="gobject-The-Base-Object-Type.html#g-object-set"/>
     <keyword type="function" name="g_object_get ()" link="gobject-The-Base-Object-Type.html#g-object-get"/>
     <keyword type="function" name="g_object_notify ()" link="gobject-The-Base-Object-Type.html#g-object-notify"/>
+    <keyword type="function" name="g_object_notify_by_pspec ()" link="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec" since="2.26"/>
     <keyword type="function" name="g_object_freeze_notify ()" link="gobject-The-Base-Object-Type.html#g-object-freeze-notify"/>
     <keyword type="function" name="g_object_thaw_notify ()" link="gobject-The-Base-Object-Type.html#g-object-thaw-notify"/>
     <keyword type="function" name="g_object_get_data ()" link="gobject-The-Base-Object-Type.html#g-object-get-data"/>
@@ -340,8 +353,9 @@
     <keyword type="macro" name="G_TYPE_ARRAY" link="gobject-Boxed-Types.html#G-TYPE-ARRAY:CAPS" since="2.22"/>
     <keyword type="macro" name="G_TYPE_BYTE_ARRAY" link="gobject-Boxed-Types.html#G-TYPE-BYTE-ARRAY:CAPS" since="2.22"/>
     <keyword type="macro" name="G_TYPE_PTR_ARRAY" link="gobject-Boxed-Types.html#G-TYPE-PTR-ARRAY:CAPS" since="2.22"/>
-    <keyword type="macro" name="G_TYPE_VARIANT" link="gobject-Boxed-Types.html#G-TYPE-VARIANT:CAPS" since="2.24"/>
     <keyword type="macro" name="G_TYPE_VARIANT_TYPE" link="gobject-Boxed-Types.html#G-TYPE-VARIANT-TYPE:CAPS" since="2.24"/>
+    <keyword type="macro" name="G_TYPE_ERROR" link="gobject-Boxed-Types.html#G-TYPE-ERROR:CAPS" since="2.26"/>
+    <keyword type="macro" name="G_TYPE_DATE_TIME" link="gobject-Boxed-Types.html#G-TYPE-DATE-TIME:CAPS" since="2.26"/>
     <keyword type="typedef" name="GStrv" link="gobject-Boxed-Types.html#GStrv"/>
     <keyword type="macro" name="G_VALUE_HOLDS()" link="gobject-Generic-values.html#G-VALUE-HOLDS:CAPS"/>
     <keyword type="macro" name="G_VALUE_TYPE()" link="gobject-Generic-values.html#G-VALUE-TYPE:CAPS"/>
@@ -547,6 +561,16 @@
     <keyword type="function" name="g_param_spec_gtype ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-gtype" since="2.10"/>
     <keyword type="function" name="g_value_get_gtype ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-get-gtype" since="2.12"/>
     <keyword type="function" name="g_value_set_gtype ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-set-gtype" since="2.12"/>
+    <keyword type="macro" name="G_IS_PARAM_SPEC_VARIANT()" link="gobject-Standard-Parameter-and-Value-Types.html#G-IS-PARAM-SPEC-VARIANT:CAPS" since="2.26"/>
+    <keyword type="macro" name="G_PARAM_SPEC_VARIANT()" link="gobject-Standard-Parameter-and-Value-Types.html#G-PARAM-SPEC-VARIANT:CAPS" since="2.26"/>
+    <keyword type="macro" name="G_VALUE_HOLDS_VARIANT()" link="gobject-Standard-Parameter-and-Value-Types.html#G-VALUE-HOLDS-VARIANT:CAPS" since="2.26"/>
+    <keyword type="macro" name="G_TYPE_PARAM_VARIANT" link="gobject-Standard-Parameter-and-Value-Types.html#G-TYPE-PARAM-VARIANT:CAPS" since="2.26"/>
+    <keyword type="struct" name="GParamSpecVariant" link="gobject-Standard-Parameter-and-Value-Types.html#GParamSpecVariant" since="2.26"/>
+    <keyword type="function" name="g_param_spec_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-variant" since="2.26"/>
+    <keyword type="function" name="g_value_get_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-get-variant" since="2.26"/>
+    <keyword type="function" name="g_value_dup_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-dup-variant" since="2.26"/>
+    <keyword type="function" name="g_value_set_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-set-variant" since="2.26"/>
+    <keyword type="function" name="g_value_take_variant ()" link="gobject-Standard-Parameter-and-Value-Types.html#g-value-take-variant" since="2.26"/>
     <keyword type="macro" name="G_TYPE_IS_PARAM()" link="gobject-GParamSpec.html#G-TYPE-IS-PARAM:CAPS"/>
     <keyword type="macro" name="G_PARAM_SPEC()" link="gobject-GParamSpec.html#G-PARAM-SPEC:CAPS"/>
     <keyword type="macro" name="G_IS_PARAM_SPEC()" link="gobject-GParamSpec.html#G-IS-PARAM-SPEC:CAPS"/>
@@ -648,6 +672,7 @@
     <keyword type="function" name="g_signal_parse_name ()" link="gobject-Signals.html#g-signal-parse-name"/>
     <keyword type="function" name="g_signal_get_invocation_hint ()" link="gobject-Signals.html#g-signal-get-invocation-hint"/>
     <keyword type="function" name="g_signal_type_cclosure_new ()" link="gobject-Signals.html#g-signal-type-cclosure-new"/>
+    <keyword type="function" name="g_signal_accumulator_first_wins ()" link="gobject-Signals.html#g-signal-accumulator-first-wins" since="2.28"/>
     <keyword type="function" name="g_signal_accumulator_true_handled ()" link="gobject-Signals.html#g-signal-accumulator-true-handled" since="2.4"/>
     <keyword type="macro" name="G_CLOSURE_NEEDS_MARSHAL()" link="gobject-Closures.html#G-CLOSURE-NEEDS-MARSHAL:CAPS"/>
     <keyword type="macro" name="G_CLOSURE_N_NOTIFIERS()" link="gobject-Closures.html#G-CLOSURE-N-NOTIFIERS:CAPS"/>
@@ -678,6 +703,7 @@
     <keyword type="function" name="g_closure_add_marshal_guards ()" link="gobject-Closures.html#g-closure-add-marshal-guards"/>
     <keyword type="function" name="g_closure_set_meta_marshal ()" link="gobject-Closures.html#g-closure-set-meta-marshal"/>
     <keyword type="function" name="g_source_set_closure ()" link="gobject-Closures.html#g-source-set-closure"/>
+    <keyword type="function" name="g_source_set_dummy_callback ()" link="gobject-Closures.html#g-source-set-dummy-callback"/>
     <keyword type="macro" name="G_TYPE_IO_CHANNEL" link="gobject-Closures.html#G-TYPE-IO-CHANNEL:CAPS"/>
     <keyword type="macro" name="G_TYPE_IO_CONDITION" link="gobject-Closures.html#G-TYPE-IO-CONDITION:CAPS"/>
     <keyword type="function" name="g_cclosure_marshal_VOID__VOID ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--VOID"/>
@@ -697,6 +723,7 @@
     <keyword type="function" name="g_cclosure_marshal_VOID__BOXED ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--BOXED"/>
     <keyword type="function" name="g_cclosure_marshal_VOID__POINTER ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--POINTER"/>
     <keyword type="function" name="g_cclosure_marshal_VOID__OBJECT ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--OBJECT"/>
+    <keyword type="function" name="g_cclosure_marshal_VOID__VARIANT ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--VARIANT" since="2.26"/>
     <keyword type="function" name="g_cclosure_marshal_STRING__OBJECT_POINTER ()" link="gobject-Closures.html#g-cclosure-marshal-STRING--OBJECT-POINTER"/>
     <keyword type="function" name="g_cclosure_marshal_VOID__UINT_POINTER ()" link="gobject-Closures.html#g-cclosure-marshal-VOID--UINT-POINTER"/>
     <keyword type="function" name="g_cclosure_marshal_BOOLEAN__FLAGS ()" link="gobject-Closures.html#g-cclosure-marshal-BOOLEAN--FLAGS"/>
@@ -712,13 +739,29 @@
     <keyword type="function" name="g_value_array_remove ()" link="gobject-Value-arrays.html#g-value-array-remove"/>
     <keyword type="function" name="g_value_array_sort ()" link="gobject-Value-arrays.html#g-value-array-sort"/>
     <keyword type="function" name="g_value_array_sort_with_data ()" link="gobject-Value-arrays.html#g-value-array-sort-with-data"/>
-    <keyword type="" name="Options" link="glib-mkenums.html#id505964"/>
-    <keyword type="" name="Production text substitutions" link="glib-mkenums.html#id542354"/>
-    <keyword type="" name="Trigraph extensions" link="glib-mkenums.html#id542714"/>
-    <keyword type="" name="Options" link="glib-genmarshal.html#id524832"/>
-    <keyword type="" name="Marshaller list format" link="glib-genmarshal.html#id548262"/>
-    <keyword type="" name="Parameter types" link="glib-genmarshal.html#id536853"/>
-    <keyword type="" name="Options" link="gobject-query.html#id542064"/>
+    <keyword type="struct" name="GBinding" link="GBinding.html#GBinding-struct"/>
+    <keyword type="enum" name="enum GBindingFlags" link="GBinding.html#GBindingFlags" since="2.26"/>
+    <keyword type="function" name="g_binding_get_source ()" link="GBinding.html#g-binding-get-source" since="2.26"/>
+    <keyword type="function" name="g_binding_get_source_property ()" link="GBinding.html#g-binding-get-source-property" since="2.26"/>
+    <keyword type="function" name="g_binding_get_target ()" link="GBinding.html#g-binding-get-target" since="2.26"/>
+    <keyword type="function" name="g_binding_get_target_property ()" link="GBinding.html#g-binding-get-target-property" since="2.26"/>
+    <keyword type="function" name="g_binding_get_flags ()" link="GBinding.html#g-binding-get-flags" since="2.26"/>
+    <keyword type="function" name="g_object_bind_property ()" link="GBinding.html#g-object-bind-property" since="2.26"/>
+    <keyword type="function" name="GBindingTransformFunc ()" link="GBinding.html#GBindingTransformFunc" since="2.26"/>
+    <keyword type="function" name="g_object_bind_property_full ()" link="GBinding.html#g-object-bind-property-full" since="2.26"/>
+    <keyword type="function" name="g_object_bind_property_with_closures ()" link="GBinding.html#g-object-bind-property-with-closures" since="2.26"/>
+    <keyword type="property" name="The &quot;flags&quot; property" link="GBinding.html#GBinding--flags"/>
+    <keyword type="property" name="The &quot;source&quot; property" link="GBinding.html#GBinding--source"/>
+    <keyword type="property" name="The &quot;source-property&quot; property" link="GBinding.html#GBinding--source-property"/>
+    <keyword type="property" name="The &quot;target&quot; property" link="GBinding.html#GBinding--target"/>
+    <keyword type="property" name="The &quot;target-property&quot; property" link="GBinding.html#GBinding--target-property"/>
+    <keyword type="" name="Options" link="glib-mkenums.html#id496048"/>
+    <keyword type="" name="Production text substitutions" link="glib-mkenums.html#id492693"/>
+    <keyword type="" name="Trigraph extensions" link="glib-mkenums.html#id479746"/>
+    <keyword type="" name="Options" link="glib-genmarshal.html#id476163"/>
+    <keyword type="" name="Marshaller list format" link="glib-genmarshal.html#id474223"/>
+    <keyword type="" name="Parameter types" link="glib-genmarshal.html#id471051"/>
+    <keyword type="" name="Options" link="gobject-query.html#id468332"/>
     <keyword type="constant" name="G_TYPE_DEBUG_NONE" link="gobject-Type-Information.html#G-TYPE-DEBUG-NONE:CAPS"/>
     <keyword type="constant" name="G_TYPE_DEBUG_OBJECTS" link="gobject-Type-Information.html#G-TYPE-DEBUG-OBJECTS:CAPS"/>
     <keyword type="constant" name="G_TYPE_DEBUG_SIGNALS" link="gobject-Type-Information.html#G-TYPE-DEBUG-SIGNALS:CAPS"/>
@@ -738,6 +781,7 @@
     <keyword type="constant" name="G_PARAM_PRIVATE" link="gobject-GParamSpec.html#G-PARAM-PRIVATE:CAPS"/>
     <keyword type="constant" name="G_PARAM_STATIC_NICK" link="gobject-GParamSpec.html#G-PARAM-STATIC-NICK:CAPS"/>
     <keyword type="constant" name="G_PARAM_STATIC_BLURB" link="gobject-GParamSpec.html#G-PARAM-STATIC-BLURB:CAPS"/>
+    <keyword type="constant" name="G_PARAM_DEPRECATED" link="gobject-GParamSpec.html#G-PARAM-DEPRECATED:CAPS"/>
     <keyword type="constant" name="G_SIGNAL_RUN_FIRST" link="gobject-Signals.html#G-SIGNAL-RUN-FIRST:CAPS"/>
     <keyword type="constant" name="G_SIGNAL_RUN_LAST" link="gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"/>
     <keyword type="constant" name="G_SIGNAL_RUN_CLEANUP" link="gobject-Signals.html#G-SIGNAL-RUN-CLEANUP:CAPS"/>
@@ -753,5 +797,9 @@
     <keyword type="constant" name="G_SIGNAL_MATCH_UNBLOCKED" link="gobject-Signals.html#G-SIGNAL-MATCH-UNBLOCKED:CAPS"/>
     <keyword type="constant" name="G_CONNECT_AFTER" link="gobject-Signals.html#G-CONNECT-AFTER:CAPS"/>
     <keyword type="constant" name="G_CONNECT_SWAPPED" link="gobject-Signals.html#G-CONNECT-SWAPPED:CAPS"/>
+    <keyword type="constant" name="G_BINDING_DEFAULT" link="GBinding.html#G-BINDING-DEFAULT:CAPS"/>
+    <keyword type="constant" name="G_BINDING_BIDIRECTIONAL" link="GBinding.html#G-BINDING-BIDIRECTIONAL:CAPS"/>
+    <keyword type="constant" name="G_BINDING_SYNC_CREATE" link="GBinding.html#G-BINDING-SYNC-CREATE:CAPS"/>
+    <keyword type="constant" name="G_BINDING_INVERT_BOOLEAN" link="GBinding.html#G-BINDING-INVERT-BOOLEAN:CAPS"/>
   </functions>
 </book>

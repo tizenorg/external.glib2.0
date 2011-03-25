@@ -24,7 +24,6 @@
 #include "gseekable.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gseekable
@@ -155,7 +154,8 @@ g_seekable_can_truncate (GSeekable *seekable)
  * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned. If an
  * operation was partially finished when the operation was cancelled the
  * partial result will be returned, without an error.
- * 
+ *
+ * Virtual: truncate_fn
  * Returns: %TRUE if successful. If an error
  *     has occurred, this function will return %FALSE and set @error
  *     appropriately if present. 
@@ -174,6 +174,3 @@ g_seekable_truncate (GSeekable     *seekable,
 
   return (* iface->truncate_fn) (seekable, offset, cancellable, error);
 }
-
-#define __G_SEEKABLE_C__
-#include "gioaliasdef.c"

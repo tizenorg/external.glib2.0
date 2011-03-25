@@ -27,9 +27,13 @@
 #include <stdlib.h>
 #include <errno.h>
 
-#include "glib.h"
+#include "gmarkup.h"
+
+#include "galloca.h"
+#include "gstrfuncs.h"
+#include "gstring.h"
+#include "gtestutils.h"
 #include "glibintl.h"
-#include "galias.h"
 
 GQuark
 g_markup_error_quark (void)
@@ -1963,7 +1967,7 @@ g_markup_parse_context_get_user_data (GMarkupParseContext *context)
  **/
 void
 g_markup_parse_context_push (GMarkupParseContext *context,
-                             GMarkupParser       *parser,
+                             const GMarkupParser *parser,
                              gpointer             user_data)
 {
   GMarkupRecursionTracker *tracker;
@@ -2092,12 +2096,11 @@ append_escaped_text (GString     *str,
  * from being processed according to the XML rules for normalization
  * of line endings and attribute values.
  *
- * Note also that if given a string containing them, this function
- * will produce character references in the range of &amp;#x1; ..
- * &amp;#x1f; for all control sequences except for tabstop, newline
- * and carriage return.  The character references in this range are
- * not valid XML 1.0, but they are valid XML 1.1 and will be accepted
- * by the GMarkup parser.
+ * Note also that this function will produce character references in
+ * the range of &amp;#x1; ... &amp;#x1f; for all control sequences
+ * except for tabstop, newline and carriage return.  The character
+ * references in this range are not valid XML 1.0, but they are
+ * valid XML 1.1 and will be accepted by the GMarkup parser.
  * 
  * Return value: a newly allocated string with the escaped text
  **/
@@ -2780,6 +2783,3 @@ failure:
 
   return FALSE;
 }
-
-#define __G_MARKUP_C__
-#include "galiasdef.c"

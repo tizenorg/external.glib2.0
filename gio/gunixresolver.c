@@ -34,7 +34,6 @@
 #include "gsimpleasyncresult.h"
 #include "gsocketaddress.h"
 
-#include "gioalias.h"
 
 G_DEFINE_TYPE (GUnixResolver, g_unix_resolver, G_TYPE_THREADED_RESOLVER)
 
@@ -233,8 +232,7 @@ request_cancelled (GCancellable *cancellable,
   req->qy = NULL;
 
   g_cancellable_set_error_if_cancelled (cancellable, &error);
-  g_simple_async_result_set_from_error (req->async_result, error);
-  g_error_free (error);
+  g_simple_async_result_take_error (req->async_result, error);
 
   g_unix_resolver_request_complete (req);
 }
@@ -304,10 +302,7 @@ lookup_by_name_process (GUnixResolverRequest *req)
     freeaddrinfo (res);
 
   if (error)
-    {
-      g_simple_async_result_set_from_error (req->async_result, error);
-      g_error_free (error);
-    }
+    g_simple_async_result_take_error (req->async_result, error);
 }
 
 static void
@@ -345,7 +340,8 @@ lookup_by_name_finish (GResolver     *resolver,
   GUnixResolverRequest *req;
   GList *addresses;
 
-  g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (resolver), lookup_by_name_async), FALSE);
+  g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (resolver), lookup_by_name_async), NULL);
+
   simple = G_SIMPLE_ASYNC_RESULT (result);
 
   if (g_simple_async_result_propagate_error (simple, error))
@@ -373,10 +369,7 @@ lookup_by_address_process (GUnixResolverRequest *req)
                                     host, retval, &error);
 
   if (error)
-    {
-      g_simple_async_result_set_from_error (req->async_result, error);
-      g_error_free (error);
-    }
+    g_simple_async_result_take_error (req->async_result, error);
 }
 
 static void
@@ -419,7 +412,8 @@ lookup_by_address_finish (GResolver     *resolver,
   GUnixResolverRequest *req;
   gchar *name;
 
-  g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (resolver), lookup_by_address_async), FALSE);
+  g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (resolver), lookup_by_address_async), NULL);
+
   simple = G_SIMPLE_ASYNC_RESULT (result);
 
   if (g_simple_async_result_propagate_error (simple, error))
@@ -452,10 +446,7 @@ lookup_service_process (GUnixResolverRequest *req)
   _g_asyncns_freeanswer (answer);
 
   if (error)
-    {
-      g_simple_async_result_set_from_error (req->async_result, error);
-      g_error_free (error);
-    }
+    g_simple_async_result_take_error (req->async_result, error);
 }
 
 static void
@@ -492,7 +483,8 @@ lookup_service_finish (GResolver     *resolver,
   GUnixResolverRequest *req;
   GList *targets;
 
-  g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (resolver), lookup_service_async), FALSE);
+  g_return_val_if_fail (g_simple_async_result_is_valid (result, G_OBJECT (resolver), lookup_service_async), NULL);
+
   simple = G_SIMPLE_ASYNC_RESULT (result);
 
   if (g_simple_async_result_propagate_error (simple, error))
@@ -522,6 +514,3 @@ g_unix_resolver_class_init (GUnixResolverClass *unix_class)
 
   object_class->finalize = g_unix_resolver_finalize;
 }
-
-#define __G_UNIX_RESOLVER_C__
-#include "gioaliasdef.c"

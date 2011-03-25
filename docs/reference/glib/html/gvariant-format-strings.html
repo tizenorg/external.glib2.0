@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GVariant Format Strings</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-GVariant.html" title="GVariant">
 <link rel="next" href="tools.html" title="GLib Tools">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -22,7 +22,7 @@
 <div class="refentry" title="GVariant Format Strings">
 <a name="gvariant-format-strings"></a><div class="titlepage"></div>
 <div class="refsect1" title="Variable Argument Conversions">
-<a name="id526523"></a><h2>Variable Argument Conversions</h2>
+<a name="id381559"></a><h2>Variable Argument Conversions</h2>
 <p>
    This page attempts to document how to perform variable argument conversions with GVariant.
   </p>
@@ -38,7 +38,7 @@
   </p>
 </div>
 <div class="refsect1" title="Syntax">
-<a name="id580250"></a><h2>Syntax</h2>
+<a name="id413198"></a><h2>Syntax</h2>
 <p>
    This section exhaustively describes all possibilities for GVariant format strings.  There are no valid forms of
    format strings other than those described here.  Please note that the format string syntax is likely to expand in the
@@ -54,8 +54,8 @@
     </p></li>
 <li class="listitem"><p>
      '<code class="literal">&amp;s</code>' '<code class="literal">&amp;o</code>', '<code class="literal">&amp;g</code>', '<code class="literal">^as</code>',
-     '<code class="literal">^ao</code>', '<code class="literal">^ag</code>', '<code class="literal">^a&amp;s</code>', '<code class="literal">^a&amp;o</code>' or
-     '<code class="literal">^a&amp;g</code>'
+     '<code class="literal">^a&amp;s</code>', '<code class="literal">^ay</code>', '<code class="literal">^&amp;ay</code>', '<code class="literal">^aay</code>'
+     or '<code class="literal">^a&amp;ay</code>'.
     </p></li>
 <li class="listitem"><p>
      any format string, prefixed with an '<code class="literal">m</code>'
@@ -70,15 +70,15 @@
 </ul></div>
 </div>
 <div class="refsect1" title="Symbols">
-<a name="id576500"></a><h2>Symbols</h2>
+<a name="id642332"></a><h2>Symbols</h2>
 <p>
     The following table describes the rough meaning of symbols that may appear inside a GVariant format string.  Each
     symbol is described in detail in its own section, including usage examples.
   </p>
 <div class="informaltable"><table border="1">
 <colgroup>
-<col>
-<col>
+<col class="col_0">
+<col class="col_1">
 </colgroup>
 <tbody>
 <tr>
@@ -211,7 +211,9 @@
         <a class="link" href="glib-GVariant.html#GVariant" title="GVariant">GVariant</a> should be used in place of the normal C type or types.  For
         <a class="link" href="glib-GVariant.html#g-variant-new" title="g_variant_new ()"><code class="function">g_variant_new()</code></a> this means that you must pass a
         non-<code class="literal">NULL</code> <code class="code">(<a class="link" href="glib-GVariant.html#GVariant" title="GVariant">GVariant</a>
-        *)</code>.  For <a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()"><code class="function">g_variant_get()</code></a> this means that you
+        *)</code>; if it is a floating reference, ownership will be taken, as
+        if by using <a class="link" href="glib-GVariant.html#g-variant-ref-sink" title="g_variant_ref_sink ()"><code class="function">g_variant_ref_sink()</code></a>.
+        For <a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()"><code class="function">g_variant_get()</code></a> this means that you
         must pass a pointer to a <code class="code">(<a class="link" href="glib-GVariant.html#GVariant" title="GVariant">GVariant</a> *)</code> for the value to be returned
         by reference or <code class="literal">NULL</code> to ignore the value.  See
         <a href="gvariant-format-strings.html#gvariant-format-strings-gvariant"><code class="code">GVariant *</code></a> below.
@@ -282,8 +284,8 @@
    </p>
 <div class="informaltable"><table border="1">
 <colgroup>
-<col>
-<col>
+<col class="col_0">
+<col class="col_1">
 </colgroup>
 <tbody>
 <tr>
@@ -460,7 +462,7 @@
     it operates with pointers.  The pointers must always point to a memory region of exactly the correct size.
    </p>
 <div class="refsect3" title="Examples">
-<a name="id749793"></a><h4>Examples</h4>
+<a name="id668374"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -534,7 +536,7 @@
     string should be ignored (in which case no copy is made).
    </p>
 <div class="refsect3" title="Examples">
-<a name="id508424"></a><h4>Examples</h4>
+<a name="id431928"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -603,7 +605,7 @@
     ignored (in which case no new reference is created).
    </p>
 <div class="refsect3" title="Examples">
-<a name="id546664"></a><h4>Examples</h4>
+<a name="id444619"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -657,12 +659,12 @@
     <code class="code">(<a class="link" href="glib-GVariant.html#GVariantIter" title="GVariantIter">GVariantIter</a> **)</code>).
     A new heap-allocated iterator is created and returned, initialised for iterating over the elements of the array.
     This iterator should be freed when you are done with it, using
-    <code class="function">g_variant_iter_unref()</code>.
+    <a class="link" href="glib-GVariant.html#g-variant-iter-free" title="g_variant_iter_free ()"><code class="function">g_variant_iter_free()</code></a>.
     <code class="literal">NULL</code> may also be given to indicate that the value of the array
     should be ignored.
    </p>
 <div class="refsect3" title="Examples">
-<a name="id506366"></a><h4>Examples</h4>
+<a name="id370887"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -685,16 +687,20 @@
 16
 17
 18
-19</pre></td>
+19
+20
+21
+22</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="usertype">GVariantBuilder</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">builder</span><span class="symbol">;</span>
 <span class="usertype">GVariant</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">value</span><span class="symbol">;</span>
 
-<span class="normal">builder </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-GVariant.html#g-variant-builder-new">g_variant_builder_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">G_VARIANT_TYPE_CLASS_ARRAY</span><span class="symbol">,</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span>
+<span class="normal">builder </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-GVariant.html#g-variant-builder-new">g_variant_builder_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="glib-GVariantType.html#G-VARIANT-TYPE:CAPS">G_VARIANT_TYPE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"as"</span><span class="symbol">));</span>
 <span class="function"><a href="glib-GVariant.html#g-variant-builder-add">g_variant_builder_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">builder</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"s"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"when"</span><span class="symbol">);</span>
 <span class="function"><a href="glib-GVariant.html#g-variant-builder-add">g_variant_builder_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">builder</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"s"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"in"</span><span class="symbol">);</span>
 <span class="function"><a href="glib-GVariant.html#g-variant-builder-add">g_variant_builder_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">builder</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"s"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"the"</span><span class="symbol">);</span>
 <span class="function"><a href="glib-GVariant.html#g-variant-builder-add">g_variant_builder_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">builder</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"s"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"course"</span><span class="symbol">);</span>
 <span class="normal">value </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-GVariant.html#g-variant-new">g_variant_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"as"</span><span class="symbol">,</span><span class="normal"> builder</span><span class="symbol">);</span>
+<span class="function"><a href="glib-GVariant.html#g-variant-builder-unref">g_variant_builder_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">builder</span><span class="symbol">);</span>
 
 <span class="cbracket">{</span>
 <span class="normal">  </span><span class="usertype">GVariantIter</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">iter</span><span class="symbol">;</span>
@@ -702,9 +708,11 @@
 
 <span class="normal">  </span><span class="function"><a href="glib-GVariant.html#g-variant-get">g_variant_get</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">value</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"as"</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">iter</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="keyword">while</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="glib-GVariant.html#g-variant-iter-loop">g_variant_iter_loop</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">iter</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"s"</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">str</span><span class="symbol">))</span>
-<span class="normal">    </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"%s</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function">g_variant_iter_unref</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">iter</span><span class="symbol">);</span>
-<span class="cbracket">}</span></pre></td>
+<span class="normal">    </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"%s</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> str</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="glib-GVariant.html#g-variant-iter-free">g_variant_iter_free</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">iter</span><span class="symbol">);</span>
+<span class="cbracket">}</span>
+
+<span class="function"><a href="glib-GVariant.html#g-variant-unref">g_variant_unref</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">value</span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -762,7 +770,7 @@
     but have their values set to binary zero.
    </p>
 <div class="refsect3" title="Examples">
-<a name="id539803"></a><h4>Examples</h4>
+<a name="id404418"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -896,7 +904,7 @@
     Tuples are handled by handling each item in the tuple, in sequence.  Each item is handled in the usual way.
    </p>
 <div class="refsect3" title="Examples">
-<a name="id696306"></a><h4>Examples</h4>
+<a name="id584566"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -950,7 +958,7 @@
     Dictionary entries are handled by handling first the key, then the value.  Each is handled in the usual way.
    </p>
 <div class="refsect3" title="Examples">
-<a name="id503994"></a><h4>Examples</h4>
+<a name="id370246"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -965,7 +973,7 @@
         <td class="listing_code"><pre class="programlisting"><span class="usertype">GVariantBuilder</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">b</span><span class="symbol">;</span>
 <span class="usertype">GVariant</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">dict</span><span class="symbol">;</span>
 
-<span class="normal">b </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-GVariant.html#g-variant-builder-new">g_variant_builder_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">G_VARIANT_TYPE_CLASS_ARRAY</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="glib-GVariantType.html#G-VARIANT-TYPE:CAPS">G_VARIANT_TYPE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"a{sv}"</span><span class="symbol">));</span>
+<span class="normal">b </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-GVariant.html#g-variant-builder-new">g_variant_builder_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="glib-GVariantType.html#G-VARIANT-TYPE:CAPS">G_VARIANT_TYPE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"a{sv}"</span><span class="symbol">));</span>
 <span class="function"><a href="glib-GVariant.html#g-variant-builder-add">g_variant_builder_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">b</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"{sv}"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"name"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="glib-GVariant.html#g-variant-new-string">g_variant_new_string</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"foo"</span><span class="symbol">));</span>
 <span class="function"><a href="glib-GVariant.html#g-variant-builder-add">g_variant_builder_add</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">b</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"{sv}"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"timeout"</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="glib-GVariant.html#g-variant-new-int32">g_variant_new_int32</a></span><span class="normal"> </span><span class="symbol">(</span><span class="number">10</span><span class="symbol">));</span>
 <span class="normal">dict </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-GVariant.html#g-variant-builder-end">g_variant_builder_end</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">b</span><span class="symbol">);</span></pre></td>
@@ -1013,7 +1021,7 @@
     improvements in type safety and code self-documentation.
    </p>
 <div class="refsect3" title="Examples">
-<a name="id584926"></a><h4>Examples</h4>
+<a name="id562159"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1093,7 +1101,7 @@
     always be properly nul-terminated.
    </p>
 <div class="refsect3" title="Examples">
-<a name="id539396"></a><h4>Examples</h4>
+<a name="id375128"></a><h4>Examples</h4>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -1132,40 +1140,149 @@
     </strong></span>
    </p>
 <p>
-    The '<code class="literal">^</code>' character currently only has one purpose: to convert to and from
-    <code class="literal">G_TYPE_STRV</code> type arrays of strings.  It is always used with
-    arrays of strings (or other string types).  It has two forms.
-   </p>
-<div class="itemizedlist"><ul class="itemizedlist" type="disc">
-<li class="listitem"><p>
-      '<code class="literal">^as</code>' (or <code class="literal">o</code> or <code class="literal">g</code>)
-     </p></li>
-<li class="listitem"><p>
-      '<code class="literal">^a&amp;s</code>' (or <code class="literal">o</code> or <code class="literal">g</code>)
-     </p></li>
-</ul></div>
-<p>
-    When used with <a class="link" href="glib-GVariant.html#g-variant-new" title="g_variant_new ()"><code class="function">g_variant_new()</code></a> both forms are equivalent.
-    A <code class="code">(const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar">gchar</a> * const *)</code> is collected.  This must be a pointer to the
-    array of <code class="literal">NULL</code>-terminated pointers to strings.  This array is
-    converted to a <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> instance.  Copies are made, so the original
-    array may be freed immediately.
+    The '<code class="literal">^</code>' character currently supports conversion to and from bytestrings or to and from arrays
+    of strings or bytestrings.  It has a number of forms.
    </p>
 <p>
-    When used with <a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()"><code class="function">g_variant_get()</code></a> the two forms have
-    different meaning.  Both return a freshly allocated
-    <code class="literal">NULL</code>-terminated array of pointers to strings.  In the case of
-    '<code class="literal">^as</code>', the strings are owned by the caller -- it is appropriate to free the array with
-    <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>.  In the case of '<code class="literal">^a&amp;s</code>',
-    a shallow copy is made; the strings themselves are embedded in the serialised data and owned by the original
-    <a class="link" href="glib-GVariant.html#GVariant" title="GVariant"><span class="type">GVariant</span></a> instance -- it is only appropriate to free the outer array
-    with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>.
+    In all forms, when used with <a class="link" href="glib-GVariant.html#g-variant-new" title="g_variant_new ()"><code class="function">g_variant_new()</code></a> one
+    pointer value is collected from the variable arguments and passed to a function (as given in the table below).
+    The result of that function is used as the value for this position.  When used with
+    <a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()"><code class="function">g_variant_get()</code></a> one pointer value is produced by using
+    the function (given in the table) and returned by reference.
    </p>
+<div class="informaltable"><table border="1">
+<colgroup>
+<col class="col_0">
+<col class="col_1">
+</colgroup>
+<tbody>
+<tr>
+<td>
+        <p>
+         <span class="strong"><strong>Conversion</strong></span>
+        </p>
+       </td>
+<td>
+        <p>
+          <span class="strong"><strong>
+            Used with <a class="link" href="glib-GVariant.html#g-variant-new" title="g_variant_new ()"><code class="function">g_variant_new()</code></a>
+          </strong></span>
+        </p>
+       </td>
+<td>
+        <p>
+          <span class="strong"><strong>
+            Used with <a class="link" href="glib-GVariant.html#g-variant-get" title="g_variant_get ()"><code class="function">g_variant_get()</code></a>
+          </strong></span>
+        </p>
+       </td>
+</tr>
+<tr>
+<td>
+        <p>
+         <span class="strong"><strong>
+          <code class="literal">^as</code>
+         </strong></span>
+        </p>
+       </td>
+<td rowspan="2">
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-new-strv" title="g_variant_new_strv ()"><code class="function">g_variant_new_strv()</code></a>
+        </p>
+       </td>
+<td>
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-dup-strv" title="g_variant_dup_strv ()"><code class="function">g_variant_dup_strv()</code></a>
+        </p>
+       </td>
+</tr>
+<tr>
+<td>
+        <p>
+         <span class="strong"><strong>
+          <code class="literal">^a&amp;s</code>
+         </strong></span>
+        </p>
+       </td>
+<td>
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-get-strv" title="g_variant_get_strv ()"><code class="function">g_variant_get_strv()</code></a>
+        </p>
+       </td>
+</tr>
+<tr>
+<td>
+        <p>
+         <span class="strong"><strong>
+          <code class="literal">^ay</code>
+         </strong></span>
+        </p>
+       </td>
+<td rowspan="2">
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-new-bytestring" title="g_variant_new_bytestring ()"><code class="function">g_variant_new_bytestring()</code></a>
+        </p>
+       </td>
+<td>
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-dup-bytestring" title="g_variant_dup_bytestring ()"><code class="function">g_variant_dup_bytestring()</code></a>
+        </p>
+       </td>
+</tr>
+<tr>
+<td>
+        <p>
+         <span class="strong"><strong>
+          <code class="literal">^&amp;ay</code>
+         </strong></span>
+        </p>
+       </td>
+<td>
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-get-bytestring" title="g_variant_get_bytestring ()"><code class="function">g_variant_get_bytestring()</code></a>
+        </p>
+       </td>
+</tr>
+<tr>
+<td>
+        <p>
+         <span class="strong"><strong>
+          <code class="literal">^aay</code>
+         </strong></span>
+        </p>
+       </td>
+<td rowspan="2">
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-new-bytestring-array" title="g_variant_new_bytestring_array ()"><code class="function">g_variant_new_bytestring_array()</code></a>
+        </p>
+       </td>
+<td>
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-dup-bytestring-array" title="g_variant_dup_bytestring_array ()"><code class="function">g_variant_dup_bytestring_array()</code></a>
+        </p>
+       </td>
+</tr>
+<tr>
+<td>
+        <p>
+         <span class="strong"><strong>
+          <code class="literal">^a&amp;ay</code>
+         </strong></span>
+        </p>
+       </td>
+<td>
+        <p>
+         equivalent to <a class="link" href="glib-GVariant.html#g-variant-get-bytestring-array" title="g_variant_get_bytestring_array ()"><code class="function">g_variant_get_bytestring_array()</code></a>
+        </p>
+       </td>
+</tr>
+</tbody>
+</table></div>
 </div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

@@ -41,9 +41,15 @@
 #include <sys/resource.h>
 #endif /* HAVE_SYS_RESOURCE_H */
 
-#include "glib.h"
+#include "gspawn.h"
+
+#include "gmem.h"
+#include "gshell.h"
+#include "gstring.h"
+#include "gstrfuncs.h"
+#include "gtestutils.h"
+#include "gutils.h"
 #include "glibintl.h"
-#include "galias.h"
 
 static gint g_execute (const gchar  *file,
                        gchar **argv,
@@ -1677,6 +1683,3 @@ void
 g_spawn_close_pid (GPid pid)
 {
 }
-
-#define __G_SPAWN_C__
-#include "galiasdef.c"

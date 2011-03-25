@@ -30,9 +30,16 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
-#include "glib.h"
+#include "gmem.h"
+#include "gunicode.h"
 #include "gunicodeprivate.h"
-#include "galias.h"
+#include "gstring.h"
+#include "gstrfuncs.h"
+#include "gtestutils.h"
+#ifndef __STDC_ISO_10646__
+#include "gconvert.h"
+#endif
+
 
 #ifdef _MSC_VER
 /* Workaround for bug in MSVCR80.DLL */
@@ -673,7 +680,3 @@ g_utf8_collate_key_for_filename (const gchar *str,
   return carbon_collate_key_for_filename (str, len);
 #endif
 }
-
-
-#define __G_UNICOLLATE_C__
-#include "galiasdef.c"

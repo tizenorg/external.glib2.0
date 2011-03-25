@@ -42,7 +42,6 @@
 
 #include <stdlib.h>
 
-#include "gioalias.h"
 
 /**
  * SECTION:gresolver
@@ -145,7 +144,7 @@ static GResolver *default_resolver;
  * many threads/processes, etc it should allocate for concurrent DNS
  * resolutions.
  *
- * Return value: the default #GResolver.
+ * Return value: (transfer full): the default #GResolver.
  *
  * Since: 2.22
  */
@@ -240,7 +239,8 @@ g_resolver_maybe_reload (GResolver *resolver)
  * address, it may be easier to create a #GNetworkAddress and use its
  * #GSocketConnectable interface.
  *
- * Return value: a #GList of #GInetAddress, or %NULL on error. You
+ * Return value: (element-type GInetAddress) (transfer full): a #GList
+ * of #GInetAddress, or %NULL on error. You
  * must unref each of the addresses and free the list when you are
  * done with it. (You can use g_resolver_free_addresses() to do this.)
  *
@@ -342,8 +342,9 @@ g_resolver_lookup_by_name_async (GResolver           *resolver,
  * a value from #GResolverError. If the operation was cancelled,
  * @error will be set to %G_IO_ERROR_CANCELLED.
  *
- * Return value: a #GList of #GInetAddress, or %NULL on error. See
- * g_resolver_lookup_by_name() for more details.
+ * Return value: (element-type GInetAddress) (transfer full): a #GList
+ * of #GInetAddress, or %NULL on error. See g_resolver_lookup_by_name()
+ * for more details.
  *
  * Since: 2.22
  */
@@ -376,7 +377,7 @@ g_resolver_lookup_by_name_finish (GResolver     *resolver,
 }
 
 /**
- * g_resolver_free_addresses:
+ * g_resolver_free_addresses: (skip)
  * @addresses: a #GList of #GInetAddress
  *
  * Frees @addresses (which should be the return value from
@@ -546,9 +547,9 @@ g_resolver_get_service_rrname (const char *service,
  * to create a #GNetworkService and use its #GSocketConnectable
  * interface.
  *
- * Return value: a #GList of #GSrvTarget, or %NULL on error. You must
- * free each of the targets and the list when you are done with it.
- * (You can use g_resolver_free_targets() to do this.)
+ * Return value: (element-type GSrvTarget) (transfer full): a #GList of #GSrvTarget,
+ * or %NULL on error. You must free each of the targets and the list when you are
+ * done with it. (You can use g_resolver_free_targets() to do this.)
  *
  * Since: 2.22
  */
@@ -634,8 +635,8 @@ g_resolver_lookup_service_async (GResolver           *resolver,
  * a value from #GResolverError. If the operation was cancelled,
  * @error will be set to %G_IO_ERROR_CANCELLED.
  *
- * Return value: a #GList of #GSrvTarget, or %NULL on error. See
- * g_resolver_lookup_service() for more details.
+ * Return value: (element-type GSrvTarget) (transfer full): a #GList of #GSrvTarget,
+ * or %NULL on error. See g_resolver_lookup_service() for more details.
  *
  * Since: 2.22
  */
@@ -659,7 +660,7 @@ g_resolver_lookup_service_finish (GResolver     *resolver,
 }
 
 /**
- * g_resolver_free_targets:
+ * g_resolver_free_targets: (skip)
  * @targets: a #GList of #GSrvTarget
  *
  * Frees @targets (which should be the return value from
@@ -930,6 +931,3 @@ _g_resolver_targets_from_DnsQuery (const gchar  *rrname,
 }
 
 #endif
-
-#define __G_RESOLVER_C__
-#include "gioaliasdef.c"

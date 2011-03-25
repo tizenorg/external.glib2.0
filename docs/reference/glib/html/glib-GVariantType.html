@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GVariantType</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-Memory-Allocators.html" title="Memory Allocators">
 <link rel="next" href="glib-GVariant.html" title="GVariant">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -63,6 +63,9 @@
 #define             <a class="link" href="glib-GVariantType.html#G-VARIANT-TYPE-UNIT:CAPS" title="G_VARIANT_TYPE_UNIT">G_VARIANT_TYPE_UNIT</a>
 #define             <a class="link" href="glib-GVariantType.html#G-VARIANT-TYPE-DICT-ENTRY:CAPS" title="G_VARIANT_TYPE_DICT_ENTRY">G_VARIANT_TYPE_DICT_ENTRY</a>
 #define             <a class="link" href="glib-GVariantType.html#G-VARIANT-TYPE-DICTIONARY:CAPS" title="G_VARIANT_TYPE_DICTIONARY">G_VARIANT_TYPE_DICTIONARY</a>
+#define             <a class="link" href="glib-GVariantType.html#G-VARIANT-TYPE-STRING-ARRAY:CAPS" title="G_VARIANT_TYPE_STRING_ARRAY">G_VARIANT_TYPE_STRING_ARRAY</a>
+#define             <a class="link" href="glib-GVariantType.html#G-VARIANT-TYPE-BYTESTRING:CAPS" title="G_VARIANT_TYPE_BYTESTRING">G_VARIANT_TYPE_BYTESTRING</a>
+#define             <a class="link" href="glib-GVariantType.html#G-VARIANT-TYPE-BYTESTRING-ARRAY:CAPS" title="G_VARIANT_TYPE_BYTESTRING_ARRAY">G_VARIANT_TYPE_BYTESTRING_ARRAY</a>
 
 #define             <a class="link" href="glib-GVariantType.html#G-VARIANT-TYPE:CAPS" title="G_VARIANT_TYPE()">G_VARIANT_TYPE</a>                      (type_string)
 <span class="returnvalue">void</span>                <a class="link" href="glib-GVariantType.html#g-variant-type-free" title="g_variant_type_free ()">g_variant_type_free</a>                 (<em class="parameter"><code><a class="link" href="glib-GVariantType.html#GVariantType" title="GVariantType"><span class="type">GVariantType</span></a> *type</code></em>);
@@ -167,10 +170,10 @@ certainly matches the type of "an array of no particular type", since
 This is similar to how instances of abstract classes may not
 directly exist in other type systems, but instances of their
 non-abstract subtypes may.  For example, in GTK, no object that has
-the type of <span class="type">GtkBin</span> can exist (since <span class="type">GtkBin</span> is an abstract class),
-but a <span class="type">GtkWindow</span> can certainly be instantiated, and you would say
-that the <span class="type">GtkWindow</span> is a <span class="type">GtkBin</span> (since <span class="type">GtkWindow</span> is a subclass of
-<span class="type">GtkBin</span>).
+the type of <a href="http://library.gnome.org/devel/gtk/unstable/GtkBin.html"><span class="type">GtkBin</span></a> can exist (since <a href="http://library.gnome.org/devel/gtk/unstable/GtkBin.html"><span class="type">GtkBin</span></a> is an abstract class),
+but a <a href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"><span class="type">GtkWindow</span></a> can certainly be instantiated, and you would say
+that the <a href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"><span class="type">GtkWindow</span></a> is a <a href="http://library.gnome.org/devel/gtk/unstable/GtkBin.html"><span class="type">GtkBin</span></a> (since <a href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"><span class="type">GtkWindow</span></a> is a subclass of
+<a href="http://library.gnome.org/devel/gtk/unstable/GtkBin.html"><span class="type">GtkBin</span></a>).
 </p>
 <p>
 A detailed description of GVariant type strings is given here:
@@ -799,6 +802,36 @@ type.
 An indefinite type that is a supertype of every dictionary type --
 that is, any array type that has an element type equal to any
 dictionary entry type.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="G_VARIANT_TYPE_STRING_ARRAY">
+<a name="G-VARIANT-TYPE-STRING-ARRAY:CAPS"></a><h3>G_VARIANT_TYPE_STRING_ARRAY</h3>
+<pre class="programlisting">#define G_VARIANT_TYPE_STRING_ARRAY         ((const GVariantType *) "as")
+</pre>
+<p>
+The type of an array of strings.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="G_VARIANT_TYPE_BYTESTRING">
+<a name="G-VARIANT-TYPE-BYTESTRING:CAPS"></a><h3>G_VARIANT_TYPE_BYTESTRING</h3>
+<pre class="programlisting">#define G_VARIANT_TYPE_BYTESTRING           ((const GVariantType *) "ay")
+</pre>
+<p>
+The type of an array of bytes.  This type is commonly used to pass
+around strings that may not be valid utf8.  In that case, the
+convention is that the nul terminator character should be included as
+the last character in the array.
+</p>
+</div>
+<hr>
+<div class="refsect2" title="G_VARIANT_TYPE_BYTESTRING_ARRAY">
+<a name="G-VARIANT-TYPE-BYTESTRING-ARRAY:CAPS"></a><h3>G_VARIANT_TYPE_BYTESTRING_ARRAY</h3>
+<pre class="programlisting">#define G_VARIANT_TYPE_BYTESTRING_ARRAY     ((const GVariantType *) "aay")
+</pre>
+<p>
+The type of an array of byte strings (an array of arrays of bytes).
 </p>
 </div>
 <hr>
@@ -1810,6 +1843,6 @@ Since 2.24
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

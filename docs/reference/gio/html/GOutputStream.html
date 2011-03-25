@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GOutputStream</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="streaming.html" title="Streaming I/O">
 <link rel="prev" href="GInputStream.html" title="GInputStream">
 <link rel="next" href="GIOStream.html" title="GIOStream">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,6 +26,8 @@
                   <a href="#GOutputStream.description" class="shortcut">Description</a>
                    | 
                   <a href="#GOutputStream.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GOutputStream.derived-interfaces" class="shortcut">Known Derived Interfaces</a>
 </td></tr>
 </table>
 <div class="refentry" title="GOutputStream">
@@ -44,82 +46,88 @@
 
 enum                <a class="link" href="GOutputStream.html#GOutputStreamSpliceFlags" title="enum GOutputStreamSpliceFlags">GOutputStreamSpliceFlags</a>;
                     <a class="link" href="GOutputStream.html#GOutputStream-struct" title="GOutputStream">GOutputStream</a>;
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GOutputStream.html#g-output-stream-write" title="g_output_stream_write ()">g_output_stream_write</a>               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GOutputStream.html#g-output-stream-write" title="g_output_stream_write ()">g_output_stream_write</a>               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code>const <span class="type">void</span> *buffer</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-write-all" title="g_output_stream_write_all ()">g_output_stream_write_all</a>           (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-write-all" title="g_output_stream_write_all ()">g_output_stream_write_all</a>           (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code>const <span class="type">void</span> *buffer</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> *bytes_written</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> *bytes_written</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GOutputStream.html#g-output-stream-splice" title="g_output_stream_splice ()">g_output_stream_splice</a>              (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GOutputStream.html#g-output-stream-splice" title="g_output_stream_splice ()">g_output_stream_splice</a>              (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GInputStream.html" title="GInputStream"><span class="type">GInputStream</span></a> *source</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GOutputStream.html#GOutputStreamSpliceFlags" title="enum GOutputStreamSpliceFlags"><span class="type">GOutputStreamSpliceFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-flush" title="g_output_stream_flush ()">g_output_stream_flush</a>               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-flush" title="g_output_stream_flush ()">g_output_stream_flush</a>               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-close" title="g_output_stream_close ()">g_output_stream_close</a>               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-close" title="g_output_stream_close ()">g_output_stream_close</a>               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GOutputStream.html#g-output-stream-write-async" title="g_output_stream_write_async ()">g_output_stream_write_async</a>         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code>const <span class="type">void</span> *buffer</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> io_priority</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GOutputStream.html#g-output-stream-write-finish" title="g_output_stream_write_finish ()">g_output_stream_write_finish</a>        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GOutputStream.html#g-output-stream-write-finish" title="g_output_stream_write_finish ()">g_output_stream_write_finish</a>        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GOutputStream.html#g-output-stream-splice-async" title="g_output_stream_splice_async ()">g_output_stream_splice_async</a>        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GInputStream.html" title="GInputStream"><span class="type">GInputStream</span></a> *source</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GOutputStream.html#GOutputStreamSpliceFlags" title="enum GOutputStreamSpliceFlags"><span class="type">GOutputStreamSpliceFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> io_priority</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GOutputStream.html#g-output-stream-splice-finish" title="g_output_stream_splice_finish ()">g_output_stream_splice_finish</a>       (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              <a class="link" href="GOutputStream.html#g-output-stream-splice-finish" title="g_output_stream_splice_finish ()">g_output_stream_splice_finish</a>       (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GOutputStream.html#g-output-stream-flush-async" title="g_output_stream_flush_async ()">g_output_stream_flush_async</a>         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> io_priority</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-flush-finish" title="g_output_stream_flush_finish ()">g_output_stream_flush_finish</a>        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-flush-finish" title="g_output_stream_flush_finish ()">g_output_stream_flush_finish</a>        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GOutputStream.html#g-output-stream-close-async" title="g_output_stream_close_async ()">g_output_stream_close_async</a>         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> io_priority</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-close-finish" title="g_output_stream_close_finish ()">g_output_stream_close_finish</a>        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-close-finish" title="g_output_stream_close_finish ()">g_output_stream_close_finish</a>        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-is-closing" title="g_output_stream_is_closing ()">g_output_stream_is_closing</a>          (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-is-closed" title="g_output_stream_is_closed ()">g_output_stream_is_closed</a>           (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-has-pending" title="g_output_stream_has_pending ()">g_output_stream_has_pending</a>         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-set-pending" title="g_output_stream_set_pending ()">g_output_stream_set_pending</a>         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-is-closing" title="g_output_stream_is_closing ()">g_output_stream_is_closing</a>          (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-is-closed" title="g_output_stream_is_closed ()">g_output_stream_is_closed</a>           (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-has-pending" title="g_output_stream_has_pending ()">g_output_stream_has_pending</a>         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GOutputStream.html#g-output-stream-set-pending" title="g_output_stream_set_pending ()">g_output_stream_set_pending</a>         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GOutputStream.html#g-output-stream-clear-pending" title="g_output_stream_clear_pending ()">g_output_stream_clear_pending</a>       (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Object Hierarchy">
 <a name="GOutputStream.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GOutputStream
          +----<a class="link" href="GFilterOutputStream.html" title="GFilterOutputStream">GFilterOutputStream</a>
          +----<a class="link" href="GFileOutputStream.html" title="GFileOutputStream">GFileOutputStream</a>
          +----<a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream">GMemoryOutputStream</a>
          +----<a class="link" href="GUnixOutputStream.html" title="GUnixOutputStream">GUnixOutputStream</a>
 </pre>
+</div>
+<div class="refsect1" title="Known Derived Interfaces">
+<a name="GOutputStream.derived-interfaces"></a><h2>Known Derived Interfaces</h2>
+<p>
+GOutputStream is required by
+ <a class="link" href="GPollableOutputStream.html" title="GPollableOutputStream">GPollableOutputStream</a>.</p>
 </div>
 <div class="refsect1" title="Description">
 <a name="GOutputStream.description"></a><h2>Description</h2>
@@ -188,30 +196,31 @@ asynchronous versions.
 <hr>
 <div class="refsect2" title="g_output_stream_write ()">
 <a name="g-output-stream-write"></a><h3>g_output_stream_write ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_output_stream_write               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_output_stream_write               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code>const <span class="type">void</span> *buffer</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Tries to write <em class="parameter"><code>count</code></em> bytes from <em class="parameter"><code>buffer</code></em> into the stream. Will block
 during the operation.
 </p>
 <p>
-If count is zero returns zero and does nothing. A value of <em class="parameter"><code>count</code></em>
-larger than <a href="/usr/share/gtk-doc/html/glib/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a <a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a> error.
+If count is 0, returns 0 and does nothing. A value of <em class="parameter"><code>count</code></em>
+larger than <a href="http://library.gnome.org/devel/glib/unstable/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a <a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a> error.
 </p>
 <p>
 On success, the number of bytes written to the stream is returned.
 It is not an error if this is not the same as the requested size, as it
-can happen e.g. on a partial i/o error, or if there is not enough
-storage in the stream. All writes either block until at least one byte
-is written, so zero is never returned (unless <em class="parameter"><code>count</code></em> is zero).
+can happen e.g. on a partial I/O error, or if there is not enough
+storage in the stream. All writes block until at least one byte
+is written or an error occurs; 0 is never returned (unless
+<em class="parameter"><code>count</code></em> is 0).
 </p>
 <p>
 If <em class="parameter"><code>cancellable</code></em> is not NULL, then the operation can be cancelled by
 triggering the cancellable object from another thread. If the operation
-was cancelled, the error G_IO_ERROR_CANCELLED will be returned. If an
+was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a> will be returned. If an
 operation was partially finished when the operation was cancelled the
 partial result will be returned, without an error.
 </p>
@@ -228,7 +237,7 @@ On error -1 is returned and <em class="parameter"><code>error</code></em> is set
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
-<td>the buffer containing the data to write. 
+<td> the buffer containing the data to write. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=count][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
 </td>
 </tr>
 <tr>
@@ -238,12 +247,12 @@ On error -1 is returned and <em class="parameter"><code>error</code></em> is set
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional cancellable object
+<td> optional cancellable object. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
+<td>location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
 </td>
 </tr>
 <tr>
@@ -257,12 +266,12 @@ On error -1 is returned and <em class="parameter"><code>error</code></em> is set
 <hr>
 <div class="refsect2" title="g_output_stream_write_all ()">
 <a name="g-output-stream-write-all"></a><h3>g_output_stream_write_all ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_write_all           (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_write_all           (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code>const <span class="type">void</span> *buffer</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> *bytes_written</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> *bytes_written</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Tries to write <em class="parameter"><code>count</code></em> bytes from <em class="parameter"><code>buffer</code></em> into the stream. Will block
 during the operation.
@@ -272,7 +281,7 @@ This function is similar to <a class="link" href="GOutputStream.html#g-output-st
 write as many bytes as requested, only stopping on an error.
 </p>
 <p>
-On a successful write of <em class="parameter"><code>count</code></em> bytes, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> is returned, and <em class="parameter"><code>bytes_written</code></em>
+On a successful write of <em class="parameter"><code>count</code></em> bytes, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> is returned, and <em class="parameter"><code>bytes_written</code></em>
 is set to <em class="parameter"><code>count</code></em>.
 </p>
 <p>
@@ -290,7 +299,7 @@ the number of bytes written into the stream before the error occurred.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
-<td>the buffer containing the data to write. 
+<td> the buffer containing the data to write. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=count][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
 </td>
 </tr>
 <tr>
@@ -300,23 +309,23 @@ the number of bytes written into the stream before the error occurred.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>bytes_written</code></em> :</span></p></td>
-<td>location to store the number of bytes that was 
-    written to the stream
+<td> location to store the number of bytes that was 
+    written to the stream. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
+<td>location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if there was an error
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if there was an error
 </td>
 </tr>
 </tbody>
@@ -325,11 +334,11 @@ the number of bytes written into the stream before the error occurred.
 <hr>
 <div class="refsect2" title="g_output_stream_splice ()">
 <a name="g-output-stream-splice"></a><h3>g_output_stream_splice ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_output_stream_splice              (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_output_stream_splice              (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GInputStream.html" title="GInputStream"><span class="type">GInputStream</span></a> *source</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GOutputStream.html#GOutputStreamSpliceFlags" title="enum GOutputStreamSpliceFlags"><span class="type">GOutputStreamSpliceFlags</span></a> flags</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Splices an input stream into an output stream.
 </p>
@@ -353,18 +362,18 @@ Splices an input stream into an output stream.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
 ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> containing the size of the data spliced, or
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> containing the size of the data spliced, or
     -1 if an error occurred.
 </td>
 </tr>
@@ -374,9 +383,9 @@ ignore.
 <hr>
 <div class="refsect2" title="g_output_stream_flush ()">
 <a name="g-output-stream-flush"></a><h3>g_output_stream_flush ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_flush               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_flush               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Flushed any outstanding buffers in the stream. Will block during 
 the operation. Closing the stream will implicitly cause a flush.
@@ -385,7 +394,7 @@ the operation. Closing the stream will implicitly cause a flush.
 This function is optional for inherited classes.
 </p>
 <p>
-If <em class="parameter"><code>cancellable</code></em> is not <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, then the operation can be cancelled by
+If <em class="parameter"><code>cancellable</code></em> is not <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, then the operation can be cancelled by
 triggering the cancellable object from another thread. If the operation
 was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a> will be returned.
 </p>
@@ -399,17 +408,17 @@ was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANC
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional cancellable object
+<td> optional cancellable object. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
+<td>location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error
 </td>
 </tr>
 </tbody>
@@ -418,9 +427,9 @@ was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANC
 <hr>
 <div class="refsect2" title="g_output_stream_close ()">
 <a name="g-output-stream-close"></a><h3>g_output_stream_close ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_close               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_close               (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Closes the stream, releasing resources related to it.
 </p>
@@ -468,17 +477,17 @@ data will reach the target.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional cancellable object
+<td> optional cancellable object. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
+<td>location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on failure
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on failure
 </td>
 </tr>
 </tbody>
@@ -489,11 +498,11 @@ data will reach the target.
 <a name="g-output-stream-write-async"></a><h3>g_output_stream_write_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_output_stream_write_async         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code>const <span class="type">void</span> *buffer</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> count</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> io_priority</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Request an asynchronous write of <em class="parameter"><code>count</code></em> bytes from <em class="parameter"><code>buffer</code></em> into 
 the stream. When the operation is finished <em class="parameter"><code>callback</code></em> will be called.
@@ -505,7 +514,7 @@ During an async request no other sync and async calls are allowed,
 and will result in <a class="link" href="gio-GIOError.html#G-IO-ERROR-PENDING:CAPS"><code class="literal">G_IO_ERROR_PENDING</code></a> errors. 
 </p>
 <p>
-A value of <em class="parameter"><code>count</code></em> larger than <a href="/usr/share/gtk-doc/html/glib/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a 
+A value of <em class="parameter"><code>count</code></em> larger than <a href="http://library.gnome.org/devel/glib/unstable/glib-Limits-of-Basic-Types.html#G-MAXSSIZE:CAPS"><code class="literal">G_MAXSSIZE</code></a> will cause a 
 <a class="link" href="gio-GIOError.html#G-IO-ERROR-INVALID-ARGUMENT:CAPS"><code class="literal">G_IO_ERROR_INVALID_ARGUMENT</code></a> error.
 </p>
 <p>
@@ -515,9 +524,14 @@ requested size, as it can happen e.g. on a partial I/O error,
 but generally we try to write as many bytes as requested. 
 </p>
 <p>
+You are guaranteed that this method will never fail with
+<a class="link" href="gio-GIOError.html#G-IO-ERROR-WOULD-BLOCK:CAPS"><code class="literal">G_IO_ERROR_WOULD_BLOCK</code></a> - if <em class="parameter"><code>stream</code></em> can't accept more data, the
+method will just wait until this changes.
+</p>
+<p>
 Any outstanding I/O request with higher priority (lower numerical 
 value) will be executed before an outstanding request with lower 
-priority. Default priority is <a href="/usr/share/gtk-doc/html/glib/glib-The-Main-Event-Loop.html#G-PRIORITY-DEFAULT:CAPS"><code class="literal">G_PRIORITY_DEFAULT</code></a>.
+priority. Default priority is <a href="http://library.gnome.org/devel/glib/unstable/glib-The-Main-Event-Loop.html#G-PRIORITY-DEFAULT:CAPS"><code class="literal">G_PRIORITY_DEFAULT</code></a>.
 </p>
 <p>
 The asyncronous methods have a default fallback that uses threads 
@@ -538,7 +552,7 @@ For the synchronous, blocking version of this function, see
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>buffer</code></em> :</span></p></td>
-<td>the buffer containing the data to write. 
+<td> the buffer containing the data to write. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=count][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
 </td>
 </tr>
 <tr>
@@ -553,17 +567,17 @@ For the synchronous, blocking version of this function, see
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>callback to call when the request is satisfied
+<td> callback to call when the request is satisfied. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>the data to pass to callback function
+<td> the data to pass to callback function. <span class="annotation">[closure]</span>
 </td>
 </tr>
 </tbody>
@@ -572,9 +586,9 @@ For the synchronous, blocking version of this function, see
 <hr>
 <div class="refsect2" title="g_output_stream_write_finish ()">
 <a name="g-output-stream-write-finish"></a><h3>g_output_stream_write_finish ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_output_stream_write_finish        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_output_stream_write_finish        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Finishes a stream write operation.
 </p>
@@ -593,13 +607,13 @@ Finishes a stream write operation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
 ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> containing the number of bytes written to the stream.
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> containing the number of bytes written to the stream.
 </td>
 </tr>
 </tbody>
@@ -614,7 +628,7 @@ ignore.
                                                          <em class="parameter"><code><span class="type">int</span> io_priority</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Splices a stream asynchronously.
 When the operation is finished <em class="parameter"><code>callback</code></em> will be called.
@@ -650,17 +664,17 @@ For the synchronous, blocking version of this function, see
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. 
+<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. 
+<td> a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data passed to <em class="parameter"><code>callback</code></em>.
+<td> user data passed to <em class="parameter"><code>callback</code></em>. <span class="annotation">[closure]</span>
 </td>
 </tr>
 </tbody>
@@ -669,9 +683,9 @@ For the synchronous, blocking version of this function, see
 <hr>
 <div class="refsect2" title="g_output_stream_splice_finish ()">
 <a name="g-output-stream-splice-finish"></a><h3>g_output_stream_splice_finish ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_output_stream_splice_finish       (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_output_stream_splice_finish       (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Finishes an asynchronous stream splice operation.
 </p>
@@ -690,13 +704,13 @@ Finishes an asynchronous stream splice operation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
 ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> of the number of bytes spliced.
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> of the number of bytes spliced.
 </td>
 </tr>
 </tbody>
@@ -709,7 +723,7 @@ ignore.
                                                          <em class="parameter"><code><span class="type">int</span> io_priority</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Flushes a stream asynchronously.
 For behaviour details see <a class="link" href="GOutputStream.html#g-output-stream-flush" title="g_output_stream_flush ()"><code class="function">g_output_stream_flush()</code></a>.
@@ -734,17 +748,17 @@ result of the operation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td> optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> to call when the request is satisfied
+<td> a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> to call when the request is satisfied. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>the data to pass to callback function
+<td> the data to pass to callback function. <span class="annotation">[closure]</span>
 </td>
 </tr>
 </tbody>
@@ -753,9 +767,9 @@ result of the operation.
 <hr>
 <div class="refsect2" title="g_output_stream_flush_finish ()">
 <a name="g-output-stream-flush-finish"></a><h3>g_output_stream_flush_finish ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_flush_finish        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_flush_finish        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Finishes flushing an output stream.
 </p>
@@ -774,13 +788,13 @@ Finishes flushing an output stream.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
 ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if flush operation suceeded, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if flush operation suceeded, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
 </td>
 </tr>
 </tbody>
@@ -793,7 +807,7 @@ ignore.
                                                          <em class="parameter"><code><span class="type">int</span> io_priority</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Requests an asynchronous close of the stream, releasing resources 
 related to it. When the operation is finished <em class="parameter"><code>callback</code></em> will be 
@@ -823,17 +837,17 @@ classes. However, if you override one you must override all.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional cancellable object
+<td> optional cancellable object. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>callback to call when the request is satisfied
+<td> callback to call when the request is satisfied. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>the data to pass to callback function
+<td> the data to pass to callback function. <span class="annotation">[closure]</span>
 </td>
 </tr>
 </tbody>
@@ -842,9 +856,9 @@ classes. However, if you override one you must override all.
 <hr>
 <div class="refsect2" title="g_output_stream_close_finish ()">
 <a name="g-output-stream-close-finish"></a><h3>g_output_stream_close_finish ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_close_finish        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_close_finish        (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Closes an output stream.
 </p>
@@ -863,13 +877,13 @@ Closes an output stream.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
 ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if stream was successfully closed, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if stream was successfully closed, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
 </td>
 </tr>
 </tbody>
@@ -878,7 +892,7 @@ ignore.
 <hr>
 <div class="refsect2" title="g_output_stream_is_closing ()">
 <a name="g-output-stream-is-closing"></a><h3>g_output_stream_is_closing ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_is_closing          (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_is_closing          (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);</pre>
 <p>
 Checks if an output stream is being closed. This can be
 used inside e.g. a flush implementation to see if the
@@ -895,7 +909,7 @@ the closing operation.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>stream</code></em> is being closed. <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>stream</code></em> is being closed. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
 
 </td>
 </tr>
@@ -906,7 +920,7 @@ the closing operation.
 <hr>
 <div class="refsect2" title="g_output_stream_is_closed ()">
 <a name="g-output-stream-is-closed"></a><h3>g_output_stream_is_closed ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_is_closed           (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_is_closed           (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);</pre>
 <p>
 Checks if an output stream has already been closed.
 </p>
@@ -920,7 +934,7 @@ Checks if an output stream has already been closed.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>stream</code></em> is closed. <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise. 
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>stream</code></em> is closed. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise. 
 </td>
 </tr>
 </tbody>
@@ -929,7 +943,7 @@ Checks if an output stream has already been closed.
 <hr>
 <div class="refsect2" title="g_output_stream_has_pending ()">
 <a name="g-output-stream-has-pending"></a><h3>g_output_stream_has_pending ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_has_pending         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_has_pending         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>);</pre>
 <p>
 Checks if an ouput stream has pending actions.
 </p>
@@ -943,7 +957,7 @@ Checks if an ouput stream has pending actions.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>stream</code></em> has pending actions. 
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>stream</code></em> has pending actions. 
 </td>
 </tr>
 </tbody>
@@ -952,11 +966,11 @@ Checks if an ouput stream has pending actions.
 <hr>
 <div class="refsect2" title="g_output_stream_set_pending ()">
 <a name="g-output-stream-set-pending"></a><h3>g_output_stream_set_pending ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_set_pending         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_output_stream_set_pending         (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *stream</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Sets <em class="parameter"><code>stream</code></em> to have actions pending. If the pending flag is
-already set or <em class="parameter"><code>stream</code></em> is closed, it will return <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> and set
+already set or <em class="parameter"><code>stream</code></em> is closed, it will return <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> and set
 <em class="parameter"><code>error</code></em>.
 </p>
 <div class="variablelist"><table border="0">
@@ -969,13 +983,13 @@ already set or <em class="parameter"><code>stream</code></em> is closed, it will
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to 
 ignore.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if pending was previously unset and is now set.
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if pending was previously unset and is now set.
 </td>
 </tr>
 </tbody>
@@ -1001,6 +1015,6 @@ Clears the pending flag on <em class="parameter"><code>stream</code></em>.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

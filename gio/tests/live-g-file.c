@@ -506,6 +506,8 @@ traverse_recurse_dirs (GFile * parent, GFile * root)
   g_assert (enumerator != NULL);
   g_assert_no_error (error);
 
+  g_assert (g_file_enumerator_get_container (enumerator) == parent);
+
   error = NULL;
   info = g_file_enumerator_next_file (enumerator, NULL, &error);
   while ((info) && (!error))
@@ -545,6 +547,9 @@ traverse_recurse_dirs (GFile * parent, GFile * root)
   res = g_file_enumerator_close (enumerator, NULL, &error);
   g_assert_cmpint (res, ==, TRUE);
   g_assert_no_error (error);
+  g_assert (g_file_enumerator_is_closed (enumerator));
+
+  g_object_unref (enumerator);
 }
 
 static void
@@ -642,6 +647,8 @@ test_enumerate (gconstpointer test_data)
 	      res = g_file_enumerator_close (enumerator, NULL, &error);
 	      g_assert_cmpint (res, ==, TRUE);
 	      g_assert_no_error (error);
+
+              g_object_unref (enumerator);
 	    }
 	  g_object_unref (child);
 	}
@@ -695,10 +702,7 @@ do_copy_move (GFile * root, struct StructureItem item, const char *target_dir,
 	   (extra_flags == TEST_TARGET_IS_FILE))
     {
       g_assert_cmpint (res, ==, FALSE);
-      if (item.file_type == G_FILE_TYPE_DIRECTORY)
-	g_assert_error (error, G_IO_ERROR, G_IO_ERROR_WOULD_RECURSE);
-      else
-	g_assert_error (error, G_IO_ERROR, G_IO_ERROR_NOT_DIRECTORY);
+      g_assert_error (error, G_IO_ERROR, G_IO_ERROR_NOT_DIRECTORY);
     }
   /*  source file is directory  */
   else if ((item.extra_flags & TEST_COPY_ERROR_RECURSE) ==
@@ -1083,6 +1087,8 @@ cleanup_dir_recurse (GFile *parent, GFile *root)
   res = g_file_enumerator_close (enumerator, NULL, &error);
   g_assert_cmpint (res, ==, TRUE);
   g_assert_no_error (error);
+
+  g_object_unref (enumerator);
 }
 
 static void

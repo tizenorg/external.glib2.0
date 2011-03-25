@@ -29,7 +29,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "gioalias.h"
 
 /**
  * SECTION:gsrvtarget
@@ -66,21 +65,8 @@ struct _GSrvTarget {
  * A single target host/port that a network service is running on.
  */
 
-GType
-g_srv_target_get_type (void)
-{
-  static volatile gsize type_volatile = 0;
-
-  if (g_once_init_enter (&type_volatile))
-    {
-      GType type = g_boxed_type_register_static (
-                        g_intern_static_string ("GSrvTarget"),
-			(GBoxedCopyFunc) g_srv_target_copy,
-			(GBoxedFreeFunc) g_srv_target_free);
-      g_once_init_leave (&type_volatile, type);
-    }
-  return type_volatile;
-}
+G_DEFINE_BOXED_TYPE (GSrvTarget, g_srv_target,
+                     g_srv_target_copy, g_srv_target_free)
 
 /**
  * g_srv_target_new:
@@ -236,12 +222,12 @@ compare_target (gconstpointer a, gconstpointer b)
 }
 
 /**
- * g_srv_target_list_sort:
+ * g_srv_target_list_sort: (skip)
  * @targets: a #GList of #GSrvTarget
  *
  * Sorts @targets in place according to the algorithm in RFC 2782.
  *
- * Return value: the head of the sorted list.
+ * Return value: (transfer full): the head of the sorted list.
  *
  * Since: 2.22
  */
@@ -326,6 +312,3 @@ g_srv_target_list_sort (GList *targets)
 
   return out;
 }
-
-#define __G_SRV_TARGET_C__
-#include "gioaliasdef.c"

@@ -29,7 +29,6 @@
 #include "gioerror.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gvolume
@@ -141,7 +140,7 @@ g_volume_get_name (GVolume *volume)
  * 
  * Gets the icon for @volume.
  * 
- * Returns: a #GIcon.
+ * Returns: (transfer full): a #GIcon.
  *     The returned object should be unreffed with g_object_unref()
  *     when no longer needed.
  **/
@@ -188,7 +187,7 @@ g_volume_get_uuid (GVolume *volume)
  * 
  * Gets the drive for the @volume.
  * 
- * Returns: a #GDrive or %NULL if @volume is not associated with a drive.
+ * Returns: (transfer full): a #GDrive or %NULL if @volume is not associated with a drive.
  *     The returned object should be unreffed with g_object_unref()
  *     when no longer needed.
  **/
@@ -210,7 +209,7 @@ g_volume_get_drive (GVolume *volume)
  * 
  * Gets the mount for the @volume.
  * 
- * Returns: a #GMount or %NULL if @volume isn't mounted.
+ * Returns: (transfer full): a #GMount or %NULL if @volume isn't mounted.
  *     The returned object should be unreffed with g_object_unref()
  *     when no longer needed.
  **/
@@ -301,7 +300,7 @@ g_volume_should_automount (GVolume *volume)
  * g_volume_mount:
  * @volume: a #GVolume.
  * @flags: flags affecting the operation
- * @mount_operation: a #GMountOperation or %NULL to avoid user interaction.
+ * @mount_operation: (allow-none): a #GMountOperation or %NULL to avoid user interaction.
  * @cancellable: optional #GCancellable object, %NULL to ignore.
  * @callback: a #GAsyncReadyCallback, or %NULL.
  * @user_data: user data that gets passed to @callback
@@ -309,6 +308,8 @@ g_volume_should_automount (GVolume *volume)
  * Mounts a volume. This is an asynchronous operation, and is
  * finished by calling g_volume_mount_finish() with the @volume
  * and #GAsyncResult returned in the @callback.
+ *
+ * Virtual: mount_fn
  **/
 void
 g_volume_mount (GVolume             *volume,
@@ -569,8 +570,8 @@ g_volume_get_identifier (GVolume    *volume,
  * that @volume has. Use g_volume_get_identifer() to obtain 
  * the identifiers themselves.
  *
- * Returns: a %NULL-terminated array of strings containing
- *   kinds of identifiers. Use g_strfreev() to free.
+ * Returns: (array zero-terminated=1) (transfer full): a %NULL-terminated array
+ *   of strings containing kinds of identifiers. Use g_strfreev() to free.
  */
 char **
 g_volume_enumerate_identifiers (GVolume *volume)
@@ -620,7 +621,7 @@ g_volume_enumerate_identifiers (GVolume *volume)
  * implementations to find the underlying mount to shadow, see
  * g_mount_is_shadowed() for more details.
  *
- * Returns: the activation root of @volume or %NULL. Use
+ * Returns: (transfer full): the activation root of @volume or %NULL. Use
  * g_object_unref() to free.
  *
  * Since: 2.18
@@ -638,8 +639,3 @@ g_volume_get_activation_root (GVolume *volume)
 
   return (* iface->get_activation_root) (volume);
 }
-
-
-
-#define __G_VOLUME_C__
-#include "gioaliasdef.c"

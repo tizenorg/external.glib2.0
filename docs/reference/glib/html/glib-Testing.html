@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Testing</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Bookmark-file-parser.html" title="Bookmark file parser">
 <link rel="next" href="glib-Windows-Compatibility-Functions.html" title="Windows Compatibility Functions">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -56,11 +56,13 @@
 #define             <a class="link" href="glib-Testing.html#g-test-verbose" title="g_test_verbose">g_test_verbose</a>
 #define             <a class="link" href="glib-Testing.html#g-test-quiet" title="g_test_quiet">g_test_quiet</a>
 <span class="returnvalue">int</span>                 <a class="link" href="glib-Testing.html#g-test-run" title="g_test_run ()">g_test_run</a>                          (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                (<a class="link" href="glib-Testing.html#GTestFunc" title="GTestFunc ()">*GTestFunc</a>)                        (<em class="parameter"><code><span class="type">void</span></code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Testing.html#g-test-add-func" title="g_test_add_func ()">g_test_add_func</a>                     (<em class="parameter"><code>const <span class="type">char</span> *testpath</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (test_funcvoid) ()</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestFunc" title="GTestFunc ()"><span class="type">GTestFunc</span></a> test_func</code></em>);
+<span class="returnvalue">void</span>                (<a class="link" href="glib-Testing.html#GTestDataFunc" title="GTestDataFunc ()">*GTestDataFunc</a>)                    (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> user_data</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Testing.html#g-test-add-data-func" title="g_test_add_data_func ()">g_test_add_data_func</a>                (<em class="parameter"><code>const <span class="type">char</span> *testpath</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> test_data</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (test_funcgconstpointer) ()</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestDataFunc" title="GTestDataFunc ()"><span class="type">GTestDataFunc</span></a> test_func</code></em>);
 #define             <a class="link" href="glib-Testing.html#g-test-add" title="g_test_add()">g_test_add</a>                          (testpath,
                                                          Fixture,
                                                          tdata,
@@ -125,12 +127,14 @@ enum                <a class="link" href="glib-Testing.html#GTestTrapFlags" titl
                                                          c)
 typedef             <a class="link" href="glib-Testing.html#GTestCase" title="GTestCase">GTestCase</a>;
 typedef             <a class="link" href="glib-Testing.html#GTestSuite" title="GTestSuite">GTestSuite</a>;
+<span class="returnvalue">void</span>                (<a class="link" href="glib-Testing.html#GTestFixtureFunc" title="GTestFixtureFunc ()">*GTestFixtureFunc</a>)                 (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> fixture</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> user_data</code></em>);
 <a class="link" href="glib-Testing.html#GTestCase" title="GTestCase"><span class="returnvalue">GTestCase</span></a>*          <a class="link" href="glib-Testing.html#g-test-create-case" title="g_test_create_case ()">g_test_create_case</a>                  (<em class="parameter"><code>const <span class="type">char</span> *test_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> data_size</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> test_data</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (data_setupvoid) ()</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (data_testvoid) ()</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (data_teardownvoid) ()</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestFixtureFunc" title="GTestFixtureFunc ()"><span class="type">GTestFixtureFunc</span></a> data_setup</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestFixtureFunc" title="GTestFixtureFunc ()"><span class="type">GTestFixtureFunc</span></a> data_test</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestFixtureFunc" title="GTestFixtureFunc ()"><span class="type">GTestFixtureFunc</span></a> data_teardown</code></em>);
 <a class="link" href="glib-Testing.html#GTestSuite" title="GTestSuite"><span class="returnvalue">GTestSuite</span></a>*         <a class="link" href="glib-Testing.html#g-test-create-suite" title="g_test_create_suite ()">g_test_create_suite</a>                 (<em class="parameter"><code>const <span class="type">char</span> *suite_name</code></em>);
 <a class="link" href="glib-Testing.html#GTestSuite" title="GTestSuite"><span class="returnvalue">GTestSuite</span></a>*         <a class="link" href="glib-Testing.html#g-test-get-root" title="g_test_get_root ()">g_test_get_root</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Testing.html#g-test-suite-add" title="g_test_suite_add ()">g_test_suite_add</a>                    (<em class="parameter"><code><a class="link" href="glib-Testing.html#GTestSuite" title="GTestSuite"><span class="type">GTestSuite</span></a> *suite</code></em>,
@@ -472,10 +476,18 @@ in a program.
 <p class="since">Since 2.16</p>
 </div>
 <hr>
+<div class="refsect2" title="GTestFunc ()">
+<a name="GTestFunc"></a><h3>GTestFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*GTestFunc)                        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+The type used for test case functions.
+</p>
+</div>
+<hr>
 <div class="refsect2" title="g_test_add_func ()">
 <a name="g-test-add-func"></a><h3>g_test_add_func ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_test_add_func                     (<em class="parameter"><code>const <span class="type">char</span> *testpath</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (test_funcvoid) ()</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestFunc" title="GTestFunc ()"><span class="type">GTestFunc</span></a> test_func</code></em>);</pre>
 <p>
 Create a new test case, similar to <a class="link" href="glib-Testing.html#g-test-create-case" title="g_test_create_case ()"><code class="function">g_test_create_case()</code></a>. However
 the test is assumed to use no fixture, and test suites are automatically
@@ -484,20 +496,44 @@ slash-separated portions of <em class="parameter"><code>testpath</code></em>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
-<tbody><tr>
+<tbody>
+<tr>
 <td><p><span class="term"><em class="parameter"><code>testpath</code></em> :</span></p></td>
 <td>Slash-separated test case path name for the test.
 </td>
-</tr></tbody>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>test_func</code></em> :</span></p></td>
+<td>The test function to invoke for this test.
+</td>
+</tr>
+</tbody>
 </table></div>
 <p class="since">Since 2.16</p>
+</div>
+<hr>
+<div class="refsect2" title="GTestDataFunc ()">
+<a name="GTestDataFunc"></a><h3>GTestDataFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*GTestDataFunc)                    (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> user_data</code></em>);</pre>
+<p>
+The type used for test case functions that take an extra pointer
+argument.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>the data provided when registering the test
+</td>
+</tr></tbody>
+</table></div>
 </div>
 <hr>
 <div class="refsect2" title="g_test_add_data_func ()">
 <a name="g-test-add-data-func"></a><h3>g_test_add_data_func ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_test_add_data_func                (<em class="parameter"><code>const <span class="type">char</span> *testpath</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> test_data</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (test_funcgconstpointer) ()</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestDataFunc" title="GTestDataFunc ()"><span class="type">GTestDataFunc</span></a> test_func</code></em>);</pre>
 <p>
 Create a new test case, similar to <a class="link" href="glib-Testing.html#g-test-create-case" title="g_test_create_case ()"><code class="function">g_test_create_case()</code></a>. However
 the test is assumed to use no fixture, and test suites are automatically
@@ -519,8 +555,8 @@ will be passed as first argument to <em class="parameter"><code>test_func</code>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>gconstpointer</code></em> :</span></p></td>
-<td>
+<td><p><span class="term"><em class="parameter"><code>test_func</code></em> :</span></p></td>
+<td>The test function to invoke for this test.
 </td>
 </tr>
 </tbody>
@@ -834,9 +870,9 @@ callback A before callback B will cause <code class="function">B()</code> to be 
 <a name="g-test-queue-unref"></a><h3>g_test_queue_unref()</h3>
 <pre class="programlisting">#define             g_test_queue_unref(gobject)</pre>
 <p>
-Enqueue an object to be released with <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> during
+Enqueue an object to be released with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a> during
 the next teardown phase. This is equivalent to calling <a class="link" href="glib-Testing.html#g-test-queue-destroy" title="g_test_queue_destroy ()"><code class="function">g_test_queue_destroy()</code></a>
-with a destroy callback of <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
+with a destroy callback of <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1527,14 +1563,49 @@ An opaque structure representing a test suite.
 </p>
 </div>
 <hr>
+<div class="refsect2" title="GTestFixtureFunc ()">
+<a name="GTestFixtureFunc"></a><h3>GTestFixtureFunc ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                (*GTestFixtureFunc)                 (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> fixture</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> user_data</code></em>);</pre>
+<p>
+The type used for functions that operate on test fixtures.  This is
+used for the fixture setup and teardown functions as well as for the
+testcases themselves.
+</p>
+<p>
+<em class="parameter"><code>user_data</code></em> is a pointer to the data that was given when registering
+the test case.
+</p>
+<p>
+<em class="parameter"><code>fixture</code></em> will be a pointer to the area of memory allocated by the
+test framework, of the size requested.  If the requested size was
+zero then <em class="parameter"><code>fixture</code></em> will be equal to <em class="parameter"><code>user_data</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fixture</code></em> :</span></p></td>
+<td>the test fixture
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>the data provided when registering the test
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
 <div class="refsect2" title="g_test_create_case ()">
 <a name="g-test-create-case"></a><h3>g_test_create_case ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Testing.html#GTestCase" title="GTestCase"><span class="returnvalue">GTestCase</span></a>*          g_test_create_case                  (<em class="parameter"><code>const <span class="type">char</span> *test_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> data_size</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> test_data</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (data_setupvoid) ()</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (data_testvoid) ()</code></em>,
-                                                         <em class="parameter"><code><span class="type">void</span> (data_teardownvoid) ()</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestFixtureFunc" title="GTestFixtureFunc ()"><span class="type">GTestFixtureFunc</span></a> data_setup</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestFixtureFunc" title="GTestFixtureFunc ()"><span class="type">GTestFixtureFunc</span></a> data_test</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="glib-Testing.html#GTestFixtureFunc" title="GTestFixtureFunc ()"><span class="type">GTestFixtureFunc</span></a> data_teardown</code></em>);</pre>
 <p>
 Create a new <a class="link" href="glib-Testing.html#GTestCase" title="GTestCase"><span class="type">GTestCase</span></a>, named <em class="parameter"><code>test_name</code></em>, this API is fairly
 low level, calling <a class="link" href="glib-Testing.html#g-test-add" title="g_test_add()"><code class="function">g_test_add()</code></a> or <a class="link" href="glib-Testing.html#g-test-add-func" title="g_test_add_func ()"><code class="function">g_test_add_func()</code></a> is preferable.
@@ -1568,6 +1639,21 @@ called with the same fixture, but varying <em class="parameter"><code>test_name<
 <tr>
 <td><p><span class="term"><em class="parameter"><code>test_data</code></em> :</span></p></td>
 <td>test data argument for the test functions
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data_setup</code></em> :</span></p></td>
+<td>the function to set up the fixture data
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data_test</code></em> :</span></p></td>
+<td>the actual test function
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data_teardown</code></em> :</span></p></td>
+<td>the function to teardown the fixture data
 </td>
 </tr>
 <tr>
@@ -1714,6 +1800,6 @@ in a program.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

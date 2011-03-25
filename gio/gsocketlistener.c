@@ -38,7 +38,6 @@
 #include <gio/ginetsocketaddress.h>
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION: gsocketlistener
@@ -255,7 +254,7 @@ g_socket_listener_add_socket (GSocketListener  *listener,
  * @type: a #GSocketType
  * @protocol: a #GSocketProtocol
  * @source_object: Optional #GObject identifying this source
- * @effective_address: location to store the address that was bound to, or %NULL.
+ * @effective_address: (out) (allow-none): location to store the address that was bound to, or %NULL.
  * @error: #GError for error reporting, or %NULL to ignore.
  *
  * Creates a socket of type @type and protocol @protocol, binds
@@ -563,7 +562,7 @@ accept_callback (GSocket      *socket,
 /**
  * g_socket_listener_accept_socket:
  * @listener: a #GSocketListener
- * @source_object: location where #GObject pointer will be stored, or %NULL
+ * @source_object: (out) (transfer none) (allow-none): location where #GObject pointer will be stored, or %NULL.
  * @cancellable: optional #GCancellable object, %NULL to ignore.
  * @error: #GError for error reporting, or %NULL to ignore.
  *
@@ -582,7 +581,7 @@ accept_callback (GSocket      *socket,
  * triggering the cancellable object from another thread. If the operation
  * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
  *
- * Returns: a #GSocket on success, %NULL on error.
+ * Returns: (transfer full): a #GSocket on success, %NULL on error.
  *
  * Since: 2.22
  */
@@ -640,7 +639,7 @@ g_socket_listener_accept_socket (GSocketListener  *listener,
 /**
  * g_socket_listener_accept:
  * @listener: a #GSocketListener
- * @source_object: location where #GObject pointer will be stored, or %NULL
+ * @source_object: (out) (transfer none) (allow-none): location where #GObject pointer will be stored, or %NULL
  * @cancellable: optional #GCancellable object, %NULL to ignore.
  * @error: #GError for error reporting, or %NULL to ignore.
  *
@@ -656,7 +655,7 @@ g_socket_listener_accept_socket (GSocketListener  *listener,
  * triggering the cancellable object from another thread. If the operation
  * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
  *
- * Returns: a #GSocketConnection on success, %NULL on error.
+ * Returns: (transfer full): a #GSocketConnection on success, %NULL on error.
  *
  * Since: 2.22
  */
@@ -711,8 +710,7 @@ accept_ready (GSocket      *accept_socket,
     }
   else
     {
-      g_simple_async_result_set_from_error (data->simple, error);
-      g_error_free (error);
+      g_simple_async_result_take_error (data->simple, error);
     }
 
   g_simple_async_result_complete_in_idle (data->simple);
@@ -749,10 +747,9 @@ g_socket_listener_accept_socket_async (GSocketListener     *listener,
 
   if (!check_listener (listener, &error))
     {
-      g_simple_async_report_gerror_in_idle (G_OBJECT (listener),
+      g_simple_async_report_take_gerror_in_idle (G_OBJECT (listener),
 					    callback, user_data,
 					    error);
-      g_error_free (error);
       return;
     }
 
@@ -778,7 +775,7 @@ g_socket_listener_accept_socket_async (GSocketListener     *listener,
  *
  * Finishes an async accept operation. See g_socket_listener_accept_socket_async()
  *
- * Returns: a #GSocket on success, %NULL on error.
+ * Returns: (transfer full): a #GSocket on success, %NULL on error.
  *
  * Since: 2.22
  */
@@ -791,7 +788,7 @@ g_socket_listener_accept_socket_finish (GSocketListener  *listener,
   GSocket *socket;
   GSimpleAsyncResult *simple;
 
-  g_return_val_if_fail (G_IS_SOCKET_LISTENER (listener), FALSE);
+  g_return_val_if_fail (G_IS_SOCKET_LISTENER (listener), NULL);
 
   simple = G_SIMPLE_ASYNC_RESULT (result);
 
@@ -845,7 +842,7 @@ g_socket_listener_accept_async (GSocketListener     *listener,
  *
  * Finishes an async accept operation. See g_socket_listener_accept_async()
  *
- * Returns: a #GSocketConnection on success, %NULL on error.
+ * Returns: (transfer full): a #GSocketConnection on success, %NULL on error.
  *
  * Since: 2.22
  */
@@ -1151,6 +1148,3 @@ g_socket_listener_add_any_inet_port (GSocketListener  *listener,
 
   return candidate_port;
 }
-
-#define __G_SOCKET_LISTENER_C__
-#include "gioaliasdef.c"

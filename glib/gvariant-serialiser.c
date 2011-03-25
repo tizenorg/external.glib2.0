@@ -31,7 +31,6 @@
 
 #include <string.h>
 
-#include "galias.h"
 
 /* GVariantSerialiser
  *
@@ -138,6 +137,34 @@ g_variant_serialised_check (GVariantSerialised serialised)
     g_assert_cmpint (serialised.size, ==, fixed_size);
   else
     g_assert (serialised.size == 0 || serialised.data != NULL);
+
+  /* Depending on the native alignment requirements of the machine, the
+   * compiler will insert either 3 or 7 padding bytes after the char.
+   * This will result in the sizeof() the struct being 12 or 16.
+   * Subtract 9 to get 3 or 7 which is a nice bitmask to apply to get
+   * the alignment bits that we "care about" being zero: in the
+   * 4-aligned case, we care about 2 bits, and in the 8-aligned case, we
+   * care about 3 bits.
+   */
+  alignment &= sizeof (struct {
+                         char a;
+                         union {
+                           guint64 x;
+                           void *y;
+                           gdouble z;
+                         } b;
+                       }
+                      ) - 9;
+
+  /* Some OSes (FreeBSD is a known example) have a malloc() that returns
+   * unaligned memory if you request small sizes.  'malloc (1);', for
+   * example, has been seen to return pointers aligned to 6 mod 16.
+   *
+   * Check if this is a small allocation and return without enforcing
+   * the alignment assertion if this is the case.
+   */
+  if (serialised.size <= alignment)
+    return;
 
   g_assert_cmpint (alignment & (gsize) serialised.data, ==, 0);
 }
@@ -1517,6 +1544,9 @@ g_variant_serialised_is_normal (GVariantSerialised serialised)
 
                  )
 
+  if (serialised.data == NULL)
+    return FALSE;
+
   /* some hard-coded terminal cases */
   switch (g_variant_type_info_get_type_char (serialised.type_info))
     {
@@ -1561,15 +1591,11 @@ gboolean
 g_variant_serialiser_is_string (gconstpointer data,
                                 gsize         size)
 {
-  const gchar *string = data;
+  const gchar *end;
 
-  if (size == 0)
-    return FALSE;
+  g_utf8_validate (data, size, &end);
 
-  if (string[size - 1] != '\0')
-    return FALSE;
-
-  return strlen (string) == size - 1;
+  return data == end - (size - 1);
 }
 
 /* < private >
@@ -1658,7 +1684,4 @@ g_variant_serialiser_is_signature (gconstpointer data,
 }
 
 /* Epilogue {{{1 */
-#define __G_VARIANT_SERIALISER_C__
-#include "galiasdef.c"
-
 /* vim:set foldmethod=marker: */

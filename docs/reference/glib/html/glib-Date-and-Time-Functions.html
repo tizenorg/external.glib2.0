@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Date and Time Functions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-I18N.html" title="Internationalization">
-<link rel="next" href="glib-Random-Numbers.html" title="Random Numbers">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<link rel="next" href="glib-GTimeZone.html" title="GTimeZone">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,7 +18,7 @@
 <td><a accesskey="u" href="glib-utilities.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GLib Reference Manual</th>
-<td><a accesskey="n" href="glib-Random-Numbers.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="glib-GTimeZone.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#glib-Date-and-Time-Functions.synopsis" class="shortcut">Top</a>
@@ -49,6 +49,9 @@
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Date-and-Time-Functions.html#g-time-val-from-iso8601" title="g_time_val_from_iso8601 ()">g_time_val_from_iso8601</a>             (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *iso_date</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Date-and-Time-Functions.html#GTimeVal" title="GTimeVal"><span class="type">GTimeVal</span></a> *time_</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Date-and-Time-Functions.html#g-time-val-to-iso8601" title="g_time_val_to_iso8601 ()">g_time_val_to_iso8601</a>               (<em class="parameter"><code><a class="link" href="glib-Date-and-Time-Functions.html#GTimeVal" title="GTimeVal"><span class="type">GTimeVal</span></a> *time_</code></em>);
+
+<a class="link" href="glib-Basic-Types.html#gint64" title="gint64"><span class="returnvalue">gint64</span></a>              <a class="link" href="glib-Date-and-Time-Functions.html#g-get-monotonic-time" title="g_get_monotonic_time ()">g_get_monotonic_time</a>                (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="glib-Basic-Types.html#gint64" title="gint64"><span class="returnvalue">gint64</span></a>              <a class="link" href="glib-Date-and-Time-Functions.html#g-get-real-time" title="g_get_real_time ()">g_get_real_time</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
 
                     <a class="link" href="glib-Date-and-Time-Functions.html#GDate" title="GDate">GDate</a>;
 typedef             <a class="link" href="glib-Date-and-Time-Functions.html#GTime" title="GTime">GTime</a>;
@@ -195,10 +198,7 @@ struct.</em></span> Often only the day-month-year or only the Julian
 representation is valid. Sometimes neither is valid. Use the API.
 </p>
 <p>
-GLib doesn't contain any time-manipulation functions; however, there
-is a <a class="link" href="glib-Date-and-Time-Functions.html#GTime" title="GTime"><span class="type">GTime</span></a> typedef and a <a class="link" href="glib-Date-and-Time-Functions.html#GTimeVal" title="GTimeVal"><span class="type">GTimeVal</span></a> struct which represents a more
-precise time (with microseconds). You can request the current time as
-a <a class="link" href="glib-Date-and-Time-Functions.html#GTimeVal" title="GTimeVal"><span class="type">GTimeVal</span></a> with <a class="link" href="glib-Date-and-Time-Functions.html#g-get-current-time" title="g_get_current_time ()"><code class="function">g_get_current_time()</code></a>.
+GLib also features <a class="link" href="glib-GDateTime.html#GDateTime" title="GDateTime"><span class="type">GDateTime</span></a> which represents a precise time.
 </p>
 </div>
 <div class="refsect1" title="Details">
@@ -225,6 +225,11 @@ Represents a precise time, with seconds and microseconds.
 Similar to the <span class="structname">struct timeval</span> returned by
 the <code class="function"><code class="function">gettimeofday()</code></code> UNIX call.
 </p>
+<p>
+GLib is attempting to unify around the use of 64bit integers to
+represent microsecond-precision time.  As such, this type will be
+removed from a future version of GLib.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -247,6 +252,9 @@ the <code class="function"><code class="function">gettimeofday()</code></code> U
 <pre class="programlisting"><span class="returnvalue">void</span>                g_get_current_time                  (<em class="parameter"><code><a class="link" href="glib-Date-and-Time-Functions.html#GTimeVal" title="GTimeVal"><span class="type">GTimeVal</span></a> *result</code></em>);</pre>
 <p>
 Equivalent to the UNIX <code class="function">gettimeofday()</code> function, but portable.
+</p>
+<p>
+You may find <a class="link" href="glib-Date-and-Time-Functions.html#g-get-real-time" title="g_get_real_time ()"><code class="function">g_get_real_time()</code></a> to be more convenient.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -360,6 +368,64 @@ Coordinated Universal Time (UTC).
 </tbody>
 </table></div>
 <p class="since">Since 2.12</p>
+</div>
+<hr>
+<div class="refsect2" title="g_get_monotonic_time ()">
+<a name="g-get-monotonic-time"></a><h3>g_get_monotonic_time ()</h3>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint64" title="gint64"><span class="returnvalue">gint64</span></a>              g_get_monotonic_time                (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Queries the system monotonic time, if available.
+</p>
+<p>
+On POSIX systems with <code class="function">clock_gettime()</code> and <code class="literal">CLOCK_MONOTONIC</code> this call
+is a very shallow wrapper for that.  Otherwise, we make a best effort
+that probably involves returning the wall clock time (with at least
+microsecond accuracy, subject to the limitations of the OS kernel).
+</p>
+<p>
+Note that, on Windows, "limitations of the OS kernel" is a rather
+substantial statement.  Depending on the configuration of the system,
+the wall clock time is updated as infrequently as 64 times a second
+(which is approximately every 16ms).
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the monotonic time, in microseconds
+
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
+</div>
+<hr>
+<div class="refsect2" title="g_get_real_time ()">
+<a name="g-get-real-time"></a><h3>g_get_real_time ()</h3>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint64" title="gint64"><span class="returnvalue">gint64</span></a>              g_get_real_time                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Queries the system wall-clock time.
+</p>
+<p>
+This call is functionally equivalent to <a class="link" href="glib-Date-and-Time-Functions.html#g-get-current-time" title="g_get_current_time ()"><code class="function">g_get_current_time()</code></a> except
+that the return value is often more convenient than dealing with a
+<a class="link" href="glib-Date-and-Time-Functions.html#GTimeVal" title="GTimeVal"><span class="type">GTimeVal</span></a>.
+</p>
+<p>
+You should only use this call if you are actually interested in the real
+wall-clock time.  <a class="link" href="glib-Date-and-Time-Functions.html#g-get-monotonic-time" title="g_get_monotonic_time ()"><code class="function">g_get_monotonic_time()</code></a> is probably more useful for
+measuring intervals.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the number of microseconds since January 1, 1970 UTC.
+
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
 </div>
 <hr>
 <div class="refsect2" title="GDate">
@@ -1054,6 +1120,9 @@ Sets the value of a date from a <a class="link" href="glib-Date-and-Time-Functio
 <em class="parameter"><code>tv_usec</code></em> member is ignored, because <a class="link" href="glib-Date-and-Time-Functions.html#GDate" title="GDate"><span class="type">GDate</span></a> can't make use of the
 additional precision.
 </p>
+<p>
+The time to date conversion is done using the user's current timezone.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -1608,7 +1677,7 @@ Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE">
 <a name="g-date-is-leap-year"></a><h3>g_date_is_leap_year ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_date_is_leap_year                 (<em class="parameter"><code><a class="link" href="glib-Date-and-Time-Functions.html#GDateYear" title="GDateYear"><span class="type">GDateYear</span></a> year</code></em>);</pre>
 <p>
-Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the year is a leap year.<sup>[<a name="id701533" href="#ftn.id701533" class="footnote">4</a>]</sup>
+Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the year is a leap year.<sup>[<a name="id568687" href="#ftn.id568687" class="footnote">4</a>]</sup>
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -2029,7 +2098,7 @@ values are the only valid weekdays.
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a name="ftn.id701533" href="#id701533" class="para">4</a>] </sup>
+<div class="footnote"><p><sup>[<a id="ftn.id568687" href="#id568687" class="para">4</a>] </sup>
 For the purposes of this function, leap year is every year divisible by
 4 unless that year is divisible by 100. If it is divisible by 100 it would
 be a leap year only if that year is also divisible by 400.</p></div>
@@ -2037,6 +2106,6 @@ be a leap year only if that year is also divisible by 400.</p></div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

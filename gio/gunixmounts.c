@@ -56,19 +56,18 @@
 #include "glibintl.h"
 #include "gthemedicon.h"
 
-#include "gioalias.h"
 
 static const char *_resolve_dev_root (void);
 
 /**
  * SECTION:gunixmounts
  * @include: gio/gunixmounts.h
- * @short_description: Unix Mounts
- * 
+ * @short_description: UNIX mounts
+ *
  * Routines for managing mounted UNIX mount points and paths.
  *
- * Note that <filename>&lt;gio/gunixmounts.h&gt;</filename> belongs to the 
- * UNIX-specific GIO interfaces, thus you have to use the 
+ * Note that <filename>&lt;gio/gunixmounts.h&gt;</filename> belongs to the
+ * UNIX-specific GIO interfaces, thus you have to use the
  * <filename>gio-unix-2.0.pc</filename> pkg-config file when using it.
  */
 
@@ -243,18 +242,19 @@ g_unix_is_mount_path_system_internal (const char *mount_path)
     "/proc",
     "/sbin",
     "/net",
+    "/sys",
     NULL
   };
 
   if (is_in (mount_path, ignore_mountpoints))
     return TRUE;
   
-  if (g_str_has_prefix (mount_path, "/dev") ||
-      g_str_has_prefix (mount_path, "/proc") ||
-      g_str_has_prefix (mount_path, "/sys"))
+  if (g_str_has_prefix (mount_path, "/dev/") ||
+      g_str_has_prefix (mount_path, "/proc/") ||
+      g_str_has_prefix (mount_path, "/sys/"))
     return TRUE;
 
-  if (strstr (mount_path, "/.gvfs") != NULL)
+  if (g_str_has_suffix (mount_path, "/.gvfs"))
     return TRUE;
 
   return FALSE;
@@ -1076,14 +1076,14 @@ get_mount_points_timestamp (void)
 
 /**
  * g_unix_mounts_get:
- * @time_read: guint64 to contain a timestamp.
- * 
- * Gets a #GList of strings containing the unix mounts. 
- * If @time_read is set, it will be filled with the mount 
- * timestamp, allowing for checking if the mounts have changed 
+ * @time_read: (allow-none): guint64 to contain a timestamp, or %NULL
+ *
+ * Gets a #GList of #GUnixMountEntry containing the unix mounts.
+ * If @time_read is set, it will be filled with the mount
+ * timestamp, allowing for checking if the mounts have changed
  * with g_unix_mounts_changed_since().
- * 
- * Returns: a #GList of the UNIX mounts. 
+ *
+ * Returns: (element-type utf8) (transfer full): a #GList of the UNIX mounts.
  **/
 GList *
 g_unix_mounts_get (guint64 *time_read)
@@ -1103,7 +1103,7 @@ g_unix_mounts_get (guint64 *time_read)
  * is set, it will be filled with a unix timestamp for checking
  * if the mounts have changed since with g_unix_mounts_changed_since().
  * 
- * Returns: a #GUnixMount. 
+ * Returns: (transfer full): a #GUnixMount. 
  **/
 GUnixMountEntry *
 g_unix_mount_at (const char *mount_path,
@@ -1131,14 +1131,14 @@ g_unix_mount_at (const char *mount_path,
 
 /**
  * g_unix_mount_points_get:
- * @time_read: guint64 to contain a timestamp.
- * 
- * Gets a #GList of strings containing the unix mount points. 
+ * @time_read: (allow-none): guint64 to contain a timestamp.
+ *
+ * Gets a #GList of #GUnixMountPoint containing the unix mount points.
  * If @time_read is set, it will be filled with the mount timestamp,
- * allowing for checking if the mounts have changed with 
+ * allowing for checking if the mounts have changed with
  * g_unix_mounts_points_changed_since().
- * 
- * Returns: a #GList of the UNIX mountpoints. 
+ *
+ * Returns: (element-type utf8) (transfer full): a #GList of the UNIX mountpoints.
  **/
 GList *
 g_unix_mount_points_get (guint64 *time_read)
@@ -1856,7 +1856,7 @@ g_unix_mount_guess_name (GUnixMountEntry *mount_entry)
  * 
  * Guesses the icon of a Unix mount. 
  *
- * Returns: a #GIcon
+ * Returns: (transfer full): a #GIcon
  */
 GIcon *
 g_unix_mount_guess_icon (GUnixMountEntry *mount_entry)
@@ -1893,7 +1893,7 @@ g_unix_mount_point_guess_name (GUnixMountPoint *mount_point)
  * 
  * Guesses the icon of a Unix mount point. 
  *
- * Returns: a #GIcon
+ * Returns: (transfer full): a #GIcon
  */
 GIcon *
 g_unix_mount_point_guess_icon (GUnixMountPoint *mount_point)
@@ -1944,6 +1944,10 @@ g_unix_mount_guess_should_display (GUnixMountEntry *mount_entry)
   mount_path = mount_entry->mount_path;
   if (mount_path != NULL)
     {
+      /* Hide mounts within a dot path, suppose it was a purpose to hide this mount */
+      if (g_strstr_len (mount_path, -1, "/.") != NULL)
+        return FALSE;
+
       if (g_str_has_prefix (mount_path, "/media/")) 
         {
           char *path;
@@ -2191,6 +2195,3 @@ found:
   return real_dev_root;
 }
 #endif
-
-#define __G_UNIX_MOUNTS_C__
-#include "gioaliasdef.c"

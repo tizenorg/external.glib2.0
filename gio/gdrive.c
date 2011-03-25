@@ -28,7 +28,6 @@
 #include "gioerror.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gdrive
@@ -160,7 +159,7 @@ g_drive_get_name (GDrive *drive)
  * 
  * Gets the icon for @drive.
  * 
- * Returns: #GIcon for the @drive.
+ * Returns: (transfer full): #GIcon for the @drive.
  *    Free the returned object with g_object_unref().
  **/
 GIcon *
@@ -204,7 +203,7 @@ g_drive_has_volumes (GDrive *drive)
  * The returned list should be freed with g_list_free(), after
  * its elements have been unreffed with g_object_unref().
  * 
- * Returns: #GList containing any #GVolume objects on the given @drive.
+ * Returns: (element-type GVolume) (transfer full): #GList containing any #GVolume objects on the given @drive.
  **/
 GList *
 g_drive_get_volumes (GDrive *drive)
@@ -595,7 +594,7 @@ g_drive_get_identifier (GDrive     *drive,
  * Use g_drive_get_identifer() to obtain the identifiers
  * themselves.
  *
- * Returns: a %NULL-terminated array of strings containing
+ * Returns: (transfer full): a %NULL-terminated array of strings containing
  *     kinds of identifiers. Use g_strfreev() to free.
  */
 char **
@@ -866,6 +865,3 @@ g_drive_stop_finish (GDrive        *drive,
 
   return (* iface->stop_finish) (drive, result, error);
 }
-
-#define __G_DRIVE_C__
-#include "gioaliasdef.c"

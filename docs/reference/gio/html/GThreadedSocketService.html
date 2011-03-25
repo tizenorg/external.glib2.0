@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GThreadedSocketService</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="highlevel-socket.html" title="Highlevel network functionallity">
 <link rel="prev" href="GSocketService.html" title="GSocketService">
-<link rel="next" href="utils.html" title="Utilities">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<link rel="next" href="tls.html" title="TLS (SSL) support">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,7 +18,7 @@
 <td><a accesskey="u" href="highlevel-socket.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GIO Reference Manual</th>
-<td><a accesskey="n" href="utils.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="tls.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#GThreadedSocketService.synopsis" class="shortcut">Top</a>
@@ -50,7 +50,7 @@
 <div class="refsect1" title="Object Hierarchy">
 <a name="GThreadedSocketService.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----<a class="link" href="GSocketListener.html" title="GSocketListener">GSocketListener</a>
          +----<a class="link" href="GSocketService.html" title="GSocketService">GSocketService</a>
                +----GThreadedSocketService
@@ -59,7 +59,7 @@
 <div class="refsect1" title="Properties">
 <a name="GThreadedSocketService.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GThreadedSocketService.html#GThreadedSocketService--max-threads" title='The "max-threads" property'>max-threads</a>"              <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct Only
+  "<a class="link" href="GThreadedSocketService.html#GThreadedSocketService--max-threads" title='The "max-threads" property'>max-threads</a>"              <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct Only
 </pre>
 </div>
 <div class="refsect1" title="Signals">
@@ -134,7 +134,7 @@ must be added with <code class="function">g_socket_service_add_listeners()</code
 <a name="GThreadedSocketService.property-details"></a><h2>Property Details</h2>
 <div class="refsect2" title='The "max-threads" property'>
 <a name="GThreadedSocketService--max-threads"></a><h3>The <code class="literal">"max-threads"</code> property</h3>
-<pre class="programlisting">  "max-threads"              <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "max-threads"              <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct Only</pre>
 <p>The max number of threads handling clients for this service.</p>
 <p>Allowed values: &gt;= G_MAXULONG</p>
 <p>Default value: 10</p>
@@ -144,10 +144,10 @@ must be added with <code class="function">g_socket_service_add_listeners()</code
 <a name="GThreadedSocketService.signal-details"></a><h2>Signal Details</h2>
 <div class="refsect2" title='The "run" signal'>
 <a name="GThreadedSocketService-run"></a><h3>The <code class="literal">"run"</code> signal</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            user_function                      (<a class="link" href="GThreadedSocketService.html" title="GThreadedSocketService"><span class="type">GThreadedSocketService</span></a> *service,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            user_function                      (<a class="link" href="GThreadedSocketService.html" title="GThreadedSocketService"><span class="type">GThreadedSocketService</span></a> *service,
                                                         <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>      *connection,
-                                                        <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>                *source_object,
-                                                        <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>                user_data)          : Run Last</pre>
+                                                        <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>                *source_object,
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>                user_data)          : Run Last</pre>
 <p>
 The ::run signal is emitted in a worker thread in response to an
 incoming connection. This thread is dedicated to handling
@@ -178,7 +178,7 @@ not return until the connection is closed.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> to stope further signal handlers from being called
+<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> to stope further signal handlers from being called
 </td>
 </tr>
 </tbody>
@@ -192,6 +192,6 @@ not return until the connection is closed.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>The GLib Dynamic Type System</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="pt01.html" title="Part I. Concepts">
 <link rel="prev" href="ch01s02.html" title="Exporting a C API">
 <link rel="next" href="gtype-conventions.html" title="Conventions">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -79,12 +79,12 @@ GType g_type_register_fundamental (GType                       type_id,
         <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-fundamental" title="g_type_register_fundamental ()">g_type_register_fundamental</a></code>
         are the C functions, defined in
         <code class="filename">gtype.h</code> and implemented in <code class="filename">gtype.c</code>
-        which you should use to register a new <span class="type"><a class="link" href="gobject-Type-Information.html#GType" title="GType">GType</a></span> in the program's type system.
+        which you should use to register a new <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> in the program's type system.
         It is not likely you will ever need to use 
         <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-fundamental" title="g_type_register_fundamental ()">g_type_register_fundamental</a></code> (you have to be Tim Janik 
         to do that) but in case you want to, the last chapter explains how to create
         new fundamental types.
-        <sup>[<a name="id512184" href="#ftn.id512184" class="footnote">2</a>]</sup>
+        <sup>[<a name="id494293" href="#ftn.id494293" class="footnote">2</a>]</sup>
       </p>
 <p>
         Fundamental types are top-level types which do not derive from any other type 
@@ -99,35 +99,35 @@ GType g_type_register_fundamental (GType                       type_id,
         </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>
-            class size: the class_size field in <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo">GTypeInfo</a></span>.
+            class size: the class_size field in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             class initialization functions (C++ constructor): the base_init and 
-            class_init fields in <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo">GTypeInfo</a></span>.
+            class_init fields in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             class destruction functions (C++ destructor): the base_finalize and 
-            class_finalize fields in <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo">GTypeInfo</a></span>.
+            class_finalize fields in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             instance size (C++ parameter to new): the instance_size field in 
-            <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo">GTypeInfo</a></span>.
+            <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             instantiation policy (C++ type of new operator): the n_preallocs
-            field in <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo">GTypeInfo</a></span>.
+            field in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             copy functions (C++ copy operators): the value_table field in 
-            <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo">GTypeInfo</a></span>.
+            <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
-            type characteristic flags: <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeFlags" title="enum GTypeFlags">GTypeFlags</a></span>.
+            type characteristic flags: <a class="link" href="gobject-Type-Information.html#GTypeFlags" title="enum GTypeFlags"><span class="type">GTypeFlags</span></a>.
           </p></li>
 </ul></div>
 <p>
-        Fundamental types are also defined by a set of <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeFundamentalFlags" title="enum GTypeFundamentalFlags">GTypeFundamentalFlags</a></span> 
-        which are stored in a <span class="type"><a class="link" href="gobject-Type-Information.html#GTypeFundamentalInfo" title="GTypeFundamentalInfo">GTypeFundamentalInfo</a></span>.
+        Fundamental types are also defined by a set of <a class="link" href="gobject-Type-Information.html#GTypeFundamentalFlags" title="enum GTypeFundamentalFlags"><span class="type">GTypeFundamentalFlags</span></a> 
+        which are stored in a <a class="link" href="gobject-Type-Information.html#GTypeFundamentalInfo" title="GTypeFundamentalInfo"><span class="type">GTypeFundamentalInfo</span></a>.
         Non-fundamental types are furthermore defined by the type of their parent which is
         passed as the parent_type parameter to <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-static" title="g_type_register_static ()">g_type_register_static</a></code>
         and <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-dynamic" title="g_type_register_dynamic ()">g_type_register_dynamic</a></code>.
@@ -141,16 +141,16 @@ GType g_type_register_fundamental (GType                       type_id,
           they can all be manipulated through a single API to copy/assign them.
         </p>
 <p>
-          The <span class="type"><a class="link" href="gobject-Generic-values.html#GValue" title="GValue">GValue</a></span> structure is used as an abstract container for all of these 
+          The <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> structure is used as an abstract container for all of these 
           types. Its simplistic API (defined in <code class="filename">gobject/gvalue.h</code>) can be 
           used to invoke the value_table functions registered
           during type registration: for example <code class="function"><a class="link" href="gobject-Generic-values.html#g-value-copy" title="g_value_copy ()">g_value_copy</a></code> copies the 
-          content of a <span class="type"><a class="link" href="gobject-Generic-values.html#GValue" title="GValue">GValue</a></span> to another <span class="type"><a class="link" href="gobject-Generic-values.html#GValue" title="GValue">GValue</a></span>. This is similar
+          content of a <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> to another <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a>. This is similar
           to a C++ assignment which invokes the C++ copy operator to modify the default
           bit-by-bit copy semantics of C++/C structures/classes.
         </p>
 <p>
-          The following code shows how you can copy around a 64 bit integer, as well as a <span class="type"><a class="link" href="gobject-The-Base-Object-Type.html#GObject">GObject</a></span>
+          The following code shows how you can copy around a 64 bit integer, as well as a <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>
           instance pointer (sample code for this is located in the source tarball for this document in 
           <code class="filename">sample/gtype/test.c</code>):
 </p>
@@ -248,7 +248,7 @@ struct _GTypeValueTable
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a name="ftn.id512184" href="#id512184" class="para">2</a>] </sup>
+<div class="footnote"><p><sup>[<a id="ftn.id494293" href="#id494293" class="para">2</a>] </sup>
             Please note that there exists another registration function: the 
             <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-dynamic" title="g_type_register_dynamic ()">g_type_register_dynamic</a></code>. We will not discuss this
             function here since its use is very similar to the <code class="function">_static</code> 
@@ -258,6 +258,6 @@ struct _GTypeValueTable
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

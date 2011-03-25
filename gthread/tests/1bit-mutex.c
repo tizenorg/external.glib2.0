@@ -26,7 +26,6 @@
    */
 
   /* side-step some glib build stuff */
-  #define DISABLE_VISIBILITY
   #define GLIB_COMPILATION
 
   /* rebuild gbitlock.c without futex support,
@@ -55,7 +54,13 @@ acquire (int nr)
 
   self = g_thread_self ();
 
-  g_bit_lock (&locks[nr], bits[nr]);
+  if (!g_bit_trylock (&locks[nr], bits[nr]))
+    {
+      if (g_test_verbose ())
+        g_print ("thread %p going to block on lock %d\n", self, nr);
+      g_bit_lock (&locks[nr], bits[nr]);
+    }
+
   g_assert (owners[nr] == NULL);   /* hopefully nobody else is here */
   owners[nr] = self;
 

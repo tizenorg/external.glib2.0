@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>The Base Object Type</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="rn01.html" title="API Reference">
 <link rel="prev" href="GTypeModule.html" title="GTypeModule">
 <link rel="next" href="gobject-Enumeration-and-Flag-Types.html" title="Enumeration and Flag Types">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -69,6 +69,9 @@
 <span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-class-install-property" title="g_object_class_install_property ()">g_object_class_install_property</a>     (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObjectClass" title="GObjectClass"><span class="type">GObjectClass</span></a> *oclass</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> property_id</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> *pspec</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-class-install-properties" title="g_object_class_install_properties ()">g_object_class_install_properties</a>   (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObjectClass" title="GObjectClass"><span class="type">GObjectClass</span></a> *oclass</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> n_pspecs</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> **pspecs</code></em>);
 <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="returnvalue">GParamSpec</span></a>*         <a class="link" href="gobject-The-Base-Object-Type.html#g-object-class-find-property" title="g_object_class_find_property ()">g_object_class_find_property</a>        (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObjectClass" title="GObjectClass"><span class="type">GObjectClass</span></a> *oclass</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *property_name</code></em>);
 <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="returnvalue">GParamSpec</span></a>**        <a class="link" href="gobject-The-Base-Object-Type.html#g-object-class-list-properties" title="g_object_class_list_properties ()">g_object_class_list_properties</a>      (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObjectClass" title="GObjectClass"><span class="type">GObjectClass</span></a> *oclass</code></em>,
@@ -92,6 +95,7 @@
 <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-ref" title="g_object_ref ()">g_object_ref</a>                        (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> object</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-unref" title="g_object_unref ()">g_object_unref</a>                      (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> object</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-ref-sink" title="g_object_ref_sink ()">g_object_ref_sink</a>                   (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> object</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-clear-object" title="g_clear_object ()">g_clear_object</a>                      (<em class="parameter"><code>volatile <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **object_ptr</code></em>);
 typedef             <a class="link" href="gobject-The-Base-Object-Type.html#GInitiallyUnowned" title="GInitiallyUnowned">GInitiallyUnowned</a>;
 typedef             <a class="link" href="gobject-The-Base-Object-Type.html#GInitiallyUnownedClass" title="GInitiallyUnownedClass">GInitiallyUnownedClass</a>;
 #define             <a class="link" href="gobject-The-Base-Object-Type.html#G-TYPE-INITIALLY-UNOWNED:CAPS" title="G_TYPE_INITIALLY_UNOWNED">G_TYPE_INITIALLY_UNOWNED</a>
@@ -132,6 +136,8 @@ typedef             <a class="link" href="gobject-The-Base-Object-Type.html#GIni
                                                          <em class="parameter"><code>...</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-notify" title="g_object_notify ()">g_object_notify</a>                     (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *property_name</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec" title="g_object_notify_by_pspec ()">g_object_notify_by_pspec</a>            (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> *pspec</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-freeze-notify" title="g_object_freeze_notify ()">g_object_freeze_notify</a>              (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gobject-The-Base-Object-Type.html#g-object-thaw-notify" title="g_object_thaw_notify ()">g_object_thaw_notify</a>                (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>);
 <a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="gobject-The-Base-Object-Type.html#g-object-get-data" title="g_object_get_data ()">g_object_get_data</a>                   (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
@@ -183,6 +189,7 @@ typedef             <a class="link" href="gobject-The-Base-Object-Type.html#GIni
 <a name="gobject-The-Base-Object-Type.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   GObject
+   +----<a class="link" href="GBinding.html" title="GBinding">GBinding</a>
    +----<a class="link" href="GTypeModule.html" title="GTypeModule">GTypeModule</a>
 </pre>
 </div>
@@ -265,7 +272,7 @@ need to expose floating references in their API.
 </p>
 <p>
 Some object implementations may need to save an objects floating state
-across certain code portions (an example is <span class="type">GtkMenu</span>), to achive this, the
+across certain code portions (an example is <a href="http://library.gnome.org/devel/gtk/unstable/GtkMenu.html"><span class="type">GtkMenu</span></a>), to achive this, the
 following sequence can be used:
 </p>
 <p>
@@ -349,7 +356,7 @@ The class structure for the <span class="structname">GObject</span> type.
 <p>
 </p>
 <div class="example">
-<a name="id551047"></a><p class="title"><b>Example 1. Implementing singletons using a constructor</b></p>
+<a name="id519253"></a><p class="title"><b>Example 1. Implementing singletons using a constructor</b></p>
 <div class="example-contents">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -849,6 +856,155 @@ e.g. to change the range of allowed values or the default value.
 </table></div>
 </div>
 <hr>
+<div class="refsect2" title="g_object_class_install_properties ()">
+<a name="g-object-class-install-properties"></a><h3>g_object_class_install_properties ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_object_class_install_properties   (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObjectClass" title="GObjectClass"><span class="type">GObjectClass</span></a> *oclass</code></em>,
+                                                         <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a> n_pspecs</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> **pspecs</code></em>);</pre>
+<p>
+Installs new properties from an array of <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>s. This is
+usually done in the class initializer.
+</p>
+<p>
+The property id of each property is the index of each <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> in
+the <em class="parameter"><code>pspecs</code></em> array.
+</p>
+<p>
+The property id of 0 is treated specially by <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> and it should not
+be used to store a <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>.
+</p>
+<p>
+This function should be used if you plan to use a static array of
+<a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>s and <a class="link" href="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec" title="g_object_notify_by_pspec ()"><code class="function">g_object_notify_by_pspec()</code></a>. For instance, this
+class initialization:
+</p>
+<p>
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">enum</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">  PROP_0</span><span class="symbol">,</span><span class="normal"> PROP_FOO</span><span class="symbol">,</span><span class="normal"> PROP_BAR</span><span class="symbol">,</span><span class="normal"> N_PROPERTIES</span>
+<span class="cbracket">}</span><span class="symbol">;</span>
+
+<span class="keyword">static</span><span class="normal"> </span><span class="usertype">GParamSpec</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">obj_properties</span><span class="symbol">[</span><span class="normal">N_PROPERTIES</span><span class="symbol">]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span><span class="normal"> <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal"> </span><span class="cbracket">}</span><span class="symbol">;</span>
+
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">my_object_class_init</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MyObjectClass</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">klass</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GObjectClass</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">gobject_class </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gobject-The-Base-Object-Type.html#G-OBJECT-CLASS:CAPS">G_OBJECT_CLASS</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">klass</span><span class="symbol">);</span>
+
+<span class="normal">  obj_properties</span><span class="symbol">[</span><span class="normal">PROP_FOO</span><span class="symbol">]</span><span class="normal"> </span><span class="symbol">=</span>
+<span class="normal">    </span><span class="function"><a href="gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-int">g_param_spec_int</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"foo"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Foo"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Foo"</span><span class="symbol">,</span>
+<span class="normal">                      </span><span class="symbol">-</span><span class="number">1</span><span class="symbol">,</span><span class="normal"> <a href="./../glib/glib/glib-Limits-of-Basic-Types.html#G-MAXINT:CAPS">G_MAXINT</a></span><span class="symbol">,</span>
+<span class="normal">                      </span><span class="number">0</span><span class="symbol">,</span>
+<span class="normal">                      <a href="gobject-GParamSpec.html#G-PARAM-READWRITE:CAPS">G_PARAM_READWRITE</a></span><span class="symbol">);</span>
+
+<span class="normal">  obj_properties</span><span class="symbol">[</span><span class="normal">PROP_BAR</span><span class="symbol">]</span><span class="normal"> </span><span class="symbol">=</span>
+<span class="normal">    </span><span class="function"><a href="gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-string">g_param_spec_string</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"bar"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Bar"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Bar"</span><span class="symbol">,</span>
+<span class="normal">                         <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span>
+<span class="normal">                         <a href="gobject-GParamSpec.html#G-PARAM-READWRITE:CAPS">G_PARAM_READWRITE</a></span><span class="symbol">);</span>
+
+<span class="normal">  gobject_class</span><span class="symbol">-&gt;</span><span class="normal">set_property </span><span class="symbol">=</span><span class="normal"> my_object_set_property</span><span class="symbol">;</span>
+<span class="normal">  gobject_class</span><span class="symbol">-&gt;</span><span class="normal">get_property </span><span class="symbol">=</span><span class="normal"> my_object_get_property</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-class-install-properties">g_object_class_install_properties</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gobject_class</span><span class="symbol">,</span>
+<span class="normal">                                     N_PROPERTIES</span><span class="symbol">,</span>
+<span class="normal">                                     obj_properties</span><span class="symbol">);</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+</p>
+<p>
+allows calling <a class="link" href="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec" title="g_object_notify_by_pspec ()"><code class="function">g_object_notify_by_pspec()</code></a> to notify of property changes:
+</p>
+<p>
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="type">void</span>
+<span class="function">my_object_set_foo</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MyObject</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> </span><span class="usertype">gint</span><span class="normal"> foo</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">-&gt;</span><span class="normal">foo </span><span class="symbol">!=</span><span class="normal"> foo</span><span class="symbol">)</span>
+<span class="normal">    </span><span class="cbracket">{</span>
+<span class="normal">      self</span><span class="symbol">-&gt;</span><span class="normal">foo </span><span class="symbol">=</span><span class="normal"> foo</span><span class="symbol">;</span>
+<span class="normal">      </span><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec">g_object_notify_by_pspec</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="gobject-The-Base-Object-Type.html#G-OBJECT:CAPS">G_OBJECT</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">),</span><span class="normal"> obj_properties</span><span class="symbol">[</span><span class="normal">PROP_FOO</span><span class="symbol">]);</span>
+<span class="normal">    </span><span class="cbracket">}</span>
+<span class="normal"> </span><span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>oclass</code></em> :</span></p></td>
+<td>a <a class="link" href="gobject-The-Base-Object-Type.html#GObjectClass" title="GObjectClass"><span class="type">GObjectClass</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>n_pspecs</code></em> :</span></p></td>
+<td>the length of the <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>s array
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pspecs</code></em> :</span></p></td>
+<td> the <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>s array
+  defining the new properties. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=n_pspecs]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.26</p>
+</div>
+<hr>
 <div class="refsect2" title="g_object_class_find_property ()">
 <a name="g-object-class-find-property"></a><h3>g_object_class_find_property ()</h3>
 <pre class="programlisting"><a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="returnvalue">GParamSpec</span></a>*         g_object_class_find_property        (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObjectClass" title="GObjectClass"><span class="type">GObjectClass</span></a> *oclass</code></em>,
@@ -901,7 +1057,8 @@ Get an array of <a class="link" href="gobject-GParamSpec.html#GParamSpec" title=
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> an array of <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>* which should be freed after use
+<td> an array of
+         <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>* which should be freed after use. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=n_properties][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> length=n_properties]</span>
 </td>
 </tr>
 </tbody>
@@ -1254,6 +1411,39 @@ adds a new normal reference increasing the reference count by one.
 <p class="since">Since 2.10</p>
 </div>
 <hr>
+<div class="refsect2" title="g_clear_object ()">
+<a name="g-clear-object"></a><h3>g_clear_object ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_clear_object                      (<em class="parameter"><code>volatile <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **object_ptr</code></em>);</pre>
+<p>
+Clears a reference to a <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>.
+</p>
+<p>
+<em class="parameter"><code>object_ptr</code></em> must not be <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+</p>
+<p>
+If the reference is <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> then this function does nothing.
+Otherwise, the reference count of the object is decreased and the
+pointer is set to <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+</p>
+<p>
+This function is threadsafe and modifies the pointer atomically,
+using memory barriers where needed.
+</p>
+<p>
+A macro is also included that allows this function to be used without
+pointer casts.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>object_ptr</code></em> :</span></p></td>
+<td>a pointer to a <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> reference
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
+</div>
+<hr>
 <div class="refsect2" title="GInitiallyUnowned">
 <a name="GInitiallyUnowned"></a><h3>GInitiallyUnowned</h3>
 <pre class="programlisting">typedef struct _GObject                  GInitiallyUnowned;
@@ -1442,7 +1632,7 @@ the lifetime of <em class="parameter"><code>object</code></em>. When the <em cla
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>weak_pointer_location</code></em> :</span></p></td>
-<td>The memory address of a pointer.
+<td> The memory address of a pointer. <span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1468,7 +1658,7 @@ to match the one used with <a class="link" href="gobject-The-Base-Object-Type.ht
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>weak_pointer_location</code></em> :</span></p></td>
-<td>The memory address of a pointer.
+<td> The memory address of a pointer. <span class="annotation">[<acronym title="Parameter for input and for returning results. Default is transfer full."><span class="acronym">inout</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1690,12 +1880,12 @@ equivalent to <code class="literal">g_signal_connect_object (..., G_CONNECT_SWAP
 7
 8</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="normal">menu</span><span class="symbol">-&gt;</span><span class="normal">toplevel </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-connect">g_object_connect</a></span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-new">g_object_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">GTK_TYPE_WINDOW</span><span class="symbol">,</span>
-<span class="normal">                           </span><span class="string">"type"</span><span class="symbol">,</span><span class="normal"> GTK_WINDOW_POPUP</span><span class="symbol">,</span>
+<span class="normal">                           </span><span class="string">"type"</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/gtk/unstable/gtk3-Standard-Enumerations.html#GTK-WINDOW-POPUP:CAPS">GTK_WINDOW_POPUP</a></span><span class="symbol">,</span>
 <span class="normal">                           </span><span class="string">"child"</span><span class="symbol">,</span><span class="normal"> menu</span><span class="symbol">,</span>
 <span class="normal">                           <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">),</span>
 <span class="normal">                     </span><span class="string">"signal::event"</span><span class="symbol">,</span><span class="normal"> gtk_menu_window_event</span><span class="symbol">,</span><span class="normal"> menu</span><span class="symbol">,</span>
 <span class="normal">                     </span><span class="string">"signal::size_request"</span><span class="symbol">,</span><span class="normal"> gtk_menu_window_size_request</span><span class="symbol">,</span><span class="normal"> menu</span><span class="symbol">,</span>
-<span class="normal">                     </span><span class="string">"signal::destroy"</span><span class="symbol">,</span><span class="normal"> gtk_widget_destroyed</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">menu</span><span class="symbol">-&gt;</span><span class="normal">toplevel</span><span class="symbol">,</span>
+<span class="normal">                     </span><span class="string">"signal::destroy"</span><span class="symbol">,</span><span class="normal"> <a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html#gtk-widget-destroyed">gtk_widget_destroyed</a></span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">menu</span><span class="symbol">-&gt;</span><span class="normal">toplevel</span><span class="symbol">,</span>
 <span class="normal">                     <a href="./../glib/glib/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">);</span></pre></td>
       </tr>
     </tbody>
@@ -1820,7 +2010,7 @@ the type, for instance by calling <a href="./../glib/glib/glib-Memory-Allocation
 <p>
 </p>
 <div class="example">
-<a name="id589616"></a><p class="title"><b>Example 2. Using g_object_get()</b></p>
+<a name="id553670"></a><p class="title"><b>Example 2. Using g_object_get()</b></p>
 <div class="example-contents">
 An example of using <a class="link" href="gobject-The-Base-Object-Type.html#g-object-get" title="g_object_get ()"><code class="function">g_object_get()</code></a> to get the contents
 of three properties - one of type <a class="link" href="gobject-Type-Information.html#G-TYPE-INT:CAPS" title="G_TYPE_INT"><span class="type">G_TYPE_INT</span></a>,
@@ -1875,6 +2065,11 @@ one of type <a class="link" href="gobject-Type-Information.html#G-TYPE-STRING:CA
 <p>
 Emits a "notify" signal for the property <em class="parameter"><code>property_name</code></em> on <em class="parameter"><code>object</code></em>.
 </p>
+<p>
+When possible, eg. when signaling a property change from within the class
+that registered the property, you should use <a class="link" href="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec" title="g_object_notify_by_pspec ()"><code class="function">g_object_notify_by_pspec()</code></a>
+instead.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -1890,6 +2085,112 @@ Emits a "notify" signal for the property <em class="parameter"><code>property_na
 </tr>
 </tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2" title="g_object_notify_by_pspec ()">
+<a name="g-object-notify-by-pspec"></a><h3>g_object_notify_by_pspec ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_object_notify_by_pspec            (<em class="parameter"><code><a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> *pspec</code></em>);</pre>
+<p>
+Emits a "notify" signal for the property specified by <em class="parameter"><code>pspec</code></em> on <em class="parameter"><code>object</code></em>.
+</p>
+<p>
+This function omits the property name lookup, hence it is faster than
+<a class="link" href="gobject-The-Base-Object-Type.html#g-object-notify" title="g_object_notify ()"><code class="function">g_object_notify()</code></a>.
+</p>
+<p>
+One way to avoid using <a class="link" href="gobject-The-Base-Object-Type.html#g-object-notify" title="g_object_notify ()"><code class="function">g_object_notify()</code></a> from within the
+class that registered the properties, and using <a class="link" href="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec" title="g_object_notify_by_pspec ()"><code class="function">g_object_notify_by_pspec()</code></a>
+instead, is to store the GParamSpec used with
+<a class="link" href="gobject-The-Base-Object-Type.html#g-object-class-install-property" title="g_object_class_install_property ()"><code class="function">g_object_class_install_property()</code></a> inside a static array, e.g.:
+</p>
+<p>
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">enum</span>
+<span class="cbracket">{</span>
+<span class="normal">  PROP_0</span><span class="symbol">,</span>
+<span class="normal">  PROP_FOO</span><span class="symbol">,</span>
+<span class="normal">  PROP_LAST</span>
+<span class="cbracket">}</span><span class="symbol">;</span>
+
+<span class="keyword">static</span><span class="normal"> </span><span class="usertype">GParamSpec</span><span class="normal"> </span><span class="symbol">*</span><span class="normal"><a href="/usr/share/gtk-doc/html/libbonobo/properties.html">properties</a></span><span class="symbol">[</span><span class="normal">PROP_LAST</span><span class="symbol">];</span>
+
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">my_object_class_init</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MyObjectClass</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">klass</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  <a href="/usr/share/gtk-doc/html/libbonobo/properties.html">properties</a></span><span class="symbol">[</span><span class="normal">PROP_FOO</span><span class="symbol">]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gobject-Standard-Parameter-and-Value-Types.html#g-param-spec-int">g_param_spec_int</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"foo"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Foo"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"The foo"</span><span class="symbol">,</span>
+<span class="normal">                                           </span><span class="number">0</span><span class="symbol">,</span><span class="normal"> </span><span class="number">100</span><span class="symbol">,</span>
+<span class="normal">                                           </span><span class="number">50</span><span class="symbol">,</span>
+<span class="normal">                                           <a href="gobject-GParamSpec.html#G-PARAM-READWRITE:CAPS">G_PARAM_READWRITE</a></span><span class="symbol">);</span>
+<span class="normal">  </span><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-class-install-property">g_object_class_install_property</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">gobject_class</span><span class="symbol">,</span>
+<span class="normal">                                   PROP_FOO</span><span class="symbol">,</span>
+<span class="normal">                                   <a href="/usr/share/gtk-doc/html/libbonobo/properties.html">properties</a></span><span class="symbol">[</span><span class="normal">PROP_FOO</span><span class="symbol">]);</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+</p>
+<p>
+and then notify a change on the "foo" property with:
+</p>
+<p>
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-The-Base-Object-Type.html#g-object-notify-by-pspec">g_object_notify_by_pspec</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">,</span><span class="normal"> <a href="/usr/share/gtk-doc/html/libbonobo/properties.html">properties</a></span><span class="symbol">[</span><span class="normal">PROP_FOO</span><span class="symbol">]);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
+<td>a <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>pspec</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> of a property installed on the class of <em class="parameter"><code>object</code></em>.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.26</p>
 </div>
 <hr>
 <div class="refsect2" title="g_object_freeze_notify ()">
@@ -2314,7 +2615,9 @@ Sets a property on an object.
                                                          <em class="parameter"><code>const <a href="./../glib/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *property_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
 <p>
-Gets a property of an object.
+Gets a property of an object. <em class="parameter"><code>value</code></em> must have been initialized to the
+expected type of the property (or a type to which the expected type can be
+transformed) using <a class="link" href="gobject-Generic-values.html#g-value-init" title="g_value_init ()"><code class="function">g_value_init()</code></a>.
 </p>
 <p>
 In general, a copy is made of the property contents and the caller is
@@ -2604,6 +2907,6 @@ detail strings for the notify signal.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

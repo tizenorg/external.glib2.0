@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GIOModule</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="extending.html" title="Extending GIO">
 <link rel="prev" href="GVfs.html" title="GVfs">
 <link rel="next" href="gio-Extension-Points.html" title="Extension Points">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -45,8 +45,8 @@
 #include &lt;gio/gio.h&gt;
 
                     <a class="link" href="GIOModule.html#GIOModule-struct" title="GIOModule">GIOModule</a>;
-<a class="link" href="GIOModule.html" title="GIOModule"><span class="returnvalue">GIOModule</span></a> *         <a class="link" href="GIOModule.html#g-io-module-new" title="g_io_module_new ()">g_io_module_new</a>                     (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *filename</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GIOModule.html#g-io-modules-load-all-in-directory" title="g_io_modules_load_all_in_directory ()">g_io_modules_load_all_in_directory</a>  (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *dirname</code></em>);
+<a class="link" href="GIOModule.html" title="GIOModule"><span class="returnvalue">GIOModule</span></a> *         <a class="link" href="GIOModule.html#g-io-module-new" title="g_io_module_new ()">g_io_module_new</a>                     (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *filename</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="GIOModule.html#g-io-modules-load-all-in-directory" title="g_io_modules_load_all_in_directory ()">g_io_modules_load_all_in_directory</a>  (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *dirname</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GIOModule.html#g-io-modules-scan-all-in-directory" title="g_io_modules_scan_all_in_directory ()">g_io_modules_scan_all_in_directory</a>  (<em class="parameter"><code>const <span class="type">char</span> *dirname</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GIOModule.html#g-io-module-load" title="g_io_module_load ()">g_io_module_load</a>                    (<em class="parameter"><code><a class="link" href="GIOModule.html" title="GIOModule"><span class="type">GIOModule</span></a> *module</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GIOModule.html#g-io-module-unload" title="g_io_module_unload ()">g_io_module_unload</a>                  (<em class="parameter"><code><a class="link" href="GIOModule.html" title="GIOModule"><span class="type">GIOModule</span></a> *module</code></em>);
@@ -56,8 +56,8 @@
 <div class="refsect1" title="Object Hierarchy">
 <a name="GIOModule.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
-  <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject">GObject</a>
-   +----<a href="/usr/share/gtk-doc/html/gobject/GTypeModule.html">GTypeModule</a>
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----<a href="http://library.gnome.org/devel/gobject/unstable/GTypeModule.html">GTypeModule</a>
          +----GIOModule
 </pre>
 </div>
@@ -65,7 +65,7 @@
 <a name="GIOModule.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GIOModule implements
- <a href="/usr/share/gtk-doc/html/gobject/GTypePlugin.html">GTypePlugin</a>.</p>
+ <a href="http://library.gnome.org/devel/gobject/unstable/GTypePlugin.html">GTypePlugin</a>.</p>
 </div>
 <div class="refsect1" title="Description">
 <a name="GIOModule.description"></a><h2>Description</h2>
@@ -87,7 +87,7 @@ Opaque module base class for extending GIO.
 <hr>
 <div class="refsect2" title="g_io_module_new ()">
 <a name="g-io-module-new"></a><h3>g_io_module_new ()</h3>
-<pre class="programlisting"><a class="link" href="GIOModule.html" title="GIOModule"><span class="returnvalue">GIOModule</span></a> *         g_io_module_new                     (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *filename</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GIOModule.html" title="GIOModule"><span class="returnvalue">GIOModule</span></a> *         g_io_module_new                     (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *filename</code></em>);</pre>
 <p>
 Creates a new GIOModule that will load the specific
 shared library when in use.
@@ -103,7 +103,7 @@ shared library when in use.
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td> a <a class="link" href="GIOModule.html" title="GIOModule"><span class="type">GIOModule</span></a> from given <em class="parameter"><code>filename</code></em>, 
-or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
+or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
 </td>
 </tr>
 </tbody>
@@ -112,7 +112,7 @@ or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><c
 <hr>
 <div class="refsect2" title="g_io_modules_load_all_in_directory ()">
 <a name="g-io-modules-load-all-in-directory"></a><h3>g_io_modules_load_all_in_directory ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_io_modules_load_all_in_directory  (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *dirname</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_io_modules_load_all_in_directory  (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *dirname</code></em>);</pre>
 <p>
 Loads all the modules in the specified directory.
 </p>
@@ -131,11 +131,12 @@ which allows delayed/lazy loading of modules.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a list of <a href="GIOModule.html"><span class="type">GIOModules</span></a> loaded from the directory,
+<td> a list of <a href="GIOModule.html"><span class="type">GIOModules</span></a> loaded
+     from the directory,
      All the modules are loaded into memory, if you want to
      unload them (enabling on-demand loading) you must call
-     <a href="/usr/share/gtk-doc/html/gobject/GTypeModule.html#g-type-module-unuse"><code class="function">g_type_module_unuse()</code></a> on all the modules. Free the list
-     with <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>.
+     <a href="http://library.gnome.org/devel/gobject/unstable/GTypeModule.html#g-type-module-unuse"><code class="function">g_type_module_unuse()</code></a> on all the modules. Free the list
+     with <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#g-list-free"><code class="function">g_list_free()</code></a>. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GIOModule][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> GIOModule]</span>
 </td>
 </tr>
 </tbody>
@@ -158,7 +159,7 @@ an extension point it implementes is used with e.g.
 </p>
 <p>
 If you need to guarantee that all types are loaded in all the modules,
-use <a class="link" href="GIOModule.html#g-io-modules-scan-all-in-directory" title="g_io_modules_scan_all_in_directory ()"><code class="function">g_io_modules_scan_all_in_directory()</code></a>.
+use <a class="link" href="GIOModule.html#g-io-modules-load-all-in-directory" title="g_io_modules_load_all_in_directory ()"><code class="function">g_io_modules_load_all_in_directory()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -243,10 +244,9 @@ lazy loading.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings, listing the supported
+<td> A <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings, listing the supported
     extension points of the module. The array must be suitable for
-    freeing with <a href="/usr/share/gtk-doc/html/glib/glib-String-Utility-Functions.html#g-strfreev"><code class="function">g_strfreev()</code></a>.
-
+    freeing with <a href="http://library.gnome.org/devel/glib/unstable/glib-String-Utility-Functions.html#g-strfreev"><code class="function">g_strfreev()</code></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr></tbody>
 </table></div>
@@ -256,6 +256,6 @@ lazy loading.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

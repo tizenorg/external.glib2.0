@@ -26,15 +26,27 @@
 
 #include "giomodule.h"
 #include "giomodule-priv.h"
+#include "gmemorysettingsbackend.h"
 #include "glocalfilemonitor.h"
 #include "glocaldirectorymonitor.h"
 #include "gnativevolumemonitor.h"
+#include "gproxyresolver.h"
+#include "gproxy.h"
+#include "gsocks4proxy.h"
+#include "gsocks4aproxy.h"
+#include "gsocks5proxy.h"
+#include "gtlsbackend.h"
 #include "gvfs.h"
+#ifdef G_OS_WIN32
+#include "gregistrysettingsbackend.h"
+#endif
+#include <glib/gstdio.h>
+
+#undef G_DISABLE_DEPRECATED
+
 #ifdef G_OS_UNIX
 #include "gdesktopappinfo.h"
 #endif
-#include "gioalias.h"
-#include <glib/gstdio.h>
 
 /**
  * SECTION:giomodule
@@ -89,7 +101,13 @@
  *  it uses the implementations that have been associated with it.
  *  Depending on the use case, it may use all implementations, or
  *  only the one with the highest priority, or pick a specific
- *  one by name. 
+ *  one by name.
+ *
+ *  To avoid opening all modules just to find out what extension
+ *  points they implement, GIO makes use of a caching mechanism,
+ *  see <link linkend="gio-querymodules">gio-querymodules</link>.
+ *  You are expected to run this command after installing a
+ *  GIO module.
  */
 struct _GIOModule {
   GTypeModule parent_instance;
@@ -260,7 +278,7 @@ is_valid_module_name (const gchar *basename)
  * g_io_extension_point_get_extension_by_name().
  *
  * If you need to guarantee that all types are loaded in all the modules,
- * use g_io_modules_scan_all_in_directory().
+ * use g_io_modules_load_all_in_directory().
  *
  * Since: 2.24
  **/
@@ -270,11 +288,7 @@ g_io_modules_scan_all_in_directory (const char *dirname)
   const gchar *name;
   char *filename;
   GDir *dir;
-#ifdef G_OS_WIN32
-  struct _g_stat_struct statbuf;
-#else
-  struct stat statbuf;
-#endif
+  GStatBuf statbuf;
   char *data;
   time_t cache_mtime;
   GHashTable *cache;
@@ -401,7 +415,8 @@ g_io_modules_scan_all_in_directory (const char *dirname)
  * all gtypes) then you can use g_io_modules_scan_all_in_directory()
  * which allows delayed/lazy loading of modules.
  *
- * Returns: a list of #GIOModules loaded from the directory,
+ * Returns: (element-type GIOModule) (transfer full): a list of #GIOModules loaded
+ *      from the directory,
  *      All the modules are loaded into memory, if you want to
  *      unload them (enabling on-demand loading) you must call
  *      g_type_module_unuse() on all the modules. Free the list
@@ -465,6 +480,9 @@ extern GType _g_win32_volume_monitor_get_type (void);
 extern GType g_win32_directory_monitor_get_type (void);
 extern GType _g_winhttp_vfs_get_type (void);
 
+extern GType _g_dummy_proxy_resolver_get_type (void);
+extern GType _g_dummy_tls_backend_get_type (void);
+
 #ifdef G_PLATFORM_WIN32
 
 #include <windows.h>
@@ -511,8 +529,10 @@ _g_io_modules_ensure_extension_points_registered (void)
       registered_extensions = TRUE;
       
 #ifdef G_OS_UNIX
+#if !GLIB_CHECK_VERSION (3, 0, 0)
       ep = g_io_extension_point_register (G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME);
       g_io_extension_point_set_required_type (ep, G_TYPE_DESKTOP_APP_INFO_LOOKUP);
+#endif
 #endif
       
       ep = g_io_extension_point_register (G_LOCAL_DIRECTORY_MONITOR_EXTENSION_POINT_NAME);
@@ -532,6 +552,15 @@ _g_io_modules_ensure_extension_points_registered (void)
 
       ep = g_io_extension_point_register ("gsettings-backend");
       g_io_extension_point_set_required_type (ep, G_TYPE_OBJECT);
+
+      ep = g_io_extension_point_register (G_PROXY_RESOLVER_EXTENSION_POINT_NAME);
+      g_io_extension_point_set_required_type (ep, G_TYPE_PROXY_RESOLVER);
+
+      ep = g_io_extension_point_register (G_PROXY_EXTENSION_POINT_NAME);
+      g_io_extension_point_set_required_type (ep, G_TYPE_PROXY);
+
+      ep = g_io_extension_point_register (G_TLS_BACKEND_EXTENSION_POINT_NAME);
+      g_io_extension_point_set_required_type (ep, G_TYPE_TLS_BACKEND);
     }
   
   G_UNLOCK (registered_extensions);
@@ -569,6 +598,7 @@ _g_io_modules_ensure_loaded (void)
 	}
 
       /* Initialize types from built-in "modules" */
+      g_memory_settings_backend_get_type ();
 #if defined(HAVE_SYS_INOTIFY_H) || defined(HAVE_LINUX_INOTIFY_H)
       _g_inotify_directory_monitor_get_type ();
       _g_inotify_file_monitor_get_type ();
@@ -580,6 +610,7 @@ _g_io_modules_ensure_loaded (void)
 #ifdef G_OS_WIN32
       _g_win32_volume_monitor_get_type ();
       g_win32_directory_monitor_get_type ();
+      g_registry_backend_get_type ();
 #endif
 #ifdef G_OS_UNIX
       _g_unix_volume_monitor_get_type ();
@@ -588,6 +619,11 @@ _g_io_modules_ensure_loaded (void)
       _g_winhttp_vfs_get_type ();
 #endif
       _g_local_vfs_get_type ();
+      _g_dummy_proxy_resolver_get_type ();
+      _g_socks4a_proxy_get_type ();
+      _g_socks4_proxy_get_type ();
+      _g_socks5_proxy_get_type ();
+      _g_dummy_tls_backend_get_type ();
     }
 
   G_UNLOCK (loaded_dirs);
@@ -720,9 +756,10 @@ lazy_load_modules (GIOExtensionPoint *extension_point)
  *
  * Gets a list of all extensions that implement this extension point.
  * The list is sorted by priority, beginning with the highest priority.
- * 
- * Returns: a #GList of #GIOExtension<!-- -->s. The list is owned by
- *   GIO and should not be modified
+ *
+ * Returns: (element-type GIOExtension) (transfer none): a #GList of
+ * #GIOExtension<!-- -->s. The list is owned by GIO and should not be
+ * modified.
  */
 GList *
 g_io_extension_point_get_extensions (GIOExtensionPoint *extension_point)
@@ -738,7 +775,7 @@ g_io_extension_point_get_extensions (GIOExtensionPoint *extension_point)
  *
  * Finds a #GIOExtension for an extension point by name.
  *
- * Returns: the #GIOExtension for @extension_point that has the
+ * Returns: (transfer none): the #GIOExtension for @extension_point that has the
  *    given name, or %NULL if there is no extension with that name
  */
 GIOExtension *
@@ -766,7 +803,13 @@ extension_prio_compare (gconstpointer  a,
 {
   const GIOExtension *extension_a = a, *extension_b = b;
 
-  return extension_b->priority - extension_a->priority;
+  if (extension_a->priority > extension_b->priority)
+    return -1;
+
+  if (extension_b->priority > extension_a->priority)
+    return 1;
+
+  return 0;
 }
 
 /**
@@ -840,7 +883,7 @@ g_io_extension_point_implement (const char *extension_point_name,
  * Gets a reference to the class for the type that is 
  * associated with @extension.
  *
- * Returns: the #GTypeClass for the type of @extension
+ * Returns: (transfer full): the #GTypeClass for the type of @extension
  */
 GTypeClass *
 g_io_extension_ref_class (GIOExtension *extension)
@@ -892,6 +935,3 @@ g_io_extension_get_priority (GIOExtension *extension)
 {
   return extension->priority;
 }
-
-#define __G_IO_MODULE_C__
-#include "gioaliasdef.c"

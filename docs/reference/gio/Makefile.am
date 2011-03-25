@@ -18,6 +18,8 @@ CFILE_GLOB=$(top_srcdir)/gio/*.c
 
 # Headers to ignore
 IGNORE_HFILES=				\
+	gvdb				\
+	tests				\
 	asyncns.h			\
 	fam-helper.h			\
 	fen-data.h			\
@@ -26,17 +28,31 @@ IGNORE_HFILES=				\
 	fen-node.h			\
 	gasynchelper.h			\
 	gcontenttypeprivate.h		\
+	gdbusauth.h			\
+	gdbusauthmechanism.h		\
+	gdbusauthmechanismanon.h	\
+	gdbusauthmechanismexternal.h	\
+	gdbusauthmechanismsha1.h	\
+	gdbusprivate.h			\
+	gdbus-sessionbus.h		\
+	gdbus-tests.h			\
+	gdummyproxyresolver.h		\
+	testenums.h			\
+	gapplicationimpl.h		\
+	gdelayedsettingsbackend.h	\
+	gregistrysettingsbackend.h	\
 	gdummyfile.h			\
 	gfamdirectorymonitor.h		\
 	gfamfilemonitor.h		\
+	gfendirectorymonitor.h		\
+	gfenfilemonitor.h		\
 	gfileattribute-priv.h		\
 	gfileinfo-priv.h		\
 	ginotifydirectorymonitor.h	\
 	ginotifyfilemonitor.h		\
 	gio-marshal.h			\
 	gio.h				\
-	gioalias.h			\
-	gioalias.h			\
+	gkeyfilesettingsbackend.h	\
 	gioenumtypes.h			\
 	giomodule-priv.h		\
 	glocaldirectorymonitor.h	\
@@ -44,20 +60,44 @@ IGNORE_HFILES=				\
 	glocalfileenumerator.h		\
 	glocalfileinfo.h		\
 	glocalfileinputstream.h		\
+	glocalfileiostream.h		\
 	glocalfilemonitor.h		\
 	glocalfileoutputstream.h	\
 	glocalvfs.h			\
+	gmemorysettingsbackend.h	\
+	gmountprivate.h			\
 	gnativevolumemonitor.h		\
 	gnetworkingprivate.h		\
+	gnullsettingsbackend.h		\
 	gpollfilemonitor.h		\
+	gproxyconnection.h		\
+	gsettingsbackendinternal.h	\
+	gsettingsschema.h		\
+	gsettings-mapping.h		\
+	gsocketinputstream.h		\
+	gsocketoutputstream.h		\
 	gthreadedresolver.h		\
 	gunionvolumemonitor.h		\
 	gunixdrive.h			\
+	gunixmount.h			\
+	gunixvolumemonitor.h		\
 	gunixresolver.h			\
 	gunixvolume.h			\
+	gvdb-builder.h			\
+	gvdb-format.h			\
+	gvdb-render.h			\
 	gvolumeprivate.h		\
 	gwin32appinfo.h			\
+	gwin32mount.h			\
+	gwin32directorymonitor.h	\
+	gwin32inputstream.h		\
+	gwin32outputstream.h		\
+	gwin32volumemonitor.h		\
 	gwin32resolver.h		\
+	gwinhttpfile.h			\
+	gwinhttpfileinputstream.h	\
+	gwinhttpfileoutputstream.h	\
+	gwinhttpvfs.h			\
 	inotify-diag.h			\
 	inotify-helper.h		\
 	inotify-kernel.h		\
@@ -80,15 +120,7 @@ IGNORE_HFILES=				\
 # CFLAGS and LDFLAGS for compiling scan program. Only needed
 # if $(DOC_MODULE).types is non-empty.
 INCLUDES = \
-	-I$(srcdir)			\
-	-I$(top_srcdir)			\
-	-I$(top_srcdir)/glib		\
-	-I$(top_srcdir)/gobject		\
-	-I$(top_srcdir)/gio		\
-	-I$(top_builddir)		\
-	-I$(top_builddir)/glib		\
-	-I$(top_builddir)/gobject	\
-	-I$(top_builddir)/gio		\
+	$(gio_INCLUDES)			\
 	$(GLIB_DEBUG_FLAGS)
 
 GTKDOC_LIBS = \
@@ -109,11 +141,22 @@ HTML_IMAGES =			\
 content_files =			\
 	version.xml		\
 	overview.xml		\
-	migrating.xml
+	migrating-posix.xml	\
+	migrating-gnome-vfs.xml	\
+	migrating-gconf.xml	\
+	migrating-gdbus.xml	\
+	gio-querymodules.xml	\
+	glib-compile-schemas.xml\
+	gsettings.xml		\
+	gdbus.xml		\
+	$(NULL)
 
 expand_content_files =		\
 	overview.xml		\
-	migrating.xml
+	migrating-posix.xml	\
+	migrating-gnome-vfs.xml	\
+	migrating-gconf.xml	\
+	migrating-gdbus.xml
 
 extra_files =			\
 	version.xml.in		\
@@ -123,3 +166,38 @@ include $(top_srcdir)/gtk-doc.make
 
 EXTRA_DIST +=			\
 	version.xml.in
+
+man_MANS =			\
+	gio-querymodules.1	\
+	glib-compile-schemas.1	\
+	gsettings.1	\
+	gdbus.1
+
+if ENABLE_MAN
+
+.xml.1:
+	@XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
+
+dist-local-check-mans-enabled:
+	if grep "Man generation disabled" $(man_MANS) >/dev/null; then $(RM) $(man_MANS); fi
+
+else
+
+$(man_MANS):
+	echo Man generation disabled.  Creating dummy $@.  Configure with --enable-man to enable it.
+	echo Man generation disabled.  Remove this file, configure with --enable-man, and rebuild > $@
+
+dist-local-check-mans-enabled:
+	echo "*** --enable-man must be used in order to make dist"
+	false
+
+endif
+
+MAINTAINERCLEANFILES = $(man_MANS) $(BUILT_SOURCES)
+
+EXTRA_DIST += $(man_MANS)
+
+dist-hook-local: dist-local-check-mans-enabled gio-docs-clean all-local
+
+gio-docs-clean: clean
+	cd $(srcdir) && rm -rf xml html

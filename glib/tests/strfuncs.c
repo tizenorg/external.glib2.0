@@ -19,6 +19,7 @@
  * if advised of the possibility of such damage.
  */
 
+#define _XOPEN_SOURCE
 #include <ctype.h>
 #include <errno.h>
 #include <locale.h>
@@ -944,6 +945,11 @@ test_strtod (void)
   check_strtod_string ("5.4", 5.4, TRUE, 3);
   check_strtod_string ("5.4,5.5", 5.4, TRUE, 3);
   check_strtod_string ("5,4", 5.0, TRUE, 1);
+  check_strtod_string ("0xa.b", 10.6875, TRUE, 5);
+  check_strtod_string ("0xa.bP3", 85.5, TRUE, 7);
+  check_strtod_string ("0xa.bp+3", 85.5, TRUE, 8);
+  check_strtod_string ("0xa.bp-2", 2.671875, TRUE, 8);
+  check_strtod_string ("0xA.BG", 10.6875, TRUE, 5);
   /* the following are for #156421 */
   check_strtod_string ("1e1", 1e1, FALSE, 0); 
   check_strtod_string ("NAN", our_nan, FALSE, 0);
@@ -1207,6 +1213,32 @@ test_bounds (void)
   g_mapped_file_free (file);
 }
 
+static void
+test_strip_context (void)
+{
+  const gchar *msgid;
+  const gchar *msgval;
+  const gchar *s;
+
+
+  msgid = "blabla";
+  msgval = "bla";
+  s = g_strip_context (msgid, msgval);
+  g_assert (s == msgval);
+
+  msgid = msgval = "blabla";
+  s = g_strip_context (msgid, msgval);
+  g_assert (s == msgval);
+
+  msgid = msgval = "blabla|foo";
+  s = g_strip_context (msgid, msgval);
+  g_assert (s == msgval + 7);
+
+  msgid = msgval = "blabla||bar";
+  s = g_strip_context (msgid, msgval);
+  g_assert (s == msgval + 7);
+}
+
 int
 main (int   argc,
       char *argv[])
@@ -1236,6 +1268,7 @@ main (int   argc,
   g_test_add_func ("/strfuncs/strtod", test_strtod);
   g_test_add_func ("/strfuncs/strtoull-strtoll", test_strtoll);
   g_test_add_func ("/strfuncs/bounds-check", test_bounds);
+  g_test_add_func ("/strfuncs/strip-context", test_strip_context);
 
   return g_test_run();
 }

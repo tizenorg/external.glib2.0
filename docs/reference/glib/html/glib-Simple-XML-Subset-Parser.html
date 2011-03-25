@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Simple XML Subset Parser</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Perl-compatible-regular-expressions.html" title="Perl-compatible regular expressions">
 <link rel="next" href="glib-Key-value-file-parser.html" title="Key-value file parser">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -71,7 +71,7 @@ const <a class="link" href="glib-Singly-Linked-Lists.html#GSList" title="GSList"
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gssize" title="gssize"><span class="type">gssize</span></a> text_len</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Simple-XML-Subset-Parser.html#g-markup-parse-context-push" title="g_markup_parse_context_push ()">g_markup_parse_context_push</a>         (<em class="parameter"><code><a class="link" href="glib-Simple-XML-Subset-Parser.html#GMarkupParseContext" title="GMarkupParseContext"><span class="type">GMarkupParseContext</span></a> *context</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Simple-XML-Subset-Parser.html#GMarkupParser" title="GMarkupParser"><span class="type">GMarkupParser</span></a> *parser</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Simple-XML-Subset-Parser.html#GMarkupParser" title="GMarkupParser"><span class="type">GMarkupParser</span></a> *parser</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Simple-XML-Subset-Parser.html#g-markup-parse-context-pop" title="g_markup_parse_context_pop ()">g_markup_parse_context_pop</a>          (<em class="parameter"><code><a class="link" href="glib-Simple-XML-Subset-Parser.html#GMarkupParseContext" title="GMarkupParseContext"><span class="type">GMarkupParseContext</span></a> *context</code></em>);
 
@@ -384,12 +384,11 @@ from being processed according to the XML rules for normalization
 of line endings and attribute values.
 </p>
 <p>
-Note also that if given a string containing them, this function
-will produce character references in the range of &amp;<span class="type">x1</span>; ..
-&amp;<span class="type">x1f</span>; for all control sequences except for tabstop, newline
-and carriage return.  The character references in this range are
-not valid XML 1.0, but they are valid XML 1.1 and will be accepted
-by the GMarkup parser.
+Note also that this function will produce character references in
+the range of &amp;<span class="type">x1</span>; ... &amp;<span class="type">x1f</span>; for all control sequences
+except for tabstop, newline and carriage return.  The character
+references in this range are not valid XML 1.0, but they are
+valid XML 1.1 and will be accepted by the GMarkup parser.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -789,7 +788,7 @@ data may be fed to the <a class="link" href="glib-Simple-XML-Subset-Parser.html#
 <div class="refsect2" title="g_markup_parse_context_push ()">
 <a name="g-markup-parse-context-push"></a><h3>g_markup_parse_context_push ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_markup_parse_context_push         (<em class="parameter"><code><a class="link" href="glib-Simple-XML-Subset-Parser.html#GMarkupParseContext" title="GMarkupParseContext"><span class="type">GMarkupParseContext</span></a> *context</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Simple-XML-Subset-Parser.html#GMarkupParser" title="GMarkupParser"><span class="type">GMarkupParser</span></a> *parser</code></em>,
+                                                         <em class="parameter"><code>const <a class="link" href="glib-Simple-XML-Subset-Parser.html#GMarkupParser" title="GMarkupParser"><span class="type">GMarkupParser</span></a> *parser</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Temporarily redirects markup data to a sub-parser.
@@ -1278,6 +1277,6 @@ will be returned and <em class="parameter"><code>error</code></em> will be set a
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

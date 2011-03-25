@@ -40,7 +40,7 @@
 
 #include "config.h"
 
-#include "glib.h"
+#include "gthread.h"
 #include "gthreadprivate.h"
 
 #ifdef HAVE_UNISTD_H
@@ -56,7 +56,11 @@
 
 #include <string.h>
 
-#include "galias.h"
+#include "garray.h"
+#include "gslist.h"
+#include "gtestutils.h"
+#include "gtimer.h"
+
 
 /**
  * SECTION: threads
@@ -1238,7 +1242,7 @@ g_static_mutex_init (GStaticMutex *mutex)
  * a GMutex.  In that case, the first access we make to the static mutex
  * must first allocate the normal GMutex and store it into the pointer.
  *
- * configure.in writes macros into glibconfig.h to determine if
+ * configure.ac writes macros into glibconfig.h to determine if
  * g_static_mutex_get_mutex() accesses the sturcture in memory directly
  * (on platforms where we are able to do that) or if it ends up here,
  * where we may have to allocate the GMutex before returning it.
@@ -1323,7 +1327,7 @@ g_static_mutex_free (GStaticMutex* mutex)
   g_return_if_fail (mutex);
 
   /* The runtime_mutex is the first (or only) member of GStaticMutex,
-   * see both versions (of glibconfig.h) in configure.in. Note, that
+   * see both versions (of glibconfig.h) in configure.ac. Note, that
    * this variable is NULL, if g_thread_init() hasn't been called or
    * if we're using the default thread implementation and it provides
    * static mutexes. */
@@ -2532,7 +2536,3 @@ g_thread_get_initialized ()
 {
   return g_thread_supported ();
 }
-
-#define __G_THREAD_C__
-#include "galiasdef.c"
-

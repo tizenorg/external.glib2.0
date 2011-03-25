@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Miscellaneous Utility Functions</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Hook-Functions.html" title="Hook Functions">
 <link rel="next" href="glib-Lexical-Scanner.html" title="Lexical Scanner">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -44,6 +44,7 @@ const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span cla
 <span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()">g_set_application_name</a>              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *application_name</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*              <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-prgname" title="g_get_prgname ()">g_get_prgname</a>                       (<em class="parameter"><code><span class="type">void</span></code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()">g_set_prgname</a>                       (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *prgname</code></em>);
+<a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>**             <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-environ" title="g_get_environ ()">g_get_environ</a>                       (<em class="parameter"><code><span class="type">void</span></code></em>);
 const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-getenv" title="g_getenv ()">g_getenv</a>                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-setenv" title="g_setenv ()">g_setenv</a>                            (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *variable</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *value</code></em>,
@@ -55,6 +56,7 @@ const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span cla
 const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-cache-dir" title="g_get_user_cache_dir ()">g_get_user_cache_dir</a>                (<em class="parameter"><code><span class="type">void</span></code></em>);
 const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-data-dir" title="g_get_user_data_dir ()">g_get_user_data_dir</a>                 (<em class="parameter"><code><span class="type">void</span></code></em>);
 const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir" title="g_get_user_config_dir ()">g_get_user_config_dir</a>               (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-runtime-dir" title="g_get_user_runtime_dir ()">g_get_user_runtime_dir</a>              (<em class="parameter"><code><span class="type">void</span></code></em>);
 enum                <a class="link" href="glib-Miscellaneous-Utility-Functions.html#GUserDirectory" title="enum GUserDirectory">GUserDirectory</a>;
 const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>*        <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-special-dir" title="g_get_user_special_dir ()">g_get_user_special_dir</a>              (<em class="parameter"><code><a class="link" href="glib-Miscellaneous-Utility-Functions.html#GUserDirectory" title="enum GUserDirectory"><span class="type">GUserDirectory</span></a> directory</code></em>);
 const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>* const * <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-system-data-dirs" title="g_get_system_data_dirs ()">g_get_system_data_dirs</a>             (<em class="parameter"><code><span class="type">void</span></code></em>);
@@ -149,7 +151,7 @@ been called).
 Sets a human-readable name for the application. This name should be
 localized if possible, and is intended for display to the user.
 Contrast with <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a>, which sets a non-localized name.
-<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a> will be called automatically by <code class="function">gtk_init()</code>,
+<a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a> will be called automatically by <a href="http://library.gnome.org/devel/gtk/unstable/gtk3-General.html#gtk-init"><code class="function">gtk_init()</code></a>,
 but <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-application-name" title="g_set_application_name ()"><code class="function">g_set_application_name()</code></a> will not.
 </p>
 <p>
@@ -177,8 +179,8 @@ or when displaying an application's name in the task list.
 <p>
 Gets the name of the program. This name should <span class="emphasis"><em>not</em></span> 
 be localized, contrast with <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-application-name" title="g_get_application_name ()"><code class="function">g_get_application_name()</code></a>.
-(If you are using GDK or GTK+ the program name is set in <code class="function">gdk_init()</code>, 
-which is called by <code class="function">gtk_init()</code>. The program name is found by taking 
+(If you are using GDK or GTK+ the program name is set in <a href="http://library.gnome.org/devel/gdk/unstable/gdk-General.html#gdk-init"><code class="function">gdk_init()</code></a>, 
+which is called by <a href="http://library.gnome.org/devel/gtk/unstable/gtk3-General.html#gtk-init"><code class="function">gtk_init()</code></a>. The program name is found by taking 
 the last component of <code class="literal">argv[0]</code>.)
 </p>
 <div class="variablelist"><table border="0">
@@ -208,6 +210,34 @@ thread-safety reasons this function can only be called once.
 </td>
 </tr></tbody>
 </table></div>
+</div>
+<hr>
+<div class="refsect2" title="g_get_environ ()">
+<a name="g-get-environ"></a><h3>g_get_environ ()</h3>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a>**             g_get_environ                       (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Gets the list of environment variables for the current process.  The
+list is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> terminated and each item in the list is of the form
+'NAME=VALUE'.
+</p>
+<p>
+This is equivalent to direct access to the 'environ' global variable,
+except portable.
+</p>
+<p>
+The return value is freshly allocated and it should be freed with
+<a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a> when it is no longer needed.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the list of environment variables
+
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
 </div>
 <hr>
 <div class="refsect2" title="g_getenv ()">
@@ -383,7 +413,14 @@ data specific to particular user.
 <p>
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
-XDG Base Directory Specification</a>
+XDG Base Directory Specification</a>.
+In this case the directory retrieved will be XDG_CACHE_HOME.
+</p>
+<p>
+On Windows is the directory that serves as a common repository for
+temporary Internet files. A typical path is
+C:\Documents and Settings\username\Local Settings\Temporary Internet Files.
+See documentation for CSIDL_INTERNET_CACHE.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -407,7 +444,14 @@ as icons that is customized for a particular user.
 <p>
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
-XDG Base Directory Specification</a>
+XDG Base Directory Specification</a>.
+In this case the directory retrieved will be XDG_DATA_HOME.
+</p>
+<p>
+On Windows this is the folder to use for local (as opposed to
+roaming) application data. See documentation for
+CSIDL_LOCAL_APPDATA. Note that on Windows it thus is the same as
+what <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir" title="g_get_user_config_dir ()"><code class="function">g_get_user_config_dir()</code></a> returns.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -431,7 +475,14 @@ configuration information such as user preferences and settings.
 <p>
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
-XDG Base Directory Specification</a>
+XDG Base Directory Specification</a>.
+In this case the directory retrieved will be XDG_CONFIG_HOME.
+</p>
+<p>
+On Windows this is the folder to use for local (as opposed to
+roaming) application data. See documentation for
+CSIDL_LOCAL_APPDATA. Note that on Windows it thus is the same as
+what <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-data-dir" title="g_get_user_data_dir ()"><code class="function">g_get_user_data_dir()</code></a> returns.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -443,6 +494,39 @@ XDG Base Directory Specification</a>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.6</p>
+</div>
+<hr>
+<div class="refsect2" title="g_get_user_runtime_dir ()">
+<a name="g-get-user-runtime-dir"></a><h3>g_get_user_runtime_dir ()</h3>
+<pre class="programlisting">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *       g_get_user_runtime_dir              (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Returns a directory that is unique to the current user on the local
+system.
+</p>
+<p>
+On UNIX platforms this is determined using the mechanisms described in
+the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
+XDG Base Directory Specification</a>.  This is the directory
+specified in the <code class="envar">XDG_RUNTIME_DIR</code> environment variable.
+In the case that this variable is not set, GLib will issue a warning
+message to stderr and return the value of <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-cache-dir" title="g_get_user_cache_dir ()"><code class="function">g_get_user_cache_dir()</code></a>.
+</p>
+<p>
+On Windows this is the folder to use for local (as opposed to
+roaming) application data. See documentation for
+CSIDL_LOCAL_APPDATA.  Note that on Windows it thus is the same as
+what <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-config-dir" title="g_get_user_config_dir ()"><code class="function">g_get_user_config_dir()</code></a> returns.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a string owned by GLib that must not be modified or freed.
+
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
 </div>
 <hr>
 <div class="refsect2" title="enum GUserDirectory">
@@ -572,6 +656,7 @@ system-wide application data.
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
 XDG Base Directory Specification</a>
+In this case the list of directories retrieved will be XDG_DATA_DIRS.
 </p>
 <p>
 On Windows the first elements in the list are the Application Data
@@ -622,7 +707,16 @@ system-wide configuration information.
 <p>
 On UNIX platforms this is determined using the mechanisms described in
 the <a class="ulink" href="http://www.freedesktop.org/Standards/basedir-spec" target="_top">
-XDG Base Directory Specification</a>
+XDG Base Directory Specification</a>.
+In this case the list of directories retrieved will be XDG_CONFIG_DIRS.
+</p>
+<p>
+On Windows is the directory that contains application data for all users.
+A typical path is C:\Documents and Settings\All Users\Application Data.
+This folder is used for application data that is not user specific.
+For example, an application can store a spell-check dictionary, a database
+of clip art, or a log file in the CSIDL_COMMON_APPDATA folder.
+This information will not roam and is available to anyone using the computer.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -748,7 +842,7 @@ inspecting the environment variables <code class="envar">TMPDIR</code>,
 <code class="envar">TMP</code>, and <code class="envar">TEMP</code> in that order. If none 
 of those are defined "/tmp" is returned on UNIX and "C:\" on Windows. 
 The encoding of the returned string is system-defined. On Windows, 
-it is always UTF-8. The return value is never <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+it is always UTF-8. The return value is never <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> or the empty string.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -839,9 +933,34 @@ The returned string should be freed when no longer needed.
 <a name="g-path-is-absolute"></a><h3>g_path_is_absolute ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_path_is_absolute                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file_name</code></em>);</pre>
 <p>
-Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the given <em class="parameter"><code>file_name</code></em> is an absolute file name,
-i.e. it contains a full path from the root directory such as "/usr/local"
-on UNIX or "C:\windows" on Windows systems.
+Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the given <em class="parameter"><code>file_name</code></em> is an absolute file name.
+Note that this is a somewhat vague concept on Windows.
+</p>
+<p>
+On POSIX systems, an absolute file name is well-defined. It always
+starts from the single root directory. For example "/usr/local".
+</p>
+<p>
+On Windows, the concepts of current drive and drive-specific
+current directory introduce vagueness. This function interprets as
+an absolute file name one that either begins with a directory
+separator such as "\Users\tml" or begins with the root on a drive,
+for example "C:\Windows". The first case also includes UNC paths
+such as "\\myserver\docs\foo". In all cases, either slashes or
+backslashes are accepted.
+</p>
+<p>
+Note that a file name relative to the current drive root does not
+truly specify a file uniquely over time and across processes, as
+the current drive is a per-process value and can be changed.
+</p>
+<p>
+File names relative the current directory on some specific drive,
+such as "D:foo/bar", are not interpreted as absolute by this
+function, but they obviously are not relative to the normal current
+directory as returned by <code class="function">getcwd()</code> or <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-current-dir" title="g_get_current_dir ()"><code class="function">g_get_current_dir()</code></a>
+either. Such paths should be avoided, or need to be handled using
+Windows-specific code.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -853,7 +972,7 @@ on UNIX or "C:\windows" on Windows systems.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>file_name</code></em> is an absolute path. 
+<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>file_name</code></em> is absolute. 
 </td>
 </tr>
 </tbody>
@@ -1518,6 +1637,6 @@ Set the pointer at the specified location to <a class="link" href="glib-Standard
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

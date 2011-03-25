@@ -886,7 +886,8 @@ test_file_functions (void)
   fd = g_mkstemp (template);
   if (g_test_verbose() && fd != -1)
     g_print ("g_mkstemp works even if template doesn't end in XXXXXX\n");
-  close (fd);
+  if (fd != -1)
+    close (fd);
   strcpy (template, "fooXXXXXX");
   fd = g_mkstemp (template);
   if (fd == -1)
@@ -1255,7 +1256,7 @@ various_string_tests (void)
   GTimeVal ref_date, date;
   gchar *tmp_string = NULL, *tmp_string_2, *string, *date_str;
   guint i;
-  gchar *tz;
+  const gchar *tz;
 
   if (g_test_verbose())
     g_print ("checking string chunks...");
@@ -1283,6 +1284,7 @@ various_string_tests (void)
 
 #define REF_INVALID1      "Wed Dec 19 17:20:20 GMT 2007"
 #define REF_INVALID2      "1980-02-22T10:36:00Zulu"
+#define REF_INVALID3      "1980-02-22T"
 #define REF_SEC_UTC       320063760
 #define REF_STR_UTC       "1980-02-22T10:36:00Z"
 #define REF_STR_LOCAL     "1980-02-22T13:36:00"
@@ -1294,6 +1296,7 @@ various_string_tests (void)
 #define REF_STR_USEC_CEST "19800222T123600.050000000+0200"
 #define REF_STR_USEC_EST  "1980-02-22T05:36:00,05-05:00"
 #define REF_STR_USEC_NST  "19800222T070600,0500-0330"
+#define REF_STR_DATE_ONLY "1980-02-22"
 
   if (g_test_verbose())
     g_print ("checking g_time_val_from_iso8601...\n");
@@ -1301,6 +1304,8 @@ various_string_tests (void)
   ref_date.tv_usec = 0;
   g_assert (g_time_val_from_iso8601 (REF_INVALID1, &date) == FALSE);
   g_assert (g_time_val_from_iso8601 (REF_INVALID2, &date) == FALSE);
+  g_assert (g_time_val_from_iso8601 (REF_INVALID3, &date) == FALSE);
+  g_assert (g_time_val_from_iso8601 (REF_STR_DATE_ONLY, &date) != FALSE);
   g_assert (g_time_val_from_iso8601 (REF_STR_UTC, &date) != FALSE);
   if (g_test_verbose())
     g_print ("\t=> UTC stamp = %ld.%06ld (should be: %ld.%06ld) (%ld.%06ld off)\n",

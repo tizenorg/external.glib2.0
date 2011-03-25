@@ -26,13 +26,14 @@
 
 #include "config.h"
 
-#include "glib.h"
-#include "galias.h"
+#include "gqueue.h"
+
+#include "gtestutils.h"
 
 /**
  * g_queue_new:
  *
- * Creates a new #GQueue. 
+ * Creates a new #GQueue.
  *
  * Returns: a new #GQueue.
  **/
@@ -900,7 +901,7 @@ g_queue_remove (GQueue        *queue,
  * @queue: a #GQueue
  * @data: data to remove
  * 
- * Remove all elemeents in @queue which contains @data.
+ * Remove all elements whose data equals @data from @queue.
  * 
  * Since: 2.4
  **/
@@ -1008,6 +1009,3 @@ g_queue_insert_sorted (GQueue           *queue,
   else
     g_queue_push_tail (queue, data);
 }
-
-#define __G_QUEUE_C__
-#include "galiasdef.c"

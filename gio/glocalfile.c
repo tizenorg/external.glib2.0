@@ -105,12 +105,6 @@
 #endif
 #endif
 
-#include "gioalias.h"
-
-/* See gstdio.h */
-#ifndef G_OS_WIN32
-#define _g_stat_struct stat
-#endif
 
 static void g_local_file_file_iface_init (GFileIface *iface);
 
@@ -741,7 +735,7 @@ get_mount_info (GFileInfo             *fs_info,
 		const char            *path,
 		GFileAttributeMatcher *matcher)
 {
-  struct _g_stat_struct buf;
+  GStatBuf buf;
   gboolean got_info;
   gpointer info_as_ptr;
   guint mount_info;
@@ -1052,7 +1046,7 @@ g_local_file_find_enclosing_mount (GFile         *file,
                                    GError       **error)
 {
   GLocalFile *local = G_LOCAL_FILE (file);
-  struct _g_stat_struct buf;
+  GStatBuf buf;
   char *mountpoint;
   GMount *mount;
 
@@ -1098,7 +1092,7 @@ g_local_file_set_display_name (GFile         *file,
 {
   GLocalFile *local, *new_local;
   GFile *new_file, *parent;
-  struct _g_stat_struct statbuf;
+  GStatBuf statbuf;
   GVfsClass *class;
   GVfs *vfs;
   int errsv;
@@ -1459,6 +1453,8 @@ g_local_file_delete (GFile         *file,
   return TRUE;
 }
 
+#ifndef G_OS_WIN32
+
 static char *
 strip_trailing_slashes (const char *path)
 {
@@ -1516,7 +1512,7 @@ get_parent (const char *path,
             dev_t      *parent_dev)
 {
   char *parent, *tmp;
-  struct _g_stat_struct parent_stat;
+  GStatBuf parent_stat;
   int num_recursions;
   char *path_copy;
 
@@ -1582,8 +1578,6 @@ expand_all_symlinks (const char *path)
   
   return res;
 }
-
-#ifndef G_OS_WIN32
 
 static char *
 find_mountpoint_for (const char *file, 
@@ -1725,12 +1719,12 @@ _g_local_file_has_trash_dir (const char *dirname, dev_t dir_dev)
   char *topdir, *globaldir, *trashdir, *tmpname;
   uid_t uid;
   char uid_str[32];
-  struct _g_stat_struct global_stat, trash_stat;
+  GStatBuf global_stat, trash_stat;
   gboolean res;
 
   if (g_once_init_enter (&home_dev_set))
     {
-      struct _g_stat_struct home_stat;
+      GStatBuf home_stat;
 
       g_stat (g_get_home_dir (), &home_stat);
       home_dev = home_stat.st_dev;
@@ -1792,7 +1786,7 @@ g_local_file_trash (GFile         *file,
 		    GError       **error)
 {
   GLocalFile *local = G_LOCAL_FILE (file);
-  struct _g_stat_struct file_stat, home_stat;
+  GStatBuf file_stat, home_stat;
   const char *homedir;
   char *trashdir, *topdir, *infodir, *filesdir;
   char *basename, *trashname, *trashfile, *infoname, *infofile;
@@ -1802,7 +1796,7 @@ g_local_file_trash (GFile         *file,
   gboolean is_homedir_trash;
   char delete_time[32];
   int fd;
-  struct _g_stat_struct trash_stat, global_stat;
+  GStatBuf trash_stat, global_stat;
   char *dirname, *globaldir;
   GVfsClass *class;
   GVfs *vfs;
@@ -2207,7 +2201,7 @@ g_local_file_move (GFile                  *source,
 		   GError                **error)
 {
   GLocalFile *local_source, *local_destination;
-  struct _g_stat_struct statbuf;
+  GStatBuf statbuf;
   gboolean destination_exist, source_is_dir;
   char *backup_name;
   int res;

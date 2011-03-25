@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Type Information</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="rn01.html" title="API Reference">
 <link rel="prev" href="rn01.html" title="API Reference">
 <link rel="next" href="GTypePlugin.html" title="GTypePlugin">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -72,6 +72,9 @@ typedef             <a class="link" href="gobject-Type-Information.html#GType" t
                                                          g_type,
                                                          c_type)
 #define             <a class="link" href="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-PRIVATE:CAPS" title="G_TYPE_INSTANCE_GET_PRIVATE()">G_TYPE_INSTANCE_GET_PRIVATE</a>         (instance,
+                                                         g_type,
+                                                         c_type)
+#define             <a class="link" href="gobject-Type-Information.html#G-TYPE-CLASS-GET-PRIVATE:CAPS" title="G_TYPE_CLASS_GET_PRIVATE()">G_TYPE_CLASS_GET_PRIVATE</a>            (klass,
                                                          g_type,
                                                          c_type)
 #define             <a class="link" href="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE:CAPS" title="G_TYPE_CHECK_INSTANCE()">G_TYPE_CHECK_INSTANCE</a>               (instance)
@@ -221,6 +224,20 @@ enum                <a class="link" href="gobject-Type-Information.html#GTypeFun
                                                          T_P,
                                                          _f_,
                                                          _C_)
+#define             <a class="link" href="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE:CAPS" title="G_DEFINE_BOXED_TYPE()">G_DEFINE_BOXED_TYPE</a>                 (TypeName,
+                                                         type_name,
+                                                         copy_func,
+                                                         free_func)
+#define             <a class="link" href="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE-WITH-CODE:CAPS" title="G_DEFINE_BOXED_TYPE_WITH_CODE()">G_DEFINE_BOXED_TYPE_WITH_CODE</a>       (TypeName,
+                                                         type_name,
+                                                         copy_func,
+                                                         free_func,
+                                                         _C_)
+#define             <a class="link" href="gobject-Type-Information.html#G-DEFINE-POINTER-TYPE:CAPS" title="G_DEFINE_POINTER_TYPE()">G_DEFINE_POINTER_TYPE</a>               (TypeName,
+                                                         type_name)
+#define             <a class="link" href="gobject-Type-Information.html#G-DEFINE-POINTER-TYPE-WITH-CODE:CAPS" title="G_DEFINE_POINTER_TYPE_WITH_CODE()">G_DEFINE_POINTER_TYPE_WITH_CODE</a>     (TypeName,
+                                                         type_name,
+                                                         _C_)
 
 
 #define             <a class="link" href="gobject-Type-Information.html#G-TYPE-INVALID:CAPS" title="G_TYPE_INVALID">G_TYPE_INVALID</a>
@@ -245,6 +262,7 @@ enum                <a class="link" href="gobject-Type-Information.html#GTypeFun
 #define             <a class="link" href="gobject-Type-Information.html#G-TYPE-PARAM:CAPS" title="G_TYPE_PARAM">G_TYPE_PARAM</a>
 #define             <a class="link" href="gobject-Type-Information.html#G-TYPE-OBJECT:CAPS" title="G_TYPE_OBJECT">G_TYPE_OBJECT</a>
 #define             <a class="link" href="gobject-Type-Information.html#G-TYPE-GTYPE:CAPS" title="G_TYPE_GTYPE">G_TYPE_GTYPE</a>
+#define             <a class="link" href="gobject-Type-Information.html#G-TYPE-VARIANT:CAPS" title="G_TYPE_VARIANT">G_TYPE_VARIANT</a>
 
 #define             <a class="link" href="gobject-Type-Information.html#G-TYPE-RESERVED-GLIB-FIRST:CAPS" title="G_TYPE_RESERVED_GLIB_FIRST">G_TYPE_RESERVED_GLIB_FIRST</a>
 #define             <a class="link" href="gobject-Type-Information.html#G-TYPE-RESERVED-GLIB-LAST:CAPS" title="G_TYPE_RESERVED_GLIB_LAST">G_TYPE_RESERVED_GLIB_LAST</a>
@@ -1332,6 +1350,46 @@ This macro should only be used in type implementations.
 <p class="since">Since 2.4</p>
 </div>
 <hr>
+<div class="refsect2" title="G_TYPE_CLASS_GET_PRIVATE()">
+<a name="G-TYPE-CLASS-GET-PRIVATE:CAPS"></a><h3>G_TYPE_CLASS_GET_PRIVATE()</h3>
+<pre class="programlisting">#define G_TYPE_CLASS_GET_PRIVATE(klass, g_type, c_type)   ((c_type*) g_type_class_get_private ((GTypeClass*) (klass), (g_type)))
+</pre>
+<p>
+Gets the private class structure for a particular type.
+The private structure must have been registered in the
+<code class="function">get_type()</code> function with <a class="link" href="gobject-Type-Information.html#g-type-add-class-private" title="g_type_add_class_private ()"><code class="function">g_type_add_class_private()</code></a>.
+</p>
+<p>
+This macro should only be used in type implementations.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>klass</code></em> :</span></p></td>
+<td>the class of a type deriving from <em class="parameter"><code>private_type</code></em>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>g_type</code></em> :</span></p></td>
+<td>the type identifying which private data to retrieve.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>c_type</code></em> :</span></p></td>
+<td>The C type for the private structure.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a pointer to the private data structure.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.24</p>
+</div>
+<hr>
 <div class="refsect2" title="G_TYPE_CHECK_INSTANCE()">
 <a name="G-TYPE-CHECK-INSTANCE:CAPS"></a><h3>G_TYPE_CHECK_INSTANCE()</h3>
 <pre class="programlisting">#define G_TYPE_CHECK_INSTANCE(instance)				(_G_TYPE_CHI ((GTypeInstance*) (instance)))
@@ -1965,13 +2023,24 @@ g_type_class_peek (g_type_parent (G_TYPE_FROM_CLASS (g_class)));
 <pre class="programlisting"><span class="returnvalue">void</span>                g_type_class_add_private            (<em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> g_class</code></em>,
                                                          <em class="parameter"><code><a href="./../glib/glib/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> private_size</code></em>);</pre>
 <p>
-Registers a private structure for an instantiatable type;
-when an object is allocated, the private structures for
+Registers a private structure for an instantiatable type.
+</p>
+<p>
+When an object is allocated, the private structures for
 the type and all of its parent types are allocated
 sequentially in the same memory block as the public
-structures. This function should be called in the
-type's <code class="function">class_init()</code> function. The private structure can
-be retrieved using the <a class="link" href="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-PRIVATE:CAPS" title="G_TYPE_INSTANCE_GET_PRIVATE()"><code class="function">G_TYPE_INSTANCE_GET_PRIVATE()</code></a> macro.
+structures.
+</p>
+<p>
+Note that the accumulated size of the private structures of
+a type and all its parent types cannot excced 64kB.
+</p>
+<p>
+This function should be called in the type's <code class="function">class_init()</code> function.
+The private structure can be retrieved using the
+<a class="link" href="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-PRIVATE:CAPS" title="G_TYPE_INSTANCE_GET_PRIVATE()"><code class="function">G_TYPE_INSTANCE_GET_PRIVATE()</code></a> macro.
+</p>
+<p>
 The following example shows attaching a private structure
 <span class="structname">MyObjectPrivate</span> to an object
 <span class="structname">MyObject</span> defined in the standard GObject
@@ -2089,7 +2158,7 @@ sequentially in the same memory block as the public
 structures. This function should be called in the
 type's <code class="function">get_type()</code> function after the type is registered.
 The private structure can be retrieved using the
-<code class="function">G_TYPE_CLASS_GET_PRIVATE()</code> macro.
+<a class="link" href="gobject-Type-Information.html#G-TYPE-CLASS-GET-PRIVATE:CAPS" title="G_TYPE_CLASS_GET_PRIVATE()"><code class="function">G_TYPE_CLASS_GET_PRIVATE()</code></a> macro.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -3969,6 +4038,147 @@ class init functions.
 <p class="since">Since 2.4</p>
 </div>
 <hr>
+<div class="refsect2" title="G_DEFINE_BOXED_TYPE()">
+<a name="G-DEFINE-BOXED-TYPE:CAPS"></a><h3>G_DEFINE_BOXED_TYPE()</h3>
+<pre class="programlisting">#define G_DEFINE_BOXED_TYPE(TypeName, type_name, copy_func, free_func) G_DEFINE_BOXED_TYPE_WITH_CODE (TypeName, type_name, copy_func, free_func, {})
+</pre>
+<p>
+A convenience macro for boxed type implementations, which defines a
+<code class="function">type_name_get_type()</code> function registering the boxed type.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>TypeName</code></em> :</span></p></td>
+<td>The name of the new type, in Camel case.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type_name</code></em> :</span></p></td>
+<td>The name of the new type, in lowercase, with words
+ separated by '_'.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>copy_func</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-Boxed-Types.html#GBoxedCopyFunc" title="GBoxedCopyFunc ()"><span class="type">GBoxedCopyFunc</span></a> for the new type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>free_func</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-Boxed-Types.html#GBoxedFreeFunc" title="GBoxedFreeFunc ()"><span class="type">GBoxedFreeFunc</span></a> for the new type
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.26</p>
+</div>
+<hr>
+<div class="refsect2" title="G_DEFINE_BOXED_TYPE_WITH_CODE()">
+<a name="G-DEFINE-BOXED-TYPE-WITH-CODE:CAPS"></a><h3>G_DEFINE_BOXED_TYPE_WITH_CODE()</h3>
+<pre class="programlisting">#define G_DEFINE_BOXED_TYPE_WITH_CODE(TypeName, type_name, copy_func, free_func, _C_) _G_DEFINE_BOXED_TYPE_BEGIN (TypeName, type_name, copy_func, free_func) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+</pre>
+<p>
+A convenience macro for boxed type implementations.
+Similar to <a class="link" href="gobject-Type-Information.html#G-DEFINE-BOXED-TYPE:CAPS" title="G_DEFINE_BOXED_TYPE()"><code class="function">G_DEFINE_BOXED_TYPE()</code></a>, but allows to insert custom code into the
+<code class="function">type_name_get_type()</code> function, e.g. to register value transformations with
+<a class="link" href="gobject-Generic-values.html#g-value-register-transform-func" title="g_value_register_transform_func ()"><code class="function">g_value_register_transform_func()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>TypeName</code></em> :</span></p></td>
+<td>The name of the new type, in Camel case.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type_name</code></em> :</span></p></td>
+<td>The name of the new type, in lowercase, with words
+ separated by '_'.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>copy_func</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-Boxed-Types.html#GBoxedCopyFunc" title="GBoxedCopyFunc ()"><span class="type">GBoxedCopyFunc</span></a> for the new type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>free_func</code></em> :</span></p></td>
+<td>the <a class="link" href="gobject-Boxed-Types.html#GBoxedFreeFunc" title="GBoxedFreeFunc ()"><span class="type">GBoxedFreeFunc</span></a> for the new type
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>_C_</code></em> :</span></p></td>
+<td>Custom code that gets inserted in the *_get_type() function.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.26</p>
+</div>
+<hr>
+<div class="refsect2" title="G_DEFINE_POINTER_TYPE()">
+<a name="G-DEFINE-POINTER-TYPE:CAPS"></a><h3>G_DEFINE_POINTER_TYPE()</h3>
+<pre class="programlisting">#define G_DEFINE_POINTER_TYPE(TypeName, type_name) G_DEFINE_POINTER_TYPE_WITH_CODE (TypeName, type_name, {})
+</pre>
+<p>
+A convenience macro for pointer type implementations, which defines a
+<code class="function">type_name_get_type()</code> function registering the pointer type.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>TypeName</code></em> :</span></p></td>
+<td>The name of the new type, in Camel case.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type_name</code></em> :</span></p></td>
+<td>The name of the new type, in lowercase, with words
+ separated by '_'.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.26</p>
+</div>
+<hr>
+<div class="refsect2" title="G_DEFINE_POINTER_TYPE_WITH_CODE()">
+<a name="G-DEFINE-POINTER-TYPE-WITH-CODE:CAPS"></a><h3>G_DEFINE_POINTER_TYPE_WITH_CODE()</h3>
+<pre class="programlisting">#define G_DEFINE_POINTER_TYPE_WITH_CODE(TypeName, type_name, _C_) _G_DEFINE_POINTER_TYPE_BEGIN (TypeName, type_name) {_C_;} _G_DEFINE_TYPE_EXTENDED_END()
+</pre>
+<p>
+A convenience macro for pointer type implementations.
+Similar to <a class="link" href="gobject-Type-Information.html#G-DEFINE-POINTER-TYPE:CAPS" title="G_DEFINE_POINTER_TYPE()"><code class="function">G_DEFINE_POINTER_TYPE()</code></a>, but allows to insert custom code into the
+<code class="function">type_name_get_type()</code> function.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>TypeName</code></em> :</span></p></td>
+<td>The name of the new type, in Camel case.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type_name</code></em> :</span></p></td>
+<td>The name of the new type, in lowercase, with words
+ separated by '_'.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>_C_</code></em> :</span></p></td>
+<td>Custom code that gets inserted in the *_get_type() function.
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.26</p>
+</div>
+<hr>
 <div class="refsect2" title="G_TYPE_INVALID">
 <a name="G-TYPE-INVALID:CAPS"></a><h3>G_TYPE_INVALID</h3>
 <pre class="programlisting">#define G_TYPE_INVALID			G_TYPE_MAKE_FUNDAMENTAL (0)
@@ -4171,9 +4381,32 @@ The type for <a class="link" href="gobject-Type-Information.html#GType" title="G
 </p>
 </div>
 <hr>
+<div class="refsect2" title="G_TYPE_VARIANT">
+<a name="G-TYPE-VARIANT:CAPS"></a><h3>G_TYPE_VARIANT</h3>
+<pre class="programlisting">#define G_TYPE_VARIANT                  G_TYPE_MAKE_FUNDAMENTAL (21)
+</pre>
+<p>
+The fundamental type corresponding to <a href="./../glib/glib/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>.
+</p>
+<p>
+All floating <a href="./../glib/glib/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> instances passed through the <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a> system are
+consumed.
+</p>
+<p>
+Note that callbacks in closures, and signal handlers
+for signals of return type <a class="link" href="gobject-Type-Information.html#G-TYPE-VARIANT:CAPS" title="G_TYPE_VARIANT"><code class="literal">G_TYPE_VARIANT</code></a>, must never return floating
+variants.
+</p>
+<p>
+Note: GLib 2.24 did include a boxed type with this name. It was replaced
+with this fundamental type in 2.26.
+</p>
+<p class="since">Since 2.26</p>
+</div>
+<hr>
 <div class="refsect2" title="G_TYPE_RESERVED_GLIB_FIRST">
 <a name="G-TYPE-RESERVED-GLIB-FIRST:CAPS"></a><h3>G_TYPE_RESERVED_GLIB_FIRST</h3>
-<pre class="programlisting">#define G_TYPE_RESERVED_GLIB_FIRST (21)
+<pre class="programlisting">#define G_TYPE_RESERVED_GLIB_FIRST (22)
 </pre>
 <p>
 First fundamental type number to create a new fundamental type id with
@@ -4222,6 +4455,6 @@ type id with <a class="link" href="gobject-Type-Information.html#G-TYPE-MAKE-FUN
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

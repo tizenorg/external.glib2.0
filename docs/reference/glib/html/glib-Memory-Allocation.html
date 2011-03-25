@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Memory Allocation</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-Dynamic-Loading-of-Modules.html" title="Dynamic Loading of Modules">
 <link rel="next" href="glib-IO-Channels.html" title="IO Channels">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -104,23 +104,27 @@ extern              GMemVTable	*<a class="link" href="glib-Memory-Allocation.htm
 <p>
 These functions provide support for allocating and freeing memory.
 </p>
+<p>
+</p>
 <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
-<p>
 If any call to allocate memory fails, the application is terminated.
 This also means that there is no need to check if the call succeeded.
-</p>
 </div>
+<p>
+</p>
+<p>
+</p>
 <div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
-<p>
 It's important to match <a class="link" href="glib-Memory-Allocation.html#g-malloc" title="g_malloc ()"><code class="function">g_malloc()</code></a> with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>, plain <code class="function">malloc()</code> with <code class="function">free()</code>,
 and (if you're using C++) new with delete and new[] with delete[]. Otherwise
 bad things can happen, since these allocators may use different memory
 pools (and new/delete call constructors and destructors). See also
 <a class="link" href="glib-Memory-Allocation.html#g-mem-set-vtable" title="g_mem_set_vtable ()"><code class="function">g_mem_set_vtable()</code></a>.
-</p>
 </div>
+<p>
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="glib-Memory-Allocation.details"></a><h2>Details</h2>
@@ -153,7 +157,7 @@ so might hide memory allocation errors.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td> a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -189,7 +193,7 @@ so might hide memory allocation errors.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>.
+<td> a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>.
 </td>
 </tr>
 </tbody>
@@ -225,7 +229,7 @@ Care is taken to avoid overflow when calculating the size of the allocated block
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the new allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td> a pointer to the new allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -256,7 +260,7 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td> a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -289,7 +293,7 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td> a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -327,7 +331,7 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the new allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td> a pointer to the new allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -352,7 +356,7 @@ If <em class="parameter"><code>n_bytes</code></em> is 0 it returns <a class="lin
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the allocated memory
+<td> a pointer to the allocated memory
 </td>
 </tr>
 </tbody>
@@ -376,7 +380,7 @@ If <em class="parameter"><code>n_bytes</code></em> is 0 it returns <a class="lin
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the allocated memory
+<td> a pointer to the allocated memory
 </td>
 </tr>
 </tbody>
@@ -409,7 +413,7 @@ and <em class="parameter"><code>mem</code></em> will be freed unless it is <a cl
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the new address of the allocated memory
+<td> the new address of the allocated memory
 </td>
 </tr>
 </tbody>
@@ -433,7 +437,7 @@ Contrast with <a class="link" href="glib-Memory-Allocation.html#g-malloc" title=
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 </tbody>
@@ -457,7 +461,7 @@ failure. Contrast with <a class="link" href="glib-Memory-Allocation.html#g-mallo
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 </tbody>
@@ -489,7 +493,7 @@ on failure. If <em class="parameter"><code>mem</code></em> is <a class="link" hr
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 </tbody>
@@ -519,7 +523,7 @@ but care is taken to detect possible overflow during multiplication.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the allocated memory
+<td> a pointer to the allocated memory
 </td>
 </tr>
 </tbody>
@@ -550,7 +554,7 @@ but care is taken to detect possible overflow during multiplication.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the allocated memory
+<td> a pointer to the allocated memory
 </td>
 </tr>
 </tbody>
@@ -587,7 +591,7 @@ but care is taken to detect possible overflow during multiplication.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the new address of the allocated memory
+<td> the new address of the allocated memory
 </td>
 </tr>
 </tbody>
@@ -618,7 +622,7 @@ but care is taken to detect possible overflow during multiplication.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 </tbody>
@@ -649,7 +653,7 @@ but care is taken to detect possible overflow during multiplication.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 </tbody>
@@ -686,7 +690,7 @@ but care is taken to detect possible overflow during multiplication.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 </tbody>
@@ -782,12 +786,12 @@ Thus it provides the same advantages and pitfalls as <code class="function">allo
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
-<td>   number of bytes to allocate.
+<td>number of bytes to allocate.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>space for <em class="parameter"><code>size</code></em> bytes, allocated on the stack
+<td> space for <em class="parameter"><code>size</code></em> bytes, allocated on the stack
 </td>
 </tr>
 </tbody>
@@ -810,12 +814,12 @@ Wraps <a class="link" href="glib-Memory-Allocation.html#g-alloca" title="g_alloc
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_structs</code></em> :</span></p></td>
-<td>  Number of chunks to be allocated
+<td>Number of chunks to be allocated
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>    Pointer to stack space for <em class="parameter"><code>n_structs</code></em> chunks of type <em class="parameter"><code>struct_type</code></em>
+<td> Pointer to stack space for <em class="parameter"><code>n_structs</code></em> chunks of type <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -880,8 +884,8 @@ from <em class="parameter"><code>mem</code></em>. If <em class="parameter"><code
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a pointer to the newly-allocated copy of the memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if <em class="parameter"><code>mem</code></em>
-is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
+<td> a pointer to the newly-allocated copy of the memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if <em class="parameter"><code>mem</code></em>
+ is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
 </td>
 </tr>
 </tbody>
@@ -973,7 +977,7 @@ should return <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="
 <p>
 Checks whether the allocator used by <a class="link" href="glib-Memory-Allocation.html#g-malloc" title="g_malloc ()"><code class="function">g_malloc()</code></a> is the system's
 malloc implementation. If it returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> memory allocated with
-<code class="function">malloc()</code> can be used interchangeable with memory allocated using <a class="link" href="glib-Memory-Allocation.html#g-malloc" title="g_malloc ()"><code class="function">g_malloc()</code></a>. 
+<code class="function">malloc()</code> can be used interchangeable with memory allocated using <a class="link" href="glib-Memory-Allocation.html#g-malloc" title="g_malloc ()"><code class="function">g_malloc()</code></a>.
 This function is useful for avoiding an extra copy of allocated memory returned
 by a non-GLib-based API.
 </p>
@@ -1024,6 +1028,6 @@ previously installed the <a class="link" href="glib-Memory-Allocation.html#glib-
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

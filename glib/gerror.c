@@ -26,9 +26,10 @@
 
 #include "config.h"
 
-#include "glib.h"
-#include "galias.h"
+#include "gerror.h"
 
+#include "gstrfuncs.h"
+#include "gtestutils.h"
 
 /**
  * g_error_new_valist:
@@ -384,6 +385,3 @@ g_propagate_prefixed_error (GError      **dest,
       va_end (ap);
     }
 }
-
-#define __G_ERROR_C__
-#include "galiasdef.c"

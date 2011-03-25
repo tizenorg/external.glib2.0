@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Strings</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-Hash-Tables.html" title="Hash Tables">
 <link rel="next" href="glib-String-Chunks.html" title="String Chunks">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -124,10 +124,11 @@
 <div class="refsect1" title="Description">
 <a name="glib-Strings.description"></a><h2>Description</h2>
 <p>
-A <a class="link" href="glib-Strings.html#GString" title="GString"><span class="type">GString</span></a> is similar to a standard C string, except that it grows
-automatically as text is appended or inserted. Also, it stores the
-length of the string, so can be used for binary data with embedded
-nul bytes.
+A <a class="link" href="glib-Strings.html#GString" title="GString"><span class="type">GString</span></a> is an object that handles the memory management of a C string
+for you. You can think of it as similar to a Java StringBuffer.
+In addition to the string itself, GString stores the length of the string,
+so can be used for binary data with embedded nul bytes. To access the C
+string managed by the GString <em class="parameter"><code>string</code></em>, simply use <em class="parameter"><code>string-&gt;str</code></em>.
 </p>
 </div>
 <div class="refsect1" title="Details">
@@ -648,7 +649,7 @@ are reserved in URIs using URI-style escape sequences.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>reserved_chars_allowed</code></em> :</span></p></td>
-<td>a string of reserved characters allowed to be used
+<td>a string of reserved characters allowed to be used, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -914,14 +915,14 @@ into the string at the given position.
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *val</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gssize" title="gssize"><span class="type">gssize</span></a> len</code></em>);</pre>
 <p>
-Inserts <em class="parameter"><code>len</code></em> bytes of <em class="parameter"><code>val</code></em> into <em class="parameter"><code>string</code></em> at <em class="parameter"><code>pos</code></em>.  
-Because <em class="parameter"><code>len</code></em> is provided, <em class="parameter"><code>val</code></em> may contain embedded 
-nuls and need not be nul-terminated. If <em class="parameter"><code>pos</code></em> is -1, 
+Inserts <em class="parameter"><code>len</code></em> bytes of <em class="parameter"><code>val</code></em> into <em class="parameter"><code>string</code></em> at <em class="parameter"><code>pos</code></em>.
+Because <em class="parameter"><code>len</code></em> is provided, <em class="parameter"><code>val</code></em> may contain embedded
+nuls and need not be nul-terminated. If <em class="parameter"><code>pos</code></em> is -1,
 bytes are inserted at the end of the string.
 </p>
 <p>
-Since this function does not stop at nul bytes, it is 
-the caller's responsibility to ensure that <em class="parameter"><code>val</code></em> has at 
+Since this function does not stop at nul bytes, it is
+the caller's responsibility to ensure that <em class="parameter"><code>val</code></em> has at
 least <em class="parameter"><code>len</code></em> addressable bytes.
 </p>
 <div class="variablelist"><table border="0">
@@ -934,7 +935,7 @@ least <em class="parameter"><code>len</code></em> addressable bytes.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pos</code></em> :</span></p></td>
-<td>position in <em class="parameter"><code>string</code></em> where insertion should 
+<td>position in <em class="parameter"><code>string</code></em> where insertion should
       happen, or -1 for at the end
 </td>
 </tr>
@@ -1143,7 +1144,9 @@ always, string-&gt;str[string-&gt;len] will be a nul byte.)
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> free_segment</code></em>);</pre>
 <p>
 Frees the memory allocated for the <a class="link" href="glib-Strings.html#GString" title="GString"><span class="type">GString</span></a>.
-If <em class="parameter"><code>free_segment</code></em> is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> it also frees the character data.
+If <em class="parameter"><code>free_segment</code></em> is <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> it also frees the character data.  If 
+it's <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>, the caller gains ownership of the buffer and must
+free it after use with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -1285,6 +1288,6 @@ For use with <a class="link" href="glib-Hash-Tables.html#GHashTable" title="GHas
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

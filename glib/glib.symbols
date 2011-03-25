@@ -1,7 +1,5 @@
 /* This file lists all exported symbols. It is used to generate
- * the glib.def file used to control exports on Windows and the
- * galias.h/galiasdef.c files used to avoid PLT entries for 
- * internal uses of exported functions (see makegalias.pl).
+ * the glib.def file used to control exports on Windows.
  * 
  * Every symbol must be included in the right
  * #ifdef IN_HEADER(sym) #endif and
@@ -325,6 +323,73 @@ g_date_valid_year G_GNUC_CONST
 #endif
 #endif
 
+#if IN_HEADER(__G_DATE_TIME_H__)
+#if IN_FILE(__G_DATE_TIME_C__)
+g_date_time_add
+g_date_time_add_days
+g_date_time_add_full
+g_date_time_add_hours
+g_date_time_add_minutes
+g_date_time_add_months
+g_date_time_add_seconds
+g_date_time_add_weeks
+g_date_time_add_years
+g_date_time_compare
+g_date_time_difference
+g_date_time_equal
+g_date_time_format G_GNUC_MALLOC
+g_date_time_get_day_of_month
+g_date_time_get_day_of_week
+g_date_time_get_day_of_year
+g_date_time_get_hour
+g_date_time_get_microsecond
+g_date_time_get_minute
+g_date_time_get_month
+g_date_time_get_second
+g_date_time_get_seconds
+g_date_time_get_timezone_abbreviation
+g_date_time_get_utc_offset
+g_date_time_get_week_numbering_year
+g_date_time_get_week_of_year
+g_date_time_get_year
+g_date_time_get_ymd
+g_date_time_hash
+g_date_time_is_daylight_savings
+g_date_time_new
+g_date_time_new_from_timeval_local
+g_date_time_new_from_timeval_utc
+g_date_time_new_from_unix_local
+g_date_time_new_from_unix_utc
+g_date_time_new_local
+g_date_time_new_now
+g_date_time_new_now_local
+g_date_time_new_now_utc
+g_date_time_new_utc
+g_date_time_ref
+g_date_time_to_local
+g_date_time_to_timeval
+g_date_time_to_timezone
+g_date_time_to_unix
+g_date_time_to_utc
+g_date_time_unref
+#endif
+#endif
+
+#if IN_HEADER(__G_TIME_ZONE_H__)
+#if IN_FILE(__G_TIME_ZONE_C__)
+g_time_zone_new
+g_time_zone_new_local
+g_time_zone_new_utc
+g_time_zone_ref
+g_time_zone_unref
+g_time_zone_adjust_time
+g_time_zone_find_interval
+g_time_zone_get_abbreviation
+g_time_zone_get_offset
+g_time_zone_is_dst
+#endif
+#endif
+
 #if IN_HEADER(__G_DIR_H__)
 #if IN_FILE(__G_DIR_C__)
 g_dir_close
@@ -533,6 +598,8 @@ g_key_file_get_groups G_GNUC_MALLOC
 g_key_file_get_double
 g_key_file_get_double_list G_GNUC_MALLOC
 g_key_file_get_integer
+g_key_file_get_int64
+g_key_file_get_uint64
 g_key_file_get_integer_list G_GNUC_MALLOC
 g_key_file_get_keys G_GNUC_MALLOC
 g_key_file_get_locale_string G_GNUC_MALLOC
@@ -557,6 +624,8 @@ g_key_file_set_comment
 g_key_file_set_double
 g_key_file_set_double_list
 g_key_file_set_integer
+g_key_file_set_int64
+g_key_file_set_uint64
 g_key_file_set_integer_list
 g_key_file_set_list_separator
 g_key_file_set_locale_string
@@ -580,6 +649,7 @@ g_list_find_custom
 g_list_first
 g_list_foreach
 g_list_free
+g_list_free_full
 g_list_free_1
 g_list_index
 g_list_insert
@@ -614,6 +684,8 @@ g_child_watch_add
 g_child_watch_add_full
 g_child_watch_source_new
 g_get_current_time
+g_get_monotonic_time
+g_get_real_time
 g_main_context_acquire
 g_main_context_add_poll
 g_main_context_check
@@ -639,6 +711,8 @@ g_main_context_set_poll_func
 g_main_context_unref
 g_main_context_wait
 g_main_context_wakeup
+g_main_context_invoke
+g_main_context_invoke_full
 g_main_depth
 g_main_current_source
 g_main_loop_get_context
@@ -648,24 +722,32 @@ g_main_loop_quit
 g_main_loop_ref
 g_main_loop_run
 g_main_loop_unref
+g_source_add_child_source
 g_source_add_poll
 g_source_attach
 g_source_destroy
 g_source_get_can_recurse
 g_source_get_context
+g_source_get_time
+#ifndef G_DISABLE_DEPRECATED
 g_source_get_current_time
+#endif
 g_source_get_id
+g_source_get_name
 g_source_get_priority
 g_source_new
 g_source_ref
 g_source_remove
 g_source_remove_by_funcs_user_data
 g_source_remove_by_user_data
+g_source_remove_child_source
 g_source_remove_poll
 g_source_set_callback
 g_source_set_callback_indirect
 g_source_set_can_recurse
 g_source_set_funcs
+g_source_set_name
+g_source_set_name_by_id
 g_source_is_destroyed
 g_source_set_priority
 g_source_unref
@@ -1040,6 +1122,8 @@ g_sequence_remove_range
 g_sequence_move_range
 g_sequence_search
 g_sequence_search_iter
+g_sequence_lookup
+g_sequence_lookup_iter
 g_sequence_get
 g_sequence_set
 g_sequence_iter_is_begin
@@ -1074,6 +1158,7 @@ g_slist_find
 g_slist_find_custom
 g_slist_foreach
 g_slist_free
+g_slist_free_full
 g_slist_free_1
 g_slist_index
 g_slist_insert
@@ -1204,6 +1289,7 @@ g_strdown
 g_strv_length
 g_strip_context G_GNUC_FORMAT(1)
 g_dgettext G_GNUC_FORMAT(2)
+g_dcgettext G_GNUC_FORMAT(2)
 g_dngettext G_GNUC_FORMAT(3)
 g_dpgettext G_GNUC_FORMAT(2)
 g_dpgettext2 G_GNUC_FORMAT(3)
@@ -1561,6 +1647,7 @@ g_get_host_name
 g_setenv PRIVATE
 #endif
 g_listenv
+g_get_environ
 #ifdef G_OS_WIN32
 g_find_program_in_path_utf8
 g_get_current_dir_utf8
@@ -1592,6 +1679,7 @@ g_get_user_cache_dir
 g_get_user_config_dir
 g_get_user_data_dir
 g_reload_user_special_dirs_cache
+g_get_user_runtime_dir
 g_get_user_special_dir
 #ifndef _WIN64
 g_get_user_name PRIVATE
@@ -1631,6 +1719,8 @@ g_regex_get_pattern
 g_regex_get_max_backref
 g_regex_get_capture_count
 g_regex_get_string_number
+g_regex_get_compile_flags
+g_regex_get_match_flags
 g_regex_escape_string
 g_regex_match_simple
 g_regex_match
@@ -1700,6 +1790,7 @@ g_variant_type_checked_
 g_variant_unref
 g_variant_ref
 g_variant_ref_sink
+g_variant_is_floating
 g_variant_n_children
 g_variant_get_child_value
 g_variant_get_size
@@ -1714,6 +1805,7 @@ g_variant_get_type_string
 g_variant_is_of_type
 g_variant_is_container
 g_variant_classify
+g_variant_compare
 
 g_variant_new_boolean
 g_variant_new_byte
@@ -1732,6 +1824,8 @@ g_variant_new_signature
 g_variant_is_signature
 g_variant_new_variant
 g_variant_new_strv
+g_variant_new_bytestring
+g_variant_new_bytestring_array
 
 g_variant_get_boolean
 g_variant_get_byte
@@ -1748,6 +1842,10 @@ g_variant_dup_string
 g_variant_get_variant
 g_variant_get_strv
 g_variant_dup_strv
+g_variant_get_bytestring
+g_variant_dup_bytestring
+g_variant_get_bytestring_array
+g_variant_dup_bytestring_array
 
 g_variant_new_maybe
 g_variant_new_array
@@ -1787,6 +1885,8 @@ g_variant_get
 
 g_variant_builder_add
 g_variant_get_child
+g_variant_lookup_value
+g_variant_lookup
 g_variant_iter_next
 g_variant_iter_loop
 
@@ -1798,6 +1898,7 @@ g_variant_byteswap
 #if IN_FILE(__G_VARIANT_PARSER_C__)
 g_variant_new_parsed
 g_variant_new_parsed_va
+g_variant_builder_add_parsed
 g_variant_parse
 g_variant_parser_get_error_quark
 #endif

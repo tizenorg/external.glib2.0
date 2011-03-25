@@ -23,7 +23,6 @@
 
 #include "gtypeplugin.h"
 #include "gtypemodule.h"
-#include "gobjectalias.h"
 
 
 /**
@@ -109,8 +108,8 @@ g_type_module_dispose (GObject *object)
   
   if (module->type_infos || module->interface_infos)
     {
-      g_warning (G_STRLOC ": unsolicitated invocation of g_object_dispose() on GTypeModule");
-	     
+      g_warning (G_STRLOC ": unsolicitated invocation of g_object_run_dispose() on GTypeModule");
+
       g_object_ref (object);
     }
 
@@ -580,7 +579,3 @@ g_type_module_register_flags (GTypeModule      *module,
   return g_type_module_register_type (G_TYPE_MODULE (module),
                                       G_TYPE_FLAGS, name, &flags_type_info, 0);
 }
-
-
-#define __G_TYPE_MODULE_C__
-#include "gobjectaliasdef.c"

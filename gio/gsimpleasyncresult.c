@@ -38,7 +38,6 @@
 #include <gio/gioerror.h>
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gsimpleasyncresult
@@ -73,7 +72,8 @@
  *
  * To create a new #GSimpleAsyncResult, call g_simple_async_result_new().
  * If the result needs to be created for a #GError, use
- * g_simple_async_result_new_from_error(). If a #GError is not available
+ * g_simple_async_result_new_from_error() or
+ * g_simple_async_result_new_take_error(). If a #GError is not available
  * (e.g. the asynchronous operation's doesn't take a #GError argument),
  * but the result still needs to be created for an error condition, use
  * g_simple_async_result_new_error() (or g_simple_async_result_set_error_va()
@@ -110,7 +110,109 @@
  * g_simple_async_result_get_op_res_gssize() are
  * provided, getting the operation's result as a gpointer, gboolean, and
  * gssize, respectively.
- **/
+ *
+ * For the details of the requirements implementations must respect, see
+ * #GAsyncResult.  A typical implementation of an asynchronous operation
+ * using GSimpleAsyncResult looks something like this:
+ *
+ * |[
+ * static void
+ * baked_cb (Cake    *cake,
+ *           gpointer user_data)
+ * {
+ *   /&ast; In this example, this callback is not given a reference to the cake, so
+ *    &ast; the GSimpleAsyncResult has to take a reference to it.
+ *    &ast;/
+ *   GSimpleAsyncResult *result = user_data;
+ *
+ *   if (cake == NULL)
+ *     g_simple_async_result_set_error (result,
+ *                                      BAKER_ERRORS,
+ *                                      BAKER_ERROR_NO_FLOUR,
+ *                                      "Go to the supermarket");
+ *   else
+ *     g_simple_async_result_set_op_res_gpointer (result,
+ *                                                g_object_ref (cake),
+ *                                                g_object_unref);
+ *
+ *
+ *   /&ast; In this example, we assume that baked_cb is called as a callback from
+ *    &ast; the mainloop, so it's safe to complete the operation synchronously here.
+ *    &ast; If, however, _baker_prepare_cake () might call its callback without
+ *    &ast; first returning to the mainloop — inadvisable, but some APIs do so —
+ *    &ast; we would need to use g_simple_async_result_complete_in_idle().
+ *    &ast;/
+ *   g_simple_async_result_complete (result);
+ *   g_object_unref (result);
+ * }
+ *
+ * void
+ * baker_bake_cake_async (Baker              *self,
+ *                        guint               radius,
+ *                        GAsyncReadyCallback callback,
+ *                        gpointer            user_data)
+ * {
+ *   GSimpleAsyncResult *simple;
+ *   Cake               *cake;
+ *
+ *   if (radius < 3)
+ *     {
+ *       g_simple_async_report_error_in_idle (G_OBJECT (self),
+ *                                            callback,
+ *                                            user_data,
+ *                                            BAKER_ERRORS,
+ *                                            BAKER_ERROR_TOO_SMALL,
+ *                                            "%ucm radius cakes are silly",
+ *                                            radius);
+ *       return;
+ *     }
+ *
+ *   simple = g_simple_async_result_new (G_OBJECT (self),
+ *                                       callback,
+ *                                       user_data,
+ *                                       baker_bake_cake_async);
+ *   cake = _baker_get_cached_cake (self, radius);
+ *
+ *   if (cake != NULL)
+ *     {
+ *       g_simple_async_result_set_op_res_gpointer (simple,
+ *                                                  g_object_ref (cake),
+ *                                                  g_object_unref);
+ *       g_simple_async_result_complete_in_idle (simple);
+ *       g_object_unref (simple);
+ *       /&ast; Drop the reference returned by _baker_get_cached_cake(); the
+ *        &ast; GSimpleAsyncResult has taken its own reference.
+ *        &ast;/
+ *       g_object_unref (cake);
+ *       return;
+ *     }
+ *
+ *   _baker_prepare_cake (self, radius, baked_cb, simple);
+ * }
+ *
+ * Cake *
+ * baker_bake_cake_finish (Baker        *self,
+ *                         GAsyncResult *result,
+ *                         GError      **error)
+ * {
+ *   GSimpleAsyncResult *simple;
+ *   Cake               *cake;
+ *
+ *   g_return_val_if_fail (g_simple_async_result_is_valid (result,
+ *                                                         G_OBJECT (self),
+ *                                                         baker_bake_cake_async),
+ *                         NULL);
+ *
+ *   simple = (GSimpleAsyncResult *) result;
+ *
+ *   if (g_simple_async_result_propagate_error (simple, error))
+ *     return NULL;
+ *
+ *   cake = CAKE (g_simple_async_result_get_op_res_gpointer (simple));
+ *   return g_object_ref (cake);
+ * }
+ * ]|
+ */
 
 static void g_simple_async_result_async_result_iface_init (GAsyncResultIface       *iface);
 
@@ -197,8 +299,7 @@ g_simple_async_result_init (GSimpleAsyncResult *simple)
 
 /**
  * g_simple_async_result_new:
- * @source_object: a #GObject the asynchronous function was called with,
- * or %NULL.
+ * @source_object: (allow-none): a #GObject, or %NULL.
  * @callback: a #GAsyncReadyCallback.
  * @user_data: user data passed to @callback.
  * @source_tag: the asynchronous function.
@@ -231,10 +332,10 @@ g_simple_async_result_new (GObject             *source_object,
 
 /**
  * g_simple_async_result_new_from_error:
- * @source_object: a #GObject, or %NULL.
+ * @source_object: (allow-none): a #GObject, or %NULL.
  * @callback: a #GAsyncReadyCallback.
  * @user_data: user data passed to @callback.
- * @error: a #GError location.
+ * @error: a #GError
  *
  * Creates a #GSimpleAsyncResult from an error condition.
  *
@@ -244,7 +345,7 @@ GSimpleAsyncResult *
 g_simple_async_result_new_from_error (GObject             *source_object,
                                       GAsyncReadyCallback  callback,
                                       gpointer             user_data,
-                                      GError              *error)
+                                      const GError        *error)
 {
   GSimpleAsyncResult *simple;
 
@@ -259,8 +360,40 @@ g_simple_async_result_new_from_error (GObject             *source_object,
 }
 
 /**
+ * g_simple_async_result_new_take_error:
+ * @source_object: (allow-none): a #GObject, or %NULL
+ * @callback: a #GAsyncReadyCallback
+ * @user_data: (allow-none): user data passed to @callback
+ * @error: a #GError
+ *
+ * Creates a #GSimpleAsyncResult from an error condition, and takes over the
+ * caller's ownership of @error, so the caller does not need to free it anymore.
+ *
+ * Returns: a #GSimpleAsyncResult
+ *
+ * Since: 2.28
+ **/
+GSimpleAsyncResult *
+g_simple_async_result_new_take_error (GObject             *source_object,
+                                      GAsyncReadyCallback  callback,
+                                      gpointer             user_data,
+                                      GError              *error)
+{
+  GSimpleAsyncResult *simple;
+
+  g_return_val_if_fail (!source_object || G_IS_OBJECT (source_object), NULL);
+
+  simple = g_simple_async_result_new (source_object,
+				      callback,
+				      user_data, NULL);
+  g_simple_async_result_take_error (simple, error);
+
+  return simple;
+}
+
+/**
  * g_simple_async_result_new_error:
- * @source_object: a #GObject, or %NULL.
+ * @source_object: (allow-none): a #GObject, or %NULL.
  * @callback: a #GAsyncReadyCallback.
  * @user_data: user data passed to @callback.
  * @domain: a #GQuark.
@@ -338,7 +471,7 @@ g_simple_async_result_set_handle_cancellation (GSimpleAsyncResult *simple,
 }
 
 /**
- * g_simple_async_result_get_source_tag:
+ * g_simple_async_result_get_source_tag: (skip)
  * @simple: a #GSimpleAsyncResult.
  *
  * Gets the source tag for the #GSimpleAsyncResult.
@@ -399,7 +532,7 @@ g_simple_async_result_set_op_res_gpointer (GSimpleAsyncResult *simple,
 }
 
 /**
- * g_simple_async_result_get_op_res_gpointer:
+ * g_simple_async_result_get_op_res_gpointer: (skip)
  * @simple: a #GSimpleAsyncResult.
  *
  * Gets a pointer result as returned by the asynchronous function.
@@ -498,6 +631,29 @@ g_simple_async_result_set_from_error (GSimpleAsyncResult *simple,
 }
 
 /**
+ * g_simple_async_result_take_error:
+ * @simple: a #GSimpleAsyncResult
+ * @error: a #GError
+ *
+ * Sets the result from @error, and takes over the caller's ownership
+ * of @error, so the caller does not need to free it any more.
+ *
+ * Since: 2.28
+ **/
+void
+g_simple_async_result_take_error (GSimpleAsyncResult *simple,
+                                  GError             *error)
+{
+  g_return_if_fail (G_IS_SIMPLE_ASYNC_RESULT (simple));
+  g_return_if_fail (error != NULL);
+
+  if (simple->error)
+    g_error_free (simple->error);
+  simple->error = error;
+  simple->failed = TRUE;
+}
+
+/**
  * g_simple_async_result_set_error_va:
  * @simple: a #GSimpleAsyncResult.
  * @domain: a #GQuark (usually #G_IO_ERROR).
@@ -561,6 +717,9 @@ g_simple_async_result_set_error (GSimpleAsyncResult *simple,
  * the thread where the asynchronous result was to be delivered, as it
  * invokes the callback directly. If you are in a different thread use
  * g_simple_async_result_complete_in_idle().
+ *
+ * Calling this function takes a reference to @simple for as long as
+ * is needed to complete the call.
  **/
 void
 g_simple_async_result_complete (GSimpleAsyncResult *simple)
@@ -736,12 +895,16 @@ g_simple_async_result_run_in_thread (GSimpleAsyncResult     *simple,
  * First, @result is checked to ensure that it is really a
  * #GSimpleAsyncResult.  Second, @source is checked to ensure that it
  * matches the source object of @result.  Third, @source_tag is
- * checked to ensure that it is equal to the source_tag argument given
- * to g_simple_async_result_new() (which, by convention, is a pointer
- * to the _async function corresponding to the _finish function from
- * which this function is called).
+ * checked to ensure that it is either %NULL (as it is when the result was
+ * created by g_simple_async_report_error_in_idle() or
+ * g_simple_async_report_gerror_in_idle()) or equal to the
+ * @source_tag argument given to g_simple_async_result_new() (which, by
+ * convention, is a pointer to the _async function corresponding to the
+ * _finish function from which this function is called).
  *
  * Returns: #TRUE if all checks passed or #FALSE if any failed.
+ *
+ * Since: 2.20
  **/
 gboolean
 g_simple_async_result_is_valid (GAsyncResult *result,
@@ -758,17 +921,20 @@ g_simple_async_result_is_valid (GAsyncResult *result,
   cmp_source = g_async_result_get_source_object (result);
   if (cmp_source != source)
     {
-      g_object_unref (cmp_source);
+      if (cmp_source != NULL)
+        g_object_unref (cmp_source);
       return FALSE;
     }
-  g_object_unref (cmp_source);
+  if (cmp_source != NULL)
+    g_object_unref (cmp_source);
 
-  return source_tag == g_simple_async_result_get_source_tag (simple);
+  return source_tag == NULL ||
+         source_tag == g_simple_async_result_get_source_tag (simple);
 }
 
 /**
  * g_simple_async_report_error_in_idle:
- * @object: a #GObject.
+ * @object: (allow-none): a #GObject, or %NULL.
  * @callback: a #GAsyncReadyCallback.
  * @user_data: user data passed to @callback.
  * @domain: a #GQuark containing the error domain (usually #G_IO_ERROR).
@@ -792,7 +958,7 @@ g_simple_async_report_error_in_idle (GObject             *object,
   GSimpleAsyncResult *simple;
   va_list args;
  
-  g_return_if_fail (G_IS_OBJECT (object));
+  g_return_if_fail (!object || G_IS_OBJECT (object));
   g_return_if_fail (domain != 0);
   g_return_if_fail (format != NULL);
 
@@ -809,7 +975,7 @@ g_simple_async_report_error_in_idle (GObject             *object,
 
 /**
  * g_simple_async_report_gerror_in_idle:
- * @object: a #GObject.
+ * @object: (allow-none): a #GObject, or %NULL
  * @callback: a #GAsyncReadyCallback.
  * @user_data: user data passed to @callback.
  * @error: the #GError to report
@@ -822,11 +988,11 @@ void
 g_simple_async_report_gerror_in_idle (GObject *object,
 				      GAsyncReadyCallback callback,
 				      gpointer user_data,
-				      GError *error)
+				      const GError *error)
 {
   GSimpleAsyncResult *simple;
  
-  g_return_if_fail (G_IS_OBJECT (object));
+  g_return_if_fail (!object || G_IS_OBJECT (object));
   g_return_if_fail (error != NULL);
 
   simple = g_simple_async_result_new_from_error (object,
@@ -837,5 +1003,34 @@ g_simple_async_report_gerror_in_idle (GObject *object,
   g_object_unref (simple);
 }
 
-#define __G_SIMPLE_ASYNC_RESULT_C__
-#include "gioaliasdef.c"
+/**
+ * g_simple_async_report_take_gerror_in_idle:
+ * @object: (allow-none): a #GObject, or %NULL
+ * @callback: a #GAsyncReadyCallback.
+ * @user_data: user data passed to @callback.
+ * @error: the #GError to report
+ *
+ * Reports an error in an idle function. Similar to
+ * g_simple_async_report_gerror_in_idle(), but takes over the caller's
+ * ownership of @error, so the caller does not have to free it any more.
+ *
+ * Since: 2.28
+ **/
+void
+g_simple_async_report_take_gerror_in_idle (GObject *object,
+                                           GAsyncReadyCallback callback,
+                                           gpointer user_data,
+                                           GError *error)
+{
+  GSimpleAsyncResult *simple;
+
+  g_return_if_fail (!object || G_IS_OBJECT (object));
+  g_return_if_fail (error != NULL);
+
+  simple = g_simple_async_result_new_take_error (object,
+                                                 callback,
+                                                 user_data,
+                                                 error);
+  g_simple_async_result_complete_in_idle (simple);
+  g_object_unref (simple);
+}

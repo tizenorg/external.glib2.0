@@ -23,10 +23,10 @@
  * Modified by the GLib Team and others 1997-2000.  See the AUTHORS
  * file for a list of people on the GLib Team.  See the ChangeLog
  * files for a list of changes.  These files are distributed with
- * GLib at ftp://ftp.gtk.org/pub/gtk/. 
+ * GLib at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-/* 
+/*
  * MT safe ; except for g_data*_foreach()
  */
 
@@ -34,9 +34,15 @@
 
 #include <string.h>
 
-#include "glib.h"
+#include "gdataset.h"
+
 #include "gdatasetprivate.h"
-#include "galias.h"
+#include "ghash.h"
+#include "gquark.h"
+#include "gstrfuncs.h"
+#include "gtestutils.h"
+#include "gthread.h"
+#include "glib_trace.h"
 
 /**
  * SECTION: datasets
@@ -994,14 +1000,48 @@ GQuark
 g_quark_try_string (const gchar *string)
 {
   GQuark quark = 0;
-  g_return_val_if_fail (string != NULL, 0);
-  
+
+  if (string == NULL)
+    return 0;
+
   G_LOCK (g_quark_global);
   if (g_quark_ht)
     quark = GPOINTER_TO_UINT (g_hash_table_lookup (g_quark_ht, string));
   G_UNLOCK (g_quark_global);
   
   return quark;
+}
+
+#define QUARK_STRING_BLOCK_SIZE (4096 - sizeof (gsize))
+static char *quark_block = NULL;
+static int quark_block_offset = 0;
+
+/* HOLDS: g_quark_global_lock */
+static char *
+quark_strdup(const gchar *string)
+{
+  gchar *copy;
+  gsize len;
+
+  len = strlen (string) + 1;
+
+  /* For strings longer than half the block size, fall back
+     to strdup so that we fill our blocks at least 50%. */
+  if (len > QUARK_STRING_BLOCK_SIZE / 2)
+    return g_strdup (string);
+
+  if (quark_block == NULL ||
+      QUARK_STRING_BLOCK_SIZE - quark_block_offset < len)
+    {
+      quark_block = g_malloc (QUARK_STRING_BLOCK_SIZE);
+      quark_block_offset = 0;
+    }
+
+  copy = quark_block + quark_block_offset;
+  memcpy (copy, string, len);
+  quark_block_offset += len;
+
+  return copy;
 }
 
 /* HOLDS: g_quark_global_lock */
@@ -1015,8 +1055,11 @@ g_quark_from_string_internal (const gchar *string,
     quark = GPOINTER_TO_UINT (g_hash_table_lookup (g_quark_ht, string));
   
   if (!quark)
-    quark = g_quark_new (duplicate ? g_strdup (string) : (gchar *)string);
-  
+    {
+      quark = g_quark_new (duplicate ? quark_strdup (string) : (gchar *)string);
+      TRACE(GLIB_QUARK_NEW(string, quark));
+    }
+
   return quark;
 }
 
@@ -1178,6 +1221,3 @@ g_intern_static_string (const gchar *string)
 
   return result;
 }
-
-#define __G_DATASET_C__
-#include "galiasdef.c"

@@ -164,6 +164,7 @@ return PCRE_ERROR_NOSUBSTRING;
 }
 
 
+#ifdef NOT_USED_IN_GLIB
 
 /*************************************************
 *    Find first set of multiple named strings    *
@@ -461,5 +462,7 @@ pcre_free_substring(const char *pointer)
 {
 (pcre_free)((void *)pointer);
 }
+
+#endif
 
 /* End of pcre_get.c */

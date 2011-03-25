@@ -414,6 +414,12 @@ test_comments (void)
   check_name ("key comment", comment, key_comment, 0);
   g_free (comment);
 
+  g_key_file_remove_comment (keyfile, "group1", "key2", &error);
+  check_no_error (&error);
+  comment = g_key_file_get_comment (keyfile, "group1", "key2", &error);
+  check_no_error (&error);
+  g_assert (comment == NULL);
+
   comment = g_key_file_get_comment (keyfile, "group2", NULL, &error);
   check_no_error (&error);
   check_name ("group comment", comment, group_comment, 0);
@@ -1233,9 +1239,122 @@ test_reload_idempotency (void)
   g_free (data1);
 }
 
+static const char int64_data[] =
+"[bees]\n"
+"a=1\n"
+"b=2\n"
+"c=123456789123456789\n"
+"d=-123456789123456789\n";
+
+static void
+test_int64 (void)
+{
+  GKeyFile *file;
+  gboolean ok;
+  guint64 c;
+  gint64 d;
+  gchar *value;
+
+  g_test_bug ("614864");
+
+  file = g_key_file_new ();
+
+  ok = g_key_file_load_from_data (file, int64_data, strlen (int64_data),
+      0, NULL);
+  g_assert (ok);
+
+  c = g_key_file_get_uint64 (file, "bees", "c", NULL);
+  g_assert (c == G_GUINT64_CONSTANT (123456789123456789));
+
+  d = g_key_file_get_int64 (file, "bees", "d", NULL);
+  g_assert (d == G_GINT64_CONSTANT (-123456789123456789));
+
+  g_key_file_set_uint64 (file, "bees", "c",
+      G_GUINT64_CONSTANT (987654321987654321));
+  value = g_key_file_get_value (file, "bees", "c", NULL);
+  g_assert_cmpstr (value, ==, "987654321987654321");
+  g_free (value);
+
+  g_key_file_set_int64 (file, "bees", "d",
+      G_GINT64_CONSTANT (-987654321987654321));
+  value = g_key_file_get_value (file, "bees", "d", NULL);
+  g_assert_cmpstr (value, ==, "-987654321987654321");
+  g_free (value);
+
+  g_key_file_free (file);
+}
+
+static void
+test_load (void)
+{
+  GKeyFile *file;
+  GError *error;
+  gboolean bools[2] = { TRUE, FALSE };
+
+  file = g_key_file_new ();
+  error = NULL;
+  g_assert (g_key_file_load_from_data_dirs (file, "keyfiletest.ini", NULL, 0, &error));
+  g_assert_no_error (error);
+
+  g_key_file_set_locale_string (file, "test", "key4", "de", "Vierter Schlüssel");
+  g_key_file_set_boolean_list (file, "test", "key5", bools, 2);
+  g_key_file_set_integer (file, "test", "key6", 22);
+  g_key_file_set_double (file, "test", "key7", 2.5);
+  g_key_file_set_comment (file, "test", "key7", "some float", NULL);
+  g_key_file_set_comment (file, "test", NULL, "the test group", NULL);
+  g_key_file_set_comment (file, NULL, NULL, "top comment", NULL);
+
+  g_key_file_free (file);
+}
+
+static void
+test_non_utf8 (void)
+{
+  GKeyFile *file;
+  static const char data[] =
+"[group]\n"
+"a=\230\230\230\n"
+"b=a;b;\230\230\230;\n"
+"c=a\\\n";
+  gboolean ok;
+  GError *error;
+  gchar *s;
+  gchar **l;
+
+  file = g_key_file_new ();
+
+  ok = g_key_file_load_from_data (file, data, strlen (data), 0, NULL);
+  g_assert (ok);
+
+  error = NULL;
+  s = g_key_file_get_string (file, "group", "a", &error);
+  g_assert_error (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_UNKNOWN_ENCODING);
+  g_assert (s == NULL);
+
+  g_clear_error (&error);
+  l = g_key_file_get_string_list (file, "group", "b", NULL, &error);
+  g_assert_error (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_UNKNOWN_ENCODING);
+  g_assert (l == NULL);
+
+  g_clear_error (&error);
+  l = g_key_file_get_string_list (file, "group", "c", NULL, &error);
+  g_assert_error (error, G_KEY_FILE_ERROR, G_KEY_FILE_ERROR_INVALID_VALUE);
+  g_assert (l == NULL);
+
+  g_clear_error (&error);
+
+  g_key_file_free (file);
+}
+
+#ifndef SRCDIR
+#define SRCDIR "."
+#endif
+
 int
 main (int argc, char *argv[])
 {
+  g_setenv ("XDG_DATA_HOME", SRCDIR, TRUE);
+
   g_test_init (&argc, &argv, NULL);
   g_test_bug_base ("http://bugzilla.gnome.org/");
 
@@ -1258,6 +1377,9 @@ main (int argc, char *argv[])
   g_test_add_func ("/keyfile/group-names", test_group_names);
   g_test_add_func ("/keyfile/key-names", test_key_names);
   g_test_add_func ("/keyfile/reload", test_reload_idempotency);
+  g_test_add_func ("/keyfile/int64", test_int64);
+  g_test_add_func ("/keyfile/load", test_load);
+  g_test_add_func ("/keyfile/non-utf8", test_non_utf8);
   
   return g_test_run ();
 }

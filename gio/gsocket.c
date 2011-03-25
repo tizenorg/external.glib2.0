@@ -26,7 +26,8 @@
  */
 
 #include "config.h"
-#include "glib.h"
+
+#include "gsocket.h"
 
 #include <errno.h>
 #include <signal.h>
@@ -42,18 +43,19 @@
 #include <sys/uio.h>
 #endif
 
-#include "gsocket.h"
 #include "gcancellable.h"
 #include "gioenumtypes.h"
+#include "ginetaddress.h"
 #include "ginitable.h"
-#include "gasynchelper.h"
 #include "gioerror.h"
 #include "gioenums.h"
 #include "gioerror.h"
+#include "gio-marshal.h"
 #include "gnetworkingprivate.h"
+#include "gsocketaddress.h"
+#include "gsocketcontrolmessage.h"
+#include "gcredentials.h"
 #include "glibintl.h"
-
-#include "gioalias.h"
 
 /**
  * SECTION:gsocket
@@ -131,7 +133,8 @@ enum
   PROP_LISTEN_BACKLOG,
   PROP_KEEPALIVE,
   PROP_LOCAL_ADDRESS,
-  PROP_REMOTE_ADDRESS
+  PROP_REMOTE_ADDRESS,
+  PROP_TIMEOUT
 };
 
 struct _GSocketPrivate
@@ -141,13 +144,17 @@ struct _GSocketPrivate
   GSocketProtocol protocol;
   gint            fd;
   gint            listen_backlog;
+  guint           timeout;
   GError         *construct_error;
+  GSocketAddress *remote_address;
   guint           inited : 1;
   guint           blocking : 1;
   guint           keepalive : 1;
   guint           closed : 1;
   guint           connected : 1;
   guint           listening : 1;
+  guint           timed_out : 1;
+  guint           connect_pending : 1;
 #ifdef G_OS_WIN32
   WSAEVENT        event;
   int             current_events;
@@ -207,20 +214,13 @@ socket_strerror (int err)
 #ifndef G_OS_WIN32
   return g_strerror (err);
 #else
-  static GStaticPrivate msg_private = G_STATIC_PRIVATE_INIT;
-  char *buf, *msg;
-
-  buf = g_static_private_get (&msg_private);
-  if (!buf)
-    {
-      buf = g_new (gchar, 128);
-      g_static_private_set (&msg_private, buf, g_free);
-    }
+  static GStaticPrivate last_msg = G_STATIC_PRIVATE_INIT;
+  char *msg;
 
   msg = g_win32_error_message (err);
-  strncpy (buf, msg, 128);
-  g_free (msg);
-  return buf;
+  g_static_private_set (&last_msg, msg, g_free);
+
+  return msg;
 #endif
 }
 
@@ -292,6 +292,15 @@ check_socket (GSocket *socket,
 			   _("Socket is already closed"));
       return FALSE;
     }
+
+  if (socket->priv->timed_out)
+    {
+      socket->priv->timed_out = FALSE;
+      g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_TIMED_OUT,
+			   _("Socket I/O timed out"));
+      return FALSE;
+    }
+
   return TRUE;
 }
 
@@ -369,13 +378,34 @@ g_socket_details_from_fd (GSocket *socket)
     {
      case G_SOCKET_FAMILY_IPV4:
      case G_SOCKET_FAMILY_IPV6:
+       socket->priv->family = address.ss_family;
+       switch (socket->priv->type)
+	 {
+	 case G_SOCKET_TYPE_STREAM:
+	   socket->priv->protocol = G_SOCKET_PROTOCOL_TCP;
+	   break;
+
+	 case G_SOCKET_TYPE_DATAGRAM:
+	   socket->priv->protocol = G_SOCKET_PROTOCOL_UDP;
+	   break;
+
+	 case G_SOCKET_TYPE_SEQPACKET:
+	   socket->priv->protocol = G_SOCKET_PROTOCOL_SCTP;
+	   break;
+
+	 default:
+	   break;
+	 }
+       break;
+
      case G_SOCKET_FAMILY_UNIX:
-      socket->priv->family = address.ss_family;
-      break;
+       socket->priv->family = G_SOCKET_FAMILY_UNIX;
+       socket->priv->protocol = G_SOCKET_PROTOCOL_DEFAULT;
+       break;
 
      default:
-      socket->priv->family = G_SOCKET_FAMILY_INVALID;
-      break;
+       socket->priv->family = G_SOCKET_FAMILY_INVALID;
+       break;
     }
 
   if (socket->priv->family != G_SOCKET_FAMILY_INVALID)
@@ -449,9 +479,11 @@ g_socket_create_socket (GSocketFamily   family,
     }
 
 #ifdef SOCK_CLOEXEC
-  native_type |= SOCK_CLOEXEC;
+  fd = socket (family, native_type | SOCK_CLOEXEC, protocol);
+  /* It's possible that libc has SOCK_CLOEXEC but the kernel does not */
+  if (fd < 0 && errno == EINVAL)
 #endif
-  fd = socket (family, native_type, protocol);
+    fd = socket (family, native_type, protocol);
 
   if (fd < 0)
     {
@@ -554,6 +586,10 @@ g_socket_get_property (GObject    *object,
 	g_value_take_object (value, address);
 	break;
 
+      case PROP_TIMEOUT:
+	g_value_set_uint (value, socket->priv->timeout);
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -597,6 +633,10 @@ g_socket_set_property (GObject      *object,
 	g_socket_set_keepalive (socket, g_value_get_boolean (value));
 	break;
 
+      case PROP_TIMEOUT:
+	g_socket_set_timeout (socket, g_value_get_uint (value));
+	break;
+
       default:
 	G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -612,6 +652,9 @@ g_socket_finalize (GObject *object)
   if (socket->priv->fd != -1 &&
       !socket->priv->closed)
     g_socket_close (socket, NULL);
+
+  if (socket->priv->remote_address)
+    g_object_unref (socket->priv->remote_address);
 
 #ifdef G_OS_WIN32
   if (socket->priv->event != WSA_INVALID_EVENT)
@@ -733,6 +776,23 @@ g_socket_class_init (GSocketClass *klass)
 							G_TYPE_SOCKET_ADDRESS,
 							G_PARAM_READABLE |
                                                         G_PARAM_STATIC_STRINGS));
+
+  /**
+   * GSocket:timeout:
+   *
+   * The timeout in seconds on socket I/O
+   *
+   * Since: 2.26
+   */
+  g_object_class_install_property (gobject_class, PROP_TIMEOUT,
+				   g_param_spec_uint ("timeout",
+						      P_("Timeout"),
+						      P_("The timeout in seconds on socket I/O"),
+						      0,
+						      G_MAXUINT,
+						      0,
+						      G_PARAM_READWRITE |
+						      G_PARAM_STATIC_STRINGS));
 }
 
 static void
@@ -1020,6 +1080,66 @@ g_socket_set_listen_backlog (GSocket *socket,
 }
 
 /**
+ * g_socket_get_timeout:
+ * @socket: a #GSocket.
+ *
+ * Gets the timeout setting of the socket. For details on this, see
+ * g_socket_set_timeout().
+ *
+ * Returns: the timeout in seconds
+ *
+ * Since: 2.26
+ */
+guint
+g_socket_get_timeout (GSocket *socket)
+{
+  g_return_val_if_fail (G_IS_SOCKET (socket), 0);
+
+  return socket->priv->timeout;
+}
+
+/**
+ * g_socket_set_timeout:
+ * @socket: a #GSocket.
+ * @timeout: the timeout for @socket, in seconds, or 0 for none
+ *
+ * Sets the time in seconds after which I/O operations on @socket will
+ * time out if they have not yet completed.
+ *
+ * On a blocking socket, this means that any blocking #GSocket
+ * operation will time out after @timeout seconds of inactivity,
+ * returning %G_IO_ERROR_TIMED_OUT.
+ *
+ * On a non-blocking socket, calls to g_socket_condition_wait() will
+ * also fail with %G_IO_ERROR_TIMED_OUT after the given time. Sources
+ * created with g_socket_create_source() will trigger after
+ * @timeout seconds of inactivity, with the requested condition
+ * set, at which point calling g_socket_receive(), g_socket_send(),
+ * g_socket_check_connect_result(), etc, will fail with
+ * %G_IO_ERROR_TIMED_OUT.
+ *
+ * If @timeout is 0 (the default), operations will never time out
+ * on their own.
+ *
+ * Note that if an I/O operation is interrupted by a signal, this may
+ * cause the timeout to be reset.
+ *
+ * Since: 2.26
+ */
+void
+g_socket_set_timeout (GSocket *socket,
+		      guint    timeout)
+{
+  g_return_if_fail (G_IS_SOCKET (socket));
+
+  if (timeout != socket->priv->timeout)
+    {
+      socket->priv->timeout = timeout;
+      g_object_notify (G_OBJECT (socket), "timeout");
+    }
+}
+
+/**
  * g_socket_get_family:
  * @socket: a #GSocket.
  *
@@ -1105,7 +1225,7 @@ g_socket_get_fd (GSocket *socket)
  * useful if the socket has been bound to a local address,
  * either explicitly or implicitly when connecting.
  *
- * Returns: a #GSocketAddress or %NULL on error.
+ * Returns: (transfer full): a #GSocketAddress or %NULL on error.
  *     Free the returned object with g_object_unref().
  *
  * Since: 2.22
@@ -1138,7 +1258,7 @@ g_socket_get_local_address (GSocket  *socket,
  * Try to get the remove address of a connected socket. This is only
  * useful for connection oriented sockets that have been connected.
  *
- * Returns: a #GSocketAddress or %NULL on error.
+ * Returns: (transfer full): a #GSocketAddress or %NULL on error.
  *     Free the returned object with g_object_unref().
  *
  * Since: 2.22
@@ -1152,15 +1272,28 @@ g_socket_get_remote_address (GSocket  *socket,
 
   g_return_val_if_fail (G_IS_SOCKET (socket), NULL);
 
-  if (getpeername (socket->priv->fd, (struct sockaddr *) &buffer, &len) < 0)
+  if (socket->priv->connect_pending)
     {
-      int errsv = get_socket_errno ();
-      g_set_error (error, G_IO_ERROR, socket_io_error_from_errno (errsv),
-		   _("could not get remote address: %s"), socket_strerror (errsv));
-      return NULL;
+      if (!g_socket_check_connect_result (socket, error))
+        return NULL;
+      else
+        socket->priv->connect_pending = FALSE;
     }
 
-  return g_socket_address_new_from_native (&buffer, len);
+  if (!socket->priv->remote_address)
+    {
+      if (getpeername (socket->priv->fd, (struct sockaddr *) &buffer, &len) < 0)
+	{
+	  int errsv = get_socket_errno ();
+	  g_set_error (error, G_IO_ERROR, socket_io_error_from_errno (errsv),
+		       _("could not get remote address: %s"), socket_strerror (errsv));
+	  return NULL;
+	}
+
+      socket->priv->remote_address = g_socket_address_new_from_native (&buffer, len);
+    }
+
+  return g_object_ref (socket->priv->remote_address);
 }
 
 /**
@@ -1360,7 +1493,7 @@ g_socket_speaks_ipv4 (GSocket *socket)
  * or return %G_IO_ERROR_WOULD_BLOCK if non-blocking I/O is enabled.
  * To be notified of an incoming connection, wait for the %G_IO_IN condition.
  *
- * Returns: a new #GSocket, or %NULL on error.
+ * Returns: (transfer full): a new #GSocket, or %NULL on error.
  *     Free the returned object with g_object_unref().
  *
  * Since: 2.22
@@ -1498,6 +1631,10 @@ g_socket_connect (GSocket         *socket,
   if (!g_socket_address_to_native (address, &buffer, sizeof buffer, error))
     return FALSE;
 
+  if (socket->priv->remote_address)
+    g_object_unref (socket->priv->remote_address);
+  socket->priv->remote_address = g_object_ref (address);
+
   while (1)
     {
       if (connect (socket->priv->fd, (struct sockaddr *) &buffer,
@@ -1524,8 +1661,11 @@ g_socket_connect (GSocket         *socket,
 		  g_prefix_error (error, _("Error connecting: "));
 		}
 	      else
-                g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_PENDING,
-                                     _("Connection in progress"));
+                {
+                  g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_PENDING,
+                                       _("Connection in progress"));
+                  socket->priv->connect_pending = TRUE;
+                }
 	    }
 	  else
 	    g_set_error (error, G_IO_ERROR,
@@ -1564,6 +1704,9 @@ g_socket_check_connect_result (GSocket  *socket,
   guint optlen;
   int value;
 
+  if (!check_socket (socket, error))
+    return FALSE;
+
   optlen = sizeof (value);
   if (getsockopt (socket->priv->fd, SOL_SOCKET, SO_ERROR, (void *)&value, &optlen) != 0)
     {
@@ -1578,6 +1721,11 @@ g_socket_check_connect_result (GSocket  *socket,
     {
       g_set_error_literal (error, G_IO_ERROR, socket_io_error_from_errno (value),
                            socket_strerror (value));
+      if (socket->priv->remote_address)
+        {
+          g_object_unref (socket->priv->remote_address);
+          socket->priv->remote_address = NULL;
+        }
       return FALSE;
     }
   return TRUE;
@@ -1626,6 +1774,37 @@ g_socket_receive (GSocket       *socket,
 		  GCancellable  *cancellable,
 		  GError       **error)
 {
+  return g_socket_receive_with_blocking (socket, buffer, size,
+					 socket->priv->blocking,
+					 cancellable, error);
+}
+
+/**
+ * g_socket_receive_with_blocking:
+ * @socket: a #GSocket
+ * @buffer: a buffer to read data into (which should be at least @size
+ *     bytes long).
+ * @size: the number of bytes you want to read from the socket
+ * @blocking: whether to do blocking or non-blocking I/O
+ * @cancellable: a %GCancellable or %NULL
+ * @error: #GError for error reporting, or %NULL to ignore.
+ *
+ * This behaves exactly the same as g_socket_receive(), except that
+ * the choice of blocking or non-blocking behavior is determined by
+ * the @blocking argument rather than by @socket's properties.
+ *
+ * Returns: Number of bytes read, or -1 on error
+ *
+ * Since: 2.26
+ */
+gssize
+g_socket_receive_with_blocking (GSocket       *socket,
+				gchar         *buffer,
+				gsize          size,
+				gboolean       blocking,
+				GCancellable  *cancellable,
+				GError       **error)
+{
   gssize ret;
 
   g_return_val_if_fail (G_IS_SOCKET (socket) && buffer != NULL, FALSE);
@@ -1638,7 +1817,7 @@ g_socket_receive (GSocket       *socket,
 
   while (1)
     {
-      if (socket->priv->blocking &&
+      if (blocking &&
 	  !g_socket_condition_wait (socket,
 				    G_IO_IN, cancellable, error))
 	return -1;
@@ -1650,7 +1829,7 @@ g_socket_receive (GSocket       *socket,
 	  if (errsv == EINTR)
 	    continue;
 
-	  if (socket->priv->blocking)
+	  if (blocking)
 	    {
 #ifdef WSAEWOULDBLOCK
 	      if (errsv == WSAEWOULDBLOCK)
@@ -1766,6 +1945,37 @@ g_socket_send (GSocket       *socket,
 	       GCancellable  *cancellable,
 	       GError       **error)
 {
+  return g_socket_send_with_blocking (socket, buffer, size,
+				      socket->priv->blocking,
+				      cancellable, error);
+}
+
+/**
+ * g_socket_send_with_blocking:
+ * @socket: a #GSocket
+ * @buffer: the buffer containing the data to send.
+ * @size: the number of bytes to send
+ * @blocking: whether to do blocking or non-blocking I/O
+ * @cancellable: a %GCancellable or %NULL
+ * @error: #GError for error reporting, or %NULL to ignore.
+ *
+ * This behaves exactly the same as g_socket_send(), except that
+ * the choice of blocking or non-blocking behavior is determined by
+ * the @blocking argument rather than by @socket's properties.
+ *
+ * Returns: Number of bytes written (which may be less than @size), or -1
+ * on error
+ *
+ * Since: 2.26
+ */
+gssize
+g_socket_send_with_blocking (GSocket       *socket,
+			     const gchar   *buffer,
+			     gsize          size,
+			     gboolean       blocking,
+			     GCancellable  *cancellable,
+			     GError       **error)
+{
   gssize ret;
 
   g_return_val_if_fail (G_IS_SOCKET (socket) && buffer != NULL, FALSE);
@@ -1778,7 +1988,7 @@ g_socket_send (GSocket       *socket,
 
   while (1)
     {
-      if (socket->priv->blocking &&
+      if (blocking &&
 	  !g_socket_condition_wait (socket,
 				    G_IO_OUT, cancellable, error))
 	return -1;
@@ -1795,7 +2005,7 @@ g_socket_send (GSocket       *socket,
 	    win32_unset_event_mask (socket, FD_WRITE);
 #endif
 
-	  if (socket->priv->blocking)
+	  if (blocking)
 	    {
 #ifdef WSAEWOULDBLOCK
 	      if (errsv == WSAEWOULDBLOCK)
@@ -2010,6 +2220,11 @@ g_socket_close (GSocket  *socket,
 
   socket->priv->connected = FALSE;
   socket->priv->closed = TRUE;
+  if (socket->priv->remote_address)
+    {
+      g_object_unref (socket->priv->remote_address);
+      socket->priv->remote_address = NULL;
+    }
 
   return TRUE;
 }
@@ -2188,6 +2403,7 @@ update_condition (GSocket *socket)
 
   return condition;
 }
+#endif
 
 typedef struct {
   GSource       source;
@@ -2196,103 +2412,135 @@ typedef struct {
   GIOCondition  condition;
   GCancellable *cancellable;
   GPollFD       cancel_pollfd;
-  GIOCondition  result_condition;
-} GWinsockSource;
+  gint64        timeout_time;
+} GSocketSource;
 
 static gboolean
-winsock_prepare (GSource *source,
-		 gint    *timeout)
+socket_source_prepare (GSource *source,
+		       gint    *timeout)
 {
-  GWinsockSource *winsock_source = (GWinsockSource *)source;
-  GIOCondition current_condition;
+  GSocketSource *socket_source = (GSocketSource *)source;
 
-  current_condition = update_condition (winsock_source->socket);
+  if (g_cancellable_is_cancelled (socket_source->cancellable))
+    return TRUE;
 
-  if (g_cancellable_is_cancelled (winsock_source->cancellable))
+  if (socket_source->timeout_time)
     {
-      winsock_source->result_condition = current_condition;
-      return TRUE;
-    }
+      gint64 now;
 
-  if ((winsock_source->condition & current_condition) != 0)
-    {
-      winsock_source->result_condition = current_condition;
-      return TRUE;
+      now = g_source_get_time (source);
+      /* Round up to ensure that we don't try again too early */
+      *timeout = (socket_source->timeout_time - now + 999) / 1000;
+      if (*timeout < 0)
+        {
+          socket_source->socket->priv->timed_out = TRUE;
+          socket_source->pollfd.revents = socket_source->condition & (G_IO_IN | G_IO_OUT);
+          *timeout = 0;
+          return TRUE;
+        }
     }
+  else
+    *timeout = -1;
+
+#ifdef G_OS_WIN32
+  socket_source->pollfd.revents = update_condition (socket_source->socket);
+#endif
+
+  if ((socket_source->condition & socket_source->pollfd.revents) != 0)
+    return TRUE;
 
   return FALSE;
 }
 
 static gboolean
-winsock_check (GSource *source)
+socket_source_check (GSource *source)
 {
-  GWinsockSource *winsock_source = (GWinsockSource *)source;
-  GIOCondition current_condition;
+  int timeout;
 
-  current_condition = update_condition (winsock_source->socket);
-
-  if (g_cancellable_is_cancelled (winsock_source->cancellable))
-    {
-      winsock_source->result_condition = current_condition;
-      return TRUE;
-    }
-
-  if ((winsock_source->condition & current_condition) != 0)
-    {
-      winsock_source->result_condition = current_condition;
-      return TRUE;
-    }
-
-  return FALSE;
+  return socket_source_prepare (source, &timeout);
 }
 
 static gboolean
-winsock_dispatch (GSource     *source,
-		  GSourceFunc  callback,
-		  gpointer     user_data)
+socket_source_dispatch (GSource     *source,
+			GSourceFunc  callback,
+			gpointer     user_data)
 {
   GSocketSourceFunc func = (GSocketSourceFunc)callback;
-  GWinsockSource *winsock_source = (GWinsockSource *)source;
+  GSocketSource *socket_source = (GSocketSource *)source;
 
-  return (*func) (winsock_source->socket,
-		  winsock_source->result_condition & winsock_source->condition,
+  return (*func) (socket_source->socket,
+		  socket_source->pollfd.revents & socket_source->condition,
 		  user_data);
 }
 
 static void
-winsock_finalize (GSource *source)
+socket_source_finalize (GSource *source)
 {
-  GWinsockSource *winsock_source = (GWinsockSource *)source;
+  GSocketSource *socket_source = (GSocketSource *)source;
   GSocket *socket;
 
-  socket = winsock_source->socket;
+  socket = socket_source->socket;
 
-  remove_condition_watch (socket, &winsock_source->condition);
+#ifdef G_OS_WIN32
+  remove_condition_watch (socket, &socket_source->condition);
+#endif
+
   g_object_unref (socket);
 
-  if (winsock_source->cancellable)
+  if (socket_source->cancellable)
     {
-      g_cancellable_release_fd (winsock_source->cancellable);
-      g_object_unref (winsock_source->cancellable);
+      g_cancellable_release_fd (socket_source->cancellable);
+      g_object_unref (socket_source->cancellable);
     }
 }
 
-static GSourceFuncs winsock_funcs =
+static gboolean
+socket_source_closure_callback (GSocket      *socket,
+				GIOCondition  condition,
+				gpointer      data)
 {
-  winsock_prepare,
-  winsock_check,
-  winsock_dispatch,
-  winsock_finalize
+  GClosure *closure = data;
+
+  GValue params[2] = { { 0, }, { 0, } };
+  GValue result_value = { 0, };
+  gboolean result;
+
+  g_value_init (&result_value, G_TYPE_BOOLEAN);
+
+  g_value_init (&params[0], G_TYPE_SOCKET);
+  g_value_set_object (&params[0], socket);
+  g_value_init (&params[1], G_TYPE_IO_CONDITION);
+  g_value_set_flags (&params[1], condition);
+
+  g_closure_invoke (closure, &result_value, 2, params, NULL);
+
+  result = g_value_get_boolean (&result_value);
+  g_value_unset (&result_value);
+  g_value_unset (&params[0]);
+  g_value_unset (&params[1]);
+
+  return result;
+}
+
+static GSourceFuncs socket_source_funcs =
+{
+  socket_source_prepare,
+  socket_source_check,
+  socket_source_dispatch,
+  socket_source_finalize,
+  (GSourceFunc)socket_source_closure_callback,
+  (GSourceDummyMarshal)_gio_marshal_BOOLEAN__FLAGS,
 };
 
 static GSource *
-winsock_source_new (GSocket      *socket,
-		    GIOCondition  condition,
-		    GCancellable *cancellable)
+socket_source_new (GSocket      *socket,
+		   GIOCondition  condition,
+		   GCancellable *cancellable)
 {
   GSource *source;
-  GWinsockSource *winsock_source;
+  GSocketSource *socket_source;
 
+#ifdef G_OS_WIN32
   ensure_event (socket);
 
   if (socket->priv->event == WSA_INVALID_EVENT)
@@ -2300,30 +2548,44 @@ winsock_source_new (GSocket      *socket,
       g_warning ("Failed to create WSAEvent");
       return g_source_new (&broken_funcs, sizeof (GSource));
     }
+#endif
 
   condition |= G_IO_HUP | G_IO_ERR;
 
-  source = g_source_new (&winsock_funcs, sizeof (GWinsockSource));
-  winsock_source = (GWinsockSource *)source;
+  source = g_source_new (&socket_source_funcs, sizeof (GSocketSource));
+  g_source_set_name (source, "GSocket");
+  socket_source = (GSocketSource *)source;
 
-  winsock_source->socket = g_object_ref (socket);
-  winsock_source->condition = condition;
-  add_condition_watch (socket, &winsock_source->condition);
+  socket_source->socket = g_object_ref (socket);
+  socket_source->condition = condition;
 
   if (g_cancellable_make_pollfd (cancellable,
-                                 &winsock_source->cancel_pollfd))
+                                 &socket_source->cancel_pollfd))
     {
-      winsock_source->cancellable = g_object_ref (cancellable);
-      g_source_add_poll (source, &winsock_source->cancel_pollfd);
+      socket_source->cancellable = g_object_ref (cancellable);
+      g_source_add_poll (source, &socket_source->cancel_pollfd);
     }
 
-  winsock_source->pollfd.fd = (gintptr) socket->priv->event;
-  winsock_source->pollfd.events = condition;
-  g_source_add_poll (source, &winsock_source->pollfd);
+#ifdef G_OS_WIN32
+  add_condition_watch (socket, &socket_source->condition);
+  socket_source->pollfd.fd = (gintptr) socket->priv->event;
+#else
+  socket_source->pollfd.fd = socket->priv->fd;
+#endif
+
+  socket_source->pollfd.events = condition;
+  socket_source->pollfd.revents = 0;
+  g_source_add_poll (source, &socket_source->pollfd);
+
+  if (socket->priv->timeout)
+    socket_source->timeout_time = g_get_monotonic_time () +
+                                  socket->priv->timeout * 1000000;
+
+  else
+    socket_source->timeout_time = 0;
 
   return source;
 }
-#endif
 
 /**
  * g_socket_create_source:
@@ -2336,7 +2598,7 @@ winsock_source_new (GSocket      *socket,
  *
  * The callback on the source is of the #GSocketSourceFunc type.
  *
- * It is meaningless to specify %G_IO_ERR or %G_IO_HUP in condition;
+ * It is meaningless to specify %G_IO_ERR or %G_IO_HUP in @condition;
  * these conditions will always be reported output if they are true.
  *
  * @cancellable if not %NULL can be used to cancel the source, which will
@@ -2345,7 +2607,13 @@ winsock_source_new (GSocket      *socket,
  * condition change). You can check for this in the callback using
  * g_cancellable_is_cancelled().
  *
- * Returns: a newly allocated %GSource, free with g_source_unref().
+ * If @socket has a timeout set, and it is reached before @condition
+ * occurs, the source will then trigger anyway, reporting %G_IO_IN or
+ * %G_IO_OUT depending on @condition. However, @socket will have been
+ * marked as having had a timeout, and so the next #GSocket I/O method
+ * you call will then fail with a %G_IO_ERROR_TIMED_OUT.
+ *
+ * Returns: (transfer full): a newly allocated %GSource, free with g_source_unref().
  *
  * Since: 2.22
  */
@@ -2354,16 +2622,9 @@ g_socket_create_source (GSocket      *socket,
 			GIOCondition  condition,
 			GCancellable *cancellable)
 {
-  GSource *source;
   g_return_val_if_fail (G_IS_SOCKET (socket) && (cancellable == NULL || G_IS_CANCELLABLE (cancellable)), NULL);
 
-#ifdef G_OS_WIN32
-  source = winsock_source_new (socket, condition, cancellable);
-#else
-  source =_g_fd_source_new_with_object (G_OBJECT (socket), socket->priv->fd,
-					condition, cancellable);
-#endif
-  return source;
+  return socket_source_new (socket, condition, cancellable);
 }
 
 /**
@@ -2375,6 +2636,14 @@ g_socket_create_source (GSocket      *socket,
  * The operations specified in @condition are checked for and masked
  * against the currently-satisfied conditions on @socket. The result
  * is returned.
+ *
+ * Note that on Windows, it is possible for an operation to return
+ * %G_IO_ERROR_WOULD_BLOCK even immediately after
+ * g_socket_condition_check() has claimed that the socket is ready for
+ * writing. Rather than calling g_socket_condition_check() and then
+ * writing to the socket if it succeeds, it is generally better to
+ * simply try writing to the socket right away, and try again later if
+ * the initial attempt returns %G_IO_ERROR_WOULD_BLOCK.
  *
  * It is meaningless to specify %G_IO_ERR or %G_IO_HUP in condition;
  * these conditions will always be set in the output if they are true.
@@ -2429,8 +2698,11 @@ g_socket_condition_check (GSocket      *socket,
  * Waits for @condition to become true on @socket. When the condition
  * is met, %TRUE is returned.
  *
- * If @cancellable is cancelled before the condition is met then %FALSE
- * is returned and @error, if non-%NULL, is set to %G_IO_ERROR_CANCELLED.
+ * If @cancellable is cancelled before the condition is met, or if the
+ * socket has a timeout set and it is reached before the condition is
+ * met, then %FALSE is returned and @error, if non-%NULL, is set to
+ * the appropriate value (%G_IO_ERROR_CANCELLED or
+ * %G_IO_ERROR_TIMED_OUT).
  *
  * Returns: %TRUE if the condition was met, %FALSE otherwise
  *
@@ -2452,7 +2724,7 @@ g_socket_condition_wait (GSocket       *socket,
   {
     GIOCondition current_condition;
     WSAEVENT events[2];
-    DWORD res;
+    DWORD res, timeout;
     GPollFD cancel_fd;
     int num_events;
 
@@ -2467,11 +2739,16 @@ g_socket_condition_wait (GSocket       *socket,
     if (g_cancellable_make_pollfd (cancellable, &cancel_fd))
       events[num_events++] = (WSAEVENT)cancel_fd.fd;
 
+    if (socket->priv->timeout)
+      timeout = socket->priv->timeout * 1000;
+    else
+      timeout = WSA_INFINITE;
+
     current_condition = update_condition (socket);
     while ((condition & current_condition) == 0)
       {
 	res = WSAWaitForMultipleEvents(num_events, events,
-				       FALSE, WSA_INFINITE, FALSE);
+				       FALSE, timeout, FALSE);
 	if (res == WSA_WAIT_FAILED)
 	  {
 	    int errsv = get_socket_errno ();
@@ -2480,6 +2757,12 @@ g_socket_condition_wait (GSocket       *socket,
 			 socket_io_error_from_errno (errsv),
 			 _("Waiting for socket condition: %s"),
 			 socket_strerror (errsv));
+	    break;
+	  }
+	else if (res == WSA_WAIT_TIMEOUT)
+	  {
+	    g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_TIMED_OUT,
+				 _("Socket I/O timed out"));
 	    break;
 	  }
 
@@ -2499,6 +2782,7 @@ g_socket_condition_wait (GSocket       *socket,
     GPollFD poll_fd[2];
     gint result;
     gint num;
+    gint timeout;
 
     poll_fd[0].fd = socket->priv->fd;
     poll_fd[0].events = condition;
@@ -2507,15 +2791,26 @@ g_socket_condition_wait (GSocket       *socket,
     if (g_cancellable_make_pollfd (cancellable, &poll_fd[1]))
       num++;
 
+    if (socket->priv->timeout)
+      timeout = socket->priv->timeout * 1000;
+    else
+      timeout = -1;
+
     do
-      result = g_poll (poll_fd, num, -1);
+      result = g_poll (poll_fd, num, timeout);
     while (result == -1 && get_socket_errno () == EINTR);
     
     if (num > 1)
       g_cancellable_release_fd (cancellable);
 
-    return cancellable == NULL ||
-      !g_cancellable_set_error_if_cancelled (cancellable, error);
+    if (result == 0)
+      {
+	g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_TIMED_OUT,
+			     _("Socket I/O timed out"));
+	return FALSE;
+      }
+
+    return !g_cancellable_set_error_if_cancelled (cancellable, error);
   }
   #endif
 }
@@ -2627,6 +2922,8 @@ g_socket_send_message (GSocket                *socket,
     struct msghdr msg;
     gssize result;
 
+   msg.msg_flags = 0;
+
     /* name */
     if (address)
       {
@@ -2680,7 +2977,13 @@ g_socket_send_message (GSocket                *socket,
       for (i = 0; i < num_messages; i++)
 	msg.msg_controllen += CMSG_SPACE (g_socket_control_message_get_size (messages[i]));
 
-      msg.msg_control = g_alloca (msg.msg_controllen);
+      if (msg.msg_controllen == 0)
+        msg.msg_control = NULL;
+      else
+        {
+          msg.msg_control = g_alloca (msg.msg_controllen);
+          memset (msg.msg_control, '\0', msg.msg_controllen);
+        }
 
       cmsg = CMSG_FIRSTHDR (&msg);
       for (i = 0; i < num_messages; i++)
@@ -2816,7 +3119,7 @@ g_socket_send_message (GSocket                *socket,
  * @address: a pointer to a #GSocketAddress pointer, or %NULL
  * @vectors: an array of #GInputVector structs
  * @num_vectors: the number of elements in @vectors, or -1
- * @messages: a pointer which will be filled with an array of
+ * @messages: a pointer which may be filled with an array of
  *     #GSocketControlMessages, or %NULL
  * @num_messages: a pointer which will be filled with the number of
  *    elements in @messages, or %NULL
@@ -2844,12 +3147,13 @@ g_socket_send_message (GSocket                *socket,
  * single '\0' byte for the purposes of transferring ancillary data.
  *
  * @messages, if non-%NULL, will be set to point to a newly-allocated
- * array of #GSocketControlMessage instances. These correspond to the
- * control messages received from the kernel, one
- * #GSocketControlMessage per message from the kernel. This array is
- * %NULL-terminated and must be freed by the caller using g_free(). If
- * @messages is %NULL, any control messages received will be
- * discarded.
+ * array of #GSocketControlMessage instances or %NULL if no such
+ * messages was received. These correspond to the control messages
+ * received from the kernel, one #GSocketControlMessage per message
+ * from the kernel. This array is %NULL-terminated and must be freed
+ * by the caller using g_free() after calling g_object_unref() on each
+ * element. If @messages is %NULL, any control messages received will
+ * be discarded.
  *
  * @num_messages, if non-%NULL, will be set to the number of control
  * messages received.
@@ -3019,8 +3323,7 @@ g_socket_receive_message (GSocket                 *socket,
 
     /* decode control messages */
     {
-      GSocketControlMessage **my_messages = NULL;
-      gint allocated = 0, index = 0;
+      GPtrArray *my_messages = NULL;
       const gchar *scm_pointer;
       struct cmsghdr *cmsg;
       gsize scm_size;
@@ -3041,35 +3344,39 @@ g_socket_receive_message (GSocket                 *socket,
 	       deserialization code, so just continue */
 	    continue;
 
-	  if (index == allocated)
+	  if (messages == NULL)
 	    {
-	      /* estimated 99% case: exactly 1 control message */
-	      allocated = MAX (allocated * 2, 1);
-	      my_messages = g_new (GSocketControlMessage *, (allocated + 1));
+	      /* we have to do it this way if the user ignores the
+	       * messages so that we will close any received fds.
+	       */
+	      g_object_unref (message);
 	    }
-
-	  my_messages[index++] = message;
+	  else
+	    {
+	      if (my_messages == NULL)
+		my_messages = g_ptr_array_new ();
+	      g_ptr_array_add (my_messages, message);
+	    }
 	}
 
       if (num_messages)
-	*num_messages = index;
+	*num_messages = my_messages != NULL ? my_messages->len : 0;
 
       if (messages)
 	{
-	  my_messages[index++] = NULL;
-	  *messages = my_messages;
+	  if (my_messages == NULL)
+	    {
+	      *messages = NULL;
+	    }
+	  else
+	    {
+	      g_ptr_array_add (my_messages, NULL);
+	      *messages = (GSocketControlMessage **) g_ptr_array_free (my_messages, FALSE);
+	    }
 	}
       else
 	{
-	  gint i;
-
-	  /* free all those messages we just constructed.
-	   * we have to do it this way if the user ignores the
-	   * messages so that we will close any received fds.
-	   */
-	  for (i = 0; i < index; i++)
-	    g_object_unref (my_messages[i]);
-	  g_free (my_messages);
+	  g_assert (my_messages == NULL);
 	}
     }
 
@@ -3159,10 +3466,82 @@ g_socket_receive_message (GSocket                 *socket,
     if (flags != NULL)
       *flags = win_flags;
 
+    if (messages != NULL)
+      *messages = NULL;
+    if (num_messages != NULL)
+      *num_messages = 0;
+
     return bytes_received;
   }
 #endif
 }
 
-#define __G_SOCKET_C__
-#include "gioaliasdef.c"
+/**
+ * g_socket_get_credentials:
+ * @socket: a #GSocket.
+ * @error: #GError for error reporting, or %NULL to ignore.
+ *
+ * Returns the credentials of the foreign process connected to this
+ * socket, if any (e.g. it is only supported for %G_SOCKET_FAMILY_UNIX
+ * sockets).
+ *
+ * If this operation isn't supported on the OS, the method fails with
+ * the %G_IO_ERROR_NOT_SUPPORTED error. On Linux this is implemented
+ * by reading the %SO_PEERCRED option on the underlying socket.
+ *
+ * Other ways to obtain credentials from a foreign peer includes the
+ * #GUnixCredentialsMessage type and
+ * g_unix_connection_send_credentials() /
+ * g_unix_connection_receive_credentials() functions.
+ *
+ * Returns: (transfer full): %NULL if @error is set, otherwise a #GCredentials object
+ * that must be freed with g_object_unref().
+ *
+ * Since: 2.26
+ */
+GCredentials *
+g_socket_get_credentials (GSocket   *socket,
+                          GError   **error)
+{
+  GCredentials *ret;
+
+  g_return_val_if_fail (G_IS_SOCKET (socket), NULL);
+  g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+
+  ret = NULL;
+
+#ifdef __linux__
+  {
+    struct ucred native_creds;
+    socklen_t optlen;
+    optlen = sizeof (struct ucred);
+    if (getsockopt (socket->priv->fd,
+                    SOL_SOCKET,
+                    SO_PEERCRED,
+                    (void *)&native_creds,
+                    &optlen) != 0)
+      {
+        int errsv = get_socket_errno ();
+        g_set_error (error,
+                     G_IO_ERROR,
+                     socket_io_error_from_errno (errsv),
+                     _("Unable to get pending error: %s"),
+                     socket_strerror (errsv));
+      }
+    else
+      {
+        ret = g_credentials_new ();
+        g_credentials_set_native (ret,
+                                  G_CREDENTIALS_TYPE_LINUX_UCRED,
+                                  &native_creds);
+      }
+  }
+#else
+  g_set_error_literal (error,
+                       G_IO_ERROR,
+                       G_IO_ERROR_NOT_SUPPORTED,
+                       _("g_socket_get_credentials not implemented for this OS"));
+#endif
+
+  return ret;
+}

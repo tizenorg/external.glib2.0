@@ -28,7 +28,6 @@
 
 #include "gclosure.h"
 #include "gvalue.h"
-#include "gobjectalias.h"
 
 
 /**
@@ -187,7 +186,7 @@ enum {
  * }
  * ]|
  *
- * Returns: a newly allocated #GClosure
+ * Returns: (transfer full): a newly allocated #GClosure
  */
 GClosure*
 g_closure_new_simple (guint           sizeof_closure,
@@ -294,7 +293,7 @@ closure_invoke_notifiers (GClosure *closure,
 }
 
 /**
- * g_closure_set_meta_marshal:
+ * g_closure_set_meta_marshal: (skip)
  * @closure: a #GClosure
  * @marshal_data: context-dependent data to pass to @meta_marshal
  * @meta_marshal: a #GClosureMarshal function
@@ -344,7 +343,7 @@ g_closure_set_meta_marshal (GClosure       *closure,
 }
 
 /**
- * g_closure_add_marshal_guards:
+ * g_closure_add_marshal_guards: (skip)
  * @closure: a #GClosure
  * @pre_marshal_data: data to pass to @pre_marshal_notify
  * @pre_marshal_notify: a function to call before the closure callback
@@ -402,7 +401,7 @@ g_closure_add_marshal_guards (GClosure      *closure,
 }
 
 /**
- * g_closure_add_finalize_notifier:
+ * g_closure_add_finalize_notifier: (skip)
  * @closure: a #GClosure
  * @notify_data: data to pass to @notify_func
  * @notify_func: the callback function to register
@@ -438,7 +437,7 @@ g_closure_add_finalize_notifier (GClosure      *closure,
 }
 
 /**
- * g_closure_add_invalidate_notifier:
+ * g_closure_add_invalidate_notifier: (skip)
  * @closure: a #GClosure
  * @notify_data: data to pass to @notify_func
  * @notify_func: the callback function to register
@@ -518,7 +517,7 @@ closure_try_remove_fnotify (GClosure       *closure,
  * Increments the reference count on a closure to force it staying
  * alive while the caller holds a pointer to it.
  *
- * Returns: The @closure passed in, for convenience
+ * Returns: (transfer none): The @closure passed in, for convenience
  */
 GClosure*
 g_closure_ref (GClosure *closure)
@@ -666,7 +665,7 @@ g_closure_sink (GClosure *closure)
 }
 
 /**
- * g_closure_remove_invalidate_notifier:
+ * g_closure_remove_invalidate_notifier: (skip)
  * @closure: a #GClosure
  * @notify_data: data which was passed to g_closure_add_invalidate_notifier()
  *               when registering @notify_func
@@ -694,7 +693,7 @@ g_closure_remove_invalidate_notifier (GClosure      *closure,
 }
 
 /**
- * g_closure_remove_finalize_notifier:
+ * g_closure_remove_finalize_notifier: (skip)
  * @closure: a #GClosure
  * @notify_data: data which was passed to g_closure_add_finalize_notifier()
  *  when registering @notify_func
@@ -727,8 +726,9 @@ g_closure_remove_finalize_notifier (GClosure      *closure,
  * @return_value: a #GValue to store the return value. May be %NULL if the
  *                callback of @closure doesn't return a value.
  * @n_param_values: the length of the @param_values array
- * @param_values: an array of #GValue<!-- -->s holding the arguments on
- *                which to invoke the callback of @closure
+ * @param_values: (array length=n_param_values): an array of
+ *                #GValue<!-- -->s holding the arguments on which to
+ *                invoke the callback of @closure
  * @invocation_hint: a context-dependent invocation hint
  *
  * Invokes the closure, i.e. executes the callback represented by the @closure.
@@ -777,7 +777,7 @@ g_closure_invoke (GClosure       *closure,
 }
 
 /**
- * g_closure_set_marshal:
+ * g_closure_set_marshal: (skip)
  * @closure: a #GClosure
  * @marshal: a #GClosureMarshal function
  *
@@ -803,7 +803,7 @@ g_closure_set_marshal (GClosure       *closure,
 }
 
 /**
- * g_cclosure_new:
+ * g_cclosure_new: (skip)
  * @callback_func: the function to invoke
  * @user_data: user data to pass to @callback_func
  * @destroy_data: destroy notify to be called when @user_data is no longer used
@@ -831,7 +831,7 @@ g_cclosure_new (GCallback      callback_func,
 }
 
 /**
- * g_cclosure_new_swap:
+ * g_cclosure_new_swap: (skip)
  * @callback_func: the function to invoke
  * @user_data: user data to pass to @callback_func
  * @destroy_data: destroy notify to be called when @user_data is no longer used
@@ -839,7 +839,7 @@ g_cclosure_new (GCallback      callback_func,
  * Creates a new closure which invokes @callback_func with @user_data as
  * the first parameter.
  *
- * Returns: a new #GCClosure
+ * Returns: (transfer full): a new #GCClosure
  */
 GClosure*
 g_cclosure_new_swap (GCallback      callback_func,
@@ -1171,7 +1171,23 @@ g_signal_type_cclosure_new (GType    itype,
  * @marshal_data: additional data specified when registering the marshaller
  *
  * A marshaller for a #GCClosure with a callback of type
- * <literal>void (*callback) (gpointer instance, GOBject *arg1, gpointer user_data)</literal>.
+ * <literal>void (*callback) (gpointer instance, GObject *arg1, gpointer user_data)</literal>.
+ */
+
+/**
+ * g_cclosure_marshal_VOID__VARIANT:
+ * @closure: the #GClosure to which the marshaller belongs
+ * @return_value: ignored
+ * @n_param_values: 2
+ * @param_values: a #GValue array holding the instance and the #GVariant* parameter
+ * @invocation_hint: the invocation hint given as the last argument
+ *  to g_closure_invoke()
+ * @marshal_data: additional data specified when registering the marshaller
+ *
+ * A marshaller for a #GCClosure with a callback of type
+ * <literal>void (*callback) (gpointer instance, GVariant *arg1, gpointer user_data)</literal>.
+ *
+ * Since: 2.26
  */
 
 /**
@@ -1221,6 +1237,18 @@ g_signal_type_cclosure_new (GType    itype,
  * A marshaller for a #GCClosure with a callback of type
  * <literal>gchar* (*callback) (gpointer instance, GObject *arg1, gpointer arg2, gpointer user_data)</literal>.
  */
-
-#define __G_CLOSURE_C__
-#include "gobjectaliasdef.c"
+/**
+ * g_cclosure_marshal_BOOLEAN__OBJECT_BOXED_BOXED:
+ * @closure: the #GClosure to which the marshaller belongs
+ * @return_value: a #GValue, which can store the returned string
+ * @n_param_values: 3
+ * @param_values: a #GValue array holding instance, arg1 and arg2
+ * @invocation_hint: the invocation hint given as the last argument
+ *  to g_closure_invoke()
+ * @marshal_data: additional data specified when registering the marshaller
+ *
+ * A marshaller for a #GCClosure with a callback of type
+ * <literal>gboolean (*callback) (gpointer instance, GBoxed *arg1, GBoxed *arg2, gpointer user_data)</literal>.
+ *
+ * Since: 2.26
+ */

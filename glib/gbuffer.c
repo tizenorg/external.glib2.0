@@ -27,7 +27,6 @@
 #include <glib/gatomic.h>
 #include <glib/gmem.h>
 
-#include "galias.h"
 
 typedef struct
 {
@@ -138,7 +137,7 @@ g_buffer_free_usernotify (GBuffer *buffer)
   GUserNotifyBuffer *ubuffer = (GUserNotifyBuffer *) buffer;
 
   ubuffer->user_destroy (ubuffer->user_data);
-  g_slice_free (GBuffer, buffer);
+  g_slice_free (GUserNotifyBuffer, ubuffer);
 }
 
 /* < private >

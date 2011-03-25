@@ -336,7 +336,6 @@ G_VA_COPY
 <SUBSECTION>
 G_STRINGIFY
 G_PASTE
-G_PASTE_ARGS
 G_STATIC_ASSERT
 
 <SUBSECTION>
@@ -347,6 +346,7 @@ G_GNUC_MALLOC
 G_GNUC_ALLOC_SIZE
 G_GNUC_ALLOC_SIZE2
 G_GNUC_DEPRECATED
+G_GNUC_DEPRECATED_FOR
 G_GNUC_NORETURN
 G_GNUC_UNUSED
 G_GNUC_PRINTF
@@ -391,6 +391,7 @@ G_GUINTPTR_FORMAT
 <SUBSECTION Private>
 GLIB_VAR
 G_STRINGIFY_ARG
+G_PASTE_ARGS
 G_HAVE_INLINE
 G_CAN_INLINE
 inline
@@ -399,6 +400,7 @@ G_HAVE___INLINE__
 G_HAVE_GNUC_VARARGS
 G_HAVE_ISO_VARARGS
 G_HAVE_GROWING_STACK
+G_VA_COPY_AS_ARRAY
 </SECTION>
 
 <SECTION>
@@ -473,6 +475,8 @@ g_main_context_remove_poll
 g_main_depth
 g_main_current_source
 g_main_set_poll_func
+g_main_context_invoke
+g_main_context_invoke_full
 
 <SUBSECTION>
 g_main_context_get_thread_default
@@ -522,12 +526,18 @@ g_source_get_priority
 g_source_set_can_recurse
 g_source_get_can_recurse
 g_source_get_id
+g_source_get_name
+g_source_set_name
+g_source_set_name_by_id
 g_source_get_context
 g_source_set_callback
 GSourceFunc
 g_source_set_callback_indirect
 g_source_add_poll
 g_source_remove_poll
+g_source_add_child_source
+g_source_remove_child_source
+g_source_get_time
 g_source_get_current_time
 g_source_remove
 g_source_remove_by_funcs_user_data
@@ -537,12 +547,19 @@ g_source_remove_by_user_data
 GLIB_HAVE_SYS_POLL_H
 GLIB_HAVE_ALLOCA_H
 alloca
+GLIB_USING_SYSTEM_PRINTF
 GLIB_SYSDEF_POLLERR
 GLIB_SYSDEF_POLLHUP
 GLIB_SYSDEF_POLLIN
 GLIB_SYSDEF_POLLNVAL
 GLIB_SYSDEF_POLLOUT
 GLIB_SYSDEF_POLLPRI
+GLIB_SYSDEF_AF_INET
+GLIB_SYSDEF_AF_INET6
+GLIB_SYSDEF_AF_UNIX
+GLIB_SYSDEF_MSG_DONTROUTE
+GLIB_SYSDEF_MSG_OOB
+GLIB_SYSDEF_MSG_PEEK
 G_WIN32_MSG_HANDLE
 g_idle_funcs
 g_timeout_funcs
@@ -679,6 +696,7 @@ GSystemThread
 g_thread_use_default_impl
 g_threads_got_initialized
 g_thread_functions_for_glib_use
+g_thread_gettime
 g_thread_init_glib
 g_thread_error_quark
 g_once_impl
@@ -752,6 +770,9 @@ g_atomic_pointer_set
 g_atomic_pointer_compare_and_exchange
 g_atomic_int_inc
 g_atomic_int_dec_and_test
+
+<SUBSECTION Private>
+G_ATOMIC_OP_MEMORY_BARRIER_NEEDED
 </SECTION>
 
 <SECTION>
@@ -942,6 +963,8 @@ g_regex_get_pattern
 g_regex_get_max_backref
 g_regex_get_capture_count
 g_regex_get_string_number
+g_regex_get_compile_flags
+g_regex_get_match_flags
 g_regex_escape_string
 g_regex_match_simple
 g_regex_match
@@ -1154,6 +1177,7 @@ g_mapped_file_get_contents
 g_open
 g_rename
 g_mkdir
+GStatBuf
 g_stat
 g_lstat
 g_unlink
@@ -1169,6 +1193,7 @@ g_utime
 
 <SUBSECTION Private>
 g_file_error_quark
+utimbuf
 </SECTION>
 
 
@@ -1298,6 +1323,10 @@ g_time_val_from_iso8601
 g_time_val_to_iso8601
 
 <SUBSECTION>
+g_get_monotonic_time
+g_get_real_time
+
+<SUBSECTION>
 GDate
 GTime
 GDateDMY
@@ -1385,7 +1414,122 @@ g_date_sunday_week_of_year
 g_date_days_in_month
 g_date_monday_weeks_in_year
 g_date_sunday_weeks_in_year
-tm
+</SECTION>
+
+<SECTION>
+<FILE>timezone</FILE>
+<SUBSECTION>
+GTimeZone
+g_time_zone_unref
+g_time_zone_ref
+<SUBSECTION>
+g_time_zone_new
+g_time_zone_new_local
+g_time_zone_new_utc
+<SUBSECTION>
+GTimeType
+g_time_zone_find_interval
+g_time_zone_adjust_time
+<SUBSECTION>
+g_time_zone_get_abbreviation
+g_time_zone_get_offset
+g_time_zone_is_dst
+</SECTION>
+
+<SECTION>
+<FILE>date-time</FILE>
+GTimeSpan
+G_TIME_SPAN_DAY
+G_TIME_SPAN_HOUR
+G_TIME_SPAN_MINUTE
+G_TIME_SPAN_SECOND
+G_TIME_SPAN_MILLISECOND
+
+<SUBSECTION>
+GDateTime
+g_date_time_unref
+g_date_time_ref
+
+<SUBSECTION>
+g_date_time_new_now
+g_date_time_new_now_local
+g_date_time_new_now_utc
+
+<SUBSECTION>
+g_date_time_new_from_unix_local
+g_date_time_new_from_unix_utc
+
+<SUBSECTION>
+g_date_time_new_from_timeval_local
+g_date_time_new_from_timeval_utc
+
+<SUBSECTION>
+g_date_time_new
+g_date_time_new_local
+g_date_time_new_utc
+
+<SUBSECTION>
+g_date_time_add
+
+<SUBSECTION>
+g_date_time_add_years
+g_date_time_add_months
+g_date_time_add_weeks
+g_date_time_add_days
+
+<SUBSECTION>
+g_date_time_add_hours
+g_date_time_add_minutes
+g_date_time_add_seconds
+
+<SUBSECTION>
+g_date_time_add_full
+
+<SUBSECTION>
+g_date_time_compare
+g_date_time_difference
+g_date_time_hash
+g_date_time_equal
+
+<SUBSECTION>
+g_date_time_get_ymd
+
+<SUBSECTION>
+g_date_time_get_year
+g_date_time_get_month
+g_date_time_get_day_of_month
+
+<SUBSECTION>
+g_date_time_get_week_numbering_year
+g_date_time_get_week_of_year
+g_date_time_get_day_of_week
+
+<SUBSECTION>
+g_date_time_get_day_of_year
+
+<SUBSECTION>
+g_date_time_get_hour
+g_date_time_get_minute
+g_date_time_get_second
+g_date_time_get_microsecond
+g_date_time_get_seconds
+
+<SUBSECTION>
+g_date_time_to_unix
+g_date_time_to_timeval
+
+<SUBSECTION>
+g_date_time_get_utc_offset
+g_date_time_get_timezone_abbreviation
+g_date_time_is_daylight_savings
+
+<SUBSECTION>
+g_date_time_to_timezone
+g_date_time_to_local
+g_date_time_to_utc
+
+<SUBSECTION>
+g_date_time_format
 </SECTION>
 
 <SECTION>
@@ -1455,6 +1599,7 @@ g_get_application_name
 g_set_application_name
 g_get_prgname
 g_set_prgname
+g_get_environ
 g_getenv
 g_setenv
 g_unsetenv
@@ -1464,6 +1609,7 @@ g_get_real_name
 g_get_user_cache_dir
 g_get_user_data_dir
 g_get_user_config_dir
+g_get_user_runtime_dir
 GUserDirectory
 g_get_user_special_dir
 g_get_system_data_dirs
@@ -1607,6 +1753,8 @@ g_key_file_get_string
 g_key_file_get_locale_string
 g_key_file_get_boolean
 g_key_file_get_integer
+g_key_file_get_int64
+g_key_file_get_uint64
 g_key_file_get_double
 g_key_file_get_string_list
 g_key_file_get_locale_string_list
@@ -1621,6 +1769,8 @@ g_key_file_set_string
 g_key_file_set_locale_string
 g_key_file_set_boolean
 g_key_file_set_integer
+g_key_file_set_int64
+g_key_file_set_uint64
 g_key_file_set_double
 g_key_file_set_string_list
 g_key_file_set_locale_string_list
@@ -1846,6 +1996,7 @@ g_list_remove_link
 g_list_delete_link
 g_list_remove_all
 g_list_free
+g_list_free_full
 
 <SUBSECTION>
 g_list_alloc
@@ -1902,6 +2053,7 @@ g_slist_remove_link
 g_slist_delete_link
 g_slist_remove_all
 g_slist_free
+g_slist_free_full
 g_slist_free_1
 g_slist_free1
 
@@ -2014,6 +2166,8 @@ g_sequence_remove_range
 g_sequence_move_range
 g_sequence_search
 g_sequence_search_iter
+g_sequence_lookup
+g_sequence_lookup_iter
 
 <SUBSECTION>
 g_sequence_get
@@ -2468,8 +2622,6 @@ g_iconv_close
 g_locale_to_utf8
 g_filename_to_utf8
 g_filename_from_utf8
-g_filename_from_uri
-g_filename_to_uri
 g_get_filename_charsets
 g_filename_display_name
 g_filename_display_basename
@@ -2565,11 +2717,13 @@ g_unichar_to_utf8
 <TITLE>I18N</TITLE>
 <FILE>i18n</FILE>
 <INCLUDE>glib.h,glib/gi18n.h</INCLUDE>
+_
 Q_
 C_
 N_
 NC_
 g_dgettext
+g_dcgettext
 g_dngettext
 g_dpgettext
 g_dpgettext2
@@ -2602,6 +2756,8 @@ g_uri_escape_string
 g_uri_unescape_string
 g_uri_unescape_segment
 g_uri_list_extract_uris
+g_filename_from_uri
+g_filename_to_uri
 </SECTION>
 
 <SECTION>
@@ -2635,7 +2791,9 @@ g_test_perf
 g_test_verbose
 g_test_quiet
 g_test_run
+GTestFunc
 g_test_add_func
+GTestDataFunc
 g_test_add_data_func
 g_test_add
 
@@ -2682,6 +2840,7 @@ g_assert_error
 
 GTestCase
 GTestSuite
+GTestFixtureFunc
 g_test_create_case
 g_test_create_suite
 g_test_get_root
@@ -2699,7 +2858,6 @@ g_assertion_message_error
 
 g_test_add_vtable
 GTestConfig
-g_test_config_vars
 GTestLogType
 GTestLogMsg
 GTestLogBuffer
@@ -2738,6 +2896,9 @@ G_VARIANT_TYPE_TUPLE
 G_VARIANT_TYPE_UNIT
 G_VARIANT_TYPE_DICT_ENTRY
 G_VARIANT_TYPE_DICTIONARY
+G_VARIANT_TYPE_STRING_ARRAY
+G_VARIANT_TYPE_BYTESTRING
+G_VARIANT_TYPE_BYTESTRING_ARRAY
 
 <SUBSECTION>
 G_VARIANT_TYPE
@@ -2789,10 +2950,12 @@ GVariant
 g_variant_unref
 g_variant_ref
 g_variant_ref_sink
+g_variant_is_floating
 g_variant_get_type
 g_variant_get_type_string
 g_variant_is_of_type
 g_variant_is_container
+g_variant_compare
 
 <SUBSECTION>
 g_variant_classify
@@ -2822,6 +2985,8 @@ g_variant_new_signature
 g_variant_is_signature
 g_variant_new_variant
 g_variant_new_strv
+g_variant_new_bytestring
+g_variant_new_bytestring_array
 
 <SUBSECTION>
 g_variant_get_boolean
@@ -2839,6 +3004,10 @@ g_variant_dup_string
 g_variant_get_variant
 g_variant_get_strv
 g_variant_dup_strv
+g_variant_get_bytestring
+g_variant_dup_bytestring
+g_variant_get_bytestring_array
+g_variant_dup_bytestring_array
 
 <SUBSECTION>
 g_variant_new_maybe
@@ -2851,6 +3020,8 @@ g_variant_get_maybe
 g_variant_n_children
 g_variant_get_child_value
 g_variant_get_child
+g_variant_lookup_value
+g_variant_lookup
 g_variant_get_fixed_array
 
 <SUBSECTION>
@@ -2890,11 +3061,13 @@ g_variant_builder_init
 g_variant_builder_clear
 g_variant_builder_add_value
 g_variant_builder_add
+g_variant_builder_add_parsed
 g_variant_builder_end
 g_variant_builder_open
 g_variant_builder_close
 
 <SUBSECTION>
+GVariantParseError
 G_VARIANT_PARSE_ERROR
 g_variant_parse
 g_variant_new_parsed_va

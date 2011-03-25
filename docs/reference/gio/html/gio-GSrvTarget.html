@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GSrvTarget</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GIO Reference Manual">
 <link rel="up" href="resolver.html" title="DNS resolution">
 <link rel="prev" href="GNetworkService.html" title="GNetworkService">
-<link rel="next" href="highlevel-socket.html" title="Highlevel network functionallity">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<link rel="next" href="gdbus-lowlevel.html" title="Lowlevel D-Bus Support">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -18,7 +18,7 @@
 <td><a accesskey="u" href="resolver.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">GIO Reference Manual</th>
-<td><a accesskey="n" href="highlevel-socket.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<td><a accesskey="n" href="gdbus-lowlevel.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr>
 <tr><td colspan="5" class="shortcuts">
 <a href="#gio-GSrvTarget.synopsis" class="shortcut">Top</a>
@@ -41,17 +41,17 @@
 #include &lt;gio/gio.h&gt;
 
                     <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget">GSrvTarget</a>;
-<a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="returnvalue">GSrvTarget</span></a> *        <a class="link" href="gio-GSrvTarget.html#g-srv-target-new" title="g_srv_target_new ()">g_srv_target_new</a>                    (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *hostname</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> port</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> priority</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> weight</code></em>);
+<a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="returnvalue">GSrvTarget</span></a> *        <a class="link" href="gio-GSrvTarget.html#g-srv-target-new" title="g_srv_target_new ()">g_srv_target_new</a>                    (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *hostname</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> port</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> priority</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> weight</code></em>);
 <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="returnvalue">GSrvTarget</span></a> *        <a class="link" href="gio-GSrvTarget.html#g-srv-target-copy" title="g_srv_target_copy ()">g_srv_target_copy</a>                   (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="gio-GSrvTarget.html#g-srv-target-free" title="g_srv_target_free ()">g_srv_target_free</a>                   (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
-const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="gio-GSrvTarget.html#g-srv-target-get-hostname" title="g_srv_target_get_hostname ()">g_srv_target_get_hostname</a>           (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="gio-GSrvTarget.html#g-srv-target-get-port" title="g_srv_target_get_port ()">g_srv_target_get_port</a>               (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="gio-GSrvTarget.html#g-srv-target-get-priority" title="g_srv_target_get_priority ()">g_srv_target_get_priority</a>           (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="gio-GSrvTarget.html#g-srv-target-get-weight" title="g_srv_target_get_weight ()">g_srv_target_get_weight</a>             (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
-<a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="gio-GSrvTarget.html#g-srv-target-list-sort" title="g_srv_target_list_sort ()">g_srv_target_list_sort</a>              (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *targets</code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="gio-GSrvTarget.html#g-srv-target-get-hostname" title="g_srv_target_get_hostname ()">g_srv_target_get_hostname</a>           (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="gio-GSrvTarget.html#g-srv-target-get-port" title="g_srv_target_get_port ()">g_srv_target_get_port</a>               (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="gio-GSrvTarget.html#g-srv-target-get-priority" title="g_srv_target_get_priority ()">g_srv_target_get_priority</a>           (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="gio-GSrvTarget.html#g-srv-target-get-weight" title="g_srv_target_get_weight ()">g_srv_target_get_weight</a>             (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             <a class="link" href="gio-GSrvTarget.html#g-srv-target-list-sort" title="g_srv_target_list_sort ()">g_srv_target_list_sort</a>              (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *targets</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -86,10 +86,10 @@ A single target host/port that a network service is running on.
 <hr>
 <div class="refsect2" title="g_srv_target_new ()">
 <a name="g-srv-target-new"></a><h3>g_srv_target_new ()</h3>
-<pre class="programlisting"><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="returnvalue">GSrvTarget</span></a> *        g_srv_target_new                    (<em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *hostname</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> port</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> priority</code></em>,
-                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> weight</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="returnvalue">GSrvTarget</span></a> *        g_srv_target_new                    (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *hostname</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> port</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> priority</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> weight</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> with the given parameters.
 </p>
@@ -175,12 +175,12 @@ Frees <em class="parameter"><code>target</code></em>
 <hr>
 <div class="refsect2" title="g_srv_target_get_hostname ()">
 <a name="g-srv-target-get-hostname"></a><h3>g_srv_target_get_hostname ()</h3>
-<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_srv_target_get_hostname           (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);</pre>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_srv_target_get_hostname           (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>target</code></em>'s hostname (in ASCII form; if you are going to present
-this to the user, you should use <a href="/usr/share/gtk-doc/html/glib/glib-Hostname-Utilities.html#g-hostname-is-ascii-encoded"><code class="function">g_hostname_is_ascii_encoded()</code></a> to
+this to the user, you should use <a href="http://library.gnome.org/devel/glib/unstable/glib-Hostname-Utilities.html#g-hostname-is-ascii-encoded"><code class="function">g_hostname_is_ascii_encoded()</code></a> to
 check if it contains encoded Unicode segments, and use
-<a href="/usr/share/gtk-doc/html/glib/glib-Hostname-Utilities.html#g-hostname-to-unicode"><code class="function">g_hostname_to_unicode()</code></a> to convert it if it does.)
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Hostname-Utilities.html#g-hostname-to-unicode"><code class="function">g_hostname_to_unicode()</code></a> to convert it if it does.)
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
@@ -203,7 +203,7 @@ check if it contains encoded Unicode segments, and use
 <hr>
 <div class="refsect2" title="g_srv_target_get_port ()">
 <a name="g-srv-target-get-port"></a><h3>g_srv_target_get_port ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_srv_target_get_port               (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_srv_target_get_port               (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>target</code></em>'s port
 </p>
@@ -228,7 +228,7 @@ Gets <em class="parameter"><code>target</code></em>'s port
 <hr>
 <div class="refsect2" title="g_srv_target_get_priority ()">
 <a name="g-srv-target-get-priority"></a><h3>g_srv_target_get_priority ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_srv_target_get_priority           (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_srv_target_get_priority           (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>target</code></em>'s priority. You should not need to look at this;
 <a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> already sorts the targets according to the algorithm in
@@ -255,7 +255,7 @@ RFC 2782.
 <hr>
 <div class="refsect2" title="g_srv_target_get_weight ()">
 <a name="g-srv-target-get-weight"></a><h3>g_srv_target_get_weight ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_srv_target_get_weight             (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_srv_target_get_weight             (<em class="parameter"><code><a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a> *target</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>target</code></em>'s weight. You should not need to look at this;
 <a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> already sorts the targets according to the algorithm in
@@ -282,7 +282,7 @@ RFC 2782.
 <hr>
 <div class="refsect2" title="g_srv_target_list_sort ()">
 <a name="g-srv-target-list-sort"></a><h3>g_srv_target_list_sort ()</h3>
-<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_srv_target_list_sort              (<em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *targets</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_srv_target_list_sort              (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *targets</code></em>);</pre>
 <p>
 Sorts <em class="parameter"><code>targets</code></em> in place according to the algorithm in RFC 2782.
 </p>
@@ -291,13 +291,12 @@ Sorts <em class="parameter"><code>targets</code></em> in place according to the 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>targets</code></em> :</span></p></td>
-<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the head of the sorted list.
-
+<td> the head of the sorted list. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -308,6 +307,6 @@ Sorts <em class="parameter"><code>targets</code></em> in place according to the 
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

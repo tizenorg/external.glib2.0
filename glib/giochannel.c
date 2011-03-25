@@ -42,13 +42,12 @@
 
 #undef G_DISABLE_DEPRECATED
 
-#include "glib.h"
-
 #include "giochannel.h"
 
+#include "gstrfuncs.h"
+#include "gtestutils.h"
 #include "glibintl.h"
 
-#include "galias.h"
 
 /**
  * SECTION: iochannels
@@ -645,7 +644,7 @@ g_io_create_watch (GIOChannel   *channel,
  *
  * This internally creates a main loop source using g_io_create_watch()
  * and attaches it to the main loop context with g_source_attach().
- * You can do these steps manuallt if you need greater control.
+ * You can do these steps manually if you need greater control.
  *
  * Returns: the event source id
  */
@@ -2579,6 +2578,3 @@ g_io_channel_error_quark (void)
 {
   return g_quark_from_static_string ("g-io-channel-error-quark");
 }
-
-#define __G_IOCHANNEL_C__
-#include "galiasdef.c"

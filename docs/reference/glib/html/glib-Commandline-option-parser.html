@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Commandline option parser</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GLib Reference Manual">
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Shell-related-Utilities.html" title="Shell-related Utilities">
 <link rel="next" href="glib-Glob-style-pattern-matching.html" title="Glob-style pattern matching">
-<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -125,15 +125,16 @@ enum                <a class="link" href="glib-Commandline-option-parser.html#GO
 <div class="refsect1" title="Description">
 <a name="glib-Commandline-option-parser.description"></a><h2>Description</h2>
 <p>
-The GOption commandline parser is intended to be a simpler replacement for the
-popt library. It supports short and long commandline options, as shown in the 
-following example:
+The GOption commandline parser is intended to be a simpler replacement
+for the popt library. It supports short and long commandline options,
+as shown in the following example:
 </p>
 <p>
 <code class="literal">testtreemodel -r 1 --max-size 20 --rand --display=:1.0 -vb -- file1 file2</code>
 </p>
 <p>
-The example demonstrates a number of features of the GOption commandline parser
+The example demonstrates a number of features of the GOption
+commandline parser
 </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>
@@ -144,29 +145,33 @@ The example demonstrates a number of features of the GOption commandline parser
   Long options are prefixed by two consecutive dashes.
 </p></li>
 <li class="listitem"><p>
-  Options can have an extra argument, which can be a number, a string or a 
-  filename. For long options, the extra argument can be appended with an 
-  equals sign after the option name.
+  Options can have an extra argument, which can be a number, a string or
+  a filename. For long options, the extra argument can be appended with
+  an equals sign after the option name, which is useful if the extra
+  argument starts with a dash, which would otherwise cause it to be
+  interpreted as another option.
 </p></li>
 <li class="listitem"><p>
   Non-option arguments are returned to the application as rest arguments.
 </p></li>
 <li class="listitem"><p>
-  An argument consisting solely of two dashes turns off further parsing, 
-  any remaining arguments (even those starting with a dash) are returned 
+  An argument consisting solely of two dashes turns off further parsing,
+  any remaining arguments (even those starting with a dash) are returned
   to the application as rest arguments.
 </p></li>
 </ul></div>
 <p>
 </p>
 <p>
-Another important feature of GOption is that it can automatically generate 
-nicely formatted help output. Unless it is explicitly turned off with 
-<a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-help-enabled" title="g_option_context_set_help_enabled ()"><code class="function">g_option_context_set_help_enabled()</code></a>, GOption will recognize the 
-<code class="option">--help</code>, <code class="option">-?</code>, <code class="option">--help-all</code>
-and <code class="option">--help-</code><em class="replaceable"><code>groupname</code></em> options 
-(where <em class="replaceable"><code>groupname</code></em> is the name of a <a class="link" href="glib-Commandline-option-parser.html#GOptionGroup" title="GOptionGroup"><span class="type">GOptionGroup</span></a>) 
-and write a text similar to the one shown in the following example to stdout.
+Another important feature of GOption is that it can automatically
+generate nicely formatted help output. Unless it is explicitly turned
+off with <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-help-enabled" title="g_option_context_set_help_enabled ()"><code class="function">g_option_context_set_help_enabled()</code></a>, GOption will recognize
+the <code class="option">--help</code>, <code class="option">-?</code>,
+<code class="option">--help-all</code> and
+<code class="option">--help-</code><em class="replaceable"><code>groupname</code></em> options
+(where <em class="replaceable"><code>groupname</code></em> is the name of a
+<a class="link" href="glib-Commandline-option-parser.html#GOptionGroup" title="GOptionGroup"><span class="type">GOptionGroup</span></a>) and write a text similar to the one shown in the
+following example to stdout.
 </p>
 <p>
 </p>
@@ -184,7 +189,7 @@ Application Options:
   -m, --max-size=M         Test up to 2^M items
   --display=DISPLAY        X display to use
   -v, --verbose            Be verbose
-  -b, --beep               Beep when done   
+  -b, --beep               Beep when done
   --rand                   Randomize the data
 </pre></div>
 <p>
@@ -194,13 +199,14 @@ GOption groups options in <a class="link" href="glib-Commandline-option-parser.h
 incorporate options from multiple sources. The intended use for this is
 to let applications collect option groups from the libraries it uses,
 add them to their <a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="type">GOptionContext</span></a>, and parse all options by a single call
-to <a class="link" href="glib-Commandline-option-parser.html#g-option-context-parse" title="g_option_context_parse ()"><code class="function">g_option_context_parse()</code></a>. See <code class="function">gtk_get_option_group()</code> for an example.
+to <a class="link" href="glib-Commandline-option-parser.html#g-option-context-parse" title="g_option_context_parse ()"><code class="function">g_option_context_parse()</code></a>. See <a href="http://library.gnome.org/devel/gtk/unstable/gtk3-General.html#gtk-get-option-group"><code class="function">gtk_get_option_group()</code></a> for an example.
 </p>
 <p>
 If an option is declared to be of type string or filename, GOption takes
-care of converting it to the right encoding; strings are returned in UTF-8,
-filenames are returned in the GLib filename encoding. Note that this only
-works if <a class="link" href="glib-running.html#setlocale" title="Locale"><code class="function">setlocale()</code></a> has been called before <a class="link" href="glib-Commandline-option-parser.html#g-option-context-parse" title="g_option_context_parse ()"><code class="function">g_option_context_parse()</code></a>.
+care of converting it to the right encoding; strings are returned in
+UTF-8, filenames are returned in the GLib filename encoding. Note that
+this only works if <a class="link" href="glib-running.html#setlocale" title="Locale"><code class="function">setlocale()</code></a> has been called before
+<a class="link" href="glib-Commandline-option-parser.html#g-option-context-parse" title="g_option_context_parse ()"><code class="function">g_option_context_parse()</code></a>.
 </p>
 <p>
 Here is a complete example of setting up GOption to parse the example
@@ -252,7 +258,7 @@ commandline above and produce the example help output.
 <span class="keyword">static</span><span class="normal"> </span><span class="usertype">gboolean</span><span class="normal"> beep </span><span class="symbol">=</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">;</span>
 <span class="keyword">static</span><span class="normal"> </span><span class="usertype">gboolean</span><span class="normal"> rand </span><span class="symbol">=</span><span class="normal"> <a href="glib-Standard-Macros.html#FALSE:CAPS">FALSE</a></span><span class="symbol">;</span>
 
-<span class="keyword">static</span><span class="normal"> </span><span class="usertype">GOptionEntry</span><span class="normal"> entries</span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span><span class="normal"> </span>
+<span class="keyword">static</span><span class="normal"> </span><span class="usertype">GOptionEntry</span><span class="normal"> entries</span><span class="symbol">[]</span><span class="normal"> </span><span class="symbol">=</span>
 <span class="cbracket">{</span>
 <span class="normal">  </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"repeats"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">'r'</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">,</span><span class="normal"> <a href="glib-Commandline-option-parser.html#G-OPTION-ARG-INT:CAPS">G_OPTION_ARG_INT</a></span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">repeats</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Average over N repetitions"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"N"</span><span class="normal"> </span><span class="cbracket">}</span><span class="symbol">,</span>
 <span class="normal">  </span><span class="cbracket">{</span><span class="normal"> </span><span class="string">"max-size"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">'m'</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">,</span><span class="normal"> <a href="glib-Commandline-option-parser.html#G-OPTION-ARG-INT:CAPS">G_OPTION_ARG_INT</a></span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">max_size</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"Test up to 2^M items"</span><span class="symbol">,</span><span class="normal"> </span><span class="string">"M"</span><span class="normal"> </span><span class="cbracket">}</span><span class="symbol">,</span>
@@ -262,7 +268,7 @@ commandline above and produce the example help output.
 <span class="normal">  </span><span class="cbracket">{</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a> </span><span class="cbracket">}</span>
 <span class="cbracket">}</span><span class="symbol">;</span>
 
-<span class="type">int</span><span class="normal"> </span>
+<span class="type">int</span>
 <span class="function">main</span><span class="normal"> </span><span class="symbol">(</span><span class="type">int</span><span class="normal"> argc</span><span class="symbol">,</span><span class="normal"> </span><span class="type">char</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">argv</span><span class="symbol">[])</span>
 <span class="cbracket">{</span>
 <span class="normal">  </span><span class="usertype">GError</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">error </span><span class="symbol">=</span><span class="normal"> <a href="glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">;</span>
@@ -270,14 +276,14 @@ commandline above and produce the example help output.
 
 <span class="normal">  context </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="glib-Commandline-option-parser.html#g-option-context-new">g_option_context_new</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"- test tree model performance"</span><span class="symbol">);</span>
 <span class="normal">  </span><span class="function"><a href="glib-Commandline-option-parser.html#g-option-context-add-main-entries">g_option_context_add_main_entries</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">context</span><span class="symbol">,</span><span class="normal"> entries</span><span class="symbol">,</span><span class="normal"> GETTEXT_PACKAGE</span><span class="symbol">);</span>
-<span class="normal">  </span><span class="function"><a href="glib-Commandline-option-parser.html#g-option-context-add-group">g_option_context_add_group</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">context</span><span class="symbol">,</span><span class="normal"> </span><span class="function">gtk_get_option_group</span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#TRUE:CAPS">TRUE</a></span><span class="symbol">));</span>
+<span class="normal">  </span><span class="function"><a href="glib-Commandline-option-parser.html#g-option-context-add-group">g_option_context_add_group</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">context</span><span class="symbol">,</span><span class="normal"> </span><span class="function"><a href="http://library.gnome.org/devel/gtk/unstable/gtk3-General.html#gtk-get-option-group">gtk_get_option_group</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="glib-Standard-Macros.html#TRUE:CAPS">TRUE</a></span><span class="symbol">));</span>
 <span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(!</span><span class="function"><a href="glib-Commandline-option-parser.html#g-option-context-parse">g_option_context_parse</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">context</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">argc</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">argv</span><span class="symbol">,</span><span class="normal"> </span><span class="symbol">&amp;</span><span class="normal">error</span><span class="symbol">))</span>
 <span class="normal">    </span><span class="cbracket">{</span>
 <span class="normal">      </span><span class="function"><a href="glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"option parsing failed: %s</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">,</span><span class="normal"> error</span><span class="symbol">-&gt;</span><span class="normal">message</span><span class="symbol">);</span>
 <span class="normal">      </span><span class="function">exit</span><span class="normal"> </span><span class="symbol">(</span><span class="number">1</span><span class="symbol">);</span>
 <span class="normal">    </span><span class="cbracket">}</span>
 
-<span class="normal">  </span><span class="comment">// ...</span>
+<span class="normal">  </span><span class="comment">/* ... */</span>
 
 <span class="cbracket">}</span></pre></td>
       </tr>
@@ -398,7 +404,7 @@ fields and should not be directly accessed.
 <a name="g-option-context-new"></a><h3>g_option_context_new ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="returnvalue">GOptionContext</span></a> *    g_option_context_new                (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *parameter_string</code></em>);</pre>
 <p>
-Creates a new option context. 
+Creates a new option context.
 </p>
 <p>
 The <em class="parameter"><code>parameter_string</code></em> can serve multiple purposes. It can be used
@@ -428,7 +434,7 @@ it should normally be passed untranslated.
 <td><p><span class="term"><em class="parameter"><code>parameter_string</code></em> :</span></p></td>
 <td>a string which is displayed in
    the first line of <code class="option">--help</code> output, after the
-   usage summary 
+   usage summary
    <code class="literal"><em class="replaceable"><code>programname</code></em> [OPTION...]</code>
 </td>
 </tr>
@@ -451,10 +457,10 @@ it should normally be passed untranslated.
 <p>
 Adds a string to be displayed in <code class="option">--help</code> output
 before the list of options. This is typically a summary of the
-program functionality. 
+program functionality.
 </p>
 <p>
-Note that the summary is translated (see 
+Note that the summary is translated (see
 <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-translate-func" title="g_option_context_set_translate_func ()"><code class="function">g_option_context_set_translate_func()</code></a> and
 <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-translation-domain" title="g_option_context_set_translation_domain ()"><code class="function">g_option_context_set_translation_domain()</code></a>).
 </p>
@@ -468,7 +474,7 @@ Note that the summary is translated (see
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>summary</code></em> :</span></p></td>
-<td>a string to be shown in <code class="option">--help</code> output 
+<td>a string to be shown in <code class="option">--help</code> output
  before the list of options, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
@@ -512,7 +518,7 @@ after the list of options. This text often includes a bug reporting
 address.
 </p>
 <p>
-Note that the summary is translated (see 
+Note that the summary is translated (see
 <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-translate-func" title="g_option_context_set_translate_func ()"><code class="function">g_option_context_set_translate_func()</code></a>).
 </p>
 <div class="variablelist"><table border="0">
@@ -525,7 +531,7 @@ Note that the summary is translated (see
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>description</code></em> :</span></p></td>
-<td>a string to be shown in <code class="option">--help</code> output 
+<td>a string to be shown in <code class="option">--help</code> output
   after the list of options, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
@@ -598,14 +604,14 @@ strings, for <code class="option">--help</code> output.
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> data</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> destroy_notify</code></em>);</pre>
 <p>
-Sets the function which is used to translate the contexts 
-user-visible strings, for <code class="option">--help</code> output. 
+Sets the function which is used to translate the contexts
+user-visible strings, for <code class="option">--help</code> output.
 If <em class="parameter"><code>func</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, strings are not translated.
 </p>
 <p>
-Note that option groups have their own translation functions, 
-this function only affects the <em class="parameter"><code>parameter_string</code></em> (see <a class="link" href="glib-Commandline-option-parser.html#g-option-context-new" title="g_option_context_new ()"><code class="function">g_option_context_new()</code></a>), 
-the summary (see <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-summary" title="g_option_context_set_summary ()"><code class="function">g_option_context_set_summary()</code></a>) and the description 
+Note that option groups have their own translation functions,
+this function only affects the <em class="parameter"><code>parameter_string</code></em> (see <a class="link" href="glib-Commandline-option-parser.html#g-option-context-new" title="g_option_context_new ()"><code class="function">g_option_context_new()</code></a>),
+the summary (see <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-summary" title="g_option_context_set_summary ()"><code class="function">g_option_context_set_summary()</code></a>) and the description
 (see <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-description" title="g_option_context_set_description ()"><code class="function">g_option_context_set_description()</code></a>).
 </p>
 <p>
@@ -622,7 +628,7 @@ domain, see <a class="link" href="glib-Commandline-option-parser.html#g-option-c
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td>the <a class="link" href="glib-Commandline-option-parser.html#GTranslateFunc" title="GTranslateFunc ()"><span class="type">GTranslateFunc</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> 
+<td>the <a class="link" href="glib-Commandline-option-parser.html#GTranslateFunc" title="GTranslateFunc ()"><span class="type">GTranslateFunc</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -671,7 +677,7 @@ user-visible strings.
 <a name="g-option-context-free"></a><h3>g_option_context_free ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_option_context_free               (<em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="type">GOptionContext</span></a> *context</code></em>);</pre>
 <p>
-Frees context and all the groups which have been 
+Frees context and all the groups which have been
 added to it.
 </p>
 <p>
@@ -682,7 +688,7 @@ Please note that parsed arguments need to be freed separately (see
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>context</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="type">GOptionContext</span></a> 
+<td>a <a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="type">GOptionContext</span></a>
 </td>
 </tr></tbody>
 </table></div>
@@ -697,28 +703,28 @@ Please note that parsed arguments need to be freed separately (see
                                                          <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Parses the command line arguments, recognizing options
-which have been added to <em class="parameter"><code>context</code></em>. A side-effect of 
+which have been added to <em class="parameter"><code>context</code></em>. A side-effect of
 calling this function is that <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-set-prgname" title="g_set_prgname ()"><code class="function">g_set_prgname()</code></a> will be
 called.
 </p>
 <p>
 If the parsing is successful, any parsed arguments are
-removed from the array and <em class="parameter"><code>argc</code></em> and <em class="parameter"><code>argv</code></em> are updated 
+removed from the array and <em class="parameter"><code>argc</code></em> and <em class="parameter"><code>argv</code></em> are updated
 accordingly. A '--' option is stripped from <em class="parameter"><code>argv</code></em>
-unless there are unparsed options before and after it, 
-or some of the options after it start with '-'. In case 
-of an error, <em class="parameter"><code>argc</code></em> and <em class="parameter"><code>argv</code></em> are left unmodified. 
+unless there are unparsed options before and after it,
+or some of the options after it start with '-'. In case
+of an error, <em class="parameter"><code>argc</code></em> and <em class="parameter"><code>argv</code></em> are left unmodified.
 </p>
 <p>
 If automatic <code class="option">--help</code> support is enabled
-(see <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-help-enabled" title="g_option_context_set_help_enabled ()"><code class="function">g_option_context_set_help_enabled()</code></a>), and the 
+(see <a class="link" href="glib-Commandline-option-parser.html#g-option-context-set-help-enabled" title="g_option_context_set_help_enabled ()"><code class="function">g_option_context_set_help_enabled()</code></a>), and the
 <em class="parameter"><code>argv</code></em> array contains one of the recognized help options,
 this function will produce help output to stdout and
 call <code class="literal">exit (0)</code>.
 </p>
 <p>
-Note that function depends on the 
-<a class="link" href="glib-running.html#setlocale" title="Locale">current locale</a> for 
+Note that function depends on the
+<a class="link" href="glib-running.html#setlocale" title="Locale">current locale</a> for
 automatic character set conversion of string and filename
 arguments.
 </p>
@@ -742,12 +748,12 @@ arguments.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>a return location for errors 
+<td>a return location for errors
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the parsing was successful, 
+<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the parsing was successful,
               <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if an error occurred
 
 </td>
@@ -762,7 +768,7 @@ arguments.
 <pre class="programlisting"><span class="returnvalue">void</span>                g_option_context_set_help_enabled   (<em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="type">GOptionContext</span></a> *context</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> help_enabled</code></em>);</pre>
 <p>
-Enables or disables automatic generation of <code class="option">--help</code> 
+Enables or disables automatic generation of <code class="option">--help</code>
 output. By default, <a class="link" href="glib-Commandline-option-parser.html#g-option-context-parse" title="g_option_context_parse ()"><code class="function">g_option_context_parse()</code></a> recognizes
 <code class="option">--help</code>, <code class="option">-h</code>,
 <code class="option">-?</code>, <code class="option">--help-all</code>
@@ -820,12 +826,12 @@ is turned on for <em class="parameter"><code>context</code></em>. See <a class="
                                                         (<em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="type">GOptionContext</span></a> *context</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> ignore_unknown</code></em>);</pre>
 <p>
-Sets whether to ignore unknown options or not. If an argument is 
-ignored, it is left in the <em class="parameter"><code>argv</code></em> array after parsing. By default, 
+Sets whether to ignore unknown options or not. If an argument is
+ignored, it is left in the <em class="parameter"><code>argv</code></em> array after parsing. By default,
 <a class="link" href="glib-Commandline-option-parser.html#g-option-context-parse" title="g_option_context_parse ()"><code class="function">g_option_context_parse()</code></a> treats unknown options as error.
 </p>
 <p>
-This setting does not affect non-option arguments (i.e. arguments 
+This setting does not affect non-option arguments (i.e. arguments
 which don't start with a dash). But note that GOption cannot reliably
 determine whether a non-option belongs to a preceding unknown option.
 </p>
@@ -900,7 +906,7 @@ To obtain the help text for an option group, call
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>main_help</code></em> :</span></p></td>
-<td>if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, only include the main group 
+<td>if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, only include the main group
 </td>
 </tr>
 <tr>
@@ -1212,7 +1218,7 @@ To have an effect, they must be added to a <a class="link" href="glib-Commandlin
                                                          <em class="parameter"><code>const <a class="link" href="glib-Commandline-option-parser.html#GOptionEntry" title="GOptionEntry"><span class="type">GOptionEntry</span></a> *entries</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *translation_domain</code></em>);</pre>
 <p>
-A convenience function which creates a main group if it doesn't 
+A convenience function which creates a main group if it doesn't
 exist, adds the <em class="parameter"><code>entries</code></em> to it and sets the translation domain.
 </p>
 <div class="variablelist"><table border="0">
@@ -1289,9 +1295,9 @@ to a context.
 <pre class="programlisting"><span class="returnvalue">void</span>                g_option_context_set_main_group     (<em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="type">GOptionContext</span></a> *context</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionGroup" title="GOptionGroup"><span class="type">GOptionGroup</span></a> *group</code></em>);</pre>
 <p>
-Sets a <a class="link" href="glib-Commandline-option-parser.html#GOptionGroup" title="GOptionGroup"><span class="type">GOptionGroup</span></a> as main group of the <em class="parameter"><code>context</code></em>. 
-This has the same effect as calling <a class="link" href="glib-Commandline-option-parser.html#g-option-context-add-group" title="g_option_context_add_group ()"><code class="function">g_option_context_add_group()</code></a>, 
-the only difference is that the options in the main group are 
+Sets a <a class="link" href="glib-Commandline-option-parser.html#GOptionGroup" title="GOptionGroup"><span class="type">GOptionGroup</span></a> as main group of the <em class="parameter"><code>context</code></em>.
+This has the same effect as calling <a class="link" href="glib-Commandline-option-parser.html#g-option-context-add-group" title="g_option_context_add_group ()"><code class="function">g_option_context_add_group()</code></a>,
+the only difference is that the options in the main group are
 treated differently when generating <code class="option">--help</code> output.
 </p>
 <div class="variablelist"><table border="0">
@@ -1360,7 +1366,7 @@ Creates a new <a class="link" href="glib-Commandline-option-parser.html#GOptionG
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>description</code></em> :</span></p></td>
-<td>a description for this group to be shown in 
+<td>a description for this group to be shown in
   <code class="option">--help</code>. This string is translated using the translation
   domain or translation function of the group
 </td>
@@ -1385,7 +1391,7 @@ Creates a new <a class="link" href="glib-Commandline-option-parser.html#GOptionG
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a newly created option group. It should be added 
+<td> a newly created option group. It should be added
   to a <a class="link" href="glib-Commandline-option-parser.html#GOptionContext" title="GOptionContext"><span class="type">GOptionContext</span></a> or freed with <a class="link" href="glib-Commandline-option-parser.html#g-option-group-free" title="g_option_group_free ()"><code class="function">g_option_group_free()</code></a>.
 
 </td>
@@ -1487,7 +1493,7 @@ The type of function that can be called before and after parsing.
                                                          <em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionParseFunc" title="GOptionParseFunc ()"><span class="type">GOptionParseFunc</span></a> pre_parse_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionParseFunc" title="GOptionParseFunc ()"><span class="type">GOptionParseFunc</span></a> post_parse_func</code></em>);</pre>
 <p>
-Associates two functions with <em class="parameter"><code>group</code></em> which will be called 
+Associates two functions with <em class="parameter"><code>group</code></em> which will be called
 from <a class="link" href="glib-Commandline-option-parser.html#g-option-context-parse" title="g_option_context_parse ()"><code class="function">g_option_context_parse()</code></a> before the first option is parsed
 and after the last option has been parsed, respectively.
 </p>
@@ -1561,7 +1567,7 @@ The type of function to be used as callback when a parse error occurs.
 <pre class="programlisting"><span class="returnvalue">void</span>                g_option_group_set_error_hook       (<em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionGroup" title="GOptionGroup"><span class="type">GOptionGroup</span></a> *group</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Commandline-option-parser.html#GOptionErrorFunc" title="GOptionErrorFunc ()"><span class="type">GOptionErrorFunc</span></a> error_func</code></em>);</pre>
 <p>
-Associates a function with <em class="parameter"><code>group</code></em> which will be called 
+Associates a function with <em class="parameter"><code>group</code></em> which will be called
 from <a class="link" href="glib-Commandline-option-parser.html#g-option-context-parse" title="g_option_context_parse ()"><code class="function">g_option_context_parse()</code></a> when an error occurs.
 </p>
 <p>
@@ -1612,7 +1618,7 @@ domain, see <a class="link" href="glib-Commandline-option-parser.html#g-option-g
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td>the <a class="link" href="glib-Commandline-option-parser.html#GTranslateFunc" title="GTranslateFunc ()"><span class="type">GTranslateFunc</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> 
+<td>the <a class="link" href="glib-Commandline-option-parser.html#GTranslateFunc" title="GTranslateFunc ()"><span class="type">GTranslateFunc</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -1660,6 +1666,6 @@ user-visible strings.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.14</div>
+          Generated by GTK-Doc V1.15</div>
 </body>
 </html>

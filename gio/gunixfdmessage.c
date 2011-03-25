@@ -15,18 +15,23 @@
 /**
  * SECTION: gunixfdmessage
  * @title: GUnixFDMessage
- * @short_description: A GSocketControlMessage containing a #GUnixFDList
+ * @short_description: A GSocketControlMessage containing a GUnixFDList
+ * @include: gio/gunixfdmessage.h
  * @see_also: #GUnixConnection, #GUnixFDList, #GSocketControlMessage
  *
- * This #GSocketControlMessage contains a #GUnixFDList.  It may be sent
- * using g_socket_send_message() and received using
+ * This #GSocketControlMessage contains a #GUnixFDList.
+ * It may be sent using g_socket_send_message() and received using
  * g_socket_receive_message() over UNIX sockets (ie: sockets in the
- * %G_SOCKET_ADDRESS_UNIX family).  The file descriptors are copied
+ * %G_SOCKET_ADDRESS_UNIX family). The file descriptors are copied
  * between processes by the kernel.
  *
  * For an easier way to send and receive file descriptors over
  * stream-oriented UNIX sockets, see g_unix_connection_send_fd() and
  * g_unix_connection_receive_fd().
+ *
+ * Note that <filename>&lt;gio/gunixfdmessage.h&gt;</filename> belongs to
+ * the UNIX-specific GIO interfaces, thus you have to use the
+ * <filename>gio-unix-2.0.pc</filename> pkg-config file when using it.
  **/
 
 #include "config.h"
@@ -39,9 +44,9 @@
 #include <errno.h>
 
 #include "gunixfdmessage.h"
+#include "gunixfdlist.h"
 #include "gioerror.h"
 
-#include "gioalias.h"
 
 
 G_DEFINE_TYPE (GUnixFDMessage, g_unix_fd_message,
@@ -152,7 +157,7 @@ g_unix_fd_message_set_property (GObject *object, guint prop_id,
  * return a reference to the caller, but the returned list is valid for
  * the lifetime of @message.
  *
- * Returns: the #GUnixFDList from @message
+ * Returns: (transfer none): the #GUnixFDList from @message
  *
  * Since: 2.24
  **/
@@ -280,7 +285,7 @@ gint *
 g_unix_fd_message_steal_fds (GUnixFDMessage *message,
                              gint           *length)
 {
-  g_return_val_if_fail (G_UNIX_FD_MESSAGE (message), FALSE);
+  g_return_val_if_fail (G_UNIX_FD_MESSAGE (message), NULL);
 
   return g_unix_fd_list_steal_fds (message->priv->list, length);
 }
@@ -313,6 +318,3 @@ g_unix_fd_message_append_fd (GUnixFDMessage  *message,
 
   return g_unix_fd_list_append (message->priv->list, fd, error) > 0;
 }
-
-#define __G_UNIX_FD_MESSAGE_C__
-#include "gioaliasdef.c"

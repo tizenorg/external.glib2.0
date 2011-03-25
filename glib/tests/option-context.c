@@ -33,16 +33,14 @@ group_captions (void)
   gchar *help_variants[] = { "--help", "--help-all", "--help-test" };
 
   GOptionEntry main_entries[] = {
-    { "main-switch", 0,
-      G_OPTION_FLAG_NO_ARG,
+    { "main-switch", 0, 0,
       G_OPTION_ARG_NONE, NULL,
       "A switch that is in the main group", NULL },
     { NULL }
   };
 
   GOptionEntry group_entries[] = {
-    { "test-switch", 0,
-      G_OPTION_FLAG_NO_ARG,
+    { "test-switch", 0, 0,
       G_OPTION_ARG_NONE, NULL,
       "A switch that is in the test group", NULL },
     { NULL }
@@ -1708,10 +1706,159 @@ missing_arg_test (void)
   g_strfreev (argv);
 
   /* Try parsing again */
-  argv = split_string ("program --t", &argc);
+  argv = split_string ("program -t", &argc);
 
   retval = g_option_context_parse (context, &argc, &argv, &error);
   g_assert (retval == FALSE);
+
+  g_strfreev (argv);
+  g_option_context_free (context);
+}
+
+static gchar *test_arg;
+
+static gboolean cb (const gchar  *option_name,
+                    const gchar  *value,
+                    gpointer      data,
+                    GError      **error)
+{
+  test_arg = g_strdup (value);
+  return TRUE;
+}
+
+void
+dash_arg_test (void)
+{
+  GOptionContext *context;
+  gboolean retval;
+  GError *error = NULL;
+  gchar **argv;
+  int argc;
+  gboolean argb = FALSE;
+  GOptionEntry entries [] =
+    { { "test", 't', G_OPTION_FLAG_OPTIONAL_ARG, G_OPTION_ARG_CALLBACK, cb, NULL, NULL },
+      { "three", '3', 0, G_OPTION_ARG_NONE, &argb, NULL, NULL },
+      { NULL } };
+
+  g_test_bug ("577638");
+
+  context = g_option_context_new (NULL);
+  g_option_context_add_main_entries (context, entries, NULL);
+
+  /* Now try parsing */
+  argv = split_string ("program --test=-3", &argc);
+
+  test_arg = NULL;
+  error = NULL;
+  retval = g_option_context_parse (context, &argc, &argv, &error);
+  g_assert (retval);
+  g_assert_no_error (error);
+  g_assert_cmpstr (test_arg, ==, "-3");
+
+  g_strfreev (argv);
+  g_free (test_arg);
+  test_arg = NULL;
+
+  /* Try parsing again */
+  argv = split_string ("program --test -3", &argc);
+
+  error = NULL;
+  retval = g_option_context_parse (context, &argc, &argv, &error);
+  g_assert_no_error (error);
+  g_assert (retval);
+  g_assert_cmpstr (test_arg, ==, NULL);
+
+  g_option_context_free (context);
+}
+
+static void
+test_basic (void)
+{
+  GOptionContext *context;
+  gchar *arg = NULL;
+  GOptionEntry entries [] =
+    { { "test", 't', 0, G_OPTION_ARG_STRING, &arg, NULL, NULL },
+      { NULL } };
+
+  context = g_option_context_new (NULL);
+  g_option_context_add_main_entries (context, entries, NULL);
+
+  g_assert (g_option_context_get_help_enabled (context));
+  g_assert (!g_option_context_get_ignore_unknown_options (context));
+  g_assert_cmpstr (g_option_context_get_summary (context), ==, NULL);
+  g_assert_cmpstr (g_option_context_get_description (context), ==, NULL);
+
+  g_option_context_set_help_enabled (context, FALSE);
+  g_option_context_set_ignore_unknown_options (context, TRUE);
+  g_option_context_set_summary (context, "summary");
+  g_option_context_set_description(context, "description");
+
+  g_assert (!g_option_context_get_help_enabled (context));
+  g_assert (g_option_context_get_ignore_unknown_options (context));
+  g_assert_cmpstr (g_option_context_get_summary (context), ==, "summary");
+  g_assert_cmpstr (g_option_context_get_description (context), ==, "description");
+
+  g_option_context_free (context);
+}
+
+static void
+test_main_group (void)
+{
+  GOptionContext *context;
+  GOptionGroup *group;
+
+  context = g_option_context_new (NULL);
+  g_assert (g_option_context_get_main_group (context) == NULL);
+  group = g_option_group_new ("name", "description", "hlep", NULL, NULL);
+  g_option_context_add_group (context, group);
+  g_assert (g_option_context_get_main_group (context) == NULL);
+  group = g_option_group_new ("name", "description", "hlep", NULL, NULL);
+  g_option_context_set_main_group (context, group);
+  g_assert (g_option_context_get_main_group (context) == group);
+
+  g_option_context_free (context);
+}
+
+static gboolean error_func_called = FALSE;
+
+static void
+error_func (GOptionContext  *context,
+            GOptionGroup    *group,
+            gpointer         data,
+            GError         **error)
+{
+  g_assert_cmpint (GPOINTER_TO_INT(data), ==, 1234);
+  error_func_called = TRUE;
+}
+
+static void
+test_error_hook (void)
+{
+  GOptionContext *context;
+  gchar *arg = NULL;
+  GOptionEntry entries [] =
+    { { "test", 't', 0, G_OPTION_ARG_STRING, &arg, NULL, NULL },
+      { NULL } };
+  GOptionGroup *group;
+  gchar **argv;
+  gint argc;
+  gboolean retval;
+  GError *error = NULL;
+
+  context = g_option_context_new (NULL);
+  group = g_option_group_new ("name", "description", "hlep", GINT_TO_POINTER(1234), NULL);
+  g_option_group_add_entries (group, entries);
+  g_option_context_set_main_group (context, group);
+  g_option_group_set_error_hook (g_option_context_get_main_group (context),
+                                 error_func);
+
+  argv = split_string ("program --test", &argc);
+
+  retval = g_option_context_parse (context, &argc, &argv, &error);
+  g_assert (retval == FALSE);
+  g_clear_error (&error);
+
+  g_assert (error_func_called);
 
   g_strfreev (argv);
   g_option_context_free (context);
@@ -1724,71 +1871,76 @@ main (int   argc,
   g_test_init (&argc, &argv, NULL);
 
   g_test_bug_base ("http://bugzilla.gnome.org/");
-  g_test_add_func ("/group/captions", group_captions);
+
+  g_test_add_func ("/option/basic", test_basic);
+  g_test_add_func ("/option/group/captions", group_captions);
+  g_test_add_func ("/option/group/main", test_main_group);
+  g_test_add_func ("/option/group/error-hook", test_error_hook);
 
   /* Test that restoration on failure works */
-  g_test_add_func ("/restoration/int", error_test1);
-  g_test_add_func ("/restoration/string", error_test2);
-  g_test_add_func ("/restoration/boolean", error_test3);
+  g_test_add_func ("/option/restoration/int", error_test1);
+  g_test_add_func ("/option/restoration/string", error_test2);
+  g_test_add_func ("/option/restoration/boolean", error_test3);
   
   /* Test that special argument parsing works */
-  g_test_add_func ("/arg/repetition/int", arg_test1);
-  g_test_add_func ("/arg/repetition/string", arg_test2);
-  g_test_add_func ("/arg/repetition/filename", arg_test3);
-  g_test_add_func ("/arg/repetition/double", arg_test4);
-  g_test_add_func ("/arg/repetition/locale", arg_test5);
-  g_test_add_func ("/arg/repetition/int64", arg_test6);
+  g_test_add_func ("/option/arg/repetition/int", arg_test1);
+  g_test_add_func ("/option/arg/repetition/string", arg_test2);
+  g_test_add_func ("/option/arg/repetition/filename", arg_test3);
+  g_test_add_func ("/option/arg/repetition/double", arg_test4);
+  g_test_add_func ("/option/arg/repetition/locale", arg_test5);
+  g_test_add_func ("/option/arg/repetition/int64", arg_test6);
 
   /* Test string arrays */
-  g_test_add_func ("/arg/array/string", array_test1);
+  g_test_add_func ("/option/arg/array/string", array_test1);
 
   /* Test callback args */
-  g_test_add_func ("/arg/callback/string", callback_test1);
-  g_test_add_func ("/arg/callback/count", callback_test2);
+  g_test_add_func ("/option/arg/callback/string", callback_test1);
+  g_test_add_func ("/option/arg/callback/count", callback_test2);
 
   /* Test optional arg flag for callback */
-  g_test_add_func ("/arg/callback/optional1", callback_test_optional_1);
-  g_test_add_func ("/arg/callback/optional2", callback_test_optional_2);
-  g_test_add_func ("/arg/callback/optional3", callback_test_optional_3);
-  g_test_add_func ("/arg/callback/optional4", callback_test_optional_4);
-  g_test_add_func ("/arg/callback/optional5", callback_test_optional_5);
-  g_test_add_func ("/arg/callback/optional6", callback_test_optional_6);
-  g_test_add_func ("/arg/callback/optional7", callback_test_optional_7);
-  g_test_add_func ("/arg/callback/optional8", callback_test_optional_8);
+  g_test_add_func ("/option/arg/callback/optional1", callback_test_optional_1);
+  g_test_add_func ("/option/arg/callback/optional2", callback_test_optional_2);
+  g_test_add_func ("/option/arg/callback/optional3", callback_test_optional_3);
+  g_test_add_func ("/option/arg/callback/optional4", callback_test_optional_4);
+  g_test_add_func ("/option/arg/callback/optional5", callback_test_optional_5);
+  g_test_add_func ("/option/arg/callback/optional6", callback_test_optional_6);
+  g_test_add_func ("/option/arg/callback/optional7", callback_test_optional_7);
+  g_test_add_func ("/option/arg/callback/optional8", callback_test_optional_8);
 
   /* Test callback with G_OPTION_REMAINING */
-  g_test_add_func ("/arg/remaining/callback", callback_remaining_test1);
+  g_test_add_func ("/option/arg/remaining/callback", callback_remaining_test1);
   
   /* Test callbacks which return FALSE */
-  g_test_add_func ("/arg/remaining/callback-false", callback_returns_false);
+  g_test_add_func ("/option/arg/remaining/callback-false", callback_returns_false);
   
   /* Test ignoring options */
-  g_test_add_func ("/arg/ignore/long", ignore_test1);
-  g_test_add_func ("/arg/ignore/short", ignore_test2);
-  g_test_add_func ("/arg/ignore/arg", ignore_test3);
+  g_test_add_func ("/option/arg/ignore/long", ignore_test1);
+  g_test_add_func ("/option/arg/ignore/short", ignore_test2);
+  g_test_add_func ("/option/arg/ignore/arg", ignore_test3);
 
-  g_test_add_func ("/context/add", add_test1);
+  g_test_add_func ("/option/context/add", add_test1);
 
   /* Test parsing empty args */
-  g_test_add_func ("/context/empty1", empty_test1);
-  g_test_add_func ("/context/empty2", empty_test2);
-  g_test_add_func ("/context/empty3", empty_test3);
+  g_test_add_func ("/option/context/empty1", empty_test1);
+  g_test_add_func ("/option/context/empty2", empty_test2);
+  g_test_add_func ("/option/context/empty3", empty_test3);
 
   /* Test handling of rest args */
-  g_test_add_func ("/arg/rest/non-option", rest_test1);
-  g_test_add_func ("/arg/rest/separator1", rest_test2);
-  g_test_add_func ("/arg/rest/separator2", rest_test2a);
-  g_test_add_func ("/arg/rest/separator3", rest_test2b);
-  g_test_add_func ("/arg/rest/separator4", rest_test2c);
-  g_test_add_func ("/arg/rest/separator5", rest_test2d);
-  g_test_add_func ("/arg/remaining/non-option", rest_test3);
-  g_test_add_func ("/arg/remaining/separator", rest_test4);
-  g_test_add_func ("/arg/remaining/array", rest_test5);
+  g_test_add_func ("/option/arg/rest/non-option", rest_test1);
+  g_test_add_func ("/option/arg/rest/separator1", rest_test2);
+  g_test_add_func ("/option/arg/rest/separator2", rest_test2a);
+  g_test_add_func ("/option/arg/rest/separator3", rest_test2b);
+  g_test_add_func ("/option/arg/rest/separator4", rest_test2c);
+  g_test_add_func ("/option/arg/rest/separator5", rest_test2d);
+  g_test_add_func ("/option/arg/remaining/non-option", rest_test3);
+  g_test_add_func ("/option/arg/remaining/separator", rest_test4);
+  g_test_add_func ("/option/arg/remaining/array", rest_test5);
 
   /* regression tests for individual bugs */
-  g_test_add_func ("/bug/unknown-short", unknown_short_test);
-  g_test_add_func ("/bug/lonely-dash", lonely_dash_test);
-  g_test_add_func ("/bug/missing-arg", missing_arg_test);
+  g_test_add_func ("/option/bug/unknown-short", unknown_short_test);
+  g_test_add_func ("/option/bug/lonely-dash", lonely_dash_test);
+  g_test_add_func ("/option/bug/missing-arg", missing_arg_test);
+  g_test_add_func ("/option/bug/dash-arg", dash_arg_test);
 
   return g_test_run();
 }

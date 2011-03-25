@@ -1,13 +1,22 @@
 '\" t
 .\"     Title: glib-genmarshal
 .\"    Author: [see the "Author" section]
-.\" Generator: DocBook XSL Stylesheets v1.75.2 <http://docbook.sf.net/>
-.\"      Date: 05/02/2010
-.\"    Manual: [FIXME: manual]
-.\"    Source: [FIXME: source]
+.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
+.\"      Date: 12/20/2010
+.\"    Manual: User Commands
+.\"    Source: User Commands
 .\"  Language: English
 .\"
-.TH "GLIB\-GENMARSHAL" "1" "05/02/2010" "[FIXME: source]" "[FIXME: manual]"
+.TH "GLIB\-GENMARSHAL" "1" "12/20/2010" "User Commands" "User Commands"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
 .\" -----------------------------------------------------------------
 .\" * set default formatting
 .\" -----------------------------------------------------------------
@@ -46,7 +55,7 @@ Generate C code file contents of the marshallers\&.
 \fB\-\-prefix=string\fR, \fB\-\-prefix string\fR
 .RS 4
 Specify marshaller prefix\&. The default prefix is
-`g_cclosure_marshal\'\&.
+`g_cclosure_marshal\*(Aq\&.
 .RE
 .PP
 \fB\-\-skip\-source\fR
@@ -108,8 +117,8 @@ or a marshaller specification of the form
 .PP
 The
 \fIRTYPE\fR
-part specifies the callback\'s return type and the
-\fIPTYPE\fRs right to the colon specify the callback\'s parameter list, except for the first and the last arguments which are always pointers\&.
+part specifies the callback\*(Aqs return type and the
+\fIPTYPE\fRs right to the colon specify the callback\*(Aqs parameter list, except for the first and the last arguments which are always pointers\&.
 .SS "Parameter types"
 .PP
 Currently, the following types are supported:
@@ -209,6 +218,11 @@ for anonymous pointer types (gpointer)
 \fIOBJECT\fR
 .RS 4
 for GObject or derived types (GObject*)
+.RE
+.PP
+\fIVARIANT\fR
+.RS 4
+for GVariant types (GVariant*)
 .RE
 .PP
 \fINONE\fR

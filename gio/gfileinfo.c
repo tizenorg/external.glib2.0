@@ -62,7 +62,6 @@
 #include "gicon.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /* We use this nasty thing, because NULL is a valid attribute matcher (matches nothing) */
 #define NO_ATTRIBUTE_MASK ((GFileAttributeMatcher *)1)
@@ -408,7 +407,7 @@ g_file_info_copy_into (GFileInfo *src_info,
  * 
  * Duplicates a file info structure.
  * 
- * Returns: a duplicate #GFileInfo of @other.
+ * Returns: (transfer full): a duplicate #GFileInfo of @other.
  **/
 GFileInfo *
 g_file_info_dup (GFileInfo *other)
@@ -618,7 +617,7 @@ g_file_info_has_namespace (GFileInfo  *info,
  * 
  * Lists the file info structure's attributes.
  * 
- * Returns: a null-terminated array of strings of all of the 
+ * Returns: (array zero-terminated=1) (transfer full): a null-terminated array of strings of all of the 
  * possible attribute types for the given @name_space, or 
  * %NULL on error.
  **/
@@ -709,13 +708,13 @@ g_file_info_remove_attribute (GFileInfo  *info,
  * g_file_info_get_attribute_data:
  * @info: a #GFileInfo
  * @attribute: a file attribute key
- * @type: return location for the attribute type, or %NULL
- * @value_pp: return location for the attribute value, or %NULL
- * @status: return location for the attribute status, or %NULL
+ * @type: (out) (allow-none): return location for the attribute type, or %NULL
+ * @value_pp: (out) (allow-none): return location for the attribute value, or %NULL
+ * @status: (out) (allow-none): return location for the attribute status, or %NULL
  *
  * Gets the attribute type, value and status for an attribute key.
  *
- * Returns: %TRUE if @info has an attribute named @attribute, 
+ * Returns: (transfer none): %TRUE if @info has an attribute named @attribute, 
  *      %FALSE otherwise.
  */
 gboolean
@@ -794,8 +793,8 @@ g_file_info_set_attribute_status (GFileInfo  *info,
 {
   GFileAttributeValue *val;
 
-  g_return_val_if_fail (G_IS_FILE_INFO (info), 0);
-  g_return_val_if_fail (attribute != NULL && *attribute != '\0', 0);
+  g_return_val_if_fail (G_IS_FILE_INFO (info), FALSE);
+  g_return_val_if_fail (attribute != NULL && *attribute != '\0', FALSE);
 
   val = g_file_info_find_value_by_name (info, attribute);
   if (val)
@@ -850,7 +849,7 @@ g_file_info_get_attribute_as_string (GFileInfo  *info,
  * Gets the value of a #GObject attribute. If the attribute does 
  * not contain a #GObject, %NULL will be returned.
  * 
- * Returns: a #GObject associated with the given @attribute, or
+ * Returns: (transfer none): a #GObject associated with the given @attribute, or
  * %NULL otherwise.
  **/
 GObject *
@@ -922,7 +921,7 @@ g_file_info_get_attribute_byte_string (GFileInfo  *info,
  * Gets the value of a stringv attribute. If the attribute does
  * not contain a stringv, %NULL will be returned.
  *
- * Returns: the contents of the @attribute value as a stringv, or
+ * Returns: (transfer none): the contents of the @attribute value as a stringv, or
  * %NULL otherwise. Do not free.
  *
  * Since: 2.22
@@ -1604,7 +1603,7 @@ g_file_info_get_edit_name (GFileInfo *info)
  * 
  * Gets the icon for a file.
  * 
- * Returns: #GIcon for the given @info.
+ * Returns: (transfer none): #GIcon for the given @info.
  **/
 GIcon *
 g_file_info_get_icon (GFileInfo *info)
@@ -2148,6 +2147,10 @@ matcher_add (GFileAttributeMatcher *matcher,
   g_array_append_val (matcher->more_sub_matchers, s);
 }
 
+G_DEFINE_BOXED_TYPE (GFileAttributeMatcher, g_file_attribute_matcher,
+                     g_file_attribute_matcher_ref,
+                     g_file_attribute_matcher_unref)
+
 /**
  * g_file_attribute_matcher_new:
  * @attributes: an attribute string to match.
@@ -2481,6 +2484,3 @@ g_file_attribute_matcher_enumerate_next (GFileAttributeMatcher *matcher)
 	return get_attribute_for_id (sub_matcher->id);
     }
 }
-
-#define __G_FILE_INFO_C__
-#include "gioaliasdef.c"

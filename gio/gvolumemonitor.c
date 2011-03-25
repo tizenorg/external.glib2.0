@@ -30,7 +30,6 @@
 #include "gdrive.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gvolumemonitor
@@ -283,7 +282,7 @@ g_volume_monitor_init (GVolumeMonitor *monitor)
  * The returned list should be freed with g_list_free(), after
  * its elements have been unreffed with g_object_unref().
  *
- * Returns: a #GList of connected #GDrive objects.
+ * Returns: (element-type GDrive) (transfer full): a #GList of connected #GDrive objects.
  **/
 GList *
 g_volume_monitor_get_connected_drives (GVolumeMonitor *volume_monitor)
@@ -306,7 +305,7 @@ g_volume_monitor_get_connected_drives (GVolumeMonitor *volume_monitor)
  * The returned list should be freed with g_list_free(), after
  * its elements have been unreffed with g_object_unref().
  *
- * Returns: a #GList of #GVolume objects.
+ * Returns: (element-type GVolume) (transfer full): a #GList of #GVolume objects.
  **/
 GList *
 g_volume_monitor_get_volumes (GVolumeMonitor *volume_monitor)
@@ -329,7 +328,7 @@ g_volume_monitor_get_volumes (GVolumeMonitor *volume_monitor)
  * The returned list should be freed with g_list_free(), after
  * its elements have been unreffed with g_object_unref().
  * 
- * Returns: a #GList of #GMount objects.
+ * Returns: (element-type GMount) (transfer full): a #GList of #GMount objects.
  **/
 GList *
 g_volume_monitor_get_mounts (GVolumeMonitor *volume_monitor)
@@ -350,7 +349,7 @@ g_volume_monitor_get_mounts (GVolumeMonitor *volume_monitor)
  * 
  * Finds a #GVolume object by its UUID (see g_volume_get_uuid())
  * 
- * Returns: a #GVolume or %NULL if no such volume is available.
+ * Returns: (transfer full): a #GVolume or %NULL if no such volume is available.
  *     Free the returned object with g_object_unref().
  **/
 GVolume *
@@ -374,7 +373,7 @@ g_volume_monitor_get_volume_for_uuid (GVolumeMonitor *volume_monitor,
  * 
  * Finds a #GMount object by its UUID (see g_mount_get_uuid())
  * 
- * Returns: a #GMount or %NULL if no such mount is available.
+ * Returns: (transfer full): a #GMount or %NULL if no such mount is available.
  *     Free the returned object with g_object_unref().
  **/
 GMount *
@@ -390,7 +389,3 @@ g_volume_monitor_get_mount_for_uuid (GVolumeMonitor *volume_monitor,
 
   return class->get_mount_for_uuid (volume_monitor, uuid);
 }
-
-
-#define __G_VOLUME_MONITOR_C__
-#include "gioaliasdef.c"

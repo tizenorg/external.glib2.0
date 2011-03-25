@@ -29,7 +29,6 @@
 #include <glib-object.h>
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gfileattribute
@@ -337,23 +336,9 @@ _g_file_attribute_value_dup (const GFileAttributeValue *other)
   return attr;
 }
 
-GType
-g_file_attribute_info_list_get_type (void)
-{
-  static volatile gsize g_define_type_id__volatile = 0;
-
-  if (g_once_init_enter (&g_define_type_id__volatile))
-    {
-      GType g_define_type_id =
-        g_boxed_type_register_static (I_("GFileAttributeInfoList"),
-                                      (GBoxedCopyFunc) g_file_attribute_info_list_dup,
-                                      (GBoxedFreeFunc) g_file_attribute_info_list_unref);
-
-      g_once_init_leave (&g_define_type_id__volatile, g_define_type_id);
-    }
-
-  return g_define_type_id__volatile;
-}
+G_DEFINE_BOXED_TYPE (GFileAttributeInfoList, g_file_attribute_info_list,
+                     g_file_attribute_info_list_dup,
+                     g_file_attribute_info_list_unref)
 
 static gboolean
 valid_char (char c)
@@ -1068,6 +1053,3 @@ g_file_attribute_info_list_add (GFileAttributeInfoList *list,
 
   list_update_public (priv);
 }
-
-#define __G_FILE_ATTRIBUTE_C__
-#include "gioaliasdef.c"

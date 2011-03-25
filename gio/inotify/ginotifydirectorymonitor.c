@@ -26,12 +26,10 @@
 #include "config.h"
 
 #include "ginotifydirectorymonitor.h"
-#include "giomodule.h"
+#include <gio/giomodule.h>
 
 #define USE_INOTIFY 1
 #include "inotify-helper.h"
-
-#include "gioalias.h"
 
 struct _GInotifyDirectoryMonitor
 {
@@ -156,4 +154,3 @@ g_inotify_directory_monitor_cancel (GFileMonitor* monitor)
 
   return TRUE;
 }
-

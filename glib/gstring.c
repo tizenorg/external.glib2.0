@@ -21,10 +21,10 @@
  * Modified by the GLib Team and others 1997-2000.  See the AUTHORS
  * file for a list of people on the GLib Team.  See the ChangeLog
  * files for a list of changes.  These files are distributed with
- * GLib at ftp://ftp.gtk.org/pub/gtk/. 
+ * GLib at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-/* 
+/*
  * MT safe
  */
 
@@ -39,10 +39,10 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "glib.h"
+#include "gstring.h"
+
 #include "gprintf.h"
 
-#include "galias.h"
 
 /**
  * SECTION: string_chunks
@@ -121,21 +121,26 @@ g_str_equal (gconstpointer v1,
  * @v: a string key
  *
  * Converts a string to a hash value.
- * It can be passed to g_hash_table_new() as the @hash_func 
- * parameter, when using strings as keys in a #GHashTable.
+ *
+ * This function implements the widely used "djb" hash apparently posted
+ * by Daniel Bernstein to comp.lang.c some time ago.  The 32 bit
+ * unsigned hash value starts at 5381 and for each byte 'c' in the
+ * string, is updated: <literal>hash = hash * 33 + c</literal>.  This
+ * function uses the signed value of each byte.
+ *
+ * It can be passed to g_hash_table_new() as the @hash_func parameter,
+ * when using strings as keys in a #GHashTable.
  *
  * Returns: a hash value corresponding to the key
- */
+ **/
 guint
 g_str_hash (gconstpointer v)
 {
-  /* 31 bit hash function */
-  const signed char *p = v;
-  guint32 h = *p;
+  const signed char *p;
+  guint32 h = 5381;
 
-  if (h)
-    for (p += 1; *p != '\0'; p++)
-      h = (h << 5) - h + *p;
+  for (p = v; *p != '\0'; p++)
+    h = (h << 5) + h + *p;
 
   return h;
 }
@@ -492,7 +497,9 @@ g_string_new_len (const gchar *init,
  * @free_segment: if %TRUE the actual character data is freed as well
  *
  * Frees the memory allocated for the #GString.
- * If @free_segment is %TRUE it also frees the character data.
+ * If @free_segment is %TRUE it also frees the character data.  If 
+ * it's %FALSE, the caller gains ownership of the buffer and must
+ * free it after use with g_free().
  *
  * Returns: the character data of @string 
  *          (i.e. %NULL if @free_segment is %TRUE)
@@ -663,30 +670,33 @@ g_string_set_size (GString *string,
 /**
  * g_string_insert_len:
  * @string: a #GString
- * @pos: position in @string where insertion should 
+ * @pos: position in @string where insertion should
  *       happen, or -1 for at the end
  * @val: bytes to insert
  * @len: number of bytes of @val to insert
- * 
- * Inserts @len bytes of @val into @string at @pos.  
- * Because @len is provided, @val may contain embedded 
- * nuls and need not be nul-terminated. If @pos is -1, 
+ *
+ * Inserts @len bytes of @val into @string at @pos.
+ * Because @len is provided, @val may contain embedded
+ * nuls and need not be nul-terminated. If @pos is -1,
  * bytes are inserted at the end of the string.
  *
- * Since this function does not stop at nul bytes, it is 
- * the caller's responsibility to ensure that @val has at 
+ * Since this function does not stop at nul bytes, it is
+ * the caller's responsibility to ensure that @val has at
  * least @len addressable bytes.
  *
  * Returns: @string
  */
 GString*
 g_string_insert_len (GString     *string,
-		     gssize       pos,    
+		     gssize       pos,
 		     const gchar *val,
-		     gssize       len)    
+		     gssize       len)
 {
   g_return_val_if_fail (string != NULL, NULL);
-  g_return_val_if_fail (val != NULL, string);
+  g_return_val_if_fail (len == 0 || val != NULL, string);
+
+  if (len == 0)
+    return string;
 
   if (len < 0)
     len = strlen (val);
@@ -711,20 +721,20 @@ g_string_insert_len (GString     *string,
 
       /* Open up space where we are going to insert.  */
       if (pos < string->len)
-	g_memmove (string->str + pos + len, string->str + pos, string->len - pos);
+        g_memmove (string->str + pos + len, string->str + pos, string->len - pos);
 
       /* Move the source part before the gap, if any.  */
       if (offset < pos)
-	{
-	  precount = MIN (len, pos - offset);
-	  memcpy (string->str + pos, val, precount);
-	}
+        {
+          precount = MIN (len, pos - offset);
+          memcpy (string->str + pos, val, precount);
+        }
 
       /* Move the source part after the gap, if any.  */
       if (len > precount)
-	memcpy (string->str + pos + precount,
-		val + /* Already moved: */ precount + /* Space opened up: */ len,
-		len - precount);
+        memcpy (string->str + pos + precount,
+                val + /* Already moved: */ precount + /* Space opened up: */ len,
+                len - precount);
     }
   else
     {
@@ -734,7 +744,7 @@ g_string_insert_len (GString     *string,
        * of the old string to the end, opening up space
        */
       if (pos < string->len)
-	g_memmove (string->str + pos + len, string->str + pos, string->len - pos);
+        g_memmove (string->str + pos + len, string->str + pos, string->len - pos);
 
       /* insert the new string */
       if (len == 1)
@@ -781,7 +791,7 @@ gunichar_ok (gunichar c)
  * g_string_append_uri_escaped:
  * @string: a #GString
  * @unescaped: a string
- * @reserved_chars_allowed: a string of reserved characters allowed to be used
+ * @reserved_chars_allowed: a string of reserved characters allowed to be used, or %NULL
  * @allow_utf8: set %TRUE if the escaped string may include UTF8 characters
  * 
  * Appends @unescaped to @string, escaped any characters that
@@ -1516,6 +1526,3 @@ g_string_append_printf (GString     *string,
   g_string_append_vprintf (string, format, args);
   va_end (args);
 }
-
-#define __G_STRING_C__
-#include "galiasdef.c"

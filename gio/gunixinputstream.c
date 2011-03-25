@@ -38,7 +38,6 @@
 #include "gasynchelper.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gunixinputstream
@@ -50,8 +49,8 @@
  * UNIX file descriptor, including asynchronous operations. The file
  * descriptor must be selectable, so it doesn't work with opened files.
  *
- * Note that <filename>&lt;gio/gunixinputstream.h&gt;</filename> belongs 
- * to the UNIX-specific GIO interfaces, thus you have to use the 
+ * Note that <filename>&lt;gio/gunixinputstream.h&gt;</filename> belongs
+ * to the UNIX-specific GIO interfaces, thus you have to use the
  * <filename>gio-unix-2.0.pc</filename> pkg-config file when using it.
  */
 
@@ -61,7 +60,12 @@ enum {
   PROP_CLOSE_FD
 };
 
-G_DEFINE_TYPE (GUnixInputStream, g_unix_input_stream, G_TYPE_INPUT_STREAM);
+static void g_unix_input_stream_pollable_iface_init (GPollableInputStreamInterface *iface);
+
+G_DEFINE_TYPE_WITH_CODE (GUnixInputStream, g_unix_input_stream, G_TYPE_INPUT_STREAM,
+			 G_IMPLEMENT_INTERFACE (G_TYPE_POLLABLE_INPUT_STREAM,
+						g_unix_input_stream_pollable_iface_init)
+			 );
 
 struct _GUnixInputStreamPrivate {
   int fd;
@@ -112,6 +116,9 @@ static gboolean g_unix_input_stream_close_finish (GInputStream         *stream,
 						  GAsyncResult         *result,
 						  GError              **error);
 
+static gboolean g_unix_input_stream_pollable_is_readable   (GPollableInputStream *stream);
+static GSource *g_unix_input_stream_pollable_create_source (GPollableInputStream *stream,
+							    GCancellable         *cancellable);
 
 static void
 g_unix_input_stream_finalize (GObject *object)
@@ -173,6 +180,13 @@ g_unix_input_stream_class_init (GUnixInputStreamClass *klass)
 							 P_("Whether to close the file descriptor when the stream is closed"),
 							 TRUE,
 							 G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_STATIC_NAME | G_PARAM_STATIC_NICK | G_PARAM_STATIC_BLURB));
+}
+
+static void
+g_unix_input_stream_pollable_iface_init (GPollableInputStreamInterface *iface)
+{
+  iface->is_readable = g_unix_input_stream_pollable_is_readable;
+  iface->create_source = g_unix_input_stream_pollable_create_source;
 }
 
 static void
@@ -423,9 +437,9 @@ typedef struct {
 } ReadAsyncData;
 
 static gboolean
-read_async_cb (ReadAsyncData *data,
+read_async_cb (int            fd,
                GIOCondition   condition,
-               int            fd)
+               ReadAsyncData *data)
 {
   GSimpleAsyncResult *simple;
   GError *error = NULL;
@@ -463,10 +477,7 @@ read_async_cb (ReadAsyncData *data,
   g_simple_async_result_set_op_res_gssize (simple, count_read);
 
   if (count_read == -1)
-    {
-      g_simple_async_result_set_from_error (simple, error);
-      g_error_free (error);
-    }
+    g_simple_async_result_take_error (simple, error);
 
   /* Complete immediately, not in idle, since we're already in a mainloop callout */
   g_simple_async_result_complete (simple);
@@ -501,6 +512,7 @@ g_unix_input_stream_read_async (GInputStream        *stream,
   source = _g_fd_source_new (unix_stream->priv->fd,
 			     G_IO_IN,
 			     cancellable);
+  g_source_set_name (source, "GUnixInputStream");
   
   g_source_set_callback (source, (GSourceFunc)read_async_cb, data, g_free);
   g_source_attach (source, g_main_context_get_thread_default ());
@@ -601,10 +613,7 @@ close_async_cb (CloseAsyncData *data)
 				      g_unix_input_stream_close_async);
 
   if (!result)
-    {
-      g_simple_async_result_set_from_error (simple, error);
-      g_error_free (error);
-    }
+    g_simple_async_result_take_error (simple, error);
 
   /* Complete immediately, not in idle, since we're already in a mainloop callout */
   g_simple_async_result_complete (simple);
@@ -644,5 +653,36 @@ g_unix_input_stream_close_finish (GInputStream  *stream,
   return TRUE;
 }
 
-#define __G_UNIX_INPUT_STREAM_C__
-#include "gioaliasdef.c"
+static gboolean
+g_unix_input_stream_pollable_is_readable (GPollableInputStream *stream)
+{
+  GUnixInputStream *unix_stream = G_UNIX_INPUT_STREAM (stream);
+  GPollFD poll_fd;
+  gint result;
+
+  poll_fd.fd = unix_stream->priv->fd;
+  poll_fd.events = G_IO_IN;
+
+  do
+    result = g_poll (&poll_fd, 1, 0);
+  while (result == -1 && errno == EINTR);
+
+  return poll_fd.revents != 0;
+}
+
+static GSource *
+g_unix_input_stream_pollable_create_source (GPollableInputStream *stream,
+					    GCancellable         *cancellable)
+{
+  GUnixInputStream *unix_stream = G_UNIX_INPUT_STREAM (stream);
+  GSource *inner_source, *pollable_source;
+
+  pollable_source = g_pollable_source_new (G_OBJECT (stream));
+
+  inner_source = _g_fd_source_new (unix_stream->priv->fd, G_IO_IN, cancellable);
+  g_source_set_dummy_callback (inner_source);
+  g_source_add_child_source (pollable_source, inner_source);
+  g_source_unref (inner_source);
+
+  return pollable_source;
+}

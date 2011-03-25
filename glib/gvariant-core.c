@@ -29,7 +29,6 @@
 #include <glib/gmem.h>
 #include <string.h>
 
-#include "galias.h"
 
 /*
  * This file includes the structure definition for GVariant and a small
@@ -504,11 +503,33 @@ g_variant_new_from_buffer (const GVariantType *type,
                            gboolean            trusted)
 {
   GVariant *value;
+  guint alignment;
+  gsize size;
 
   value = g_variant_alloc (type, TRUE, trusted);
+
   value->contents.serialised.buffer = g_buffer_ref (buffer);
-  value->contents.serialised.data = buffer->data;
-  value->size = buffer->size;
+
+  g_variant_type_info_query (value->type_info,
+                             &alignment, &size);
+
+  if (size && buffer->size != size)
+    {
+      /* Creating a fixed-sized GVariant with a buffer of the wrong
+       * size.
+       *
+       * We should do the equivalent of pulling a fixed-sized child out
+       * of a brozen container (ie: data is NULL size is equal to the correct
+       * fixed size).
+       */
+      value->contents.serialised.data = NULL;
+      value->size = size;
+    }
+  else
+    {
+      value->contents.serialised.data = buffer->data;
+      value->size = buffer->size;
+    }
 
   return value;
 }
@@ -675,6 +696,30 @@ g_variant_ref_sink (GVariant *value)
 }
 
 /**
+ * g_variant_is_floating:
+ * @value: a #GVariant
+ * @returns: whether @value is floating
+ *
+ * Checks whether @value has a floating reference count.
+ *
+ * This function should only ever be used to assert that a given variant
+ * is or is not floating, or for debug purposes. To acquire a reference
+ * to a variant that might be floating, always use g_variant_ref_sink().
+ *
+ * See g_variant_ref_sink() for more information about floating reference
+ * counts.
+ *
+ * Since: 2.26
+ **/
+gboolean
+g_variant_is_floating (GVariant *value)
+{
+  g_return_val_if_fail (value != NULL, FALSE);
+
+  return (value->state & STATE_FLOATING) != 0;
+}
+
+/**
  * g_variant_get_size:
  * @value: a #GVariant instance
  * @returns: the serialised size of @value
@@ -802,41 +847,50 @@ GVariant *
 g_variant_get_child_value (GVariant *value,
                            gsize     index_)
 {
-  GVariant *child = NULL;
-
-  g_variant_lock (value);
-
-  if (value->state & STATE_SERIALISED)
+  if (~g_atomic_int_get (&value->state) & STATE_SERIALISED)
     {
-      GVariantSerialised serialised = {
-        value->type_info,
-        (gpointer) value->contents.serialised.data,
-        value->size
-      };
-      GVariantSerialised s_child;
+      g_variant_lock (value);
 
-      /* get the serialiser to extract the serialised data for the child
-       * from the serialised data for the container
-       */
-      s_child = g_variant_serialised_get_child (serialised, index_);
+      if (~value->state & STATE_SERIALISED)
+        {
+          GVariant *child;
 
-      /* create a new serialised instance out of it */
-      child = g_slice_new (GVariant);
-      child->type_info = s_child.type_info;
-      child->state = (value->state & STATE_TRUSTED) |
-                     STATE_SERIALISED;
-      child->size = s_child.size;
-      child->ref_count = 1;
-      child->contents.serialised.buffer =
-        g_buffer_ref (value->contents.serialised.buffer);
-      child->contents.serialised.data = s_child.data;
-     }
-  else
-    child = g_variant_ref (value->contents.tree.children[index_]);
+          child = g_variant_ref (value->contents.tree.children[index_]);
+          g_variant_unlock (value);
 
-  g_variant_unlock (value);
+          return child;
+        }
 
-  return child;
+      g_variant_unlock (value);
+    }
+
+  {
+    GVariantSerialised serialised = {
+      value->type_info,
+      (gpointer) value->contents.serialised.data,
+      value->size
+    };
+    GVariantSerialised s_child;
+    GVariant *child;
+
+    /* get the serialiser to extract the serialised data for the child
+     * from the serialised data for the container
+     */
+    s_child = g_variant_serialised_get_child (serialised, index_);
+
+    /* create a new serialised instance out of it */
+    child = g_slice_new (GVariant);
+    child->type_info = s_child.type_info;
+    child->state = (value->state & STATE_TRUSTED) |
+                   STATE_SERIALISED;
+    child->size = s_child.size;
+    child->ref_count = 1;
+    child->contents.serialised.buffer =
+      g_buffer_ref (value->contents.serialised.buffer);
+    child->contents.serialised.data = s_child.data;
+
+    return child;
+  }
 }
 
 /**
@@ -927,6 +981,3 @@ g_variant_is_normal_form (GVariant *value)
 
   return (value->state & STATE_TRUSTED) != 0;
 }
-
-#define __G_VARIANT_CORE_C__
-#include "galiasdef.c"

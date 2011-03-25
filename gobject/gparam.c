@@ -28,7 +28,6 @@
 #include "gparam.h"
 #include "gparamspecs.h"
 #include "gvaluecollector.h"
-#include "gobjectalias.h"
 
 
 /**
@@ -1145,7 +1144,13 @@ pspec_compare_id (gconstpointer a,
 {
   const GParamSpec *pspec1 = a, *pspec2 = b;
 
-  return pspec1->param_id < pspec2->param_id ? -1 : pspec1->param_id > pspec2->param_id;
+  if (pspec1->param_id < pspec2->param_id)
+    return -1;
+
+  if (pspec1->param_id > pspec2->param_id)
+    return 1;
+
+  return strcmp (pspec1->name, pspec2->name);
 }
 
 static inline GSList*
@@ -1469,7 +1474,7 @@ g_value_take_param (GValue     *value,
  *
  * Get the contents of a %G_TYPE_PARAM #GValue.
  *
- * Returns: #GParamSpec content of @value
+ * Returns: (transfer none): #GParamSpec content of @value
  */
 GParamSpec*
 g_value_get_param (const GValue *value)
@@ -1480,7 +1485,7 @@ g_value_get_param (const GValue *value)
 }
 
 /**
- * g_value_dup_param:
+ * g_value_dup_param: (skip)
  * @value: a valid #GValue whose type is derived from %G_TYPE_PARAM
  *
  * Get the contents of a %G_TYPE_PARAM #GValue, increasing its
@@ -1496,6 +1501,3 @@ g_value_dup_param (const GValue *value)
 
   return value->data[0].v_pointer ? g_param_spec_ref (value->data[0].v_pointer) : NULL;
 }
-
-#define __G_PARAM_C__
-#include "gobjectaliasdef.c"

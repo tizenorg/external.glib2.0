@@ -21,10 +21,10 @@
  * Modified by the GLib Team and others 1997-2000.  See the AUTHORS
  * file for a list of people on the GLib Team.  See the ChangeLog
  * files for a list of changes.  These files are distributed with
- * GLib at ftp://ftp.gtk.org/pub/gtk/. 
+ * GLib at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-/* 
+/*
  * MT safe
  */
 
@@ -41,11 +41,18 @@
 #include <locale.h>
 #include <errno.h>
 
-#include "glib.h"
+#include "gmessages.h"
+
+#include "gbacktrace.h"
+#include "gconvert.h"
 #include "gdebug.h"
+#include "gmem.h"
 #include "gprintfint.h"
+#include "gtestutils.h"
+#include "gthread.h"
 #include "gthreadprivate.h"
-#include "galias.h"
+#include "gstrfuncs.h"
+#include "gstring.h"
 
 #ifdef G_OS_WIN32
 #include <process.h>		/* For getpid() */
@@ -55,6 +62,7 @@
 #  include <windows.h>
 #  undef STRICT
 #endif
+
 
 /* --- structures --- */
 typedef struct _GLogDomain	GLogDomain;
@@ -575,12 +583,6 @@ g_return_if_fail_warning (const char *log_domain,
 			  const char *pretty_function,
 			  const char *expression)
 {
-  /*
-   * Omit the prefix used by the PLT-reduction
-   * technique used in GTK+. 
-   */
-  if (g_str_has_prefix (pretty_function, "IA__"))
-    pretty_function += 4;
   g_log (log_domain,
 	 G_LOG_LEVEL_CRITICAL,
 	 "%s: assertion `%s' failed",
@@ -616,12 +618,6 @@ g_assert_warning (const char *log_domain,
 		  const char *pretty_function,
 		  const char *expression)
 {
-  /*
-   * Omit the prefix used by the PLT-reduction
-   * technique used in GTK+. 
-   */
-  if (g_str_has_prefix (pretty_function, "IA__"))
-    pretty_function += 4;
   g_log (log_domain,
 	 G_LOG_LEVEL_ERROR,
 	 expression 
@@ -1161,6 +1157,3 @@ _g_debug_init (void)
       g_log_set_always_fatal (fatal_mask);
     }
 }
-
-#define __G_MESSAGES_C__
-#include "galiasdef.c"

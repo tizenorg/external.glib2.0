@@ -34,7 +34,6 @@
 
 #include <string.h>
 
-#include "galias.h"
 
 /**
  * SECTION: gvariant
@@ -317,7 +316,7 @@ g_variant_new_from_trusted (const GVariantType *type,
 /**
  * g_variant_new_boolean:
  * @boolean: a #gboolean value
- * @returns: a new boolean #GVariant instance
+ * @returns: a floating reference to a new boolean #GVariant instance
  *
  * Creates a new boolean #GVariant instance -- either %TRUE or %FALSE.
  *
@@ -375,7 +374,7 @@ g_variant_get_boolean (GVariant *value)
 /**
  * g_variant_new_byte:
  * @byte: a #guint8 value
- * @returns: a new byte #GVariant instance
+ * @returns: a floating reference to a new byte #GVariant instance
  *
  * Creates a new byte #GVariant instance.
  *
@@ -398,7 +397,7 @@ NUMERIC_TYPE (BYTE, byte, guchar)
 /**
  * g_variant_new_int16:
  * @int16: a #gint16 value
- * @returns: a new int16 #GVariant instance
+ * @returns: a floating reference to a new int16 #GVariant instance
  *
  * Creates a new int16 #GVariant instance.
  *
@@ -421,7 +420,7 @@ NUMERIC_TYPE (INT16, int16, gint16)
 /**
  * g_variant_new_uint16:
  * @uint16: a #guint16 value
- * @returns: a new uint16 #GVariant instance
+ * @returns: a floating reference to a new uint16 #GVariant instance
  *
  * Creates a new uint16 #GVariant instance.
  *
@@ -444,7 +443,7 @@ NUMERIC_TYPE (UINT16, uint16, guint16)
 /**
  * g_variant_new_int32:
  * @int32: a #gint32 value
- * @returns: a new int32 #GVariant instance
+ * @returns: a floating reference to a new int32 #GVariant instance
  *
  * Creates a new int32 #GVariant instance.
  *
@@ -467,7 +466,7 @@ NUMERIC_TYPE (INT32, int32, gint32)
 /**
  * g_variant_new_uint32:
  * @uint32: a #guint32 value
- * @returns: a new uint32 #GVariant instance
+ * @returns: a floating reference to a new uint32 #GVariant instance
  *
  * Creates a new uint32 #GVariant instance.
  *
@@ -490,7 +489,7 @@ NUMERIC_TYPE (UINT32, uint32, guint32)
 /**
  * g_variant_new_int64:
  * @int64: a #gint64 value
- * @returns: a new int64 #GVariant instance
+ * @returns: a floating reference to a new int64 #GVariant instance
  *
  * Creates a new int64 #GVariant instance.
  *
@@ -513,7 +512,7 @@ NUMERIC_TYPE (INT64, int64, gint64)
 /**
  * g_variant_new_uint64:
  * @uint64: a #guint64 value
- * @returns: a new uint64 #GVariant instance
+ * @returns: a floating reference to a new uint64 #GVariant instance
  *
  * Creates a new uint64 #GVariant instance.
  *
@@ -536,7 +535,7 @@ NUMERIC_TYPE (UINT64, uint64, guint64)
 /**
  * g_variant_new_handle:
  * @handle: a #gint32 value
- * @returns: a new handle #GVariant instance
+ * @returns: a floating reference to a new handle #GVariant instance
  *
  * Creates a new handle #GVariant instance.
  *
@@ -567,7 +566,7 @@ NUMERIC_TYPE (HANDLE, handle, gint32)
 /**
  * g_variant_new_double:
  * @floating: a #gdouble floating point value
- * @returns: a new double #GVariant instance
+ * @returns: a floating reference to a new double #GVariant instance
  *
  * Creates a new double #GVariant instance.
  *
@@ -590,16 +589,20 @@ NUMERIC_TYPE (DOUBLE, double, gdouble)
 /* Container type Constructor / Deconstructors {{{1 */
 /**
  * g_variant_new_maybe:
- * @child_type: the #GVariantType of the child
- * @child: the child value, or %NULL
- * @returns: a new #GVariant maybe instance
+ * @child_type: (allow-none): the #GVariantType of the child, or %NULL
+ * @child: (allow-none): the child value, or %NULL
+ * @returns: a floating reference to a new #GVariant maybe instance
  *
- * Depending on if @value is %NULL, either wraps @value inside of a
+ * Depending on if @child is %NULL, either wraps @child inside of a
  * maybe container or creates a Nothing instance for the given @type.
  *
- * At least one of @type and @value must be non-%NULL.  If @type is
- * non-%NULL then it must be a definite type.  If they are both
- * non-%NULL then @type must be the type of @value.
+ * At least one of @child_type and @child must be non-%NULL.
+ * If @child_type is non-%NULL then it must be a definite type.
+ * If they are both non-%NULL then @child_type must be the type
+ * of @child.
+ *
+ * If @child is a floating reference (see g_variant_ref_sink()), the new
+ * instance takes ownership of @child.
  *
  * Since: 2.24
  **/
@@ -644,7 +647,7 @@ g_variant_new_maybe (const GVariantType *child_type,
 /**
  * g_variant_get_maybe:
  * @value: a maybe-typed value
- * @returns: the contents of @value, or %NULL
+ * @returns: (allow-none): the contents of @value, or %NULL
  *
  * Given a maybe-typed #GVariant instance, extract its value.  If the
  * value is Nothing, then this function returns %NULL.
@@ -665,10 +668,13 @@ g_variant_get_maybe (GVariant *value)
 /**
  * g_variant_new_variant:
  * @value: a #GVariance instance
- * @returns: a new variant #GVariant instance
+ * @returns: a floating reference to a new variant #GVariant instance
  *
  * Boxes @value.  The result is a #GVariant instance representing a
  * variant containing the original value.
+ *
+ * If @child is a floating reference (see g_variant_ref_sink()), the new
+ * instance takes ownership of @child.
  *
  * Since: 2.24
  **/
@@ -704,10 +710,11 @@ g_variant_get_variant (GVariant *value)
 
 /**
  * g_variant_new_array:
- * @child_type: the element type of the new array
- * @children: an array of #GVariant pointers, the children
+ * @child_type: (allow-none): the element type of the new array
+ * @children: (allow-none) (array length=n_children): an array of
+ *            #GVariant pointers, the children
  * @n_children: the length of @children
- * @returns: a new #GVariant array
+ * @returns: a floating reference to a new #GVariant array
  *
  * Creates a new #GVariant array from @children.
  *
@@ -721,6 +728,9 @@ g_variant_get_variant (GVariant *value)
  *
  * All items in the array must have the same type, which must be the
  * same as @child_type, if given.
+ *
+ * If the @children are floating references (see g_variant_ref_sink()), the
+ * new instance takes ownership of them as if via g_variant_ref_sink().
  *
  * Since: 2.24
  **/
@@ -763,7 +773,7 @@ g_variant_new_array (const GVariantType *child_type,
 
 /*< private >
  * g_variant_make_tuple_type:
- * @children: an array of GVariant *
+ * @children: (array length=n_children): an array of GVariant *
  * @n_children: the length of @children
  *
  * Return the type of a tuple containing @children as its items.
@@ -789,15 +799,18 @@ g_variant_make_tuple_type (GVariant * const *children,
 
 /**
  * g_variant_new_tuple:
- * @children: the items to make the tuple out of
+ * @children: (array length=n_children): the items to make the tuple out of
  * @n_children: the length of @children
- * @returns: a new #GVariant tuple
+ * @returns: a floating reference to a new #GVariant tuple
  *
  * Creates a new tuple #GVariant out of the items in @children.  The
  * type is determined from the types of @children.  No entry in the
  * @children array may be %NULL.
  *
  * If @n_children is 0 then the unit tuple is constructed.
+ *
+ * If the @children are floating references (see g_variant_ref_sink()), the
+ * new instance takes ownership of them as if via g_variant_ref_sink().
  *
  * Since: 2.24
  **/
@@ -850,12 +863,15 @@ g_variant_make_dict_entry_type (GVariant *key,
  * g_variant_new_dict_entry:
  * @key: a basic #GVariant, the key
  * @value: a #GVariant, the value
- * @returns: a new dictionary entry #GVariant
+ * @returns: a floating reference to a new dictionary entry #GVariant
  *
  * Creates a new dictionary entry #GVariant.  @key and @value must be
  * non-%NULL.
  *
  * @key must be a value of a basic type (ie: not a container).
+ *
+ * If the @key or @value are floating references (see g_variant_ref_sink()),
+ * the new instance takes ownership of them as if via g_variant_ref_sink().
  *
  * Since: 2.24
  **/
@@ -883,11 +899,155 @@ g_variant_new_dict_entry (GVariant *key,
 }
 
 /**
+ * g_variant_lookup:
+ * @dictionary: a dictionary #GVariant
+ * @key: the key to lookup in the dictionary
+ * @format_string: a GVariant format string
+ * @...: the arguments to unpack the value into
+ *
+ * Looks up a value in a dictionary #GVariant.
+ *
+ * This function is a wrapper around g_variant_lookup_value() and
+ * g_variant_get().  In the case that %NULL would have been returned,
+ * this function returns %FALSE.  Otherwise, it unpacks the returned
+ * value and returns %TRUE.
+ *
+ * See g_variant_get() for information about @format_string.
+ *
+ * Returns: %TRUE if a value was unpacked
+ *
+ * Since: 2.28
+ */
+gboolean
+g_variant_lookup (GVariant    *dictionary,
+                  const gchar *key,
+                  const gchar *format_string,
+                  ...)
+{
+  GVariantType *type;
+  GVariant *value;
+
+  /* flatten */
+  g_variant_get_data (dictionary);
+
+  type = g_variant_format_string_scan_type (format_string, NULL, NULL);
+  value = g_variant_lookup_value (dictionary, key, type);
+  g_variant_type_free (type);
+
+  if (value)
+    {
+      va_list ap;
+
+      va_start (ap, format_string);
+      g_variant_get_va (value, format_string, NULL, &ap);
+      g_variant_unref (value);
+      va_end (ap);
+
+      return TRUE;
+    }
+
+  else
+    return FALSE;
+}
+
+/**
+ * g_variant_lookup_value:
+ * @dictionary: a dictionary #GVariant
+ * @key: the key to lookup in the dictionary
+ * @expected_type: a #GVariantType, or %NULL
+ *
+ * Looks up a value in a dictionary #GVariant.
+ *
+ * This function works with dictionaries of the type
+ * <literal>a{s*}</literal> (and equally well with type
+ * <literal>a{o*}</literal>, but we only further discuss the string case
+ * for sake of clarity).
+ *
+ * In the event that @dictionary has the type <literal>a{sv}</literal>,
+ * the @expected_type string specifies what type of value is expected to
+ * be inside of the variant.  If the value inside the variant has a
+ * different type then %NULL is returned.  In the event that @dictionary
+ * has a value type other than <literal>v</literal> then @expected_type
+ * must directly match the key type and it is used to unpack the value
+ * directly or an error occurs.
+ *
+ * In either case, if @key is not found in @dictionary, %NULL is
+ * returned.
+ *
+ * If the key is found and the value has the correct type, it is
+ * returned.  If @expected_type was specified then any non-%NULL return
+ * value will have this type.
+ *
+ * Returns: the value of the dictionary key, or %NULL
+ *
+ * Since: 2.28
+ */
+GVariant *
+g_variant_lookup_value (GVariant           *dictionary,
+                        const gchar        *key,
+                        const GVariantType *expected_type)
+{
+  GVariantIter iter;
+  GVariant *entry;
+  GVariant *value;
+
+  g_return_val_if_fail (g_variant_is_of_type (dictionary,
+                                              G_VARIANT_TYPE ("a{s*}")) ||
+                        g_variant_is_of_type (dictionary,
+                                              G_VARIANT_TYPE ("a{o*}")),
+                        NULL);
+
+  g_variant_iter_init (&iter, dictionary);
+
+  while ((entry = g_variant_iter_next_value (&iter)))
+    {
+      GVariant *entry_key;
+      gboolean matches;
+
+      entry_key = g_variant_get_child_value (entry, 0);
+      matches = strcmp (g_variant_get_string (entry_key, NULL), key) == 0;
+      g_variant_unref (entry_key);
+
+      if (matches)
+        break;
+
+      g_variant_unref (entry);
+    }
+
+  if (entry == NULL)
+    return NULL;
+
+  value = g_variant_get_child_value (entry, 1);
+  g_variant_unref (entry);
+
+  if (g_variant_is_of_type (value, G_VARIANT_TYPE_VARIANT))
+    {
+      GVariant *tmp;
+
+      tmp = g_variant_get_variant (value);
+      g_variant_unref (value);
+
+      if (expected_type && !g_variant_is_of_type (tmp, expected_type))
+        {
+          g_variant_unref (tmp);
+          tmp = NULL;
+        }
+
+      value = tmp;
+    }
+
+  g_return_val_if_fail (expected_type == NULL || value == NULL ||
+                        g_variant_is_of_type (value, expected_type), NULL);
+
+  return value;
+}
+
+/**
  * g_variant_get_fixed_array:
  * @value: a #GVariant array with fixed-sized elements
  * @n_elements: a pointer to the location to store the number of items
  * @element_size: the size of each element
- * @returns: a pointer to the fixed array
+ * @returns: (array length=n_elements): a pointer to the fixed array
  *
  * Provides access to the serialised data for an array of fixed-sized
  * items.
@@ -957,10 +1117,12 @@ g_variant_get_fixed_array (GVariant *value,
 /* String type constructor/getters/validation {{{1 */
 /**
  * g_variant_new_string:
- * @string: a normal C nul-terminated string
- * @returns: a new string #GVariant instance
+ * @string: a normal utf8 nul-terminated string
+ * @returns: a floating reference to a new string #GVariant instance
  *
  * Creates a string #GVariant with the contents of @string.
+ *
+ * @string must be valid utf8.
  *
  * Since: 2.24
  **/
@@ -968,6 +1130,7 @@ GVariant *
 g_variant_new_string (const gchar *string)
 {
   g_return_val_if_fail (string != NULL, NULL);
+  g_return_val_if_fail (g_utf8_validate (string, -1, NULL), NULL);
 
   return g_variant_new_from_trusted (G_VARIANT_TYPE_STRING,
                                      string, strlen (string) + 1);
@@ -976,7 +1139,7 @@ g_variant_new_string (const gchar *string)
 /**
  * g_variant_new_object_path:
  * @object_path: a normal C nul-terminated string
- * @returns: a new object path #GVariant instance
+ * @returns: a floating reference to a new object path #GVariant instance
  *
  * Creates a DBus object path #GVariant with the contents of @string.
  * @string must be a valid DBus object path.  Use
@@ -1020,7 +1183,7 @@ g_variant_is_object_path (const gchar *string)
 /**
  * g_variant_new_signature:
  * @signature: a normal C nul-terminated string
- * @returns: a new signature #GVariant instance
+ * @returns: a floating reference to a new signature #GVariant instance
  *
  * Creates a DBus type signature #GVariant with the contents of
  * @string.  @string must be a valid DBus type signature.  Use
@@ -1043,7 +1206,7 @@ g_variant_new_signature (const gchar *signature)
  * @returns: %TRUE if @string is a DBus type signature
  *
  * Determines if a given string is a valid DBus type signature.  You
- * should ensure that a string is a valid DBus object path before
+ * should ensure that a string is a valid DBus type signature before
  * passing it to g_variant_new_signature().
  *
  * DBus type signatures consist of zero or more definite #GVariantType
@@ -1062,12 +1225,15 @@ g_variant_is_signature (const gchar *string)
 /**
  * g_variant_get_string:
  * @value: a string #GVariant instance
- * @length: a pointer to a #gsize, to store the length
- * @returns: the constant string
+ * @length: (allow-none) (default NULL) (out): a pointer to a #gsize,
+ *          to store the length
+ * @returns: the constant string, utf8 encoded
  *
  * Returns the string value of a #GVariant instance with a string
  * type.  This includes the types %G_VARIANT_TYPE_STRING,
  * %G_VARIANT_TYPE_OBJECT_PATH and %G_VARIANT_TYPE_SIGNATURE.
+ *
+ * The string will always be utf8 encoded.
  *
  * If @length is non-%NULL then the length of the string (in bytes) is
  * returned there.  For trusted values, this information is already
@@ -1139,10 +1305,12 @@ g_variant_get_string (GVariant *value,
  * g_variant_dup_string:
  * @value: a string #GVariant instance
  * @length: a pointer to a #gsize, to store the length
- * @returns: a newly allocated string
+ * @returns: a newly allocated string, utf8 encoded
  *
  * Similar to g_variant_get_string() except that instead of returning
  * a constant string, the string is duplicated.
+ *
+ * The string will always be utf8 encoded.
  *
  * The return value must be freed using g_free().
  *
@@ -1157,15 +1325,14 @@ g_variant_dup_string (GVariant *value,
 
 /**
  * g_variant_new_strv:
- * @strv: an array of strings
+ * @strv: (array length=length) (element-type utf8): an array of strings
  * @length: the length of @strv, or -1
  * @returns: a new floating #GVariant instance
  *
  * Constructs an array of strings #GVariant from the given array of
  * strings.
  *
- * If @length is not -1 then it gives the maximum length of @strv.  In
- * any case, a %NULL pointer in @strv is taken as a terminator.
+ * If @length is -1 then @strv is %NULL-terminated.
  *
  * Since: 2.24
  **/
@@ -1185,15 +1352,16 @@ g_variant_new_strv (const gchar * const *strv,
   for (i = 0; i < length; i++)
     strings[i] = g_variant_ref_sink (g_variant_new_string (strv[i]));
 
-  return g_variant_new_from_children (G_VARIANT_TYPE ("as"),
+  return g_variant_new_from_children (G_VARIANT_TYPE_STRING_ARRAY,
                                       strings, length, TRUE);
 }
 
 /**
  * g_variant_get_strv:
  * @value: an array of strings #GVariant
- * @length: the length of the result, or %NULL
- * @returns: an array of constant strings
+ * @length: (allow-none): the length of the result, or %NULL
+ * @returns: (array length=length) (transfer container): an array of constant
+ * strings
  *
  * Gets the contents of an array of strings #GVariant.  This call
  * makes a shallow copy; the return result should be released with
@@ -1216,10 +1384,7 @@ g_variant_get_strv (GVariant *value,
   gsize n;
   gsize i;
 
-  g_return_val_if_fail (g_variant_is_of_type (value, G_VARIANT_TYPE ("as")) ||
-                        g_variant_is_of_type (value, G_VARIANT_TYPE ("ao")) ||
-                        g_variant_is_of_type (value, G_VARIANT_TYPE ("ag")),
-                        NULL);
+  TYPE_CHECK (value, G_VARIANT_TYPE_STRING_ARRAY, NULL);
 
   g_variant_get_data (value);
   n = g_variant_n_children (value);
@@ -1244,8 +1409,8 @@ g_variant_get_strv (GVariant *value,
 /**
  * g_variant_dup_strv:
  * @value: an array of strings #GVariant
- * @length: the length of the result, or %NULL
- * @returns: an array of constant strings
+ * @length: (allow-none): the length of the result, or %NULL
+ * @returns: (array length=length): an array of strings
  *
  * Gets the contents of an array of strings #GVariant.  This call
  * makes a deep copy; the return result should be released with
@@ -1268,10 +1433,7 @@ g_variant_dup_strv (GVariant *value,
   gsize n;
   gsize i;
 
-  g_return_val_if_fail (g_variant_is_of_type (value, G_VARIANT_TYPE ("as")) ||
-                        g_variant_is_of_type (value, G_VARIANT_TYPE ("ao")) ||
-                        g_variant_is_of_type (value, G_VARIANT_TYPE ("ag")),
-                        NULL);
+  TYPE_CHECK (value, G_VARIANT_TYPE_STRING_ARRAY, NULL);
 
   n = g_variant_n_children (value);
   strv = g_new (gchar *, n + 1);
@@ -1282,6 +1444,234 @@ g_variant_dup_strv (GVariant *value,
 
       string = g_variant_get_child_value (value, i);
       strv[i] = g_variant_dup_string (string, NULL);
+      g_variant_unref (string);
+    }
+  strv[i] = NULL;
+
+  if (length)
+    *length = n;
+
+  return strv;
+}
+
+/**
+ * g_variant_new_bytestring:
+ * @string: a normal nul-terminated string in no particular encoding
+ * @returns: a floating reference to a new bytestring #GVariant instance
+ *
+ * Creates an array-of-bytes #GVariant with the contents of @string.
+ * This function is just like g_variant_new_string() except that the
+ * string need not be valid utf8.
+ *
+ * The nul terminator character at the end of the string is stored in
+ * the array.
+ *
+ * Since: 2.26
+ **/
+GVariant *
+g_variant_new_bytestring (const gchar *string)
+{
+  g_return_val_if_fail (string != NULL, NULL);
+
+  return g_variant_new_from_trusted (G_VARIANT_TYPE_BYTESTRING,
+                                     string, strlen (string) + 1);
+}
+
+/**
+ * g_variant_get_bytestring:
+ * @value: an array-of-bytes #GVariant instance
+ * @returns: the constant string
+ *
+ * Returns the string value of a #GVariant instance with an
+ * array-of-bytes type.  The string has no particular encoding.
+ *
+ * If the array does not end with a nul terminator character, the empty
+ * string is returned.  For this reason, you can always trust that a
+ * non-%NULL nul-terminated string will be returned by this function.
+ *
+ * If the array contains a nul terminator character somewhere other than
+ * the last byte then the returned string is the string, up to the first
+ * such nul character.
+ *
+ * It is an error to call this function with a @value that is not an
+ * array of bytes.
+ *
+ * The return value remains valid as long as @value exists.
+ *
+ * Since: 2.26
+ **/
+const gchar *
+g_variant_get_bytestring (GVariant *value)
+{
+  const gchar *string;
+  gsize size;
+
+  TYPE_CHECK (value, G_VARIANT_TYPE_BYTESTRING, NULL);
+
+  /* Won't be NULL since this is an array type */
+  string = g_variant_get_data (value);
+  size = g_variant_get_size (value);
+
+  if (size && string[size - 1] == '\0')
+    return string;
+  else
+    return "";
+}
+
+/**
+ * g_variant_dup_bytestring:
+ * @value: an array-of-bytes #GVariant instance
+ * @length: (allow-none) (default NULL): a pointer to a #gsize, to store
+ *          the length (not including the nul terminator)
+ * @returns: a newly allocated string
+ *
+ * Similar to g_variant_get_bytestring() except that instead of
+ * returning a constant string, the string is duplicated.
+ *
+ * The return value must be freed using g_free().
+ *
+ * Since: 2.26
+ **/
+gchar *
+g_variant_dup_bytestring (GVariant *value,
+                          gsize    *length)
+{
+  const gchar *original = g_variant_get_bytestring (value);
+  gsize size;
+
+  /* don't crash in case get_bytestring() had an assert failure */
+  if (original == NULL)
+    return NULL;
+
+  size = strlen (original);
+
+  if (length)
+    *length = size;
+
+  return g_memdup (original, size + 1);
+}
+
+/**
+ * g_variant_new_bytestring_array:
+ * @strv: (array length=length): an array of strings
+ * @length: the length of @strv, or -1
+ * @returns: a new floating #GVariant instance
+ *
+ * Constructs an array of bytestring #GVariant from the given array of
+ * strings.
+ *
+ * If @length is -1 then @strv is %NULL-terminated.
+ *
+ * Since: 2.26
+ **/
+GVariant *
+g_variant_new_bytestring_array (const gchar * const *strv,
+                                gssize               length)
+{
+  GVariant **strings;
+  gsize i;
+
+  g_return_val_if_fail (length == 0 || strv != NULL, NULL);
+
+  if (length < 0)
+    length = g_strv_length ((gchar **) strv);
+
+  strings = g_new (GVariant *, length);
+  for (i = 0; i < length; i++)
+    strings[i] = g_variant_ref_sink (g_variant_new_bytestring (strv[i]));
+
+  return g_variant_new_from_children (G_VARIANT_TYPE_BYTESTRING_ARRAY,
+                                      strings, length, TRUE);
+}
+
+/**
+ * g_variant_get_bytestring_array:
+ * @value: an array of array of bytes #GVariant ('aay')
+ * @length: (allow-none): the length of the result, or %NULL
+ * @returns: (array length=length): an array of constant strings
+ *
+ * Gets the contents of an array of array of bytes #GVariant.  This call
+ * makes a shallow copy; the return result should be released with
+ * g_free(), but the individual strings must not be modified.
+ *
+ * If @length is non-%NULL then the number of elements in the result is
+ * stored there.  In any case, the resulting array will be
+ * %NULL-terminated.
+ *
+ * For an empty array, @length will be set to 0 and a pointer to a
+ * %NULL pointer will be returned.
+ *
+ * Since: 2.26
+ **/
+const gchar **
+g_variant_get_bytestring_array (GVariant *value,
+                                gsize    *length)
+{
+  const gchar **strv;
+  gsize n;
+  gsize i;
+
+  TYPE_CHECK (value, G_VARIANT_TYPE_BYTESTRING_ARRAY, NULL);
+
+  g_variant_get_data (value);
+  n = g_variant_n_children (value);
+  strv = g_new (const gchar *, n + 1);
+
+  for (i = 0; i < n; i++)
+    {
+      GVariant *string;
+
+      string = g_variant_get_child_value (value, i);
+      strv[i] = g_variant_get_bytestring (string);
+      g_variant_unref (string);
+    }
+  strv[i] = NULL;
+
+  if (length)
+    *length = n;
+
+  return strv;
+}
+
+/**
+ * g_variant_dup_bytestring_array:
+ * @value: an array of array of bytes #GVariant ('aay')
+ * @length: (allow-none): the length of the result, or %NULL
+ * @returns: (array length=length): an array of strings
+ *
+ * Gets the contents of an array of array of bytes #GVariant.  This call
+ * makes a deep copy; the return result should be released with
+ * g_strfreev().
+ *
+ * If @length is non-%NULL then the number of elements in the result is
+ * stored there.  In any case, the resulting array will be
+ * %NULL-terminated.
+ *
+ * For an empty array, @length will be set to 0 and a pointer to a
+ * %NULL pointer will be returned.
+ *
+ * Since: 2.26
+ **/
+gchar **
+g_variant_dup_bytestring_array (GVariant *value,
+                                gsize    *length)
+{
+  gchar **strv;
+  gsize n;
+  gsize i;
+
+  TYPE_CHECK (value, G_VARIANT_TYPE_BYTESTRING_ARRAY, NULL);
+
+  g_variant_get_data (value);
+  n = g_variant_n_children (value);
+  strv = g_new (gchar *, n + 1);
+
+  for (i = 0; i < n; i++)
+    {
+      GVariant *string;
+
+      string = g_variant_get_child_value (value, i);
+      strv[i] = g_variant_dup_bytestring (string, NULL);
       g_variant_unref (string);
     }
   strv[i] = NULL;
@@ -1419,7 +1809,7 @@ g_variant_classify (GVariant *value)
 /**
  * g_variant_print_string:
  * @value: a #GVariant
- * @string: a #GString, or %NULL
+ * @string: (allow-none) (default NULL): a #GString, or %NULL
  * @type_annotate: %TRUE if type information should be included in
  *                 the output
  * @returns: a #GString containing the string
@@ -1485,6 +1875,45 @@ g_variant_print_string (GVariant *value,
     case G_VARIANT_CLASS_ARRAY:
       /* it's an array so the first character of the type string is 'a'
        *
+       * if the first two characters are 'ay' then it's a bytestring.
+       * under certain conditions we print those as strings.
+       */
+      if (g_variant_get_type_string (value)[1] == 'y')
+        {
+          const gchar *str;
+          gsize size;
+          gsize i;
+
+          /* first determine if it is a byte string.
+           * that's when there's a single nul character: at the end.
+           */
+          str = g_variant_get_data (value);
+          size = g_variant_get_size (value);
+
+          for (i = 0; i < size; i++)
+            if (str[i] == '\0')
+              break;
+
+          /* first nul byte is the last byte -> it's a byte string. */
+          if (i == size - 1)
+            {
+              gchar *escaped = g_strescape (str, NULL);
+
+              /* use double quotes only if a ' is in the string */
+              if (strchr (str, '\''))
+                g_string_append_printf (string, "b\"%s\"", escaped);
+              else
+                g_string_append_printf (string, "b'%s'", escaped);
+
+              g_free (escaped);
+              break;
+            }
+
+          else
+            /* fall through and handle normally... */;
+        }
+
+      /*
        * if the first two characters are 'a{' then it's an array of
        * dictionary entries (ie: a dictionary) so we print that
        * differently.
@@ -1631,15 +2060,66 @@ g_variant_print_string (GVariant *value,
     case G_VARIANT_CLASS_STRING:
       {
         const gchar *str = g_variant_get_string (value, NULL);
-        gchar *escaped = g_strescape (str, NULL);
+        gunichar quote = strchr (str, '\'') ? '"' : '\'';
 
-        /* use double quotes only if a ' is in the string */
-        if (strchr (str, '\''))
-          g_string_append_printf (string, "\"%s\"", escaped);
-        else
-          g_string_append_printf (string, "'%s'", escaped);
+        g_string_append_c (string, quote);
 
-        g_free (escaped);
+        while (*str)
+          {
+            gunichar c = g_utf8_get_char (str);
+
+            if (c == quote || c == '\\')
+              g_string_append_c (string, '\\');
+
+            if (g_unichar_isprint (c))
+              g_string_append_unichar (string, c);
+
+            else
+              {
+                g_string_append_c (string, '\\');
+                if (c < 0x10000)
+                  switch (c)
+                    {
+                    case '\a':
+                      g_string_append_c (string, 'a');
+                      break;
+
+                    case '\b':
+                      g_string_append_c (string, 'b');
+                      break;
+
+                    case '\f':
+                      g_string_append_c (string, 'f');
+                      break;
+
+                    case '\n':
+                      g_string_append_c (string, 'n');
+                      break;
+
+                    case '\r':
+                      g_string_append_c (string, 'r');
+                      break;
+
+                    case '\t':
+                      g_string_append_c (string, 't');
+                      break;
+
+                    case '\v':
+                      g_string_append_c (string, 'v');
+                      break;
+
+                    default:
+                      g_string_append_printf (string, "u%04x", c);
+                      break;
+                    }
+                 else
+                   g_string_append_printf (string, "U%08x", c);
+              }
+
+            str = g_utf8_next_char (str);
+          }
+
+        g_string_append_c (string, quote);
       }
       break;
 
@@ -1765,10 +2245,10 @@ g_variant_print (GVariant *value,
                         FALSE);
 };
 
-/* Hash, Equal {{{1 */
+/* Hash, Equal, Compare {{{1 */
 /**
  * g_variant_hash:
- * @value: a basic #GVariant value as a #gconstpointer
+ * @value: (type GVariant): a basic #GVariant value as a #gconstpointer
  * @returns: a hash value corresponding to @value
  *
  * Generates a hash value for a #GVariant instance.
@@ -1854,8 +2334,8 @@ g_variant_hash (gconstpointer value_)
 
 /**
  * g_variant_equal:
- * @one: a #GVariant instance
- * @two: a #GVariant instance
+ * @one: (type GVariant): a #GVariant instance
+ * @two: (type GVariant): a #GVariant instance
  * @returns: %TRUE if @one and @two are equal
  *
  * Checks if @one and @two have the same type and value.
@@ -1915,6 +2395,111 @@ g_variant_equal (gconstpointer one,
     }
 
   return equal;
+}
+
+/**
+ * g_variant_compare:
+ * @one: (type GVariant): a basic-typed #GVariant instance
+ * @two: (type GVariant): a #GVariant instance of the same type
+ * @returns: negative value if a &lt; b;
+ *           zero if a = b;
+ *           positive value if a &gt; b.
+ *
+ * Compares @one and @two.
+ *
+ * The types of @one and @two are #gconstpointer only to allow use of
+ * this function with #GTree, #GPtrArray, etc.  They must each be a
+ * #GVariant.
+ *
+ * Comparison is only defined for basic types (ie: booleans, numbers,
+ * strings).  For booleans, %FALSE is less than %TRUE.  Numbers are
+ * ordered in the usual way.  Strings are in ASCII lexographical order.
+ *
+ * It is a programmer error to attempt to compare container values or
+ * two values that have types that are not exactly equal.  For example,
+ * you can not compare a 32-bit signed integer with a 32-bit unsigned
+ * integer.  Also note that this function is not particularly
+ * well-behaved when it comes to comparison of doubles; in particular,
+ * the handling of incomparable values (ie: NaN) is undefined.
+ *
+ * If you only require an equality comparison, g_variant_equal() is more
+ * general.
+ *
+ * Since: 2.26
+ **/
+gint
+g_variant_compare (gconstpointer one,
+                   gconstpointer two)
+{
+  GVariant *a = (GVariant *) one;
+  GVariant *b = (GVariant *) two;
+
+  g_return_val_if_fail (g_variant_classify (a) == g_variant_classify (b), 0);
+
+  switch (g_variant_classify (a))
+    {
+    case G_VARIANT_CLASS_BYTE:
+      return ((gint) g_variant_get_byte (a)) -
+             ((gint) g_variant_get_byte (b));
+
+    case G_VARIANT_CLASS_INT16:
+      return ((gint) g_variant_get_int16 (a)) -
+             ((gint) g_variant_get_int16 (b));
+
+    case G_VARIANT_CLASS_UINT16:
+      return ((gint) g_variant_get_uint16 (a)) -
+             ((gint) g_variant_get_uint16 (b));
+
+    case G_VARIANT_CLASS_INT32:
+      {
+        gint32 a_val = g_variant_get_int32 (a);
+        gint32 b_val = g_variant_get_int32 (b);
+
+        return (a_val == b_val) ? 0 : (a_val > b_val) ? 1 : -1;
+      }
+
+    case G_VARIANT_CLASS_UINT32:
+      {
+        guint32 a_val = g_variant_get_uint32 (a);
+        guint32 b_val = g_variant_get_uint32 (b);
+
+        return (a_val == b_val) ? 0 : (a_val > b_val) ? 1 : -1;
+      }
+
+    case G_VARIANT_CLASS_INT64:
+      {
+        gint64 a_val = g_variant_get_int64 (a);
+        gint64 b_val = g_variant_get_int64 (b);
+
+        return (a_val == b_val) ? 0 : (a_val > b_val) ? 1 : -1;
+      }
+
+    case G_VARIANT_CLASS_UINT64:
+      {
+        guint64 a_val = g_variant_get_int32 (a);
+        guint64 b_val = g_variant_get_int32 (b);
+
+        return (a_val == b_val) ? 0 : (a_val > b_val) ? 1 : -1;
+      }
+
+    case G_VARIANT_CLASS_DOUBLE:
+      {
+        gdouble a_val = g_variant_get_double (a);
+        gdouble b_val = g_variant_get_double (b);
+
+        return (a_val == b_val) ? 0 : (a_val > b_val) ? 1 : -1;
+      }
+
+    case G_VARIANT_CLASS_STRING:
+    case G_VARIANT_CLASS_OBJECT_PATH:
+    case G_VARIANT_CLASS_SIGNATURE:
+      return strcmp (g_variant_get_string (a, NULL),
+                     g_variant_get_string (b, NULL));
+
+    default:
+      g_return_val_if_fail (!g_variant_is_container (a), 0);
+      g_assert_not_reached ();
+    }
 }
 
 /* GVariantIter {{{1 */
@@ -2088,7 +2673,7 @@ g_variant_iter_free (GVariantIter *iter)
 /**
  * g_variant_iter_next_value:
  * @iter: a #GVariantIter
- * @returns: a #GVariant, or %NULL
+ * @returns: (allow-none): a #GVariant, or %NULL
  *
  * Gets the next item in the container.  If no more items remain then
  * %NULL is returned.
@@ -2615,7 +3200,7 @@ g_variant_make_array_type (GVariant *element)
 /**
  * g_variant_builder_end:
  * @builder: a #GVariantBuilder
- * @returns: a new, floating, #GVariant
+ * @returns: (transfer none): a new, floating, #GVariant
  *
  * Ends the builder process and returns the constructed value.
  *
@@ -2686,8 +3271,10 @@ g_variant_builder_end (GVariantBuilder *builder)
 /*< private >
  * g_variant_format_string_scan:
  * @string: a string that may be prefixed with a format string
- * @limit: a pointer to the end of @string, or %NULL
- * @endptr: location to store the end pointer, or %NULL
+ * @limit: (allow-none) (default NULL): a pointer to the end of @string,
+ *         or %NULL
+ * @endptr: (allow-none) (default NULL): location to store the end pointer,
+ *          or %NULL
  * @returns: %TRUE if there was a valid format string
  *
  * Checks the string pointed to by @string for starting with a properly
@@ -2769,19 +3356,43 @@ g_variant_format_string_scan (const gchar  *string,
 
       break;
 
-    case '^': /* '^as' or '^a&s' only */
-      if (next_char() != 'a')
-        return FALSE;
+    case '^':
+      if ((c = next_char()) == 'a')
+        {
+          if ((c = next_char()) == '&')
+            {
+              if ((c = next_char()) == 'a')
+                {
+                  if ((c = next_char()) == 'y')
+                    break;      /* '^a&ay' */
+                }
 
-      if (peek_char() == '&')
-        next_char ();
+              else if (c == 's')
+                break;          /* '^a&s' */
+            }
 
-      c = next_char ();
+          else if (c == 'a')
+            {
+              if ((c = next_char()) == 'y')
+                break;          /* '^aay' */
+            }
 
-      if (c != 's' && c != 'o' && c != 'g')
-        return FALSE;
+          else if (c == 's')
+            break;              /* '^as' */
 
-      break;
+          else if (c == 'y')
+            break;              /* '^ay' */
+        }
+      else if (c == '&')
+        {
+          if ((c = next_char()) == 'a')
+            {
+              if ((c = next_char()) == 'y')
+                break;          /* '^&ay' */
+            }
+        }
+
+      return FALSE;
 
     case '&':
       c = next_char();
@@ -2807,9 +3418,11 @@ g_variant_format_string_scan (const gchar  *string,
 /*< private >
  * g_variant_format_string_scan_type:
  * @string: a string that may be prefixed with a format string
- * @limit: a pointer to the end of @string
- * @endptr: location to store the end pointer, or %NULL
- * @returns: a #GVariantType if there was a valid format string
+ * @limit: (allow-none) (default NULL): a pointer to the end of @string,
+ *         or %NULL
+ * @endptr: (allow-none) (default NULL): location to store the end pointer,
+ *          or %NULL
+ * @returns: (allow-none): a #GVariantType if there was a valid format string
  *
  * If @string starts with a valid format string then this function will
  * return the type that the format string corresponds to.  Otherwise
@@ -2994,6 +3607,29 @@ g_variant_valist_free_nnp (const gchar *str,
     }
 }
 
+static gchar
+g_variant_scan_convenience (const gchar **str,
+                            gboolean     *constant,
+                            guint        *arrays)
+{
+  *constant = FALSE;
+  *arrays = 0;
+
+  for (;;)
+    {
+      char c = *(*str)++;
+
+      if (c == '&')
+        *constant = TRUE;
+
+      else if (c == 'a')
+        (*arrays)++;
+
+      else
+        return c;
+    }
+}
+
 static GVariant *
 g_variant_valist_new_nnp (const gchar **str,
                           gpointer      ptr)
@@ -3040,31 +3676,16 @@ g_variant_valist_new_nnp (const gchar **str,
 
     case '^':
       {
-        const GVariantType *type;
-        GVariantType *array_type;
-        GVariant **children;
-        gchar **strv = ptr;
-        GVariant *value;
-        guint length, i;
+        gboolean constant;
+        guint arrays;
 
-        if ((*str)[1] == '&')    /* '^a&s' */
-          (*str) += 2;
-        else                     /* '^as' */
-          (*str)++;
+        if (g_variant_scan_convenience (str, &constant, &arrays) == 's')
+          return g_variant_new_strv (ptr, -1);
 
-        type = (GVariantType *) (*str)++;
-        array_type = g_variant_type_new_array (type);
-        length = g_strv_length (strv);
-        children = g_new (GVariant *, length);
-        for (i = 0; i < length; i++)
-          children[i] = g_variant_ref_sink (
-            g_variant_new_from_trusted (type, strv[i], strlen (strv[i]) + 1));
+        if (arrays > 1)
+          return g_variant_new_bytestring_array (ptr, -1);
 
-        value = g_variant_new_from_children (array_type, children,
-                                             length, TRUE);
-        g_variant_type_free (array_type);
-
-        return value;
+        return g_variant_new_bytestring (ptr);
       }
 
     case '@':
@@ -3125,16 +3746,34 @@ g_variant_valist_get_nnp (const gchar **str,
       return g_variant_dup_string (value, NULL);
 
     case '^':
-      if ((*str)[1] == '&')    /* '^a&s' */
-        {
-          (*str) += 3;
-          return g_variant_get_strv (value, NULL);
-        }
-      else                    /* '^as' */
-        {
-          (*str) += 2;
-          return g_variant_dup_strv (value, NULL);
-        }
+      {
+        gboolean constant;
+        guint arrays;
+
+        if (g_variant_scan_convenience (str, &constant, &arrays) == 's')
+          {
+            if (constant)
+              return g_variant_get_strv (value, NULL);
+            else
+              return g_variant_dup_strv (value, NULL);
+          }
+
+        else if (arrays > 1)
+          {
+            if (constant)
+              return g_variant_get_bytestring_array (value, NULL);
+            else
+              return g_variant_dup_bytestring_array (value, NULL);
+          }
+
+        else
+          {
+            if (constant)
+              return (gchar *) g_variant_get_bytestring (value);
+            else
+              return g_variant_dup_bytestring (value, NULL);
+          }
+      }
 
     case '@':
       g_variant_type_string_scan (*str, NULL, str);
@@ -3534,7 +4173,8 @@ g_variant_new (const gchar *format_string,
 /**
  * g_variant_new_va:
  * @format_string: a string that is prefixed with a format string
- * @endptr: location to store the end pointer, or %NULL
+ * @endptr: (allow-none) (default NULL): location to store the end pointer,
+ *          or %NULL
  * @app: a pointer to a #va_list
  * @returns: a new, usually floating, #GVariant
  *
@@ -3634,7 +4274,8 @@ g_variant_get (GVariant    *value,
  * g_variant_get_va:
  * @value: a #GVariant
  * @format_string: a string that is prefixed with a format string
- * @endptr: location to store the end pointer, or %NULL
+ * @endptr: (allow-none) (default NULL): location to store the end pointer,
+ *          or %NULL
  * @app: a pointer to a #va_list
  *
  * This function is intended to be used by libraries based on #GVariant
@@ -3701,8 +4342,7 @@ g_variant_get_va (GVariant     *value,
  *   GVariantBuilder *builder;
  *   int i;
  *
- *   builder = g_variant_builder_new (G_VARIANT_TYPE_CLASS_ARRAY,
- *                                    NULL);
+ *   builder = g_variant_builder_new (G_VARIANT_TYPE_ARRAY);
  *   for (i = 0; i < 16; i++)
  *     {
  *       gchar buf[3];
@@ -3782,6 +4422,9 @@ g_variant_get_child (GVariant    *value,
  * function are assumed to point at uninitialised memory.  It is the
  * responsibility of the caller to free all of the values returned by
  * the unpacking process.
+ *
+ * See the section on <link linkend='gvariant-format-strings'>GVariant
+ * Format Strings</link>.
  *
  * <example>
  *  <title>Memory management with g_variant_iter_next()</title>
@@ -3866,6 +4509,9 @@ g_variant_iter_next (GVariantIter *iter,
  * string constant must be used each time.  Mixing calls to this
  * function and g_variant_iter_next() or g_variant_iter_next_value() on
  * the same iterator is not recommended.
+ *
+ * See the section on <link linkend='gvariant-format-strings'>GVariant
+ * Format Strings</link>.
  *
  * <example>
  *  <title>Memory management with g_variant_iter_loop()</title>
@@ -4064,23 +4710,37 @@ g_variant_get_normal_form (GVariant *value)
 GVariant *
 g_variant_byteswap (GVariant *value)
 {
-  GVariantSerialised serialised;
-  GVariant *trusted;
-  GBuffer *buffer;
+  GVariantTypeInfo *type_info;
+  guint alignment;
   GVariant *new;
 
-  trusted = g_variant_get_normal_form (value);
-  serialised.type_info = g_variant_get_type_info (trusted);
-  serialised.size = g_variant_get_size (trusted);
-  serialised.data = g_malloc (serialised.size);
-  g_variant_store (trusted, serialised.data);
-  g_variant_unref (trusted);
+  type_info = g_variant_get_type_info (value);
 
-  g_variant_serialised_byteswap (serialised);
+  g_variant_type_info_query (type_info, &alignment, NULL);
 
-  buffer = g_buffer_new_take_data (serialised.data, serialised.size);
-  new = g_variant_new_from_buffer (g_variant_get_type (value), buffer, TRUE);
-  g_buffer_unref (buffer);
+  if (alignment)
+    /* (potentially) contains multi-byte numeric data */
+    {
+      GVariantSerialised serialised;
+      GVariant *trusted;
+      GBuffer *buffer;
+
+      trusted = g_variant_get_normal_form (value);
+      serialised.type_info = g_variant_get_type_info (trusted);
+      serialised.size = g_variant_get_size (trusted);
+      serialised.data = g_malloc (serialised.size);
+      g_variant_store (trusted, serialised.data);
+      g_variant_unref (trusted);
+
+      g_variant_serialised_byteswap (serialised);
+
+      buffer = g_buffer_new_take_data (serialised.data, serialised.size);
+      new = g_variant_new_from_buffer (g_variant_get_type (value), buffer, TRUE);
+      g_buffer_unref (buffer);
+    }
+  else
+    /* contains no multi-byte data */
+    new = value;
 
   return g_variant_ref_sink (new);
 }
@@ -4144,7 +4804,4 @@ g_variant_new_from_data (const GVariantType *type,
 }
 
 /* Epilogue {{{1 */
-#define __G_VARIANT_C__
-#include "galiasdef.c"
-
 /* vim:set foldmethod=marker: */

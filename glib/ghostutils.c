@@ -21,17 +21,20 @@
 
 #include "config.h"
 
-#include "glib.h"
-#include "glibintl.h"
-
 #include <string.h>
 
-#include "galias.h"
+#include "ghostutils.h"
+
+#include "garray.h"
+#include "gmem.h"
+#include "gstring.h"
+#include "gstrfuncs.h"
+#include "glibintl.h"
+
 
 /**
  * SECTION:ghostutils
  * @short_description: Internet hostname utilities
- * @include: glib.h
  *
  * Functions for manipulating internet hostnames; in particular, for
  * converting between Unicode and ASCII-encoded forms of
@@ -300,7 +303,8 @@ idna_is_prohibited (gunichar ch)
 /* RFC 3491 IDN cleanup algorithm. */
 static gchar *
 nameprep (const gchar *hostname,
-          gint         len)
+          gint         len,
+          gboolean    *is_unicode)
 {
   gchar *name, *tmp = NULL, *p;
 
@@ -333,11 +337,14 @@ nameprep (const gchar *hostname,
   /* If there are no UTF8 characters, we're done. */
   if (!contains_non_ascii (name, len))
     {
+      *is_unicode = FALSE;
       if (name == (gchar *)hostname)
         return len == -1 ? g_strdup (hostname) : g_strndup (hostname, len);
       else
         return name;
     }
+
+  *is_unicode = TRUE;
 
   /* Normalize */
   name = g_utf8_normalize (name, len, G_NORMALIZE_NFKC);
@@ -380,6 +387,26 @@ nameprep (const gchar *hostname,
   return name;
 }
 
+/* RFC 3490, section 3.1 says '.', 0x3002, 0xFF0E, and 0xFF61 count as
+ * label-separating dots. @str must be '\0'-terminated.
+ */
+#define idna_is_dot(str) ( \
+  ((guchar)(str)[0] == '.') ||                                                 \
+  ((guchar)(str)[0] == 0xE3 && (guchar)(str)[1] == 0x80 && (guchar)(str)[2] == 0x82) || \
+  ((guchar)(str)[0] == 0xEF && (guchar)(str)[1] == 0xBC && (guchar)(str)[2] == 0x8E) || \
+  ((guchar)(str)[0] == 0xEF && (guchar)(str)[1] == 0xBD && (guchar)(str)[2] == 0xA1) )
+
+static const gchar *
+idna_end_of_label (const gchar *str)
+{
+  for (; *str; str = g_utf8_next_char (str))
+    {
+      if (idna_is_dot (str))
+        return str;
+    }
+  return str;
+}
+
 /**
  * g_hostname_to_ascii:
  * @hostname: a valid UTF-8 or ASCII hostname
@@ -401,16 +428,16 @@ g_hostname_to_ascii (const gchar *hostname)
   gssize llen, oldlen;
   gboolean unicode;
 
-  label = name = nameprep (hostname, -1);
-  if (!name)
-    return NULL;
+  label = name = nameprep (hostname, -1, &unicode);
+  if (!name || !unicode)
+    return name;
 
   out = g_string_new (NULL);
 
   do
     {
       unicode = FALSE;
-      for (p = label; *p && *p != '.'; p++)
+      for (p = label; *p && !idna_is_dot (p); p++)
 	{
 	  if ((guchar)*p > 0x80)
 	    unicode = TRUE;
@@ -434,7 +461,9 @@ g_hostname_to_ascii (const gchar *hostname)
 	goto fail;
 
       label += llen;
-      if (*label && *++label)
+      if (*label)
+        label = g_utf8_next_char (label);
+      if (*label)
         g_string_append_c (out, '.');
     }
   while (*label);
@@ -582,7 +611,7 @@ g_hostname_to_unicode (const gchar *hostname)
 
   do
     {
-      llen = strcspn (hostname, ".");
+      llen = idna_end_of_label (hostname) - hostname;
       if (!g_ascii_strncasecmp (hostname, IDNA_ACE_PREFIX, IDNA_ACE_PREFIX_LEN))
 	{
 	  hostname += IDNA_ACE_PREFIX_LEN;
@@ -595,7 +624,8 @@ g_hostname_to_unicode (const gchar *hostname)
 	}
       else
         {
-          gchar *canonicalized = nameprep (hostname, llen);
+          gboolean unicode;
+          gchar *canonicalized = nameprep (hostname, llen, &unicode);
 
           if (!canonicalized)
             {
@@ -607,7 +637,9 @@ g_hostname_to_unicode (const gchar *hostname)
         }
 
       hostname += llen;
-      if (*hostname && *++hostname)
+      if (*hostname)
+        hostname = g_utf8_next_char (hostname);
+      if (*hostname)
         g_string_append_c (out, '.');
     }
   while (*hostname);
@@ -640,8 +672,10 @@ g_hostname_is_ascii_encoded (const gchar *hostname)
     {
       if (!g_ascii_strncasecmp (hostname, IDNA_ACE_PREFIX, IDNA_ACE_PREFIX_LEN))
 	return TRUE;
-      hostname = strchr (hostname, '.');
-      if (!hostname++)
+      hostname = idna_end_of_label (hostname);
+      if (*hostname)
+        hostname = g_utf8_next_char (hostname);
+      if (!*hostname)
 	return FALSE;
     }
 }
@@ -764,6 +798,3 @@ g_hostname_is_ip_address (const gchar *hostname)
   /* If there's nothing left to parse, then it's ok. */
   return !*p;
 }
-
-#define __G_HOST_UTILS_C__
-#include "galiasdef.c"

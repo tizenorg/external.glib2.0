@@ -39,6 +39,8 @@ opened_for_read (GObject *source, GAsyncResult *result, gpointer loop)
 			     async_read_buffer, sizeof (async_read_buffer),
 			     G_PRIORITY_DEFAULT, NULL,
 			     read_data, loop);
+
+  g_object_unref (in);
 }
 
 /* Test 1: Async I/O started in a thread with a thread-default context
@@ -113,6 +115,7 @@ test1_thread (gpointer user_data)
   loop = g_main_loop_new (context, FALSE);
   g_file_read_async (file, G_PRIORITY_DEFAULT, NULL,
 		     opened_for_read, loop);
+  g_object_unref (file);
   g_main_loop_run (loop);
   g_main_loop_unref (loop);
 
@@ -155,6 +158,7 @@ test_context_independence (void)
   loop = g_main_loop_new (context, FALSE);
   g_file_read_async (file, G_PRIORITY_DEFAULT, NULL,
 		     opened_for_read, loop);
+  g_object_unref (file);
   g_main_loop_run (loop);
   g_main_loop_unref (loop);
 

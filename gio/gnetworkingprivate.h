@@ -40,6 +40,14 @@
 
 #else /* !G_OS_WIN32 */
 
+/* need this for struct ucred on Linux */
+#ifdef __linux__
+#define __USE_GNU
+#include <sys/types.h>
+#include <sys/socket.h>
+#undef __USE_GNU
+#endif
+
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <arpa/nameser.h>
@@ -68,6 +76,18 @@
 #define _PATH_RESCONF "/etc/resolv.conf"
 #endif
 
+#ifndef CMSG_LEN
+/* CMSG_LEN and CMSG_SPACE are defined by RFC 2292, but missing on
+ * some older platforms.
+ */
+#define CMSG_LEN(len) ((size_t)CMSG_DATA((struct cmsghdr *)NULL) + (len))
+
+/* CMSG_SPACE must add at least as much padding as CMSG_NXTHDR()
+ * adds. We overestimate here.
+ */
+#define ALIGN_TO_SIZEOF(len, obj) (((len) + sizeof (obj) - 1) & ~(sizeof (obj) - 1))
+#define CMSG_SPACE(len) ALIGN_TO_SIZEOF (CMSG_LEN (len), struct cmsghdr)
+#endif
 #endif
 
 G_BEGIN_DECLS
@@ -99,6 +119,15 @@ GList *_g_resolver_targets_from_DnsQuery   (const gchar      *rrname,
 					    DNS_RECORD       *results,
 					    GError          **error);
 #endif
+
+gboolean _g_uri_parse_authority            (const char       *uri,
+					    char            **host,
+					    guint16          *port,
+					    char            **userinfo);
+gchar *  _g_uri_from_authority             (const gchar      *protocol,
+					    const gchar      *host,
+					    guint             port,
+					    const gchar      *userinfo);
 
 G_END_DECLS
 

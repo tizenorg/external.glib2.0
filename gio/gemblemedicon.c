@@ -31,7 +31,6 @@
 #include "glibintl.h"
 #include "gioerror.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gemblemedicon
@@ -47,20 +46,19 @@
  * of the emblems. See also #GEmblem for more information.
  **/
 
-static void g_emblemed_icon_icon_iface_init (GIconIface *iface);
+enum {
+  PROP_GICON = 1,
+  NUM_PROPERTIES
+};
 
-struct _GEmblemedIcon
-{
-  GObject parent_instance;
-
+struct _GEmblemedIconPrivate {
   GIcon *icon;
   GList *emblems;
 };
 
-struct _GEmblemedIconClass
-{
-  GObjectClass parent_class;
-};
+static GParamSpec *properties[NUM_PROPERTIES] = { NULL, };
+
+static void g_emblemed_icon_icon_iface_init (GIconIface *iface);
 
 G_DEFINE_TYPE_WITH_CODE (GEmblemedIcon, g_emblemed_icon, G_TYPE_OBJECT,
                          G_IMPLEMENT_INTERFACE (G_TYPE_ICON,
@@ -74,33 +72,88 @@ g_emblemed_icon_finalize (GObject *object)
 
   emblemed = G_EMBLEMED_ICON (object);
 
-  g_object_unref (emblemed->icon);
-  g_list_foreach (emblemed->emblems, (GFunc) g_object_unref, NULL);
-  g_list_free (emblemed->emblems);
+  g_object_unref (emblemed->priv->icon);
+  g_list_foreach (emblemed->priv->emblems, (GFunc) g_object_unref, NULL);
+  g_list_free (emblemed->priv->emblems);
 
   (*G_OBJECT_CLASS (g_emblemed_icon_parent_class)->finalize) (object);
+}
+
+static void
+g_emblemed_icon_set_property (GObject  *object,
+                              guint property_id,
+                              const GValue *value,
+                              GParamSpec *pspec)
+{
+  GEmblemedIcon *self = G_EMBLEMED_ICON (object);
+
+  switch (property_id)
+    {
+    case PROP_GICON:
+      self->priv->icon = g_value_dup_object (value);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+    }
+}
+
+static void
+g_emblemed_icon_get_property (GObject  *object,
+                              guint property_id,
+                              GValue *value,
+                              GParamSpec *pspec)
+{
+  GEmblemedIcon *self = G_EMBLEMED_ICON (object);
+
+  switch (property_id)
+    {
+    case PROP_GICON:
+      g_value_set_object (value, self->priv->icon);
+      break;
+    default:
+      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+      break;
+    }
 }
 
 static void
 g_emblemed_icon_class_init (GEmblemedIconClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
+
   gobject_class->finalize = g_emblemed_icon_finalize;
+  gobject_class->set_property = g_emblemed_icon_set_property;
+  gobject_class->get_property = g_emblemed_icon_get_property;
+
+  properties[PROP_GICON] =
+    g_param_spec_object ("gicon",
+                         P_("The base GIcon"),
+                         P_("The GIcon to attach emblems to"),
+                         G_TYPE_ICON,
+                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  g_object_class_install_properties (gobject_class, NUM_PROPERTIES, properties);
+
+  g_type_class_add_private (klass, sizeof (GEmblemedIconPrivate));
 }
 
 static void
 g_emblemed_icon_init (GEmblemedIcon *emblemed)
 {
+  emblemed->priv =
+    G_TYPE_INSTANCE_GET_PRIVATE (emblemed, G_TYPE_EMBLEMED_ICON,
+                                 GEmblemedIconPrivate);
 }
 
 /**
  * g_emblemed_icon_new:
  * @icon: a #GIcon
- * @emblem: a #GEmblem
+ * @emblem: (allow-none): a #GEmblem, or %NULL
  *
  * Creates a new emblemed icon for @icon with the emblem @emblem.
  *
- * Returns: a new #GIcon
+ * Returns: (transfer full): a new #GIcon
  *
  * Since: 2.18
  **/
@@ -112,12 +165,13 @@ g_emblemed_icon_new (GIcon   *icon,
   
   g_return_val_if_fail (G_IS_ICON (icon), NULL);
   g_return_val_if_fail (!G_IS_EMBLEM (icon), NULL);
-  g_return_val_if_fail (G_IS_EMBLEM (emblem), NULL);
 
-  emblemed = G_EMBLEMED_ICON (g_object_new (G_TYPE_EMBLEMED_ICON, NULL));
-  emblemed->icon = g_object_ref (icon);
-  
-  g_emblemed_icon_add_emblem (emblemed, emblem);
+  emblemed = G_EMBLEMED_ICON (g_object_new (G_TYPE_EMBLEMED_ICON,
+                                            "gicon", icon,
+                                            NULL));
+
+  if (emblem != NULL)
+    g_emblemed_icon_add_emblem (emblemed, emblem);
 
   return G_ICON (emblemed);
 }
@@ -129,7 +183,7 @@ g_emblemed_icon_new (GIcon   *icon,
  *
  * Gets the main icon for @emblemed.
  *
- * Returns: a #GIcon that is owned by @emblemed
+ * Returns: (transfer none): a #GIcon that is owned by @emblemed
  *
  * Since: 2.18
  **/
@@ -138,7 +192,7 @@ g_emblemed_icon_get_icon (GEmblemedIcon *emblemed)
 {
   g_return_val_if_fail (G_IS_EMBLEMED_ICON (emblemed), NULL);
 
-  return emblemed->icon;
+  return emblemed->priv->icon;
 }
 
 /**
@@ -147,7 +201,8 @@ g_emblemed_icon_get_icon (GEmblemedIcon *emblemed)
  *
  * Gets the list of emblems for the @icon.
  *
- * Returns: a #GList of #GEmblem <!-- -->s that is owned by @emblemed
+ * Returns: (element-type utf8) (transfer none): a #GList of #GEmblem <!-- -->s that
+ * is owned by @emblemed
  *
  * Since: 2.18
  **/
@@ -157,41 +212,27 @@ g_emblemed_icon_get_emblems (GEmblemedIcon *emblemed)
 {
   g_return_val_if_fail (G_IS_EMBLEMED_ICON (emblemed), NULL);
 
-  return emblemed->emblems;
+  return emblemed->priv->emblems;
 }
-
 
 /**
- * g_emblemed_icon_add_emblem:
+ * g_emblemed_icon_clear_emblems:
  * @emblemed: a #GEmblemedIcon
- * @emblem: a #GEmblem
  *
- * Adds @emblem to the #GList of #GEmblem <!-- -->s.
+ * Removes all the emblems from @icon.
  *
- * Since: 2.18
+ * Since: 2.28
  **/
-void 
-g_emblemed_icon_add_emblem (GEmblemedIcon *emblemed,
-                            GEmblem       *emblem)
+void
+g_emblemed_icon_clear_emblems (GEmblemedIcon *emblemed)
 {
   g_return_if_fail (G_IS_EMBLEMED_ICON (emblemed));
-  g_return_if_fail (G_IS_EMBLEM (emblem));
 
-  g_object_ref (emblem);
-  emblemed->emblems = g_list_append (emblemed->emblems, emblem);
-}
+  if (emblemed->priv->emblems == NULL)
+    return;
 
-static guint
-g_emblemed_icon_hash (GIcon *icon)
-{
-  GEmblemedIcon *emblemed = G_EMBLEMED_ICON (icon);
-  GList *list;
-  guint hash = g_icon_hash (emblemed->icon);
-
-  for (list = emblemed->emblems; list != NULL; list = list->next)
-    hash ^= g_icon_hash (G_ICON (list->data));
-
-  return hash;
+  g_list_free_full (emblemed->priv->emblems, g_object_unref);
+  emblemed->priv->emblems = NULL;
 }
 
 static gint
@@ -210,6 +251,40 @@ g_emblem_comp (GEmblem *a,
   return 1;
 }
 
+/**
+ * g_emblemed_icon_add_emblem:
+ * @emblemed: a #GEmblemedIcon
+ * @emblem: a #GEmblem
+ *
+ * Adds @emblem to the #GList of #GEmblem <!-- -->s.
+ *
+ * Since: 2.18
+ **/
+void 
+g_emblemed_icon_add_emblem (GEmblemedIcon *emblemed,
+                            GEmblem       *emblem)
+{
+  g_return_if_fail (G_IS_EMBLEMED_ICON (emblemed));
+  g_return_if_fail (G_IS_EMBLEM (emblem));
+
+  g_object_ref (emblem);
+  emblemed->priv->emblems = g_list_insert_sorted (emblemed->priv->emblems, emblem,
+                                                  (GCompareFunc) g_emblem_comp);
+}
+
+static guint
+g_emblemed_icon_hash (GIcon *icon)
+{
+  GEmblemedIcon *emblemed = G_EMBLEMED_ICON (icon);
+  GList *list;
+  guint hash = g_icon_hash (emblemed->priv->icon);
+
+  for (list = emblemed->priv->emblems; list != NULL; list = list->next)
+    hash ^= g_icon_hash (G_ICON (list->data));
+
+  return hash;
+}
+
 static gboolean
 g_emblemed_icon_equal (GIcon *icon1,
                        GIcon *icon2)
@@ -218,14 +293,11 @@ g_emblemed_icon_equal (GIcon *icon1,
   GEmblemedIcon *emblemed2 = G_EMBLEMED_ICON (icon2);
   GList *list1, *list2;
 
-  if (!g_icon_equal (emblemed1->icon, emblemed2->icon))
+  if (!g_icon_equal (emblemed1->priv->icon, emblemed2->priv->icon))
     return FALSE;
 
-  list1 = emblemed1->emblems;
-  list2 = emblemed2->emblems;
-
-  list1 = g_list_sort (list1, (GCompareFunc) g_emblem_comp);
-  list2 = g_list_sort (list2, (GCompareFunc) g_emblem_comp);
+  list1 = emblemed1->priv->emblems;
+  list2 = emblemed2->priv->emblems;
 
   while (list1 && list2)
   {
@@ -257,13 +329,13 @@ g_emblemed_icon_to_tokens (GIcon *icon,
 
   *out_version = 0;
 
-  s = g_icon_to_string (emblemed_icon->icon);
+  s = g_icon_to_string (emblemed_icon->priv->icon);
   if (s == NULL)
     return FALSE;
 
   g_ptr_array_add (tokens, s);
 
-  for (l = emblemed_icon->emblems; l != NULL; l = l->next)
+  for (l = emblemed_icon->priv->emblems; l != NULL; l = l->next)
     {
       GIcon *emblem_icon = G_ICON (l->data);
 
@@ -309,8 +381,8 @@ g_emblemed_icon_from_tokens (gchar  **tokens,
     }
 
   emblemed_icon = g_object_new (G_TYPE_EMBLEMED_ICON, NULL);
-  emblemed_icon->icon = g_icon_new_for_string (tokens[0], error);
-  if (emblemed_icon->icon == NULL)
+  emblemed_icon->priv->icon = g_icon_new_for_string (tokens[0], error);
+  if (emblemed_icon->priv->icon == NULL)
     goto fail;
 
   for (n = 1; n < num_tokens; n++)
@@ -331,7 +403,7 @@ g_emblemed_icon_from_tokens (gchar  **tokens,
           goto fail;
         }
 
-      emblemed_icon->emblems = g_list_append (emblemed_icon->emblems, emblem);
+      emblemed_icon->priv->emblems = g_list_append (emblemed_icon->priv->emblems, emblem);
     }
 
   return G_ICON (emblemed_icon);
@@ -350,6 +422,3 @@ g_emblemed_icon_icon_iface_init (GIconIface *iface)
   iface->to_tokens = g_emblemed_icon_to_tokens;
   iface->from_tokens = g_emblemed_icon_from_tokens;
 }
-
-#define __G_EMBLEMED_ICON_C__
-#include "gioaliasdef.c"

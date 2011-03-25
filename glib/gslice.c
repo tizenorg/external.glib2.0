@@ -19,8 +19,7 @@
 /* MT safe */
 
 #include "config.h"
-
-#include "gslice.h"
+#include "glibconfig.h"
 
 #if     defined HAVE_POSIX_MEMALIGN && defined POSIX_MEMALIGN_WITH_COMPLIANT_ALLOCS
 #  define HAVE_COMPLIANT_POSIX_MEMALIGN 1
@@ -32,10 +31,7 @@
 #include <stdlib.h>             /* posix_memalign() */
 #include <string.h>
 #include <errno.h>
-#include "gmem.h"               /* gslice.h */
-#include "gthreadprivate.h"
-#include "glib.h"
-#include "galias.h"
+
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>             /* sysconf() */
 #endif
@@ -46,6 +42,16 @@
 
 #include <stdio.h>              /* fputs/fprintf */
 
+#include "gslice.h"
+
+#include "gmain.h"
+#include "gmem.h"               /* gslice.h */
+#include "gstrfuncs.h"
+#include "gutils.h"
+#include "gtestutils.h"
+#include "gthread.h"
+#include "gthreadprivate.h"
+#include "glib_trace.h"
 
 /* the GSlice allocator is split up into 4 layers, roughly modelled after the slab
  * allocator and magazine extensions as outlined in:
@@ -836,6 +842,9 @@ g_slice_alloc (gsize mem_size)
     mem = g_malloc (mem_size);
   if (G_UNLIKELY (allocator->config.debug_blocks))
     smc_notify_alloc (mem, mem_size);
+
+  TRACE (GLIB_SLICE_ALLOC((void*)mem, mem_size));
+
   return mem;
 }
 
@@ -897,6 +906,7 @@ g_slice_free1 (gsize    mem_size,
         memset (mem_block, 0, mem_size);
       g_free (mem_block);
     }
+  TRACE (GLIB_SLICE_FREE((void*)mem_block, mem_size));
 }
 
 void
@@ -1483,6 +1493,3 @@ g_slice_debug_tree_statistics (void)
    */
 }
 #endif /* G_ENABLE_DEBUG */
-
-#define __G_SLICE_C__
-#include "galiasdef.c"

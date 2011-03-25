@@ -20,6 +20,7 @@
 
 
 
+
 VPATH = @srcdir@
 pkgdatadir = $(datadir)/@PACKAGE@
 pkgincludedir = $(includedir)/@PACKAGE@
@@ -39,27 +40,34 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
-DIST_COMMON = $(am__giounixinclude_HEADERS_DIST) $(gioinclude_HEADERS) \
-	$(srcdir)/Makefile.am $(srcdir)/Makefile.in \
-	$(srcdir)/gio.rc.in $(top_srcdir)/Makefile.decl ChangeLog
+DIST_COMMON = $(am__giounixinclude_HEADERS_DIST) \
+	$(am__giowin32include_HEADERS_DIST) $(dist_schema_DATA) \
+	$(gioinclude_HEADERS) $(srcdir)/Makefile.am \
+	$(srcdir)/Makefile.in $(srcdir)/gio.rc.in \
+	$(top_srcdir)/Makefile.decl ChangeLog
 @OS_UNIX_TRUE@am__append_1 = libasyncns xdgmime
-@HAVE_INOTIFY_TRUE@am__append_2 = inotify
-@HAVE_INOTIFY_TRUE@am__append_3 = inotify/libinotify.la
+@OS_WIN32_TRUE@am__append_2 = \
+@OS_WIN32_TRUE@	gregistrysettingsbackend.h	\
+@OS_WIN32_TRUE@	gregistrysettingsbackend.c
+
+@HAVE_INOTIFY_TRUE@am__append_3 = inotify
 @HAVE_INOTIFY_TRUE@am__append_4 = inotify/libinotify.la
-@HAVE_FEN_TRUE@am__append_5 = -DHAVE_FEN
-@HAVE_FEN_TRUE@am__append_6 = fen
-@HAVE_FEN_TRUE@am__append_7 = fen/libfen.la
+@HAVE_INOTIFY_TRUE@am__append_5 = inotify/libinotify.la
+@HAVE_FEN_TRUE@am__append_6 = -DHAVE_FEN
+@HAVE_FEN_TRUE@am__append_7 = fen
 @HAVE_FEN_TRUE@am__append_8 = fen/libfen.la
-@OS_WIN32_TRUE@am__append_9 = win32
-@OS_WIN32_TRUE@am__append_10 = win32/libgiowin32.la
+@HAVE_FEN_TRUE@am__append_9 = fen/libfen.la
+@OS_WIN32_TRUE@am__append_10 = win32
 @OS_WIN32_TRUE@am__append_11 = win32/libgiowin32.la
-@HAVE_FAM_TRUE@am__append_12 = fam
-@OS_UNIX_TRUE@am__append_13 = gdesktopappinfo.c gdesktopappinfo.h
-@OS_UNIX_TRUE@am__append_14 = libasyncns/libasyncns.la xdgmime/libxdgmime.la
+@OS_WIN32_TRUE@am__append_12 = win32/libgiowin32.la
+@HAVE_FAM_TRUE@am__append_13 = fam
+@OS_UNIX_TRUE@am__append_14 = gdesktopappinfo.c
 @OS_UNIX_TRUE@am__append_15 = libasyncns/libasyncns.la xdgmime/libxdgmime.la
-@OS_WIN32_TRUE@am__append_16 = gwin32appinfo.c gwin32appinfo.h
-@OS_WIN32_TRUE@am__append_17 = -lshlwapi -lws2_32 -ldnsapi
-bin_PROGRAMS = gio-querymodules$(EXEEXT)
+@OS_UNIX_TRUE@am__append_16 = libasyncns/libasyncns.la xdgmime/libxdgmime.la
+@OS_WIN32_TRUE@am__append_17 = gwin32appinfo.c gwin32appinfo.h
+@OS_WIN32_TRUE@am__append_18 = -lshlwapi -lws2_32 -ldnsapi
+bin_PROGRAMS = gio-querymodules$(EXEEXT) glib-compile-schemas$(EXEEXT) \
+	gsettings$(EXEEXT) gdbus$(EXEEXT)
 subdir = gio
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -67,7 +75,7 @@ am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
 	$(top_srcdir)/glib/libcharset/codeset.m4 \
 	$(top_srcdir)/glib/libcharset/glibc21.m4 \
 	$(top_srcdir)/m4macros/glib-gettext.m4 \
-	$(top_srcdir)/configure.in
+	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -96,86 +104,139 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(gioincludedir)" "$(DESTDIR)$(giounixincludedir)"
+	"$(DESTDIR)$(completiondir)" "$(DESTDIR)$(schemadir)" \
+	"$(DESTDIR)$(gioincludedir)" "$(DESTDIR)$(giounixincludedir)" \
+	"$(DESTDIR)$(giowin32includedir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
-am__DEPENDENCIES_2 = $(am__append_3) $(am__append_7) $(am__append_10) \
-	$(am__append_14) $(am__DEPENDENCIES_1)
+am__DEPENDENCIES_2 = $(am__append_4) $(am__append_8) $(am__append_11) \
+	$(am__append_15) $(am__DEPENDENCIES_1)
 am__libgio_2_0_la_SOURCES_DIST = gappinfo.c gasynchelper.c \
 	gasynchelper.h gasyncinitable.c gasyncresult.c \
 	gbufferedinputstream.c gbufferedoutputstream.c gcancellable.c \
 	gcontenttype.c gcontenttypeprivate.h gcharsetconverter.c \
 	gconverter.c gconverterinputstream.c gconverteroutputstream.c \
-	gdatainputstream.c gdataoutputstream.c gdrive.c gdummyfile.h \
-	gdummyfile.c gemblem.h gemblem.c gemblemedicon.h \
-	gemblemedicon.c gfile.c gfileattribute.c gfileattribute-priv.h \
-	gfiledescriptorbased.h gfiledescriptorbased.c \
-	gfileenumerator.c gfileicon.c gfileinfo.c gfileinfo-priv.h \
-	gfileinputstream.c gfilemonitor.c gfilenamecompleter.c \
-	gfileoutputstream.c gfileiostream.c gfilterinputstream.c \
-	gfilteroutputstream.c gicon.c ginetaddress.c \
-	ginetsocketaddress.c ginitable.c ginputstream.c gioenums.h \
-	gioerror.c giomodule.c giomodule-priv.h gioscheduler.c \
-	giostream.c gloadableicon.c gmount.c gmemoryinputstream.c \
-	gmemoryoutputstream.c gmountoperation.c gnativevolumemonitor.c \
+	gcredentials.c gdatainputstream.c gdataoutputstream.c gdrive.c \
+	gdummyfile.h gdummyfile.c gdummyproxyresolver.c \
+	gdummyproxyresolver.h gdummytlsbackend.c gdummytlsbackend.h \
+	gemblem.h gemblem.c gemblemedicon.h gemblemedicon.c gfile.c \
+	gfileattribute.c gfileattribute-priv.h gfileenumerator.c \
+	gfileicon.c gfileinfo.c gfileinfo-priv.h gfileinputstream.c \
+	gfilemonitor.c gfilenamecompleter.c gfileoutputstream.c \
+	gfileiostream.c gfilterinputstream.c gfilteroutputstream.c \
+	gicon.c ginetaddress.c ginetsocketaddress.c ginitable.c \
+	ginputstream.c gioenums.h gioerror.c giomodule.c \
+	giomodule-priv.h gioscheduler.c giostream.c gloadableicon.c \
+	gmount.c gmemoryinputstream.c gmemoryoutputstream.c \
+	gmountoperation.c gnativevolumemonitor.c \
 	gnativevolumemonitor.h gnetworkaddress.c gnetworkingprivate.h \
-	gnetworkservice.c goutputstream.c gpollfilemonitor.c \
-	gpollfilemonitor.h gresolver.c gseekable.c \
-	gsimpleasyncresult.c gsocket.c gsocketaddress.c \
+	gnetworkservice.c goutputstream.c gpermission.c \
+	gpollableinputstream.c gpollableoutputstream.c \
+	gpollfilemonitor.c gpollfilemonitor.h gproxyresolver.c \
+	gresolver.c gseekable.c gsimpleasyncresult.c \
+	gsimplepermission.c gsocket.c gsocketaddress.c \
 	gsocketaddressenumerator.c gsocketclient.c \
 	gsocketconnectable.c gsocketconnection.c \
 	gsocketcontrolmessage.c gsocketinputstream.c \
 	gsocketinputstream.h gsocketlistener.c gsocketoutputstream.c \
-	gsocketoutputstream.h gsocketservice.c gsrvtarget.c \
-	gtcpconnection.c gthreadedsocketservice.c gthemedicon.c \
-	gthreadedresolver.c gthreadedresolver.h gunionvolumemonitor.c \
-	gunionvolumemonitor.h gvfs.c gvolume.c gvolumemonitor.c \
-	gzlibcompressor.c gzlibdecompressor.c gmountprivate.h \
-	gioenumtypes.h gioenumtypes.c gioalias.h gioaliasdef.c \
-	gdesktopappinfo.c gdesktopappinfo.h gwin32appinfo.c \
-	gwin32appinfo.h gunixconnection.c gunixfdlist.c \
-	gunixfdmessage.c gunixmount.c gunixmount.h gunixmounts.c \
-	gunixmounts.h gunixresolver.c gunixresolver.h \
-	gunixsocketaddress.c gunixvolume.c gunixvolume.h \
-	gunixvolumemonitor.c gunixvolumemonitor.h gunixinputstream.c \
-	gunixoutputstream.c gwin32mount.c gwin32mount.h \
-	gwin32resolver.c gwin32resolver.h gwin32volumemonitor.c \
-	gwin32volumemonitor.h glocaldirectorymonitor.c \
+	gsocketoutputstream.h gproxy.c gproxyaddress.c \
+	gproxyaddressenumerator.c gsocketservice.c gsrvtarget.c \
+	gtcpconnection.c gtcpwrapperconnection.c \
+	gthreadedsocketservice.c gthemedicon.c gthreadedresolver.c \
+	gthreadedresolver.h gtlsbackend.c gtlscertificate.c \
+	gtlsclientconnection.c gtlsconnection.c gtlsserverconnection.c \
+	gunionvolumemonitor.c gunionvolumemonitor.h gvfs.c gvolume.c \
+	gvolumemonitor.c gzlibcompressor.c gzlibdecompressor.c \
+	gmountprivate.h gioenumtypes.h gioenumtypes.c \
+	gdesktopappinfo.c gwin32appinfo.c gwin32appinfo.h \
+	gfiledescriptorbased.c gunixconnection.c \
+	gunixcredentialsmessage.c gunixfdlist.c gunixfdmessage.c \
+	gunixmount.c gunixmount.h gunixmounts.c gunixresolver.c \
+	gunixresolver.h gunixsocketaddress.c gunixvolume.c \
+	gunixvolume.h gunixvolumemonitor.c gunixvolumemonitor.h \
+	gunixinputstream.c gunixoutputstream.c gwin32mount.c \
+	gwin32mount.h gwin32resolver.c gwin32resolver.h \
+	gwin32volumemonitor.c gwin32volumemonitor.h \
+	gwin32inputstream.c gwin32outputstream.c gwin32outputstream.h \
+	gactiongroup.c gsimpleactiongroup.c gaction.c gsimpleaction.c \
+	gapplicationcommandline.c gapplicationimpl.h \
+	gapplicationimpl-dbus.c gapplication.c gvdb/gvdb-format.h \
+	gvdb/gvdb-reader.h gvdb/gvdb-reader.c \
+	gdelayedsettingsbackend.h gdelayedsettingsbackend.c \
+	gkeyfilesettingsbackend.c gmemorysettingsbackend.h \
+	gmemorysettingsbackend.c gnullsettingsbackend.h \
+	gnullsettingsbackend.c gsettingsbackendinternal.h \
+	gsettingsbackend.c gsettingsschema.h gsettingsschema.c \
+	gsettings-mapping.h gsettings-mapping.c gsettings.c \
+	gregistrysettingsbackend.h gregistrysettingsbackend.c \
+	gdbusutils.h gdbusutils.c gdbusaddress.h gdbusaddress.c \
+	gdbusauthobserver.h gdbusauthobserver.c gdbusauth.h \
+	gdbusauth.c gdbusauthmechanism.h gdbusauthmechanism.c \
+	gdbusauthmechanismanon.h gdbusauthmechanismanon.c \
+	gdbusauthmechanismexternal.h gdbusauthmechanismexternal.c \
+	gdbusauthmechanismsha1.h gdbusauthmechanismsha1.c gdbuserror.h \
+	gdbuserror.c gdbusconnection.h gdbusconnection.c \
+	gdbusmessage.h gdbusmessage.c gdbusnameowning.h \
+	gdbusnameowning.c gdbusnamewatching.h gdbusnamewatching.c \
+	gdbusproxy.h gdbusproxy.c gdbusprivate.h gdbusprivate.c \
+	gdbusintrospection.h gdbusintrospection.c \
+	gdbusmethodinvocation.h gdbusmethodinvocation.c gdbusserver.h \
+	gdbusserver.c glocaldirectorymonitor.c \
 	glocaldirectorymonitor.h glocalfile.c glocalfile.h \
 	glocalfileenumerator.c glocalfileenumerator.h glocalfileinfo.c \
 	glocalfileinfo.h glocalfileinputstream.c \
 	glocalfileinputstream.h glocalfilemonitor.c \
 	glocalfilemonitor.h glocalfileoutputstream.c \
 	glocalfileoutputstream.h glocalfileiostream.c \
-	glocalfileiostream.h glocalvfs.c glocalvfs.h gio-marshal.h \
-	gio-marshal.c
+	glocalfileiostream.h glocalvfs.c glocalvfs.h gsocks4proxy.c \
+	gsocks4proxy.h gsocks4aproxy.c gsocks4aproxy.h gsocks5proxy.c \
+	gsocks5proxy.h gio-marshal.h gio-marshal.c
 @OS_UNIX_TRUE@am__objects_1 = gdesktopappinfo.lo
 @OS_WIN32_TRUE@am__objects_2 = gwin32appinfo.lo
 am__objects_3 = $(am__objects_1) $(am__objects_2)
 am__objects_4 =
-@OS_UNIX_TRUE@am__objects_5 = gunixconnection.lo gunixfdlist.lo \
-@OS_UNIX_TRUE@	gunixfdmessage.lo gunixmount.lo gunixmounts.lo \
-@OS_UNIX_TRUE@	gunixresolver.lo gunixsocketaddress.lo \
-@OS_UNIX_TRUE@	gunixvolume.lo gunixvolumemonitor.lo \
-@OS_UNIX_TRUE@	gunixinputstream.lo gunixoutputstream.lo \
-@OS_UNIX_TRUE@	$(am__objects_4)
-@OS_WIN32_TRUE@am__objects_6 = gwin32mount.lo gwin32resolver.lo \
-@OS_WIN32_TRUE@	gwin32volumemonitor.lo $(am__objects_4)
-am__objects_7 = glocaldirectorymonitor.lo glocalfile.lo \
+@OS_UNIX_TRUE@am__objects_5 = gfiledescriptorbased.lo \
+@OS_UNIX_TRUE@	gunixconnection.lo gunixcredentialsmessage.lo \
+@OS_UNIX_TRUE@	gunixfdlist.lo gunixfdmessage.lo gunixmount.lo \
+@OS_UNIX_TRUE@	gunixmounts.lo gunixresolver.lo \
+@OS_UNIX_TRUE@	gunixsocketaddress.lo gunixvolume.lo \
+@OS_UNIX_TRUE@	gunixvolumemonitor.lo gunixinputstream.lo \
+@OS_UNIX_TRUE@	gunixoutputstream.lo $(am__objects_4)
+am__objects_6 = gwin32mount.lo gwin32resolver.lo \
+	gwin32volumemonitor.lo gwin32inputstream.lo \
+	gwin32outputstream.lo $(am__objects_4)
+@OS_WIN32_TRUE@am__objects_7 = $(am__objects_6)
+am__objects_8 = gactiongroup.lo gsimpleactiongroup.lo gaction.lo \
+	gsimpleaction.lo gapplicationcommandline.lo \
+	gapplicationimpl-dbus.lo gapplication.lo
+@OS_WIN32_TRUE@am__objects_9 = gregistrysettingsbackend.lo
+am__objects_10 = gvdb-reader.lo gdelayedsettingsbackend.lo \
+	gkeyfilesettingsbackend.lo gmemorysettingsbackend.lo \
+	gnullsettingsbackend.lo gsettingsbackend.lo gsettingsschema.lo \
+	gsettings-mapping.lo gsettings.lo $(am__objects_9)
+am__objects_11 = gdbusutils.lo gdbusaddress.lo gdbusauthobserver.lo \
+	gdbusauth.lo gdbusauthmechanism.lo gdbusauthmechanismanon.lo \
+	gdbusauthmechanismexternal.lo gdbusauthmechanismsha1.lo \
+	gdbuserror.lo gdbusconnection.lo gdbusmessage.lo \
+	gdbusnameowning.lo gdbusnamewatching.lo gdbusproxy.lo \
+	gdbusprivate.lo gdbusintrospection.lo gdbusmethodinvocation.lo \
+	gdbusserver.lo $(am__objects_4)
+am__objects_12 = glocaldirectorymonitor.lo glocalfile.lo \
 	glocalfileenumerator.lo glocalfileinfo.lo \
 	glocalfileinputstream.lo glocalfilemonitor.lo \
 	glocalfileoutputstream.lo glocalfileiostream.lo glocalvfs.lo \
+	gsocks4proxy.lo gsocks4aproxy.lo gsocks5proxy.lo \
 	$(am__objects_4)
-am__objects_8 = gio-marshal.lo $(am__objects_4)
+am__objects_13 = gio-marshal.lo $(am__objects_4)
 am_libgio_2_0_la_OBJECTS = gappinfo.lo gasynchelper.lo \
 	gasyncinitable.lo gasyncresult.lo gbufferedinputstream.lo \
 	gbufferedoutputstream.lo gcancellable.lo gcontenttype.lo \
 	gcharsetconverter.lo gconverter.lo gconverterinputstream.lo \
-	gconverteroutputstream.lo gdatainputstream.lo \
-	gdataoutputstream.lo gdrive.lo gdummyfile.lo gemblem.lo \
-	gemblemedicon.lo gfile.lo gfileattribute.lo \
-	gfiledescriptorbased.lo gfileenumerator.lo gfileicon.lo \
-	gfileinfo.lo gfileinputstream.lo gfilemonitor.lo \
+	gconverteroutputstream.lo gcredentials.lo gdatainputstream.lo \
+	gdataoutputstream.lo gdrive.lo gdummyfile.lo \
+	gdummyproxyresolver.lo gdummytlsbackend.lo gemblem.lo \
+	gemblemedicon.lo gfile.lo gfileattribute.lo gfileenumerator.lo \
+	gfileicon.lo gfileinfo.lo gfileinputstream.lo gfilemonitor.lo \
 	gfilenamecompleter.lo gfileoutputstream.lo gfileiostream.lo \
 	gfilterinputstream.lo gfilteroutputstream.lo gicon.lo \
 	ginetaddress.lo ginetsocketaddress.lo ginitable.lo \
@@ -183,18 +244,24 @@ am_libgio_2_0_la_OBJECTS = gappinfo.lo gasynchelper.lo \
 	giostream.lo gloadableicon.lo gmount.lo gmemoryinputstream.lo \
 	gmemoryoutputstream.lo gmountoperation.lo \
 	gnativevolumemonitor.lo gnetworkaddress.lo gnetworkservice.lo \
-	goutputstream.lo gpollfilemonitor.lo gresolver.lo gseekable.lo \
-	gsimpleasyncresult.lo gsocket.lo gsocketaddress.lo \
+	goutputstream.lo gpermission.lo gpollableinputstream.lo \
+	gpollableoutputstream.lo gpollfilemonitor.lo gproxyresolver.lo \
+	gresolver.lo gseekable.lo gsimpleasyncresult.lo \
+	gsimplepermission.lo gsocket.lo gsocketaddress.lo \
 	gsocketaddressenumerator.lo gsocketclient.lo \
 	gsocketconnectable.lo gsocketconnection.lo \
 	gsocketcontrolmessage.lo gsocketinputstream.lo \
-	gsocketlistener.lo gsocketoutputstream.lo gsocketservice.lo \
-	gsrvtarget.lo gtcpconnection.lo gthreadedsocketservice.lo \
-	gthemedicon.lo gthreadedresolver.lo gunionvolumemonitor.lo \
-	gvfs.lo gvolume.lo gvolumemonitor.lo gzlibcompressor.lo \
-	gzlibdecompressor.lo gioenumtypes.lo gioaliasdef.lo \
-	$(am__objects_3) $(am__objects_5) $(am__objects_6) \
-	$(am__objects_7) $(am__objects_8) $(am__objects_4)
+	gsocketlistener.lo gsocketoutputstream.lo gproxy.lo \
+	gproxyaddress.lo gproxyaddressenumerator.lo gsocketservice.lo \
+	gsrvtarget.lo gtcpconnection.lo gtcpwrapperconnection.lo \
+	gthreadedsocketservice.lo gthemedicon.lo gthreadedresolver.lo \
+	gtlsbackend.lo gtlscertificate.lo gtlsclientconnection.lo \
+	gtlsconnection.lo gtlsserverconnection.lo \
+	gunionvolumemonitor.lo gvfs.lo gvolume.lo gvolumemonitor.lo \
+	gzlibcompressor.lo gzlibdecompressor.lo gioenumtypes.lo \
+	$(am__objects_3) $(am__objects_5) $(am__objects_7) \
+	$(am__objects_8) $(am__objects_10) $(am__objects_11) \
+	$(am__objects_12) $(am__objects_13) $(am__objects_4)
 libgio_2_0_la_OBJECTS = $(am_libgio_2_0_la_OBJECTS)
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
@@ -203,12 +270,26 @@ libgio_2_0_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(libgio_2_0_la_LDFLAGS) $(LDFLAGS) -o $@
 PROGRAMS = $(bin_PROGRAMS)
+am_gdbus_OBJECTS = gdbus-tool.$(OBJEXT)
+gdbus_OBJECTS = $(am_gdbus_OBJECTS)
+gdbus_DEPENDENCIES = libgio-2.0.la $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la
 am_gio_querymodules_OBJECTS = gio-querymodules.$(OBJEXT)
 gio_querymodules_OBJECTS = $(am_gio_querymodules_OBJECTS)
 gio_querymodules_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
 	$(top_builddir)/gobject/libgobject-2.0.la \
 	$(top_builddir)/gmodule/libgmodule-2.0.la libgio-2.0.la \
 	$(am__DEPENDENCIES_1)
+am_glib_compile_schemas_OBJECTS = gvdb-builder.$(OBJEXT) \
+	glib-compile-schemas.$(OBJEXT)
+glib_compile_schemas_OBJECTS = $(am_glib_compile_schemas_OBJECTS)
+glib_compile_schemas_DEPENDENCIES =  \
+	$(top_builddir)/glib/libglib-2.0.la
+am_gsettings_OBJECTS = gsettings-tool.$(OBJEXT)
+gsettings_OBJECTS = $(am_gsettings_OBJECTS)
+gsettings_DEPENDENCIES = $(top_builddir)/glib/libglib-2.0.la \
+	$(top_builddir)/gobject/libgobject-2.0.la libgio-2.0.la
+SCRIPTS = $(completion_SCRIPTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -235,9 +316,12 @@ am__v_CCLD_0 = @echo "  CCLD  " $@;
 AM_V_GEN = $(am__v_GEN_$(V))
 am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
 am__v_GEN_0 = @echo "  GEN   " $@;
-SOURCES = $(libgio_2_0_la_SOURCES) $(gio_querymodules_SOURCES)
-DIST_SOURCES = $(am__libgio_2_0_la_SOURCES_DIST) \
-	$(gio_querymodules_SOURCES)
+SOURCES = $(libgio_2_0_la_SOURCES) $(gdbus_SOURCES) \
+	$(gio_querymodules_SOURCES) $(glib_compile_schemas_SOURCES) \
+	$(gsettings_SOURCES)
+DIST_SOURCES = $(am__libgio_2_0_la_SOURCES_DIST) $(gdbus_SOURCES) \
+	$(gio_querymodules_SOURCES) $(glib_compile_schemas_SOURCES) \
+	$(gsettings_SOURCES)
 RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	html-recursive info-recursive install-data-recursive \
 	install-dvi-recursive install-exec-recursive \
@@ -245,12 +329,16 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 	install-pdf-recursive install-ps-recursive install-recursive \
 	installcheck-recursive installdirs-recursive pdf-recursive \
 	ps-recursive uninstall-recursive
-DATA = $(noinst_DATA)
+DATA = $(dist_schema_DATA) $(noinst_DATA)
 am__giounixinclude_HEADERS_DIST = gdesktopappinfo.h \
-	gfiledescriptorbased.h gunixconnection.h gunixmounts.h \
-	gunixfdlist.h gunixfdmessage.h gunixinputstream.h \
-	gunixoutputstream.h gunixsocketaddress.h
-HEADERS = $(gioinclude_HEADERS) $(giounixinclude_HEADERS)
+	gfiledescriptorbased.h gunixconnection.h \
+	gunixcredentialsmessage.h gunixmounts.h gunixfdlist.h \
+	gunixfdmessage.h gunixinputstream.h gunixoutputstream.h \
+	gunixsocketaddress.h
+am__giowin32include_HEADERS_DIST = gwin32inputstream.h \
+	gwin32outputstream.h
+HEADERS = $(gioinclude_HEADERS) $(giounixinclude_HEADERS) \
+	$(giowin32include_HEADERS)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -288,6 +376,7 @@ am__relativize = \
   done; \
   reldir="$$dir2"
 ABS_GLIB_RUNTIME_LIBDIR = @ABS_GLIB_RUNTIME_LIBDIR@
+ABS_TAPSET_DIR = @ABS_TAPSET_DIR@
 ACLOCAL = @ACLOCAL@
 ALLOCA = @ALLOCA@
 AMTAR = @AMTAR@
@@ -312,11 +401,14 @@ CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
 DATADIRNAME = @DATADIRNAME@
+DBUS1_CFLAGS = @DBUS1_CFLAGS@
+DBUS1_LIBS = @DBUS1_LIBS@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 DISABLE_MEM_POOLS = @DISABLE_MEM_POOLS@
 DLLTOOL = @DLLTOOL@
 DSYMUTIL = @DSYMUTIL@
+DTRACE = @DTRACE@
 DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
@@ -330,13 +422,16 @@ GIO = @GIO@
 GIO_MODULE_DIR = @GIO_MODULE_DIR@
 GLIBC21 = @GLIBC21@
 GLIB_BINARY_AGE = @GLIB_BINARY_AGE@
+GLIB_COMPILE_SCHEMAS = @GLIB_COMPILE_SCHEMAS@
 GLIB_DEBUG_FLAGS = @GLIB_DEBUG_FLAGS@
 GLIB_EXTRA_CFLAGS = @GLIB_EXTRA_CFLAGS@
 GLIB_GENMARSHAL = @GLIB_GENMARSHAL@
 GLIB_INTERFACE_AGE = @GLIB_INTERFACE_AGE@
+GLIB_LINK_FLAGS = @GLIB_LINK_FLAGS@
 GLIB_MAJOR_VERSION = @GLIB_MAJOR_VERSION@
 GLIB_MICRO_VERSION = @GLIB_MICRO_VERSION@
 GLIB_MINOR_VERSION = @GLIB_MINOR_VERSION@
+GLIB_RT_LIBS = @GLIB_RT_LIBS@
 GLIB_RUNTIME_LIBDIR = @GLIB_RUNTIME_LIBDIR@
 GLIB_VERSION = @GLIB_VERSION@
 GLIB_WIN32_STATIC_COMPILATION_DEFINE = @GLIB_WIN32_STATIC_COMPILATION_DEFINE@
@@ -383,6 +478,8 @@ LIB_EXE_MACHINE_FLAG = @LIB_EXE_MACHINE_FLAG@
 LIPO = @LIPO@
 LN_S = @LN_S@
 LTLIBOBJS = @LTLIBOBJS@
+LTP = @LTP@
+LTP_GENHTML = @LTP_GENHTML@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
 LT_CURRENT_MINUS_AGE = @LT_CURRENT_MINUS_AGE@
@@ -390,6 +487,7 @@ LT_RELEASE = @LT_RELEASE@
 LT_REVISION = @LT_REVISION@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
+MANIFEST_TOOL = @MANIFEST_TOOL@
 MKDIR_P = @MKDIR_P@
 MKINSTALLDIRS = @MKINSTALLDIRS@
 MSGFMT = @MSGFMT@
@@ -415,6 +513,8 @@ PCRE_WARN_CFLAGS = @PCRE_WARN_CFLAGS@
 PERL = @PERL@
 PERL_PATH = @PERL_PATH@
 PKG_CONFIG = @PKG_CONFIG@
+PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
+PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
 PLATFORMDEP = @PLATFORMDEP@
 POFILES = @POFILES@
 POSUB = @POSUB@
@@ -431,6 +531,7 @@ SED = @SED@
 SELINUX_LIBS = @SELINUX_LIBS@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
+SHTOOL = @SHTOOL@
 STRIP = @STRIP@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
@@ -440,11 +541,13 @@ XGETTEXT = @XGETTEXT@
 XMLCATALOG = @XMLCATALOG@
 XML_CATALOG_FILE = @XML_CATALOG_FILE@
 XSLTPROC = @XSLTPROC@
+ZLIB_CFLAGS = @ZLIB_CFLAGS@
 ZLIB_LIBS = @ZLIB_LIBS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
 abs_top_srcdir = @abs_top_srcdir@
+ac_ct_AR = @ac_ct_AR@
 ac_ct_CC = @ac_ct_CC@
 ac_ct_CXX = @ac_ct_CXX@
 ac_ct_DUMPBIN = @ac_ct_DUMPBIN@
@@ -460,11 +563,17 @@ build_cpu = @build_cpu@
 build_os = @build_os@
 build_vendor = @build_vendor@
 builddir = @builddir@
+config_h_INCLUDES = @config_h_INCLUDES@
 datadir = @datadir@
 datarootdir = @datarootdir@
 docdir = @docdir@
 dvidir = @dvidir@
 exec_prefix = @exec_prefix@
+gio_INCLUDES = @gio_INCLUDES@
+glib_INCLUDES = @glib_INCLUDES@
+gmodule_INCLUDES = @gmodule_INCLUDES@
+gobject_INCLUDES = @gobject_INCLUDES@
+gthread_INCLUDES = @gthread_INCLUDES@
 host = @host@
 host_alias = @host_alias@
 host_cpu = @host_cpu@
@@ -478,7 +587,6 @@ libdir = @libdir@
 libexecdir = @libexecdir@
 localedir = @localedir@
 localstatedir = @localstatedir@
-lt_ECHO = @lt_ECHO@
 mandir = @mandir@
 mkdir_p = @mkdir_p@
 ms_librarian = @ms_librarian@
@@ -505,23 +613,23 @@ GTESTER = $(top_builddir)/glib/gtester			# for the GLIB package
 GTESTER_REPORT = $(top_builddir)/glib/gtester-report	# for the GLIB package
 
 # initialize variables for unconditional += appending
-EXTRA_DIST = gio-marshal.list gio.symbols gioenumtypes.h.template \
-	gioenumtypes.c.template makefile.msc makegioalias.pl \
-	abicheck.sh pltcheck.sh gio.rc.in $(NULL)
+EXTRA_DIST = strinfo.c gio-marshal.list gio.symbols \
+	gioenumtypes.h.template gioenumtypes.c.template makefile.msc \
+	abicheck.sh gio.rc.in gschema.dtd $(NULL) \
+	$(completion_SCRIPTS)
 TEST_PROGS = 
 NULL = 
-SUBDIRS = $(am__append_1) $(am__append_2) $(am__append_6) \
-	$(am__append_9) . $(am__append_12) tests
+SUBDIRS = $(am__append_1) $(am__append_3) $(am__append_7) \
+	$(am__append_10) . $(am__append_13) tests
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@noinst_DATA = gio-2.0.lib
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@install_ms_lib_cmd = $(INSTALL) gio-2.0.lib $(DESTDIR)$(libdir)
 @MS_LIB_AVAILABLE_TRUE@@OS_WIN32_AND_DLL_COMPILATION_TRUE@uninstall_ms_lib_cmd = -rm $(DESTDIR)$(libdir)/gio-2.0.lib
-@HAVE_GNUC_VISIBILITY_TRUE@@OS_LINUX_TRUE@TESTS = abicheck.sh pltcheck.sh
+@HAVE_GNUC_VISIBILITY_TRUE@@OS_LINUX_TRUE@TESTS = abicheck.sh
 @HAVE_THREADS_TRUE@THREAD_FLAGS = -DG_THREADS_MANDATORY
-AM_CPPFLAGS = -DG_LOG_DOMAIN=\"GLib-GIO\" -I$(top_builddir) \
-	-I$(top_srcdir) -I$(top_srcdir)/glib -I$(top_srcdir)/gmodule \
+AM_CPPFLAGS = -DG_LOG_DOMAIN=\"GLib-GIO\" $(gmodule_INCLUDES) \
 	$(GLIB_DEBUG_FLAGS) $(THREAD_FLAGS) -DG_DISABLE_DEPRECATED \
 	-DGIO_COMPILATION -DGIO_MODULE_DIR=\"$(GIO_MODULE_DIR)\" \
-	$(am__append_5)
+	$(am__append_6)
 lib_LTLIBRARIES = libgio-2.0.la
 marshal_sources = \
         gio-marshal.h	\
@@ -530,6 +638,73 @@ marshal_sources = \
 
 @CROSS_COMPILING_FALSE@glib_genmarshal = ../gobject/glib-genmarshal
 @CROSS_COMPILING_TRUE@glib_genmarshal = $(GLIB_GENMARSHAL)
+gdbus_headers = \
+	gdbusauthobserver.h		\
+	gcredentials.h			\
+	gdbusutils.h			\
+	gdbuserror.h			\
+	gdbusaddress.h			\
+	gdbusconnection.h		\
+	gdbusmessage.h			\
+	gdbusnameowning.h		\
+	gdbusnamewatching.h		\
+	gdbusproxy.h			\
+	gdbusintrospection.h		\
+	gdbusmethodinvocation.h		\
+	gdbusserver.h			\
+	$(NULL)
+
+gdbus_sources = \
+	gdbusutils.h			gdbusutils.c			\
+	gdbusaddress.h			gdbusaddress.c			\
+	gdbusauthobserver.h		gdbusauthobserver.c		\
+	gdbusauth.h			gdbusauth.c			\
+	gdbusauthmechanism.h		gdbusauthmechanism.c		\
+	gdbusauthmechanismanon.h	gdbusauthmechanismanon.c	\
+	gdbusauthmechanismexternal.h	gdbusauthmechanismexternal.c	\
+	gdbusauthmechanismsha1.h	gdbusauthmechanismsha1.c	\
+	gdbuserror.h			gdbuserror.c			\
+	gdbusconnection.h		gdbusconnection.c		\
+	gdbusmessage.h			gdbusmessage.c			\
+	gdbusnameowning.h		gdbusnameowning.c		\
+	gdbusnamewatching.h		gdbusnamewatching.c		\
+	gdbusproxy.h			gdbusproxy.c			\
+	gdbusprivate.h			gdbusprivate.c			\
+	gdbusintrospection.h		gdbusintrospection.c		\
+	gdbusmethodinvocation.h		gdbusmethodinvocation.c		\
+	gdbusserver.h			gdbusserver.c			\
+	$(NULL)
+
+settings_headers = \
+	gsettingsbackend.h		\
+	gsettings.h
+
+settings_sources = gvdb/gvdb-format.h gvdb/gvdb-reader.h \
+	gvdb/gvdb-reader.c gdelayedsettingsbackend.h \
+	gdelayedsettingsbackend.c gkeyfilesettingsbackend.c \
+	gmemorysettingsbackend.h gmemorysettingsbackend.c \
+	gnullsettingsbackend.h gnullsettingsbackend.c \
+	gsettingsbackendinternal.h gsettingsbackend.c \
+	gsettingsschema.h gsettingsschema.c gsettings-mapping.h \
+	gsettings-mapping.c gsettings.c $(am__append_2)
+application_headers = \
+	gactiongroup.h			\
+	gsimpleactiongroup.h		\
+	gaction.h			\
+	gsimpleaction.h			\
+	gapplicationcommandline.h	\
+	gapplication.h
+
+application_sources = \
+	gactiongroup.c				\
+	gsimpleactiongroup.c			\
+	gaction.c				\
+	gsimpleaction.c				\
+	gapplicationcommandline.c		\
+	gapplicationimpl.h			\
+	gapplicationimpl-dbus.c			\
+	gapplication.c
+
 local_sources = \
 	glocaldirectorymonitor.c 	\
 	glocaldirectorymonitor.h 	\
@@ -549,21 +724,28 @@ local_sources = \
 	glocalfileiostream.h		\
 	glocalvfs.c 			\
 	glocalvfs.h 			\
+	gsocks4proxy.c			\
+	gsocks4proxy.h			\
+	gsocks4aproxy.c			\
+	gsocks4aproxy.h			\
+	gsocks5proxy.c			\
+	gsocks5proxy.h			\
 	$(NULL)
 
-platform_libadd = $(am__append_3) $(am__append_7) $(am__append_10) \
-	$(am__append_14) $(am__append_17)
-platform_deps = $(am__append_4) $(am__append_8) $(am__append_11) \
-	$(am__append_15)
-appinfo_sources = $(am__append_13) $(am__append_16)
+platform_libadd = $(am__append_4) $(am__append_8) $(am__append_11) \
+	$(am__append_15) $(am__append_18)
+platform_deps = $(am__append_5) $(am__append_9) $(am__append_12) \
+	$(am__append_16)
+appinfo_sources = $(am__append_14) $(am__append_17)
 @OS_UNIX_TRUE@unix_sources = \
+@OS_UNIX_TRUE@	gfiledescriptorbased.c  \
 @OS_UNIX_TRUE@	gunixconnection.c	\
+@OS_UNIX_TRUE@	gunixcredentialsmessage.c	\
 @OS_UNIX_TRUE@	gunixfdlist.c		\
 @OS_UNIX_TRUE@	gunixfdmessage.c	\
 @OS_UNIX_TRUE@	gunixmount.c		\
 @OS_UNIX_TRUE@	gunixmount.h		\
 @OS_UNIX_TRUE@	gunixmounts.c 		\
-@OS_UNIX_TRUE@	gunixmounts.h 		\
 @OS_UNIX_TRUE@	gunixresolver.c		\
 @OS_UNIX_TRUE@	gunixresolver.h		\
 @OS_UNIX_TRUE@	gunixsocketaddress.c	\
@@ -580,6 +762,7 @@ appinfo_sources = $(am__append_13) $(am__append_16)
 @OS_UNIX_TRUE@	gdesktopappinfo.h	\
 @OS_UNIX_TRUE@	gfiledescriptorbased.h  \
 @OS_UNIX_TRUE@	gunixconnection.h	\
+@OS_UNIX_TRUE@	gunixcredentialsmessage.h	\
 @OS_UNIX_TRUE@	gunixmounts.h 		\
 @OS_UNIX_TRUE@	gunixfdlist.h		\
 @OS_UNIX_TRUE@	gunixfdmessage.h	\
@@ -588,22 +771,32 @@ appinfo_sources = $(am__append_13) $(am__append_16)
 @OS_UNIX_TRUE@	gunixsocketaddress.h	\
 @OS_UNIX_TRUE@	$(NULL)
 
-@OS_WIN32_TRUE@win32_sources = \
-@OS_WIN32_TRUE@	gwin32mount.c \
-@OS_WIN32_TRUE@	gwin32mount.h \
-@OS_WIN32_TRUE@	gwin32resolver.c \
-@OS_WIN32_TRUE@	gwin32resolver.h \
-@OS_WIN32_TRUE@	gwin32volumemonitor.c \
-@OS_WIN32_TRUE@	gwin32volumemonitor.h \
-@OS_WIN32_TRUE@	$(NULL)
+win32_actual_sources = \
+	gwin32mount.c \
+	gwin32mount.h \
+	gwin32resolver.c \
+	gwin32resolver.h \
+	gwin32volumemonitor.c \
+	gwin32volumemonitor.h \
+	gwin32inputstream.c \
+	gwin32outputstream.c \
+	gwin32outputstream.h \
+	$(NULL)
 
-@OS_WIN32_TRUE@win32_more_sources_for_vcproj = \
-@OS_WIN32_TRUE@	gwin32appinfo.c \
-@OS_WIN32_TRUE@	win32/gwin32directorymonitor.c \
-@OS_WIN32_TRUE@	win32/gwinhttpfile.c \
-@OS_WIN32_TRUE@	win32/gwinhttpfileinputstream.c \
-@OS_WIN32_TRUE@	win32/gwinhttpfileoutputstream.c \
-@OS_WIN32_TRUE@	win32/gwinhttpvfs.c
+win32_more_sources_for_vcproj = \
+	gwin32appinfo.c \
+	win32/gwin32directorymonitor.c \
+	win32/gwinhttpfile.c \
+	win32/gwinhttpfileinputstream.c \
+	win32/gwinhttpfileoutputstream.c \
+	win32/gwinhttpvfs.c
+
+@OS_WIN32_TRUE@win32_sources = $(win32_actual_sources)
+@OS_WIN32_TRUE@giowin32includedir = $(includedir)/gio-win32-2.0/gio
+@OS_WIN32_TRUE@giowin32include_HEADERS = \
+@OS_WIN32_TRUE@	gwin32inputstream.h \
+@OS_WIN32_TRUE@	gwin32outputstream.h \
+@OS_WIN32_TRUE@	$(NULL)
 
 libgio_2_0_la_SOURCES = \
 	gappinfo.c 		\
@@ -620,11 +813,16 @@ libgio_2_0_la_SOURCES = \
 	gconverter.c		\
 	gconverterinputstream.c	\
 	gconverteroutputstream.c	\
+	gcredentials.c		\
 	gdatainputstream.c 	\
 	gdataoutputstream.c 	\
 	gdrive.c 		\
 	gdummyfile.h 		\
 	gdummyfile.c 		\
+	gdummyproxyresolver.c	\
+	gdummyproxyresolver.h	\
+	gdummytlsbackend.c	\
+	gdummytlsbackend.h	\
 	gemblem.h 		\
 	gemblem.c 		\
 	gemblemedicon.h		\
@@ -632,8 +830,6 @@ libgio_2_0_la_SOURCES = \
 	gfile.c 		\
 	gfileattribute.c 	\
 	gfileattribute-priv.h 	\
-	gfiledescriptorbased.h  \
-	gfiledescriptorbased.c  \
 	gfileenumerator.c 	\
 	gfileicon.c 		\
 	gfileinfo.c 		\
@@ -667,11 +863,16 @@ libgio_2_0_la_SOURCES = \
 	gnetworkingprivate.h	\
 	gnetworkservice.c	\
 	goutputstream.c 	\
+	gpermission.c 		\
+	gpollableinputstream.c 	\
+	gpollableoutputstream.c \
 	gpollfilemonitor.c 	\
 	gpollfilemonitor.h 	\
+	gproxyresolver.c	\
 	gresolver.c		\
 	gseekable.c 		\
 	gsimpleasyncresult.c 	\
+	gsimplepermission.c 	\
 	gsocket.c		\
 	gsocketaddress.c	\
 	gsocketaddressenumerator.c \
@@ -684,13 +885,22 @@ libgio_2_0_la_SOURCES = \
 	gsocketlistener.c	\
 	gsocketoutputstream.c	\
 	gsocketoutputstream.h	\
+	gproxy.c		\
+	gproxyaddress.c         \
+	gproxyaddressenumerator.c \
 	gsocketservice.c	\
 	gsrvtarget.c		\
 	gtcpconnection.c	\
+	gtcpwrapperconnection.c \
 	gthreadedsocketservice.c\
 	gthemedicon.c 		\
 	gthreadedresolver.c	\
 	gthreadedresolver.h	\
+	gtlsbackend.c		\
+	gtlscertificate.c	\
+	gtlsclientconnection.c	\
+	gtlsconnection.c	\
+	gtlsserverconnection.c	\
 	gunionvolumemonitor.c 	\
 	gunionvolumemonitor.h 	\
 	gvfs.c 			\
@@ -701,11 +911,12 @@ libgio_2_0_la_SOURCES = \
 	gmountprivate.h 	\
 	gioenumtypes.h		\
 	gioenumtypes.c		\
-	gioalias.h 		\
-	gioaliasdef.c		\
 	$(appinfo_sources) 	\
 	$(unix_sources) 	\
 	$(win32_sources) 	\
+	$(application_sources) 	\
+	$(settings_sources) 	\
+	$(gdbus_sources) 	\
 	$(local_sources) 	\
 	$(marshal_sources) 	\
 	$(NULL)
@@ -727,7 +938,7 @@ libgio_2_0_la_LIBADD = \
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gio_def = gio.def
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gio_win32_res = gio-win32-res.o
 @OS_WIN32_AND_DLL_COMPILATION_TRUE@gio_win32_res_ldflag = -Wl,$(gio_win32_res)
-libgio_2_0_la_LDFLAGS = \
+libgio_2_0_la_LDFLAGS = $(GLIB_LINK_FLAGS) \
 	$(gio_win32_res_ldflag) \
 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
 	-export-dynamic $(no_undefined) $(export_symbols)
@@ -783,9 +994,17 @@ gio_headers = \
 	gnetworkaddress.h	\
 	gnetworkservice.h	\
 	goutputstream.h 	\
+	gpermission.h 		\
+	gpollableinputstream.h 	\
+	gpollableoutputstream.h \
+	gproxyaddress.h         \
+	gproxy.h		\
+	gproxyaddressenumerator.h \
+	gproxyresolver.h	\
 	gresolver.h		\
 	gseekable.h 		\
 	gsimpleasyncresult.h 	\
+	gsimplepermission.h 	\
 	gsocket.h		\
 	gsocketaddress.h	\
 	gsocketaddressenumerator.h \
@@ -797,13 +1016,22 @@ gio_headers = \
 	gsocketservice.h	\
 	gsrvtarget.h		\
 	gtcpconnection.h	\
+	gtcpwrapperconnection.h \
 	gthreadedsocketservice.h\
 	gthemedicon.h 		\
+	gtlsbackend.h		\
+	gtlscertificate.h	\
+	gtlsclientconnection.h	\
+	gtlsconnection.h	\
+	gtlsserverconnection.h	\
 	gvfs.h 			\
 	gvolume.h 		\
 	gvolumemonitor.h 	\
 	gzlibcompressor.h	\
 	gzlibdecompressor.h	\
+	$(application_headers)	\
+	$(settings_headers)	\
+	$(gdbus_headers)	\
 	$(NULL)
 
 gioincludedir = $(includedir)/glib-2.0/gio/
@@ -816,8 +1044,6 @@ gioinclude_HEADERS = \
 BUILT_SOURCES = \
 	gio-marshal.h 		\
 	gio-marshal.c 		\
-	gioalias.h 		\
-	gioaliasdef.c		\
 	gioenumtypes.h		\
 	gioenumtypes.c		\
 	$(NULL)
@@ -836,6 +1062,31 @@ gio_querymodules_LDADD = \
 	$(top_builddir)/gmodule/libgmodule-2.0.la	\
 	libgio-2.0.la					\
 	$(NULL)
+
+glib_compile_schemas_LDADD = $(top_builddir)/glib/libglib-2.0.la
+glib_compile_schemas_SOURCES = \
+	gvdb/gvdb-format.h		\
+	gvdb/gvdb-builder.h		\
+	gvdb/gvdb-builder.c		\
+	glib-compile-schemas.c
+
+gsettings_LDADD = \
+	$(top_builddir)/glib/libglib-2.0.la		\
+	$(top_builddir)/gobject/libgobject-2.0.la	\
+	libgio-2.0.la
+
+gsettings_SOURCES = gsettings-tool.c
+schemadir = $(datadir)/glib-2.0/schemas
+dist_schema_DATA = gschema.dtd
+gdbus_SOURCES = gdbus-tool.c
+gdbus_LDADD = libgio-2.0.la \
+	$(top_builddir)/glib/libglib-2.0.la 		\
+	$(top_builddir)/gobject/libgobject-2.0.la
+
+completiondir = $(sysconfdir)/bash_completion.d
+completion_SCRIPTS = \
+	gdbus-bash-completion.sh		\
+	gsettings-bash-completion.sh
 
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-recursive
@@ -950,9 +1201,52 @@ clean-binPROGRAMS:
 	list=`for p in $$list; do echo "$$p"; done | sed 's/$(EXEEXT)$$//'`; \
 	echo " rm -f" $$list; \
 	rm -f $$list
+gdbus$(EXEEXT): $(gdbus_OBJECTS) $(gdbus_DEPENDENCIES) 
+	@rm -f gdbus$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gdbus_OBJECTS) $(gdbus_LDADD) $(LIBS)
 gio-querymodules$(EXEEXT): $(gio_querymodules_OBJECTS) $(gio_querymodules_DEPENDENCIES) 
 	@rm -f gio-querymodules$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(gio_querymodules_OBJECTS) $(gio_querymodules_LDADD) $(LIBS)
+glib-compile-schemas$(EXEEXT): $(glib_compile_schemas_OBJECTS) $(glib_compile_schemas_DEPENDENCIES) 
+	@rm -f glib-compile-schemas$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(glib_compile_schemas_OBJECTS) $(glib_compile_schemas_LDADD) $(LIBS)
+gsettings$(EXEEXT): $(gsettings_OBJECTS) $(gsettings_DEPENDENCIES) 
+	@rm -f gsettings$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(gsettings_OBJECTS) $(gsettings_LDADD) $(LIBS)
+install-completionSCRIPTS: $(completion_SCRIPTS)
+	@$(NORMAL_INSTALL)
+	test -z "$(completiondir)" || $(MKDIR_P) "$(DESTDIR)$(completiondir)"
+	@list='$(completion_SCRIPTS)'; test -n "$(completiondir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  if test -f "$$d$$p"; then echo "$$d$$p"; echo "$$p"; else :; fi; \
+	done | \
+	sed -e 'p;s,.*/,,;n' \
+	    -e 'h;s|.*|.|' \
+	    -e 'p;x;s,.*/,,;$(transform)' | sed 'N;N;N;s,\n, ,g' | \
+	$(AWK) 'BEGIN { files["."] = ""; dirs["."] = 1; } \
+	  { d=$$3; if (dirs[d] != 1) { print "d", d; dirs[d] = 1 } \
+	    if ($$2 == $$4) { files[d] = files[d] " " $$1; \
+	      if (++n[d] == $(am__install_max)) { \
+		print "f", d, files[d]; n[d] = 0; files[d] = "" } } \
+	    else { print "f", d "/" $$4, $$1 } } \
+	  END { for (d in files) print "f", d, files[d] }' | \
+	while read type dir files; do \
+	     if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
+	     test -z "$$files" || { \
+	       echo " $(INSTALL_SCRIPT) $$files '$(DESTDIR)$(completiondir)$$dir'"; \
+	       $(INSTALL_SCRIPT) $$files "$(DESTDIR)$(completiondir)$$dir" || exit $$?; \
+	     } \
+	; done
+
+uninstall-completionSCRIPTS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(completion_SCRIPTS)'; test -n "$(completiondir)" || exit 0; \
+	files=`for p in $$list; do echo "$$p"; done | \
+	       sed -e 's,.*/,,;$(transform)'`; \
+	test -n "$$list" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(completiondir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(completiondir)" && rm -f $$files
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -960,7 +1254,12 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gaction.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gactiongroup.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gappinfo.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplication.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplicationcommandline.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gapplicationimpl-dbus.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gasynchelper.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gasyncinitable.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gasyncresult.Plo@am__quote@
@@ -972,11 +1271,34 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gconverter.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gconverterinputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gconverteroutputstream.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gcredentials.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdatainputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdataoutputstream.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbus-tool.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusaddress.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusauth.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusauthmechanism.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusauthmechanismanon.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusauthmechanismexternal.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusauthmechanismsha1.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusauthobserver.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusconnection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbuserror.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusintrospection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusmessage.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusmethodinvocation.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusnameowning.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusnamewatching.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusprivate.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusproxy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusserver.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdbusutils.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdelayedsettingsbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdesktopappinfo.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdrive.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdummyfile.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdummyproxyresolver.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdummytlsbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gemblem.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gemblemedicon.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gfile.Plo@am__quote@
@@ -999,12 +1321,13 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/ginputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gio-marshal.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gio-querymodules.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gioaliasdef.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gioenumtypes.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gioerror.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/giomodule.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gioscheduler.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/giostream.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gkeyfilesettingsbackend.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glib-compile-schemas.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gloadableicon.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glocaldirectorymonitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glocalfile.Plo@am__quote@
@@ -1017,16 +1340,34 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glocalvfs.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmemoryinputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmemoryoutputstream.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmemorysettingsbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmount.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gmountoperation.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnativevolumemonitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnetworkaddress.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnetworkservice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gnullsettingsbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/goutputstream.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpermission.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpollableinputstream.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpollableoutputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gpollfilemonitor.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gproxy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gproxyaddress.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gproxyaddressenumerator.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gproxyresolver.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gregistrysettingsbackend.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gresolver.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gseekable.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsettings-mapping.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsettings-tool.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsettings.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsettingsbackend.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsettingsschema.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsimpleaction.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsimpleactiongroup.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsimpleasyncresult.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsimplepermission.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocket.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocketaddress.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocketaddressenumerator.Plo@am__quote@
@@ -1038,13 +1379,23 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocketlistener.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocketoutputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocketservice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocks4aproxy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocks4proxy.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsocks5proxy.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gsrvtarget.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtcpconnection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtcpwrapperconnection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthemedicon.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthreadedresolver.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gthreadedsocketservice.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtlsbackend.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtlscertificate.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtlsclientconnection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtlsconnection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtlsserverconnection.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunionvolumemonitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunixconnection.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunixcredentialsmessage.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunixfdlist.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunixfdmessage.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunixinputstream.Plo@am__quote@
@@ -1055,11 +1406,15 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunixsocketaddress.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunixvolume.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gunixvolumemonitor.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvdb-builder.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvdb-reader.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvfs.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvolume.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gvolumemonitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwin32appinfo.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwin32inputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwin32mount.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwin32outputstream.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwin32resolver.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gwin32volumemonitor.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gzlibcompressor.Plo@am__quote@
@@ -1089,11 +1444,55 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(LTCOMPILE) -c -o $@ $<
 
+gvdb-reader.lo: gvdb/gvdb-reader.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gvdb-reader.lo -MD -MP -MF $(DEPDIR)/gvdb-reader.Tpo -c -o gvdb-reader.lo `test -f 'gvdb/gvdb-reader.c' || echo '$(srcdir)/'`gvdb/gvdb-reader.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gvdb-reader.Tpo $(DEPDIR)/gvdb-reader.Plo
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gvdb/gvdb-reader.c' object='gvdb-reader.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gvdb-reader.lo `test -f 'gvdb/gvdb-reader.c' || echo '$(srcdir)/'`gvdb/gvdb-reader.c
+
+gvdb-builder.o: gvdb/gvdb-builder.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gvdb-builder.o -MD -MP -MF $(DEPDIR)/gvdb-builder.Tpo -c -o gvdb-builder.o `test -f 'gvdb/gvdb-builder.c' || echo '$(srcdir)/'`gvdb/gvdb-builder.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gvdb-builder.Tpo $(DEPDIR)/gvdb-builder.Po
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gvdb/gvdb-builder.c' object='gvdb-builder.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gvdb-builder.o `test -f 'gvdb/gvdb-builder.c' || echo '$(srcdir)/'`gvdb/gvdb-builder.c
+
+gvdb-builder.obj: gvdb/gvdb-builder.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT gvdb-builder.obj -MD -MP -MF $(DEPDIR)/gvdb-builder.Tpo -c -o gvdb-builder.obj `if test -f 'gvdb/gvdb-builder.c'; then $(CYGPATH_W) 'gvdb/gvdb-builder.c'; else $(CYGPATH_W) '$(srcdir)/gvdb/gvdb-builder.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/gvdb-builder.Tpo $(DEPDIR)/gvdb-builder.Po
+@am__fastdepCC_FALSE@	$(AM_V_CC) @AM_BACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='gvdb/gvdb-builder.c' object='gvdb-builder.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o gvdb-builder.obj `if test -f 'gvdb/gvdb-builder.c'; then $(CYGPATH_W) 'gvdb/gvdb-builder.c'; else $(CYGPATH_W) '$(srcdir)/gvdb/gvdb-builder.c'; fi`
+
 mostlyclean-libtool:
 	-rm -f *.lo
 
 clean-libtool:
 	-rm -rf .libs _libs
+install-dist_schemaDATA: $(dist_schema_DATA)
+	@$(NORMAL_INSTALL)
+	test -z "$(schemadir)" || $(MKDIR_P) "$(DESTDIR)$(schemadir)"
+	@list='$(dist_schema_DATA)'; test -n "$(schemadir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(schemadir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(schemadir)" || exit $$?; \
+	done
+
+uninstall-dist_schemaDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(dist_schema_DATA)'; test -n "$(schemadir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(schemadir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(schemadir)" && rm -f $$files
 install-gioincludeHEADERS: $(gioinclude_HEADERS)
 	@$(NORMAL_INSTALL)
 	test -z "$(gioincludedir)" || $(MKDIR_P) "$(DESTDIR)$(gioincludedir)"
@@ -1134,6 +1533,26 @@ uninstall-giounixincludeHEADERS:
 	test -n "$$files" || exit 0; \
 	echo " ( cd '$(DESTDIR)$(giounixincludedir)' && rm -f" $$files ")"; \
 	cd "$(DESTDIR)$(giounixincludedir)" && rm -f $$files
+install-giowin32includeHEADERS: $(giowin32include_HEADERS)
+	@$(NORMAL_INSTALL)
+	test -z "$(giowin32includedir)" || $(MKDIR_P) "$(DESTDIR)$(giowin32includedir)"
+	@list='$(giowin32include_HEADERS)'; test -n "$(giowin32includedir)" || list=; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(giowin32includedir)'"; \
+	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(giowin32includedir)" || exit $$?; \
+	done
+
+uninstall-giowin32includeHEADERS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(giowin32include_HEADERS)'; test -n "$(giowin32includedir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	test -n "$$files" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(giowin32includedir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(giowin32includedir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -1427,12 +1846,13 @@ check-am: all-am
 	$(MAKE) $(AM_MAKEFLAGS) check-TESTS check-local
 check: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) check-recursive
-all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(DATA) $(HEADERS)
+all-am: Makefile $(LTLIBRARIES) $(PROGRAMS) $(SCRIPTS) $(DATA) \
+		$(HEADERS)
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(gioincludedir)" "$(DESTDIR)$(giounixincludedir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(completiondir)" "$(DESTDIR)$(schemadir)" "$(DESTDIR)$(gioincludedir)" "$(DESTDIR)$(giounixincludedir)" "$(DESTDIR)$(giowin32includedir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -1487,8 +1907,9 @@ info: info-recursive
 
 info-am:
 
-install-data-am: install-data-local install-gioincludeHEADERS \
-	install-giounixincludeHEADERS
+install-data-am: install-completionSCRIPTS install-data-local \
+	install-dist_schemaDATA install-gioincludeHEADERS \
+	install-giounixincludeHEADERS install-giowin32includeHEADERS
 	@$(NORMAL_INSTALL)
 	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
 install-dvi: install-dvi-recursive
@@ -1535,8 +1956,10 @@ ps: ps-recursive
 
 ps-am:
 
-uninstall-am: uninstall-binPROGRAMS uninstall-gioincludeHEADERS \
-	uninstall-giounixincludeHEADERS uninstall-libLTLIBRARIES \
+uninstall-am: uninstall-binPROGRAMS uninstall-completionSCRIPTS \
+	uninstall-dist_schemaDATA uninstall-gioincludeHEADERS \
+	uninstall-giounixincludeHEADERS \
+	uninstall-giowin32includeHEADERS uninstall-libLTLIBRARIES \
 	uninstall-local
 
 .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) all check \
@@ -1549,31 +1972,38 @@ uninstall-am: uninstall-binPROGRAMS uninstall-gioincludeHEADERS \
 	clean-libtool ctags ctags-recursive dist-hook distclean \
 	distclean-compile distclean-generic distclean-libtool \
 	distclean-tags distdir dvi dvi-am html html-am info info-am \
-	install install-am install-binPROGRAMS install-data \
-	install-data-am install-data-hook install-data-local \
+	install install-am install-binPROGRAMS \
+	install-completionSCRIPTS install-data install-data-am \
+	install-data-hook install-data-local install-dist_schemaDATA \
 	install-dvi install-dvi-am install-exec install-exec-am \
 	install-gioincludeHEADERS install-giounixincludeHEADERS \
-	install-html install-html-am install-info install-info-am \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
+	install-giowin32includeHEADERS install-html install-html-am \
+	install-info install-info-am install-libLTLIBRARIES \
+	install-man install-pdf install-pdf-am install-ps \
+	install-ps-am install-strip installcheck installcheck-am \
+	installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
 	tags tags-recursive uninstall uninstall-am \
-	uninstall-binPROGRAMS uninstall-gioincludeHEADERS \
-	uninstall-giounixincludeHEADERS uninstall-libLTLIBRARIES \
+	uninstall-binPROGRAMS uninstall-completionSCRIPTS \
+	uninstall-dist_schemaDATA uninstall-gioincludeHEADERS \
+	uninstall-giounixincludeHEADERS \
+	uninstall-giowin32includeHEADERS uninstall-libLTLIBRARIES \
 	uninstall-local
 
 
 ### testing rules
 
 # test: run all tests in cwd and subdirs
-test:	${TEST_PROGS}
-@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || ${GTESTER} --verbose ${TEST_PROGS}
+test: test-nonrecursive
 @OS_UNIX_TRUE@	@ for subdir in $(SUBDIRS) . ; do \
 @OS_UNIX_TRUE@	    test "$$subdir" = "." -o "$$subdir" = "po" || \
 @OS_UNIX_TRUE@	    ( cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $@ ) || exit $? ; \
 @OS_UNIX_TRUE@	  done
+
+# test-nonrecursive: run tests only in cwd
+test-nonrecursive: ${TEST_PROGS}
+@OS_UNIX_TRUE@	@test -z "${TEST_PROGS}" || MALLOC_CHECK_=2 MALLOC_PERTURB_=$$(($${RANDOM:-256} % 256)) ${GTESTER} --verbose ${TEST_PROGS}
 
 # test-report: run tests in subdirs and generate report
 # perf-report: run tests in subdirs with -m perf and generate report
@@ -1601,8 +2031,12 @@ test-report perf-report full-report:	${TEST_PROGS}
 	    ( cd $$subdir && $(MAKE) $(AM_MAKEFLAGS) $@ ) || exit $? ; \
 	  done ; \
 	  $$ignore_logdir || { \
-	    echo '<?xml version="1.0"?>' > $@.xml ; \
-	    echo '<report-collection>'  >> $@.xml ; \
+	    echo '<?xml version="1.0"?>'            > $@.xml ; \
+	    echo '<report-collection>'             >> $@.xml ; \
+	    echo '<info>'                          >> $@.xml ; \
+	    echo '  <package>$(PACKAGE)</package>' >> $@.xml ; \
+	    echo '  <version>$(VERSION)</version>' >> $@.xml ; \
+	    echo '</info>'                         >> $@.xml ; \
 	    for lf in `ls -L "$$GTESTER_LOGDIR"/.` ; do \
 	      sed '1,1s/^<?xml\b[^>?]*?>//' <"$$GTESTER_LOGDIR"/"$$lf" >> $@.xml ; \
 	    done ; \
@@ -1611,9 +2045,29 @@ test-report perf-report full-report:	${TEST_PROGS}
 	    rm -rf "$$GTESTER_LOGDIR"/ ; \
 	    ${GTESTER_REPORT} --version 2>/dev/null 1>&2 ; test "$$?" != 0 || ${GTESTER_REPORT} $@.xml >$@.html ; \
 	  }
-.PHONY: test test-report perf-report full-report
-# run make test as part of make check
-check-local: test
+.PHONY: test test-report perf-report full-report test-nonrecursive
+
+.PHONY: lcov genlcov lcov-clean
+# use recursive makes in order to ignore errors during check
+lcov:
+	-$(MAKE) $(AM_MAKEFLAGS) -k check
+	$(MAKE) $(AM_MAKEFLAGS) genlcov
+
+# we have to massage the lcov.info file slightly to hide the effect of libtool
+# placing the objects files in the .libs/ directory separate from the *.c
+# we also have to delete tests/.libs/libmoduletestplugin_*.gcda
+genlcov:
+	rm -f $(top_builddir)/tests/.libs/libmoduletestplugin_*.gcda
+	$(LTP) --directory $(top_builddir) --capture --output-file glib-lcov.info --test-name GLIB_PERF --no-checksum --compat-libtool
+	LANG=C $(LTP_GENHTML) --prefix $(top_builddir) --output-directory glib-lcov --title "GLib Code Coverage" --legend --show-details glib-lcov.info
+
+lcov-clean:
+	-$(LTP) --directory $(top_builddir) -z
+	-rm -rf glib-lcov.info glib-lcov
+	-find -name '*.gcda' -print | xargs rm
+
+# run tests in cwd as part of make check
+check-local: test-nonrecursive
 
 install-ms-lib:
 	$(install_ms_lib_cmd)
@@ -1622,23 +2076,15 @@ uninstall-ms-lib:
 	$(uninstall_ms_lib_cmd)
 
 gio.def: gio.symbols
-	(echo -e EXPORTS; $(CPP) -P -DINCLUDE_VARIABLES -DINCLUDE_INTERNAL_SYMBOLS -DG_OS_WIN32 -DALL_FILES - <$(srcdir)/gio.symbols | sed -e '/^$$/d' -e 's/^/	/' -e 's/G_GNUC_[^ ]*//g' | sort) > gio.def.tmp && \
+	$(AM_V_GEN) (echo -e EXPORTS; $(CPP) -P -DINCLUDE_VARIABLES -DINCLUDE_INTERNAL_SYMBOLS -DG_OS_WIN32 -DALL_FILES - <$(srcdir)/gio.symbols | sed -e '/^$$/d' -e 's/^/	/' -e 's/G_GNUC_[^ ]*//g' | sort) > gio.def.tmp && \
 	  mv gio.def.tmp gio.def
 
-gioalias.h: gio.symbols
-	$(PERL) $(srcdir)/makegioalias.pl < $(srcdir)/gio.symbols > gioalias.h.tmp && \
-	  mv gioalias.h.tmp gioalias.h
-
-gioaliasdef.c: gio.symbols
-	$(PERL) $(srcdir)/makegioalias.pl -def < $(srcdir)/gio.symbols > gioaliasdef.c.tmp && \
-	  mv gioaliasdef.c.tmp gioaliasdef.c
-
 gio-marshal.h: gio-marshal.list
-	$(glib_genmarshal) --prefix=_gio_marshal $(srcdir)/gio-marshal.list --header --internal > $@.tmp && \
+	$(AM_V_GEN) $(glib_genmarshal) --prefix=_gio_marshal $(srcdir)/gio-marshal.list --header --internal > $@.tmp && \
 	  mv $@.tmp $@
 
 gio-marshal.c: gio-marshal.h gio-marshal.list
-	(echo "#include \"gio-marshal.h\""; \
+	$(AM_V_GEN) (echo "#include \"gio-marshal.h\""; \
 	$(glib_genmarshal) --prefix=_gio_marshal $(srcdir)/gio-marshal.list --body --internal) > $@.tmp && \
 	  mv $@.tmp $@
 
@@ -1661,17 +2107,19 @@ gio-win32-res.o: gio.rc
 	$(WINDRES) gio.rc $@
 
 gioenumtypes.h: $(gio_headers) gioenumtypes.h.template
-	( top_builddir=`cd $(top_builddir) && pwd`; \
+	$(AM_V_GEN) ( top_builddir=`cd $(top_builddir) && pwd`; \
 	  cd $(srcdir) && $$top_builddir/gobject/glib-mkenums --template gioenumtypes.h.template $(gio_headers) ) > \
 	    gioenumtypes.h.tmp && mv gioenumtypes.h.tmp gioenumtypes.h
 
 gioenumtypes.c: $(gio_headers) gioenumtypes.c.template
-	( top_builddir=`cd $(top_builddir) && pwd`; \
+	$(AM_V_GEN) ( top_builddir=`cd $(top_builddir) && pwd`; \
 	  cd $(srcdir) && $$top_builddir/gobject/glib-mkenums --template gioenumtypes.c.template $(gio_headers) ) > \
 	    gioenumtypes.c.tmp && mv gioenumtypes.c.tmp gioenumtypes.c
 
 gio-2.0.lib: libgio-2.0.la gio.def
 	lib -machine:@LIB_EXE_MACHINE_FLAG@ -name:libgio-2.0-$(LT_CURRENT_MINUS_AGE).dll -def:gio.def -out:$@
+
+# ------------------------------------------------------------------------
 
 dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/gio.vcproj
 	files='$(BUILT_EXTRA_DIST)'; \
@@ -1680,7 +2128,7 @@ dist-hook: $(BUILT_EXTRA_DIST) ../build/win32/vs9/gio.vcproj
 	  cp $$d/$$f $(distdir) || exit 1; done
 
 ../build/win32/vs9/gio.vcproj: $(top_srcdir)/build/win32/vs9/gio.vcprojin
-	for F in `echo $(libgio_2_0_la_SOURCES) $(win32_sources) $(win32_more_sources_for_vcproj) | tr '/' '\\'`; do \
+	for F in `echo $(libgio_2_0_la_SOURCES) $(win32_actual_sources) $(win32_actual_more_sources_for_vcproj) | tr '/' '\\'`; do \
 		case $$F in \
 		gunix*.c|gdesktopappinfo.c) ;; \
 		*.c) echo '   <File RelativePath="..\..\..\gio\'$$F'" />' \
