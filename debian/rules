@@ -43,7 +43,7 @@ LDFLAGS += -Wl,-O1
 
 APIVER := 2.0
 SONAME := 0
-SHVER := 2.27.0
+SHVER := 2.28.0
 
 # package names
 SHARED_PKG := libglib$(APIVER)-$(SONAME)
@@ -235,7 +235,7 @@ binary-arch: build $(maybe_check) install
 	dh_fixperms -s
 	dh_makeshlibs	-p$(SHARED_PKG) \
 			-V "$(SHARED_PKG) (>= $(SHVER))" \
-			--add-udeb="$(UDEB_PKG)" -- -v2.27.5
+			--add-udeb="$(UDEB_PKG)" -- -v2.28.6
 	dh_installdeb -s
 	# override shlibs for libraries from this source before computing
 	# dependencies of packages generated from this source; we already have
