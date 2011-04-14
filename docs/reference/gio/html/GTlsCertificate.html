@@ -8,7 +8,7 @@
 <link rel="up" href="tls.html" title="TLS (SSL) support">
 <link rel="prev" href="gio-TLS-Overview.html" title="TLS Overview">
 <link rel="next" href="GTlsConnection.html" title="GTlsConnection">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -30,7 +30,7 @@
                   <a href="#GTlsCertificate.properties" class="shortcut">Properties</a>
 </td></tr>
 </table>
-<div class="refentry" title="GTlsCertificate">
+<div class="refentry">
 <a name="GTlsCertificate"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -39,7 +39,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GTlsCertificate.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GTlsCertificate.html#GTlsCertificate-struct" title="GTlsCertificate">GTlsCertificate</a>;
 <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="returnvalue">GTlsCertificate</span></a> *   <a class="link" href="GTlsCertificate.html#g-tls-certificate-new-from-pem" title="g_tls_certificate_new_from_pem ()">g_tls_certificate_new_from_pem</a>      (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *data</code></em>,
@@ -54,19 +54,19 @@
                                                         (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *file</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="returnvalue">GTlsCertificate</span></a> *   <a class="link" href="GTlsCertificate.html#g-tls-certificate-get-issuer" title="g_tls_certificate_get_issuer ()">g_tls_certificate_get_issuer</a>        (<em class="parameter"><code><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> *cert</code></em>);
-<a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a>  <a class="link" href="GTlsCertificate.html#g-tls-certificate-verify" title="g_tls_certificate_verify ()">g_tls_certificate_verify</a>          (<em class="parameter"><code><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> *cert</code></em>,
+<a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a>  <a class="link" href="GTlsCertificate.html#g-tls-certificate-verify" title="g_tls_certificate_verify ()">g_tls_certificate_verify</a>          (<em class="parameter"><code><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> *cert</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> *identity</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> *trusted_ca</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GTlsCertificate.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GTlsCertificate
 </pre>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GTlsCertificate.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GTlsCertificate.html#GTlsCertificate--certificate" title='The "certificate" property'>certificate</a>"              <a href="http://library.gnome.org/devel/glib/unstable/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>*           : Read / Write / Construct Only
@@ -76,7 +76,7 @@
   "<a class="link" href="GTlsCertificate.html#GTlsCertificate--private-key-pem" title='The "private-key-pem" property'>private-key-pem</a>"          <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Write / Construct Only
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GTlsCertificate.description"></a><h2>Description</h2>
 <p>
 A certificate used for TLS authentication and encryption.
@@ -86,9 +86,9 @@ a public key and a private key (which is needed when acting as a
 <a class="link" href="GTlsServerConnection.html" title="GTlsServerConnection"><span class="type">GTlsServerConnection</span></a>).
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GTlsCertificate.details"></a><h2>Details</h2>
-<div class="refsect2" title="GTlsCertificate">
+<div class="refsect2">
 <a name="GTlsCertificate-struct"></a><h3>GTlsCertificate</h3>
 <pre class="programlisting">typedef struct _GTlsCertificate GTlsCertificate;</pre>
 <p>
@@ -97,7 +97,7 @@ Abstract base class for TLS certificate types.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tls_certificate_new_from_pem ()">
+<div class="refsect2">
 <a name="g-tls-certificate-new-from-pem"></a><h3>g_tls_certificate_new_from_pem ()</h3>
 <pre class="programlisting"><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="returnvalue">GTlsCertificate</span></a> *   g_tls_certificate_new_from_pem      (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *data</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a> length</code></em>,
@@ -116,32 +116,27 @@ parsed.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>PEM-encoded certificate data
-</td>
+<td>PEM-encoded certificate data</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>the length of <em class="parameter"><code>data</code></em>, or -1 if it's 0-terminated.
-</td>
+<td>the length of <em class="parameter"><code>data</code></em>, or -1 if it's 0-terminated.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new certificate, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>data</code></em> is invalid
-
-</td>
+<td>the new certificate, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>data</code></em> is invalid</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tls_certificate_new_from_file ()">
+<div class="refsect2">
 <a name="g-tls-certificate-new-from-file"></a><h3>g_tls_certificate_new_from_file ()</h3>
 <pre class="programlisting"><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="returnvalue">GTlsCertificate</span></a> *   g_tls_certificate_new_from_file     (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *file</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -155,27 +150,23 @@ set <em class="parameter"><code>error</code></em>. Otherwise, this behaves like 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
-<td>file containing a PEM-encoded certificate to import
-</td>
+<td>file containing a PEM-encoded certificate to import</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new certificate, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error
-
-</td>
+<td>the new certificate, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tls_certificate_new_from_files ()">
+<div class="refsect2">
 <a name="g-tls-certificate-new-from-files"></a><h3>g_tls_certificate_new_from_files ()</h3>
 <pre class="programlisting"><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="returnvalue">GTlsCertificate</span></a> *   g_tls_certificate_new_from_files    (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *cert_file</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key_file</code></em>,
@@ -191,32 +182,27 @@ like <code class="function">g_tls_certificate_new()</code>.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cert_file</code></em> :</span></p></td>
-<td>file containing a PEM-encoded certificate to import
-</td>
+<td>file containing a PEM-encoded certificate to import</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_file</code></em> :</span></p></td>
-<td>file containing a PEM-encoded private key to import
-</td>
+<td>file containing a PEM-encoded private key to import</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new certificate, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error
-
-</td>
+<td>the new certificate, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tls_certificate_list_new_from_file ()">
+<div class="refsect2">
 <a name="g-tls-certificate-list-new-from-file"></a><h3>g_tls_certificate_list_new_from_file ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_tls_certificate_list_new_from_file
                                                         (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *file</code></em>,
@@ -233,20 +219,18 @@ set <em class="parameter"><code>error</code></em>.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
-<td>file containing PEM-encoded certificates to import
-</td>
+<td>file containing PEM-encoded certificates to import</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a
+<td>a
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> containing <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> objects. You must free the list
-and its contents when you are done with it. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> Gio.TlsCertificate][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> Gio.TlsCertificate]</span>
+and its contents when you are done with it. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> Gio.TlsCertificate][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -254,7 +238,7 @@ and its contents when you are done with it. <span class="annotation">[<acronym t
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tls_certificate_get_issuer ()">
+<div class="refsect2">
 <a name="g-tls-certificate-get-issuer"></a><h3>g_tls_certificate_get_issuer ()</h3>
 <pre class="programlisting"><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="returnvalue">GTlsCertificate</span></a> *   g_tls_certificate_get_issuer        (<em class="parameter"><code><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> *cert</code></em>);</pre>
 <p>
@@ -270,7 +254,7 @@ Gets the <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><sp
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> The certificate of <em class="parameter"><code>cert</code></em>'s issuer,
+<td>The certificate of <em class="parameter"><code>cert</code></em>'s issuer,
 or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>cert</code></em> is self-signed or signed with an unknown
 certificate. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
 </td>
@@ -280,13 +264,13 @@ certificate. <span class="annotation">[<acronym title="Don't free data after the
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tls_certificate_verify ()">
+<div class="refsect2">
 <a name="g-tls-certificate-verify"></a><h3>g_tls_certificate_verify ()</h3>
-<pre class="programlisting"><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a>  g_tls_certificate_verify          (<em class="parameter"><code><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> *cert</code></em>,
+<pre class="programlisting"><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a>  g_tls_certificate_verify          (<em class="parameter"><code><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> *cert</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> *identity</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a> *trusted_ca</code></em>);</pre>
 <p>
-This verifies <em class="parameter"><code>cert</code></em> and returns a set of <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>
+This verifies <em class="parameter"><code>cert</code></em> and returns a set of <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>
 indicating any problems found with it. This can be used to verify a
 certificate outside the context of making a connection, or to
 check a certificate against a CA that is not part of the system
@@ -306,7 +290,7 @@ in its chain) must be signed by it, or else
 value.
 </p>
 <p>
-(All other <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> values will always be set or unset
+(All other <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> values will always be set or unset
 as appropriate.)
 </p>
 <div class="variablelist"><table border="0">
@@ -319,18 +303,17 @@ as appropriate.)
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>identity</code></em> :</span></p></td>
-<td> the expected peer identity. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>the expected peer identity. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>trusted_ca</code></em> :</span></p></td>
-<td> the certificate of a trusted authority. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>the certificate of a trusted authority. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the appropriate <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>
-
+<td>the appropriate <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>
 </td>
 </tr>
 </tbody>
@@ -338,9 +321,9 @@ as appropriate.)
 <p class="since">Since 2.28</p>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GTlsCertificate.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "certificate" property'>
+<div class="refsect2">
 <a name="GTlsCertificate--certificate"></a><h3>The <code class="literal">"certificate"</code> property</h3>
 <pre class="programlisting">  "certificate"              <a href="http://library.gnome.org/devel/glib/unstable/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>*           : Read / Write / Construct Only</pre>
 <p>
@@ -352,7 +335,7 @@ data, just in different forms.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title='The "certificate-pem" property'>
+<div class="refsect2">
 <a name="GTlsCertificate--certificate-pem"></a><h3>The <code class="literal">"certificate-pem"</code> property</h3>
 <pre class="programlisting">  "certificate-pem"          <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
 <p>
@@ -364,7 +347,7 @@ property represent the same data, just in different forms.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title='The "issuer" property'>
+<div class="refsect2">
 <a name="GTlsCertificate--issuer"></a><h3>The <code class="literal">"issuer"</code> property</h3>
 <pre class="programlisting">  "issuer"                   <a class="link" href="GTlsCertificate.html" title="GTlsCertificate"><span class="type">GTlsCertificate</span></a>*      : Read / Write / Construct Only</pre>
 <p>
@@ -376,7 +359,7 @@ available.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title='The "private-key" property'>
+<div class="refsect2">
 <a name="GTlsCertificate--private-key"></a><h3>The <code class="literal">"private-key"</code> property</h3>
 <pre class="programlisting">  "private-key"              <a href="http://library.gnome.org/devel/glib/unstable/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>*           : Write / Construct Only</pre>
 <p>
@@ -388,7 +371,7 @@ constructing a key (eg, from a file), but cannot be read.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title='The "private-key-pem" property'>
+<div class="refsect2">
 <a name="GTlsCertificate--private-key-pem"></a><h3>The <code class="literal">"private-key-pem"</code> property</h3>
 <pre class="programlisting">  "private-key-pem"          <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Write / Construct Only</pre>
 <p>
@@ -401,13 +384,13 @@ but cannot be read.
 <p class="since">Since 2.28</p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
+<div class="refsect1">
 <a name="GTlsCertificate.see-also"></a><h2>See Also</h2>
 <a class="link" href="GTlsConnection.html" title="GTlsConnection"><span class="type">GTlsConnection</span></a>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

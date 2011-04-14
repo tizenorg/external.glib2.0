@@ -8,7 +8,7 @@
 <link rel="up" href="glib.html" title="GLib Overview">
 <link rel="prev" href="glib.html" title="GLib Overview">
 <link rel="next" href="glib-cross-compiling.html" title="Cross-compiling the GLib package">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">GLib Reference Manual</th>
 <td><a accesskey="n" href="glib-cross-compiling.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="refentry" title="Compiling the GLib package">
+<div class="refentry">
 <a name="glib-building"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -30,7 +30,7 @@ How to compile GLib itself
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsect1" title="Building the Library on UNIX">
+<div class="refsect1">
 <a name="building"></a><h2>Building the Library on UNIX</h2>
 <p>
         On UNIX, GLib uses the standard GNU build system,
@@ -60,11 +60,11 @@ How to compile GLib itself
       </p>
 <p>
         The GTK+ documentation contains
-        <a class="ulink" href="http://library.gnome.org/devel/gtk/unstable/gtk-building.html" target="_top">further details</a>
+        <a class="ulink" href="http://library.gnome.org/devel/gtk3/gtk-building.html" target="_top">further details</a>
 	about the build process and ways to influence it.
       </p>
 </div>
-<div class="refsect1" title="Dependencies">
+<div class="refsect1">
 <a name="dependencies"></a><h2>Dependencies</h2>
 <p>
         Before you can compile the GLib library, you need to have
@@ -186,7 +186,7 @@ How to compile GLib itself
         </p></li>
 </ul></div>
 </div>
-<div class="refsect1" title="Extra Configuration Options">
+<div class="refsect1">
 <a name="extra-configuration-options"></a><h2>Extra Configuration Options</h2>
 <p>
         In addition to the normal options, the
@@ -197,7 +197,7 @@ How to compile GLib itself
 <div class="cmdsynopsis"><p><code class="command">configure</code>  [[--enable-debug=[no|minimum|yes]]] [[--disable-gc-friendly] |  [--enable-gc-friendly]] [[--disable-mem-pools] |  [--enable-mem-pools]] [[--disable-threads] |  [--enable-threads]] [[--with-threads=[none|posix|dce|win32]]] [[--disable-regex] |  [--enable-regex]] [[--with-pcre=[internal|system]]] [[--disable-included-printf] |  [--enable-included-printf]] [[--disable-Bsymbolic] |  [--enable-Bsymbolic]] [[--disable-gtk-doc] |  [--enable-gtk-doc]] [[--disable-man] |  [--enable-man]] [[--disable-xattr] |  [--enable-xattr]] [[--disable-selinux] |  [--enable-selinux]] [[--disable-dtrace] |  [--enable-dtrace]] [[--disable-systemtap] |  [--enable-systemtap]] [[--enable-gcov] |  [--disable-gcov]] [[--with-runtime-libdir=RELPATH]]</p></div>
 <p>
       </p>
-<p title="--enable-debug"><b><code class="systemitem">--enable-debug</code>. </b>
+<p><b><code class="systemitem">--enable-debug</code>. </b>
          Turns on various amounts of debugging support. Setting this to 'no'
          disables g_assert(), g_return_if_fail(), g_return_val_if_fail() and
          all cast checks between different object types. Setting it to 'minimum'         disables only cast checks. Setting it to 'yes' enables
@@ -209,7 +209,7 @@ How to compile GLib itself
          <code class="option">--enable-debug=no</code> should <span class="emphasis"><em>not</em></span>
          be used for stable releases of GLib.
         </p>
-<p title="--disable-gc-friendly and --enable-gc-friendly"><b><code class="systemitem">--disable-gc-friendly</code> and
+<p><b><code class="systemitem">--disable-gc-friendly</code> and
           <code class="systemitem">--enable-gc-friendly</code>. </b>
 	  By default, and with <code class="systemitem">--disable-gc-friendly</code>
 	  as well, Glib does not clear the memory for certain objects before they
@@ -250,7 +250,7 @@ How to compile GLib itself
         Since clearing the memory has a cost,
         <code class="systemitem">--disable-gc-friendly</code> is the default.
       </p>
-<p title="--disable-mem-pools and --enable-mem-pools"><b><code class="systemitem">--disable-mem-pools</code> and
+<p><b><code class="systemitem">--disable-mem-pools</code> and
           <code class="systemitem">--enable-mem-pools</code>. </b>
         Many small chunks of memory are often allocated via collective pools
         in GLib and are cached after release to speed up reallocations.
@@ -286,16 +286,16 @@ How to compile GLib itself
          <code class="literal">G_BSEARCH_ALIGN_POWER2</code> becomes non-functional
         </p></li>
 </ul></div>
-<p title="--disable-mem-pools and --enable-mem-pools">
+<p>
       </p>
-<p title="--disable-threads and --enable-threads"><b><code class="systemitem">--disable-threads</code> and
+<p><b><code class="systemitem">--disable-threads</code> and
           <code class="systemitem">--enable-threads</code>. </b>
            Do not compile GLib to be multi thread safe. GLib
            will be slightly faster then. This is however not
            recommended, as many programs rely on GLib being
            multi thread safe.
         </p>
-<p title="--with-threads"><b><code class="systemitem">--with-threads</code>. </b>
+<p><b><code class="systemitem">--with-threads</code>. </b>
           Specify a thread implementation to use.
           </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -312,17 +312,17 @@ How to compile GLib itself
                 <code class="function">g_thread_init()</code> by the programmer.
               </p></li>
 </ul></div>
-<p title="--with-threads">
+<p>
 
         </p>
-<p title="--disable-regex and --enable-regex"><b><code class="systemitem">--disable-regex</code> and
+<p><b><code class="systemitem">--disable-regex</code> and
           <code class="systemitem">--enable-regex</code>. </b>
            Do not compile GLib with regular expression support.
            GLib will be smaller because it will not need the
            PCRE library. This is however not recommended, as
            programs may need GRegex.
         </p>
-<p title="--with-pcre"><b><code class="systemitem">--with-pcre</code>. </b>
+<p><b><code class="systemitem">--with-pcre</code>. </b>
           Specify whether to use the internal or the system-supplied
           PCRE library.
           </p>
@@ -336,7 +336,7 @@ How to compile GLib itself
               the system-supplied PCRE library.
             </p></li>
 </ul></div>
-<p title="--with-pcre">
+<p>
           Using the internal PCRE is the preferred solution:
           </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
@@ -355,9 +355,9 @@ How to compile GLib itself
                 this variables could lead to problems when they are modified.
               </p></li>
 </ul></div>
-<p title="--with-pcre">
+<p>
         </p>
-<p title="--disable-included-printf and --enable-included-printf"><b><code class="systemitem">--disable-included-printf</code> and
+<p><b><code class="systemitem">--disable-included-printf</code> and
            <code class="systemitem">--enable-included-printf</code>. </b>
           By default the <span class="command"><strong>configure</strong></span> script will try
           to auto-detect whether the C library provides a suitable set
@@ -372,7 +372,7 @@ How to compile GLib itself
           an implementation fo the <code class="function">printf()</code> family
           should be included or not.
         </p>
-<p title="--disable-Bsymbolic and --enable-Bsymbolic"><b><code class="systemitem">--disable-Bsymbolic</code> and
+<p><b><code class="systemitem">--disable-Bsymbolic</code> and
            <code class="systemitem">--enable-Bsymbolic</code>. </b>
           By default, GLib uses the -Bsymbolic-functions linker
           flag to avoid intra-library PLT jumps. A side-effect
@@ -383,7 +383,7 @@ How to compile GLib itself
           The <code class="option">--disable-Bsymbolic</code> option allows
           to do that.
         </p>
-<p title="--disable-gtk-doc and --enable-gtk-doc"><b><code class="systemitem">--disable-gtk-doc</code> and
+<p><b><code class="systemitem">--disable-gtk-doc</code> and
           <code class="systemitem">--enable-gtk-doc</code>. </b>
           By default the <span class="command"><strong>configure</strong></span> script will try
           to auto-detect whether the
@@ -396,7 +396,7 @@ How to compile GLib itself
           pre-generated HTML files will be installed instead of
           building them on your machine.
         </p>
-<p title="--disable-man and --enable-man"><b><code class="systemitem">--disable-man</code> and
+<p><b><code class="systemitem">--disable-man</code> and
           <code class="systemitem">--enable-man</code>. </b>
           By default the <span class="command"><strong>configure</strong></span> script will try
           to auto-detect whether <span class="application">xsltproc</span>
@@ -407,7 +407,7 @@ How to compile GLib itself
           used or not. The distribution includes pre-generated man
           pages.
         </p>
-<p title="--disable-xattr and --enable-xattr"><b><code class="systemitem">--disable-xattr</code> and
+<p><b><code class="systemitem">--disable-xattr</code> and
           <code class="systemitem">--enable-xattr</code>. </b>
           By default the <span class="command"><strong>configure</strong></span> script will try
           to auto-detect whether the getxattr() family of functions
@@ -417,7 +417,7 @@ How to compile GLib itself
           should be included or not. getxattr() and friends can
           be provided by glibc or by the standalone libattr library.
         </p>
-<p title="--disable-selinux and --enable-selinux"><b><code class="systemitem">--disable-selinux</code> and
+<p><b><code class="systemitem">--disable-selinux</code> and
           <code class="systemitem">--enable-selinux</code>. </b>
           By default the <span class="command"><strong>configure</strong></span> script will
           auto-detect if libselinux is available and include
@@ -425,18 +425,18 @@ How to compile GLib itself
           used to explicitly control whether SELinux support should
 	  be included.
         </p>
-<p title="--disable-dtrace and --enable-dtrace"><b><code class="systemitem">--disable-dtrace</code> and
+<p><b><code class="systemitem">--disable-dtrace</code> and
           <code class="systemitem">--enable-dtrace</code>. </b>
           By default the <span class="command"><strong>configure</strong></span> script will
           detect if DTrace support is available, and use it.
         </p>
-<p title="--disable-systemtap and --enable-systemtap"><b><code class="systemitem">--disable-systemtap</code> and
+<p><b><code class="systemitem">--disable-systemtap</code> and
           <code class="systemitem">--enable-systemtap</code>. </b>
           This option requires DTrace support.  If it is available, then
 	  the <span class="command"><strong>configure</strong></span> script will also check for
 	  the presence of SystemTap.
         </p>
-<p title="--enable-gcov and --disable-gcov"><b><code class="systemitem">--enable-gcov</code> and
+<p><b><code class="systemitem">--enable-gcov</code> and
           <code class="systemitem">--disable-gcov</code>. </b>
           Enable the generation of coverage reports for the GLib tests.
           This requires the lcov frontend to gcov from the
@@ -444,7 +444,7 @@ How to compile GLib itself
           To generate a coverage report, use the lcov make target. The
           report is placed in the <code class="filename">glib-lcov</code> directory.
         </p>
-<p title="--with-runtime-libdir=RELPATH"><b><code class="systemitem">--with-runtime-libdir=RELPATH</code>. </b>
+<p><b><code class="systemitem">--with-runtime-libdir=RELPATH</code>. </b>
           Allows specifying a relative path to where to install the runtime
           libraries (meaning library files used for running, not developing,
           GLib applications). This can be used in operating system setups where
@@ -460,6 +460,6 @@ How to compile GLib itself
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

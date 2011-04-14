@@ -1,3 +1,253 @@
+Overview of Changes from GLib 2.28.5 to 2.28.6
+==============================================
+
+* Fix a possible crash when using g_settings_delay()
+
+* Various documentation clarifications
+
+* Translation updates
+ Assamese
+ Basque
+ Catalan
+ Czech
+ Hungarian
+ Japanese
+ Marathi
+ Slovenian
+ Swedish
+
+
+Overview of Changes from GLib 2.28.4 to 2.28.5
+==============================================
+
+* Fix some introspection annotations
+
+* Translation updates:
+ Afrikaans
+ Bulgarian
+ Brazilian Portuguese
+ British English
+ Catalan
+ Danish
+ Dutch
+ German
+ Hebrew
+ Hindi
+ Indonesian
+ Italian
+ Latvian
+ Lithuanian
+ Serbian
+ Simplified Chinese
+ Swedish
+ Telugu
+ Traditional Chinese
+ Vietnamese
+
+
+Overview of Changes from GLib 2.28.3 to 2.28.4
+==============================================
+
+* Improve documentation of GSettings vendor override files
+
+* Translation updates:
+ French
+ Galician
+ German
+ Gujarati
+ Hungarian
+ Korean
+ Norwegian bokmål
+ Polish
+ Romanian
+ Russian
+ Spanish
+
+
+Overview of Changes from GLib 2.28.2 to 2.28.3
+==============================================
+
+* Fix build with linux < 2.6.19
+
+* Bugs fixed:
+ 644465 undefined reference to `_usleep'
+ 644552 g_timeout_add_seconds(1, ...) may have a latency...
+ 644607 Correct internal definition of C_()
+
+* Translation updates:
+ French
+ Hungarian
+
+
+Overview of Changes from GLib 2.28.1 to 2.28.2
+==============================================
+
+* Improved documentation
+ - GApplication details are explained a lot more thoroughly
+
+* GVariant now supports NULL for empty arrays in varargs
+
+* Bugs fixed:
+ 613269 g_type_get_qdata() doesn't work as I expected on subtypes
+ 624943 G_VALUE_NOCOPY_CONTENTS is undocumented
+ 637738 object_interface_check_properties never actually executes
+ 638185 GIOCondition should be annotated as "flags"
+ 642797 g_app_info_get_default_for_type() broken for subtypes
+ 642825 Unnecessary assertion failure in g_option_context_parse()
+ 642944 NULL key lookup using g_hash_table_lookup_extended()
+ 643197 g_application_id_is_valid docs imply no valid ids
+ 643468 Warn that handling "command-line" means manual activating...
+ 643478 GApplication::local_command_line vfunc documentation seems...
+ 643649 g_application_run() should say that argc/argv can be NULL
+ 643780 shouldn't need to create an action group to use actions...
+ 643795 g_timeout_add_seconds fires with intervals 1 second longer...
+
+* Translation updates:
+ British English
+ Italian
+
+Overview of Changes from GLib 2.28.0 to 2.28.1
+==============================================
+
+* The format accepted by the GVariant parser has beend documented
+
+* The return value of g_datetime_compare() has been fixed to
+  match strcmp() semantics
+
+* Commandline utilities are now fully translated
+
+* Bugs fixed:
+ 635099 Memory leak in gdbus introspection when parsing xml
+ 640489 $ and ^ do not match lines if G_REGEX_MULTILINE|G_R...
+ 642042 Overriding GDBus org.freedesktop.DBus.Properties im...
+ 642052 g_timeout_add(_seconds) cannot handle large intervals
+ 642490 notify_desktop_launch() "g_variant_new_bytestring:...
+
+* Translation updates
+ Bengali India
+ Polish
+
+
+Overview of Changes from GLib 2.27.93 to 2.28.0
+===============================================
+
+* Bugs fixed:
+641363 GInitable documentation isn't clear about that finalize...
+641395 Add more data about the origin application to the "Lau...
+641411 gdesktopappinfo signals lost if it's the session bus...
+641477 glib-mkenums uses unportable #! line
+641572 Add @EXEEXT@ to pkgconfig binary name
+641688 glib installs GSettings.html and gsettings.html
+
+* Translation updates:
+ Galician
+ Italian
+ Korean
+ Punjabi
+
+
+Overview of Changes from GLib 2.27.92 to 2.27.93
+================================================
+
+* Bugs fixed:
+ 637013 gio/gdbusmessage.c fails to compile on Solaris
+ 640192 Error creating a Gio.Settings object through py...
+ 640261 Minimum version for external pcre needs to be..
+ 640262 GActionGroup contains redundant TYPE macros
+ 640436 Make load_user_special_dirs() resistant to non...
+ 640695 g_key_file_load_from_file() mishandles a CR-LF...
+ 640724 can't compile gio due to format string issues
+ 640725 can't compile tests due to format string issue
+ 640807 improve GVariant behaviour with invalid pointers
+ 640823 wrong documentation for g_source_add_child_source
+
+* Translation updates:
+ Bulgarian
+ Galician
+ Hebrew
+ Norwegian bokmål
+ Spanish
+ Traditional Chinese
+
+
+Overview of Changes from GLib 2.27.91 to 2.27.92
+================================================
+
+* Update to Unicode 6.0
+
+* Update PCRE to 8.12
+
+* Bugs fixed:
+ 637696 g_unix_connection_send_fd() doesn't work
+ 638872 null settings backend bug
+ 640042 GtkApplication's warning about not connecting...
+
+* Translation updates:
+ Arabic
+ Basque
+ Estonian
+ Greek
+
+Overview of Changes from GLib 2.27.90 to 2.27.91
+================================================
+
+* Bugs fixed:
+ 638838 gdesktopappinfo: Don't crash if we don't have a desktop filename
+ 638894 Splitting on \s* gives no result
+ 639064 Update gschema.dtd
+ 639084 Copy/paste error in GSettings::writable-changed signal
+ 639177 SIGSEGV for GApplications with G_APPLICATION_IS_SERVICE
+
+* Translation updates:
+ Estonian
+ Galician
+ Indonesian
+
+
+Overview of Changes from GLib 2.27.5 to 2.27.90
+===============================================
+
+* Test reports created by gtester-report can now
+  include revision information
+
+* The g_desktop_app_info_launch_* family of functions
+  now emit a DBus signal when an application is launched.
+  Additionally, there is a new variant
+  g_desktop_app_info_launch_uris_as_manager(), which
+  gives more control over the launched process.
+
+* The memory and null GSettings backends are now available
+  as public API
+
+* g_get_locale_variants() is a new function that returns a
+  list of variants of a locale identifier
+
+* Bugs fixed:
+ 587898 I/O timeouts for GSocket
+ 606960 gio: Add extension point for informing parties...
+ 631980 Handle an optional <revision> node in the report...
+ 634569 Document that g_variant_builder_add_value consumes...
+ 635998 Make _g_compute_locale_variants public
+ 636806 Add g_{memory,null}_settings_backend_get_default
+ 637262 Need a binary DER version of ::accepted-cas
+ 637544 Skip fsync() on btrfs
+ 637720 void functions should not return a value.
+ 637738 object_interface_check_properties never actually...
+ 637759 GIOChannel: fix a crash in g_io_channel_read_chars()
+ 637852 Updates to glib.vsprops file for MSVC 2008 builds...
+ 637858 Updates to test/testglib.c...
+ 638349 parameter name of g_variant_new_* may conflict...
+
+* Translation updates:
+ Hebrew
+ Norwegian bokmål
+ Simplified Chinese
+ Spanish
+ Swedish
+ Uyghur
+ Vietnamese
+
+
 Overview of Changes from GLib 2.27.4 to 2.27.5
 ==============================================
 

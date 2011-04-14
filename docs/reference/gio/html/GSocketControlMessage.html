@@ -8,7 +8,7 @@
 <link rel="up" href="networking.html" title="Lowlevel network support">
 <link rel="prev" href="GUnixSocketAddress.html" title="GUnixSocketAddress">
 <link rel="next" href="GUnixFDList.html" title="GUnixFDList">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -28,7 +28,7 @@
                   <a href="#GSocketControlMessage.object-hierarchy" class="shortcut">Object Hierarchy</a>
 </td></tr>
 </table>
-<div class="refentry" title="GSocketControlMessage">
+<div class="refentry">
 <a name="GSocketControlMessage"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -37,7 +37,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GSocketControlMessage.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GSocketControlMessage.html#GSocketControlMessage-struct" title="GSocketControlMessage">GSocketControlMessage</a>;
 <a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="returnvalue">GSocketControlMessage</span></a> * <a class="link" href="GSocketControlMessage.html#g-socket-control-message-deserialize" title="g_socket_control_message_deserialize ()">g_socket_control_message_deserialize</a>
@@ -53,7 +53,7 @@
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GSocketControlMessage.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
@@ -62,7 +62,7 @@
          +----<a class="link" href="GUnixCredentialsMessage.html" title="GUnixCredentialsMessage">GUnixCredentialsMessage</a>
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GSocketControlMessage.description"></a><h2>Description</h2>
 <p>
 A <a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="type">GSocketControlMessage</span></a> is a special-purpose utility message that
@@ -91,9 +91,9 @@ class is registered with the GType typesystem before calling
 <a class="link" href="GSocket.html#g-socket-receive-message" title="g_socket_receive_message ()"><code class="function">g_socket_receive_message()</code></a> to read such a message.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GSocketControlMessage.details"></a><h2>Details</h2>
-<div class="refsect2" title="GSocketControlMessage">
+<div class="refsect2">
 <a name="GSocketControlMessage-struct"></a><h3>GSocketControlMessage</h3>
 <pre class="programlisting">typedef struct _GSocketControlMessage GSocketControlMessage;</pre>
 <p>
@@ -102,7 +102,7 @@ received over <a class="link" href="GSocket.html" title="GSocket"><span class="t
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_control_message_deserialize ()">
+<div class="refsect2">
 <a name="g-socket-control-message-deserialize"></a><h3>g_socket_control_message_deserialize ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="returnvalue">GSocketControlMessage</span></a> * g_socket_control_message_deserialize
                                                         (<em class="parameter"><code><span class="type">int</span> level</code></em>,
@@ -124,8 +124,7 @@ will be returned.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>level</code></em> :</span></p></td>
-<td>a socket level
-</td>
+<td>a socket level</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
@@ -134,17 +133,16 @@ will be returned.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
-<td>the size of the data in bytes
-</td>
+<td>the size of the data in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>pointer to the message data
+<td>pointer to the message data. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> guint8]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the deserialized message or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the deserialized message or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -152,7 +150,7 @@ will be returned.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_control_message_get_level ()">
+<div class="refsect2">
 <a name="g-socket-control-message-get-level"></a><h3>g_socket_control_message_get_level ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 g_socket_control_message_get_level  (<em class="parameter"><code><a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="type">GSocketControlMessage</span></a> *message</code></em>);</pre>
 <p>
@@ -169,16 +167,14 @@ This is often SOL_SOCKET.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> an integer describing the level
-
-</td>
+<td>an integer describing the level</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_control_message_get_msg_type ()">
+<div class="refsect2">
 <a name="g-socket-control-message-get-msg-type"></a><h3>g_socket_control_message_get_msg_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">int</span>                 g_socket_control_message_get_msg_type
                                                         (<em class="parameter"><code><a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="type">GSocketControlMessage</span></a> *message</code></em>);</pre>
@@ -196,16 +192,14 @@ For instance, for UNIX fd passing this would be SCM_RIGHTS.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> an integer describing the type of control message
-
-</td>
+<td>an integer describing the type of control message</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_control_message_get_size ()">
+<div class="refsect2">
 <a name="g-socket-control-message-get-size"></a><h3>g_socket_control_message_get_size ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="returnvalue">gsize</span></a>               g_socket_control_message_get_size   (<em class="parameter"><code><a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="type">GSocketControlMessage</span></a> *message</code></em>);</pre>
 <p>
@@ -222,16 +216,14 @@ headers or alignment.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> The number of bytes required.
-
-</td>
+<td>The number of bytes required.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_control_message_serialize ()">
+<div class="refsect2">
 <a name="g-socket-control-message-serialize"></a><h3>g_socket_control_message_serialize ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_control_message_serialize  (<em class="parameter"><code><a class="link" href="GSocketControlMessage.html" title="GSocketControlMessage"><span class="type">GSocketControlMessage</span></a> *message</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>);</pre>
@@ -254,21 +246,20 @@ object.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>A buffer to write data to
-</td>
+<td>A buffer to write data to</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
+<div class="refsect1">
 <a name="GSocketControlMessage.see-also"></a><h2>See Also</h2>
 <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a>.
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

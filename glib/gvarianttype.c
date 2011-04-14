@@ -31,19 +31,19 @@
 
 
 /**
- * SECTION: gvarianttype
+ * SECTION:gvarianttype
  * @title: GVariantType
  * @short_description: introduction to the GVariant type system
  * @see_also: #GVariantType, #GVariant
  *
  * This section introduces the GVariant type system.  It is based, in
- * large part, on the DBus type system, with two major changes and some minor
+ * large part, on the D-Bus type system, with two major changes and some minor
  * lifting of restrictions.  The <ulink
  * url='http://dbus.freedesktop.org/doc/dbus-specification.html'>DBus
  * specification</ulink>, therefore, provides a significant amount of
  * information that is useful when working with GVariant.
  *
- * The first major change with respect to the DBus type system is the
+ * The first major change with respect to the D-Bus type system is the
  * introduction of maybe (or "nullable") types.  Any type in GVariant can be
  * converted to a maybe type, in which case, "nothing" (or "null") becomes a
  * valid value.  Maybe types have been added by introducing the
@@ -51,8 +51,8 @@
  *
  * The second major change is that the GVariant type system supports the
  * concept of "indefinite types" -- types that are less specific than
- * the normal types found in DBus.  For example, it is possible to speak
- * of "an array of any type" in GVariant, where the DBus type system
+ * the normal types found in D-Bus.  For example, it is possible to speak
+ * of "an array of any type" in GVariant, where the D-Bus type system
  * would require you to speak of "an array of integers" or "an array of
  * strings".  Indefinite types have been added by introducing the
  * characters "<literal>*</literal>", "<literal>?</literal>" and
@@ -62,15 +62,15 @@
  * types are lifted along with the restriction that dictionary entries
  * may only appear nested inside of arrays.
  *
- * Just as in DBus, GVariant types are described with strings ("type
+ * Just as in D-Bus, GVariant types are described with strings ("type
  * strings").  Subject to the differences mentioned above, these strings
- * are of the same form as those found in DBus.  Note, however: DBus
+ * are of the same form as those found in DBus.  Note, however: D-Bus
  * always works in terms of messages and therefore individual type
  * strings appear nowhere in its interface.  Instead, "signatures"
  * are a concatenation of the strings of the type of each argument in a
  * message.  GVariant deals with single values directly so GVariant type
  * strings always describe the type of exactly one value.  This means
- * that a DBus signature string is generally not a valid GVariant type
+ * that a D-Bus signature string is generally not a valid GVariant type
  * string -- except in the case that it is the signature of a message
  * containing exactly one argument.
  *
@@ -79,11 +79,12 @@
  * indefinite type as its type, but values can exist that have types
  * that are subtypes of indefinite types.  That is to say,
  * g_variant_get_type() will never return an indefinite type, but
- * calling g_variant_is_a() with an indefinite type may return %TRUE.
- * For example, you can not have a value that represents "an array of no
- * particular type", but you can have an "array of integers" which
- * certainly matches the type of "an array of no particular type", since
- * "array of integers" is a subtype of "array of no particular type".
+ * calling g_variant_is_of_type() with an indefinite type may return
+ * %TRUE.  For example, you can not have a value that represents "an
+ * array of no particular type", but you can have an "array of integers"
+ * which certainly matches the type of "an array of no particular type",
+ * since "array of integers" is a subtype of "array of no particular
+ * type".
  *
  * This is similar to how instances of abstract classes may not
  * directly exist in other type systems, but instances of their
@@ -281,7 +282,7 @@
  *       <para>
  *        the type string of %G_VARIANT_TYPE_HANDLE; a signed 32 bit
  *        value that, by convention, is used as an index into an array
- *        of file descriptors that are sent alongside a DBus message.
+ *        of file descriptors that are sent alongside a D-Bus message.
  *       </para>
  *      </entry>
  *     </row>
@@ -319,7 +320,7 @@
  *      <entry>
  *       <para>
  *        the type string of %G_VARIANT_TYPE_OBJECT_PATH; a string in
- *        the form of a DBus object path.
+ *        the form of a D-Bus object path.
  *       </para>
  *      </entry>
  *     </row>
@@ -332,7 +333,7 @@
  *      <entry>
  *       <para>
  *        the type string of %G_VARIANT_TYPE_STRING; a string in the
- *        form of a DBus type signature.
+ *        form of a D-Bus type signature.
  *       </para>
  *      </entry>
  *     </row>

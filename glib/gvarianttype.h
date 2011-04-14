@@ -38,7 +38,7 @@ G_BEGIN_DECLS
  * A type in the GVariant type system.
  *
  * Two types may not be compared by value; use g_variant_type_equal() or
- * g_variant_type_is_subtype().  May be copied using
+ * g_variant_type_is_subtype_of().  May be copied using
  * g_variant_type_copy() and freed using g_variant_type_free().
  **/
 typedef struct _GVariantType GVariantType;
@@ -126,12 +126,12 @@ typedef struct _GVariantType GVariantType;
 /**
  * G_VARIANT_TYPE_OBJECT_PATH:
  *
- * The type of a DBus object reference.  These are strings of a
+ * The type of a D-Bus object reference.  These are strings of a
  * specific format used to identify objects at a given destination on
  * the bus.
  *
- * If you are not interacting with DBus, then there is no reason to make
- * use of this type.  If you are, then the DBus specification contains a
+ * If you are not interacting with D-Bus, then there is no reason to make
+ * use of this type.  If you are, then the D-Bus specification contains a
  * precise description of valid object paths.
  **/
 #define G_VARIANT_TYPE_OBJECT_PATH          ((const GVariantType *) "o")
@@ -139,11 +139,11 @@ typedef struct _GVariantType GVariantType;
 /**
  * G_VARIANT_TYPE_SIGNATURE:
  *
- * The type of a DBus type signature.  These are strings of a specific
- * format used as type signatures for DBus methods and messages.
+ * The type of a D-Bus type signature.  These are strings of a specific
+ * format used as type signatures for D-Bus methods and messages.
  *
- * If you are not interacting with DBus, then there is no reason to make
- * use of this type.  If you are, then the DBus specification contains a
+ * If you are not interacting with D-Bus, then there is no reason to make
+ * use of this type.  If you are, then the D-Bus specification contains a
  * precise description of valid signature strings.
  **/
 #define G_VARIANT_TYPE_SIGNATURE            ((const GVariantType *) "g")
@@ -161,9 +161,9 @@ typedef struct _GVariantType GVariantType;
  *
  * The type of a 32bit signed integer value, that by convention, is used
  * as an index into an array of file descriptors that are sent alongside
- * a DBus message.
+ * a D-Bus message.
  *
- * If you are not interacting with DBus, then there is no reason to make
+ * If you are not interacting with D-Bus, then there is no reason to make
  * use of this type.
  **/
 #define G_VARIANT_TYPE_HANDLE               ((const GVariantType *) "h")

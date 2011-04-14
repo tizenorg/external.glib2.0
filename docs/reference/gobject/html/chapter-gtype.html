@@ -8,7 +8,7 @@
 <link rel="up" href="pt01.html" title="Part I. Concepts">
 <link rel="prev" href="ch01s02.html" title="Exporting a C API">
 <link rel="next" href="gtype-conventions.html" title="Conventions">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">GObject Reference Manual</th>
 <td><a accesskey="n" href="gtype-conventions.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="chapter" title="The GLib Dynamic Type System">
+<div class="chapter">
 <div class="titlepage"><div><div><h2 class="title">
 <a name="chapter-gtype"></a>The GLib Dynamic Type System</h2></div></div></div>
 <div class="toc"><dl>
@@ -84,7 +84,7 @@ GType g_type_register_fundamental (GType                       type_id,
         <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-fundamental" title="g_type_register_fundamental ()">g_type_register_fundamental</a></code> (you have to be Tim Janik 
         to do that) but in case you want to, the last chapter explains how to create
         new fundamental types.
-        <sup>[<a name="id494293" href="#ftn.id494293" class="footnote">2</a>]</sup>
+        <sup>[<a name="id421598" href="#ftn.id421598" class="footnote">2</a>]</sup>
       </p>
 <p>
         Fundamental types are top-level types which do not derive from any other type 
@@ -99,27 +99,27 @@ GType g_type_register_fundamental (GType                       type_id,
         </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>
-            class size: the class_size field in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
+            class size: the class_size field in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             class initialization functions (C++ constructor): the base_init and 
-            class_init fields in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
+            class_init fields in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             class destruction functions (C++ destructor): the base_finalize and 
-            class_finalize fields in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
+            class_finalize fields in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             instance size (C++ parameter to new): the instance_size field in 
-            <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
+            <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             instantiation policy (C++ type of new operator): the n_preallocs
-            field in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
+            field in <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             copy functions (C++ copy operators): the value_table field in 
-            <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="GTypeInfo"><span class="type">GTypeInfo</span></a>.
+            <a class="link" href="gobject-Type-Information.html#GTypeInfo" title="struct GTypeInfo"><span class="type">GTypeInfo</span></a>.
           </p></li>
 <li class="listitem"><p>
             type characteristic flags: <a class="link" href="gobject-Type-Information.html#GTypeFlags" title="enum GTypeFlags"><span class="type">GTypeFlags</span></a>.
@@ -127,12 +127,12 @@ GType g_type_register_fundamental (GType                       type_id,
 </ul></div>
 <p>
         Fundamental types are also defined by a set of <a class="link" href="gobject-Type-Information.html#GTypeFundamentalFlags" title="enum GTypeFundamentalFlags"><span class="type">GTypeFundamentalFlags</span></a> 
-        which are stored in a <a class="link" href="gobject-Type-Information.html#GTypeFundamentalInfo" title="GTypeFundamentalInfo"><span class="type">GTypeFundamentalInfo</span></a>.
+        which are stored in a <a class="link" href="gobject-Type-Information.html#GTypeFundamentalInfo" title="struct GTypeFundamentalInfo"><span class="type">GTypeFundamentalInfo</span></a>.
         Non-fundamental types are furthermore defined by the type of their parent which is
         passed as the parent_type parameter to <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-static" title="g_type_register_static ()">g_type_register_static</a></code>
         and <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-dynamic" title="g_type_register_dynamic ()">g_type_register_dynamic</a></code>.
       </p>
-<div class="sect1" title="Copy functions">
+<div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="gtype-copy"></a>Copy functions</h2></div></div></div>
 <p>
@@ -248,7 +248,7 @@ struct _GTypeValueTable
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a id="ftn.id494293" href="#id494293" class="para">2</a>] </sup>
+<div class="footnote"><p><sup>[<a id="ftn.id421598" href="#id421598" class="para">2</a>] </sup>
             Please note that there exists another registration function: the 
             <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-register-dynamic" title="g_type_register_dynamic ()">g_type_register_dynamic</a></code>. We will not discuss this
             function here since its use is very similar to the <code class="function">_static</code> 
@@ -258,6 +258,6 @@ struct _GTypeValueTable
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

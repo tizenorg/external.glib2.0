@@ -8,7 +8,7 @@
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Miscellaneous-Utility-Functions.html" title="Miscellaneous Utility Functions">
 <link rel="next" href="glib-Automatic-String-Completion.html" title="Automatic String Completion">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#glib-Lexical-Scanner.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="Lexical Scanner">
+<div class="refentry">
 <a name="glib-Lexical-Scanner"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -35,45 +35,45 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="glib-Lexical-Scanner.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;glib.h&gt;
 
-                    <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner">GScanner</a>;
-                    <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig">GScannerConfig</a>;
-<a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="returnvalue">GScanner</span></a>*           <a class="link" href="glib-Lexical-Scanner.html#g-scanner-new" title="g_scanner_new ()">g_scanner_new</a>                       (<em class="parameter"><code>const <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig"><span class="type">GScannerConfig</span></a> *config_templ</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-destroy" title="g_scanner_destroy ()">g_scanner_destroy</a>                   (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+struct              <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner">GScanner</a>;
+struct              <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig">GScannerConfig</a>;
+<a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="returnvalue">GScanner</span></a> *	         <a class="link" href="glib-Lexical-Scanner.html#g-scanner-new" title="g_scanner_new ()">g_scanner_new</a>                       (<em class="parameter"><code>const <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig"><span class="type">GScannerConfig</span></a> *config_templ</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-destroy" title="g_scanner_destroy ()">g_scanner_destroy</a>                   (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-input-file" title="g_scanner_input_file ()">g_scanner_input_file</a>                (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-input-file" title="g_scanner_input_file ()">g_scanner_input_file</a>                (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> input_fd</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-sync-file-offset" title="g_scanner_sync_file_offset ()">g_scanner_sync_file_offset</a>          (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-input-text" title="g_scanner_input_text ()">g_scanner_input_text</a>                (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-sync-file-offset" title="g_scanner_sync_file_offset ()">g_scanner_sync_file_offset</a>          (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-input-text" title="g_scanner_input_text ()">g_scanner_input_text</a>                (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *text</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> text_len</code></em>);
-<a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()">g_scanner_peek_next_token</a>           (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
-<a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()">g_scanner_get_next_token</a>            (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
-<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Lexical-Scanner.html#g-scanner-eof" title="g_scanner_eof ()">g_scanner_eof</a>                       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+<a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()">g_scanner_peek_next_token</a>           (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+<a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()">g_scanner_get_next_token</a>            (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+<a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Lexical-Scanner.html#g-scanner-eof" title="g_scanner_eof ()">g_scanner_eof</a>                       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Lexical-Scanner.html#g-scanner-cur-line" title="g_scanner_cur_line ()">g_scanner_cur_line</a>                  (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
-<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Lexical-Scanner.html#g-scanner-cur-position" title="g_scanner_cur_position ()">g_scanner_cur_position</a>              (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
-<a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          <a class="link" href="glib-Lexical-Scanner.html#g-scanner-cur-token" title="g_scanner_cur_token ()">g_scanner_cur_token</a>                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
-<a class="link" href="glib-Lexical-Scanner.html#GTokenValue" title="union GTokenValue"><span class="returnvalue">GTokenValue</span></a>         <a class="link" href="glib-Lexical-Scanner.html#g-scanner-cur-value" title="g_scanner_cur_value ()">g_scanner_cur_value</a>                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Lexical-Scanner.html#g-scanner-cur-line" title="g_scanner_cur_line ()">g_scanner_cur_line</a>                  (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Lexical-Scanner.html#g-scanner-cur-position" title="g_scanner_cur_position ()">g_scanner_cur_position</a>              (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+<a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          <a class="link" href="glib-Lexical-Scanner.html#g-scanner-cur-token" title="g_scanner_cur_token ()">g_scanner_cur_token</a>                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
+<a class="link" href="glib-Lexical-Scanner.html#GTokenValue" title="union GTokenValue"><span class="returnvalue">GTokenValue</span></a>         <a class="link" href="glib-Lexical-Scanner.html#g-scanner-cur-value" title="g_scanner_cur_value ()">g_scanner_cur_value</a>                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);
 
-<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Lexical-Scanner.html#g-scanner-set-scope" title="g_scanner_set_scope ()">g_scanner_set_scope</a>                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               <a class="link" href="glib-Lexical-Scanner.html#g-scanner-set-scope" title="g_scanner_set_scope ()">g_scanner_set_scope</a>                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-add-symbol" title="g_scanner_scope_add_symbol ()">g_scanner_scope_add_symbol</a>          (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-add-symbol" title="g_scanner_scope_add_symbol ()">g_scanner_scope_add_symbol</a>          (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> value</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-foreach-symbol" title="g_scanner_scope_foreach_symbol ()">g_scanner_scope_foreach_symbol</a>      (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-foreach-symbol" title="g_scanner_scope_foreach_symbol ()">g_scanner_scope_foreach_symbol</a>      (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Hash-Tables.html#GHFunc" title="GHFunc ()"><span class="type">GHFunc</span></a> func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-lookup-symbol" title="g_scanner_scope_lookup_symbol ()">g_scanner_scope_lookup_symbol</a>       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-lookup-symbol" title="g_scanner_scope_lookup_symbol ()">g_scanner_scope_lookup_symbol</a>       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-remove-symbol" title="g_scanner_scope_remove_symbol ()">g_scanner_scope_remove_symbol</a>       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-remove-symbol" title="g_scanner_scope_remove_symbol ()">g_scanner_scope_remove_symbol</a>       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol</code></em>);
 #define             <a class="link" href="glib-Lexical-Scanner.html#g-scanner-add-symbol" title="g_scanner_add_symbol()">g_scanner_add_symbol</a>                (scanner,
@@ -87,23 +87,23 @@
 
 #define             <a class="link" href="glib-Lexical-Scanner.html#g-scanner-freeze-symbol-table" title="g_scanner_freeze_symbol_table()">g_scanner_freeze_symbol_table</a>       (scanner)
 #define             <a class="link" href="glib-Lexical-Scanner.html#g-scanner-thaw-symbol-table" title="g_scanner_thaw_symbol_table()">g_scanner_thaw_symbol_table</a>         (scanner)
-<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Lexical-Scanner.html#g-scanner-lookup-symbol" title="g_scanner_lookup_symbol ()">g_scanner_lookup_symbol</a>             (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Lexical-Scanner.html#g-scanner-lookup-symbol" title="g_scanner_lookup_symbol ()">g_scanner_lookup_symbol</a>             (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol</code></em>);
 
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-warn" title="g_scanner_warn ()">g_scanner_warn</a>                      (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-warn" title="g_scanner_warn ()">g_scanner_warn</a>                      (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-error" title="g_scanner_error ()">g_scanner_error</a>                     (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-error" title="g_scanner_error ()">g_scanner_error</a>                     (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-unexp-token" title="g_scanner_unexp_token ()">g_scanner_unexp_token</a>               (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="glib-Lexical-Scanner.html#g-scanner-unexp-token" title="g_scanner_unexp_token ()">g_scanner_unexp_token</a>               (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="type">GTokenType</span></a> expected_token</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *identifier_spec</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol_spec</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> is_error</code></em>);
-<span class="returnvalue">void</span>                (<a class="link" href="glib-Lexical-Scanner.html#GScannerMsgFunc" title="GScannerMsgFunc ()">*GScannerMsgFunc</a>)                  (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<span class="returnvalue">void</span>                (<a class="link" href="glib-Lexical-Scanner.html#GScannerMsgFunc" title="GScannerMsgFunc ()">*GScannerMsgFunc</a>)                  (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> error</code></em>);
 
@@ -117,18 +117,18 @@ union               <a class="link" href="glib-Lexical-Scanner.html#GTokenValue"
 enum                <a class="link" href="glib-Lexical-Scanner.html#GErrorType" title="enum GErrorType">GErrorType</a>;
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="glib-Lexical-Scanner.description"></a><h2>Description</h2>
 <p>
-The <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> and its associated functions provide a general purpose
+The <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> and its associated functions provide a general purpose
 lexical scanner.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="glib-Lexical-Scanner.details"></a><h2>Details</h2>
-<div class="refsect2" title="GScanner">
-<a name="GScanner"></a><h3>GScanner</h3>
-<pre class="programlisting">typedef struct {
+<div class="refsect2">
+<a name="GScanner"></a><h3>struct GScanner</h3>
+<pre class="programlisting">struct GScanner {
   /* unused fields */
   gpointer		user_data;
   guint			max_parse_errors;
@@ -167,7 +167,7 @@ lexical scanner.
   
   /* handler function for _warn and _error */
   GScannerMsgFunc msg_handler;
-} GScanner;
+};
 </pre>
 <p>
 The data structure representing a lexical scanner.
@@ -193,67 +193,61 @@ handler function is declared by <a class="link" href="glib-Lexical-Scanner.html#
 <tbody>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> <em class="structfield"><code><a name="GScanner.user-data"></a>user_data</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GScanner.max-parse-errors"></a>max_parse_errors</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GScanner.parse-errors"></a>parse_errors</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *<em class="structfield"><code><a name="GScanner.input-name"></a>input_name</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Keyed-Data-Lists.html#GData" title="GData"><span class="type">GData</span></a> *<em class="structfield"><code><a name="GScanner.qdata"></a>qdata</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
-<td><p><span class="term"><a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig"><span class="type">GScannerConfig</span></a> *<em class="structfield"><code><a name="GScanner.config"></a>config</code></em>;</span></p></td>
-<td>
-</td>
+<td><p><span class="term"><a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig"><span class="type">GScannerConfig</span></a> *<em class="structfield"><code><a name="GScanner.config"></a>config</code></em>;</span></p></td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="type">GTokenType</span></a> <em class="structfield"><code><a name="GScanner.token"></a>token</code></em>;</span></p></td>
-<td>      token parsed by the last <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>
+<td>token parsed by the last <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Lexical-Scanner.html#GTokenValue" title="union GTokenValue"><span class="type">GTokenValue</span></a> <em class="structfield"><code><a name="GScanner.value"></a>value</code></em>;</span></p></td>
-<td>      value of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>
+<td>value of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GScanner.line"></a>line</code></em>;</span></p></td>
-<td>       line number of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>
+<td>line number of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GScanner.position"></a>position</code></em>;</span></p></td>
-<td>   char number of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>
+<td>char number of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="type">GTokenType</span></a> <em class="structfield"><code><a name="GScanner.next-token"></a>next_token</code></em>;</span></p></td>
-<td>   token parsed by the last <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()"><code class="function">g_scanner_peek_next_token()</code></a>
+<td>token parsed by the last <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()"><code class="function">g_scanner_peek_next_token()</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Lexical-Scanner.html#GTokenValue" title="union GTokenValue"><span class="type">GTokenValue</span></a> <em class="structfield"><code><a name="GScanner.next-value"></a>next_value</code></em>;</span></p></td>
-<td>   value of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()"><code class="function">g_scanner_peek_next_token()</code></a>
+<td>value of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()"><code class="function">g_scanner_peek_next_token()</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GScanner.next-line"></a>next_line</code></em>;</span></p></td>
-<td>    line number of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()"><code class="function">g_scanner_peek_next_token()</code></a>
+<td>line number of the last token from <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()"><code class="function">g_scanner_peek_next_token()</code></a>
 </td>
 </tr>
 <tr>
@@ -263,46 +257,39 @@ handler function is declared by <a class="link" href="glib-Lexical-Scanner.html#
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Hash-Tables.html#GHashTable" title="GHashTable"><span class="type">GHashTable</span></a> *<em class="structfield"><code><a name="GScanner.symbol-table"></a>symbol_table</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> <em class="structfield"><code><a name="GScanner.input-fd"></a>input_fd</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *<em class="structfield"><code><a name="GScanner.text"></a>text</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term">const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *<em class="structfield"><code><a name="GScanner.text-end"></a>text_end</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *<em class="structfield"><code><a name="GScanner.buffer"></a>buffer</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> <em class="structfield"><code><a name="GScanner.scope-id"></a>scope_id</code></em>;</span></p></td>
-<td>
-</td>
+<td></td>
 </tr>
 <tr>
 <td><p><span class="term"><a class="link" href="glib-Lexical-Scanner.html#GScannerMsgFunc" title="GScannerMsgFunc ()"><span class="type">GScannerMsgFunc</span></a> <em class="structfield"><code><a name="GScanner.msg-handler"></a>msg_handler</code></em>;</span></p></td>
-<td>function to handle GScanner message output
-</td>
+<td>function to handle GScanner message output</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GScannerConfig">
-<a name="GScannerConfig"></a><h3>GScannerConfig</h3>
-<pre class="programlisting">typedef struct {
+<div class="refsect2">
+<a name="GScannerConfig"></a><h3>struct GScannerConfig</h3>
+<pre class="programlisting">struct GScannerConfig {
   /* Character sets
    */
   gchar		*cset_skip_characters;		/* default: " \t\n" */
@@ -339,10 +326,10 @@ handler function is declared by <a class="link" href="glib-Lexical-Scanner.html#
   guint		scope_0_fallback : 1;		/* try scope 0 on lookups? */
   guint		store_int64 : 1; 		/* use value.v_int64 rather than v_int */
   guint		padding_dummy;
-} GScannerConfig;
+};
 </pre>
 <p>
-Specifies the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> parser configuration. Most settings can be changed during
+Specifies the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> parser configuration. Most settings can be changed during
 the parsing phase and will affect the lexical parsing of the next unpeeked token.
 </p>
 <p>
@@ -457,13 +444,13 @@ is searched for in the default scope in addition to the current scope
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_new ()">
+<div class="refsect2">
 <a name="g-scanner-new"></a><h3>g_scanner_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="returnvalue">GScanner</span></a>*           g_scanner_new                       (<em class="parameter"><code>const <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig"><span class="type">GScannerConfig</span></a> *config_templ</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="returnvalue">GScanner</span></a> *	         g_scanner_new                       (<em class="parameter"><code>const <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig"><span class="type">GScannerConfig</span></a> *config_templ</code></em>);</pre>
 <p>
-Creates a new <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
+Creates a new <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.
 The <em class="parameter"><code>config_templ</code></em> structure specifies the initial settings of the scanner,
-which are copied into the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> <em class="structfield"><code>config</code></em> field.
+which are copied into the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> <em class="structfield"><code>config</code></em> field.
 If you pass <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> then the default settings are used.
 </p>
 <div class="variablelist"><table border="0">
@@ -471,37 +458,34 @@ If you pass <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NU
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>config_templ</code></em> :</span></p></td>
-<td>the initial scanner settings.
-</td>
+<td>the initial scanner settings.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the new <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>the new <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_destroy ()">
+<div class="refsect2">
 <a name="g-scanner-destroy"></a><h3>g_scanner_destroy ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_destroy                   (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_destroy                   (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
-Frees all memory used by the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
+Frees all memory used by the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_input_file ()">
+<div class="refsect2">
 <a name="g-scanner-input-file"></a><h3>g_scanner_input_file ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_input_file                (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_input_file                (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="type">gint</span></a> input_fd</code></em>);</pre>
 <p>
 Prepares to scan a file.
@@ -511,21 +495,19 @@ Prepares to scan a file.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>input_fd</code></em> :</span></p></td>
-<td>a file descriptor.
-</td>
+<td>a file descriptor.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_sync_file_offset ()">
+<div class="refsect2">
 <a name="g-scanner-sync-file-offset"></a><h3>g_scanner_sync_file_offset ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_sync_file_offset          (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_sync_file_offset          (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
 Rewinds the filedescriptor to the current buffer position and blows
 the file read ahead buffer. This is useful for third party uses of
@@ -536,15 +518,14 @@ position.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_input_text ()">
+<div class="refsect2">
 <a name="g-scanner-input-text"></a><h3>g_scanner_input_text ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_input_text                (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_input_text                (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *text</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> text_len</code></em>);</pre>
 <p>
@@ -555,33 +536,30 @@ Prepares to scan a text buffer.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>text</code></em> :</span></p></td>
-<td>the text buffer to scan.
-</td>
+<td>the text buffer to scan.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>text_len</code></em> :</span></p></td>
-<td>the length of the text buffer.
-</td>
+<td>the length of the text buffer.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_peek_next_token ()">
+<div class="refsect2">
 <a name="g-scanner-peek-next-token"></a><h3>g_scanner_peek_next_token ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          g_scanner_peek_next_token           (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          g_scanner_peek_next_token           (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
 Parses the next token, without removing it from the input stream.
 The token data is placed in the
 <em class="structfield"><code>next_token</code></em>,
 <em class="structfield"><code>next_value</code></em>,
 <em class="structfield"><code>next_line</code></em>, and
-<em class="structfield"><code>next_position</code></em> fields of the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> structure.
+<em class="structfield"><code>next_position</code></em> fields of the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> structure.
 </p>
 <p>
 Note that, while the token is not removed from the input stream (i.e.
@@ -597,21 +575,19 @@ have been added or removed in the new scope.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the type of the token.
-</td>
+<td>the type of the token.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_get_next_token ()">
+<div class="refsect2">
 <a name="g-scanner-get-next-token"></a><h3>g_scanner_get_next_token ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          g_scanner_get_next_token            (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          g_scanner_get_next_token            (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
 Parses the next token just like <a class="link" href="glib-Lexical-Scanner.html#g-scanner-peek-next-token" title="g_scanner_peek_next_token ()"><code class="function">g_scanner_peek_next_token()</code></a> and also
 removes it from the input stream.
@@ -619,28 +595,26 @@ The token data is placed in the
 <em class="structfield"><code>token</code></em>,
 <em class="structfield"><code>value</code></em>,
 <em class="structfield"><code>line</code></em>, and
-<em class="structfield"><code>position</code></em> fields of the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> structure.
+<em class="structfield"><code>position</code></em> fields of the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> structure.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the type of the token.
-</td>
+<td>the type of the token.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_eof ()">
+<div class="refsect2">
 <a name="g-scanner-eof"></a><h3>g_scanner_eof ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_scanner_eof                       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_scanner_eof                       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
 Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the scanner has reached the end of the file or text buffer.
 </p>
@@ -649,22 +623,20 @@ Returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the scanner has reached the end of the file or text buffer.
-</td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the scanner has reached the end of the file or text buffer.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_cur_line ()">
+<div class="refsect2">
 <a name="g-scanner-cur-line"></a><h3>g_scanner_cur_line ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_scanner_cur_line                  (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_scanner_cur_line                  (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
 Returns the current line in the input stream (counting from 1).
 This is the line of the last token parsed via <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>.
@@ -674,21 +646,19 @@ This is the line of the last token parsed via <a class="link" href="glib-Lexical
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the current line.
-</td>
+<td>the current line.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_cur_position ()">
+<div class="refsect2">
 <a name="g-scanner-cur-position"></a><h3>g_scanner_cur_position ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_scanner_cur_position              (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_scanner_cur_position              (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
 Returns the current position in the current line (counting from 0).
 This is the position of the last token parsed via <a class="link" href="glib-Lexical-Scanner.html#g-scanner-get-next-token" title="g_scanner_get_next_token ()"><code class="function">g_scanner_get_next_token()</code></a>.
@@ -698,24 +668,22 @@ This is the position of the last token parsed via <a class="link" href="glib-Lex
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the current position on the line.
-</td>
+<td>the current position on the line.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_cur_token ()">
+<div class="refsect2">
 <a name="g-scanner-cur-token"></a><h3>g_scanner_cur_token ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          g_scanner_cur_token                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="returnvalue">GTokenType</span></a>          g_scanner_cur_token                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
 Gets the current token type.
-This is simply the <em class="structfield"><code>token</code></em> field in the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>
+This is simply the <em class="structfield"><code>token</code></em> field in the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>
 structure.
 </p>
 <div class="variablelist"><table border="0">
@@ -723,24 +691,22 @@ structure.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the current token type.
-</td>
+<td>the current token type.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_cur_value ()">
+<div class="refsect2">
 <a name="g-scanner-cur-value"></a><h3>g_scanner_cur_value ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GTokenValue" title="union GTokenValue"><span class="returnvalue">GTokenValue</span></a>         g_scanner_cur_value                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Lexical-Scanner.html#GTokenValue" title="union GTokenValue"><span class="returnvalue">GTokenValue</span></a>         g_scanner_cur_value                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>);</pre>
 <p>
 Gets the current token value.
-This is simply the <em class="structfield"><code>value</code></em> field in the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>
+This is simply the <em class="structfield"><code>value</code></em> field in the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>
 structure.
 </p>
 <div class="variablelist"><table border="0">
@@ -748,21 +714,19 @@ structure.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the current token value.
-</td>
+<td>the current token value.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_set_scope ()">
+<div class="refsect2">
 <a name="g-scanner-set-scope"></a><h3>g_scanner_set_scope ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_scanner_set_scope                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="returnvalue">guint</span></a>               g_scanner_set_scope                 (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>);</pre>
 <p>
 Sets the current scope.
@@ -772,26 +736,23 @@ Sets the current scope.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scope_id</code></em> :</span></p></td>
-<td>the new scope id.
-</td>
+<td>the new scope id.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the old scope id.
-</td>
+<td>the old scope id.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_scope_add_symbol ()">
+<div class="refsect2">
 <a name="g-scanner-scope-add-symbol"></a><h3>g_scanner_scope_add_symbol ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_scope_add_symbol          (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_scope_add_symbol          (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> value</code></em>);</pre>
@@ -803,37 +764,33 @@ Adds a symbol to the given scope.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scope_id</code></em> :</span></p></td>
-<td>the scope id.
-</td>
+<td>the scope id.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>symbol</code></em> :</span></p></td>
-<td>the symbol to add.
-</td>
+<td>the symbol to add.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value of the symbol.
-</td>
+<td>the value of the symbol.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_scope_foreach_symbol ()">
+<div class="refsect2">
 <a name="g-scanner-scope-foreach-symbol"></a><h3>g_scanner_scope_foreach_symbol ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_scope_foreach_symbol      (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_scope_foreach_symbol      (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Hash-Tables.html#GHFunc" title="GHFunc ()"><span class="type">GHFunc</span></a> func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
 Calls the given function for each of the symbol/value pairs in the
-given scope of the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>. The function is passed the symbol and
+given scope of the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>. The function is passed the symbol and
 value of each pair, and the given <em class="parameter"><code>user_data</code></em> parameter.
 </p>
 <div class="variablelist"><table border="0">
@@ -841,31 +798,27 @@ value of each pair, and the given <em class="parameter"><code>user_data</code></
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scope_id</code></em> :</span></p></td>
-<td>the scope id.
-</td>
+<td>the scope id.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td>the function to call for each symbol/value pair.
-</td>
+<td>the function to call for each symbol/value pair.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data to pass to the function.
-</td>
+<td>user data to pass to the function.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_scope_lookup_symbol ()">
+<div class="refsect2">
 <a name="g-scanner-scope-lookup-symbol"></a><h3>g_scanner_scope_lookup_symbol ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_scanner_scope_lookup_symbol       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_scanner_scope_lookup_symbol       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol</code></em>);</pre>
 <p>
@@ -877,32 +830,28 @@ symbol is not bound in the scope, <a class="link" href="glib-Standard-Macros.htm
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scope_id</code></em> :</span></p></td>
-<td>the scope id.
-</td>
+<td>the scope id.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>symbol</code></em> :</span></p></td>
-<td>the symbol to look up.
-</td>
+<td>the symbol to look up.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>the value of <em class="parameter"><code>symbol</code></em> in the given scope, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
-if <em class="parameter"><code>symbol</code></em> is not bound in the given scope.
-</td>
+if <em class="parameter"><code>symbol</code></em> is not bound in the given scope.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_scope_remove_symbol ()">
+<div class="refsect2">
 <a name="g-scanner-scope-remove-symbol"></a><h3>g_scanner_scope_remove_symbol ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_scope_remove_symbol       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_scope_remove_symbol       (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> scope_id</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol</code></em>);</pre>
 <p>
@@ -913,27 +862,24 @@ Removes a symbol from a scope.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scope_id</code></em> :</span></p></td>
-<td>the scope id.
-</td>
+<td>the scope id.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>symbol</code></em> :</span></p></td>
-<td>the symbol to remove.
-</td>
+<td>the symbol to remove.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_add_symbol()">
+<div class="refsect2">
 <a name="g-scanner-add-symbol"></a><h3>g_scanner_add_symbol()</h3>
 <pre class="programlisting">#define             g_scanner_add_symbol( scanner, symbol, value )</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_scanner_add_symbol</code> has been deprecated since version 2.2 and should not be used in newly-written code. Use <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-add-symbol" title="g_scanner_scope_add_symbol ()"><code class="function">g_scanner_scope_add_symbol()</code></a> instead.</p>
 </div>
@@ -945,27 +891,24 @@ Adds a symbol to the default scope.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>symbol</code></em> :</span></p></td>
-<td>the symbol to add.
-</td>
+<td>the symbol to add.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value of the symbol.
-</td>
+<td>the value of the symbol.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_remove_symbol()">
+<div class="refsect2">
 <a name="g-scanner-remove-symbol"></a><h3>g_scanner_remove_symbol()</h3>
 <pre class="programlisting">#define             g_scanner_remove_symbol( scanner, symbol )</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_scanner_remove_symbol</code> has been deprecated since version 2.2 and should not be used in newly-written code. Use <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-remove-symbol" title="g_scanner_scope_remove_symbol ()"><code class="function">g_scanner_scope_remove_symbol()</code></a> instead.</p>
 </div>
@@ -977,22 +920,20 @@ Removes a symbol from the default scope.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>symbol</code></em> :</span></p></td>
-<td>the symbol to remove.
-</td>
+<td>the symbol to remove.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_foreach_symbol()">
+<div class="refsect2">
 <a name="g-scanner-foreach-symbol"></a><h3>g_scanner_foreach_symbol()</h3>
 <pre class="programlisting">#define             g_scanner_foreach_symbol( scanner, func, data )</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_scanner_foreach_symbol</code> has been deprecated since version 2.2 and should not be used in newly-written code. Use <a class="link" href="glib-Lexical-Scanner.html#g-scanner-scope-foreach-symbol" title="g_scanner_scope_foreach_symbol ()"><code class="function">g_scanner_scope_foreach_symbol()</code></a> instead.</p>
 </div>
@@ -1004,27 +945,24 @@ Calls a function for each symbol in the default scope.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td>the function to call with each symbol.
-</td>
+<td>the function to call with each symbol.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>data to pass to the function.
-</td>
+<td>data to pass to the function.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_freeze_symbol_table()">
+<div class="refsect2">
 <a name="g-scanner-freeze-symbol-table"></a><h3>g_scanner_freeze_symbol_table()</h3>
 <pre class="programlisting">#define             g_scanner_freeze_symbol_table(scanner)</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_scanner_freeze_symbol_table</code> has been deprecated since version 2.2 and should not be used in newly-written code. This macro does nothing.</p>
 </div>
@@ -1035,16 +973,15 @@ There is no reason to use this macro, since it does nothing.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_thaw_symbol_table()">
+<div class="refsect2">
 <a name="g-scanner-thaw-symbol-table"></a><h3>g_scanner_thaw_symbol_table()</h3>
 <pre class="programlisting">#define             g_scanner_thaw_symbol_table(scanner)</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_scanner_thaw_symbol_table</code> has been deprecated since version 2.2 and should not be used in newly-written code. This macro does nothing.</p>
 </div>
@@ -1055,15 +992,14 @@ There is no reason to use this macro, since it does nothing.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_lookup_symbol ()">
+<div class="refsect2">
 <a name="g-scanner-lookup-symbol"></a><h3>g_scanner_lookup_symbol ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_scanner_lookup_symbol             (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_scanner_lookup_symbol             (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol</code></em>);</pre>
 <p>
 Looks up a symbol in the current scope and return its value. If the
@@ -1074,89 +1010,80 @@ symbol is not bound in the current scope, <a class="link" href="glib-Standard-Ma
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>symbol</code></em> :</span></p></td>
-<td>the symbol to look up.
-</td>
+<td>the symbol to look up.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>the value of <em class="parameter"><code>symbol</code></em> in the current scope, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
-if <em class="parameter"><code>symbol</code></em> is not bound in the current scope.
-</td>
+if <em class="parameter"><code>symbol</code></em> is not bound in the current scope.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_warn ()">
+<div class="refsect2">
 <a name="g-scanner-warn"></a><h3>g_scanner_warn ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_warn                      (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_warn                      (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);</pre>
 <p>
-Outputs a warning message, via the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> message handler.
+Outputs a warning message, via the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> message handler.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
 <td>the message format. See the <code class="function"><code class="function">printf()</code></code>
-documentation.
-</td>
+documentation.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>the parameters to insert into the format string.
-</td>
+<td>the parameters to insert into the format string.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_error ()">
+<div class="refsect2">
 <a name="g-scanner-error"></a><h3>g_scanner_error ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_error                     (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_error                     (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *format</code></em>,
                                                          <em class="parameter"><code>...</code></em>);</pre>
 <p>
-Outputs an error message, via the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> message handler.
+Outputs an error message, via the <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> message handler.
 </p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
 <td>the message format. See the <code class="function"><code class="function">printf()</code></code>
-documentation.
-</td>
+documentation.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>the parameters to insert into the format string.
-</td>
+<td>the parameters to insert into the format string.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_scanner_unexp_token ()">
+<div class="refsect2">
 <a name="g-scanner-unexp-token"></a><h3>g_scanner_unexp_token ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_unexp_token               (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_scanner_unexp_token               (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GTokenType" title="enum GTokenType"><span class="type">GTokenType</span></a> expected_token</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *identifier_spec</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *symbol_spec</code></em>,
@@ -1177,54 +1104,47 @@ of the message.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>expected_token</code></em> :</span></p></td>
-<td>the expected token.
-</td>
+<td>the expected token.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>identifier_spec</code></em> :</span></p></td>
 <td>a string describing how the scanner's user refers to
-                  identifiers (<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> defaults to "identifier").
-                  This is used if <em class="parameter"><code>expected_token</code></em> is <span class="type">G_TOKEN_IDENTIFIER</span>
-                  or <span class="type">G_TOKEN_IDENTIFIER_NULL</span>.
-</td>
+identifiers (<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> defaults to "identifier").
+This is used if <em class="parameter"><code>expected_token</code></em> is <span class="type">G_TOKEN_IDENTIFIER</span>
+or <span class="type">G_TOKEN_IDENTIFIER_NULL</span>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>symbol_spec</code></em> :</span></p></td>
 <td>a string describing how the scanner's user refers to
-              symbols (<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> defaults to "symbol").
-              This is used if <em class="parameter"><code>expected_token</code></em> is <span class="type">G_TOKEN_SYMBOL</span> or
-              any token value greater than <span class="type">G_TOKEN_LAST</span>.
-</td>
+symbols (<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> defaults to "symbol").
+This is used if <em class="parameter"><code>expected_token</code></em> is <span class="type">G_TOKEN_SYMBOL</span> or
+any token value greater than <span class="type">G_TOKEN_LAST</span>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>symbol_name</code></em> :</span></p></td>
 <td>the name of the symbol, if the scanner's current token
-              is a symbol.
-</td>
+is a symbol.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
-<td>a message string to output at the end of the warning/error, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
-</td>
+<td>a message string to output at the end of the warning/error, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>is_error</code></em> :</span></p></td>
 <td>if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> it is output as an error. If <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> it is output as a
-           warning.
-</td>
+warning.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GScannerMsgFunc ()">
+<div class="refsect2">
 <a name="GScannerMsgFunc"></a><h3>GScannerMsgFunc ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                (*GScannerMsgFunc)                  (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                (*GScannerMsgFunc)                  (<em class="parameter"><code><a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a> *scanner</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *message</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="type">gboolean</span></a> error</code></em>);</pre>
 <p>
@@ -1235,76 +1155,73 @@ Specifies the type of the message handler function.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>scanner</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="GScanner"><span class="type">GScanner</span></a>.
-</td>
+<td>a <a class="link" href="glib-Lexical-Scanner.html#GScanner" title="struct GScanner"><span class="type">GScanner</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>message</code></em> :</span></p></td>
-<td>the message.
-</td>
+<td>the message.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the message signals an error, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if it 
-  signals a warning.
-</td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the message signals an error, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if it
+signals a warning.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="G_CSET_a_2_z">
+<div class="refsect2">
 <a name="G-CSET-a-2-z"></a><h3>G_CSET_a_2_z</h3>
 <pre class="programlisting">#define G_CSET_a_2_z "abcdefghijklmnopqrstuvwxyz"
 </pre>
 <p>
 The set of lowercase ASCII alphabet characters.
-Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig"><span class="type">GScannerConfig</span></a>.
+Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig"><span class="type">GScannerConfig</span></a>.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_CSET_A_2_Z">
+<div class="refsect2">
 <a name="G-CSET-A-2-Z:CAPS"></a><h3>G_CSET_A_2_Z</h3>
 <pre class="programlisting">#define G_CSET_A_2_Z "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 </pre>
 <p>
 The set of uppercase ASCII alphabet characters.
-Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig"><span class="type">GScannerConfig</span></a>.
+Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig"><span class="type">GScannerConfig</span></a>.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_CSET_DIGITS">
+<div class="refsect2">
 <a name="G-CSET-DIGITS:CAPS"></a><h3>G_CSET_DIGITS</h3>
 <pre class="programlisting">#define G_CSET_DIGITS "0123456789"
 </pre>
 <p>
 The set of digits.
-Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig"><span class="type">GScannerConfig</span></a>.
+Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig"><span class="type">GScannerConfig</span></a>.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_CSET_LATINC">
+<div class="refsect2">
 <a name="G-CSET-LATINC:CAPS"></a><h3>G_CSET_LATINC</h3>
 <pre class="programlisting">#define             G_CSET_LATINC</pre>
 <p>
 The set of uppercase ISO 8859-1 alphabet characters which are
 not ASCII characters.
-Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig"><span class="type">GScannerConfig</span></a>.
+Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig"><span class="type">GScannerConfig</span></a>.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_CSET_LATINS">
+<div class="refsect2">
 <a name="G-CSET-LATINS:CAPS"></a><h3>G_CSET_LATINS</h3>
 <pre class="programlisting">#define             G_CSET_LATINS</pre>
 <p>
 The set of lowercase ISO 8859-1 alphabet characters which are
 not ASCII characters.
-Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="GScannerConfig"><span class="type">GScannerConfig</span></a>.
+Used for specifying valid identifier characters in <a class="link" href="glib-Lexical-Scanner.html#GScannerConfig" title="struct GScannerConfig"><span class="type">GScannerConfig</span></a>.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="enum GTokenType">
+<div class="refsect2">
 <a name="GTokenType"></a><h3>enum GTokenType</h3>
 <pre class="programlisting">typedef enum
 {
@@ -1370,15 +1287,30 @@ The possible types of token returned from each <a class="link" href="glib-Lexica
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="union GTokenValue">
+<div class="refsect2">
 <a name="GTokenValue"></a><h3>union GTokenValue</h3>
-<pre class="programlisting"></pre>
+<pre class="programlisting">union _GTokenValue
+{
+  gpointer v_symbol;
+  gchar		*v_identifier;
+  gulong v_binary;
+  gulong v_octal;
+  gulong v_int;
+  guint64       v_int64;
+  gdouble v_float;
+  gulong v_hex;
+  gchar		*v_string;
+  gchar		*v_comment;
+  guchar v_char;
+  guint		v_error;
+};
+</pre>
 <p>
 A union holding the value of the token.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="enum GErrorType">
+<div class="refsect2">
 <a name="GErrorType"></a><h3>enum GErrorType</h3>
 <pre class="programlisting">typedef enum
 {
@@ -1446,6 +1378,6 @@ of <a class="link" href="glib-Lexical-Scanner.html#GTokenValue" title="union GTo
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

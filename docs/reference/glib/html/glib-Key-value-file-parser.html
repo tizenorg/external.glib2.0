@@ -8,7 +8,7 @@
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Simple-XML-Subset-Parser.html" title="Simple XML Subset Parser">
 <link rel="next" href="glib-Bookmark-file-parser.html" title="Bookmark file parser">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#glib-Key-value-file-parser.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="Key-value file parser">
+<div class="refentry">
 <a name="glib-Key-value-file-parser"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -35,7 +35,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="glib-Key-value-file-parser.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;glib.h&gt;
@@ -52,103 +52,103 @@ enum                <a class="link" href="glib-Key-value-file-parser.html#GKeyFi
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-load-from-file" title="g_key_file_load_from_file ()">g_key_file_load_from_file</a>           (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-load-from-data" title="g_key_file_load_from_data ()">g_key_file_load_from_data</a>           (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *data</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> length</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-load-from-data-dirs" title="g_key_file_load_from_data_dirs ()">g_key_file_load_from_data_dirs</a>      (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **full_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-load-from-dirs" title="g_key_file_load_from_dirs ()">g_key_file_load_from_dirs</a>           (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **search_dirs</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **full_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Key-value-file-parser.html#g-key-file-to-data" title="g_key_file_to_data ()">g_key_file_to_data</a>                  (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-start-group" title="g_key_file_get_start_group ()">g_key_file_get_start_group</a>          (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-groups" title="g_key_file_get_groups ()">g_key_file_get_groups</a>               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-keys" title="g_key_file_get_keys ()">g_key_file_get_keys</a>                 (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-has-group" title="g_key_file_has_group ()">g_key_file_has_group</a>                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-has-key" title="g_key_file_has_key ()">g_key_file_has_key</a>                  (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-value" title="g_key_file_get_value ()">g_key_file_get_value</a>                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-string" title="g_key_file_get_string ()">g_key_file_get_string</a>               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-locale-string" title="g_key_file_get_locale_string ()">g_key_file_get_locale_string</a>        (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *locale</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-boolean" title="g_key_file_get_boolean ()">g_key_file_get_boolean</a>              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-integer" title="g_key_file_get_integer ()">g_key_file_get_integer</a>              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gint64" title="gint64"><span class="returnvalue">gint64</span></a>              <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-int64" title="g_key_file_get_int64 ()">g_key_file_get_int64</a>                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#guint64" title="guint64"><span class="returnvalue">guint64</span></a>             <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-uint64" title="g_key_file_get_uint64 ()">g_key_file_get_uint64</a>               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gdouble" title="gdouble"><span class="returnvalue">gdouble</span></a>             <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-double" title="g_key_file_get_double ()">g_key_file_get_double</a>               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-string-list" title="g_key_file_get_string_list ()">g_key_file_get_string_list</a>          (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-locale-string-list" title="g_key_file_get_locale_string_list ()">g_key_file_get_locale_string_list</a>   (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *locale</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> *          <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-boolean-list" title="g_key_file_get_boolean_list ()">g_key_file_get_boolean_list</a>         (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> *              <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-integer-list" title="g_key_file_get_integer_list ()">g_key_file_get_integer_list</a>         (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gdouble" title="gdouble"><span class="returnvalue">gdouble</span></a> *           <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-double-list" title="g_key_file_get_double_list ()">g_key_file_get_double_list</a>          (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-comment" title="g_key_file_get_comment ()">g_key_file_get_comment</a>              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 
 <span class="returnvalue">void</span>                <a class="link" href="glib-Key-value-file-parser.html#g-key-file-set-value" title="g_key_file_set_value ()">g_key_file_set_value</a>                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -213,18 +213,18 @@ enum                <a class="link" href="glib-Key-value-file-parser.html#GKeyFi
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *comment</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-remove-group" title="g_key_file_remove_group ()">g_key_file_remove_group</a>             (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-remove-key" title="g_key_file_remove_key ()">g_key_file_remove_key</a>               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Key-value-file-parser.html#g-key-file-remove-comment" title="g_key_file_remove_comment ()">g_key_file_remove_comment</a>           (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);
 
 #define             <a class="link" href="glib-Key-value-file-parser.html#G-KEY-FILE-DESKTOP-GROUP:CAPS" title="G_KEY_FILE_DESKTOP_GROUP">G_KEY_FILE_DESKTOP_GROUP</a>
 #define             <a class="link" href="glib-Key-value-file-parser.html#G-KEY-FILE-DESKTOP-KEY-TYPE:CAPS" title="G_KEY_FILE_DESKTOP_KEY_TYPE">G_KEY_FILE_DESKTOP_KEY_TYPE</a>
@@ -251,7 +251,7 @@ enum                <a class="link" href="glib-Key-value-file-parser.html#GKeyFi
 #define             <a class="link" href="glib-Key-value-file-parser.html#G-KEY-FILE-DESKTOP-TYPE-DIRECTORY:CAPS" title="G_KEY_FILE_DESKTOP_TYPE_DIRECTORY">G_KEY_FILE_DESKTOP_TYPE_DIRECTORY</a>
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="glib-Key-value-file-parser.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> lets you parse, edit or create files containing groups of
@@ -365,9 +365,9 @@ Another difference is that keys and group names in key files are not
 restricted to ASCII characters.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="glib-Key-value-file-parser.details"></a><h2>Details</h2>
-<div class="refsect2" title="GKeyFile">
+<div class="refsect2">
 <a name="GKeyFile"></a><h3>GKeyFile</h3>
 <pre class="programlisting">typedef struct _GKeyFile GKeyFile;</pre>
 <p>
@@ -376,18 +376,18 @@ and should not be used directly.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_ERROR">
+<div class="refsect2">
 <a name="G-KEY-FILE-ERROR:CAPS"></a><h3>G_KEY_FILE_ERROR</h3>
 <pre class="programlisting">#define G_KEY_FILE_ERROR g_key_file_error_quark()
 </pre>
 <p>
 Error domain for key file parsing. Errors in this domain will
-be from the <a class="link" href="glib-Key-value-file-parser.html#GKeyFileError" title="enum GKeyFileError"><span class="type">GKeyFileError</span></a> enumeration. See <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> for information on
+be from the <a class="link" href="glib-Key-value-file-parser.html#GKeyFileError" title="enum GKeyFileError"><span class="type">GKeyFileError</span></a> enumeration. See <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> for information on
 error domains.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="enum GKeyFileError">
+<div class="refsect2">
 <a name="GKeyFileError"></a><h3>enum GKeyFileError</h3>
 <pre class="programlisting">typedef enum
 {
@@ -439,7 +439,7 @@ Error codes returned by key file parsing.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="enum GKeyFileFlags">
+<div class="refsect2">
 <a name="GKeyFileFlags"></a><h3>enum GKeyFileFlags</h3>
 <pre class="programlisting">typedef enum
 {
@@ -477,7 +477,7 @@ Flags which influence the parsing.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_new ()">
+<div class="refsect2">
 <a name="g-key-file-new"></a><h3>g_key_file_new ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="returnvalue">GKeyFile</span></a> *          g_key_file_new                      (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
@@ -490,15 +490,13 @@ read an existing key file.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a>.
-
-</td>
+<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a>.</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_free ()">
+<div class="refsect2">
 <a name="g-key-file-free"></a><h3>g_key_file_free ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_free                     (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>);</pre>
 <p>
@@ -515,7 +513,7 @@ Frees a <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="G
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_list_separator ()">
+<div class="refsect2">
 <a name="g-key-file-set-list-separator"></a><h3>g_key_file_set_list_separator ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_list_separator       (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> separator</code></em>);</pre>
@@ -529,25 +527,24 @@ as separators. The default list separator is ';'.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_file</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> 
+<td>a <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>separator</code></em> :</span></p></td>
-<td>the separator
-</td>
+<td>the separator</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_load_from_file ()">
+<div class="refsect2">
 <a name="g-key-file-load-from-file"></a><h3>g_key_file_load_from_file ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_load_from_file           (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Loads a key file into an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> structure.
 If the file could not be loaded then <code class="literal">error</code> is set to 
@@ -558,13 +555,11 @@ either a <a class="link" href="glib-File-Utilities.html#GFileError" title="enum 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_file</code></em> :</span></p></td>
-<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> struct
-</td>
+<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> struct</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
-<td>the path of a filename to load, in the GLib filename encoding
-</td>
+<td>the path of a filename to load, in the GLib filename encoding</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
@@ -573,27 +568,26 @@ either a <a class="link" href="glib-File-Utilities.html#GFileError" title="enum 
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a key file could be loaded, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a key file could be loaded, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_load_from_data ()">
+<div class="refsect2">
 <a name="g-key-file-load-from-data"></a><h3>g_key_file_load_from_data ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_load_from_data           (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *data</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> length</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Loads a key file from memory into an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> structure.  
 If the object cannot be created then <code class="literal">error</code> is set to a <a class="link" href="glib-Key-value-file-parser.html#GKeyFileError" title="enum GKeyFileError"><span class="type">GKeyFileError</span></a>.
@@ -603,18 +597,15 @@ If the object cannot be created then <code class="literal">error</code> is set t
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_file</code></em> :</span></p></td>
-<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> struct
-</td>
+<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> struct</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>key file loaded in memory
-</td>
+<td>key file loaded in memory</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>the length of <em class="parameter"><code>data</code></em> in bytes
-</td>
+<td>the length of <em class="parameter"><code>data</code></em> in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
@@ -623,27 +614,26 @@ If the object cannot be created then <code class="literal">error</code> is set t
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a key file could be loaded, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a key file could be loaded, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_load_from_data_dirs ()">
+<div class="refsect2">
 <a name="g-key-file-load-from-data-dirs"></a><h3>g_key_file_load_from_data_dirs ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_load_from_data_dirs      (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **full_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 This function looks for a key file named <em class="parameter"><code>file</code></em> in the paths 
 returned from <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-user-data-dir" title="g_get_user_data_dir ()"><code class="function">g_get_user_data_dir()</code></a> and <a class="link" href="glib-Miscellaneous-Utility-Functions.html#g-get-system-data-dirs" title="g_get_system_data_dirs ()"><code class="function">g_get_system_data_dirs()</code></a>, 
@@ -656,48 +646,46 @@ set to either a <a class="link" href="glib-File-Utilities.html#GFileError" title
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_file</code></em> :</span></p></td>
-<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> struct
-</td>
+<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> struct</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
-<td>a relative path to a filename to open and parse
-</td>
+<td>a relative path to a filename to open and parse</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>full_path</code></em> :</span></p></td>
 <td>return location for a string containing the full path
-  of the file, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+of the file, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>flags from <a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> 
+<td>flags from <a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a key file could be loaded, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> othewise
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a key file could be loaded, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> othewise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_load_from_dirs ()">
+<div class="refsect2">
 <a name="g-key-file-load-from-dirs"></a><h3>g_key_file_load_from_dirs ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_load_from_dirs           (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **search_dirs</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> **full_path</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFileFlags" title="enum GKeyFileFlags"><span class="type">GKeyFileFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 This function looks for a key file named <em class="parameter"><code>file</code></em> in the paths
 specified in <em class="parameter"><code>search_dirs</code></em>, loads the file into <em class="parameter"><code>key_file</code></em> and
@@ -710,24 +698,21 @@ be loaded then an <code class="literal">error</code> is set to either a <a class
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_file</code></em> :</span></p></td>
-<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> struct
-</td>
+<td>an empty <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> struct</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>file</code></em> :</span></p></td>
-<td>a relative path to a filename to open and parse
-</td>
+<td>a relative path to a filename to open and parse</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>search_dirs</code></em> :</span></p></td>
 <td>
-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of directories to search
-</td>
+<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of directories to search</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>full_path</code></em> :</span></p></td>
 <td>return location for a string containing the full path
-  of the file, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+of the file, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
@@ -737,25 +722,24 @@ be loaded then an <code class="literal">error</code> is set to either a <a class
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a key file could be loaded, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if a key file could be loaded, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_to_data ()">
+<div class="refsect2">
 <a name="g-key-file-to-data"></a><h3>g_key_file_to_data ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_key_file_to_data                  (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 This function outputs <em class="parameter"><code>key_file</code></em> as a string.  
 </p>
@@ -773,20 +757,19 @@ so it is safe to pass <a class="link" href="glib-Standard-Macros.html#NULL:CAPS"
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>return location for the length of the 
-  returned string, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for the length of the
+returned string, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a newly allocated string holding
-  the contents of the <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> 
-
+<td>a newly allocated string holding
+the contents of the <a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a>
 </td>
 </tr>
 </tbody>
@@ -794,7 +777,7 @@ so it is safe to pass <a class="link" href="glib-Standard-Macros.html#NULL:CAPS"
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_start_group ()">
+<div class="refsect2">
 <a name="g-key-file-get-start-group"></a><h3>g_key_file_get_start_group ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_key_file_get_start_group          (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>);</pre>
 <p>
@@ -810,16 +793,14 @@ Returns the name of the start group of the file.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> The start group of the key file.
-
-</td>
+<td>The start group of the key file.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_groups ()">
+<div class="refsect2">
 <a name="g-key-file-get-groups"></a><h3>g_key_file_get_groups ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            g_key_file_get_groups               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>);</pre>
@@ -843,21 +824,20 @@ The array of returned groups will be <a class="link" href="glib-Standard-Macros.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a newly-allocated <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of strings. 
-  Use <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a> to free it.
-</td>
+<td>a newly-allocated <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of strings.
+Use <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a> to free it.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_keys ()">
+<div class="refsect2">
 <a name="g-key-file-get-keys"></a><h3>g_key_file_get_keys ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            g_key_file_get_keys                 (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns all keys for the group name <em class="parameter"><code>group_name</code></em>.  The array of
 returned keys will be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated, so <em class="parameter"><code>length</code></em> may
@@ -875,8 +855,7 @@ be found, <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
@@ -885,22 +864,20 @@ be found, <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a newly-allocated <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of strings. 
-    Use <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a> to free it.
-
-</td>
+<td>a newly-allocated <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of strings.
+Use <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a> to free it.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_has_group ()">
+<div class="refsect2">
 <a name="g-key-file-has-group"></a><h3>g_key_file_has_group ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_has_group                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>);</pre>
@@ -917,26 +894,25 @@ Looks whether the key file has the group <em class="parameter"><code>group_name<
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>group_name</code></em> is a part of <em class="parameter"><code>key_file</code></em>, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>
-otherwise.
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>group_name</code></em> is a part of <em class="parameter"><code>key_file</code></em>, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>
+otherwise.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_has_key ()">
+<div class="refsect2">
 <a name="g-key-file-has-key"></a><h3>g_key_file_has_key ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_has_key                  (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Looks whether the key file has the key <em class="parameter"><code>key</code></em> in the group
 <em class="parameter"><code>group_name</code></em>.
@@ -951,37 +927,34 @@ Looks whether the key file has the key <em class="parameter"><code>key</code></e
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key name
-</td>
+<td>a key name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>key</code></em> is a part of <em class="parameter"><code>group_name</code></em>, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>
-otherwise.
-
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if <em class="parameter"><code>key</code></em> is a part of <em class="parameter"><code>group_name</code></em>, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a>
+otherwise.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_value ()">
+<div class="refsect2">
 <a name="g-key-file-get-value"></a><h3>g_key_file_get_value ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_key_file_get_value                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the raw value associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em>. 
 Use <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-string" title="g_key_file_get_string ()"><code class="function">g_key_file_get_string()</code></a> to retrieve an unescaped UTF-8 string. 
@@ -1002,37 +975,33 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a newly allocated string or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the specified 
- key cannot be found.
-
-</td>
+<td>a newly allocated string or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the specified
+key cannot be found.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_string ()">
+<div class="refsect2">
 <a name="g-key-file-get-string"></a><h3>g_key_file_get_string ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_key_file_get_string               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the string value associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em>.
 Unlike <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-value" title="g_key_file_get_value ()"><code class="function">g_key_file_get_value()</code></a>, this function handles escape sequences
@@ -1054,38 +1023,34 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a newly allocated string or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the specified 
-  key cannot be found.
-
-</td>
+<td>a newly allocated string or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the specified
+key cannot be found.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_locale_string ()">
+<div class="refsect2">
 <a name="g-key-file-get-locale-string"></a><h3>g_key_file_get_locale_string ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_key_file_get_locale_string        (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *locale</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the value associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em>
 translated in the given <em class="parameter"><code>locale</code></em> if available.  If <em class="parameter"><code>locale</code></em> is
@@ -1107,13 +1072,11 @@ be found then the untranslated value is returned.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>locale</code></em> :</span></p></td>
@@ -1122,27 +1085,25 @@ be found then the untranslated value is returned.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a newly allocated string or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the specified 
-  key cannot be found.
-
-</td>
+<td>a newly allocated string or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the specified
+key cannot be found.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_boolean ()">
+<div class="refsect2">
 <a name="g-key-file-get-boolean"></a><h3>g_key_file_get_boolean ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_get_boolean              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the value associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em> as a
 boolean. 
@@ -1163,37 +1124,33 @@ is returned and <em class="parameter"><code>error</code></em> is set to <a class
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the value associated with the key as a boolean, 
-   or <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if the key was not found or could not be parsed.
-
-</td>
+<td>the value associated with the key as a boolean,
+or <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> if the key was not found or could not be parsed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_integer ()">
+<div class="refsect2">
 <a name="g-key-file-get-integer"></a><h3>g_key_file_get_integer ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_key_file_get_integer              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the value associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em> as an
 integer. 
@@ -1214,37 +1171,33 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the value associated with the key as an integer, or
-    0 if the key was not found or could not be parsed.
-
-</td>
+<td>the value associated with the key as an integer, or
+0 if the key was not found or could not be parsed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_int64 ()">
+<div class="refsect2">
 <a name="g-key-file-get-int64"></a><h3>g_key_file_get_int64 ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint64" title="gint64"><span class="returnvalue">gint64</span></a>              g_key_file_get_int64                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the value associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em> as a signed
 64-bit integer. This is similar to <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-integer" title="g_key_file_get_integer ()"><code class="function">g_key_file_get_integer()</code></a> but can return
@@ -1260,37 +1213,33 @@ Returns the value associated with <em class="parameter"><code>key</code></em> un
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> group name
-</td>
+<td>a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> key
-</td>
+<td>a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the value associated with the key as a signed 64-bit integer, or
-0 if the key was not found or could not be parsed.
-
-</td>
+<td>the value associated with the key as a signed 64-bit integer, or
+0 if the key was not found or could not be parsed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_uint64 ()">
+<div class="refsect2">
 <a name="g-key-file-get-uint64"></a><h3>g_key_file_get_uint64 ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#guint64" title="guint64"><span class="returnvalue">guint64</span></a>             g_key_file_get_uint64               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the value associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em> as an unsigned
 64-bit integer. This is similar to <a class="link" href="glib-Key-value-file-parser.html#g-key-file-get-integer" title="g_key_file_get_integer ()"><code class="function">g_key_file_get_integer()</code></a> but can return
@@ -1306,37 +1255,33 @@ large positive results without truncation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> group name
-</td>
+<td>a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> key
-</td>
+<td>a non-<a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the value associated with the key as an unsigned 64-bit integer,
-or 0 if the key was not found or could not be parsed.
-
-</td>
+<td>the value associated with the key as an unsigned 64-bit integer,
+or 0 if the key was not found or could not be parsed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_double ()">
+<div class="refsect2">
 <a name="g-key-file-get-double"></a><h3>g_key_file_get_double ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gdouble" title="gdouble"><span class="returnvalue">gdouble</span></a>             g_key_file_get_double               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the value associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em> as a
 double. If <em class="parameter"><code>group_name</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>, the start_group is used.
@@ -1357,38 +1302,34 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the value associated with the key as a double, or
-    0.0 if the key was not found or could not be parsed.
-
-</td>
+<td>the value associated with the key as a double, or
+0.0 if the key was not found or could not be parsed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.12</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_string_list ()">
+<div class="refsect2">
 <a name="g-key-file-get-string-list"></a><h3>g_key_file_get_string_list ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            g_key_file_get_string_list          (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the values associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em>.
 </p>
@@ -1408,13 +1349,11 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
@@ -1423,29 +1362,27 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated string array or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the specified 
-  key cannot be found. The array should be freed with <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>.
-
-</td>
+<td>a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated string array or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the specified
+key cannot be found. The array should be freed with <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_locale_string_list ()">
+<div class="refsect2">
 <a name="g-key-file-get-locale-string-list"></a><h3>g_key_file_get_locale_string_list ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> **            g_key_file_get_locale_string_list   (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *locale</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the values associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em>
 translated in the given <em class="parameter"><code>locale</code></em> if available.  If <em class="parameter"><code>locale</code></em> is
@@ -1469,13 +1406,11 @@ be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>locale</code></em> :</span></p></td>
@@ -1489,29 +1424,27 @@ be <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a newly allocated <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated string array
-  or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key isn't found. The string array should be freed
-  with <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>.
-
-</td>
+<td>a newly allocated <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated string array
+or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key isn't found. The string array should be freed
+with <a class="link" href="glib-String-Utility-Functions.html#g-strfreev" title="g_strfreev ()"><code class="function">g_strfreev()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_boolean_list ()">
+<div class="refsect2">
 <a name="g-key-file-get-boolean-list"></a><h3>g_key_file_get_boolean_list ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a> *          g_key_file_get_boolean_list         (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the values associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em> as
 booleans. 
@@ -1532,43 +1465,38 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>the number of booleans returned
-</td>
+<td>the number of booleans returned</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the values associated with the key as a list of
-   booleans, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key was not found or could not be parsed.
-
-</td>
+<td>the values associated with the key as a list of
+booleans, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key was not found or could not be parsed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_integer_list ()">
+<div class="refsect2">
 <a name="g-key-file-get-integer-list"></a><h3>g_key_file_get_integer_list ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a> *              g_key_file_get_integer_list         (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the values associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em> as
 integers. 
@@ -1589,43 +1517,38 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>the number of integers returned
-</td>
+<td>the number of integers returned</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the values associated with the key as a list of
-    integers, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key was not found or could not be parsed.
-
-</td>
+<td>the values associated with the key as a list of
+integers, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key was not found or could not be parsed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_double_list ()">
+<div class="refsect2">
 <a name="g-key-file-get-double-list"></a><h3>g_key_file_get_double_list ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gdouble" title="gdouble"><span class="returnvalue">gdouble</span></a> *           g_key_file_get_double_list          (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> *length</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Returns the values associated with <em class="parameter"><code>key</code></em> under <em class="parameter"><code>group_name</code></em> as
 doubles. 
@@ -1646,42 +1569,37 @@ and <em class="parameter"><code>error</code></em> is set to <a class="link" href
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td>the number of doubles returned
-</td>
+<td>the number of doubles returned</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the values associated with the key as a list of
-    doubles, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key was not found or could not be parsed.
-
-</td>
+<td>the values associated with the key as a list of
+doubles, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key was not found or could not be parsed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.12</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_get_comment ()">
+<div class="refsect2">
 <a name="g-key-file-get-comment"></a><h3>g_key_file_get_comment ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="returnvalue">gchar</span></a> *             g_key_file_get_comment              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Retrieves a comment above <em class="parameter"><code>key</code></em> from <em class="parameter"><code>group_name</code></em>.
 If <em class="parameter"><code>key</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> then <em class="parameter"><code>comment</code></em> will be read from above 
@@ -1703,18 +1621,16 @@ If <em class="parameter"><code>key</code></em> is <a class="link" href="glib-Sta
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a comment that should be freed with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>
-
+<td>a comment that should be freed with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>
 </td>
 </tr>
 </tbody>
@@ -1722,7 +1638,7 @@ If <em class="parameter"><code>key</code></em> is <a class="link" href="glib-Sta
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_value ()">
+<div class="refsect2">
 <a name="g-key-file-set-value"></a><h3>g_key_file_set_value ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_value                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -1747,25 +1663,22 @@ characters that need escaping (such as newlines or spaces), use
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>a string
-</td>
+<td>a string</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_string ()">
+<div class="refsect2">
 <a name="g-key-file-set-string"></a><h3>g_key_file_set_string ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_string               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -1788,25 +1701,22 @@ that need escaping, such as newlines.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
-<td>a string
-</td>
+<td>a string</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_locale_string ()">
+<div class="refsect2">
 <a name="g-key-file-set-locale-string"></a><h3>g_key_file_set_locale_string ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_locale_string        (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -1827,30 +1737,26 @@ If the translation for <em class="parameter"><code>key</code></em> cannot be fou
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>locale</code></em> :</span></p></td>
-<td>a locale identifier
-</td>
+<td>a locale identifier</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
-<td>a string
-</td>
+<td>a string</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_boolean ()">
+<div class="refsect2">
 <a name="g-key-file-set-boolean"></a><h3>g_key_file_set_boolean ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_boolean              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -1870,13 +1776,11 @@ If <em class="parameter"><code>key</code></em> cannot be found then it is create
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
@@ -1889,7 +1793,7 @@ If <em class="parameter"><code>key</code></em> cannot be found then it is create
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_integer ()">
+<div class="refsect2">
 <a name="g-key-file-set-integer"></a><h3>g_key_file_set_integer ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_integer              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -1909,25 +1813,22 @@ If <em class="parameter"><code>key</code></em> cannot be found then it is create
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>an integer value
-</td>
+<td>an integer value</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_int64 ()">
+<div class="refsect2">
 <a name="g-key-file-set-int64"></a><h3>g_key_file_set_int64 ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_int64                (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -1947,25 +1848,22 @@ If <em class="parameter"><code>key</code></em> cannot be found then it is create
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>an integer value
-</td>
+<td>an integer value</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_uint64 ()">
+<div class="refsect2">
 <a name="g-key-file-set-uint64"></a><h3>g_key_file_set_uint64 ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_uint64               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -1985,25 +1883,22 @@ If <em class="parameter"><code>key</code></em> cannot be found then it is create
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>an integer value
-</td>
+<td>an integer value</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_double ()">
+<div class="refsect2">
 <a name="g-key-file-set-double"></a><h3>g_key_file_set_double ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_double               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -2023,25 +1918,22 @@ If <em class="parameter"><code>key</code></em> cannot be found then it is create
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>an double value
-</td>
+<td>an double value</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.12</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_string_list ()">
+<div class="refsect2">
 <a name="g-key-file-set-string-list"></a><h3>g_key_file_set_string_list ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_string_list          (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -2063,18 +1955,15 @@ If <em class="parameter"><code>group_name</code></em> cannot be found then it is
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>an array of string values
-</td>
+<td>an array of string values</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
@@ -2086,7 +1975,7 @@ If <em class="parameter"><code>group_name</code></em> cannot be found then it is
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_locale_string_list ()">
+<div class="refsect2">
 <a name="g-key-file-set-locale-string-list"></a><h3>g_key_file_set_locale_string_list ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_locale_string_list   (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -2109,23 +1998,19 @@ it is created.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>locale</code></em> :</span></p></td>
-<td>a locale identifier
-</td>
+<td>a locale identifier</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of locale string values
-</td>
+<td>a <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>-terminated array of locale string values</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
@@ -2137,7 +2022,7 @@ it is created.
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_boolean_list ()">
+<div class="refsect2">
 <a name="g-key-file-set-boolean-list"></a><h3>g_key_file_set_boolean_list ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_boolean_list         (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -2159,18 +2044,15 @@ If <em class="parameter"><code>group_name</code></em> is <a class="link" href="g
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>an array of boolean values
-</td>
+<td>an array of boolean values</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
@@ -2182,7 +2064,7 @@ If <em class="parameter"><code>group_name</code></em> is <a class="link" href="g
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_integer_list ()">
+<div class="refsect2">
 <a name="g-key-file-set-integer-list"></a><h3>g_key_file_set_integer_list ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_integer_list         (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -2203,18 +2085,15 @@ If <em class="parameter"><code>key</code></em> cannot be found then it is create
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>an array of integer values
-</td>
+<td>an array of integer values</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
@@ -2226,7 +2105,7 @@ If <em class="parameter"><code>key</code></em> cannot be found then it is create
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_double_list ()">
+<div class="refsect2">
 <a name="g-key-file-set-double-list"></a><h3>g_key_file_set_double_list ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_key_file_set_double_list          (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
@@ -2247,18 +2126,15 @@ Associates a list of double values with <em class="parameter"><code>key</code></
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>list</code></em> :</span></p></td>
-<td>an array of double values
-</td>
+<td>an array of double values</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
@@ -2270,13 +2146,13 @@ Associates a list of double values with <em class="parameter"><code>key</code></
 <p class="since">Since 2.12</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_set_comment ()">
+<div class="refsect2">
 <a name="g-key-file-set-comment"></a><h3>g_key_file_set_comment ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_set_comment              (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *comment</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Places a comment above <em class="parameter"><code>key</code></em> from <em class="parameter"><code>group_name</code></em>.
 If <em class="parameter"><code>key</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> then <em class="parameter"><code>comment</code></em> will be written above <em class="parameter"><code>group_name</code></em>.  
@@ -2298,35 +2174,32 @@ written above the first group in the file.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>comment</code></em> :</span></p></td>
-<td>a comment
-</td>
+<td>a comment</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the comment was written, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the comment was written, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_remove_group ()">
+<div class="refsect2">
 <a name="g-key-file-remove-group"></a><h3>g_key_file_remove_group ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_remove_group             (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Removes the specified group, <em class="parameter"><code>group_name</code></em>, 
 from the key file.
@@ -2341,31 +2214,29 @@ from the key file.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the group was removed, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the group was removed, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_remove_key ()">
+<div class="refsect2">
 <a name="g-key-file-remove-key"></a><h3>g_key_file_remove_key ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_remove_key               (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Removes <em class="parameter"><code>key</code></em> in <em class="parameter"><code>group_name</code></em> from the key file.
 </p>
@@ -2379,36 +2250,33 @@ Removes <em class="parameter"><code>key</code></em> in <em class="parameter"><co
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>group_name</code></em> :</span></p></td>
-<td>a group name
-</td>
+<td>a group name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key name to remove
-</td>
+<td>a key name to remove</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the key was removed, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the key was removed, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="g_key_file_remove_comment ()">
+<div class="refsect2">
 <a name="g-key-file-remove-comment"></a><h3>g_key_file_remove_comment ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_key_file_remove_comment           (<em class="parameter"><code><a class="link" href="glib-Key-value-file-parser.html#GKeyFile" title="GKeyFile"><span class="type">GKeyFile</span></a> *key_file</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *group_name</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *key</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Removes a comment above <em class="parameter"><code>key</code></em> from <em class="parameter"><code>group_name</code></em>.
 If <em class="parameter"><code>key</code></em> is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> then <em class="parameter"><code>comment</code></em> will be removed above <em class="parameter"><code>group_name</code></em>. 
@@ -2430,26 +2298,24 @@ be removed above the first group in the file.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key
-</td>
+<td>a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="GError"><span class="type">GError</span></a>
+<td>return location for a <a class="link" href="glib-Error-Reporting.html#GError" title="struct GError"><span class="type">GError</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the comment was removed, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the comment was removed, <a class="link" href="glib-Standard-Macros.html#FALSE:CAPS" title="FALSE"><code class="literal">FALSE</code></a> otherwise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_GROUP">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-GROUP:CAPS"></a><h3>G_KEY_FILE_DESKTOP_GROUP</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_GROUP                "Desktop Entry"
 </pre>
@@ -2462,7 +2328,7 @@ details about the meanings of the keys below.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_TYPE">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-TYPE:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_TYPE</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_TYPE             "Type"
 </pre>
@@ -2476,7 +2342,7 @@ whose value is a string giving the type of the desktop entry. Usually
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_VERSION">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-VERSION:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_VERSION</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_VERSION          "Version"
 </pre>
@@ -2488,7 +2354,7 @@ Entry Specification used for the desktop entry file.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_NAME">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-NAME:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_NAME</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_NAME             "Name"
 </pre>
@@ -2500,7 +2366,7 @@ desktop entry.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_GENERIC_NAME">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-GENERIC-NAME:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_GENERIC_NAME</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_GENERIC_NAME     "GenericName"
 </pre>
@@ -2512,7 +2378,7 @@ desktop entry.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-NO-DISPLAY:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_NO_DISPLAY       "NoDisplay"
 </pre>
@@ -2524,7 +2390,7 @@ shown in menus.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_COMMENT">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-COMMENT:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_COMMENT</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_COMMENT          "Comment"
 </pre>
@@ -2536,7 +2402,7 @@ entry.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_ICON">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-ICON:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_ICON</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_ICON             "Icon"
 </pre>
@@ -2548,7 +2414,7 @@ displayed for the desktop entry.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_HIDDEN">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-HIDDEN:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_HIDDEN</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_HIDDEN           "Hidden"
 </pre>
@@ -2560,7 +2426,7 @@ deleted by the user.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-ONLY-SHOW-IN:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_ONLY_SHOW_IN     "OnlyShowIn"
 </pre>
@@ -2572,7 +2438,7 @@ should display the desktop entry.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_NOT_SHOW_IN">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-NOT-SHOW-IN:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_NOT_SHOW_IN</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_NOT_SHOW_IN      "NotShowIn"
 </pre>
@@ -2584,7 +2450,7 @@ should not display the desktop entry.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_TRY_EXEC">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-TRY-EXEC:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_TRY_EXEC</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_TRY_EXEC         "TryExec"
 </pre>
@@ -2598,7 +2464,7 @@ type.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_EXEC">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-EXEC:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_EXEC</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_EXEC             "Exec"
 </pre>
@@ -2611,7 +2477,7 @@ type.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_PATH">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-PATH:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_PATH</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_PATH             "Path"
 </pre>
@@ -2624,7 +2490,7 @@ program in. It is only valid for desktop entries with the
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_TERMINAL">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-TERMINAL:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_TERMINAL</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_TERMINAL         "Terminal"
 </pre>
@@ -2637,7 +2503,7 @@ the <code class="literal">Application</code> type.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_MIME_TYPE">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-MIME-TYPE:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_MIME_TYPE</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_MIME_TYPE        "MimeType"
 </pre>
@@ -2649,7 +2515,7 @@ by this desktop entry.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_CATEGORIES">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-CATEGORIES:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_CATEGORIES</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_CATEGORIES       "Categories"
 </pre>
@@ -2661,7 +2527,7 @@ desktop entry should be shown in a menu.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-STARTUP-NOTIFY:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_STARTUP_NOTIFY   "StartupNotify"
 </pre>
@@ -2674,7 +2540,7 @@ Notification Protocol Specification</a>.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-STARTUP-WM-CLASS:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_STARTUP_WM_CLASS "StartupWMClass"
 </pre>
@@ -2687,7 +2553,7 @@ Startup Notification with older applications.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_KEY_URL">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-KEY-URL:CAPS"></a><h3>G_KEY_FILE_DESKTOP_KEY_URL</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_KEY_URL              "URL"
 </pre>
@@ -2699,7 +2565,7 @@ for desktop entries with the <code class="literal">Link</code> type.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_TYPE_APPLICATION">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-TYPE-APPLICATION:CAPS"></a><h3>G_KEY_FILE_DESKTOP_TYPE_APPLICATION</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_TYPE_APPLICATION     "Application"
 </pre>
@@ -2710,7 +2576,7 @@ key for desktop entries representing applications.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_TYPE_LINK">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-TYPE-LINK:CAPS"></a><h3>G_KEY_FILE_DESKTOP_TYPE_LINK</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_TYPE_LINK            "Link"
 </pre>
@@ -2721,7 +2587,7 @@ key for desktop entries representing links to documents.
 <p class="since">Since 2.14</p>
 </div>
 <hr>
-<div class="refsect2" title="G_KEY_FILE_DESKTOP_TYPE_DIRECTORY">
+<div class="refsect2">
 <a name="G-KEY-FILE-DESKTOP-TYPE-DIRECTORY:CAPS"></a><h3>G_KEY_FILE_DESKTOP_TYPE_DIRECTORY</h3>
 <pre class="programlisting">#define G_KEY_FILE_DESKTOP_TYPE_DIRECTORY       "Directory"
 </pre>
@@ -2735,6 +2601,6 @@ key for desktop entries representing directories.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

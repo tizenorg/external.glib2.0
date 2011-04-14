@@ -8,7 +8,7 @@
 <link rel="up" href="networking.html" title="Lowlevel network support">
 <link rel="prev" href="GInetSocketAddress.html" title="GInetSocketAddress">
 <link rel="next" href="GSocketControlMessage.html" title="GSocketControlMessage">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -32,7 +32,7 @@
                   <a href="#GUnixSocketAddress.properties" class="shortcut">Properties</a>
 </td></tr>
 </table>
-<div class="refentry" title="GUnixSocketAddress">
+<div class="refentry">
 <a name="GUnixSocketAddress"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -41,22 +41,22 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GUnixSocketAddress.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
+<a name="GUnixSocketAddressType"></a><pre class="synopsis">
 #include &lt;gio/gunixsocketaddress.h&gt;
 
-                    <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddress-struct" title="GUnixSocketAddress">GUnixSocketAddress</a>;
-enum                <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType">GUnixSocketAddressType</a>;
+struct              <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddress-struct" title="struct GUnixSocketAddress">GUnixSocketAddress</a>;
+enum                <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType">GUnixSocketAddressType</a>;
 <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-new" title="g_unix_socket_address_new ()">g_unix_socket_address_new</a>           (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);
 <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-new-abstract" title="g_unix_socket_address_new_abstract ()">g_unix_socket_address_new_abstract</a>  (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> path_len</code></em>);
 <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-new-with-type" title="g_unix_socket_address_new_with_type ()">g_unix_socket_address_new_with_type</a> (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> path_len</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a> type</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a> type</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-get-is-abstract" title="g_unix_socket_address_get_is_abstract ()">g_unix_socket_address_get_is_abstract</a>
                                                         (<em class="parameter"><code><a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> *address</code></em>);
-<a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType"><span class="returnvalue">GUnixSocketAddressType</span></a>  <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-get-address-type" title="g_unix_socket_address_get_address_type ()">g_unix_socket_address_get_address_type</a>
+<a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType"><span class="returnvalue">GUnixSocketAddressType</span></a>  <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-get-address-type" title="g_unix_socket_address_get_address_type ()">g_unix_socket_address_get_address_type</a>
                                                         (<em class="parameter"><code><a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> *address</code></em>);
 const <span class="returnvalue">char</span> *        <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-get-path" title="g_unix_socket_address_get_path ()">g_unix_socket_address_get_path</a>      (<em class="parameter"><code><a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> *address</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="returnvalue">gsize</span></a>               <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-get-path-len" title="g_unix_socket_address_get_path_len ()">g_unix_socket_address_get_path_len</a>  (<em class="parameter"><code><a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> *address</code></em>);
@@ -64,30 +64,34 @@ const <span class="returnvalue">char</span> *        <a class="link" href="GUnix
                                                         (<em class="parameter"><code><span class="type">void</span></code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GUnixSocketAddress.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----<a class="link" href="GSocketAddress.html" title="GSocketAddress">GSocketAddress</a>
          +----GUnixSocketAddress
 </pre>
+<pre class="synopsis">
+  GEnum
+   +----GUnixSocketAddressType
+</pre>
 </div>
-<div class="refsect1" title="Implemented Interfaces">
+<div class="refsect1">
 <a name="GUnixSocketAddress.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GUnixSocketAddress implements
  <a class="link" href="GSocketConnectable.html" title="GSocketConnectable">GSocketConnectable</a>.</p>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GUnixSocketAddress.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GUnixSocketAddress.html#GUnixSocketAddress--abstract" title='The "abstract" property'>abstract</a>"                 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct Only
-  "<a class="link" href="GUnixSocketAddress.html#GUnixSocketAddress--address-type" title='The "address-type" property'>address-type</a>"             <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a>  : Read / Write / Construct Only
+  "<a class="link" href="GUnixSocketAddress.html#GUnixSocketAddress--address-type" title='The "address-type" property'>address-type</a>"             <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a>  : Read / Write / Construct Only
   "<a class="link" href="GUnixSocketAddress.html#GUnixSocketAddress--path" title='The "path" property'>path</a>"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
   "<a class="link" href="GUnixSocketAddress.html#GUnixSocketAddress--path-as-array" title='The "path-as-array" property'>path-as-array</a>"            <a href="http://library.gnome.org/devel/glib/unstable/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>*           : Read / Write / Construct Only
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GUnixSocketAddress.description"></a><h2>Description</h2>
 <p>
 Support for UNIX-domain (also known as local) sockets.
@@ -108,18 +112,18 @@ the UNIX-specific GIO interfaces, thus you have to use the
 <code class="filename">gio-unix-2.0.pc</code> pkg-config file when using it.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GUnixSocketAddress.details"></a><h2>Details</h2>
-<div class="refsect2" title="GUnixSocketAddress">
-<a name="GUnixSocketAddress-struct"></a><h3>GUnixSocketAddress</h3>
-<pre class="programlisting">typedef struct _GUnixSocketAddress GUnixSocketAddress;</pre>
+<div class="refsect2">
+<a name="GUnixSocketAddress-struct"></a><h3>struct GUnixSocketAddress</h3>
+<pre class="programlisting">struct GUnixSocketAddress;</pre>
 <p>
 A UNIX-domain (local) socket address, corresponding to a
 <span class="type">struct sockaddr_un</span>.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="enum GUnixSocketAddressType">
+<div class="refsect2">
 <a name="GUnixSocketAddressType"></a><h3>enum GUnixSocketAddressType</h3>
 <pre class="programlisting">typedef enum {
   G_UNIX_SOCKET_ADDRESS_INVALID,
@@ -138,7 +142,7 @@ or a socket created with <code class="function">socketpair()</code>).
 </p>
 <p>
 For abstract sockets, there are two incompatible ways of naming
-them: the man pages suggest using the entire <code class="literal">struct
+them; the man pages suggest using the entire <code class="literal">struct
 sockaddr_un</code> as the name, padding the unused parts of the
 <code class="literal">sun_path</code> field with zeroes; this corresponds to
 <a class="link" href="GUnixSocketAddress.html#G-UNIX-SOCKET-ADDRESS-ABSTRACT-PADDED:CAPS"><code class="literal">G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED</code></a>. However, many programs
@@ -180,7 +184,7 @@ smaller length to <code class="function">bind()</code> or <code class="function"
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_unix_socket_address_new ()">
+<div class="refsect2">
 <a name="g-unix-socket-address-new"></a><h3>g_unix_socket_address_new ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    g_unix_socket_address_new           (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);</pre>
 <p>
@@ -195,13 +199,11 @@ use <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-new-abst
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the socket path
-</td>
+<td>the socket path</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a>
-
+<td>a new <a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a>
 </td>
 </tr>
 </tbody>
@@ -209,11 +211,11 @@ use <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-new-abst
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_unix_socket_address_new_abstract ()">
+<div class="refsect2">
 <a name="g-unix-socket-address-new-abstract"></a><h3>g_unix_socket_address_new_abstract ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    g_unix_socket_address_new_abstract  (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> path_len</code></em>);</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_unix_socket_address_new_abstract</code> is deprecated and should not be used in newly-written code. Use <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-new-with-type" title="g_unix_socket_address_new_with_type ()"><code class="function">g_unix_socket_address_new_with_type()</code></a>.</p>
 </div>
@@ -226,29 +228,27 @@ Creates a new <a class="link" href="GUnixSocketAddress.html#G-UNIX-SOCKET-ADDRES
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the abstract name
+<td>the abstract name. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=path_len][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> gchar]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path_len</code></em> :</span></p></td>
-<td>the length of <em class="parameter"><code>path</code></em>, or -1
-</td>
+<td>the length of <em class="parameter"><code>path</code></em>, or -1</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a>
-
+<td>a new <a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_unix_socket_address_new_with_type ()">
+<div class="refsect2">
 <a name="g-unix-socket-address-new-with-type"></a><h3>g_unix_socket_address_new_with_type ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    g_unix_socket_address_new_with_type (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> path_len</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a> type</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a> type</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> of type <em class="parameter"><code>type</code></em> with name <em class="parameter"><code>path</code></em>.
 </p>
@@ -288,23 +288,21 @@ its listening socket.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the name
+<td>the name. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=path_len][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> gchar]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path_len</code></em> :</span></p></td>
-<td>the length of <em class="parameter"><code>path</code></em>, or -1
-</td>
+<td>the length of <em class="parameter"><code>path</code></em>, or -1</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td>a <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a>
+<td>a <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a>
-
+<td>a new <a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a>
 </td>
 </tr>
 </tbody>
@@ -312,11 +310,11 @@ its listening socket.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_unix_socket_address_get_is_abstract ()">
+<div class="refsect2">
 <a name="g-unix-socket-address-get-is-abstract"></a><h3>g_unix_socket_address_get_is_abstract ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_socket_address_get_is_abstract
                                                         (<em class="parameter"><code><a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> *address</code></em>);</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_unix_socket_address_get_is_abstract</code> is deprecated and should not be used in newly-written code. Use <a class="link" href="GUnixSocketAddress.html#g-unix-socket-address-get-address-type" title="g_unix_socket_address_get_address_type ()"><code class="function">g_unix_socket_address_get_address_type()</code></a></p>
 </div>
@@ -333,18 +331,17 @@ Tests if <em class="parameter"><code>address</code></em> is abstract.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the address is abstract, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the address is abstract, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_unix_socket_address_get_address_type ()">
+<div class="refsect2">
 <a name="g-unix-socket-address-get-address-type"></a><h3>g_unix_socket_address_get_address_type ()</h3>
-<pre class="programlisting"><a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType"><span class="returnvalue">GUnixSocketAddressType</span></a>  g_unix_socket_address_get_address_type
+<pre class="programlisting"><a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType"><span class="returnvalue">GUnixSocketAddressType</span></a>  g_unix_socket_address_get_address_type
                                                         (<em class="parameter"><code><a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> *address</code></em>);</pre>
 <p>
 Gets <em class="parameter"><code>address</code></em>'s type.
@@ -359,8 +356,7 @@ Gets <em class="parameter"><code>address</code></em>'s type.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a>
-
+<td>a <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a>
 </td>
 </tr>
 </tbody>
@@ -368,7 +364,7 @@ Gets <em class="parameter"><code>address</code></em>'s type.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_unix_socket_address_get_path ()">
+<div class="refsect2">
 <a name="g-unix-socket-address-get-path"></a><h3>g_unix_socket_address_get_path ()</h3>
 <pre class="programlisting">const <span class="returnvalue">char</span> *        g_unix_socket_address_get_path      (<em class="parameter"><code><a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> *address</code></em>);</pre>
 <p>
@@ -390,8 +386,7 @@ of this string.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the path for <em class="parameter"><code>address</code></em>
-
+<td>the path for <em class="parameter"><code>address</code></em>
 </td>
 </tr>
 </tbody>
@@ -399,7 +394,7 @@ of this string.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_unix_socket_address_get_path_len ()">
+<div class="refsect2">
 <a name="g-unix-socket-address-get-path-len"></a><h3>g_unix_socket_address_get_path_len ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="returnvalue">gsize</span></a>               g_unix_socket_address_get_path_len  (<em class="parameter"><code><a class="link" href="GUnixSocketAddress.html" title="GUnixSocketAddress"><span class="type">GUnixSocketAddress</span></a> *address</code></em>);</pre>
 <p>
@@ -418,16 +413,14 @@ For details, see <a class="link" href="GUnixSocketAddress.html#g-unix-socket-add
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the length of the path
-
-</td>
+<td>the length of the path</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_unix_socket_address_abstract_names_supported ()">
+<div class="refsect2">
 <a name="g-unix-socket-address-abstract-names-supported"></a><h3>g_unix_socket_address_abstract_names_supported ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_unix_socket_address_abstract_names_supported
                                                         (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
@@ -438,20 +431,19 @@ Checks if abstract unix domain socket names are supported.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if supported, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise
-
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if supported, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GUnixSocketAddress.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "abstract" property'>
+<div class="refsect2">
 <a name="GUnixSocketAddress--abstract"></a><h3>The <code class="literal">"abstract"</code> property</h3>
 <pre class="programlisting">  "abstract"                 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct Only</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">GUnixSocketAddress:abstract</code> is deprecated and should not be used in newly-written code. Use <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddress--address-type" title='The "address-type" property'><span class="type">"address-type"</span></a>, which
 distinguishes between zero-padded and non-zero-padded
@@ -463,21 +455,21 @@ Whether or not this is an abstract address
 <p>Default value: FALSE</p>
 </div>
 <hr>
-<div class="refsect2" title='The "address-type" property'>
+<div class="refsect2">
 <a name="GUnixSocketAddress--address-type"></a><h3>The <code class="literal">"address-type"</code> property</h3>
-<pre class="programlisting">  "address-type"             <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType" title="enum GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a>  : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "address-type"             <a class="link" href="GUnixSocketAddress.html#GUnixSocketAddressType"><span class="type">GUnixSocketAddressType</span></a>  : Read / Write / Construct Only</pre>
 <p>The type of UNIX socket address.</p>
 <p>Default value: G_UNIX_SOCKET_ADDRESS_PATH</p>
 </div>
 <hr>
-<div class="refsect2" title='The "path" property'>
+<div class="refsect2">
 <a name="GUnixSocketAddress--path"></a><h3>The <code class="literal">"path"</code> property</h3>
 <pre class="programlisting">  "path"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
 <p>UNIX socket path.</p>
 <p>Default value: NULL</p>
 </div>
 <hr>
-<div class="refsect2" title='The "path-as-array" property'>
+<div class="refsect2">
 <a name="GUnixSocketAddress--path-as-array"></a><h3>The <code class="literal">"path-as-array"</code> property</h3>
 <pre class="programlisting">  "path-as-array"            <a href="http://library.gnome.org/devel/glib/unstable/glib-Byte-Arrays.html#GByteArray"><span class="type">GByteArray</span></a>*           : Read / Write / Construct Only</pre>
 <p>UNIX socket path, as byte array.</p>
@@ -486,6 +478,6 @@ Whether or not this is an abstract address
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

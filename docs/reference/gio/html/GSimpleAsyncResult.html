@@ -8,7 +8,7 @@
 <link rel="up" href="async.html" title="Asynchronous I/O">
 <link rel="prev" href="gio-GIOScheduler.html" title="GIOScheduler">
 <link rel="next" href="conversion.html" title="Data conversion">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -30,7 +30,7 @@
                   <a href="#GSimpleAsyncResult.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
 </td></tr>
 </table>
-<div class="refentry" title="GSimpleAsyncResult">
+<div class="refentry">
 <a name="GSimpleAsyncResult"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -39,7 +39,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GSimpleAsyncResult.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;gio/gio.h&gt;
@@ -137,20 +137,20 @@
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GSimpleAsyncResult.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GSimpleAsyncResult
 </pre>
 </div>
-<div class="refsect1" title="Implemented Interfaces">
+<div class="refsect1">
 <a name="GSimpleAsyncResult.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GSimpleAsyncResult implements
  <a class="link" href="GAsyncResult.html" title="GAsyncResult">GAsyncResult</a>.</p>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GSimpleAsyncResult.description"></a><h2>Description</h2>
 <p>
 Implements <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> for simple cases. Most of the time, this
@@ -435,9 +435,9 @@ using GSimpleAsyncResult looks something like this:
 <p>
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GSimpleAsyncResult.details"></a><h2>Details</h2>
-<div class="refsect2" title="GSimpleAsyncResult">
+<div class="refsect2">
 <a name="GSimpleAsyncResult-struct"></a><h3>GSimpleAsyncResult</h3>
 <pre class="programlisting">typedef struct _GSimpleAsyncResult GSimpleAsyncResult;</pre>
 <p>
@@ -445,7 +445,7 @@ A simple implementation of <a class="link" href="GAsyncResult.html" title="GAsyn
 </p>
 </div>
 <hr>
-<div class="refsect2" title="GSimpleAsyncThreadFunc ()">
+<div class="refsect2">
 <a name="GSimpleAsyncThreadFunc"></a><h3>GSimpleAsyncThreadFunc ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                (*GSimpleAsyncThreadFunc)           (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *res</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
@@ -459,24 +459,21 @@ checks for cancellation.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>.
-</td>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_new ()">
+<div class="refsect2">
 <a name="g-simple-async-result-new"></a><h3>g_simple_async_result_new ()</h3>
 <pre class="programlisting"><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="returnvalue">GSimpleAsyncResult</span></a> * g_simple_async_result_new          (<em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
@@ -490,34 +487,32 @@ Creates a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResu
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data passed to <em class="parameter"><code>callback</code></em>.
+<td>user data passed to <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_tag</code></em> :</span></p></td>
-<td>the asynchronous function.
-</td>
+<td>the asynchronous function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_new_error ()">
+<div class="refsect2">
 <a name="g-simple-async-result-new-error"></a><h3>g_simple_async_result_new_error ()</h3>
 <pre class="programlisting"><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="returnvalue">GSimpleAsyncResult</span></a> * g_simple_async_result_new_error    (<em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
@@ -534,49 +529,44 @@ Creates a new <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsync
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data passed to <em class="parameter"><code>callback</code></em>.
+<td>user data passed to <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>.
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td>an error code.
-</td>
+<td>an error code.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>a string with format characters.
-</td>
+<td>a string with format characters.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>a list of values to insert into <em class="parameter"><code>format</code></em>.
-</td>
+<td>a list of values to insert into <em class="parameter"><code>format</code></em>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_new_from_error ()">
+<div class="refsect2">
 <a name="g-simple-async-result-new-from-error"></a><h3>g_simple_async_result_new_from_error ()</h3>
 <pre class="programlisting"><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="returnvalue">GSimpleAsyncResult</span></a> * g_simple_async_result_new_from_error
                                                         (<em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
@@ -591,17 +581,17 @@ Creates a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResu
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data passed to <em class="parameter"><code>callback</code></em>.
+<td>user data passed to <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -611,14 +601,13 @@ Creates a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResu
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_new_take_error ()">
+<div class="refsect2">
 <a name="g-simple-async-result-new-take-error"></a><h3>g_simple_async_result_new_take_error ()</h3>
 <pre class="programlisting"><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="returnvalue">GSimpleAsyncResult</span></a> * g_simple_async_result_new_take_error
                                                         (<em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
@@ -634,17 +623,17 @@ caller's ownership of <em class="parameter"><code>error</code></em>, so the call
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td> user data passed to <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>user data passed to <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -654,8 +643,7 @@ caller's ownership of <em class="parameter"><code>error</code></em>, so the call
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>
-
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>
 </td>
 </tr>
 </tbody>
@@ -663,7 +651,7 @@ caller's ownership of <em class="parameter"><code>error</code></em>, so the call
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_set_op_res_gpointer ()">
+<div class="refsect2">
 <a name="g-simple-async-result-set-op-res-gpointer"></a><h3>g_simple_async_result_set_op_res_gpointer ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_set_op_res_gpointer
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
@@ -677,24 +665,21 @@ Sets the operation result within the asynchronous result to a pointer.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op_res</code></em> :</span></p></td>
-<td>a pointer result from an asynchronous function.
-</td>
+<td>a pointer result from an asynchronous function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>destroy_op_res</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> function.
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Datasets.html#GDestroyNotify"><span class="type">GDestroyNotify</span></a> function.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_get_op_res_gpointer ()">
+<div class="refsect2">
 <a name="g-simple-async-result-get-op-res-gpointer"></a><h3>g_simple_async_result_get_op_res_gpointer ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_simple_async_result_get_op_res_gpointer
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>);</pre>
@@ -706,19 +691,17 @@ Gets a pointer result as returned by the asynchronous function.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer from the result.
-</td>
+<td>a pointer from the result.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_set_op_res_gssize ()">
+<div class="refsect2">
 <a name="g-simple-async-result-set-op-res-gssize"></a><h3>g_simple_async_result_set_op_res_gssize ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_set_op_res_gssize
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
@@ -732,19 +715,17 @@ the given <em class="parameter"><code>op_res</code></em>.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op_res</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a>.
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="type">gssize</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_get_op_res_gssize ()">
+<div class="refsect2">
 <a name="g-simple-async-result-get-op-res-gssize"></a><h3>g_simple_async_result_get_op_res_gssize ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gssize"><span class="returnvalue">gssize</span></a>              g_simple_async_result_get_op_res_gssize
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>);</pre>
@@ -756,19 +737,17 @@ Gets a gssize from the asynchronous result.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a gssize returned from the asynchronous function.
-</td>
+<td>a gssize returned from the asynchronous function.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_set_op_res_gboolean ()">
+<div class="refsect2">
 <a name="g-simple-async-result-set-op-res-gboolean"></a><h3>g_simple_async_result_set_op_res_gboolean ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_set_op_res_gboolean
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
@@ -781,19 +760,17 @@ Sets the operation result to a boolean within the asynchronous result.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>op_res</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>.
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_get_op_res_gboolean ()">
+<div class="refsect2">
 <a name="g-simple-async-result-get-op-res-gboolean"></a><h3>g_simple_async_result_get_op_res_gboolean ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_simple_async_result_get_op_res_gboolean
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>);</pre>
@@ -805,20 +782,19 @@ Gets the operation result boolean from within the asynchronous result.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the operation's result was <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>
-    if the operation's result was <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>.
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the operation's result was <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>
+if the operation's result was <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_get_source_tag ()">
+<div class="refsect2">
 <a name="g-simple-async-result-get-source-tag"></a><h3>g_simple_async_result_get_source_tag ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_simple_async_result_get_source_tag
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>);</pre>
@@ -830,19 +806,17 @@ Gets the source tag for the <a class="link" href="GSimpleAsyncResult.html" title
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> to the source object for the <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> to the source object for the <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_is_valid ()">
+<div class="refsect2">
 <a name="g-simple-async-result-is-valid"></a><h3>g_simple_async_result_is_valid ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_simple_async_result_is_valid      (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source</code></em>,
@@ -867,31 +841,27 @@ _finish function from which this function is called).
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>the <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> passed to the _finish function.
-</td>
+<td>the <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> passed to the _finish function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source</code></em> :</span></p></td>
-<td>the <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> passed to the _finish function.
-</td>
+<td>the <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> passed to the _finish function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_tag</code></em> :</span></p></td>
-<td>the asynchronous function.
-</td>
+<td>the asynchronous function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><span class="type">TRUE</span></a> if all checks passed or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><span class="type">FALSE</span></a> if any failed.
-
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><span class="type">TRUE</span></a> if all checks passed or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><span class="type">FALSE</span></a> if any failed.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.20</p>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_set_handle_cancellation ()">
+<div class="refsect2">
 <a name="g-simple-async-result-set-handle-cancellation"></a><h3>g_simple_async_result_set_handle_cancellation ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_set_handle_cancellation
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
@@ -904,19 +874,17 @@ Sets whether to handle cancellation within the asynchronous operation.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>handle_cancellation</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>.
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_complete ()">
+<div class="refsect2">
 <a name="g-simple-async-result-complete"></a><h3>g_simple_async_result_complete ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_complete      (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>);</pre>
 <p>
@@ -933,13 +901,12 @@ is needed to complete the call.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_complete_in_idle ()">
+<div class="refsect2">
 <a name="g-simple-async-result-complete-in-idle"></a><h3>g_simple_async_result_complete_in_idle ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_complete_in_idle
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>);</pre>
@@ -955,13 +922,12 @@ is needed to complete the call.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_run_in_thread ()">
+<div class="refsect2">
 <a name="g-simple-async-result-run-in-thread"></a><h3>g_simple_async_result_run_in_thread ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_run_in_thread (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html#GSimpleAsyncThreadFunc" title="GSimpleAsyncThreadFunc ()"><span class="type">GSimpleAsyncThreadFunc</span></a> func</code></em>,
@@ -981,29 +947,26 @@ is needed to run the job and report its completion.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html#GSimpleAsyncThreadFunc" title="GSimpleAsyncThreadFunc ()"><span class="type">GSimpleAsyncThreadFunc</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html#GSimpleAsyncThreadFunc" title="GSimpleAsyncThreadFunc ()"><span class="type">GSimpleAsyncThreadFunc</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>io_priority</code></em> :</span></p></td>
-<td>the io priority of the request.
-</td>
+<td>the io priority of the request.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_set_from_error ()">
+<div class="refsect2">
 <a name="g-simple-async-result-set-from-error"></a><h3>g_simple_async_result_set_from_error ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_set_from_error
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
@@ -1016,20 +979,18 @@ Sets the result from a <a href="http://library.gnome.org/devel/glib/unstable/gli
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_take_error ()">
+<div class="refsect2">
 <a name="g-simple-async-result-take-error"></a><h3>g_simple_async_result_take_error ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_take_error    (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);</pre>
@@ -1055,7 +1016,7 @@ of <em class="parameter"><code>error</code></em>, so the caller does not need to
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_propagate_error ()">
+<div class="refsect2">
 <a name="g-simple-async-result-propagate-error"></a><h3>g_simple_async_result_propagate_error ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_simple_async_result_propagate_error
                                                         (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
@@ -1069,24 +1030,23 @@ a given destination.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>dest</code></em> :</span></p></td>
-<td>a location to propegate the error to.
+<td>a location to propagate the error to. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the error was propagated to <em class="parameter"><code>dest</code></em>. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the error was propagated to <em class="parameter"><code>dest</code></em>. <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_set_error ()">
+<div class="refsect2">
 <a name="g-simple-async-result-set-error"></a><h3>g_simple_async_result_set_error ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_set_error     (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
@@ -1101,34 +1061,29 @@ Sets an error within the asynchronous result without a <a href="http://library.g
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> (usually <a class="link" href="gio-GIOError.html#G-IO-ERROR:CAPS" title="G_IO_ERROR"><span class="type">G_IO_ERROR</span></a>).
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> (usually <a class="link" href="gio-GIOError.html#G-IO-ERROR:CAPS" title="G_IO_ERROR"><span class="type">G_IO_ERROR</span></a>).</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td>an error code.
-</td>
+<td>an error code.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>a formatted error reporting string.
-</td>
+<td>a formatted error reporting string.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>a list of variables to fill in <em class="parameter"><code>format</code></em>.
-</td>
+<td>a list of variables to fill in <em class="parameter"><code>format</code></em>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_result_set_error_va ()">
+<div class="refsect2">
 <a name="g-simple-async-result-set-error-va"></a><h3>g_simple_async_result_set_error_va ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_result_set_error_va  (<em class="parameter"><code><a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a> *simple</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> domain</code></em>,
@@ -1144,34 +1099,29 @@ Unless writing a binding, see <a class="link" href="GSimpleAsyncResult.html#g-si
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>simple</code></em> :</span></p></td>
-<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GSimpleAsyncResult.html" title="GSimpleAsyncResult"><span class="type">GSimpleAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> (usually <a class="link" href="gio-GIOError.html#G-IO-ERROR:CAPS" title="G_IO_ERROR"><span class="type">G_IO_ERROR</span></a>).
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> (usually <a class="link" href="gio-GIOError.html#G-IO-ERROR:CAPS" title="G_IO_ERROR"><span class="type">G_IO_ERROR</span></a>).</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td>an error code.
-</td>
+<td>an error code.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>a formatted error reporting string.
-</td>
+<td>a formatted error reporting string.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>args</code></em> :</span></p></td>
-<td>va_list of arguments.
-</td>
+<td>va_list of arguments.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_report_error_in_idle ()">
+<div class="refsect2">
 <a name="g-simple-async-report-error-in-idle"></a><h3>g_simple_async_report_error_in_idle ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_report_error_in_idle (<em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
@@ -1190,44 +1140,38 @@ information.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.
-</td>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data passed to <em class="parameter"><code>callback</code></em>.
-</td>
+<td>user data passed to <em class="parameter"><code>callback</code></em>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> containing the error domain (usually <a class="link" href="gio-GIOError.html#G-IO-ERROR:CAPS" title="G_IO_ERROR"><span class="type">G_IO_ERROR</span></a>).
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a> containing the error domain (usually <a class="link" href="gio-GIOError.html#G-IO-ERROR:CAPS" title="G_IO_ERROR"><span class="type">G_IO_ERROR</span></a>).</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>code</code></em> :</span></p></td>
-<td>a specific error code.
-</td>
+<td>a specific error code.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>a formatted error reporting string.
-</td>
+<td>a formatted error reporting string.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
-<td>a list of variables to fill in <em class="parameter"><code>format</code></em>.
-</td>
+<td>a list of variables to fill in <em class="parameter"><code>format</code></em>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_report_gerror_in_idle ()">
+<div class="refsect2">
 <a name="g-simple-async-report-gerror-in-idle"></a><h3>g_simple_async_report_gerror_in_idle ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_report_gerror_in_idle
                                                         (<em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
@@ -1244,29 +1188,28 @@ than building a new one.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data passed to <em class="parameter"><code>callback</code></em>.
+<td>user data passed to <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> to report
-</td>
+<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> to report</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_simple_async_report_take_gerror_in_idle ()">
+<div class="refsect2">
 <a name="g-simple-async-report-take-gerror-in-idle"></a><h3>g_simple_async_report_take_gerror_in_idle ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_simple_async_report_take_gerror_in_idle
                                                         (<em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *object</code></em>,
@@ -1283,36 +1226,33 @@ ownership of <em class="parameter"><code>error</code></em>, so the caller does n
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.
-</td>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data passed to <em class="parameter"><code>callback</code></em>.
-</td>
+<td>user data passed to <em class="parameter"><code>callback</code></em>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> to report
-</td>
+<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> to report</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
+<div class="refsect1">
 <a name="GSimpleAsyncResult.see-also"></a><h2>See Also</h2>
 <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

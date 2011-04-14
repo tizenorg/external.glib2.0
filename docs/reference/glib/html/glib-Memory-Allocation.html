@@ -8,7 +8,7 @@
 <link rel="up" href="glib-core.html" title="GLib Core Application Support">
 <link rel="prev" href="glib-Dynamic-Loading-of-Modules.html" title="Dynamic Loading of Modules">
 <link rel="next" href="glib-IO-Channels.html" title="IO Channels">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#glib-Memory-Allocation.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="Memory Allocation">
+<div class="refentry">
 <a name="glib-Memory-Allocation"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -35,7 +35,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="glib-Memory-Allocation.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;glib.h&gt;
@@ -91,22 +91,22 @@ extern              gboolean <a class="link" href="glib-Memory-Allocation.html#g
 <a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="glib-Memory-Allocation.html#g-memdup" title="g_memdup ()">g_memdup</a>                            (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> mem</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> byte_size</code></em>);
 
-                    <a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="GMemVTable">GMemVTable</a>;
-<span class="returnvalue">void</span>                <a class="link" href="glib-Memory-Allocation.html#g-mem-set-vtable" title="g_mem_set_vtable ()">g_mem_set_vtable</a>                    (<em class="parameter"><code><a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="GMemVTable"><span class="type">GMemVTable</span></a> *vtable</code></em>);
+struct              <a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="struct GMemVTable">GMemVTable</a>;
+<span class="returnvalue">void</span>                <a class="link" href="glib-Memory-Allocation.html#g-mem-set-vtable" title="g_mem_set_vtable ()">g_mem_set_vtable</a>                    (<em class="parameter"><code><a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="struct GMemVTable"><span class="type">GMemVTable</span></a> *vtable</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Memory-Allocation.html#g-mem-is-system-malloc" title="g_mem_is_system_malloc ()">g_mem_is_system_malloc</a>              (<em class="parameter"><code><span class="type">void</span></code></em>);
 
 extern              GMemVTable	*<a class="link" href="glib-Memory-Allocation.html#glib-mem-profiler-table" title="glib_mem_profiler_table">glib_mem_profiler_table</a>;
 <span class="returnvalue">void</span>                <a class="link" href="glib-Memory-Allocation.html#g-mem-profile" title="g_mem_profile ()">g_mem_profile</a>                       (<em class="parameter"><code><span class="type">void</span></code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="glib-Memory-Allocation.description"></a><h2>Description</h2>
 <p>
 These functions provide support for allocating and freeing memory.
 </p>
 <p>
 </p>
-<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 If any call to allocate memory fails, the application is terminated.
 This also means that there is no need to check if the call succeeded.
@@ -115,7 +115,7 @@ This also means that there is no need to check if the call succeeded.
 </p>
 <p>
 </p>
-<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 It's important to match <a class="link" href="glib-Memory-Allocation.html#g-malloc" title="g_malloc ()"><code class="function">g_malloc()</code></a> with <a class="link" href="glib-Memory-Allocation.html#g-free" title="g_free ()"><code class="function">g_free()</code></a>, plain <code class="function">malloc()</code> with <code class="function">free()</code>,
 and (if you're using C++) new with delete and new[] with delete[]. Otherwise
@@ -126,9 +126,9 @@ pools (and new/delete call constructors and destructors). See also
 <p>
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="glib-Memory-Allocation.details"></a><h2>Details</h2>
-<div class="refsect2" title="g_new()">
+<div class="refsect2">
 <a name="g-new"></a><h3>g_new()</h3>
 <pre class="programlisting">#define             g_new(struct_type, n_structs)</pre>
 <p>
@@ -147,24 +147,22 @@ so might hide memory allocation errors.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>struct_type</code></em> :</span></p></td>
-<td>the type of the elements to allocate
-</td>
+<td>the type of the elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_structs</code></em> :</span></p></td>
-<td>the number of elements to allocate
-</td>
+<td>the number of elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td>a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_new0()">
+<div class="refsect2">
 <a name="g-new0"></a><h3>g_new0()</h3>
 <pre class="programlisting">#define             g_new0(struct_type, n_structs)</pre>
 <p>
@@ -183,24 +181,21 @@ so might hide memory allocation errors.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>struct_type</code></em> :</span></p></td>
-<td>the type of the elements to allocate.
-</td>
+<td>the type of the elements to allocate.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_structs</code></em> :</span></p></td>
-<td>the number of elements to allocate.
-</td>
+<td>the number of elements to allocate.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>.
-</td>
+<td>a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_renew()">
+<div class="refsect2">
 <a name="g-renew"></a><h3>g_renew()</h3>
 <pre class="programlisting">#define             g_renew(struct_type, mem, n_structs)</pre>
 <p>
@@ -214,29 +209,26 @@ Care is taken to avoid overflow when calculating the size of the allocated block
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>struct_type</code></em> :</span></p></td>
-<td>the type of the elements to allocate
-</td>
+<td>the type of the elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>the currently allocated memory
-</td>
+<td>the currently allocated memory</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_structs</code></em> :</span></p></td>
-<td>the number of elements to allocate
-</td>
+<td>the number of elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the new allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td>a pointer to the new allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_try_new()">
+<div class="refsect2">
 <a name="g-try-new"></a><h3>g_try_new()</h3>
 <pre class="programlisting">#define             g_try_new(struct_type, n_structs)</pre>
 <p>
@@ -250,17 +242,15 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>struct_type</code></em> :</span></p></td>
-<td>the type of the elements to allocate
-</td>
+<td>the type of the elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_structs</code></em> :</span></p></td>
-<td>the number of elements to allocate
-</td>
+<td>the number of elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td>a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -268,7 +258,7 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 <p class="since">Since 2.8</p>
 </div>
 <hr>
-<div class="refsect2" title="g_try_new0()">
+<div class="refsect2">
 <a name="g-try-new0"></a><h3>g_try_new0()</h3>
 <pre class="programlisting">#define             g_try_new0(struct_type, n_structs)</pre>
 <p>
@@ -283,17 +273,15 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>struct_type</code></em> :</span></p></td>
-<td>the type of the elements to allocate
-</td>
+<td>the type of the elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_structs</code></em> :</span></p></td>
-<td>the number of elements to allocate
-</td>
+<td>the number of elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td>a pointer to the allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -301,7 +289,7 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 <p class="since">Since 2.8</p>
 </div>
 <hr>
-<div class="refsect2" title="g_try_renew()">
+<div class="refsect2">
 <a name="g-try-renew"></a><h3>g_try_renew()</h3>
 <pre class="programlisting">#define             g_try_renew(struct_type, mem, n_structs)</pre>
 <p>
@@ -316,22 +304,19 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>struct_type</code></em> :</span></p></td>
-<td>the type of the elements to allocate
-</td>
+<td>the type of the elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>the currently allocated memory
-</td>
+<td>the currently allocated memory</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_structs</code></em> :</span></p></td>
-<td>the number of elements to allocate
-</td>
+<td>the number of elements to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the new allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
+<td>a pointer to the new allocated memory, cast to a pointer to <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
@@ -339,7 +324,7 @@ The function returns <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" 
 <p class="since">Since 2.8</p>
 </div>
 <hr>
-<div class="refsect2" title="g_malloc ()">
+<div class="refsect2">
 <a name="g-malloc"></a><h3>g_malloc ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_malloc                            (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_bytes</code></em>);</pre>
 <p>
@@ -351,19 +336,17 @@ If <em class="parameter"><code>n_bytes</code></em> is 0 it returns <a class="lin
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_bytes</code></em> :</span></p></td>
-<td>the number of bytes to allocate
-</td>
+<td>the number of bytes to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the allocated memory
-</td>
+<td>a pointer to the allocated memory</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_malloc0 ()">
+<div class="refsect2">
 <a name="g-malloc0"></a><h3>g_malloc0 ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_malloc0                           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_bytes</code></em>);</pre>
 <p>
@@ -375,19 +358,17 @@ If <em class="parameter"><code>n_bytes</code></em> is 0 it returns <a class="lin
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_bytes</code></em> :</span></p></td>
-<td>the number of bytes to allocate
-</td>
+<td>the number of bytes to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the allocated memory
-</td>
+<td>a pointer to the allocated memory</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_realloc ()">
+<div class="refsect2">
 <a name="g-realloc"></a><h3>g_realloc ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_realloc                           (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> mem</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_bytes</code></em>);</pre>
@@ -403,24 +384,21 @@ and <em class="parameter"><code>mem</code></em> will be freed unless it is <a cl
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>the memory to reallocate
-</td>
+<td>the memory to reallocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_bytes</code></em> :</span></p></td>
-<td>new size of the memory in bytes
-</td>
+<td>new size of the memory in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new address of the allocated memory
-</td>
+<td>the new address of the allocated memory</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_try_malloc ()">
+<div class="refsect2">
 <a name="g-try-malloc"></a><h3>g_try_malloc ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_try_malloc                        (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_bytes</code></em>);</pre>
 <p>
@@ -432,19 +410,17 @@ Contrast with <a class="link" href="glib-Memory-Allocation.html#g-malloc" title=
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_bytes</code></em> :</span></p></td>
-<td>number of bytes to allocate.
-</td>
+<td>number of bytes to allocate.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
-</td>
+<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_try_malloc0 ()">
+<div class="refsect2">
 <a name="g-try-malloc0"></a><h3>g_try_malloc0 ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_try_malloc0                       (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_bytes</code></em>);</pre>
 <p>
@@ -456,12 +432,11 @@ failure. Contrast with <a class="link" href="glib-Memory-Allocation.html#g-mallo
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_bytes</code></em> :</span></p></td>
-<td>number of bytes to allocate
-</td>
+<td>number of bytes to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 </tbody>
@@ -469,7 +444,7 @@ failure. Contrast with <a class="link" href="glib-Memory-Allocation.html#g-mallo
 <p class="since">Since 2.8</p>
 </div>
 <hr>
-<div class="refsect2" title="g_try_realloc ()">
+<div class="refsect2">
 <a name="g-try-realloc"></a><h3>g_try_realloc ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_try_realloc                       (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> mem</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_bytes</code></em>);</pre>
@@ -483,24 +458,21 @@ on failure. If <em class="parameter"><code>mem</code></em> is <a class="link" hr
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>previously-allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
-</td>
+<td>previously-allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_bytes</code></em> :</span></p></td>
-<td>number of bytes to allocate.
-</td>
+<td>number of bytes to allocate.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
-</td>
+<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_malloc_n ()">
+<div class="refsect2">
 <a name="g-malloc-n"></a><h3>g_malloc_n ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_malloc_n                          (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_blocks</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_block_bytes</code></em>);</pre>
@@ -513,25 +485,22 @@ but care is taken to detect possible overflow during multiplication.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_blocks</code></em> :</span></p></td>
-<td>the number of blocks to allocate
-</td>
+<td>the number of blocks to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_block_bytes</code></em> :</span></p></td>
-<td>the size of each block in bytes
-</td>
+<td>the size of each block in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the allocated memory
-</td>
+<td>a pointer to the allocated memory</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title="g_malloc0_n ()">
+<div class="refsect2">
 <a name="g-malloc0-n"></a><h3>g_malloc0_n ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_malloc0_n                         (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_blocks</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_block_bytes</code></em>);</pre>
@@ -544,25 +513,22 @@ but care is taken to detect possible overflow during multiplication.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_blocks</code></em> :</span></p></td>
-<td>the number of blocks to allocate
-</td>
+<td>the number of blocks to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_block_bytes</code></em> :</span></p></td>
-<td>the size of each block in bytes
-</td>
+<td>the size of each block in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the allocated memory
-</td>
+<td>a pointer to the allocated memory</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title="g_realloc_n ()">
+<div class="refsect2">
 <a name="g-realloc-n"></a><h3>g_realloc_n ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_realloc_n                         (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> mem</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_blocks</code></em>,
@@ -576,30 +542,26 @@ but care is taken to detect possible overflow during multiplication.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>the memory to reallocate
-</td>
+<td>the memory to reallocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_blocks</code></em> :</span></p></td>
-<td>the number of blocks to allocate
-</td>
+<td>the number of blocks to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_block_bytes</code></em> :</span></p></td>
-<td>the size of each block in bytes
-</td>
+<td>the size of each block in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new address of the allocated memory
-</td>
+<td>the new address of the allocated memory</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title="g_try_malloc_n ()">
+<div class="refsect2">
 <a name="g-try-malloc-n"></a><h3>g_try_malloc_n ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_try_malloc_n                      (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_blocks</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_block_bytes</code></em>);</pre>
@@ -612,25 +574,22 @@ but care is taken to detect possible overflow during multiplication.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_blocks</code></em> :</span></p></td>
-<td>the number of blocks to allocate
-</td>
+<td>the number of blocks to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_block_bytes</code></em> :</span></p></td>
-<td>the size of each block in bytes
-</td>
+<td>the size of each block in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
-</td>
+<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title="g_try_malloc0_n ()">
+<div class="refsect2">
 <a name="g-try-malloc0-n"></a><h3>g_try_malloc0_n ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_try_malloc0_n                     (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_blocks</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_block_bytes</code></em>);</pre>
@@ -643,17 +602,15 @@ but care is taken to detect possible overflow during multiplication.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_blocks</code></em> :</span></p></td>
-<td>the number of blocks to allocate
-</td>
+<td>the number of blocks to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_block_bytes</code></em> :</span></p></td>
-<td>the size of each block in bytes
-</td>
+<td>the size of each block in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
+<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>
 </td>
 </tr>
 </tbody>
@@ -661,7 +618,7 @@ but care is taken to detect possible overflow during multiplication.
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title="g_try_realloc_n ()">
+<div class="refsect2">
 <a name="g-try-realloc-n"></a><h3>g_try_realloc_n ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_try_realloc_n                     (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> mem</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> n_blocks</code></em>,
@@ -675,30 +632,26 @@ but care is taken to detect possible overflow during multiplication.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>previously-allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
-</td>
+<td>previously-allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_blocks</code></em> :</span></p></td>
-<td>the number of blocks to allocate
-</td>
+<td>the number of blocks to allocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_block_bytes</code></em> :</span></p></td>
-<td>the size of each block in bytes
-</td>
+<td>the size of each block in bytes</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
-</td>
+<td>the allocated memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title="g_free ()">
+<div class="refsect2">
 <a name="g-free"></a><h3>g_free ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_free                              (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> mem</code></em>);</pre>
 <p>
@@ -709,13 +662,12 @@ If <em class="parameter"><code>mem</code></em> is <a class="link" href="glib-Sta
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>the memory to free
-</td>
+<td>the memory to free</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_mem_gc_friendly">
+<div class="refsect2">
 <a name="g-mem-gc-friendly"></a><h3>g_mem_gc_friendly</h3>
 <pre class="programlisting">extern gboolean g_mem_gc_friendly;
 </pre>
@@ -725,7 +677,7 @@ includes the key <a class="link" href="glib-running.html#G_DEBUG" title="G_DEBUG
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_alloca()">
+<div class="refsect2">
 <a name="g-alloca"></a><h3>g_alloca()</h3>
 <pre class="programlisting">#define             g_alloca(size)</pre>
 <p>
@@ -786,19 +738,17 @@ Thus it provides the same advantages and pitfalls as <code class="function">allo
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
-<td>number of bytes to allocate.
-</td>
+<td>number of bytes to allocate.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> space for <em class="parameter"><code>size</code></em> bytes, allocated on the stack
-</td>
+<td>space for <em class="parameter"><code>size</code></em> bytes, allocated on the stack</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_newa()">
+<div class="refsect2">
 <a name="g-newa"></a><h3>g_newa()</h3>
 <pre class="programlisting">#define             g_newa(struct_type, n_structs)</pre>
 <p>
@@ -809,24 +759,22 @@ Wraps <a class="link" href="glib-Memory-Allocation.html#g-alloca" title="g_alloc
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>struct_type</code></em> :</span></p></td>
-<td>Type of memory chunks to be allocated
-</td>
+<td>Type of memory chunks to be allocated</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_structs</code></em> :</span></p></td>
-<td>Number of chunks to be allocated
-</td>
+<td>Number of chunks to be allocated</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> Pointer to stack space for <em class="parameter"><code>n_structs</code></em> chunks of type <em class="parameter"><code>struct_type</code></em>
+<td>Pointer to stack space for <em class="parameter"><code>n_structs</code></em> chunks of type <em class="parameter"><code>struct_type</code></em>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_memmove()">
+<div class="refsect2">
 <a name="g-memmove"></a><h3>g_memmove()</h3>
 <pre class="programlisting">#define             g_memmove(dest,src,len)</pre>
 <p>
@@ -844,24 +792,21 @@ typically simply resolve to <code class="function">memmove()</code> and GLib doe
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>dest</code></em> :</span></p></td>
-<td>the destination address to copy the bytes to.
-</td>
+<td>the destination address to copy the bytes to.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>src</code></em> :</span></p></td>
-<td>the source address to copy the bytes from.
-</td>
+<td>the source address to copy the bytes from.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>len</code></em> :</span></p></td>
-<td>the number of bytes to copy.
-</td>
+<td>the number of bytes to copy.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_memdup ()">
+<div class="refsect2">
 <a name="g-memdup"></a><h3>g_memdup ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_memdup                            (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> mem</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> byte_size</code></em>);</pre>
@@ -874,27 +819,24 @@ from <em class="parameter"><code>mem</code></em>. If <em class="parameter"><code
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mem</code></em> :</span></p></td>
-<td>the memory to copy.
-</td>
+<td>the memory to copy.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>byte_size</code></em> :</span></p></td>
-<td>the number of bytes to copy.
-</td>
+<td>the number of bytes to copy.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the newly-allocated copy of the memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if <em class="parameter"><code>mem</code></em>
- is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.
-</td>
+<td>a pointer to the newly-allocated copy of the memory, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if <em class="parameter"><code>mem</code></em>
+is <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GMemVTable">
-<a name="GMemVTable"></a><h3>GMemVTable</h3>
-<pre class="programlisting">typedef struct {
+<div class="refsect2">
+<a name="GMemVTable"></a><h3>struct GMemVTable</h3>
+<pre class="programlisting">struct GMemVTable {
   gpointer (*malloc)      (gsize    n_bytes);
   gpointer (*realloc)     (gpointer mem,
 			   gsize    n_bytes);
@@ -905,10 +847,10 @@ from <em class="parameter"><code>mem</code></em>. If <em class="parameter"><code
   gpointer (*try_malloc)  (gsize    n_bytes);
   gpointer (*try_realloc) (gpointer mem,
 			   gsize    n_bytes);
-} GMemVTable;
+};
 </pre>
 <p>
-A set of functions used to perform memory allocation. The same <a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="GMemVTable"><span class="type">GMemVTable</span></a> must
+A set of functions used to perform memory allocation. The same <a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="struct GMemVTable"><span class="type">GMemVTable</span></a> must
 be used for all allocations in the same program; a call to <a class="link" href="glib-Memory-Allocation.html#g-mem-set-vtable" title="g_mem_set_vtable ()"><code class="function">g_mem_set_vtable()</code></a>,
 if it exists, should be prior to any use of GLib.
 </p>
@@ -917,43 +859,37 @@ if it exists, should be prior to any use of GLib.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMemVTable.malloc"></a>malloc</code></em> ()</span></p></td>
-<td>function to use for allocating memory.
-</td>
+<td>function to use for allocating memory.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMemVTable.realloc"></a>realloc</code></em> ()</span></p></td>
-<td>function to use for reallocating memory.
-</td>
+<td>function to use for reallocating memory.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMemVTable.free"></a>free</code></em> ()</span></p></td>
-<td>function to use to free memory.
-</td>
+<td>function to use to free memory.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMemVTable.calloc"></a>calloc</code></em> ()</span></p></td>
-<td>function to use for allocating zero-filled memory.
-</td>
+<td>function to use for allocating zero-filled memory.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMemVTable.try-malloc"></a>try_malloc</code></em> ()</span></p></td>
-<td>function to use for allocating memory without a default error handler.
-</td>
+<td>function to use for allocating memory without a default error handler.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GMemVTable.try-realloc"></a>try_realloc</code></em> ()</span></p></td>
-<td>function to use for reallocating memory without a default error handler.
-</td>
+<td>function to use for reallocating memory without a default error handler.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_mem_set_vtable ()">
+<div class="refsect2">
 <a name="g-mem-set-vtable"></a><h3>g_mem_set_vtable ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_mem_set_vtable                    (<em class="parameter"><code><a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="GMemVTable"><span class="type">GMemVTable</span></a> *vtable</code></em>);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                g_mem_set_vtable                    (<em class="parameter"><code><a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="struct GMemVTable"><span class="type">GMemVTable</span></a> *vtable</code></em>);</pre>
 <p>
-Sets the <a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="GMemVTable"><span class="type">GMemVTable</span></a> to use for memory allocation. You can use this to provide
+Sets the <a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="struct GMemVTable"><span class="type">GMemVTable</span></a> to use for memory allocation. You can use this to provide
 custom memory allocation routines. <span class="emphasis"><em>This function must be called
 before using any other GLib functions.</em></span> The <em class="parameter"><code>vtable</code></em> only needs to
 provide <code class="function">malloc()</code>, <code class="function">realloc()</code>, and <code class="function">free()</code> functions; GLib can provide default
@@ -965,13 +901,12 @@ should return <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>vtable</code></em> :</span></p></td>
-<td>table of memory allocation routines.
-</td>
+<td>table of memory allocation routines.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_mem_is_system_malloc ()">
+<div class="refsect2">
 <a name="g-mem-is-system-malloc"></a><h3>g_mem_is_system_malloc ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_mem_is_system_malloc              (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
@@ -988,25 +923,24 @@ A different allocator can be set using <a class="link" href="glib-Memory-Allocat
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, <code class="function">malloc()</code> and <a class="link" href="glib-Memory-Allocation.html#g-malloc" title="g_malloc ()"><code class="function">g_malloc()</code></a> can be mixed.
-</td>
+<td>if <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, <code class="function">malloc()</code> and <a class="link" href="glib-Memory-Allocation.html#g-malloc" title="g_malloc ()"><code class="function">g_malloc()</code></a> can be mixed.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="glib_mem_profiler_table">
+<div class="refsect2">
 <a name="glib-mem-profiler-table"></a><h3>glib_mem_profiler_table</h3>
 <pre class="programlisting">extern GMemVTable *glib_mem_profiler_table;
 </pre>
 <p>
-A <a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="GMemVTable"><span class="type">GMemVTable</span></a> containing profiling variants of the memory
+A <a class="link" href="glib-Memory-Allocation.html#GMemVTable" title="struct GMemVTable"><span class="type">GMemVTable</span></a> containing profiling variants of the memory
 allocation functions. Use them together with <a class="link" href="glib-Memory-Allocation.html#g-mem-profile" title="g_mem_profile ()"><code class="function">g_mem_profile()</code></a>
 in order to get information about the memory allocation pattern
 of your program.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_mem_profile ()">
+<div class="refsect2">
 <a name="g-mem-profile"></a><h3>g_mem_profile ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_mem_profile                       (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
@@ -1028,6 +962,6 @@ previously installed the <a class="link" href="glib-Memory-Allocation.html#glib-
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

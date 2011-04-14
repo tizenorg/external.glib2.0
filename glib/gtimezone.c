@@ -205,7 +205,7 @@ g_time_zone_ref (GTimeZone *tz)
  *  - hh is 00 to 23
  *  - mm is 00 to 59
  */
-gboolean
+static gboolean
 parse_time (const gchar *time,
             gint32      *offset)
 {
@@ -241,7 +241,7 @@ parse_time (const gchar *time,
   return *time == '\0';
 }
 
-gboolean
+static gboolean
 parse_constant_offset (const gchar *name,
                        gint32      *offset)
 {

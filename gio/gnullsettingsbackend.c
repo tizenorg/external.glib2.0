@@ -21,7 +21,8 @@
 
 #include "config.h"
 
-#include "gnullsettingsbackend.h"
+#include "gsettingsbackendinternal.h"
+#include "giomodule.h"
 #include "gsimplepermission.h"
 
 
@@ -34,10 +35,11 @@
 typedef GSettingsBackendClass GNullSettingsBackendClass;
 typedef GSettingsBackend      GNullSettingsBackend;
 
-static GType g_null_settings_backend_get_type (void);
-G_DEFINE_TYPE (GNullSettingsBackend,
-               g_null_settings_backend,
-               G_TYPE_SETTINGS_BACKEND)
+G_DEFINE_TYPE_WITH_CODE (GNullSettingsBackend,
+                         g_null_settings_backend,
+                         G_TYPE_SETTINGS_BACKEND,
+                         g_io_extension_point_implement (G_SETTINGS_BACKEND_EXTENSION_POINT_NAME,
+                                                         g_define_type_id, "null", 10))
 
 static GVariant *
 g_null_settings_backend_read (GSettingsBackend   *backend,
@@ -54,6 +56,18 @@ g_null_settings_backend_write (GSettingsBackend *backend,
                                GVariant         *value,
                                gpointer          origin_tag)
 {
+  if (value)
+    g_variant_unref (g_variant_ref_sink (value));
+  return FALSE;
+}
+
+static gboolean
+g_null_settings_backend_write_one (gpointer key,
+                                   gpointer value,
+                                   gpointer data)
+{
+  if (value)
+    g_variant_unref (g_variant_ref_sink (value));
   return FALSE;
 }
 
@@ -62,6 +76,7 @@ g_null_settings_backend_write_tree (GSettingsBackend *backend,
                                     GTree            *tree,
                                     gpointer          origin_tag)
 {
+  g_tree_foreach (tree, g_null_settings_backend_write_one, backend);
   return FALSE;
 }
 
@@ -104,6 +119,19 @@ g_null_settings_backend_class_init (GNullSettingsBackendClass *class)
   backend_class->get_permission = g_null_settings_backend_get_permission;
 }
 
+/**
+ * g_null_settings_backend_new:
+ *
+ *
+ * Creates a readonly #GSettingsBackend.
+ *
+ * This backend does not allow changes to settings, so all settings
+ * will always have their default values.
+ *
+ * Returns: (transfer full): a newly created #GSettingsBackend
+ *
+ * Since: 2.28
+ */
 GSettingsBackend *
 g_null_settings_backend_new (void)
 {

@@ -8,7 +8,7 @@
 <link rel="up" href="glib-fundamentals.html" title="GLib Fundamentals">
 <link rel="prev" href="glib-Standard-Macros.html" title="Standard Macros">
 <link rel="next" href="glib-Byte-Order-Macros.html" title="Byte Order Macros">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#glib-Type-Conversion-Macros.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="Type Conversion Macros">
+<div class="refentry">
 <a name="glib-Type-Conversion-Macros"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -35,7 +35,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="glib-Type-Conversion-Macros.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;glib.h&gt;
@@ -49,7 +49,7 @@
 #define             <a class="link" href="glib-Type-Conversion-Macros.html#GPOINTER-TO-SIZE:CAPS" title="GPOINTER_TO_SIZE()">GPOINTER_TO_SIZE</a>                    (p)
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="glib-Type-Conversion-Macros.description"></a><h2>Description</h2>
 <p>
 Many times GLib, GTK+, and other libraries allow you to pass "user
@@ -123,7 +123,7 @@ on the current platform.
 </p>
 <p>
 </p>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p>
 YOU MAY NOT STORE POINTERS IN INTEGERS. THIS IS NOT PORTABLE IN ANY
@@ -135,9 +135,9 @@ integer; values outside the range of a 32-bit integer will be mangled.
 <p>
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="glib-Type-Conversion-Macros.details"></a><h2>Details</h2>
-<div class="refsect2" title="GINT_TO_POINTER()">
+<div class="refsect2">
 <a name="GINT-TO-POINTER:CAPS"></a><h3>GINT_TO_POINTER()</h3>
 <pre class="programlisting">#define GINT_TO_POINTER(i) ((gpointer) (glong) (i))
 </pre>
@@ -154,13 +154,12 @@ integer; values outside the range of a 32-bit integer will be mangled.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>i</code></em> :</span></p></td>
-<td>integer to stuff into a pointer.
-</td>
+<td>integer to stuff into a pointer.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GPOINTER_TO_INT()">
+<div class="refsect2">
 <a name="GPOINTER-TO-INT:CAPS"></a><h3>GPOINTER_TO_INT()</h3>
 <pre class="programlisting">#define GPOINTER_TO_INT(p) ((gint)  (glong) (p))
 </pre>
@@ -178,13 +177,12 @@ integer; values outside the range of a 32-bit integer will be mangled.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>pointer containing an integer.
-</td>
+<td>pointer containing an integer.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GUINT_TO_POINTER()">
+<div class="refsect2">
 <a name="GUINT-TO-POINTER:CAPS"></a><h3>GUINT_TO_POINTER()</h3>
 <pre class="programlisting">#define GUINT_TO_POINTER(u) ((gpointer) (gulong) (u))
 </pre>
@@ -195,13 +193,12 @@ Stuffs an unsigned integer into a pointer type.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>u</code></em> :</span></p></td>
-<td>unsigned integer to stuff into the pointer.
-</td>
+<td>unsigned integer to stuff into the pointer.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GPOINTER_TO_UINT()">
+<div class="refsect2">
 <a name="GPOINTER-TO-UINT:CAPS"></a><h3>GPOINTER_TO_UINT()</h3>
 <pre class="programlisting">#define GPOINTER_TO_UINT(p) ((guint) (gulong) (p))
 </pre>
@@ -213,13 +210,12 @@ been stored in the pointer with <a class="link" href="glib-Type-Conversion-Macro
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>pointer to extract an unsigned integer from.
-</td>
+<td>pointer to extract an unsigned integer from.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GSIZE_TO_POINTER()">
+<div class="refsect2">
 <a name="GSIZE-TO-POINTER:CAPS"></a><h3>GSIZE_TO_POINTER()</h3>
 <pre class="programlisting">#define GSIZE_TO_POINTER(s) ((gpointer) (gsize) (s))
 </pre>
@@ -231,13 +227,12 @@ Stuffs a <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span 
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>s</code></em> :</span></p></td>
 <td>
-<a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> to stuff into the pointer.
-</td>
+<a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> to stuff into the pointer.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GPOINTER_TO_SIZE()">
+<div class="refsect2">
 <a name="GPOINTER-TO-SIZE:CAPS"></a><h3>GPOINTER_TO_SIZE()</h3>
 <pre class="programlisting">#define GPOINTER_TO_SIZE(p) ((gsize) (p))
 </pre>
@@ -249,8 +244,7 @@ been stored in the pointer with <a class="link" href="glib-Type-Conversion-Macro
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>p</code></em> :</span></p></td>
-<td>pointer to extract a <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> from.
-</td>
+<td>pointer to extract a <a class="link" href="glib-Basic-Types.html#gsize" title="gsize"><span class="type">gsize</span></a> from.</td>
 </tr></tbody>
 </table></div>
 </div>
@@ -258,6 +252,6 @@ been stored in the pointer with <a class="link" href="glib-Type-Conversion-Macro
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

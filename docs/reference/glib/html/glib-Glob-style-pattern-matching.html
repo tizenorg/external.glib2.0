@@ -8,7 +8,7 @@
 <link rel="up" href="glib-utilities.html" title="GLib Utilities">
 <link rel="prev" href="glib-Commandline-option-parser.html" title="Commandline option parser">
 <link rel="next" href="glib-Perl-compatible-regular-expressions.html" title="Perl-compatible regular expressions">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#glib-Glob-style-pattern-matching.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="Glob-style pattern matching">
+<div class="refentry">
 <a name="glib-Glob-style-pattern-matching"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -36,13 +36,13 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="glib-Glob-style-pattern-matching.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;glib.h&gt;
 
                     <a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec">GPatternSpec</a>;
-<a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="returnvalue">GPatternSpec</span></a>*       <a class="link" href="glib-Glob-style-pattern-matching.html#g-pattern-spec-new" title="g_pattern_spec_new ()">g_pattern_spec_new</a>                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pattern</code></em>);
+<a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="returnvalue">GPatternSpec</span></a> *      <a class="link" href="glib-Glob-style-pattern-matching.html#g-pattern-spec-new" title="g_pattern_spec_new ()">g_pattern_spec_new</a>                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pattern</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Glob-style-pattern-matching.html#g-pattern-spec-free" title="g_pattern_spec_free ()">g_pattern_spec_free</a>                 (<em class="parameter"><code><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a> *pspec</code></em>);
 <a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="glib-Glob-style-pattern-matching.html#g-pattern-spec-equal" title="g_pattern_spec_equal ()">g_pattern_spec_equal</a>                (<em class="parameter"><code><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a> *pspec1</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a> *pspec2</code></em>);
@@ -56,7 +56,7 @@
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="glib-Glob-style-pattern-matching.description"></a><h2>Description</h2>
 <p>
 The <code class="function">g_pattern_match*</code> functions match a string
@@ -79,9 +79,9 @@ is better to compile the pattern to a <a class="link" href="glib-Glob-style-patt
 pattern compilation.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="glib-Glob-style-pattern-matching.details"></a><h2>Details</h2>
-<div class="refsect2" title="GPatternSpec">
+<div class="refsect2">
 <a name="GPatternSpec"></a><h3>GPatternSpec</h3>
 <pre class="programlisting">typedef struct _GPatternSpec GPatternSpec;</pre>
 <p>
@@ -91,9 +91,9 @@ directly.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_pattern_spec_new ()">
+<div class="refsect2">
 <a name="g-pattern-spec-new"></a><h3>g_pattern_spec_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="returnvalue">GPatternSpec</span></a>*       g_pattern_spec_new                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pattern</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="returnvalue">GPatternSpec</span></a> *      g_pattern_spec_new                  (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pattern</code></em>);</pre>
 <p>
 Compiles a pattern to a <a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a>.
 </p>
@@ -102,8 +102,7 @@ Compiles a pattern to a <a class="link" href="glib-Glob-style-pattern-matching.h
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pattern</code></em> :</span></p></td>
-<td>a zero-terminated UTF-8 encoded string
-</td>
+<td>a zero-terminated UTF-8 encoded string</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -114,7 +113,7 @@ Compiles a pattern to a <a class="link" href="glib-Glob-style-pattern-matching.h
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_pattern_spec_free ()">
+<div class="refsect2">
 <a name="g-pattern-spec-free"></a><h3>g_pattern_spec_free ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_pattern_spec_free                 (<em class="parameter"><code><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a> *pspec</code></em>);</pre>
 <p>
@@ -130,7 +129,7 @@ Frees the memory allocated for the <a class="link" href="glib-Glob-style-pattern
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_pattern_spec_equal ()">
+<div class="refsect2">
 <a name="g-pattern-spec-equal"></a><h3>g_pattern_spec_equal ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_pattern_spec_equal                (<em class="parameter"><code><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a> *pspec1</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a> *pspec2</code></em>);</pre>
@@ -153,14 +152,13 @@ match the same set of strings.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>Whether the compiled patterns are equal
-</td>
+<td>Whether the compiled patterns are equal</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_pattern_match ()">
+<div class="refsect2">
 <a name="g-pattern-match"></a><h3>g_pattern_match ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_pattern_match                     (<em class="parameter"><code><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a> *pspec</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#guint" title="guint"><span class="type">guint</span></a> string_length</code></em>,
@@ -199,13 +197,11 @@ strings.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string_length</code></em> :</span></p></td>
 <td>the length of <em class="parameter"><code>string</code></em> (in bytes, i.e. <code class="function">strlen()</code>,
-                <span class="emphasis"><em>not</em></span> <a class="link" href="glib-Unicode-Manipulation.html#g-utf8-strlen" title="g_utf8_strlen ()"><code class="function">g_utf8_strlen()</code></a>)
-</td>
+<span class="emphasis"><em>not</em></span> <a class="link" href="glib-Unicode-Manipulation.html#g-utf8-strlen" title="g_utf8_strlen ()"><code class="function">g_utf8_strlen()</code></a>)</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
-<td>the UTF-8 encoded string to match
-</td>
+<td>the UTF-8 encoded string to match</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string_reversed</code></em> :</span></p></td>
@@ -222,7 +218,7 @@ strings.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_pattern_match_string ()">
+<div class="refsect2">
 <a name="g-pattern-match-string"></a><h3>g_pattern_match_string ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_pattern_match_string              (<em class="parameter"><code><a class="link" href="glib-Glob-style-pattern-matching.html#GPatternSpec" title="GPatternSpec"><span class="type">GPatternSpec</span></a> *pspec</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);</pre>
@@ -241,8 +237,7 @@ matched against more than one pattern, consider using
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
-<td>the UTF-8 encoded string to match
-</td>
+<td>the UTF-8 encoded string to match</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -254,7 +249,7 @@ matched against more than one pattern, consider using
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_pattern_match_simple ()">
+<div class="refsect2">
 <a name="g-pattern-match-simple"></a><h3>g_pattern_match_simple ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_pattern_match_simple              (<em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *pattern</code></em>,
                                                          <em class="parameter"><code>const <a class="link" href="glib-Basic-Types.html#gchar" title="gchar"><span class="type">gchar</span></a> *string</code></em>);</pre>
@@ -269,13 +264,11 @@ the pattern once with <a class="link" href="glib-Glob-style-pattern-matching.htm
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>pattern</code></em> :</span></p></td>
-<td>the UTF-8 encoded pattern
-</td>
+<td>the UTF-8 encoded pattern</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
-<td>the UTF-8 encoded string to match
-</td>
+<td>the UTF-8 encoded string to match</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -290,6 +283,6 @@ the pattern once with <a class="link" href="glib-Glob-style-pattern-matching.htm
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

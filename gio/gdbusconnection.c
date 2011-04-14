@@ -2712,11 +2712,18 @@ g_dbus_connection_new_for_address_sync (const gchar           *address,
  * g_dbus_connection_set_exit_on_close:
  * @connection: A #GDBusConnection.
  * @exit_on_close: Whether the process should be terminated
- * when @connection is closed by the remote peer.
+ *     when @connection is closed by the remote peer.
  *
  * Sets whether the process should be terminated when @connection is
  * closed by the remote peer. See #GDBusConnection:exit-on-close for
  * more details.
+ *
+ * Note that this function should be used with care. Most modern UNIX
+ * desktops tie the notion of a user session the session bus, and expect
+ * all of a users applications to quit when their bus connection goes away.
+ * If you are setting @exit_on_close to %FALSE for the shared session
+ * bus connection, you should make sure that your application exits
+ * when the user session ends.
  *
  * Since: 2.26
  */
@@ -4228,7 +4235,7 @@ static const gchar introspect_header[] =
 static const gchar introspect_tail[] =
   "</node>\n";
 
-static const gchar introspect_standard_interfaces[] =
+static const gchar introspect_properties_interface[] =
   "  <interface name=\"org.freedesktop.DBus.Properties\">\n"
   "    <method name=\"Get\">\n"
   "      <arg type=\"s\" name=\"interface_name\" direction=\"in\"/>\n"
@@ -4249,7 +4256,9 @@ static const gchar introspect_standard_interfaces[] =
   "      <arg type=\"a{sv}\" name=\"changed_properties\"/>\n"
   "      <arg type=\"as\" name=\"invalidated_properties\"/>\n"
   "    </signal>\n"
-  "  </interface>\n"
+  "  </interface>\n";
+
+static const gchar introspect_introspectable_interface[] =
   "  <interface name=\"org.freedesktop.DBus.Introspectable\">\n"
   "    <method name=\"Introspect\">\n"
   "      <arg type=\"s\" name=\"xml_data\" direction=\"out\"/>\n"
@@ -4266,12 +4275,6 @@ static void
 introspect_append_header (GString *s)
 {
   g_string_append (s, introspect_header);
-}
-
-static void
-introspect_append_standard_interfaces (GString *s)
-{
-  g_string_append (s, introspect_standard_interfaces);
 }
 
 static void
@@ -4365,10 +4368,17 @@ handle_introspect (GDBusConnection *connection,
 
   /* first the header with the standard interfaces */
   s = g_string_sized_new (sizeof (introspect_header) +
-                          sizeof (introspect_standard_interfaces) +
+                          sizeof (introspect_properties_interface) +
+                          sizeof (introspect_introspectable_interface) +
                           sizeof (introspect_tail));
   introspect_append_header (s);
-  introspect_append_standard_interfaces (s);
+  if (!g_hash_table_lookup (eo->map_if_name_to_ei,
+                            "org.freedesktop.DBus.Properties"))
+    g_string_append (s, introspect_properties_interface);
+
+  if (!g_hash_table_lookup (eo->map_if_name_to_ei,
+                            "org.freedesktop.DBus.Introspectable"))
+    g_string_append (s, introspect_introspectable_interface);
 
   /* then include the registered interfaces */
   g_hash_table_iter_init (&hash_iter, eo->map_if_name_to_ei);
@@ -4621,13 +4631,13 @@ obj_message_func (GDBusConnection *connection,
 
 /**
  * g_dbus_connection_register_object:
- * @connection: A #GDBusConnection.
- * @object_path: The object path to register at.
- * @interface_info: Introspection data for the interface.
- * @vtable: A #GDBusInterfaceVTable to call into or %NULL.
- * @user_data: Data to pass to functions in @vtable.
- * @user_data_free_func: Function to call when the object path is unregistered.
- * @error: Return location for error or %NULL.
+ * @connection: A #GDBusConnection
+ * @object_path: The object path to register at
+ * @interface_info: Introspection data for the interface
+ * @vtable: A #GDBusInterfaceVTable to call into, or %NULL
+ * @user_data: Data to pass to functions in @vtable
+ * @user_data_free_func: Function to call when the object path is unregistered
+ * @error: Return location for error or %NULL
  *
  * Registers callbacks for exported objects at @object_path with the
  * D-Bus interface that is described in @interface_info.
@@ -4666,7 +4676,12 @@ obj_message_func (GDBusConnection *connection,
  * reference count is -1, see g_dbus_interface_info_ref()) for as long
  * as the object is exported. Also note that @vtable will be copied.
  *
- * See <xref linkend="gdbus-server"/> for an example of how to use this method.
+ * A %NULL @vtable can be used for
+ * <ulink url="http://en.wikipedia.org/wiki/Marker_interface_pattern">marker
+ * interfaces</ulink>.
+ *
+ * See <xref linkend="gdbus-server"/> for an example of how to use this
+ * method.
  *
  * Returns: 0 if @error is set, otherwise a registration id (never 0)
  * that can be used with g_dbus_connection_unregister_object() .
@@ -5377,6 +5392,8 @@ handle_subtree_introspect (GDBusConnection *connection,
   GDBusInterfaceInfo **interfaces;
   guint n;
   gchar **subnode_paths;
+  gboolean has_properties_interface;
+  gboolean has_introspectable_interface;
 
   handled = FALSE;
 
@@ -5416,7 +5433,20 @@ handle_subtree_introspect (GDBusConnection *connection,
                                        es->user_data);
   if (interfaces != NULL)
     {
-      introspect_append_standard_interfaces (s);
+      has_properties_interface = FALSE;
+      has_introspectable_interface = FALSE;
+
+      for (n = 0; interfaces[n] != NULL; n++)
+        {
+          if (strcmp (interfaces[n]->name, "org.freedesktop.DBus.Properties") == 0)
+            has_properties_interface = TRUE;
+          else if (strcmp (interfaces[n]->name, "org.freedesktop.DBus.Introspectable") == 0)
+            has_introspectable_interface = TRUE;
+        }
+      if (!has_properties_interface)
+        g_string_append (s, introspect_properties_interface);
+      if (!has_introspectable_interface)
+        g_string_append (s, introspect_introspectable_interface);
 
       for (n = 0; interfaces[n] != NULL; n++)
         {

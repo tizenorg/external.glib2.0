@@ -8,7 +8,7 @@
 <link rel="up" href="streaming.html" title="Streaming I/O">
 <link rel="prev" href="gio-GConverterInputstream.html" title="GConverterInputstream">
 <link rel="next" href="GPollableInputStream.html" title="GPollableInputStream">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -30,7 +30,7 @@
                   <a href="#gio-GConverterOutputstream.properties" class="shortcut">Properties</a>
 </td></tr>
 </table>
-<div class="refentry" title="GConverterOutputstream">
+<div class="refentry">
 <a name="gio-GConverterOutputstream"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -39,7 +39,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="gio-GConverterOutputstream.synopsis"></a><h2>Synopsis</h2>
 <a name="GConverterOutputStream"></a><pre class="synopsis">
 #include &lt;gio/gio.h&gt;
@@ -51,7 +51,7 @@
                                                         (<em class="parameter"><code><a class="link" href="gio-GConverterOutputstream.html#GConverterOutputStream"><span class="type">GConverterOutputStream</span></a> *converter_stream</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="gio-GConverterOutputstream.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
@@ -60,22 +60,22 @@
                +----GConverterOutputStream
 </pre>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="gio-GConverterOutputstream.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="gio-GConverterOutputstream.html#GConverterOutputStream--converter" title='The "converter" property'>converter</a>"                <a class="link" href="GConverter.html" title="GConverter"><span class="type">GConverter</span></a>*           : Read / Write / Construct Only
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="gio-GConverterOutputstream.description"></a><h2>Description</h2>
 <p>
 Converter output stream implements <a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> and allows
 conversion of data of various types during reading.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="gio-GConverterOutputstream.details"></a><h2>Details</h2>
-<div class="refsect2" title="GConverterOutputStream">
+<div class="refsect2">
 <a name="GConverterOutputStream-struct"></a><h3>GConverterOutputStream</h3>
 <pre class="programlisting">typedef struct _GConverterOutputStream GConverterOutputStream;</pre>
 <p>
@@ -84,7 +84,7 @@ conversion.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_converter_output_stream_new ()">
+<div class="refsect2">
 <a name="g-converter-output-stream-new"></a><h3>g_converter_output_stream_new ()</h3>
 <pre class="programlisting"><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="returnvalue">GOutputStream</span></a> *     g_converter_output_stream_new       (<em class="parameter"><code><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a> *base_stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GConverter.html" title="GConverter"><span class="type">GConverter</span></a> *converter</code></em>);</pre>
@@ -106,14 +106,13 @@ Creates a new converter output stream for the <em class="parameter"><code>base_s
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a>.
-</td>
+<td>a new <a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_converter_output_stream_get_converter ()">
+<div class="refsect2">
 <a name="g-converter-output-stream-get-converter"></a><h3>g_converter_output_stream_get_converter ()</h3>
 <pre class="programlisting"><a class="link" href="GConverter.html" title="GConverter"><span class="returnvalue">GConverter</span></a> *        g_converter_output_stream_get_converter
                                                         (<em class="parameter"><code><a class="link" href="gio-GConverterOutputstream.html#GConverterOutputStream"><span class="type">GConverterOutputStream</span></a> *converter_stream</code></em>);</pre>
@@ -130,7 +129,7 @@ Gets the <a class="link" href="GConverter.html" title="GConverter"><span class="
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the converter of the converter output stream. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+<td>the converter of the converter output stream. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -138,21 +137,21 @@ Gets the <a class="link" href="GConverter.html" title="GConverter"><span class="
 <p class="since">Since 2.24</p>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="gio-GConverterOutputstream.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "converter" property'>
+<div class="refsect2">
 <a name="GConverterOutputStream--converter"></a><h3>The <code class="literal">"converter"</code> property</h3>
 <pre class="programlisting">  "converter"                <a class="link" href="GConverter.html" title="GConverter"><span class="type">GConverter</span></a>*           : Read / Write / Construct Only</pre>
 <p>The converter object.</p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
+<div class="refsect1">
 <a name="gio-GConverterOutputstream.see-also"></a><h2>See Also</h2>
 <a class="link" href="GOutputStream.html" title="GOutputStream"><span class="type">GOutputStream</span></a>, <a class="link" href="GConverter.html" title="GConverter"><span class="type">GConverter</span></a>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

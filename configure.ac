@@ -21,9 +21,9 @@ m4_define(glib_configure_ac)
 # set glib_binary_age _and_ glib_interface_age to 0.
 #
 m4_define([glib_major_version], [2])
-m4_define([glib_minor_version], [27])
-m4_define([glib_micro_version], [5])
-m4_define([glib_interface_age], [0])
+m4_define([glib_minor_version], [28])
+m4_define([glib_micro_version], [6])
+m4_define([glib_interface_age], [6])
 m4_define([glib_binary_age],
           [m4_eval(100 * glib_minor_version + glib_micro_version)])
 m4_define([glib_version],
@@ -49,16 +49,17 @@ AC_INIT(glib, [glib_version],
 
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_SRCDIR([glib/glib.h])
+AC_CONFIG_MACRO_DIR([m4macros])
 
 # Save this value here, since automake will set cflags later
 cflags_set=${CFLAGS+set}
 
 AM_INIT_AUTOMAKE([1.10 no-define])
 
-# Support silent build rules, requires at least automake-1.11. Enable
-# by either passing --enable-silent-rules to configure or passing V=0
+# Support silent build rules, requires at least automake-1.11. Disable
+# by either passing --disable-silent-rules to configure or passing V=1
 # to make
-m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([no])])
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 GLIB_MAJOR_VERSION=glib_major_version
 GLIB_MINOR_VERSION=glib_minor_version
@@ -856,7 +857,8 @@ AC_CHECK_HEADERS([sys/time.h sys/times.h sys/wait.h unistd.h values.h])
 AC_CHECK_HEADERS([sys/select.h sys/types.h stdint.h inttypes.h sched.h malloc.h])
 AC_CHECK_HEADERS([sys/vfs.h sys/mount.h sys/vmount.h sys/statfs.h sys/statvfs.h])
 AC_CHECK_HEADERS([mntent.h sys/mnttab.h sys/vfstab.h sys/mntctl.h sys/sysctl.h fstab.h])
-AC_CHECK_HEADERS([sys/uio.h])
+AC_CHECK_HEADERS([sys/uio.h sys/mkdev.h])
+AC_CHECK_HEADERS([linux/magic.h])
 
 # check for structure fields
 AC_CHECK_MEMBERS([struct stat.st_mtimensec, struct stat.st_mtim.tv_nsec, struct stat.st_atimensec, struct stat.st_atim.tv_nsec, struct stat.st_ctimensec, struct stat.st_ctim.tv_nsec])
@@ -874,7 +876,7 @@ AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_blocks, struct statfs.f
 #endif])
 # struct statvfs.f_basetype is available on Solaris but not for Linux. 
 AC_CHECK_MEMBERS([struct statvfs.f_basetype],,, [#include <sys/statvfs.h>])
-AC_CHECK_MEMBERS([struct tm.tm_gmtoff])
+AC_CHECK_MEMBERS([struct tm.tm_gmtoff, struct tm.__tm_gmtoff],,,[#include <time.h>])
 
 # Checks for libcharset
 AM_LANGINFO_CODESET
@@ -2610,7 +2612,7 @@ AC_MSG_RESULT($broken_poll)
 dnl *********************
 dnl *** GRegex checks ***
 dnl *********************
-PCRE_REQUIRED_VERSION=7.2
+PCRE_REQUIRED_VERSION=8.11
 
 # Check if we should compile GRegex
 AC_ARG_ENABLE(regex, AC_HELP_STRING([--disable-regex],

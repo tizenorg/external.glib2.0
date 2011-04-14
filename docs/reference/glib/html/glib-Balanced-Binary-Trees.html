@@ -8,7 +8,7 @@
 <link rel="up" href="glib-data-types.html" title="GLib Data Types">
 <link rel="prev" href="glib-Byte-Arrays.html" title="Byte Arrays">
 <link rel="next" href="glib-N-ary-Trees.html" title="N-ary Trees">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#glib-Balanced-Binary-Trees.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="Balanced Binary Trees">
+<div class="refentry">
 <a name="glib-Balanced-Binary-Trees"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -36,18 +36,18 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="glib-Balanced-Binary-Trees.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;glib.h&gt;
 
                     <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree">GTree</a>;
-<a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a>*              <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-new" title="g_tree_new ()">g_tree_new</a>                          (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> key_compare_func</code></em>);
-<a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a>*              <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-ref" title="g_tree_ref ()">g_tree_ref</a>                          (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);
+<a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a> *             <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-new" title="g_tree_new ()">g_tree_new</a>                          (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> key_compare_func</code></em>);
+<a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a> *             <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-ref" title="g_tree_ref ()">g_tree_ref</a>                          (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-unref" title="g_tree_unref ()">g_tree_unref</a>                        (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);
-<a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a>*              <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-new-with-data" title="g_tree_new_with_data ()">g_tree_new_with_data</a>                (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> key_compare_func</code></em>,
+<a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a> *             <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-new-with-data" title="g_tree_new_with_data ()">g_tree_new_with_data</a>                (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> key_compare_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> key_compare_data</code></em>);
-<a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a>*              <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-new-full" title="g_tree_new_full ()">g_tree_new_full</a>                     (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> key_compare_func</code></em>,
+<a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a> *             <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-new-full" title="g_tree_new_full ()">g_tree_new_full</a>                     (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> key_compare_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> key_compare_data</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> key_destroy_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> value_destroy_func</code></em>);
@@ -86,7 +86,7 @@ enum                <a class="link" href="glib-Balanced-Binary-Trees.html#GTrave
 <span class="returnvalue">void</span>                <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-destroy" title="g_tree_destroy ()">g_tree_destroy</a>                      (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="glib-Balanced-Binary-Trees.description"></a><h2>Description</h2>
 <p>
 The <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> structure and its associated functions provide a sorted
@@ -118,9 +118,9 @@ To remove a key/value pair use <a class="link" href="glib-Balanced-Binary-Trees.
 To destroy a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>, use <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-destroy" title="g_tree_destroy ()"><code class="function">g_tree_destroy()</code></a>.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="glib-Balanced-Binary-Trees.details"></a><h2>Details</h2>
-<div class="refsect2" title="GTree">
+<div class="refsect2">
 <a name="GTree"></a><h3>GTree</h3>
 <pre class="programlisting">typedef struct _GTree GTree;</pre>
 <p>
@@ -130,9 +130,9 @@ should be accessed only by using the following functions.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_new ()">
+<div class="refsect2">
 <a name="g-tree-new"></a><h3>g_tree_new ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a>*              g_tree_new                          (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> key_compare_func</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a> *             g_tree_new                          (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> key_compare_func</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
 </p>
@@ -142,24 +142,22 @@ Creates a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_compare_func</code></em> :</span></p></td>
 <td>the function used to order the nodes in the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-  It should return values similar to the standard <code class="function">strcmp()</code> function -
-  0 if the two arguments are equal, a negative value if the first argument 
-  comes before the second, or a positive value if the first argument comes 
-  after the second.
-</td>
+It should return values similar to the standard <code class="function">strcmp()</code> function -
+0 if the two arguments are equal, a negative value if the first argument
+comes before the second, or a positive value if the first argument comes
+after the second.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_ref ()">
+<div class="refsect2">
 <a name="g-tree-ref"></a><h3>g_tree_ref ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a>*              g_tree_ref                          (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a> *             g_tree_ref                          (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);</pre>
 <p>
 Increments the reference count of <em class="parameter"><code>tree</code></em> by one.  It is safe to call
 this function from any thread.
@@ -169,21 +167,18 @@ this function from any thread.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the passed in <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-
-</td>
+<td>the passed in <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_unref ()">
+<div class="refsect2">
 <a name="g-tree-unref"></a><h3>g_tree_unref ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_tree_unref                        (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);</pre>
 <p>
@@ -199,16 +194,15 @@ It is safe to call this function from any thread.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_new_with_data ()">
+<div class="refsect2">
 <a name="g-tree-new-with-data"></a><h3>g_tree_new_with_data ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a>*              g_tree_new_with_data                (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> key_compare_func</code></em>,
+<pre class="programlisting"><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a> *             g_tree_new_with_data                (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> key_compare_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> key_compare_data</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> with a comparison function that accepts user data.
@@ -219,26 +213,23 @@ See <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-new" title="g_t
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_compare_func</code></em> :</span></p></td>
-<td>qsort()-style comparison function.
-</td>
+<td>qsort()-style comparison function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_compare_data</code></em> :</span></p></td>
-<td>data to pass to comparison function.
-</td>
+<td>data to pass to comparison function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_new_full ()">
+<div class="refsect2">
 <a name="g-tree-new-full"></a><h3>g_tree_new_full ()</h3>
-<pre class="programlisting"><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a>*              g_tree_new_full                     (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> key_compare_func</code></em>,
+<pre class="programlisting"><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="returnvalue">GTree</span></a> *             g_tree_new_full                     (<em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareDataFunc" title="GCompareDataFunc ()"><span class="type">GCompareDataFunc</span></a> key_compare_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> key_compare_data</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> key_destroy_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Datasets.html#GDestroyNotify" title="GDestroyNotify ()"><span class="type">GDestroyNotify</span></a> value_destroy_func</code></em>);</pre>
@@ -252,38 +243,33 @@ removing the entry from the <a class="link" href="glib-Balanced-Binary-Trees.htm
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_compare_func</code></em> :</span></p></td>
-<td>qsort()-style comparison function.
-</td>
+<td>qsort()-style comparison function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_compare_data</code></em> :</span></p></td>
-<td>data to pass to comparison function.
-</td>
+<td>data to pass to comparison function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key_destroy_func</code></em> :</span></p></td>
-<td>a function to free the memory allocated for the key 
-  used when removing the entry from the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if you don't
-  want to supply such a function.
-</td>
+<td>a function to free the memory allocated for the key
+used when removing the entry from the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if you don't
+want to supply such a function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value_destroy_func</code></em> :</span></p></td>
-<td>a function to free the memory allocated for the 
-  value used when removing the entry from the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if you 
-  don't want to supply such a function.
-</td>
+<td>a function to free the memory allocated for the
+value used when removing the entry from the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if you
+don't want to supply such a function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a new <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_insert ()">
+<div class="refsect2">
 <a name="g-tree-insert"></a><h3>g_tree_insert ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_tree_insert                       (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> key</code></em>,
@@ -304,24 +290,21 @@ so that the distance from the root to every leaf is as small as possible.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to insert.
-</td>
+<td>the key to insert.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value corresponding to the key.
-</td>
+<td>the value corresponding to the key.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_replace ()">
+<div class="refsect2">
 <a name="g-tree-replace"></a><h3>g_tree_replace ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_tree_replace                      (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> key</code></em>,
@@ -343,24 +326,21 @@ so that the distance from the root to every leaf is as small as possible.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to insert.
-</td>
+<td>the key to insert.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value corresponding to the key.
-</td>
+<td>the value corresponding to the key.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_nnodes ()">
+<div class="refsect2">
 <a name="g-tree-nnodes"></a><h3>g_tree_nnodes ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_tree_nnodes                       (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);</pre>
 <p>
@@ -371,19 +351,17 @@ Gets the number of nodes in a <a class="link" href="glib-Balanced-Binary-Trees.h
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the number of nodes in the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>the number of nodes in the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_height ()">
+<div class="refsect2">
 <a name="g-tree-height"></a><h3>g_tree_height ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gint" title="gint"><span class="returnvalue">gint</span></a>                g_tree_height                       (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);</pre>
 <p>
@@ -399,19 +377,17 @@ If the root node has children the height is 2, etc.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the height of the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>the height of the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_lookup ()">
+<div class="refsect2">
 <a name="g-tree-lookup"></a><h3>g_tree_lookup ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_tree_lookup                       (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> key</code></em>);</pre>
@@ -425,25 +401,22 @@ fast.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to look up.
-</td>
+<td>the key to look up.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the value corresponding to the key, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key was
-not found.
-</td>
+<td>the value corresponding to the key, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key was
+not found.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_lookup_extended ()">
+<div class="refsect2">
 <a name="g-tree-lookup-extended"></a><h3>g_tree_lookup_extended ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_tree_lookup_extended              (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> lookup_key</code></em>,
@@ -460,34 +433,30 @@ for example before calling <a class="link" href="glib-Balanced-Binary-Trees.html
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>lookup_key</code></em> :</span></p></td>
-<td>the key to look up.
-</td>
+<td>the key to look up.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>orig_key</code></em> :</span></p></td>
-<td>returns the original key.
-</td>
+<td>returns the original key.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>returns the value associated with the key.
-</td>
+<td>returns the value associated with the key.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the key was found in the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the key was found in the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_foreach ()">
+<div class="refsect2">
 <a name="g-tree-foreach"></a><h3>g_tree_foreach ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_tree_foreach                      (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTraverseFunc" title="GTraverseFunc ()"><span class="type">GTraverseFunc</span></a> func</code></em>,
@@ -508,31 +477,28 @@ the tree, then walk the list and remove each item.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>func</code></em> :</span></p></td>
 <td>the function to call for each node visited. If this function
-  returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, the traversal is stopped.
-</td>
+returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, the traversal is stopped.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data to pass to the function.
-</td>
+<td>user data to pass to the function.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_traverse ()">
+<div class="refsect2">
 <a name="g-tree-traverse"></a><h3>g_tree_traverse ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_tree_traverse                     (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTraverseFunc" title="GTraverseFunc ()"><span class="type">GTraverseFunc</span></a> traverse_func</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTraverseType" title="enum GTraverseType"><span class="type">GTraverseType</span></a> traverse_type</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">g_tree_traverse</code> has been deprecated since version 2.2 and should not be used in newly-written code. The order of a balanced tree is somewhat arbitrary. If you 
 just want to visit all nodes in sorted order, use <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-foreach" title="g_tree_foreach ()"><code class="function">g_tree_foreach()</code></a> 
@@ -547,31 +513,27 @@ Calls the given function for each node in the <a class="link" href="glib-Balance
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>traverse_func</code></em> :</span></p></td>
-<td>the function to call for each node visited. If this 
-  function returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, the traversal is stopped.
-</td>
+<td>the function to call for each node visited. If this
+function returns <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a>, the traversal is stopped.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>traverse_type</code></em> :</span></p></td>
 <td>the order in which nodes are visited, one of <a class="link" href="glib-Balanced-Binary-Trees.html#G-IN-ORDER:CAPS"><code class="literal">G_IN_ORDER</code></a>,
-  <a class="link" href="glib-Balanced-Binary-Trees.html#G-PRE-ORDER:CAPS"><code class="literal">G_PRE_ORDER</code></a> and <a class="link" href="glib-Balanced-Binary-Trees.html#G-POST-ORDER:CAPS"><code class="literal">G_POST_ORDER</code></a>.
-</td>
+<a class="link" href="glib-Balanced-Binary-Trees.html#G-PRE-ORDER:CAPS"><code class="literal">G_PRE_ORDER</code></a> and <a class="link" href="glib-Balanced-Binary-Trees.html#G-POST-ORDER:CAPS"><code class="literal">G_POST_ORDER</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data to pass to the function.
-</td>
+<td>user data to pass to the function.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GTraverseFunc ()">
+<div class="refsect2">
 <a name="GTraverseFunc"></a><h3>GTraverseFunc ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            (*GTraverseFunc)                    (<em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> key</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="type">gpointer</span></a> value</code></em>,
@@ -587,30 +549,26 @@ parameter passed to <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>a key of a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> node.
-</td>
+<td>a key of a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> node.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value corresponding to the key.
-</td>
+<td>the value corresponding to the key.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>user data passed to <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-traverse" title="g_tree_traverse ()"><code class="function">g_tree_traverse()</code></a>.
-</td>
+<td>user data passed to <a class="link" href="glib-Balanced-Binary-Trees.html#g-tree-traverse" title="g_tree_traverse ()"><code class="function">g_tree_traverse()</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> to stop the traversal.
-</td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> to stop the traversal.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="enum GTraverseType">
+<div class="refsect2">
 <a name="GTraverseType"></a><h3>enum GTraverseType</h3>
 <pre class="programlisting">typedef enum
 {
@@ -658,7 +616,7 @@ Specifies the type of traveral performed by <a class="link" href="glib-Balanced-
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_search ()">
+<div class="refsect2">
 <a name="g-tree-search"></a><h3>g_tree_search ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gpointer" title="gpointer"><span class="returnvalue">gpointer</span></a>            g_tree_search                       (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Doubly-Linked-Lists.html#GCompareFunc" title="GCompareFunc ()"><span class="type">GCompareFunc</span></a> search_func</code></em>,
@@ -679,31 +637,27 @@ searching will proceed among the key/value pairs that have a larger key.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>search_func</code></em> :</span></p></td>
-<td>a function used to search the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>. 
-</td>
+<td>a function used to search the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>the data passed as the second argument to the <em class="parameter"><code>search_func</code></em> 
-function.
-</td>
+<td>the data passed as the second argument to the <em class="parameter"><code>search_func</code></em>
+function.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the value corresponding to the found key, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key 
-was not found.
-</td>
+<td>the value corresponding to the found key, or <a class="link" href="glib-Standard-Macros.html#NULL:CAPS" title="NULL"><code class="literal">NULL</code></a> if the key
+was not found.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_remove ()">
+<div class="refsect2">
 <a name="g-tree-remove"></a><h3>g_tree_remove ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_tree_remove                       (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> key</code></em>);</pre>
@@ -721,25 +675,23 @@ If the key does not exist in the <a class="link" href="glib-Balanced-Binary-Tree
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to remove.
-</td>
+<td>the key to remove.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the key was found (prior to 2.8, this function returned 
-  nothing)
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the key was found (prior to 2.8, this function returned
+nothing)</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_steal ()">
+<div class="refsect2">
 <a name="g-tree-steal"></a><h3>g_tree_steal ()</h3>
 <pre class="programlisting"><a class="link" href="glib-Basic-Types.html#gboolean" title="gboolean"><span class="returnvalue">gboolean</span></a>            g_tree_steal                        (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a class="link" href="glib-Basic-Types.html#gconstpointer" title="gconstpointer"><span class="type">gconstpointer</span></a> key</code></em>);</pre>
@@ -755,25 +707,23 @@ If the key does not exist in the <a class="link" href="glib-Balanced-Binary-Tree
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to remove.
-</td>
+<td>the key to remove.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the key was found (prior to 2.8, this function returned 
-   nothing)
-</td>
+<td>
+<a class="link" href="glib-Standard-Macros.html#TRUE:CAPS" title="TRUE"><code class="literal">TRUE</code></a> if the key was found (prior to 2.8, this function returned
+nothing)</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_tree_destroy ()">
+<div class="refsect2">
 <a name="g-tree-destroy"></a><h3>g_tree_destroy ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_tree_destroy                      (<em class="parameter"><code><a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a> *tree</code></em>);</pre>
 <p>
@@ -788,8 +738,7 @@ the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.
-</td>
+<td>a <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><span class="type">GTree</span></a>.</td>
 </tr></tbody>
 </table></div>
 </div>
@@ -797,6 +746,6 @@ the <a class="link" href="glib-Balanced-Binary-Trees.html#GTree" title="GTree"><
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link rel="up" href="glib-fundamentals.html" title="GLib Fundamentals">
 <link rel="prev" href="glib-Numerical-Definitions.html" title="Numerical Definitions">
 <link rel="next" href="glib-Atomic-Operations.html" title="Atomic Operations">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -26,7 +26,7 @@
                   <a href="#glib-Miscellaneous-Macros.description" class="shortcut">Description</a>
 </td></tr>
 </table>
-<div class="refentry" title="Miscellaneous Macros">
+<div class="refentry">
 <a name="glib-Miscellaneous-Macros"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -35,7 +35,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="glib-Miscellaneous-Macros.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;glib.h&gt;
@@ -108,18 +108,19 @@
 #define             <a class="link" href="glib-Miscellaneous-Macros.html#G-GUINTPTR-FORMAT:CAPS" title="G_GUINTPTR_FORMAT">G_GUINTPTR_FORMAT</a>
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="glib-Miscellaneous-Macros.description"></a><h2>Description</h2>
 <p>
 These macros provide more specialized features which are not needed so often
 by application programmers.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="glib-Miscellaneous-Macros.details"></a><h2>Details</h2>
-<div class="refsect2" title="G_INLINE_FUNC">
+<div class="refsect2">
 <a name="G-INLINE-FUNC:CAPS"></a><h3>G_INLINE_FUNC</h3>
-<pre class="programlisting">#define             G_INLINE_FUNC</pre>
+<pre class="programlisting">#  define G_INLINE_FUNC
+</pre>
 <p>
 This macro is used to export function prototypes so they can be linked
 with an external version when no inlining is performed. The file which
@@ -135,7 +136,7 @@ and can be used normally.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_STMT_START">
+<div class="refsect2">
 <a name="G-STMT-START:CAPS"></a><h3>G_STMT_START</h3>
 <pre class="programlisting">#  define G_STMT_START  do
 </pre>
@@ -145,7 +146,7 @@ only one statement is expected by the compiler.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_STMT_END">
+<div class="refsect2">
 <a name="G-STMT-END:CAPS"></a><h3>G_STMT_END</h3>
 <pre class="programlisting">#  define G_STMT_END    while (0)
 </pre>
@@ -155,9 +156,10 @@ only one statement is expected by the compiler.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_BEGIN_DECLS">
+<div class="refsect2">
 <a name="G-BEGIN-DECLS:CAPS"></a><h3>G_BEGIN_DECLS</h3>
-<pre class="programlisting">#define             G_BEGIN_DECLS</pre>
+<pre class="programlisting"># define G_BEGIN_DECLS  extern "C" {
+</pre>
 <p>
 Used (along with <a class="link" href="glib-Miscellaneous-Macros.html#G-END-DECLS:CAPS" title="G_END_DECLS"><span class="type">G_END_DECLS</span></a>) to bracket header files. If the
 compiler in use is a C++ compiler, adds <code class="literal">extern "C"</code>
@@ -165,9 +167,10 @@ around the header.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_END_DECLS">
+<div class="refsect2">
 <a name="G-END-DECLS:CAPS"></a><h3>G_END_DECLS</h3>
-<pre class="programlisting">#define             G_END_DECLS</pre>
+<pre class="programlisting"># define G_END_DECLS    }
+</pre>
 <p>
 Used (along with <a class="link" href="glib-Miscellaneous-Macros.html#G-BEGIN-DECLS:CAPS" title="G_BEGIN_DECLS"><span class="type">G_BEGIN_DECLS</span></a>) to bracket header files. If the
 compiler in use is a C++ compiler, adds <code class="literal">extern "C"</code>
@@ -175,7 +178,7 @@ around the header.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_N_ELEMENTS()">
+<div class="refsect2">
 <a name="G-N-ELEMENTS:CAPS"></a><h3>G_N_ELEMENTS()</h3>
 <pre class="programlisting">#define G_N_ELEMENTS(arr)		(sizeof (arr) / sizeof ((arr)[0]))
 </pre>
@@ -189,13 +192,12 @@ arrays or arrays on the stack.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>arr</code></em> :</span></p></td>
-<td>the array
-</td>
+<td>the array</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="G_VA_COPY()">
+<div class="refsect2">
 <a name="G-VA-COPY:CAPS"></a><h3>G_VA_COPY()</h3>
 <pre class="programlisting">#define             G_VA_COPY(ap1,ap2)</pre>
 <p>
@@ -211,19 +213,17 @@ does not include <code class="function">string.h</code> for you.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>ap1</code></em> :</span></p></td>
-<td>the <span class="type">va_list</span> variable to place a copy of <em class="parameter"><code>ap2</code></em> in.
-</td>
+<td>the <span class="type">va_list</span> variable to place a copy of <em class="parameter"><code>ap2</code></em> in.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>ap2</code></em> :</span></p></td>
-<td>a <span class="type">va_list</span>.
-</td>
+<td>a <span class="type">va_list</span>.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="G_STRINGIFY()">
+<div class="refsect2">
 <a name="G-STRINGIFY:CAPS"></a><h3>G_STRINGIFY()</h3>
 <pre class="programlisting">#define G_STRINGIFY(macro_or_string) G_STRINGIFY_ARG (macro_or_string)
 </pre>
@@ -262,13 +262,12 @@ is transformed by the preprocessor into (code equivalent to):
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>macro_or_string</code></em> :</span></p></td>
-<td>a macro or a string.
-</td>
+<td>a macro or a string.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="G_PASTE()">
+<div class="refsect2">
 <a name="G-PASTE:CAPS"></a><h3>G_PASTE()</h3>
 <pre class="programlisting">#define G_PASTE(identifier1,identifier2)      G_PASTE_ARGS (identifier1, identifier2)
 </pre>
@@ -317,20 +316,18 @@ is transformed by the preprocessor into:
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>identifier1</code></em> :</span></p></td>
-<td>an identifier
-</td>
+<td>an identifier</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>identifier2</code></em> :</span></p></td>
-<td>an identifier
-</td>
+<td>an identifier</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.20</p>
 </div>
 <hr>
-<div class="refsect2" title="G_STATIC_ASSERT()">
+<div class="refsect2">
 <a name="G-STATIC-ASSERT:CAPS"></a><h3>G_STATIC_ASSERT()</h3>
 <pre class="programlisting">#define G_STATIC_ASSERT(expr) typedef struct { char Compile_Time_Assertion[(expr) ? 1 : -1]; } G_PASTE (_GStaticAssert_, __LINE__)
 </pre>
@@ -339,7 +336,7 @@ The G_STATIC_ASSERT macro lets the programmer check a condition at compile time,
 the condition needs to be compile time computable.
 The macro can be used in any place where a <code class="literal">typedef</code> is valid.
 </p>
-<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 <p>
 A <code class="literal">typedef</code> is generally allowed in exactly the same
@@ -353,16 +350,16 @@ The macro should only be used once per source code line.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>expr</code></em> :</span></p></td>
-<td>a constant expression.
-</td>
+<td>a constant expression.</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.20</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_EXTENSION">
+<div class="refsect2">
 <a name="G-GNUC-EXTENSION:CAPS"></a><h3>G_GNUC_EXTENSION</h3>
-<pre class="programlisting">#define             G_GNUC_EXTENSION</pre>
+<pre class="programlisting">#  define G_GNUC_EXTENSION __extension__
+</pre>
 <p>
 Expands to <code class="literal">__extension__</code> when <span class="command"><strong>gcc</strong></span> is
 used as the compiler.
@@ -371,7 +368,7 @@ when compiling with the <code class="option">-pedantic</code> option.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_CONST">
+<div class="refsect2">
 <a name="G-GNUC-CONST:CAPS"></a><h3>G_GNUC_CONST</h3>
 <pre class="programlisting">#define             G_GNUC_CONST</pre>
 <p>
@@ -380,7 +377,7 @@ Expands to the GNU C <code class="literal">const</code> function attribute if th
 to the function. A const function doesn't examine any values except its parameters, and has no
 effects except its return value. See the GNU C documentation for details.
 </p>
-<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 <p>
 A function that has pointer arguments and examines the data pointed to
@@ -391,7 +388,7 @@ for a const function to return void.
 </div>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_PURE">
+<div class="refsect2">
 <a name="G-GNUC-PURE:CAPS"></a><h3>G_GNUC_PURE</h3>
 <pre class="programlisting">#define             G_GNUC_PURE</pre>
 <p>
@@ -403,7 +400,7 @@ See the GNU C documentation for details.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_MALLOC">
+<div class="refsect2">
 <a name="G-GNUC-MALLOC:CAPS"></a><h3>G_GNUC_MALLOC</h3>
 <pre class="programlisting">#define             G_GNUC_MALLOC</pre>
 <p>
@@ -417,9 +414,10 @@ See the GNU C documentation for details.
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_ALLOC_SIZE()">
+<div class="refsect2">
 <a name="G-GNUC-ALLOC-SIZE:CAPS"></a><h3>G_GNUC_ALLOC_SIZE()</h3>
-<pre class="programlisting">#define             G_GNUC_ALLOC_SIZE(x)</pre>
+<pre class="programlisting">#define G_GNUC_ALLOC_SIZE(x) __attribute__((__alloc_size__(x)))
+</pre>
 <p>
 Expands to the GNU C <code class="literal">alloc_size</code> function attribute if the
 compiler is a new enough <span class="command"><strong>gcc</strong></span>. This attribute tells the
@@ -431,16 +429,16 @@ See the GNU C documentation for details.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>x</code></em> :</span></p></td>
-<td>the index of the argument specifying the allocation size
-</td>
+<td>the index of the argument specifying the allocation size</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.18</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_ALLOC_SIZE2()">
+<div class="refsect2">
 <a name="G-GNUC-ALLOC-SIZE2:CAPS"></a><h3>G_GNUC_ALLOC_SIZE2()</h3>
-<pre class="programlisting">#define             G_GNUC_ALLOC_SIZE2(x,y)</pre>
+<pre class="programlisting">#define G_GNUC_ALLOC_SIZE2(x,y) __attribute__((__alloc_size__(x,y)))
+</pre>
 <p>
 Expands to the GNU C <code class="literal">alloc_size</code> function attribute if the
 compiler is a new enough <span class="command"><strong>gcc</strong></span>. This attribute tells the
@@ -453,20 +451,18 @@ See the GNU C documentation for details.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>x</code></em> :</span></p></td>
-<td>the index of the argument specifying one factor of the allocation size
-</td>
+<td>the index of the argument specifying one factor of the allocation size</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>y</code></em> :</span></p></td>
-<td>the index of the argument specifying the second factor of the allocation size
-</td>
+<td>the index of the argument specifying the second factor of the allocation size</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.18</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_DEPRECATED">
+<div class="refsect2">
 <a name="G-GNUC-DEPRECATED:CAPS"></a><h3>G_GNUC_DEPRECATED</h3>
 <pre class="programlisting">#define             G_GNUC_DEPRECATED</pre>
 <p>
@@ -480,7 +476,7 @@ See the GNU C documentation for details.
 <p class="since">Since 2.2</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_DEPRECATED_FOR()">
+<div class="refsect2">
 <a name="G-GNUC-DEPRECATED-FOR:CAPS"></a><h3>G_GNUC_DEPRECATED_FOR()</h3>
 <pre class="programlisting">#define             G_GNUC_DEPRECATED_FOR(f)</pre>
 <p>
@@ -494,14 +490,13 @@ See the GNU C documentation for details.
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>f</code></em> :</span></p></td>
 <td>the intended replacement for the deprecated symbol, such as the name of a
-    function
-</td>
+function</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.25.3</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_NORETURN">
+<div class="refsect2">
 <a name="G-GNUC-NORETURN:CAPS"></a><h3>G_GNUC_NORETURN</h3>
 <pre class="programlisting">#define             G_GNUC_NORETURN</pre>
 <p>
@@ -512,7 +507,7 @@ warnings. See the GNU C documentation for details.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_UNUSED">
+<div class="refsect2">
 <a name="G-GNUC-UNUSED:CAPS"></a><h3>G_GNUC_UNUSED</h3>
 <pre class="programlisting">#define             G_GNUC_UNUSED</pre>
 <p>
@@ -522,7 +517,7 @@ It avoids possible compiler warnings. See the GNU C documentation for details.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_PRINTF()">
+<div class="refsect2">
 <a name="G-GNUC-PRINTF:CAPS"></a><h3>G_GNUC_PRINTF()</h3>
 <pre class="programlisting">#define             G_GNUC_PRINTF( format_idx, arg_idx )</pre>
 <p>
@@ -555,19 +550,17 @@ See the GNU C documentation for details.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format_idx</code></em> :</span></p></td>
 <td>the index of the argument corresponding to the format string.
-(The arguments are numbered from 1).
-</td>
+(The arguments are numbered from 1).</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg_idx</code></em> :</span></p></td>
-<td>the index of the first of the format arguments.
-</td>
+<td>the index of the first of the format arguments.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_SCANF()">
+<div class="refsect2">
 <a name="G-GNUC-SCANF:CAPS"></a><h3>G_GNUC_SCANF()</h3>
 <pre class="programlisting">#define             G_GNUC_SCANF( format_idx, arg_idx )</pre>
 <p>
@@ -583,19 +576,17 @@ See the GNU C documentation for details.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format_idx</code></em> :</span></p></td>
 <td>the index of the argument corresponding to the format string.
-(The arguments are numbered from 1).
-</td>
+(The arguments are numbered from 1).</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>arg_idx</code></em> :</span></p></td>
-<td>the index of the first of the format arguments.
-</td>
+<td>the index of the first of the format arguments.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_FORMAT()">
+<div class="refsect2">
 <a name="G-GNUC-FORMAT:CAPS"></a><h3>G_GNUC_FORMAT()</h3>
 <pre class="programlisting">#define             G_GNUC_FORMAT( arg_idx )</pre>
 <p>
@@ -625,15 +616,15 @@ See the GNU C documentation for details.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>arg_idx</code></em> :</span></p></td>
-<td>the index of the argument.
-</td>
+<td>the index of the argument.</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_NULL_TERMINATED">
+<div class="refsect2">
 <a name="G-GNUC-NULL-TERMINATED:CAPS"></a><h3>G_GNUC_NULL_TERMINATED</h3>
-<pre class="programlisting">#define             G_GNUC_NULL_TERMINATED</pre>
+<pre class="programlisting">#define G_GNUC_NULL_TERMINATED __attribute__((__sentinel__))
+</pre>
 <p>
 Expands to the GNU C <code class="literal">sentinel</code> function attribute if the
 compiler is <span class="command"><strong>gcc</strong></span>, or "" if it isn't. This function attribute
@@ -643,7 +634,7 @@ See the GNU C documentation for details.
 </p>
 Since: 2.8</div>
 <hr>
-<div class="refsect2" title="G_GNUC_WARN_UNUSED_RESULT">
+<div class="refsect2">
 <a name="G-GNUC-WARN-UNUSED-RESULT:CAPS"></a><h3>G_GNUC_WARN_UNUSED_RESULT</h3>
 <pre class="programlisting">#define             G_GNUC_WARN_UNUSED_RESULT</pre>
 <p>
@@ -655,10 +646,11 @@ is ignored. See the GNU C documentation for details.
 <p class="since">Since 2.10</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_FUNCTION">
+<div class="refsect2">
 <a name="G-GNUC-FUNCTION:CAPS"></a><h3>G_GNUC_FUNCTION</h3>
-<pre class="programlisting">#define             G_GNUC_FUNCTION</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<pre class="programlisting">#define G_GNUC_FUNCTION         __FUNCTION__
+</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">G_GNUC_FUNCTION</code> has been deprecated since version 2.16 and should not be used in newly-written code. Use <a class="link" href="glib-Miscellaneous-Macros.html#G-STRFUNC:CAPS" title="G_STRFUNC"><span class="type">G_STRFUNC</span></a> instead.</p>
 </div>
@@ -668,10 +660,11 @@ on <span class="command"><strong>gcc</strong></span> version 2.x. Don't use it.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_PRETTY_FUNCTION">
+<div class="refsect2">
 <a name="G-GNUC-PRETTY-FUNCTION:CAPS"></a><h3>G_GNUC_PRETTY_FUNCTION</h3>
-<pre class="programlisting">#define             G_GNUC_PRETTY_FUNCTION</pre>
-<div class="warning" title="Warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+<pre class="programlisting">#define G_GNUC_PRETTY_FUNCTION  __PRETTY_FUNCTION__
+</pre>
+<div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Warning</h3>
 <p><code class="literal">G_GNUC_PRETTY_FUNCTION</code> has been deprecated since version 2.16 and should not be used in newly-written code. Use <a class="link" href="glib-Miscellaneous-Macros.html#G-STRFUNC:CAPS" title="G_STRFUNC"><span class="type">G_STRFUNC</span></a> instead.</p>
 </div>
@@ -682,7 +675,7 @@ Don't use it.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_NO_INSTRUMENT">
+<div class="refsect2">
 <a name="G-GNUC-NO-INSTRUMENT:CAPS"></a><h3>G_GNUC_NO_INSTRUMENT</h3>
 <pre class="programlisting">#define             G_GNUC_NO_INSTRUMENT</pre>
 <p>
@@ -695,7 +688,7 @@ See the GNU C documentation for details.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_HAVE_GNUC_VISIBILITY">
+<div class="refsect2">
 <a name="G-HAVE-GNUC-VISIBILITY:CAPS"></a><h3>G_HAVE_GNUC_VISIBILITY</h3>
 <pre class="programlisting">#define G_HAVE_GNUC_VISIBILITY 1
 </pre>
@@ -703,9 +696,10 @@ See the GNU C documentation for details.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GNUC_INTERNAL">
+<div class="refsect2">
 <a name="G-GNUC-INTERNAL:CAPS"></a><h3>G_GNUC_INTERNAL</h3>
-<pre class="programlisting">#define             G_GNUC_INTERNAL</pre>
+<pre class="programlisting">#define G_GNUC_INTERNAL __attribute__((visibility("hidden")))
+</pre>
 <p>
 This attribute can be used for marking library functions as being used
 internally to the library only, which may allow the compiler to handle
@@ -744,9 +738,10 @@ Sun Studio does not.
 
 Since: 2.6</div>
 <hr>
-<div class="refsect2" title="G_GNUC_MAY_ALIAS">
+<div class="refsect2">
 <a name="G-GNUC-MAY-ALIAS:CAPS"></a><h3>G_GNUC_MAY_ALIAS</h3>
-<pre class="programlisting">#define             G_GNUC_MAY_ALIAS</pre>
+<pre class="programlisting">#  define G_GNUC_MAY_ALIAS __attribute__((may_alias))
+</pre>
 <p>
 Expands to the GNU C <code class="literal">may_alias</code> type attribute
 if the compiler is <span class="command"><strong>gcc</strong></span>. Types with this attribute
@@ -756,9 +751,10 @@ See the GNU C documentation for details.
 </p>
 Since: 2.14</div>
 <hr>
-<div class="refsect2" title="G_LIKELY()">
+<div class="refsect2">
 <a name="G-LIKELY:CAPS"></a><h3>G_LIKELY()</h3>
-<pre class="programlisting">#define             G_LIKELY(expr)</pre>
+<pre class="programlisting">#define G_LIKELY(expr) (__builtin_expect (_G_BOOLEAN_EXPR(expr), 1))
+</pre>
 <p>
 Hints the compiler that the expression is likely to evaluate to a true
 value. The compiler may use this information for optimizations.
@@ -781,8 +777,7 @@ value. The compiler may use this information for optimizations.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>expr</code></em> :</span></p></td>
-<td>the expression
-</td>
+<td>the expression</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -794,9 +789,10 @@ value. The compiler may use this information for optimizations.
 <p class="since">Since 2.2</p>
 </div>
 <hr>
-<div class="refsect2" title="G_UNLIKELY()">
+<div class="refsect2">
 <a name="G-UNLIKELY:CAPS"></a><h3>G_UNLIKELY()</h3>
-<pre class="programlisting">#define             G_UNLIKELY(expr)</pre>
+<pre class="programlisting">#define G_UNLIKELY(expr) (__builtin_expect (_G_BOOLEAN_EXPR(expr), 0))
+</pre>
 <p>
 Hints the compiler that the expression is unlikely to evaluate to a true
 value. The compiler may use this information for optimizations.
@@ -819,8 +815,7 @@ value. The compiler may use this information for optimizations.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>expr</code></em> :</span></p></td>
-<td>the expression
-</td>
+<td>the expression</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -832,24 +827,26 @@ value. The compiler may use this information for optimizations.
 <p class="since">Since 2.2</p>
 </div>
 <hr>
-<div class="refsect2" title="G_STRLOC">
+<div class="refsect2">
 <a name="G-STRLOC:CAPS"></a><h3>G_STRLOC</h3>
-<pre class="programlisting">#define             G_STRLOC</pre>
+<pre class="programlisting">#  define G_STRLOC __FILE__ ":" G_STRINGIFY (__LINE__) ":" __PRETTY_FUNCTION__ "()"
+</pre>
 <p>
 Expands to a string identifying the current code position.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_STRFUNC">
+<div class="refsect2">
 <a name="G-STRFUNC:CAPS"></a><h3>G_STRFUNC</h3>
-<pre class="programlisting">#define             G_STRFUNC</pre>
+<pre class="programlisting">#  define G_STRFUNC     ((const char*) (__PRETTY_FUNCTION__))
+</pre>
 <p>
 Expands to a string identifying the current function.
 </p>
 <p class="since">Since 2.4</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GINT16_MODIFIER">
+<div class="refsect2">
 <a name="G-GINT16-MODIFIER:CAPS"></a><h3>G_GINT16_MODIFIER</h3>
 <pre class="programlisting">#define G_GINT16_MODIFIER "h"
 </pre>
@@ -881,7 +878,7 @@ The following example prints "0x7b";
 <p class="since">Since 2.4</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GINT16_FORMAT">
+<div class="refsect2">
 <a name="G-GINT16-FORMAT:CAPS"></a><h3>G_GINT16_FORMAT</h3>
 <pre class="programlisting">#define G_GINT16_FORMAT "hi"
 </pre>
@@ -916,7 +913,7 @@ modifiers between percent-sign and conversion specifier.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GUINT16_FORMAT">
+<div class="refsect2">
 <a name="G-GUINT16-FORMAT:CAPS"></a><h3>G_GUINT16_FORMAT</h3>
 <pre class="programlisting">#define G_GUINT16_FORMAT "hu"
 </pre>
@@ -926,7 +923,7 @@ printing values of type <a class="link" href="glib-Basic-Types.html#guint16" tit
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GINT32_MODIFIER">
+<div class="refsect2">
 <a name="G-GINT32-MODIFIER:CAPS"></a><h3>G_GINT32_MODIFIER</h3>
 <pre class="programlisting">#define G_GINT32_MODIFIER ""
 </pre>
@@ -938,7 +935,7 @@ See also <a class="link" href="glib-Miscellaneous-Macros.html#G-GINT16-MODIFIER:
 <p class="since">Since 2.4</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GINT32_FORMAT">
+<div class="refsect2">
 <a name="G-GINT32-FORMAT:CAPS"></a><h3>G_GINT32_FORMAT</h3>
 <pre class="programlisting">#define G_GINT32_FORMAT "i"
 </pre>
@@ -948,7 +945,7 @@ printing values of type <a class="link" href="glib-Basic-Types.html#gint32" titl
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GUINT32_FORMAT">
+<div class="refsect2">
 <a name="G-GUINT32-FORMAT:CAPS"></a><h3>G_GUINT32_FORMAT</h3>
 <pre class="programlisting">#define G_GUINT32_FORMAT "u"
 </pre>
@@ -958,7 +955,7 @@ printing values of type <a class="link" href="glib-Basic-Types.html#guint32" tit
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_GINT64_MODIFIER">
+<div class="refsect2">
 <a name="G-GINT64-MODIFIER:CAPS"></a><h3>G_GINT64_MODIFIER</h3>
 <pre class="programlisting">#define G_GINT64_MODIFIER "l"
 </pre>
@@ -966,7 +963,7 @@ printing values of type <a class="link" href="glib-Basic-Types.html#guint32" tit
 The platform dependent length modifier for conversion specifiers for scanning
 and printing values of type <a class="link" href="glib-Basic-Types.html#gint64" title="gint64"><span class="type">gint64</span></a> or <a class="link" href="glib-Basic-Types.html#guint64" title="guint64"><span class="type">guint64</span></a>. It is a string literal.
 </p>
-<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 <p>
 Some platforms do not support printing 64 bit integers,
@@ -977,7 +974,7 @@ is not defined.
 <p class="since">Since 2.4</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GINT64_FORMAT">
+<div class="refsect2">
 <a name="G-GINT64-FORMAT:CAPS"></a><h3>G_GINT64_FORMAT</h3>
 <pre class="programlisting">#define G_GINT64_FORMAT "li"
 </pre>
@@ -985,7 +982,7 @@ is not defined.
 This is the platform dependent conversion specifier for scanning and
 printing values of type <a class="link" href="glib-Basic-Types.html#gint64" title="gint64"><span class="type">gint64</span></a>. See also <a class="link" href="glib-Miscellaneous-Macros.html#G-GINT16-FORMAT:CAPS" title="G_GINT16_FORMAT"><span class="type">G_GINT16_FORMAT</span></a>.
 </p>
-<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 <p>
 Some platforms do not support scanning and printing 64 bit integers,
@@ -998,7 +995,7 @@ instead.
 </div>
 </div>
 <hr>
-<div class="refsect2" title="G_GUINT64_FORMAT">
+<div class="refsect2">
 <a name="G-GUINT64-FORMAT:CAPS"></a><h3>G_GUINT64_FORMAT</h3>
 <pre class="programlisting">#define G_GUINT64_FORMAT "lu"
 </pre>
@@ -1006,7 +1003,7 @@ instead.
 This is the platform dependent conversion specifier for scanning and
 printing values of type <a class="link" href="glib-Basic-Types.html#guint64" title="guint64"><span class="type">guint64</span></a>. See also <a class="link" href="glib-Miscellaneous-Macros.html#G-GINT16-FORMAT:CAPS" title="G_GINT16_FORMAT"><span class="type">G_GINT16_FORMAT</span></a>.
 </p>
-<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 <p>
 Some platforms do not support scanning and printing 64 bit integers,
@@ -1018,7 +1015,7 @@ recommended for parsing anyway; consider using <code class="function">g_strtoull
 </div>
 </div>
 <hr>
-<div class="refsect2" title="G_GSIZE_MODIFIER">
+<div class="refsect2">
 <a name="G-GSIZE-MODIFIER:CAPS"></a><h3>G_GSIZE_MODIFIER</h3>
 <pre class="programlisting">#define G_GSIZE_MODIFIER "l"
 </pre>
@@ -1029,7 +1026,7 @@ and printing values of type <a class="link" href="glib-Basic-Types.html#gsize" t
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GSIZE_FORMAT">
+<div class="refsect2">
 <a name="G-GSIZE-FORMAT:CAPS"></a><h3>G_GSIZE_FORMAT</h3>
 <pre class="programlisting">#define G_GSIZE_FORMAT "lu"
 </pre>
@@ -1040,7 +1037,7 @@ printing values of type <a class="link" href="glib-Basic-Types.html#gsize" title
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GSSIZE_FORMAT">
+<div class="refsect2">
 <a name="G-GSSIZE-FORMAT:CAPS"></a><h3>G_GSSIZE_FORMAT</h3>
 <pre class="programlisting">#define G_GSSIZE_FORMAT "li"
 </pre>
@@ -1051,7 +1048,7 @@ printing values of type <a class="link" href="glib-Basic-Types.html#gssize" titl
 <p class="since">Since 2.6</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GOFFSET_MODIFIER">
+<div class="refsect2">
 <a name="G-GOFFSET-MODIFIER:CAPS"></a><h3>G_GOFFSET_MODIFIER</h3>
 <pre class="programlisting">#define G_GOFFSET_MODIFIER      G_GINT64_MODIFIER
 </pre>
@@ -1063,7 +1060,7 @@ and printing values of type <a class="link" href="glib-Basic-Types.html#goffset"
 <p class="since">Since 2.20</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GOFFSET_FORMAT">
+<div class="refsect2">
 <a name="G-GOFFSET-FORMAT:CAPS"></a><h3>G_GOFFSET_FORMAT</h3>
 <pre class="programlisting">#define G_GOFFSET_FORMAT        G_GINT64_FORMAT
 </pre>
@@ -1073,7 +1070,7 @@ printing values of type <a class="link" href="glib-Basic-Types.html#goffset" tit
 </p>
 Since: 2.20</div>
 <hr>
-<div class="refsect2" title="G_GINTPTR_MODIFIER">
+<div class="refsect2">
 <a name="G-GINTPTR-MODIFIER:CAPS"></a><h3>G_GINTPTR_MODIFIER</h3>
 <pre class="programlisting">#define G_GINTPTR_MODIFIER      "l"
 </pre>
@@ -1084,7 +1081,7 @@ and printing values of type <a class="link" href="glib-Basic-Types.html#gintptr"
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GINTPTR_FORMAT">
+<div class="refsect2">
 <a name="G-GINTPTR-FORMAT:CAPS"></a><h3>G_GINTPTR_FORMAT</h3>
 <pre class="programlisting">#define G_GINTPTR_FORMAT        "li"
 </pre>
@@ -1095,7 +1092,7 @@ printing values of type <a class="link" href="glib-Basic-Types.html#gintptr" tit
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="G_GUINTPTR_FORMAT">
+<div class="refsect2">
 <a name="G-GUINTPTR-FORMAT:CAPS"></a><h3>G_GUINTPTR_FORMAT</h3>
 <pre class="programlisting">#define G_GUINTPTR_FORMAT       "lu"
 </pre>
@@ -1109,6 +1106,6 @@ printing values of type <a class="link" href="glib-Basic-Types.html#guintptr" ti
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link rel="up" href="highlevel-socket.html" title="Highlevel network functionallity">
 <link rel="prev" href="GTcpWrapperConnection.html" title="GTcpWrapperConnection">
 <link rel="next" href="GSocketService.html" title="GSocketService">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -30,7 +30,7 @@
                   <a href="#GSocketListener.properties" class="shortcut">Properties</a>
 </td></tr>
 </table>
-<div class="refentry" title="GSocketListener">
+<div class="refentry">
 <a name="GSocketListener"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -39,18 +39,18 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GSocketListener.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GSocketListener.html#GSocketListener-struct" title="GSocketListener">GSocketListener</a>;
-<a class="link" href="GSocketListener.html" title="GSocketListener"><span class="returnvalue">GSocketListener</span></a> *   <a class="link" href="GSocketListener.html#g-socket-listener-new" title="g_socket_listener_new ()">g_socket_listener_new</a>               (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="GSocketListener.html" title="GSocketListener"><span class="returnvalue">GSocketListener</span></a> *        <a class="link" href="GSocketListener.html#g-socket-listener-new" title="g_socket_listener_new ()">g_socket_listener_new</a>          (<em class="parameter"><code><span class="type">void</span></code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketListener.html#g-socket-listener-add-socket" title="g_socket_listener_add_socket ()">g_socket_listener_add_socket</a>        (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketListener.html#g-socket-listener-add-address" title="g_socket_listener_add_address ()">g_socket_listener_add_address</a>       (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> *address</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a> type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a> protocol</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType"><span class="type">GSocketType</span></a> type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a> protocol</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> **effective_address</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
@@ -61,7 +61,7 @@
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             <a class="link" href="GSocketListener.html#g-socket-listener-add-any-inet-port" title="g_socket_listener_add_any_inet_port ()">g_socket_listener_add_any_inet_port</a> (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketListener.html#g-socket-listener-accept" title="g_socket_listener_accept ()">g_socket_listener_accept</a>            (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketListener.html#g-socket-listener-accept" title="g_socket_listener_accept ()">g_socket_listener_accept</a>       (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
@@ -69,11 +69,13 @@
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketListener.html#g-socket-listener-accept-finish" title="g_socket_listener_accept_finish ()">g_socket_listener_accept_finish</a>     (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketListener.html#g-socket-listener-accept-finish" title="g_socket_listener_accept_finish ()">g_socket_listener_accept_finish</a>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **source_object</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *           <a class="link" href="GSocketListener.html#g-socket-listener-accept-socket" title="g_socket_listener_accept_socket ()">g_socket_listener_accept_socket</a>     (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
+<a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *                <a class="link" href="GSocketListener.html#g-socket-listener-accept-socket" title="g_socket_listener_accept_socket ()">g_socket_listener_accept_socket</a>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
@@ -82,7 +84,7 @@
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *           <a class="link" href="GSocketListener.html#g-socket-listener-accept-socket-finish" title="g_socket_listener_accept_socket_finish ()">g_socket_listener_accept_socket_finish</a>
+<a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *                <a class="link" href="GSocketListener.html#g-socket-listener-accept-socket-finish" title="g_socket_listener_accept_socket_finish ()">g_socket_listener_accept_socket_finish</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **source_object</code></em>,
@@ -92,7 +94,7 @@
                                                          <em class="parameter"><code><span class="type">int</span> listen_backlog</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GSocketListener.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
@@ -100,13 +102,13 @@
          +----<a class="link" href="GSocketService.html" title="GSocketService">GSocketService</a>
 </pre>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GSocketListener.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GSocketListener.html#GSocketListener--listen-backlog" title='The "listen-backlog" property'>listen-backlog</a>"           <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GSocketListener.description"></a><h2>Description</h2>
 <p>
 A <a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> is an object that keeps track of a set
@@ -119,18 +121,18 @@ and <a class="link" href="GThreadedSocketService.html" title="GThreadedSocketSer
 that makes this even easier.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GSocketListener.details"></a><h2>Details</h2>
-<div class="refsect2" title="GSocketListener">
+<div class="refsect2">
 <a name="GSocketListener-struct"></a><h3>GSocketListener</h3>
 <pre class="programlisting">typedef struct _GSocketListener GSocketListener;</pre>
 <p>
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_new ()">
+<div class="refsect2">
 <a name="g-socket-listener-new"></a><h3>g_socket_listener_new ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="returnvalue">GSocketListener</span></a> *   g_socket_listener_new               (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="returnvalue">GSocketListener</span></a> *        g_socket_listener_new          (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> with no sockets to listen for.
 New listeners can be added with e.g. <a class="link" href="GSocketListener.html#g-socket-listener-add-address" title="g_socket_listener_add_address ()"><code class="function">g_socket_listener_add_address()</code></a>
@@ -140,15 +142,13 @@ or <a class="link" href="GSocketListener.html#g-socket-listener-add-inet-port" t
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a new <a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a>.
-
-</td>
+<td>a new <a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a>.</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_add_socket ()">
+<div class="refsect2">
 <a name="g-socket-listener-add-socket"></a><h3>g_socket_listener_add_socket ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_listener_add_socket        (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>,
@@ -180,32 +180,30 @@ different things depending on what address is connected to.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source
+<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error.
-
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_add_address ()">
+<div class="refsect2">
 <a name="g-socket-listener-add-address"></a><h3>g_socket_listener_add_address ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_listener_add_address       (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> *address</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a> type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a> protocol</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType"><span class="type">GSocketType</span></a> type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a> protocol</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> **effective_address</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -248,42 +246,40 @@ requested, belongs to the caller and must be freed.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>
+<td>a <a class="link" href="GSocket.html#GSocketType"><span class="type">GSocketType</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>protocol</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a>
+<td>a <a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source
+<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>effective_address</code></em> :</span></p></td>
-<td> location to store the address that was bound to, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>location to store the address that was bound to, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error.
-
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_add_inet_port ()">
+<div class="refsect2">
 <a name="g-socket-listener-add-inet-port"></a><h3>g_socket_listener_add_inet_port ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_listener_add_inet_port     (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> port</code></em>,
@@ -310,32 +306,29 @@ different things depending on what address is connected to.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>port</code></em> :</span></p></td>
-<td>an IP port number (non-zero)
-</td>
+<td>an IP port number (non-zero)</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source
+<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error.
-
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> on error.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_add_any_inet_port ()">
+<div class="refsect2">
 <a name="g-socket-listener-add-any-inet-port"></a><h3>g_socket_listener_add_any_inet_port ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="returnvalue">guint16</span></a>             g_socket_listener_add_any_inet_port (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> *source_object</code></em>,
@@ -364,29 +357,26 @@ different things depending on what address is connected to.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source
+<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
-ignore.
-</td>
+ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the port number, or 0 in case of failure.
-
-</td>
+<td>the port number, or 0 in case of failure.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_accept ()">
+<div class="refsect2">
 <a name="g-socket-listener-accept"></a><h3>g_socket_listener_accept ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_listener_accept            (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_listener_accept       (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -415,23 +405,22 @@ was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANC
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td> location where <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> pointer will be stored, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>location where <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> pointer will be stored, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -439,7 +428,7 @@ was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANC
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_accept_async ()">
+<div class="refsect2">
 <a name="g-socket-listener-accept-async"></a><h3>g_socket_listener_accept_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_listener_accept_async      (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -463,17 +452,17 @@ to get the result of the operation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data for the callback
+<td>user data for the callback. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -481,9 +470,10 @@ to get the result of the operation.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_accept_finish ()">
+<div class="refsect2">
 <a name="g-socket-listener-accept-finish"></a><h3>g_socket_listener_accept_finish ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_listener_accept_finish     (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_listener_accept_finish
+                                                        (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **source_object</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -500,23 +490,21 @@ Finishes an async accept operation. See <a class="link" href="GSocketListener.ht
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source
+<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
-ignore.
-</td>
+ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -524,9 +512,10 @@ ignore.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_accept_socket ()">
+<div class="refsect2">
 <a name="g-socket-listener-accept-socket"></a><h3>g_socket_listener_accept_socket ()</h3>
-<pre class="programlisting"><a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *           g_socket_listener_accept_socket     (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
+<pre class="programlisting"><a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *                g_socket_listener_accept_socket
+                                                        (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **source_object</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -559,23 +548,22 @@ was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANC
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td> location where <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> pointer will be stored, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>location where <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> pointer will be stored, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -583,7 +571,7 @@ was cancelled, the error <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANC
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_accept_socket_async ()">
+<div class="refsect2">
 <a name="g-socket-listener-accept-socket-async"></a><h3>g_socket_listener_accept_socket_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_listener_accept_socket_async
                                                         (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
@@ -608,17 +596,17 @@ to get the result of the operation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data for the callback
+<td>user data for the callback. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -626,9 +614,9 @@ to get the result of the operation.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_accept_socket_finish ()">
+<div class="refsect2">
 <a name="g-socket-listener-accept-socket-finish"></a><h3>g_socket_listener_accept_socket_finish ()</h3>
-<pre class="programlisting"><a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *           g_socket_listener_accept_socket_finish
+<pre class="programlisting"><a class="link" href="GSocket.html" title="GSocket"><span class="returnvalue">GSocket</span></a> *                g_socket_listener_accept_socket_finish
                                                         (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> **source_object</code></em>,
@@ -646,23 +634,21 @@ Finishes an async accept operation. See <a class="link" href="GSocketListener.ht
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>source_object</code></em> :</span></p></td>
-<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source
+<td>Optional <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> identifying this source. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
-ignore.
-</td>
+ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -670,7 +656,7 @@ ignore.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_close ()">
+<div class="refsect2">
 <a name="g-socket-listener-close"></a><h3>g_socket_listener_close ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_listener_close             (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>);</pre>
 <p>
@@ -687,7 +673,7 @@ Closes all the sockets in the listener.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_listener_set_backlog ()">
+<div class="refsect2">
 <a name="g-socket-listener-set-backlog"></a><h3>g_socket_listener_set_backlog ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_listener_set_backlog       (<em class="parameter"><code><a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a> *listener</code></em>,
                                                          <em class="parameter"><code><span class="type">int</span> listen_backlog</code></em>);</pre>
@@ -707,17 +693,16 @@ See <a class="link" href="GSocket.html#g-socket-set-listen-backlog" title="g_soc
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>listen_backlog</code></em> :</span></p></td>
-<td>an integer
-</td>
+<td>an integer</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GSocketListener.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "listen-backlog" property'>
+<div class="refsect2">
 <a name="GSocketListener--listen-backlog"></a><h3>The <code class="literal">"listen-backlog"</code> property</h3>
 <pre class="programlisting">  "listen-backlog"           <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct</pre>
 <p>outstanding connections in the listen queue.</p>
@@ -725,13 +710,13 @@ See <a class="link" href="GSocket.html#g-socket-set-listen-backlog" title="g_soc
 <p>Default value: 10</p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
+<div class="refsect1">
 <a name="GSocketListener.see-also"></a><h2>See Also</h2>
 <a class="link" href="GThreadedSocketService.html" title="GThreadedSocketService"><span class="type">GThreadedSocketService</span></a>, <a class="link" href="GSocketService.html" title="GSocketService"><span class="type">GSocketService</span></a>.
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

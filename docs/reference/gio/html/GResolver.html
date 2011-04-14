@@ -8,7 +8,7 @@
 <link rel="up" href="resolver.html" title="DNS resolution">
 <link rel="prev" href="resolver.html" title="DNS resolution">
 <link rel="next" href="GProxyResolver.html" title="GProxyResolver">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -30,7 +30,7 @@
                   <a href="#GResolver.signals" class="shortcut">Signals</a>
 </td></tr>
 </table>
-<div class="refentry" title="GResolver">
+<div class="refentry">
 <a name="GResolver"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -39,9 +39,9 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GResolver.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
+<a name="GResolverError"></a><pre class="synopsis">
 #include &lt;gio/gio.h&gt;
 
                     <a class="link" href="GResolver.html#GResolver-struct" title="GResolver">GResolver</a>;
@@ -91,23 +91,27 @@
 <span class="returnvalue">void</span>                <a class="link" href="GResolver.html#g-resolver-free-targets" title="g_resolver_free_targets ()">g_resolver_free_targets</a>             (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *targets</code></em>);
 
 #define             <a class="link" href="GResolver.html#G-RESOLVER-ERROR:CAPS" title="G_RESOLVER_ERROR">G_RESOLVER_ERROR</a>
-enum                <a class="link" href="GResolver.html#GResolverError" title="enum GResolverError">GResolverError</a>;
+enum                <a class="link" href="GResolver.html#GResolverError">GResolverError</a>;
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GResolver.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GResolver
 </pre>
-</div>
-<div class="refsect1" title="Signals">
-<a name="GResolver.signals"></a><h2>Signals</h2>
 <pre class="synopsis">
-  "<a class="link" href="GResolver.html#GResolver-reload" title='The "reload" signal'>reload</a>"                                         : Run Last
+  GEnum
+   +----GResolverError
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
+<a name="GResolver.signals"></a><h2>Signals</h2>
+<pre class="synopsis">
+  "<a class="link" href="GResolver.html#GResolver-reload" title='The "reload" signal'>reload</a>"                                         : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
+</pre>
+</div>
+<div class="refsect1">
 <a name="GResolver.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> provides cancellable synchronous and asynchronous DNS
@@ -121,9 +125,9 @@ resolution, for hostnames (<a class="link" href="GResolver.html#g-resolver-looku
 making it easy to connect to a remote host/service.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GResolver.details"></a><h2>Details</h2>
-<div class="refsect2" title="GResolver">
+<div class="refsect2">
 <a name="GResolver-struct"></a><h3>GResolver</h3>
 <pre class="programlisting">typedef struct _GResolver GResolver;</pre>
 <p>
@@ -132,7 +136,7 @@ to get the default resolver.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_get_default ()">
+<div class="refsect2">
 <a name="g-resolver-get-default"></a><h3>g_resolver_get_default ()</h3>
 <pre class="programlisting"><a class="link" href="GResolver.html" title="GResolver"><span class="returnvalue">GResolver</span></a> *         g_resolver_get_default              (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
@@ -145,14 +149,14 @@ resolutions.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the default <a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the default <a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_set_default ()">
+<div class="refsect2">
 <a name="g-resolver-set-default"></a><h3>g_resolver_set_default ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_resolver_set_default              (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>);</pre>
 <p>
@@ -178,7 +182,7 @@ itself as the default resolver for all later code to use.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_by_name ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-by-name"></a><h3>g_resolver_lookup_by_name ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_resolver_lookup_by_name           (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *hostname</code></em>,
@@ -198,7 +202,7 @@ the first fails, etc.)
 </p>
 <p>
 If the DNS resolution fails, <em class="parameter"><code>error</code></em> (if non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>) will be set to a
-value from <a class="link" href="GResolver.html#GResolverError" title="enum GResolverError"><span class="type">GResolverError</span></a>.
+value from <a class="link" href="GResolver.html#GResolverError"><span class="type">GResolverError</span></a>.
 </p>
 <p>
 If <em class="parameter"><code>cancellable</code></em> is non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, it can be used to cancel the
@@ -220,12 +224,11 @@ address, it may be easier to create a <a class="link" href="GNetworkAddress.html
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>hostname</code></em> :</span></p></td>
-<td>the hostname to look up
-</td>
+<td>the hostname to look up</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -235,10 +238,10 @@ address, it may be easier to create a <a class="link" href="GNetworkAddress.html
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a>
 of <a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. You
 must unref each of the addresses and free the list when you are
-done with it. (You can use <a class="link" href="GResolver.html#g-resolver-free-addresses" title="g_resolver_free_addresses ()"><code class="function">g_resolver_free_addresses()</code></a> to do this.). <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GInetAddress][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> GInetAddress]</span>
+done with it. (You can use <a class="link" href="GResolver.html#g-resolver-free-addresses" title="g_resolver_free_addresses ()"><code class="function">g_resolver_free_addresses()</code></a> to do this.). <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GInetAddress][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -246,7 +249,7 @@ done with it. (You can use <a class="link" href="GResolver.html#g-resolver-free-
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_by_name_async ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-by-name-async"></a><h3>g_resolver_lookup_by_name_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_resolver_lookup_by_name_async     (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *hostname</code></em>,
@@ -269,22 +272,21 @@ See <a class="link" href="GResolver.html#g-resolver-lookup-by-name" title="g_res
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>hostname</code></em> :</span></p></td>
-<td>the hostname to look up the address of
-</td>
+<td>the hostname to look up the address of</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>callback to call after resolution completes
+<td>callback to call after resolution completes. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>data for <em class="parameter"><code>callback</code></em>
+<td>data for <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -292,7 +294,7 @@ See <a class="link" href="GResolver.html#g-resolver-lookup-by-name" title="g_res
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_by_name_finish ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-by-name-finish"></a><h3>g_resolver_lookup_by_name_finish ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_resolver_lookup_by_name_finish    (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
@@ -303,7 +305,7 @@ Retrieves the result of a call to
 </p>
 <p>
 If the DNS resolution failed, <em class="parameter"><code>error</code></em> (if non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>) will be set to
-a value from <a class="link" href="GResolver.html#GResolverError" title="enum GResolverError"><span class="type">GResolverError</span></a>. If the operation was cancelled,
+a value from <a class="link" href="GResolver.html#GResolverError"><span class="type">GResolverError</span></a>. If the operation was cancelled,
 <em class="parameter"><code>error</code></em> will be set to <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a>.
 </p>
 <div class="variablelist"><table border="0">
@@ -326,9 +328,9 @@ a value from <a class="link" href="GResolver.html#GResolverError" title="enum GR
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a>
 of <a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. See <a class="link" href="GResolver.html#g-resolver-lookup-by-name" title="g_resolver_lookup_by_name ()"><code class="function">g_resolver_lookup_by_name()</code></a>
-for more details. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GInetAddress][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> GInetAddress]</span>
+for more details. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GInetAddress][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -336,7 +338,7 @@ for more details. <span class="annotation">[<acronym title="Generics and definin
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_free_addresses ()">
+<div class="refsect2">
 <a name="g-resolver-free-addresses"></a><h3>g_resolver_free_addresses ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_resolver_free_addresses           (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *addresses</code></em>);</pre>
 <p>
@@ -356,7 +358,7 @@ by hand.)
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_by_address ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-by-address"></a><h3>g_resolver_lookup_by_address ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             g_resolver_lookup_by_address        (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> *address</code></em>,
@@ -368,7 +370,7 @@ associated hostname.
 </p>
 <p>
 If the DNS resolution fails, <em class="parameter"><code>error</code></em> (if non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>) will be set to
-a value from <a class="link" href="GResolver.html#GResolverError" title="enum GResolverError"><span class="type">GResolverError</span></a>.
+a value from <a class="link" href="GResolver.html#GResolverError"><span class="type">GResolverError</span></a>.
 </p>
 <p>
 If <em class="parameter"><code>cancellable</code></em> is non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, it can be used to cancel the
@@ -385,12 +387,11 @@ operation, in which case <em class="parameter"><code>error</code></em> (if non-<
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
-<td>the address to reverse-resolve
-</td>
+<td>the address to reverse-resolve</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -400,17 +401,15 @@ operation, in which case <em class="parameter"><code>error</code></em> (if non-<
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a hostname (either ASCII-only, or in ASCII-encoded
-    form), or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
-
-</td>
+<td>a hostname (either ASCII-only, or in ASCII-encoded
+form), or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_by_address_async ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-by-address-async"></a><h3>g_resolver_lookup_by_address_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_resolver_lookup_by_address_async  (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GInetAddress.html" title="GInetAddress"><span class="type">GInetAddress</span></a> *address</code></em>,
@@ -432,22 +431,21 @@ call <a class="link" href="GResolver.html#g-resolver-lookup-by-address-finish" t
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
-<td>the address to reverse-resolve
-</td>
+<td>the address to reverse-resolve</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>callback to call after resolution completes
+<td>callback to call after resolution completes. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>data for <em class="parameter"><code>callback</code></em>
+<td>data for <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -455,7 +453,7 @@ call <a class="link" href="GResolver.html#g-resolver-lookup-by-address-finish" t
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_by_address_finish ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-by-address-finish"></a><h3>g_resolver_lookup_by_address_finish ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             g_resolver_lookup_by_address_finish (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
@@ -466,7 +464,7 @@ Retrieves the result of a previous call to
 </p>
 <p>
 If the DNS resolution failed, <em class="parameter"><code>error</code></em> (if non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>) will be set to
-a value from <a class="link" href="GResolver.html#GResolverError" title="enum GResolverError"><span class="type">GResolverError</span></a>. If the operation was cancelled,
+a value from <a class="link" href="GResolver.html#GResolverError"><span class="type">GResolverError</span></a>. If the operation was cancelled,
 <em class="parameter"><code>error</code></em> will be set to <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a>.
 </p>
 <div class="variablelist"><table border="0">
@@ -489,17 +487,15 @@ a value from <a class="link" href="GResolver.html#GResolverError" title="enum GR
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a hostname (either ASCII-only, or in ASCII-encoded
-form), or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.
-
-</td>
+<td>a hostname (either ASCII-only, or in ASCII-encoded
+form), or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_service ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-service"></a><h3>g_resolver_lookup_service ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_resolver_lookup_service           (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *service</code></em>,
@@ -509,7 +505,7 @@ form), or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Ma
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Synchronously performs a DNS SRV lookup for the given <em class="parameter"><code>service</code></em> and
-<em class="parameter"><code>protocol</code></em> in the given <em class="parameter"><code>domain</code></em> and returns an array of <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a>.
+<em class="parameter"><code>protocol</code></em> in the given <em class="parameter"><code>domain</code></em> and returns an array of <a class="link" href="GSrvTarget.html" title="GSrvTarget"><span class="type">GSrvTarget</span></a>.
 <em class="parameter"><code>domain</code></em> may be an ASCII-only or UTF-8 hostname. Note also that the
 <em class="parameter"><code>service</code></em> and <em class="parameter"><code>protocol</code></em> arguments <span class="emphasis"><em>do not</em></span>
 include the leading underscore that appears in the actual DNS
@@ -517,13 +513,13 @@ entry.
 </p>
 <p>
 On success, <a class="link" href="GResolver.html#g-resolver-lookup-service" title="g_resolver_lookup_service ()"><code class="function">g_resolver_lookup_service()</code></a> will return a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of
-<a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a>, sorted in order of preference. (That is, you should
+<a class="link" href="GSrvTarget.html" title="GSrvTarget"><span class="type">GSrvTarget</span></a>, sorted in order of preference. (That is, you should
 attempt to connect to the first target first, then the second if
 the first fails, etc.)
 </p>
 <p>
 If the DNS resolution fails, <em class="parameter"><code>error</code></em> (if non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>) will be set to
-a value from <a class="link" href="GResolver.html#GResolverError" title="enum GResolverError"><span class="type">GResolverError</span></a>.
+a value from <a class="link" href="GResolver.html#GResolverError"><span class="type">GResolverError</span></a>.
 </p>
 <p>
 If <em class="parameter"><code>cancellable</code></em> is non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, it can be used to cancel the
@@ -545,22 +541,19 @@ interface.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
-<td>the service type to look up (eg, "ldap")
-</td>
+<td>the service type to look up (eg, "ldap")</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>protocol</code></em> :</span></p></td>
-<td>the networking protocol to use for <em class="parameter"><code>service</code></em> (eg, "tcp")
-</td>
+<td>the networking protocol to use for <em class="parameter"><code>service</code></em> (eg, "tcp")</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>the DNS domain to look up the service in
-</td>
+<td>the DNS domain to look up the service in</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -570,9 +563,9 @@ interface.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a>,
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GSrvTarget.html" title="GSrvTarget"><span class="type">GSrvTarget</span></a>,
 or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. You must free each of the targets and the list when you are
-done with it. (You can use <a class="link" href="GResolver.html#g-resolver-free-targets" title="g_resolver_free_targets ()"><code class="function">g_resolver_free_targets()</code></a> to do this.). <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GSrvTarget][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> GSrvTarget]</span>
+done with it. (You can use <a class="link" href="GResolver.html#g-resolver-free-targets" title="g_resolver_free_targets ()"><code class="function">g_resolver_free_targets()</code></a> to do this.). <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GSrvTarget][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -580,7 +573,7 @@ done with it. (You can use <a class="link" href="GResolver.html#g-resolver-free-
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_service_async ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-service-async"></a><h3>g_resolver_lookup_service_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_resolver_lookup_service_async     (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *service</code></em>,
@@ -606,32 +599,29 @@ details.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
-<td>the service type to look up (eg, "ldap")
-</td>
+<td>the service type to look up (eg, "ldap")</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>protocol</code></em> :</span></p></td>
-<td>the networking protocol to use for <em class="parameter"><code>service</code></em> (eg, "tcp")
-</td>
+<td>the networking protocol to use for <em class="parameter"><code>service</code></em> (eg, "tcp")</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>the DNS domain to look up the service in
-</td>
+<td>the DNS domain to look up the service in</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>callback to call after resolution completes
+<td>callback to call after resolution completes. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>data for <em class="parameter"><code>callback</code></em>
+<td>data for <em class="parameter"><code>callback</code></em>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -639,7 +629,7 @@ details.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_lookup_service_finish ()">
+<div class="refsect2">
 <a name="g-resolver-lookup-service-finish"></a><h3>g_resolver_lookup_service_finish ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="returnvalue">GList</span></a> *             g_resolver_lookup_service_finish    (<em class="parameter"><code><a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
@@ -650,7 +640,7 @@ Retrieves the result of a previous call to
 </p>
 <p>
 If the DNS resolution failed, <em class="parameter"><code>error</code></em> (if non-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>) will be set to
-a value from <a class="link" href="GResolver.html#GResolverError" title="enum GResolverError"><span class="type">GResolverError</span></a>. If the operation was cancelled,
+a value from <a class="link" href="GResolver.html#GResolverError"><span class="type">GResolverError</span></a>. If the operation was cancelled,
 <em class="parameter"><code>error</code></em> will be set to <a class="link" href="gio-GIOError.html#G-IO-ERROR-CANCELLED:CAPS"><code class="literal">G_IO_ERROR_CANCELLED</code></a>.
 </p>
 <div class="variablelist"><table border="0">
@@ -673,8 +663,8 @@ a value from <a class="link" href="GResolver.html#GResolverError" title="enum GR
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a>,
-or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. See <a class="link" href="GResolver.html#g-resolver-lookup-service" title="g_resolver_lookup_service ()"><code class="function">g_resolver_lookup_service()</code></a> for more details. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GSrvTarget][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym> GSrvTarget]</span>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GSrvTarget.html" title="GSrvTarget"><span class="type">GSrvTarget</span></a>,
+or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. See <a class="link" href="GResolver.html#g-resolver-lookup-service" title="g_resolver_lookup_service ()"><code class="function">g_resolver_lookup_service()</code></a> for more details. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GSrvTarget][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -682,7 +672,7 @@ or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.ht
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_resolver_free_targets ()">
+<div class="refsect2">
 <a name="g-resolver-free-targets"></a><h3>g_resolver_free_targets ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_resolver_free_targets             (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> *targets</code></em>);</pre>
 <p>
@@ -695,25 +685,25 @@ results by hand.)
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>targets</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="gio-GSrvTarget.html#GSrvTarget" title="GSrvTarget"><span class="type">GSrvTarget</span></a>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Doubly-Linked-Lists.html#GList"><span class="type">GList</span></a> of <a class="link" href="GSrvTarget.html" title="GSrvTarget"><span class="type">GSrvTarget</span></a>
 </td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="G_RESOLVER_ERROR">
+<div class="refsect2">
 <a name="G-RESOLVER-ERROR:CAPS"></a><h3>G_RESOLVER_ERROR</h3>
 <pre class="programlisting">#define G_RESOLVER_ERROR (g_resolver_error_quark ())
 </pre>
 <p>
 Error domain for <a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a>. Errors in this domain will be from the
-<a class="link" href="GResolver.html#GResolverError" title="enum GResolverError"><span class="type">GResolverError</span></a> enumeration. See <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for more information on
+<a class="link" href="GResolver.html#GResolverError"><span class="type">GResolverError</span></a> enumeration. See <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for more information on
 error domains.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="enum GResolverError">
+<div class="refsect2">
 <a name="GResolverError"></a><h3>enum GResolverError</h3>
 <pre class="programlisting">typedef enum {
   G_RESOLVER_ERROR_NOT_FOUND,
@@ -750,12 +740,12 @@ from a <a class="link" href="GResolver.html" title="GResolver"><span class="type
 <p class="since">Since 2.22</p>
 </div>
 </div>
-<div class="refsect1" title="Signal Details">
+<div class="refsect1">
 <a name="GResolver.signal-details"></a><h2>Signal Details</h2>
-<div class="refsect2" title='The "reload" signal'>
+<div class="refsect2">
 <a name="GResolver-reload"></a><h3>The <code class="literal">"reload"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GResolver.html" title="GResolver"><span class="type">GResolver</span></a> *resolver,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : Run Last</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a></pre>
 <p>
 Emitted when the resolver notices that the system resolver
 configuration has changed.
@@ -779,6 +769,6 @@ configuration has changed.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

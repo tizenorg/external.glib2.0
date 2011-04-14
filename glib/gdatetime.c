@@ -1319,8 +1319,8 @@ g_date_time_add_full (GDateTime *datetime,
  * #GCompareFunc-compatible comparison for #GDateTime<!-- -->'s. Both
  * #GDateTime<-- -->'s must be non-%NULL.
  *
- * Return value: 0 for equal, less than zero if dt1 is less than dt2, greater
- *   than zero if dt2 is greator than dt1.
+ * Return value: -1, 0 or 1 if @dt1 is less than, equal to or greater
+ *   than @dt2.
  *
  * Since: 2.26
  */
@@ -2237,7 +2237,6 @@ g_date_time_format (GDateTime *datetime,
   GString  *outstr;
   gchar    *tmp;
   gunichar  c;
-  glong     utf8len;
   gboolean  in_mod;
 
   g_return_val_if_fail (datetime != NULL, NULL);
@@ -2245,10 +2244,9 @@ g_date_time_format (GDateTime *datetime,
   g_return_val_if_fail (g_utf8_validate (format, -1, NULL), NULL);
 
   outstr = g_string_sized_new (strlen (format) * 2);
-  utf8len = g_utf8_strlen (format, -1);
   in_mod = FALSE;
 
-  for (; *format; format = g_utf8_next_char(format))
+  for (; *format; format = g_utf8_next_char (format))
     {
       c = g_utf8_get_char (format);
 
@@ -2297,7 +2295,7 @@ g_date_time_format (GDateTime *datetime,
                   g_string_append_printf (outstr, "%02d", g_date_time_get_hour (datetime));
                   break;
                 case 'I':
-                  if (g_date_time_get_hour (datetime) == 0)
+                  if ((g_date_time_get_hour (datetime) % 12) == 0)
                     g_string_append (outstr, "12");
                   else
                     g_string_append_printf (outstr, "%02d", g_date_time_get_hour (datetime) % 12);
@@ -2309,7 +2307,7 @@ g_date_time_format (GDateTime *datetime,
                   g_string_append_printf (outstr, "%2d", g_date_time_get_hour (datetime));
                   break;
                 case 'l':
-                  if (g_date_time_get_hour (datetime) == 0)
+                  if ((g_date_time_get_hour (datetime) % 12) == 0)
                     g_string_append (outstr, "12");
                   else
                     g_string_append_printf (outstr, "%2d", g_date_time_get_hour (datetime) % 12);

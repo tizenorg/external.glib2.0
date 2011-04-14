@@ -8,7 +8,7 @@
 <link rel="up" href="streaming.html" title="Streaming I/O">
 <link rel="prev" href="GMemoryInputStream.html" title="GMemoryInputStream">
 <link rel="next" href="GBufferedInputStream.html" title="GBufferedInputStream">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -32,7 +32,7 @@
                   <a href="#GMemoryOutputStream.properties" class="shortcut">Properties</a>
 </td></tr>
 </table>
-<div class="refentry" title="GMemoryOutputStream">
+<div class="refentry">
 <a name="GMemoryOutputStream"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -41,7 +41,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GMemoryOutputStream.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;gio/gio.h&gt;
@@ -60,7 +60,7 @@
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            <a class="link" href="GMemoryOutputStream.html#g-memory-output-stream-steal-data" title="g_memory_output_stream_steal_data ()">g_memory_output_stream_steal_data</a>   (<em class="parameter"><code><a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream"><span class="type">GMemoryOutputStream</span></a> *ostream</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GMemoryOutputStream.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
@@ -68,13 +68,13 @@
          +----GMemoryOutputStream
 </pre>
 </div>
-<div class="refsect1" title="Implemented Interfaces">
+<div class="refsect1">
 <a name="GMemoryOutputStream.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GMemoryOutputStream implements
  <a class="link" href="GSeekable.html" title="GSeekable">GSeekable</a>.</p>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GMemoryOutputStream.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GMemoryOutputStream.html#GMemoryOutputStream--data" title='The "data" property'>data</a>"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Read / Write / Construct Only
@@ -84,16 +84,16 @@ GMemoryOutputStream implements
   "<a class="link" href="GMemoryOutputStream.html#GMemoryOutputStream--size" title='The "size" property'>size</a>"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a>                : Read / Write / Construct Only
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GMemoryOutputStream.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream"><span class="type">GMemoryOutputStream</span></a> is a class for using arbitrary
 memory chunks as output for GIO streaming output operations.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GMemoryOutputStream.details"></a><h2>Details</h2>
-<div class="refsect2" title="GReallocFunc ()">
+<div class="refsect2">
 <a name="GReallocFunc"></a><h3>GReallocFunc ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            (*GReallocFunc)                     (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> size</code></em>);</pre>
@@ -109,24 +109,21 @@ The function should have the same semantics as <code class="function">realloc()<
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
-<td>memory block to reallocate
-</td>
+<td>memory block to reallocate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>size</code></em> :</span></p></td>
-<td>size to reallocate <em class="parameter"><code>data</code></em> to
-</td>
+<td>size to reallocate <em class="parameter"><code>data</code></em> to</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a pointer to the reallocated memory
-</td>
+<td>a pointer to the reallocated memory</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GMemoryOutputStream">
+<div class="refsect2">
 <a name="GMemoryOutputStream-struct"></a><h3>GMemoryOutputStream</h3>
 <pre class="programlisting">typedef struct _GMemoryOutputStream GMemoryOutputStream;</pre>
 <p>
@@ -134,7 +131,7 @@ Implements <a class="link" href="GOutputStream.html" title="GOutputStream"><span
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_memory_output_stream_new ()">
+<div class="refsect2">
 <a name="g-memory-output-stream-new"></a><h3>g_memory_output_stream_new ()</h3>
 <pre class="programlisting"><a class="link" href="GOutputStream.html" title="GOutputStream"><span class="returnvalue">GOutputStream</span></a> *     g_memory_output_stream_new          (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="type">gsize</span></a> size</code></em>,
@@ -196,25 +193,24 @@ pass <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.
 <tr>
 <td><p><span class="term"><em class="parameter"><code>realloc_function</code></em> :</span></p></td>
 <td>a function with <code class="function">realloc()</code> semantics (like <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-realloc"><code class="function">g_realloc()</code></a>)
-    to be called when <em class="parameter"><code>data</code></em> needs to be grown, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+to be called when <em class="parameter"><code>data</code></em> needs to be grown, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>destroy_function</code></em> :</span></p></td>
 <td>a function to be called on <em class="parameter"><code>data</code></em> when the stream is
-    finalized, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+finalized, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A newly created <a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream"><span class="type">GMemoryOutputStream</span></a> object.
-</td>
+<td>A newly created <a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream"><span class="type">GMemoryOutputStream</span></a> object.</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_memory_output_stream_get_data ()">
+<div class="refsect2">
 <a name="g-memory-output-stream-get-data"></a><h3>g_memory_output_stream_get_data ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_memory_output_stream_get_data     (<em class="parameter"><code><a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream"><span class="type">GMemoryOutputStream</span></a> *ostream</code></em>);</pre>
 <p>
@@ -234,18 +230,18 @@ write or truncate operation on the stream.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> pointer to the stream's data
+<td>pointer to the stream's data. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_memory_output_stream_get_size ()">
+<div class="refsect2">
 <a name="g-memory-output-stream-get-size"></a><h3>g_memory_output_stream_get_size ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="returnvalue">gsize</span></a>               g_memory_output_stream_get_size     (<em class="parameter"><code><a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream"><span class="type">GMemoryOutputStream</span></a> *ostream</code></em>);</pre>
 <p>
-Gets the size of the currently allocated data area (availible from
+Gets the size of the currently allocated data area (available from
 <a class="link" href="GMemoryOutputStream.html#g-memory-output-stream-get-data" title="g_memory_output_stream_get_data ()"><code class="function">g_memory_output_stream_get_data()</code></a>). If the stream isn't
 growable (no realloc was passed to <a class="link" href="GMemoryOutputStream.html#g-memory-output-stream-new" title="g_memory_output_stream_new ()"><code class="function">g_memory_output_stream_new()</code></a>) then
 this is the maximum size of the stream and further writes
@@ -269,14 +265,13 @@ If you want the number of bytes currently written to the stream, use
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the number of bytes allocated for the data buffer
-</td>
+<td>the number of bytes allocated for the data buffer</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_memory_output_stream_get_data_size ()">
+<div class="refsect2">
 <a name="g-memory-output-stream-get-data-size"></a><h3>g_memory_output_stream_get_data_size ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gsize"><span class="returnvalue">gsize</span></a>               g_memory_output_stream_get_data_size
                                                         (<em class="parameter"><code><a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream"><span class="type">GMemoryOutputStream</span></a> *ostream</code></em>);</pre>
@@ -295,16 +290,14 @@ that has not been truncated away.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the number of bytes written to the stream
-
-</td>
+<td>the number of bytes written to the stream</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.18</p>
 </div>
 <hr>
-<div class="refsect2" title="g_memory_output_stream_steal_data ()">
+<div class="refsect2">
 <a name="g-memory-output-stream-steal-data"></a><h3>g_memory_output_stream_steal_data ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_memory_output_stream_steal_data   (<em class="parameter"><code><a class="link" href="GMemoryOutputStream.html" title="GMemoryOutputStream"><span class="type">GMemoryOutputStream</span></a> *ostream</code></em>);</pre>
 <p>
@@ -326,7 +319,7 @@ freed using the free function set in <em class="parameter"><code>ostream</code><
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the stream's data. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the stream's data. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -334,9 +327,9 @@ freed using the free function set in <em class="parameter"><code>ostream</code><
 <p class="since">Since 2.26</p>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GMemoryOutputStream.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "data" property'>
+<div class="refsect2">
 <a name="GMemoryOutputStream--data"></a><h3>The <code class="literal">"data"</code> property</h3>
 <pre class="programlisting">  "data"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Read / Write / Construct Only</pre>
 <p>
@@ -345,7 +338,7 @@ Pointer to buffer where data will be written.
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title='The "data-size" property'>
+<div class="refsect2">
 <a name="GMemoryOutputStream--data-size"></a><h3>The <code class="literal">"data-size"</code> property</h3>
 <pre class="programlisting">  "data-size"                <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a>                : Read</pre>
 <p>
@@ -354,7 +347,7 @@ Size of data written to the buffer.
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title='The "destroy-function" property'>
+<div class="refsect2">
 <a name="GMemoryOutputStream--destroy-function"></a><h3>The <code class="literal">"destroy-function"</code> property</h3>
 <pre class="programlisting">  "destroy-function"         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Read / Write / Construct Only</pre>
 <p>
@@ -363,7 +356,7 @@ Function called with the buffer as argument when the stream is destroyed.
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title='The "realloc-function" property'>
+<div class="refsect2">
 <a name="GMemoryOutputStream--realloc-function"></a><h3>The <code class="literal">"realloc-function"</code> property</h3>
 <pre class="programlisting">  "realloc-function"         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>              : Read / Write / Construct Only</pre>
 <p>
@@ -372,7 +365,7 @@ Function with realloc semantics called to enlarge the buffer.
 <p class="since">Since 2.24</p>
 </div>
 <hr>
-<div class="refsect2" title='The "size" property'>
+<div class="refsect2">
 <a name="GMemoryOutputStream--size"></a><h3>The <code class="literal">"size"</code> property</h3>
 <pre class="programlisting">  "size"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a>                : Read / Write / Construct Only</pre>
 <p>
@@ -381,13 +374,13 @@ Current size of the data buffer.
 <p class="since">Since 2.24</p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
+<div class="refsect1">
 <a name="GMemoryOutputStream.see-also"></a><h2>See Also</h2>
 <a class="link" href="GMemoryInputStream.html" title="GMemoryInputStream"><span class="type">GMemoryInputStream</span></a>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

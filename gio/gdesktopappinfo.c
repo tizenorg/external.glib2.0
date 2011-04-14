@@ -880,18 +880,17 @@ prepend_terminal_to_vector (int    *argc,
 }
 
 static GList *
-uri_list_segment_to_files (GList *start,
-			   GList *end)
+create_files_for_uris (GList *uris)
 {
   GList *res;
-  GFile *file;
+  GList *iter;
 
   res = NULL;
-  while (start != NULL && start != end)
+
+  for (iter = uris; iter; iter = iter->next)
     {
-      file = g_file_new_for_uri ((char *)start->data);
+      GFile *file = g_file_new_for_uri ((char *)iter->data);
       res = g_list_prepend (res, file);
-      start = start->next;
     }
 
   return g_list_reverse (res);
@@ -899,6 +898,8 @@ uri_list_segment_to_files (GList *start,
 
 typedef struct
 {
+  GSpawnChildSetupFunc user_setup;
+  gpointer user_setup_data;
   char *display;
   char *sn_id;
   char *desktop_file;
@@ -924,18 +925,93 @@ child_setup (gpointer user_data)
       g_snprintf (pid, 20, "%ld", (long)getpid ());
       g_setenv ("GIO_LAUNCHED_DESKTOP_FILE_PID", pid, TRUE);
     }
+
+  if (data->user_setup)
+    data->user_setup (data->user_setup_data);
 }
 
+static void
+notify_desktop_launch (GDBusConnection  *session_bus,
+		       GDesktopAppInfo  *info,
+		       long              pid,
+		       const char       *display,
+		       const char       *sn_id,
+		       GList            *uris)
+{
+  GDBusMessage *msg;
+  GVariantBuilder uri_variant;
+  GVariantBuilder extras_variant;
+  GList *iter;
+  const char *desktop_file_id;
+  const char *gio_desktop_file;
+
+  if (session_bus == NULL)
+    return;
+
+  g_variant_builder_init (&uri_variant, G_VARIANT_TYPE ("as"));
+  for (iter = uris; iter; iter = iter->next)
+    g_variant_builder_add (&uri_variant, "s", iter->data);
+
+  g_variant_builder_init (&extras_variant, G_VARIANT_TYPE ("a{sv}"));
+  if (sn_id != NULL && g_utf8_validate (sn_id, -1, NULL))
+    g_variant_builder_add (&extras_variant, "{sv}",
+			   "startup-id",
+			   g_variant_new ("s",
+					  sn_id));
+  gio_desktop_file = g_getenv ("GIO_LAUNCHED_DESKTOP_FILE");
+  if (gio_desktop_file != NULL)
+    g_variant_builder_add (&extras_variant, "{sv}",
+			   "origin-desktop-file",
+			   g_variant_new_bytestring (gio_desktop_file));
+  if (g_get_prgname () != NULL)
+    g_variant_builder_add (&extras_variant, "{sv}",
+			   "origin-prgname",
+			   g_variant_new_bytestring (g_get_prgname ()));
+  g_variant_builder_add (&extras_variant, "{sv}",
+			 "origin-pid",
+			 g_variant_new ("x",
+					(gint64)getpid ()));
+
+  if (info->filename)
+    desktop_file_id = info->filename;
+  else if (info->desktop_id)
+    desktop_file_id = info->desktop_id;
+  else
+    desktop_file_id = "";
+  
+  msg = g_dbus_message_new_signal ("/org/gtk/gio/DesktopAppInfo",
+				   "org.gtk.gio.DesktopAppInfo",
+				   "Launched");
+  g_dbus_message_set_body (msg, g_variant_new ("(@aysxasa{sv})",
+					       g_variant_new_bytestring (desktop_file_id),
+					       display ? display : "",
+					       (gint64)pid,
+					       &uri_variant,
+					       &extras_variant));
+  g_dbus_connection_send_message (session_bus,
+				  msg, 0,
+				  NULL,
+				  NULL);
+  g_object_unref (msg);
+}
+
+#define _SPAWN_FLAGS_DEFAULT (G_SPAWN_SEARCH_PATH)
+
 static gboolean
-g_desktop_app_info_launch_uris (GAppInfo           *appinfo,
-				GList              *uris,
-				GAppLaunchContext  *launch_context,
-				GError            **error)
+_g_desktop_app_info_launch_uris_internal (GAppInfo                   *appinfo,
+					  GList                      *uris,
+					  GAppLaunchContext          *launch_context,
+					  GSpawnFlags                 spawn_flags,
+					  GSpawnChildSetupFunc        user_setup,
+					  gpointer                    user_setup_data,
+					  GDesktopAppLaunchCallback   pid_callback,
+					  gpointer                    pid_callback_data,
+					  GError                     **error)
 {
   GDesktopAppInfo *info = G_DESKTOP_APP_INFO (appinfo);
+  GDBusConnection *session_bus;
   gboolean completed = FALSE;
   GList *old_uris;
-  GList *launched_files;
   char **argv;
   int argc;
   ChildSetupData data;
@@ -944,12 +1020,24 @@ g_desktop_app_info_launch_uris (GAppInfo           *appinfo,
 
   argv = NULL;
 
+  session_bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
+
   do
     {
+      GPid pid;
+      GList *launched_uris;
+      GList *iter;
+
       old_uris = uris;
       if (!expand_application_parameters (info, &uris,
 					  &argc, &argv, error))
 	goto out;
+
+      /* Get the subset of URIs we're launching with this process */
+      launched_uris = NULL;
+      for (iter = old_uris; iter != NULL && iter != uris; iter = iter->next)
+	launched_uris = g_list_prepend (launched_uris, iter->data);
+      launched_uris = g_list_reverse (launched_uris);
       
       if (info->terminal && !prepend_terminal_to_vector (&argc, &argv))
 	{
@@ -958,13 +1046,15 @@ g_desktop_app_info_launch_uris (GAppInfo           *appinfo,
 	  goto out;
 	}
 
+      data.user_setup = user_setup;
+      data.user_setup_data = user_setup_data;
       data.display = NULL;
       data.sn_id = NULL;
       data.desktop_file = info->filename;
 
       if (launch_context)
 	{
-	  launched_files = uri_list_segment_to_files (old_uris, uris);
+	  GList *launched_files = create_files_for_uris (launched_uris);
 
 	  data.display = g_app_launch_context_get_display (launch_context,
 						           appinfo,
@@ -981,10 +1071,10 @@ g_desktop_app_info_launch_uris (GAppInfo           *appinfo,
       if (!g_spawn_async (info->path,
 			  argv,
 			  NULL,
-			  G_SPAWN_SEARCH_PATH,
+			  spawn_flags,
 			  child_setup,
 			  &data,
-			  NULL,
+			  &pid,
 			  error))
 	{
 	  if (data.sn_id)
@@ -992,17 +1082,42 @@ g_desktop_app_info_launch_uris (GAppInfo           *appinfo,
 
 	  g_free (data.sn_id);
 	  g_free (data.display);
+	  g_list_free (launched_uris);
 
 	  goto out;
 	}
 
+      if (pid_callback != NULL)
+	pid_callback (info, pid, pid_callback_data);
+
+      notify_desktop_launch (session_bus,
+			     info,
+			     pid,
+			     data.display,
+			     data.sn_id,
+			     launched_uris);
+
       g_free (data.sn_id);
       g_free (data.display);
+      g_list_free (launched_uris);
 
       g_strfreev (argv);
       argv = NULL;
     }
   while (uris != NULL);
+
+  /* TODO - need to handle the process exiting immediately
+   * after launching an app.  See http://bugzilla.gnome.org/606960
+   */
+  if (session_bus != NULL)
+    {
+      /* This asynchronous flush holds a reference until it completes,
+       * which ensures that the following unref won't immediately kill
+       * the connection if we were the initial owner.
+       */
+      g_dbus_connection_flush (session_bus, NULL, NULL, NULL);
+      g_object_unref (session_bus);
+    }
 
   completed = TRUE;
 
@@ -1010,6 +1125,19 @@ g_desktop_app_info_launch_uris (GAppInfo           *appinfo,
   g_strfreev (argv);
 
   return completed;
+}
+
+static gboolean
+g_desktop_app_info_launch_uris (GAppInfo           *appinfo,
+				GList              *uris,
+				GAppLaunchContext  *launch_context,
+				GError            **error)
+{
+  return _g_desktop_app_info_launch_uris_internal (appinfo, uris,
+						   launch_context,
+						   _SPAWN_FLAGS_DEFAULT,
+						   NULL, NULL, NULL, NULL,
+						   error);
 }
 
 static gboolean
@@ -1058,6 +1186,56 @@ g_desktop_app_info_launch (GAppInfo           *appinfo,
   g_list_free (uris);
   
   return res;
+}
+
+/**
+ * g_desktop_app_info_launch_uris_as_manager:
+ * @appinfo: a #GDesktopAppInfo
+ * @uris: (element-type utf8): List of URIs
+ * @launch_context: a #GAppLaunchContext
+ * @spawn_flags: #GSpawnFlags, used for each process
+ * @user_setup: (scope call): a #GSpawnChildSetupFunc, used once for
+ *     each process.
+ * @user_setup_data: (closure user_setup): User data for @user_setup
+ * @pid_callback: (scope call): Callback for child processes
+ * @pid_callback_data: (closure pid_callback): User data for @callback
+ * @error: a #GError
+ *
+ * This function performs the equivalent of g_app_info_launch_uris(),
+ * but is intended primarily for operating system components that
+ * launch applications.  Ordinary applications should use
+ * g_app_info_launch_uris().
+ *
+ * In contrast to g_app_info_launch_uris(), all processes created will
+ * always be run directly as children as if by the UNIX fork()/exec()
+ * calls.
+ *
+ * This guarantee allows additional control over the exact environment
+ * of the child processes, which is provided via a setup function
+ * @setup, as well as the process identifier of each child process via
+ * @pid_callback.  See g_spawn_async() for more information about the
+ * semantics of the @setup function.
+ */
+gboolean
+g_desktop_app_info_launch_uris_as_manager (GDesktopAppInfo            *appinfo,
+					   GList                      *uris,
+					   GAppLaunchContext          *launch_context,
+					   GSpawnFlags                 spawn_flags,
+					   GSpawnChildSetupFunc        user_setup,
+					   gpointer                    user_setup_data,
+					   GDesktopAppLaunchCallback   pid_callback,
+					   gpointer                    pid_callback_data,
+					   GError                    **error)
+{
+  return _g_desktop_app_info_launch_uris_internal ((GAppInfo*)appinfo,
+						   uris,
+						   launch_context,
+						   spawn_flags,
+						   user_setup,
+						   user_setup_data,
+						   pid_callback,
+						   pid_callback_data,
+						   error);
 }
 
 G_LOCK_DEFINE_STATIC (g_desktop_env);
@@ -1997,7 +2175,8 @@ g_app_info_reset_type_associations (const char *content_type)
  * 
  * Gets the #GAppInfo that corresponds to a given content type.
  *
- * Returns: #GAppInfo for given @content_type or %NULL on error.
+ * Returns: (transfer full): #GAppInfo for given @content_type or
+ *     %NULL on error.
  **/
 GAppInfo *
 g_app_info_get_default_for_type (const char *content_type,
@@ -2069,7 +2248,7 @@ g_app_info_get_default_for_type (const char *content_type,
  * of the URI, up to but not including the ':', e.g. "http", 
  * "ftp" or "sip".
  * 
- * Returns: #GAppInfo for given @uri_scheme or %NULL on error.
+ * Returns: (transfer full): #GAppInfo for given @uri_scheme or %NULL on error.
  **/
 GAppInfo *
 g_app_info_get_default_for_uri_scheme (const char *uri_scheme)
@@ -2880,14 +3059,19 @@ get_all_desktop_entries_for_mime_type (const char  *base_mime_type,
 	{
 	  dir = dir_list->data;
 
-          /* Pick the explicit default application */
-          entry = g_hash_table_lookup (dir->mimeapps_list_defaults_map, mime_type);
-
-          if (entry != NULL)
+          /* Pick the explicit default application if we got no result earlier
+           * (ie, for more specific mime types)
+           */
+          if (desktop_entries == NULL)
             {
-              /* Save the default entry if it's the first one we encounter */
-              if (default_entry == NULL)
-                default_entry = g_strdup (entry);
+              entry = g_hash_table_lookup (dir->mimeapps_list_defaults_map, mime_type);
+
+              if (entry != NULL)
+                {
+                  /* Save the default entry if it's the first one we encounter */
+                  if (default_entry == NULL)
+                    default_entry = g_strdup (entry);
+                }
             }
 
 	  /* Then added associations from mimeapps.list */

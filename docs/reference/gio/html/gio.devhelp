@@ -121,13 +121,13 @@
         <sub name="GSocketConnectable" link="GSocketConnectable.html"/>
         <sub name="GNetworkAddress" link="GNetworkAddress.html"/>
         <sub name="GNetworkService" link="GNetworkService.html"/>
-        <sub name="GSrvTarget" link="gio-GSrvTarget.html"/>
+        <sub name="GSrvTarget" link="GSrvTarget.html"/>
       </sub>
       <sub name="Lowlevel D-Bus Support" link="gdbus-lowlevel.html">
         <sub name="D-Bus Utilities" link="gio-D-Bus-Utilities.html"/>
         <sub name="D-Bus Addresses" link="gio-D-Bus-Addresses.html"/>
         <sub name="D-Bus Introspection Data" link="gio-D-Bus-Introspection-Data.html"/>
-        <sub name="GDBusError" link="gio-GDBusError.html"/>
+        <sub name="GDBusError" link="GDBusError.html"/>
         <sub name="GDBusMessage" link="GDBusMessage.html"/>
         <sub name="GDBusConnection" link="GDBusConnection.html"/>
         <sub name="GDBusMethodInvocation" link="GDBusMethodInvocation.html"/>
@@ -162,7 +162,7 @@
       </sub>
       <sub name="GIO Tools" link="tools.html">
         <sub name="gio-querymodules" link="gio-querymodules.html"/>
-        <sub name="gsettings" link="gsettings.html"/>
+        <sub name="gsettings" link="gsettings-tool.html"/>
         <sub name="glib-compile-schemas" link="glib-compile-schemas.html"/>
         <sub name="gdbus" link="gdbus.html"/>
       </sub>
@@ -172,12 +172,12 @@
         <sub name="Migrating from POSIX to GIO" link="ch26.html"/>
       </sub>
       <sub name="Migrating from GnomeVFS to GIO" link="ch27.html">
-        <sub name="Trash handling" link="ch27.html#id434222"/>
+        <sub name="Trash handling" link="ch27.html#id611366"/>
         <sub name="Operations on multiple files" link="ch27s02.html"/>
         <sub name="Mime monitoring" link="ch27s03.html"/>
       </sub>
       <sub name="Migrating from GConf to GSettings" link="ch28.html">
-        <sub name="Before you start" link="ch28.html#id684096"/>
+        <sub name="Before you start" link="ch28.html#id833268"/>
         <sub name="Conceptual differences" link="ch28s02.html"/>
         <sub name="GConfClient (and GConfBridge) API conversion" link="ch28s03.html"/>
         <sub name="Change notification" link="ch28s04.html"/>
@@ -186,7 +186,7 @@
         <sub name="Data conversion" link="ch28s07.html"/>
       </sub>
       <sub name="Migrating to GDBus" link="ch29.html">
-        <sub name="Conceptual differences" link="ch29.html#id512443"/>
+        <sub name="Conceptual differences" link="ch29.html#id462104"/>
         <sub name="API comparison" link="ch29s02.html"/>
         <sub name="Owning bus names" link="ch29s03.html"/>
         <sub name="Creating proxies for well-known names" link="ch29s04.html"/>
@@ -207,7 +207,7 @@
   </chapters>
   <functions>
     <function name="GFile" link="GFile.html#GFile-struct"/>
-    <function name="GFileIface" link="GFile.html#GFileIface"/>
+    <function name="struct GFileIface" link="GFile.html#GFileIface"/>
     <function name="enum GFileQueryInfoFlags" link="GFile.html#GFileQueryInfoFlags"/>
     <function name="enum GFileCreateFlags" link="GFile.html#GFileCreateFlags"/>
     <function name="enum GFileCopyFlags" link="GFile.html#GFileCopyFlags"/>
@@ -338,7 +338,7 @@
     <function name="g_file_attribute_info_list_dup ()" link="gio-GFileAttribute.html#g-file-attribute-info-list-dup"/>
     <function name="g_file_attribute_info_list_lookup ()" link="gio-GFileAttribute.html#g-file-attribute-info-list-lookup"/>
     <function name="g_file_attribute_info_list_add ()" link="gio-GFileAttribute.html#g-file-attribute-info-list-add"/>
-    <function name="GFileAttributeMatcher" link="GFileInfo.html#GFileAttributeMatcher"/>
+    <function name="GFileAttributeMatcher" link="GFileInfo.html#GFileAttributeMatcher-struct"/>
     <function name="enum GFileType" link="GFileInfo.html#GFileType"/>
     <function name="GFileInfo" link="GFileInfo.html#GFileInfo-struct"/>
     <function name="G_FILE_ATTRIBUTE_STANDARD_TYPE" link="GFileInfo.html#G-FILE-ATTRIBUTE-STANDARD-TYPE:CAPS"/>
@@ -561,7 +561,7 @@
     <function name="g_cancellable_cancel ()" link="GCancellable.html#g-cancellable-cancel"/>
     <function name="The &quot;cancelled&quot; signal" link="GCancellable.html#GCancellable-cancelled"/>
     <function name="GAsyncResult" link="GAsyncResult.html#GAsyncResult-struct"/>
-    <function name="GAsyncResultIface" link="GAsyncResult.html#GAsyncResultIface"/>
+    <function name="struct GAsyncResultIface" link="GAsyncResult.html#GAsyncResultIface"/>
     <function name="GAsyncReadyCallback ()" link="GAsyncResult.html#GAsyncReadyCallback"/>
     <function name="g_async_result_get_user_data ()" link="GAsyncResult.html#g-async-result-get-user-data"/>
     <function name="g_async_result_get_source_object ()" link="GAsyncResult.html#g-async-result-get-source-object"/>
@@ -598,7 +598,7 @@
     <function name="g_simple_async_report_gerror_in_idle ()" link="GSimpleAsyncResult.html#g-simple-async-report-gerror-in-idle"/>
     <function name="g_simple_async_report_take_gerror_in_idle ()" link="GSimpleAsyncResult.html#g-simple-async-report-take-gerror-in-idle"/>
     <function name="GConverter" link="GConverter.html#GConverter-struct"/>
-    <function name="GConverterIface" link="GConverter.html#GConverterIface"/>
+    <function name="struct GConverterIface" link="GConverter.html#GConverterIface"/>
     <function name="enum GConverterResult" link="GConverter.html#GConverterResult"/>
     <function name="enum GConverterFlags" link="GConverter.html#GConverterFlags"/>
     <function name="g_converter_convert ()" link="GConverter.html#g-converter-convert"/>
@@ -625,7 +625,7 @@
     <function name="The &quot;file-info&quot; property" link="GZlibDecompressor.html#GZlibDecompressor--file-info"/>
     <function name="The &quot;format&quot; property" link="GZlibDecompressor.html#GZlibDecompressor--format"/>
     <function name="GSeekable" link="GSeekable.html#GSeekable-struct"/>
-    <function name="GSeekableIface" link="GSeekable.html#GSeekableIface"/>
+    <function name="struct GSeekableIface" link="GSeekable.html#GSeekableIface"/>
     <function name="g_seekable_tell ()" link="GSeekable.html#g-seekable-tell"/>
     <function name="g_seekable_can_seek ()" link="GSeekable.html#g-seekable-can-seek"/>
     <function name="g_seekable_seek ()" link="GSeekable.html#g-seekable-seek"/>
@@ -774,7 +774,7 @@
     <function name="g_data_input_stream_read_until_finish ()" link="GDataInputStream.html#g-data-input-stream-read-until-finish"/>
     <function name="The &quot;byte-order&quot; property" link="GDataInputStream.html#GDataInputStream--byte-order"/>
     <function name="The &quot;newline-type&quot; property" link="GDataInputStream.html#GDataInputStream--newline-type"/>
-    <function name="GDataOutputStream" link="GDataOutputStream.html#GDataOutputStream-struct"/>
+    <function name="struct GDataOutputStream" link="GDataOutputStream.html#GDataOutputStream-struct"/>
     <function name="g_data_output_stream_new ()" link="GDataOutputStream.html#g-data-output-stream-new"/>
     <function name="g_data_output_stream_set_byte_order ()" link="GDataOutputStream.html#g-data-output-stream-set-byte-order"/>
     <function name="g_data_output_stream_get_byte_order ()" link="GDataOutputStream.html#g-data-output-stream-get-byte-order"/>
@@ -787,14 +787,14 @@
     <function name="g_data_output_stream_put_uint64 ()" link="GDataOutputStream.html#g-data-output-stream-put-uint64"/>
     <function name="g_data_output_stream_put_string ()" link="GDataOutputStream.html#g-data-output-stream-put-string"/>
     <function name="The &quot;byte-order&quot; property" link="GDataOutputStream.html#GDataOutputStream--byte-order"/>
-    <function name="GUnixInputStream" link="GUnixInputStream.html#GUnixInputStream-struct"/>
+    <function name="struct GUnixInputStream" link="GUnixInputStream.html#GUnixInputStream-struct"/>
     <function name="g_unix_input_stream_new ()" link="GUnixInputStream.html#g-unix-input-stream-new"/>
     <function name="g_unix_input_stream_set_close_fd ()" link="GUnixInputStream.html#g-unix-input-stream-set-close-fd"/>
     <function name="g_unix_input_stream_get_close_fd ()" link="GUnixInputStream.html#g-unix-input-stream-get-close-fd"/>
     <function name="g_unix_input_stream_get_fd ()" link="GUnixInputStream.html#g-unix-input-stream-get-fd"/>
     <function name="The &quot;close-fd&quot; property" link="GUnixInputStream.html#GUnixInputStream--close-fd"/>
     <function name="The &quot;fd&quot; property" link="GUnixInputStream.html#GUnixInputStream--fd"/>
-    <function name="GUnixOutputStream" link="GUnixOutputStream.html#GUnixOutputStream-struct"/>
+    <function name="struct GUnixOutputStream" link="GUnixOutputStream.html#GUnixOutputStream-struct"/>
     <function name="g_unix_output_stream_new ()" link="GUnixOutputStream.html#g-unix-output-stream-new"/>
     <function name="g_unix_output_stream_set_close_fd ()" link="GUnixOutputStream.html#g-unix-output-stream-set-close-fd"/>
     <function name="g_unix_output_stream_get_close_fd ()" link="GUnixOutputStream.html#g-unix-output-stream-get-close-fd"/>
@@ -810,7 +810,7 @@
     <function name="g_converter_output_stream_get_converter ()" link="gio-GConverterOutputstream.html#g-converter-output-stream-get-converter"/>
     <function name="The &quot;converter&quot; property" link="gio-GConverterOutputstream.html#GConverterOutputStream--converter"/>
     <function name="GPollableInputStream" link="GPollableInputStream.html#GPollableInputStream-struct"/>
-    <function name="GPollableInputStreamInterface" link="GPollableInputStream.html#GPollableInputStreamInterface"/>
+    <function name="struct GPollableInputStreamInterface" link="GPollableInputStream.html#GPollableInputStreamInterface"/>
     <function name="g_pollable_input_stream_can_poll ()" link="GPollableInputStream.html#g-pollable-input-stream-can-poll"/>
     <function name="g_pollable_input_stream_is_readable ()" link="GPollableInputStream.html#g-pollable-input-stream-is-readable"/>
     <function name="g_pollable_input_stream_create_source ()" link="GPollableInputStream.html#g-pollable-input-stream-create-source"/>
@@ -818,7 +818,7 @@
     <function name="GPollableSourceFunc ()" link="GPollableInputStream.html#GPollableSourceFunc"/>
     <function name="g_pollable_source_new ()" link="GPollableInputStream.html#g-pollable-source-new"/>
     <function name="GPollableOutputStream" link="GPollableOutputStream.html#GPollableOutputStream-struct"/>
-    <function name="GPollableOutputStreamInterface" link="GPollableOutputStream.html#GPollableOutputStreamInterface"/>
+    <function name="struct GPollableOutputStreamInterface" link="GPollableOutputStream.html#GPollableOutputStreamInterface"/>
     <function name="g_pollable_output_stream_can_poll ()" link="GPollableOutputStream.html#g-pollable-output-stream-can-poll"/>
     <function name="g_pollable_output_stream_is_writable ()" link="GPollableOutputStream.html#g-pollable-output-stream-is-writable"/>
     <function name="g_pollable_output_stream_create_source ()" link="GPollableOutputStream.html#g-pollable-output-stream-create-source"/>
@@ -836,7 +836,7 @@
     <function name="g_content_types_get_registered ()" link="gio-GContentType.html#g-content-types-get-registered"/>
     <function name="enum GAppInfoCreateFlags" link="GAppInfo.html#GAppInfoCreateFlags"/>
     <function name="GAppInfo" link="GAppInfo.html#GAppInfo-struct"/>
-    <function name="GAppInfoIface" link="GAppInfo.html#GAppInfoIface"/>
+    <function name="struct GAppInfoIface" link="GAppInfo.html#GAppInfoIface"/>
     <function name="GAppLaunchContext" link="GAppInfo.html#GAppLaunchContext-struct"/>
     <function name="g_app_info_create_from_commandline ()" link="GAppInfo.html#g-app-info-create-from-commandline"/>
     <function name="g_app_info_dup ()" link="GAppInfo.html#g-app-info-dup"/>
@@ -902,7 +902,7 @@
     <function name="The &quot;volume-changed&quot; signal" link="GVolumeMonitor.html#GVolumeMonitor-volume-changed"/>
     <function name="The &quot;volume-removed&quot; signal" link="GVolumeMonitor.html#GVolumeMonitor-volume-removed"/>
     <function name="GVolume" link="GVolume.html#GVolume-struct"/>
-    <function name="GVolumeIface" link="GVolume.html#GVolumeIface"/>
+    <function name="struct GVolumeIface" link="GVolume.html#GVolumeIface"/>
     <function name="g_volume_get_name ()" link="GVolume.html#g-volume-get-name"/>
     <function name="g_volume_get_uuid ()" link="GVolume.html#g-volume-get-uuid"/>
     <function name="g_volume_get_icon ()" link="GVolume.html#g-volume-get-icon"/>
@@ -928,7 +928,7 @@
     <function name="The &quot;changed&quot; signal" link="GVolume.html#GVolume-changed"/>
     <function name="The &quot;removed&quot; signal" link="GVolume.html#GVolume-removed"/>
     <function name="GMount" link="GMount.html#GMount-struct"/>
-    <function name="GMountIface" link="GMount.html#GMountIface"/>
+    <function name="struct GMountIface" link="GMount.html#GMountIface"/>
     <function name="g_mount_get_name ()" link="GMount.html#g-mount-get-name"/>
     <function name="g_mount_get_uuid ()" link="GMount.html#g-mount-get-uuid"/>
     <function name="g_mount_get_icon ()" link="GMount.html#g-mount-get-icon"/>
@@ -960,7 +960,7 @@
     <function name="The &quot;pre-unmount&quot; signal" link="GMount.html#GMount-pre-unmount"/>
     <function name="The &quot;unmounted&quot; signal" link="GMount.html#GMount-unmounted"/>
     <function name="GDrive" link="GDrive.html#GDrive-struct"/>
-    <function name="GDriveIface" link="GDrive.html#GDriveIface"/>
+    <function name="struct GDriveIface" link="GDrive.html#GDriveIface"/>
     <function name="enum GDriveStartFlags" link="GDrive.html#GDriveStartFlags"/>
     <function name="enum GDriveStartStopType" link="GDrive.html#GDriveStartStopType"/>
     <function name="g_drive_get_name ()" link="GDrive.html#g-drive-get-name"/>
@@ -1028,7 +1028,7 @@
     <function name="The &quot;mountpoints-changed&quot; signal" link="gio-Unix-Mounts.html#GUnixMountMonitor-mountpoints-changed"/>
     <function name="The &quot;mounts-changed&quot; signal" link="gio-Unix-Mounts.html#GUnixMountMonitor-mounts-changed"/>
     <function name="GIcon" link="GIcon.html#GIcon-struct"/>
-    <function name="GIconIface" link="GIcon.html#GIconIface"/>
+    <function name="struct GIconIface" link="GIcon.html#GIconIface"/>
     <function name="g_icon_hash ()" link="GIcon.html#g-icon-hash"/>
     <function name="g_icon_equal ()" link="GIcon.html#g-icon-equal"/>
     <function name="g_icon_to_string ()" link="GIcon.html#g-icon-to-string"/>
@@ -1038,7 +1038,7 @@
     <function name="g_file_icon_get_file ()" link="GFileIcon.html#g-file-icon-get-file"/>
     <function name="The &quot;file&quot; property" link="GFileIcon.html#GFileIcon--file"/>
     <function name="GLoadableIcon" link="GLoadableIcon.html#GLoadableIcon-struct"/>
-    <function name="GLoadableIconIface" link="GLoadableIcon.html#GLoadableIconIface"/>
+    <function name="struct GLoadableIconIface" link="GLoadableIcon.html#GLoadableIconIface"/>
     <function name="g_loadable_icon_load ()" link="GLoadableIcon.html#g-loadable-icon-load"/>
     <function name="g_loadable_icon_load_async ()" link="GLoadableIcon.html#g-loadable-icon-load-async"/>
     <function name="g_loadable_icon_load_finish ()" link="GLoadableIcon.html#g-loadable-icon-load-finish"/>
@@ -1052,7 +1052,7 @@
     <function name="The &quot;name&quot; property" link="GThemedIcon.html#GThemedIcon--name"/>
     <function name="The &quot;names&quot; property" link="GThemedIcon.html#GThemedIcon--names"/>
     <function name="The &quot;use-default-fallbacks&quot; property" link="GThemedIcon.html#GThemedIcon--use-default-fallbacks"/>
-    <function name="GEmblemedIcon" link="GEmblemedIcon.html#GEmblemedIcon-struct"/>
+    <function name="struct GEmblemedIcon" link="GEmblemedIcon.html#GEmblemedIcon-struct"/>
     <function name="g_emblemed_icon_new ()" link="GEmblemedIcon.html#g-emblemed-icon-new"/>
     <function name="g_emblemed_icon_get_icon ()" link="GEmblemedIcon.html#g-emblemed-icon-get-icon"/>
     <function name="g_emblemed_icon_get_emblems ()" link="GEmblemedIcon.html#g-emblemed-icon-get-emblems"/>
@@ -1068,13 +1068,13 @@
     <function name="The &quot;icon&quot; property" link="GEmblem.html#GEmblem--icon"/>
     <function name="The &quot;origin&quot; property" link="GEmblem.html#GEmblem--origin"/>
     <function name="GInitable" link="GInitable.html#GInitable-struct"/>
-    <function name="GInitableIface" link="GInitable.html#GInitableIface"/>
+    <function name="struct GInitableIface" link="GInitable.html#GInitableIface"/>
     <function name="g_initable_init ()" link="GInitable.html#g-initable-init"/>
     <function name="g_initable_new ()" link="GInitable.html#g-initable-new"/>
     <function name="g_initable_new_valist ()" link="GInitable.html#g-initable-new-valist"/>
     <function name="g_initable_newv ()" link="GInitable.html#g-initable-newv"/>
     <function name="GAsyncInitable" link="GAsyncInitable.html#GAsyncInitable-struct"/>
-    <function name="GAsyncInitableIface" link="GAsyncInitable.html#GAsyncInitableIface"/>
+    <function name="struct GAsyncInitableIface" link="GAsyncInitable.html#GAsyncInitableIface"/>
     <function name="g_async_initable_init_async ()" link="GAsyncInitable.html#g-async-initable-init-async"/>
     <function name="g_async_initable_init_finish ()" link="GAsyncInitable.html#g-async-initable-init-finish"/>
     <function name="g_async_initable_new_async ()" link="GAsyncInitable.html#g-async-initable-new-async"/>
@@ -1086,8 +1086,8 @@
     <function name="enum GSocketType" link="GSocket.html#GSocketType"/>
     <function name="enum GSocketProtocol" link="GSocket.html#GSocketProtocol"/>
     <function name="enum GSocketMsgFlags" link="GSocket.html#GSocketMsgFlags"/>
-    <function name="GInputVector" link="GSocket.html#GInputVector"/>
-    <function name="GOutputVector" link="GSocket.html#GOutputVector"/>
+    <function name="struct GInputVector" link="GSocket.html#GInputVector"/>
+    <function name="struct GOutputVector" link="GSocket.html#GOutputVector"/>
     <function name="g_socket_new ()" link="GSocket.html#g-socket-new"/>
     <function name="g_socket_new_from_fd ()" link="GSocket.html#g-socket-new-from-fd"/>
     <function name="g_socket_bind ()" link="GSocket.html#g-socket-bind"/>
@@ -1180,7 +1180,7 @@
     <function name="g_inet_socket_address_get_port ()" link="GInetSocketAddress.html#g-inet-socket-address-get-port"/>
     <function name="The &quot;address&quot; property" link="GInetSocketAddress.html#GInetSocketAddress--address"/>
     <function name="The &quot;port&quot; property" link="GInetSocketAddress.html#GInetSocketAddress--port"/>
-    <function name="GUnixSocketAddress" link="GUnixSocketAddress.html#GUnixSocketAddress-struct"/>
+    <function name="struct GUnixSocketAddress" link="GUnixSocketAddress.html#GUnixSocketAddress-struct"/>
     <function name="enum GUnixSocketAddressType" link="GUnixSocketAddress.html#GUnixSocketAddressType"/>
     <function name="g_unix_socket_address_new ()" link="GUnixSocketAddress.html#g-unix-socket-address-new"/>
     <function name="g_unix_socket_address_new_abstract ()" link="GUnixSocketAddress.html#g-unix-socket-address-new-abstract"/>
@@ -1225,14 +1225,14 @@
     <function name="g_credentials_get_unix_user ()" link="GCredentials.html#g-credentials-get-unix-user"/>
     <function name="g_credentials_set_unix_user ()" link="GCredentials.html#g-credentials-set-unix-user"/>
     <function name="GUnixCredentialsMessage" link="GUnixCredentialsMessage.html#GUnixCredentialsMessage-struct"/>
-    <function name="GUnixCredentialsMessageClass" link="GUnixCredentialsMessage.html#GUnixCredentialsMessageClass"/>
+    <function name="struct GUnixCredentialsMessageClass" link="GUnixCredentialsMessage.html#GUnixCredentialsMessageClass"/>
     <function name="g_unix_credentials_message_new ()" link="GUnixCredentialsMessage.html#g-unix-credentials-message-new"/>
     <function name="g_unix_credentials_message_new_with_credentials ()" link="GUnixCredentialsMessage.html#g-unix-credentials-message-new-with-credentials"/>
     <function name="g_unix_credentials_message_get_credentials ()" link="GUnixCredentialsMessage.html#g-unix-credentials-message-get-credentials"/>
     <function name="g_unix_credentials_message_is_supported ()" link="GUnixCredentialsMessage.html#g-unix-credentials-message-is-supported"/>
     <function name="The &quot;credentials&quot; property" link="GUnixCredentialsMessage.html#GUnixCredentialsMessage--credentials"/>
     <function name="GProxy" link="GProxy.html#GProxy-struct"/>
-    <function name="GProxyInterface" link="GProxy.html#GProxyInterface"/>
+    <function name="struct GProxyInterface" link="GProxy.html#GProxyInterface"/>
     <function name="G_PROXY_EXTENSION_POINT_NAME" link="GProxy.html#G-PROXY-EXTENSION-POINT-NAME:CAPS"/>
     <function name="g_proxy_connect ()" link="GProxy.html#g-proxy-connect"/>
     <function name="g_proxy_connect_async ()" link="GProxy.html#g-proxy-connect-async"/>
@@ -1240,7 +1240,7 @@
     <function name="g_proxy_get_default_for_protocol ()" link="GProxy.html#g-proxy-get-default-for-protocol"/>
     <function name="g_proxy_supports_hostname ()" link="GProxy.html#g-proxy-supports-hostname"/>
     <function name="GProxyAddress" link="GProxyAddress.html#GProxyAddress-struct"/>
-    <function name="GProxyAddressClass" link="GProxyAddress.html#GProxyAddressClass"/>
+    <function name="struct GProxyAddressClass" link="GProxyAddress.html#GProxyAddressClass"/>
     <function name="g_proxy_address_get_destination_hostname ()" link="GProxyAddress.html#g-proxy-address-get-destination-hostname"/>
     <function name="g_proxy_address_get_destination_port ()" link="GProxyAddress.html#g-proxy-address-get-destination-port"/>
     <function name="g_proxy_address_get_password ()" link="GProxyAddress.html#g-proxy-address-get-password"/>
@@ -1378,7 +1378,7 @@
     <function name="The &quot;use-system-certdb&quot; property" link="GTlsConnection.html#GTlsConnection--use-system-certdb"/>
     <function name="The &quot;accept-certificate&quot; signal" link="GTlsConnection.html#GTlsConnection-accept-certificate"/>
     <function name="GTlsClientConnection" link="GTlsClientConnection.html#GTlsClientConnection-struct"/>
-    <function name="GTlsClientConnectionInterface" link="GTlsClientConnection.html#GTlsClientConnectionInterface"/>
+    <function name="struct GTlsClientConnectionInterface" link="GTlsClientConnection.html#GTlsClientConnectionInterface"/>
     <function name="g_tls_client_connection_new ()" link="GTlsClientConnection.html#g-tls-client-connection-new"/>
     <function name="g_tls_client_connection_set_server_identity ()" link="GTlsClientConnection.html#g-tls-client-connection-set-server-identity"/>
     <function name="g_tls_client_connection_get_server_identity ()" link="GTlsClientConnection.html#g-tls-client-connection-get-server-identity"/>
@@ -1392,12 +1392,12 @@
     <function name="The &quot;use-ssl3&quot; property" link="GTlsClientConnection.html#GTlsClientConnection--use-ssl3"/>
     <function name="The &quot;validation-flags&quot; property" link="GTlsClientConnection.html#GTlsClientConnection--validation-flags"/>
     <function name="GTlsServerConnection" link="GTlsServerConnection.html#GTlsServerConnection-struct"/>
-    <function name="GTlsServerConnectionInterface" link="GTlsServerConnection.html#GTlsServerConnectionInterface"/>
+    <function name="struct GTlsServerConnectionInterface" link="GTlsServerConnection.html#GTlsServerConnectionInterface"/>
     <function name="g_tls_server_connection_new ()" link="GTlsServerConnection.html#g-tls-server-connection-new"/>
     <function name="The &quot;authentication-mode&quot; property" link="GTlsServerConnection.html#GTlsServerConnection--authentication-mode"/>
     <function name="G_TLS_BACKEND_EXTENSION_POINT_NAME" link="GTlsBackend.html#G-TLS-BACKEND-EXTENSION-POINT-NAME:CAPS"/>
     <function name="GTlsBackend" link="GTlsBackend.html#GTlsBackend-struct"/>
-    <function name="GTlsBackendInterface" link="GTlsBackend.html#GTlsBackendInterface"/>
+    <function name="struct GTlsBackendInterface" link="GTlsBackend.html#GTlsBackendInterface"/>
     <function name="g_tls_backend_get_default ()" link="GTlsBackend.html#g-tls-backend-get-default"/>
     <function name="g_tls_backend_supports_tls ()" link="GTlsBackend.html#g-tls-backend-supports-tls"/>
     <function name="g_tls_backend_get_certificate_type ()" link="GTlsBackend.html#g-tls-backend-get-certificate-type"/>
@@ -1421,7 +1421,7 @@
     <function name="enum GResolverError" link="GResolver.html#GResolverError"/>
     <function name="The &quot;reload&quot; signal" link="GResolver.html#GResolver-reload"/>
     <function name="GProxyResolver" link="GProxyResolver.html#GProxyResolver-struct"/>
-    <function name="GProxyResolverInterface" link="GProxyResolver.html#GProxyResolverInterface"/>
+    <function name="struct GProxyResolverInterface" link="GProxyResolver.html#GProxyResolverInterface"/>
     <function name="G_PROXY_RESOLVER_EXTENSION_POINT_NAME" link="GProxyResolver.html#G-PROXY-RESOLVER-EXTENSION-POINT-NAME:CAPS"/>
     <function name="g_proxy_resolver_get_default ()" link="GProxyResolver.html#g-proxy-resolver-get-default"/>
     <function name="g_proxy_resolver_is_supported ()" link="GProxyResolver.html#g-proxy-resolver-is-supported"/>
@@ -1429,7 +1429,7 @@
     <function name="g_proxy_resolver_lookup_async ()" link="GProxyResolver.html#g-proxy-resolver-lookup-async"/>
     <function name="g_proxy_resolver_lookup_finish ()" link="GProxyResolver.html#g-proxy-resolver-lookup-finish"/>
     <function name="GSocketConnectable" link="GSocketConnectable.html#GSocketConnectable-struct"/>
-    <function name="GSocketConnectableIface" link="GSocketConnectable.html#GSocketConnectableIface"/>
+    <function name="struct GSocketConnectableIface" link="GSocketConnectable.html#GSocketConnectableIface"/>
     <function name="g_socket_connectable_enumerate ()" link="GSocketConnectable.html#g-socket-connectable-enumerate"/>
     <function name="g_socket_connectable_proxy_enumerate ()" link="GSocketConnectable.html#g-socket-connectable-proxy-enumerate"/>
     <function name="GSocketAddressEnumerator" link="GSocketConnectable.html#GSocketAddressEnumerator-struct"/>
@@ -1460,15 +1460,15 @@
     <function name="The &quot;protocol&quot; property" link="GNetworkService.html#GNetworkService--protocol"/>
     <function name="The &quot;scheme&quot; property" link="GNetworkService.html#GNetworkService--scheme"/>
     <function name="The &quot;service&quot; property" link="GNetworkService.html#GNetworkService--service"/>
-    <function name="GSrvTarget" link="gio-GSrvTarget.html#GSrvTarget"/>
-    <function name="g_srv_target_new ()" link="gio-GSrvTarget.html#g-srv-target-new"/>
-    <function name="g_srv_target_copy ()" link="gio-GSrvTarget.html#g-srv-target-copy"/>
-    <function name="g_srv_target_free ()" link="gio-GSrvTarget.html#g-srv-target-free"/>
-    <function name="g_srv_target_get_hostname ()" link="gio-GSrvTarget.html#g-srv-target-get-hostname"/>
-    <function name="g_srv_target_get_port ()" link="gio-GSrvTarget.html#g-srv-target-get-port"/>
-    <function name="g_srv_target_get_priority ()" link="gio-GSrvTarget.html#g-srv-target-get-priority"/>
-    <function name="g_srv_target_get_weight ()" link="gio-GSrvTarget.html#g-srv-target-get-weight"/>
-    <function name="g_srv_target_list_sort ()" link="gio-GSrvTarget.html#g-srv-target-list-sort"/>
+    <function name="GSrvTarget" link="GSrvTarget.html#GSrvTarget-struct"/>
+    <function name="g_srv_target_new ()" link="GSrvTarget.html#g-srv-target-new"/>
+    <function name="g_srv_target_copy ()" link="GSrvTarget.html#g-srv-target-copy"/>
+    <function name="g_srv_target_free ()" link="GSrvTarget.html#g-srv-target-free"/>
+    <function name="g_srv_target_get_hostname ()" link="GSrvTarget.html#g-srv-target-get-hostname"/>
+    <function name="g_srv_target_get_port ()" link="GSrvTarget.html#g-srv-target-get-port"/>
+    <function name="g_srv_target_get_priority ()" link="GSrvTarget.html#g-srv-target-get-priority"/>
+    <function name="g_srv_target_get_weight ()" link="GSrvTarget.html#g-srv-target-get-weight"/>
+    <function name="g_srv_target_list_sort ()" link="GSrvTarget.html#g-srv-target-list-sort"/>
     <function name="g_dbus_generate_guid ()" link="gio-D-Bus-Utilities.html#g-dbus-generate-guid"/>
     <function name="g_dbus_is_guid ()" link="gio-D-Bus-Utilities.html#g-dbus-is-guid"/>
     <function name="g_dbus_is_name ()" link="gio-D-Bus-Utilities.html#g-dbus-is-name"/>
@@ -1487,7 +1487,7 @@
     <function name="GDBusSignalInfo" link="gio-D-Bus-Introspection-Data.html#GDBusSignalInfo"/>
     <function name="enum GDBusPropertyInfoFlags" link="gio-D-Bus-Introspection-Data.html#GDBusPropertyInfoFlags"/>
     <function name="GDBusPropertyInfo" link="gio-D-Bus-Introspection-Data.html#GDBusPropertyInfo"/>
-    <function name="GDBusInterfaceInfo" link="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"/>
+    <function name="GDBusInterfaceInfo" link="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo-struct"/>
     <function name="GDBusNodeInfo" link="gio-D-Bus-Introspection-Data.html#GDBusNodeInfo"/>
     <function name="g_dbus_annotation_info_lookup ()" link="gio-D-Bus-Introspection-Data.html#g-dbus-annotation-info-lookup"/>
     <function name="g_dbus_interface_info_lookup_method ()" link="gio-D-Bus-Introspection-Data.html#g-dbus-interface-info-lookup-method"/>
@@ -1518,19 +1518,19 @@
     <function name="g_dbus_property_info_unref ()" link="gio-D-Bus-Introspection-Data.html#g-dbus-property-info-unref"/>
     <function name="g_dbus_arg_info_unref ()" link="gio-D-Bus-Introspection-Data.html#g-dbus-arg-info-unref"/>
     <function name="g_dbus_annotation_info_unref ()" link="gio-D-Bus-Introspection-Data.html#g-dbus-annotation-info-unref"/>
-    <function name="enum GDBusError" link="gio-GDBusError.html#GDBusError"/>
-    <function name="G_DBUS_ERROR" link="gio-GDBusError.html#G-DBUS-ERROR:CAPS"/>
-    <function name="g_dbus_error_is_remote_error ()" link="gio-GDBusError.html#g-dbus-error-is-remote-error"/>
-    <function name="g_dbus_error_get_remote_error ()" link="gio-GDBusError.html#g-dbus-error-get-remote-error"/>
-    <function name="g_dbus_error_strip_remote_error ()" link="gio-GDBusError.html#g-dbus-error-strip-remote-error"/>
-    <function name="GDBusErrorEntry" link="gio-GDBusError.html#GDBusErrorEntry"/>
-    <function name="g_dbus_error_register_error_domain ()" link="gio-GDBusError.html#g-dbus-error-register-error-domain"/>
-    <function name="g_dbus_error_register_error ()" link="gio-GDBusError.html#g-dbus-error-register-error"/>
-    <function name="g_dbus_error_unregister_error ()" link="gio-GDBusError.html#g-dbus-error-unregister-error"/>
-    <function name="g_dbus_error_new_for_dbus_error ()" link="gio-GDBusError.html#g-dbus-error-new-for-dbus-error"/>
-    <function name="g_dbus_error_set_dbus_error ()" link="gio-GDBusError.html#g-dbus-error-set-dbus-error"/>
-    <function name="g_dbus_error_set_dbus_error_valist ()" link="gio-GDBusError.html#g-dbus-error-set-dbus-error-valist"/>
-    <function name="g_dbus_error_encode_gerror ()" link="gio-GDBusError.html#g-dbus-error-encode-gerror"/>
+    <function name="enum GDBusError" link="GDBusError.html#GDBusError"/>
+    <function name="G_DBUS_ERROR" link="GDBusError.html#G-DBUS-ERROR:CAPS"/>
+    <function name="g_dbus_error_is_remote_error ()" link="GDBusError.html#g-dbus-error-is-remote-error"/>
+    <function name="g_dbus_error_get_remote_error ()" link="GDBusError.html#g-dbus-error-get-remote-error"/>
+    <function name="g_dbus_error_strip_remote_error ()" link="GDBusError.html#g-dbus-error-strip-remote-error"/>
+    <function name="GDBusErrorEntry" link="GDBusError.html#GDBusErrorEntry"/>
+    <function name="g_dbus_error_register_error_domain ()" link="GDBusError.html#g-dbus-error-register-error-domain"/>
+    <function name="g_dbus_error_register_error ()" link="GDBusError.html#g-dbus-error-register-error"/>
+    <function name="g_dbus_error_unregister_error ()" link="GDBusError.html#g-dbus-error-unregister-error"/>
+    <function name="g_dbus_error_new_for_dbus_error ()" link="GDBusError.html#g-dbus-error-new-for-dbus-error"/>
+    <function name="g_dbus_error_set_dbus_error ()" link="GDBusError.html#g-dbus-error-set-dbus-error"/>
+    <function name="g_dbus_error_set_dbus_error_valist ()" link="GDBusError.html#g-dbus-error-set-dbus-error-valist"/>
+    <function name="g_dbus_error_encode_gerror ()" link="GDBusError.html#g-dbus-error-encode-gerror"/>
     <function name="GDBusMessage" link="GDBusMessage.html#GDBusMessage-struct"/>
     <function name="enum GDBusMessageType" link="GDBusMessage.html#GDBusMessageType"/>
     <function name="enum GDBusMessageFlags" link="GDBusMessage.html#GDBusMessageFlags"/>
@@ -1709,7 +1709,7 @@
     <function name="g_bus_watch_name_on_connection_with_closures ()" link="gio-Watching-Bus-Names.html#g-bus-watch-name-on-connection-with-closures"/>
     <function name="enum GDBusProxyFlags" link="GDBusProxy.html#GDBusProxyFlags"/>
     <function name="GDBusProxy" link="GDBusProxy.html#GDBusProxy-struct"/>
-    <function name="GDBusProxyClass" link="GDBusProxy.html#GDBusProxyClass"/>
+    <function name="struct GDBusProxyClass" link="GDBusProxy.html#GDBusProxyClass"/>
     <function name="g_dbus_proxy_new ()" link="GDBusProxy.html#g-dbus-proxy-new"/>
     <function name="g_dbus_proxy_new_finish ()" link="GDBusProxy.html#g-dbus-proxy-new-finish"/>
     <function name="g_dbus_proxy_new_sync ()" link="GDBusProxy.html#g-dbus-proxy-new-sync"/>
@@ -1743,8 +1743,8 @@
     <function name="The &quot;g-object-path&quot; property" link="GDBusProxy.html#GDBusProxy--g-object-path"/>
     <function name="The &quot;g-properties-changed&quot; signal" link="GDBusProxy.html#GDBusProxy-g-properties-changed"/>
     <function name="The &quot;g-signal&quot; signal" link="GDBusProxy.html#GDBusProxy-g-signal"/>
-    <function name="Vendor overrides" link="GSettings.html#id728880"/>
-    <function name="Binding" link="GSettings.html#id728910"/>
+    <function name="Vendor overrides" link="GSettings.html#id769833"/>
+    <function name="Binding" link="GSettings.html#id769877"/>
     <function name="GSettings" link="GSettings.html#GSettings-struct"/>
     <function name="g_settings_new ()" link="GSettings.html#g-settings-new"/>
     <function name="g_settings_new_with_path ()" link="GSettings.html#g-settings-new-with-path"/>
@@ -1760,6 +1760,8 @@
     <function name="g_settings_get_has_unapplied ()" link="GSettings.html#g-settings-get-has-unapplied"/>
     <function name="g_settings_get_child ()" link="GSettings.html#g-settings-get-child"/>
     <function name="g_settings_reset ()" link="GSettings.html#g-settings-reset"/>
+    <function name="g_settings_list_schemas ()" link="GSettings.html#g-settings-list-schemas"/>
+    <function name="g_settings_list_relocatable_schemas ()" link="GSettings.html#g-settings-list-relocatable-schemas"/>
     <function name="g_settings_list_keys ()" link="GSettings.html#g-settings-list-keys"/>
     <function name="g_settings_list_children ()" link="GSettings.html#g-settings-list-children"/>
     <function name="g_settings_get_range ()" link="GSettings.html#g-settings-get-range"/>
@@ -1799,8 +1801,9 @@
     <function name="The &quot;writable-change-event&quot; signal" link="GSettings.html#GSettings-writable-change-event"/>
     <function name="The &quot;writable-changed&quot; signal" link="GSettings.html#GSettings-writable-changed"/>
     <function name="GSettingsBackend" link="GSettingsBackend.html#GSettingsBackend-struct"/>
-    <function name="GSettingsBackendClass" link="GSettingsBackend.html#GSettingsBackendClass"/>
+    <function name="struct GSettingsBackendClass" link="GSettingsBackend.html#GSettingsBackendClass"/>
     <function name="G_SETTINGS_BACKEND_EXTENSION_POINT_NAME" link="GSettingsBackend.html#G-SETTINGS-BACKEND-EXTENSION-POINT-NAME:CAPS"/>
+    <function name="g_settings_backend_get_default ()" link="GSettingsBackend.html#g-settings-backend-get-default"/>
     <function name="g_settings_backend_changed ()" link="GSettingsBackend.html#g-settings-backend-changed"/>
     <function name="g_settings_backend_path_changed ()" link="GSettingsBackend.html#g-settings-backend-path-changed"/>
     <function name="g_settings_backend_keys_changed ()" link="GSettingsBackend.html#g-settings-backend-keys-changed"/>
@@ -1809,6 +1812,8 @@
     <function name="g_settings_backend_changed_tree ()" link="GSettingsBackend.html#g-settings-backend-changed-tree"/>
     <function name="g_settings_backend_flatten_tree ()" link="GSettingsBackend.html#g-settings-backend-flatten-tree"/>
     <function name="g_keyfile_settings_backend_new ()" link="GSettingsBackend.html#g-keyfile-settings-backend-new"/>
+    <function name="g_memory_settings_backend_new ()" link="GSettingsBackend.html#g-memory-settings-backend-new"/>
+    <function name="g_null_settings_backend_new ()" link="GSettingsBackend.html#g-null-settings-backend-new"/>
     <function name="GPermission" link="GPermission.html#GPermission-struct"/>
     <function name="g_permission_get_allowed ()" link="GPermission.html#g-permission-get-allowed"/>
     <function name="g_permission_get_can_acquire ()" link="GPermission.html#g-permission-get-can-acquire"/>
@@ -1863,7 +1868,7 @@
     <function name="The &quot;state&quot; property" link="GAction.html#GAction--state"/>
     <function name="The &quot;state-type&quot; property" link="GAction.html#GAction--state-type"/>
     <function name="GSimpleAction" link="GSimpleAction.html#GSimpleAction-struct"/>
-    <function name="GSimpleActionClass" link="GSimpleAction.html#GSimpleActionClass"/>
+    <function name="struct GSimpleActionClass" link="GSimpleAction.html#GSimpleActionClass"/>
     <function name="g_simple_action_new ()" link="GSimpleAction.html#g-simple-action-new"/>
     <function name="g_simple_action_new_stateful ()" link="GSimpleAction.html#g-simple-action-new-stateful"/>
     <function name="g_simple_action_set_enabled ()" link="GSimpleAction.html#g-simple-action-set-enabled"/>
@@ -1874,7 +1879,7 @@
     <function name="The &quot;state-type&quot; property" link="GSimpleAction.html#GSimpleAction--state-type"/>
     <function name="The &quot;activate&quot; signal" link="GSimpleAction.html#GSimpleAction-activate"/>
     <function name="GApplication" link="GApplication.html#GApplication-struct"/>
-    <function name="GApplicationClass" link="GApplication.html#GApplicationClass"/>
+    <function name="struct GApplicationClass" link="GApplication.html#GApplicationClass"/>
     <function name="enum GApplicationFlags" link="GApplication.html#GApplicationFlags"/>
     <function name="g_application_id_is_valid ()" link="GApplication.html#g-application-id-is-valid"/>
     <function name="g_application_new ()" link="GApplication.html#g-application-new"/>
@@ -1904,9 +1909,10 @@
     <function name="The &quot;open&quot; signal" link="GApplication.html#GApplication-open"/>
     <function name="The &quot;startup&quot; signal" link="GApplication.html#GApplication-startup"/>
     <function name="GApplicationCommandLine" link="GApplicationCommandLine.html#GApplicationCommandLine-struct"/>
-    <function name="GApplicationCommandLineClass" link="GApplicationCommandLine.html#GApplicationCommandLineClass"/>
+    <function name="struct GApplicationCommandLineClass" link="GApplicationCommandLine.html#GApplicationCommandLineClass"/>
     <function name="g_application_command_line_get_arguments ()" link="GApplicationCommandLine.html#g-application-command-line-get-arguments"/>
     <function name="g_application_command_line_get_cwd ()" link="GApplicationCommandLine.html#g-application-command-line-get-cwd"/>
+    <function name="g_application_command_line_get_environ ()" link="GApplicationCommandLine.html#g-application-command-line-get-environ"/>
     <function name="g_application_command_line_getenv ()" link="GApplicationCommandLine.html#g-application-command-line-getenv"/>
     <function name="g_application_command_line_get_is_remote ()" link="GApplicationCommandLine.html#g-application-command-line-get-is-remote"/>
     <function name="g_application_command_line_get_platform_data ()" link="GApplicationCommandLine.html#g-application-command-line-get-platform-data"/>
@@ -1943,9 +1949,8 @@
     <function name="g_io_extension_point_register ()" link="gio-Extension-Points.html#g-io-extension-point-register"/>
     <function name="g_io_extension_point_set_required_type ()" link="gio-Extension-Points.html#g-io-extension-point-set-required-type"/>
     <function name="g_io_extension_ref_class ()" link="gio-Extension-Points.html#g-io-extension-ref-class"/>
-    <function name="Commands" link="gsettings.html#id656347"/>
-    <function name="Options" link="gsettings.html#id649052"/>
-    <function name="Options" link="glib-compile-schemas.html#id550825"/>
-    <function name="Commands" link="gdbus.html#id648580"/>
+    <function name="Commands" link="gsettings-tool.html#id429156"/>
+    <function name="Options" link="glib-compile-schemas.html#id611747"/>
+    <function name="Commands" link="gdbus.html#id585624"/>
   </functions>
 </book>

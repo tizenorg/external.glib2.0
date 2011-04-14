@@ -8,7 +8,7 @@
 <link rel="up" href="highlevel-socket.html" title="Highlevel network functionallity">
 <link rel="prev" href="highlevel-socket.html" title="Highlevel network functionallity">
 <link rel="next" href="GSocketConnection.html" title="GSocketConnection">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -30,7 +30,7 @@
                   <a href="#GSocketClient.properties" class="shortcut">Properties</a>
 </td></tr>
 </table>
-<div class="refentry" title="GSocketClient">
+<div class="refentry">
 <a name="GSocketClient"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -39,7 +39,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GSocketClient.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;gio/gio.h&gt;
@@ -49,7 +49,7 @@
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *protocol</code></em>);
 <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="returnvalue">GSocketClient</span></a> *     <a class="link" href="GSocketClient.html#g-socket-client-new" title="g_socket_client_new ()">g_socket_client_new</a>                 (<em class="parameter"><code><span class="type">void</span></code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketClient.html#g-socket-client-connect" title="g_socket_client_connect ()">g_socket_client_connect</a>             (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketClient.html#g-socket-client-connect" title="g_socket_client_connect ()">g_socket_client_connect</a>        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> *connectable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
@@ -58,10 +58,11 @@
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketClient.html#g-socket-client-connect-finish" title="g_socket_client_connect_finish ()">g_socket_client_connect_finish</a>      (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketClient.html#g-socket-client-connect-finish" title="g_socket_client_connect_finish ()">g_socket_client_connect_finish</a> (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketClient.html#g-socket-client-connect-to-host" title="g_socket_client_connect_to_host ()">g_socket_client_connect_to_host</a>     (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketClient.html#g-socket-client-connect-to-host" title="g_socket_client_connect_to_host ()">g_socket_client_connect_to_host</a>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *host_and_port</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> default_port</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -73,11 +74,12 @@
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketClient.html#g-socket-client-connect-to-host-finish" title="g_socket_client_connect_to_host_finish ()">g_socket_client_connect_to_host_finish</a>
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketClient.html#g-socket-client-connect-to-host-finish" title="g_socket_client_connect_to_host_finish ()">g_socket_client_connect_to_host_finish</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketClient.html#g-socket-client-connect-to-service" title="g_socket_client_connect_to_service ()">g_socket_client_connect_to_service</a>  (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketClient.html#g-socket-client-connect-to-service" title="g_socket_client_connect_to_service ()">g_socket_client_connect_to_service</a>
+                                                        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *domain</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *service</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -89,11 +91,11 @@
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketClient.html#g-socket-client-connect-to-service-finish" title="g_socket_client_connect_to_service_finish ()">g_socket_client_connect_to_service_finish</a>
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketClient.html#g-socket-client-connect-to-service-finish" title="g_socket_client_connect_to_service_finish ()">g_socket_client_connect_to_service_finish</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketClient.html#g-socket-client-connect-to-uri" title="g_socket_client_connect_to_uri ()">g_socket_client_connect_to_uri</a>      (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketClient.html#g-socket-client-connect-to-uri" title="g_socket_client_connect_to_uri ()">g_socket_client_connect_to_uri</a> (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *uri</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> default_port</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -105,18 +107,18 @@
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
-<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GSocketClient.html#g-socket-client-connect-to-uri-finish" title="g_socket_client_connect_to_uri_finish ()">g_socket_client_connect_to_uri_finish</a>
+<a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      <a class="link" href="GSocketClient.html#g-socket-client-connect-to-uri-finish" title="g_socket_client_connect_to_uri_finish ()">g_socket_client_connect_to_uri_finish</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-set-family" title="g_socket_client_set_family ()">g_socket_client_set_family</a>          (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-set-local-address" title="g_socket_client_set_local_address ()">g_socket_client_set_local_address</a>   (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> *address</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-set-protocol" title="g_socket_client_set_protocol ()">g_socket_client_set_protocol</a>        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a> protocol</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a> protocol</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-set-socket-type" title="g_socket_client_set_socket_type ()">g_socket_client_set_socket_type</a>     (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a> type</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType"><span class="type">GSocketType</span></a> type</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-set-timeout" title="g_socket_client_set_timeout ()">g_socket_client_set_timeout</a>         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> timeout</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-set-enable-proxy" title="g_socket_client_set_enable_proxy ()">g_socket_client_set_enable_proxy</a>    (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
@@ -125,39 +127,39 @@
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> tls</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSocketClient.html#g-socket-client-set-tls-validation-flags" title="g_socket_client_set_tls_validation_flags ()">g_socket_client_set_tls_validation_flags</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> flags</code></em>);
-<a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a>       <a class="link" href="GSocketClient.html#g-socket-client-get-family" title="g_socket_client_get_family ()">g_socket_client_get_family</a>          (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> flags</code></em>);
+<a class="link" href="GSocketAddress.html#GSocketFamily"><span class="returnvalue">GSocketFamily</span></a>       <a class="link" href="GSocketClient.html#g-socket-client-get-family" title="g_socket_client_get_family ()">g_socket_client_get_family</a>          (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    <a class="link" href="GSocketClient.html#g-socket-client-get-local-address" title="g_socket_client_get_local_address ()">g_socket_client_get_local_address</a>   (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
-<a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="returnvalue">GSocketProtocol</span></a>     <a class="link" href="GSocketClient.html#g-socket-client-get-protocol" title="g_socket_client_get_protocol ()">g_socket_client_get_protocol</a>        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
-<a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="returnvalue">GSocketType</span></a>         <a class="link" href="GSocketClient.html#g-socket-client-get-socket-type" title="g_socket_client_get_socket_type ()">g_socket_client_get_socket_type</a>     (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
+<a class="link" href="GSocket.html#GSocketProtocol"><span class="returnvalue">GSocketProtocol</span></a>     <a class="link" href="GSocketClient.html#g-socket-client-get-protocol" title="g_socket_client_get_protocol ()">g_socket_client_get_protocol</a>        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
+<a class="link" href="GSocket.html#GSocketType"><span class="returnvalue">GSocketType</span></a>         <a class="link" href="GSocketClient.html#g-socket-client-get-socket-type" title="g_socket_client_get_socket_type ()">g_socket_client_get_socket_type</a>     (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="GSocketClient.html#g-socket-client-get-timeout" title="g_socket_client_get_timeout ()">g_socket_client_get_timeout</a>         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketClient.html#g-socket-client-get-enable-proxy" title="g_socket_client_get_enable_proxy ()">g_socket_client_get_enable_proxy</a>    (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSocketClient.html#g-socket-client-get-tls" title="g_socket_client_get_tls ()">g_socket_client_get_tls</a>             (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
-<a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a>  <a class="link" href="GSocketClient.html#g-socket-client-get-tls-validation-flags" title="g_socket_client_get_tls_validation_flags ()">g_socket_client_get_tls_validation_flags</a>
+<a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a>  <a class="link" href="GSocketClient.html#g-socket-client-get-tls-validation-flags" title="g_socket_client_get_tls_validation_flags ()">g_socket_client_get_tls_validation_flags</a>
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GSocketClient.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GSocketClient
 </pre>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GSocketClient.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GSocketClient.html#GSocketClient--enable-proxy" title='The "enable-proxy" property'>enable-proxy</a>"             <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct
-  "<a class="link" href="GSocketClient.html#GSocketClient--family" title='The "family" property'>family</a>"                   <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>         : Read / Write / Construct
+  "<a class="link" href="GSocketClient.html#GSocketClient--family" title='The "family" property'>family</a>"                   <a class="link" href="GSocketAddress.html#GSocketFamily"><span class="type">GSocketFamily</span></a>         : Read / Write / Construct
   "<a class="link" href="GSocketClient.html#GSocketClient--local-address" title='The "local-address" property'>local-address</a>"            <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>*       : Read / Write / Construct
-  "<a class="link" href="GSocketClient.html#GSocketClient--protocol" title='The "protocol" property'>protocol</a>"                 <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a>       : Read / Write / Construct
+  "<a class="link" href="GSocketClient.html#GSocketClient--protocol" title='The "protocol" property'>protocol</a>"                 <a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a>       : Read / Write / Construct
   "<a class="link" href="GSocketClient.html#GSocketClient--timeout" title='The "timeout" property'>timeout</a>"                  <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct
   "<a class="link" href="GSocketClient.html#GSocketClient--tls" title='The "tls" property'>tls</a>"                      <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct
-  "<a class="link" href="GSocketClient.html#GSocketClient--tls-validation-flags" title='The "tls-validation-flags" property'>tls-validation-flags</a>"     <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>  : Read / Write / Construct
-  "<a class="link" href="GSocketClient.html#GSocketClient--type" title='The "type" property'>type</a>"                     <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>           : Read / Write / Construct
+  "<a class="link" href="GSocketClient.html#GSocketClient--tls-validation-flags" title='The "tls-validation-flags" property'>tls-validation-flags</a>"     <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>  : Read / Write / Construct
+  "<a class="link" href="GSocketClient.html#GSocketClient--type" title='The "type" property'>type</a>"                     <a class="link" href="GSocket.html#GSocketType"><span class="type">GSocketType</span></a>           : Read / Write / Construct
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GSocketClient.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> is a high-level utility class for connecting to a
@@ -174,9 +176,9 @@ the underlying socket that is in use. For instance, for a TCP/IP connection
 it will be a <a class="link" href="GTcpConnection.html" title="GTcpConnection"><span class="type">GTcpConnection</span></a>.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GSocketClient.details"></a><h2>Details</h2>
-<div class="refsect2" title="GSocketClient">
+<div class="refsect2">
 <a name="GSocketClient-struct"></a><h3>GSocketClient</h3>
 <pre class="programlisting">typedef struct _GSocketClient GSocketClient;</pre>
 <p>
@@ -185,7 +187,7 @@ A helper class for network servers to listen for and accept connections.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_add_application_proxy ()">
+<div class="refsect2">
 <a name="g-socket-client-add-application-proxy"></a><h3>g_socket_client_add_application_proxy ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_add_application_proxy
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
@@ -218,14 +220,13 @@ be use as generic socket proxy through the HTTP CONNECT method.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>protocol</code></em> :</span></p></td>
-<td>The proxy protocol
-</td>
+<td>The proxy protocol</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_new ()">
+<div class="refsect2">
 <a name="g-socket-client-new"></a><h3>g_socket_client_new ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="returnvalue">GSocketClient</span></a> *     g_socket_client_new                 (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
@@ -235,18 +236,16 @@ Creates a new <a class="link" href="GSocketClient.html" title="GSocketClient"><s
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-    Free the returned object with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
-
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
+Free the returned object with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect ()">
+<div class="refsect2">
 <a name="g-socket-client-connect"></a><h3>g_socket_client_connect ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_client_connect             (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_client_connect        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> *connectable</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -279,28 +278,25 @@ socket will be bound to this address before connecting.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connectable</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> specifying the remote address.
-</td>
+<td>a <a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> specifying the remote address.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
+<td>optional <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> object, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> for error reporting, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -308,7 +304,7 @@ socket will be bound to this address before connecting.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_async ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-async"></a><h3>g_socket_client_connect_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_connect_async       (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> *connectable</code></em>,
@@ -333,22 +329,21 @@ the result of the operation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connectable</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> specifying the remote address.
-</td>
+<td>a <a class="link" href="GSocketConnectable.html" title="GSocketConnectable"><span class="type">GSocketConnectable</span></a> specifying the remote address.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data for the callback
+<td>user data for the callback. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -356,9 +351,9 @@ the result of the operation.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_finish ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-finish"></a><h3>g_socket_client_connect_finish ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_client_connect_finish      (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_client_connect_finish (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
@@ -369,23 +364,20 @@ Finishes an async connect operation. See <a class="link" href="GSocketClient.htm
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
-ignore.
-</td>
+ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -393,9 +385,10 @@ ignore.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_host ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-host"></a><h3>g_socket_client_connect_to_host ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_client_connect_to_host     (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_client_connect_to_host
+                                                        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *host_and_port</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> default_port</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -449,17 +442,15 @@ accordingly.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>host_and_port</code></em> :</span></p></td>
-<td>the name and optionally port of the host to connect to
-</td>
+<td>the name and optionally port of the host to connect to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>default_port</code></em> :</span></p></td>
-<td>the default port to connect to
-</td>
+<td>the default port to connect to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -469,7 +460,7 @@ accordingly.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -477,7 +468,7 @@ accordingly.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_host_async ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-host-async"></a><h3>g_socket_client_connect_to_host_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_connect_to_host_async
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
@@ -504,27 +495,25 @@ the result of the operation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>host_and_port</code></em> :</span></p></td>
-<td>the name and optionally the port of the host to connect to
-</td>
+<td>the name and optionally the port of the host to connect to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>default_port</code></em> :</span></p></td>
-<td>the default port to connect to
-</td>
+<td>the default port to connect to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data for the callback
+<td>user data for the callback. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -532,9 +521,9 @@ the result of the operation.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_host_finish ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-host-finish"></a><h3>g_socket_client_connect_to_host_finish ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_client_connect_to_host_finish
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_client_connect_to_host_finish
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -546,23 +535,20 @@ Finishes an async connect operation. See <a class="link" href="GSocketClient.htm
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
-ignore.
-</td>
+ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -570,9 +556,10 @@ ignore.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_service ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-service"></a><h3>g_socket_client_connect_to_service ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_client_connect_to_service  (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_client_connect_to_service
+                                                        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *domain</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *service</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -606,17 +593,15 @@ accordingly.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>a domain name
-</td>
+<td>a domain name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
-<td>the name of the service to connect to
-</td>
+<td>the name of the service to connect to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -626,14 +611,14 @@ accordingly.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> if successful, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> if successful, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_service_async ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-service-async"></a><h3>g_socket_client_connect_to_service_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_connect_to_service_async
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
@@ -656,27 +641,25 @@ This is the asynchronous version of
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>domain</code></em> :</span></p></td>
-<td>a domain name
-</td>
+<td>a domain name</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>service</code></em> :</span></p></td>
-<td>the name of the service to connect to
-</td>
+<td>the name of the service to connect to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data for the callback
+<td>user data for the callback. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -684,9 +667,9 @@ This is the asynchronous version of
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_service_finish ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-service-finish"></a><h3>g_socket_client_connect_to_service_finish ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_client_connect_to_service_finish
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_client_connect_to_service_finish
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -698,23 +681,20 @@ Finishes an async connect operation. See <a class="link" href="GSocketClient.htm
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
-ignore.
-</td>
+ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -722,9 +702,9 @@ ignore.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_uri ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-uri"></a><h3>g_socket_client_connect_to_uri ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_client_connect_to_uri      (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_client_connect_to_uri (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *uri</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint16"><span class="type">guint16</span></a> default_port</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
@@ -767,17 +747,15 @@ accordingly.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uri</code></em> :</span></p></td>
-<td>A network URI
-</td>
+<td>A network URI</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>default_port</code></em> :</span></p></td>
-<td>the default port to connect to
-</td>
+<td>the default port to connect to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -787,7 +765,7 @@ accordingly.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -795,7 +773,7 @@ accordingly.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_uri_async ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-uri-async"></a><h3>g_socket_client_connect_to_uri_async ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_connect_to_uri_async
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
@@ -822,27 +800,25 @@ the result of the operation.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uri</code></em> :</span></p></td>
-<td>a network uri
-</td>
+<td>a network uri</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>default_port</code></em> :</span></p></td>
-<td>the default port to connect to
-</td>
+<td>the default port to connect to</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>a <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>
+<td>a <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a>. <span class="annotation">[<acronym title="The callback is valid until first called."><span class="acronym">scope async</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data for the callback
+<td>user data for the callback. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -850,9 +826,9 @@ the result of the operation.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_connect_to_uri_finish ()">
+<div class="refsect2">
 <a name="g-socket-client-connect-to-uri-finish"></a><h3>g_socket_client_connect_to_uri_finish ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_socket_client_connect_to_uri_finish
+<pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> *      g_socket_client_connect_to_uri_finish
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *result</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -864,23 +840,20 @@ Finishes an async connect operation. See <a class="link" href="GSocketClient.htm
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.
-</td>
+<td>a <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
 <td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> location to store the error occuring, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to
-ignore.
-</td>
+ignore.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> on error. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -888,10 +861,10 @@ ignore.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_set_family ()">
+<div class="refsect2">
 <a name="g-socket-client-set-family"></a><h3>g_socket_client_set_family ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_family          (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="GSocketAddress.html#GSocketFamily"><span class="type">GSocketFamily</span></a> family</code></em>);</pre>
 <p>
 Sets the socket family of the socket client.
 If this is set to something other than <a class="link" href="GSocketAddress.html#G-SOCKET-FAMILY-INVALID:CAPS"><code class="literal">G_SOCKET_FAMILY_INVALID</code></a>
@@ -908,12 +881,11 @@ be an ipv6 mapped to ipv4 address.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>family</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>
+<td>a <a class="link" href="GSocketAddress.html#GSocketFamily"><span class="type">GSocketFamily</span></a>
 </td>
 </tr>
 </tbody>
@@ -921,7 +893,7 @@ be an ipv6 mapped to ipv4 address.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_set_local_address ()">
+<div class="refsect2">
 <a name="g-socket-client-set-local-address"></a><h3>g_socket_client_set_local_address ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_local_address   (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a> *address</code></em>);</pre>
@@ -940,8 +912,7 @@ a specific interface.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>address</code></em> :</span></p></td>
@@ -953,10 +924,10 @@ a specific interface.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_set_protocol ()">
+<div class="refsect2">
 <a name="g-socket-client-set-protocol"></a><h3>g_socket_client_set_protocol ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_protocol        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a> protocol</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a> protocol</code></em>);</pre>
 <p>
 Sets the protocol of the socket client.
 The sockets created by this object will use of the specified
@@ -971,12 +942,11 @@ protocol for the socket family and type.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>protocol</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a>
+<td>a <a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a>
 </td>
 </tr>
 </tbody>
@@ -984,10 +954,10 @@ protocol for the socket family and type.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_set_socket_type ()">
+<div class="refsect2">
 <a name="g-socket-client-set-socket-type"></a><h3>g_socket_client_set_socket_type ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_socket_type     (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a> type</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="GSocket.html#GSocketType"><span class="type">GSocketType</span></a> type</code></em>);</pre>
 <p>
 Sets the socket type of the socket client.
 The sockets created by this object will be of the specified
@@ -1002,12 +972,11 @@ as GSocketClient is used for connection oriented services.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>
+<td>a <a class="link" href="GSocket.html#GSocketType"><span class="type">GSocketType</span></a>
 </td>
 </tr>
 </tbody>
@@ -1015,7 +984,7 @@ as GSocketClient is used for connection oriented services.
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_set_timeout ()">
+<div class="refsect2">
 <a name="g-socket-client-set-timeout"></a><h3>g_socket_client_set_timeout ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_timeout         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a> timeout</code></em>);</pre>
@@ -1033,20 +1002,18 @@ to fail with <a class="link" href="gio-GIOError.html#G-IO-ERROR-TIMED-OUT:CAPS">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>timeout</code></em> :</span></p></td>
-<td>the timeout
-</td>
+<td>the timeout</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_set_enable_proxy ()">
+<div class="refsect2">
 <a name="g-socket-client-set-enable-proxy"></a><h3>g_socket_client_set_enable_proxy ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_enable_proxy    (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> enable</code></em>);</pre>
@@ -1061,20 +1028,18 @@ needed, and automatically do the necessary proxy negotiation.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>enable</code></em> :</span></p></td>
-<td>whether to enable proxies
-</td>
+<td>whether to enable proxies</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_set_tls ()">
+<div class="refsect2">
 <a name="g-socket-client-set-tls"></a><h3>g_socket_client_set_tls ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_tls             (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> tls</code></em>);</pre>
@@ -1096,24 +1061,22 @@ to extract the <a class="link" href="GTlsClientConnection.html" title="GTlsClien
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tls</code></em> :</span></p></td>
-<td>whether to use TLS
-</td>
+<td>whether to use TLS</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_set_tls_validation_flags ()">
+<div class="refsect2">
 <a name="g-socket-client-set-tls-validation-flags"></a><h3>g_socket_client_set_tls_validation_flags ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_socket_client_set_tls_validation_flags
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> flags</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a> flags</code></em>);</pre>
 <p>
 Sets the TLS validation flags used when creating TLS connections
 via <em class="parameter"><code>client</code></em>. The default value is <a class="link" href="gio-TLS-Overview.html#G-TLS-CERTIFICATE-VALIDATE-ALL:CAPS"><code class="literal">G_TLS_CERTIFICATE_VALIDATE_ALL</code></a>.
@@ -1123,22 +1086,20 @@ via <em class="parameter"><code>client</code></em>. The default value is <a clas
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>the validation flags
-</td>
+<td>the validation flags</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_get_family ()">
+<div class="refsect2">
 <a name="g-socket-client-get-family"></a><h3>g_socket_client_get_family ()</h3>
-<pre class="programlisting"><a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="returnvalue">GSocketFamily</span></a>       g_socket_client_get_family          (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GSocketAddress.html#GSocketFamily"><span class="returnvalue">GSocketFamily</span></a>       g_socket_client_get_family          (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
 Gets the socket family of the socket client.
 </p>
@@ -1150,13 +1111,11 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-family" title="
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>
-
+<td>a <a class="link" href="GSocketAddress.html#GSocketFamily"><span class="type">GSocketFamily</span></a>
 </td>
 </tr>
 </tbody>
@@ -1164,7 +1123,7 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-family" title="
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_get_local_address ()">
+<div class="refsect2">
 <a name="g-socket-client-get-local-address"></a><h3>g_socket_client_get_local_address ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="returnvalue">GSocketAddress</span></a> *    g_socket_client_get_local_address   (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
@@ -1178,12 +1137,11 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-local-address" 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <span class="type">GSocketAddres</span> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. don't free. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+<td>a <span class="type">GSocketAddres</span> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. don't free. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1191,9 +1149,9 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-local-address" 
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_get_protocol ()">
+<div class="refsect2">
 <a name="g-socket-client-get-protocol"></a><h3>g_socket_client_get_protocol ()</h3>
-<pre class="programlisting"><a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="returnvalue">GSocketProtocol</span></a>     g_socket_client_get_protocol        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GSocket.html#GSocketProtocol"><span class="returnvalue">GSocketProtocol</span></a>     g_socket_client_get_protocol        (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
 Gets the protocol name type of the socket client.
 </p>
@@ -1210,8 +1168,7 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-protocol" title
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a>
-
+<td>a <a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a>
 </td>
 </tr>
 </tbody>
@@ -1219,9 +1176,9 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-protocol" title
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_get_socket_type ()">
+<div class="refsect2">
 <a name="g-socket-client-get-socket-type"></a><h3>g_socket_client_get_socket_type ()</h3>
-<pre class="programlisting"><a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="returnvalue">GSocketType</span></a>         g_socket_client_get_socket_type     (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GSocket.html#GSocketType"><span class="returnvalue">GSocketType</span></a>         g_socket_client_get_socket_type     (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
 Gets the socket type of the socket client.
 </p>
@@ -1233,13 +1190,11 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-socket-type" ti
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>
-
+<td>a <a class="link" href="GSocketAddress.html#GSocketFamily"><span class="type">GSocketFamily</span></a>
 </td>
 </tr>
 </tbody>
@@ -1247,7 +1202,7 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-socket-type" ti
 <p class="since">Since 2.22</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_get_timeout ()">
+<div class="refsect2">
 <a name="g-socket-client-get-timeout"></a><h3>g_socket_client_get_timeout ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               g_socket_client_get_timeout         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
@@ -1266,16 +1221,14 @@ See <a class="link" href="GSocketClient.html#g-socket-client-set-timeout" title=
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the timeout in seconds
-
-</td>
+<td>the timeout in seconds</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_get_enable_proxy ()">
+<div class="refsect2">
 <a name="g-socket-client-get-enable-proxy"></a><h3>g_socket_client_get_enable_proxy ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_client_get_enable_proxy    (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
@@ -1286,21 +1239,18 @@ Gets the proxy enable state; see <a class="link" href="GSocketClient.html#g-sock
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> whether proxying is enabled
-
-</td>
+<td>whether proxying is enabled</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_get_tls ()">
+<div class="refsect2">
 <a name="g-socket-client-get-tls"></a><h3>g_socket_client_get_tls ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_socket_client_get_tls             (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
@@ -1312,23 +1262,20 @@ Gets whether <em class="parameter"><code>client</code></em> creates TLS connecti
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> whether <em class="parameter"><code>client</code></em> uses TLS
-
-</td>
+<td>whether <em class="parameter"><code>client</code></em> uses TLS</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_socket_client_get_tls_validation_flags ()">
+<div class="refsect2">
 <a name="g-socket-client-get-tls-validation-flags"></a><h3>g_socket_client_get_tls_validation_flags ()</h3>
-<pre class="programlisting"><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a>  g_socket_client_get_tls_validation_flags
+<pre class="programlisting"><a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="returnvalue">GTlsCertificateFlags</span></a>  g_socket_client_get_tls_validation_flags
                                                         (<em class="parameter"><code><a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a> *client</code></em>);</pre>
 <p>
 Gets the TLS validation flags used creating TLS connections via
@@ -1339,84 +1286,81 @@ Gets the TLS validation flags used creating TLS connections via
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>client</code></em> :</span></p></td>
-<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.
-</td>
+<td>a <a class="link" href="GSocketClient.html" title="GSocketClient"><span class="type">GSocketClient</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the TLS validation flags
-
-</td>
+<td>the TLS validation flags</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GSocketClient.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "enable-proxy" property'>
+<div class="refsect2">
 <a name="GSocketClient--enable-proxy"></a><h3>The <code class="literal">"enable-proxy"</code> property</h3>
 <pre class="programlisting">  "enable-proxy"             <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct</pre>
 <p>Enable proxy support.</p>
 <p>Default value: TRUE</p>
 </div>
 <hr>
-<div class="refsect2" title='The "family" property'>
+<div class="refsect2">
 <a name="GSocketClient--family"></a><h3>The <code class="literal">"family"</code> property</h3>
-<pre class="programlisting">  "family"                   <a class="link" href="GSocketAddress.html#GSocketFamily" title="enum GSocketFamily"><span class="type">GSocketFamily</span></a>         : Read / Write / Construct</pre>
+<pre class="programlisting">  "family"                   <a class="link" href="GSocketAddress.html#GSocketFamily"><span class="type">GSocketFamily</span></a>         : Read / Write / Construct</pre>
 <p>The sockets address family to use for socket construction.</p>
 <p>Default value: G_SOCKET_FAMILY_INVALID</p>
 </div>
 <hr>
-<div class="refsect2" title='The "local-address" property'>
+<div class="refsect2">
 <a name="GSocketClient--local-address"></a><h3>The <code class="literal">"local-address"</code> property</h3>
 <pre class="programlisting">  "local-address"            <a class="link" href="GSocketAddress.html" title="GSocketAddress"><span class="type">GSocketAddress</span></a>*       : Read / Write / Construct</pre>
 <p>The local address constructed sockets will be bound to.</p>
 </div>
 <hr>
-<div class="refsect2" title='The "protocol" property'>
+<div class="refsect2">
 <a name="GSocketClient--protocol"></a><h3>The <code class="literal">"protocol"</code> property</h3>
-<pre class="programlisting">  "protocol"                 <a class="link" href="GSocket.html#GSocketProtocol" title="enum GSocketProtocol"><span class="type">GSocketProtocol</span></a>       : Read / Write / Construct</pre>
+<pre class="programlisting">  "protocol"                 <a class="link" href="GSocket.html#GSocketProtocol"><span class="type">GSocketProtocol</span></a>       : Read / Write / Construct</pre>
 <p>The protocol to use for socket construction, or 0 for default.</p>
 <p>Default value: G_SOCKET_PROTOCOL_DEFAULT</p>
 </div>
 <hr>
-<div class="refsect2" title='The "timeout" property'>
+<div class="refsect2">
 <a name="GSocketClient--timeout"></a><h3>The <code class="literal">"timeout"</code> property</h3>
 <pre class="programlisting">  "timeout"                  <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>                 : Read / Write / Construct</pre>
 <p>The I/O timeout for sockets, or 0 for none.</p>
 <p>Default value: 0</p>
 </div>
 <hr>
-<div class="refsect2" title='The "tls" property'>
+<div class="refsect2">
 <a name="GSocketClient--tls"></a><h3>The <code class="literal">"tls"</code> property</h3>
 <pre class="programlisting">  "tls"                      <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write / Construct</pre>
 <p>Whether to create TLS connections.</p>
 <p>Default value: FALSE</p>
 </div>
 <hr>
-<div class="refsect2" title='The "tls-validation-flags" property'>
+<div class="refsect2">
 <a name="GSocketClient--tls-validation-flags"></a><h3>The <code class="literal">"tls-validation-flags"</code> property</h3>
-<pre class="programlisting">  "tls-validation-flags"     <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags" title="enum GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>  : Read / Write / Construct</pre>
+<pre class="programlisting">  "tls-validation-flags"     <a class="link" href="gio-TLS-Overview.html#GTlsCertificateFlags"><span class="type">GTlsCertificateFlags</span></a>  : Read / Write / Construct</pre>
 <p>TLS validation flags to use.</p>
 <p>Default value: G_TLS_CERTIFICATE_UNKNOWN_CA|G_TLS_CERTIFICATE_BAD_IDENTITY|G_TLS_CERTIFICATE_NOT_ACTIVATED|G_TLS_CERTIFICATE_EXPIRED|G_TLS_CERTIFICATE_REVOKED|G_TLS_CERTIFICATE_INSECURE|G_TLS_CERTIFICATE_GENERIC_ERROR</p>
 </div>
 <hr>
-<div class="refsect2" title='The "type" property'>
+<div class="refsect2">
 <a name="GSocketClient--type"></a><h3>The <code class="literal">"type"</code> property</h3>
-<pre class="programlisting">  "type"                     <a class="link" href="GSocket.html#GSocketType" title="enum GSocketType"><span class="type">GSocketType</span></a>           : Read / Write / Construct</pre>
+<pre class="programlisting">  "type"                     <a class="link" href="GSocket.html#GSocketType"><span class="type">GSocketType</span></a>           : Read / Write / Construct</pre>
 <p>The sockets type to use for socket construction.</p>
 <p>Default value: G_SOCKET_TYPE_STREAM</p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
+<div class="refsect1">
 <a name="GSocketClient.see-also"></a><h2>See Also</h2>
 <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>, <a class="link" href="GSocketListener.html" title="GSocketListener"><span class="type">GSocketListener</span></a>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

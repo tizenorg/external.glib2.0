@@ -36,7 +36,7 @@
 
 
 /**
- * SECTION: gvariant
+ * SECTION:gvariant
  * @title: GVariant
  * @short_description: strongly typed value datatype
  * @see_also: GVariantType
@@ -65,8 +65,8 @@
  * small constant time, usually touching only a single memory page.
  * Serialised #GVariant data can also be sent over the network.
  *
- * #GVariant is largely compatible with DBus.  Almost all types of
- * #GVariant instances can be sent over DBus.  See #GVariantType for
+ * #GVariant is largely compatible with D-Bus.  Almost all types of
+ * #GVariant instances can be sent over D-Bus.  See #GVariantType for
  * exceptions.
  *
  * For convenience to C programmers, #GVariant features powerful
@@ -315,7 +315,7 @@ g_variant_new_from_trusted (const GVariantType *type,
 
 /**
  * g_variant_new_boolean:
- * @boolean: a #gboolean value
+ * @value: a #gboolean value
  * @returns: a floating reference to a new boolean #GVariant instance
  *
  * Creates a new boolean #GVariant instance -- either %TRUE or %FALSE.
@@ -373,7 +373,7 @@ g_variant_get_boolean (GVariant *value)
 
 /**
  * g_variant_new_byte:
- * @byte: a #guint8 value
+ * @value: a #guint8 value
  * @returns: a floating reference to a new byte #GVariant instance
  *
  * Creates a new byte #GVariant instance.
@@ -396,7 +396,7 @@ NUMERIC_TYPE (BYTE, byte, guchar)
 
 /**
  * g_variant_new_int16:
- * @int16: a #gint16 value
+ * @value: a #gint16 value
  * @returns: a floating reference to a new int16 #GVariant instance
  *
  * Creates a new int16 #GVariant instance.
@@ -419,7 +419,7 @@ NUMERIC_TYPE (INT16, int16, gint16)
 
 /**
  * g_variant_new_uint16:
- * @uint16: a #guint16 value
+ * @value: a #guint16 value
  * @returns: a floating reference to a new uint16 #GVariant instance
  *
  * Creates a new uint16 #GVariant instance.
@@ -442,7 +442,7 @@ NUMERIC_TYPE (UINT16, uint16, guint16)
 
 /**
  * g_variant_new_int32:
- * @int32: a #gint32 value
+ * @value: a #gint32 value
  * @returns: a floating reference to a new int32 #GVariant instance
  *
  * Creates a new int32 #GVariant instance.
@@ -465,7 +465,7 @@ NUMERIC_TYPE (INT32, int32, gint32)
 
 /**
  * g_variant_new_uint32:
- * @uint32: a #guint32 value
+ * @value: a #guint32 value
  * @returns: a floating reference to a new uint32 #GVariant instance
  *
  * Creates a new uint32 #GVariant instance.
@@ -488,7 +488,7 @@ NUMERIC_TYPE (UINT32, uint32, guint32)
 
 /**
  * g_variant_new_int64:
- * @int64: a #gint64 value
+ * @value: a #gint64 value
  * @returns: a floating reference to a new int64 #GVariant instance
  *
  * Creates a new int64 #GVariant instance.
@@ -511,7 +511,7 @@ NUMERIC_TYPE (INT64, int64, gint64)
 
 /**
  * g_variant_new_uint64:
- * @uint64: a #guint64 value
+ * @value: a #guint64 value
  * @returns: a floating reference to a new uint64 #GVariant instance
  *
  * Creates a new uint64 #GVariant instance.
@@ -534,14 +534,14 @@ NUMERIC_TYPE (UINT64, uint64, guint64)
 
 /**
  * g_variant_new_handle:
- * @handle: a #gint32 value
+ * @value: a #gint32 value
  * @returns: a floating reference to a new handle #GVariant instance
  *
  * Creates a new handle #GVariant instance.
  *
  * By convention, handles are indexes into an array of file descriptors
- * that are sent alongside a DBus message.  If you're not interacting
- * with DBus, you probably don't need them.
+ * that are sent alongside a D-Bus message.  If you're not interacting
+ * with D-Bus, you probably don't need them.
  *
  * Since: 2.24
  **/
@@ -556,8 +556,8 @@ NUMERIC_TYPE (UINT64, uint64, guint64)
  * than %G_VARIANT_TYPE_HANDLE.
  *
  * By convention, handles are indexes into an array of file descriptors
- * that are sent alongside a DBus message.  If you're not interacting
- * with DBus, you probably don't need them.
+ * that are sent alongside a D-Bus message.  If you're not interacting
+ * with D-Bus, you probably don't need them.
  *
  * Since: 2.24
  **/
@@ -565,7 +565,7 @@ NUMERIC_TYPE (HANDLE, handle, gint32)
 
 /**
  * g_variant_new_double:
- * @floating: a #gdouble floating point value
+ * @value: a #gdouble floating point value
  * @returns: a floating reference to a new double #GVariant instance
  *
  * Creates a new double #GVariant instance.
@@ -667,7 +667,7 @@ g_variant_get_maybe (GVariant *value)
 
 /**
  * g_variant_new_variant:
- * @value: a #GVariance instance
+ * @value: a #GVariant instance
  * @returns: a floating reference to a new variant #GVariant instance
  *
  * Boxes @value.  The result is a #GVariant instance representing a
@@ -692,7 +692,7 @@ g_variant_new_variant (GVariant *value)
 
 /**
  * g_variant_get_variant:
- * @value: a variant #GVariance instance
+ * @value: a variant #GVariant instance
  * @returns: the item contained in the variant
  *
  * Unboxes @value.  The result is the #GVariant instance that was
@@ -1141,8 +1141,8 @@ g_variant_new_string (const gchar *string)
  * @object_path: a normal C nul-terminated string
  * @returns: a floating reference to a new object path #GVariant instance
  *
- * Creates a DBus object path #GVariant with the contents of @string.
- * @string must be a valid DBus object path.  Use
+ * Creates a D-Bus object path #GVariant with the contents of @string.
+ * @string must be a valid D-Bus object path.  Use
  * g_variant_is_object_path() if you're not sure.
  *
  * Since: 2.24
@@ -1159,10 +1159,10 @@ g_variant_new_object_path (const gchar *object_path)
 /**
  * g_variant_is_object_path:
  * @string: a normal C nul-terminated string
- * @returns: %TRUE if @string is a DBus object path
+ * @returns: %TRUE if @string is a D-Bus object path
  *
- * Determines if a given string is a valid DBus object path.  You
- * should ensure that a string is a valid DBus object path before
+ * Determines if a given string is a valid D-Bus object path.  You
+ * should ensure that a string is a valid D-Bus object path before
  * passing it to g_variant_new_object_path().
  *
  * A valid object path starts with '/' followed by zero or more
@@ -1185,8 +1185,8 @@ g_variant_is_object_path (const gchar *string)
  * @signature: a normal C nul-terminated string
  * @returns: a floating reference to a new signature #GVariant instance
  *
- * Creates a DBus type signature #GVariant with the contents of
- * @string.  @string must be a valid DBus type signature.  Use
+ * Creates a D-Bus type signature #GVariant with the contents of
+ * @string.  @string must be a valid D-Bus type signature.  Use
  * g_variant_is_signature() if you're not sure.
  *
  * Since: 2.24
@@ -1203,13 +1203,13 @@ g_variant_new_signature (const gchar *signature)
 /**
  * g_variant_is_signature:
  * @string: a normal C nul-terminated string
- * @returns: %TRUE if @string is a DBus type signature
+ * @returns: %TRUE if @string is a D-Bus type signature
  *
- * Determines if a given string is a valid DBus type signature.  You
- * should ensure that a string is a valid DBus type signature before
+ * Determines if a given string is a valid D-Bus type signature.  You
+ * should ensure that a string is a valid D-Bus type signature before
  * passing it to g_variant_new_signature().
  *
- * DBus type signatures consist of zero or more definite #GVariantType
+ * D-Bus type signatures consist of zero or more definite #GVariantType
  * strings in sequence.
  *
  * Since: 2.24
@@ -1784,9 +1784,9 @@ g_variant_is_container (GVariant *value)
  * @G_VARIANT_CLASS_DOUBLE: The #GVariant is a double precision floating 
  *                          point value.
  * @G_VARIANT_CLASS_STRING: The #GVariant is a normal string.
- * @G_VARIANT_CLASS_OBJECT_PATH: The #GVariant is a DBus object path 
+ * @G_VARIANT_CLASS_OBJECT_PATH: The #GVariant is a D-Bus object path 
  *                               string.
- * @G_VARIANT_CLASS_SIGNATURE: The #GVariant is a DBus signature string.
+ * @G_VARIANT_CLASS_SIGNATURE: The #GVariant is a D-Bus signature string.
  * @G_VARIANT_CLASS_VARIANT: The #GVariant is a variant.
  * @G_VARIANT_CLASS_MAYBE: The #GVariant is a maybe-typed value.
  * @G_VARIANT_CLASS_ARRAY: The #GVariant is an array.
@@ -2233,6 +2233,8 @@ g_variant_print_string (GVariant *value,
  * @returns: a newly-allocated string holding the result.
  *
  * Pretty-prints @value in the format understood by g_variant_parse().
+ *
+ * The format is described <link linkend='gvariant-text'>here</link>.
  *
  * If @type_annotate is %TRUE, then type information is included in
  * the output.
@@ -2886,7 +2888,7 @@ g_variant_builder_ref (GVariantBuilder *builder)
  * through.  This function need not be called if you call
  * g_variant_builder_end() and it also doesn't need to be called on
  * builders allocated with g_variant_builder_new (see
- * g_variant_builder_free() for that).
+ * g_variant_builder_unref() for that).
  *
  * This function leaves the #GVariantBuilder structure set to all-zeros.
  * It is valid to call this function on either an initialised
@@ -3057,6 +3059,9 @@ g_variant_builder_make_room (struct stack_builder *builder)
  * putting different types of items into an array, putting the wrong
  * types or number of items in a tuple, putting more than one value into
  * a variant, etc.
+ *
+ * If @value is a floating reference (see g_variant_ref_sink()),
+ * the @builder instance takes ownership of @value.
  *
  * Since: 2.24
  **/
@@ -3640,30 +3645,46 @@ g_variant_valist_new_nnp (const gchar **str,
   switch (*(*str)++)
     {
     case 'a':
-      {
-        const GVariantType *type;
-        GVariant *value;
+      if (ptr != NULL)
+        {
+          const GVariantType *type;
+          GVariant *value;
 
-        value = g_variant_builder_end (ptr);
-        type = g_variant_get_type (value);
+          value = g_variant_builder_end (ptr);
+          type = g_variant_get_type (value);
 
-        if G_UNLIKELY (!g_variant_type_is_array (type))
-          g_error ("g_variant_new: expected array GVariantBuilder but "
-                   "the built value has type `%s'",
-                   g_variant_get_type_string (value));
+          if G_UNLIKELY (!g_variant_type_is_array (type))
+            g_error ("g_variant_new: expected array GVariantBuilder but "
+                     "the built value has type `%s'",
+                     g_variant_get_type_string (value));
 
-        type = g_variant_type_element (type);
+          type = g_variant_type_element (type);
 
-        if G_UNLIKELY (!g_variant_type_is_subtype_of (type, (GVariantType *) *str))
-          g_error ("g_variant_new: expected GVariantBuilder array element "
-                   "type `%s' but the built value has element type `%s'",
-                   g_variant_type_dup_string ((GVariantType *) *str),
-                   g_variant_get_type_string (value) + 1);
+          if G_UNLIKELY (!g_variant_type_is_subtype_of (type, (GVariantType *) *str))
+            g_error ("g_variant_new: expected GVariantBuilder array element "
+                     "type `%s' but the built value has element type `%s'",
+                     g_variant_type_dup_string ((GVariantType *) *str),
+                     g_variant_get_type_string (value) + 1);
 
-        g_variant_type_string_scan (*str, NULL, str);
+          g_variant_type_string_scan (*str, NULL, str);
 
-        return value;
-      }
+          return value;
+        }
+      else
+
+        /* special case: NULL pointer for empty array */
+        {
+          const GVariantType *type = (GVariantType *) *str;
+
+          g_variant_type_string_scan (*str, NULL, str);
+
+          if G_UNLIKELY (!g_variant_type_is_definite (type))
+            g_error ("g_variant_new: NULL pointer given with indefinite "
+                     "array type; unable to determine which type of empty "
+                     "array to construct.");
+
+          return g_variant_new_array (type, NULL, 0);
+        }
 
     case 's':
       return g_variant_new_string (ptr);

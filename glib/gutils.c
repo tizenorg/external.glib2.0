@@ -68,6 +68,7 @@
 #include "gtestutils.h"
 #include "gunicode.h"
 #include "gstrfuncs.h"
+#include "garray.h"
 #include "glibintl.h"
 
 #ifdef G_PLATFORM_WIN32
@@ -2426,10 +2427,15 @@ load_user_special_dirs (void)
     {
       wcp = NULL;
       (*p_SHGetKnownFolderPath) (&FOLDERID_Downloads, 0, NULL, &wcp);
-      g_user_special_dirs[G_USER_DIRECTORY_DOWNLOAD] = g_utf16_to_utf8 (wcp, -1, NULL, NULL, NULL);
-      if (g_user_special_dirs[G_USER_DIRECTORY_DOWNLOAD] == NULL)
-	g_user_special_dirs[G_USER_DIRECTORY_DOWNLOAD] = get_special_folder (CSIDL_DESKTOPDIRECTORY);
-      CoTaskMemFree (wcp);
+      if (wcp)
+        {
+          g_user_special_dirs[G_USER_DIRECTORY_DOWNLOAD] = g_utf16_to_utf8 (wcp, -1, NULL, NULL, NULL);
+          if (g_user_special_dirs[G_USER_DIRECTORY_DOWNLOAD] == NULL)
+              g_user_special_dirs[G_USER_DIRECTORY_DOWNLOAD] = get_special_folder (CSIDL_DESKTOPDIRECTORY);
+          CoTaskMemFree (wcp);
+        }
+      else
+          g_user_special_dirs[G_USER_DIRECTORY_DOWNLOAD] = get_special_folder (CSIDL_DESKTOPDIRECTORY);
     }
 
   g_user_special_dirs[G_USER_DIRECTORY_MUSIC] = get_special_folder (CSIDL_MYMUSIC);
@@ -2444,10 +2450,15 @@ load_user_special_dirs (void)
     {
       wcp = NULL;
       (*p_SHGetKnownFolderPath) (&FOLDERID_Public, 0, NULL, &wcp);
-      g_user_special_dirs[G_USER_DIRECTORY_PUBLIC_SHARE] = g_utf16_to_utf8 (wcp, -1, NULL, NULL, NULL);
-      if (g_user_special_dirs[G_USER_DIRECTORY_PUBLIC_SHARE] == NULL)
-	g_user_special_dirs[G_USER_DIRECTORY_PUBLIC_SHARE] = get_special_folder (CSIDL_COMMON_DOCUMENTS);
-      CoTaskMemFree (wcp);
+      if (wcp)
+        {
+          g_user_special_dirs[G_USER_DIRECTORY_PUBLIC_SHARE] = g_utf16_to_utf8 (wcp, -1, NULL, NULL, NULL);
+          if (g_user_special_dirs[G_USER_DIRECTORY_PUBLIC_SHARE] == NULL)
+              g_user_special_dirs[G_USER_DIRECTORY_PUBLIC_SHARE] = get_special_folder (CSIDL_COMMON_DOCUMENTS);
+          CoTaskMemFree (wcp);
+        }
+      else
+          g_user_special_dirs[G_USER_DIRECTORY_PUBLIC_SHARE] = get_special_folder (CSIDL_COMMON_DOCUMENTS);
     }
   
   g_user_special_dirs[G_USER_DIRECTORY_TEMPLATES] = get_special_folder (CSIDL_TEMPLATES);
@@ -3157,36 +3168,39 @@ explode_locale (const gchar *locale,
  *       but it is big, ugly, and complicated, so I'm reluctant
  *       to do so when this should handle 99% of the time...
  */
-GSList *
-_g_compute_locale_variants (const gchar *locale)
+static void
+append_locale_variants (GPtrArray *array,
+                        const gchar *locale)
 {
-  GSList *retval = NULL;
-
   gchar *language = NULL;
   gchar *territory = NULL;
   gchar *codeset = NULL;
   gchar *modifier = NULL;
 
   guint mask;
-  guint i;
+  guint i, j;
 
-  g_return_val_if_fail (locale != NULL, NULL);
+  g_return_if_fail (locale != NULL);
 
   mask = explode_locale (locale, &language, &territory, &codeset, &modifier);
 
   /* Iterate through all possible combinations, from least attractive
    * to most attractive.
    */
-  for (i = 0; i <= mask; i++)
-    if ((i & ~mask) == 0)
-      {
-	gchar *val = g_strconcat (language,
-				  (i & COMPONENT_TERRITORY) ? territory : "",
-				  (i & COMPONENT_CODESET) ? codeset : "",
-				  (i & COMPONENT_MODIFIER) ? modifier : "",
-				  NULL);
-	retval = g_slist_prepend (retval, val);
-      }
+  for (j = 0; j <= mask; ++j)
+    {
+      i = mask - j;
+
+      if ((i & ~mask) == 0)
+        {
+          gchar *val = g_strconcat (language,
+                                    (i & COMPONENT_TERRITORY) ? territory : "",
+                                    (i & COMPONENT_CODESET) ? codeset : "",
+                                    (i & COMPONENT_MODIFIER) ? modifier : "",
+                                    NULL);
+          g_ptr_array_add (array, val);
+        }
+    }
 
   g_free (language);
   if (mask & COMPONENT_CODESET)
@@ -3195,8 +3209,41 @@ _g_compute_locale_variants (const gchar *locale)
     g_free (territory);
   if (mask & COMPONENT_MODIFIER)
     g_free (modifier);
+}
 
-  return retval;
+/**
+ * g_get_locale_variants:
+ * @locale: a locale identifier
+ *
+ * Returns a list of derived variants of @locale, which can be used to
+ * e.g. construct locale-dependent filenames or search paths. The returned
+ * list is sorted from most desirable to least desirable.
+ * This function handles territory, charset and extra locale modifiers.
+ * 
+ * For example, if @locale is "fr_BE", then the returned list
+ * is "fr_BE", "fr".
+ *
+ * If you need the list of variants for the <emphasis>current locale</emphasis>,
+ * use g_get_language_names().
+ *
+ * Returns: (transfer full) (array zero-terminated="1") (element-type utf8): a newly
+ *   allocated array of newly allocated strings with the locale variants. Free with
+ *   g_strfreev().
+ *
+ * Since: 2.28
+ */
+gchar **
+g_get_locale_variants (const gchar *locale)
+{
+  GPtrArray *array;
+
+  g_return_val_if_fail (locale != NULL, NULL);
+
+  array = g_ptr_array_sized_new (8);
+  append_locale_variants (array, locale);
+  g_ptr_array_add (array, NULL);
+
+  return (gchar **) g_ptr_array_free (array, FALSE);
 }
 
 /* The following is (partly) taken from the gettext package.
@@ -3305,31 +3352,23 @@ g_get_language_names (void)
 
   if (!(cache->languages && strcmp (cache->languages, value) == 0))
     {
-      gchar **languages;
+      GPtrArray *array;
       gchar **alist, **a;
-      GSList *list, *l;
-      gint i;
 
       g_free (cache->languages);
       g_strfreev (cache->language_names);
       cache->languages = g_strdup (value);
 
+      array = g_ptr_array_sized_new (8);
+
       alist = g_strsplit (value, ":", 0);
-      list = NULL;
       for (a = alist; *a; a++)
-	{
-	  gchar *b = unalias_lang (*a);
-	  list = g_slist_concat (list, _g_compute_locale_variants (b));
-	}
+        append_locale_variants (array, unalias_lang (*a));
       g_strfreev (alist);
-      list = g_slist_append (list, g_strdup ("C"));
+      g_ptr_array_add (array, g_strdup ("C"));
+      g_ptr_array_add (array, NULL);
 
-      cache->language_names = languages = g_new (gchar *, g_slist_length (list) + 1);
-      for (l = list, i = 0; l; l = l->next, i++)
-	languages[i] = l->data;
-      languages[i] = NULL;
-
-      g_slist_free (list);
+      cache->language_names = (gchar **) g_ptr_array_free (array, FALSE);
     }
 
   return (G_CONST_RETURN gchar * G_CONST_RETURN *) cache->language_names;
@@ -3572,18 +3611,8 @@ _glib_get_locale_dir (void)
 
 #endif /* G_OS_WIN32 */
 
-/**
- * glib_gettext:
- * @str: The string to be translated
- *
- * Returns the translated string from the glib translations.
- * This is an internal function and should only be used by
- * the internals of glib (such as libgio).
- *
- * Returns: the transation of @str to the current locale
- */
-G_CONST_RETURN gchar *
-glib_gettext (const gchar *str)
+static void
+ensure_gettext_initialized(void)
 {
   static gboolean _glib_gettext_initialized = FALSE;
 
@@ -3601,8 +3630,48 @@ glib_gettext (const gchar *str)
 #    endif
       _glib_gettext_initialized = TRUE;
     }
-  
+}
+
+/**
+ * glib_gettext:
+ * @str: The string to be translated
+ *
+ * Returns the translated string from the glib translations.
+ * This is an internal function and should only be used by
+ * the internals of glib (such as libgio).
+ *
+ * Returns: the transation of @str to the current locale
+ */
+G_CONST_RETURN gchar *
+glib_gettext (const gchar *str)
+{
+  ensure_gettext_initialized();
+
   return g_dgettext (GETTEXT_PACKAGE, str);
+}
+
+/**
+ * glib_pgettext:
+ * @msgctxtid: a combined message context and message id, separated
+ *   by a \004 character
+ * @msgidoffset: the offset of the message id in @msgctxid
+ *
+ * This function is a variant of glib_gettext() which supports
+ * a disambiguating message context. See g_dpgettext() for full
+ * details.
+ *
+ * This is an internal function and should only be used by
+ * the internals of glib (such as libgio).
+ *
+ * Returns: the transation of @str to the current locale
+ */
+G_CONST_RETURN gchar *
+glib_pgettext(const gchar *msgctxtid,
+              gsize        msgidoffset)
+{
+  ensure_gettext_initialized();
+
+  return g_dpgettext (GETTEXT_PACKAGE, msgctxtid, msgidoffset);
 }
 
 #if defined (G_OS_WIN32) && !defined (_WIN64)

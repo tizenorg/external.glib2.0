@@ -26,6 +26,7 @@
 #include "config.h"
 
 #include "gkeyfile.h"
+#include "gutils.h"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -952,7 +953,9 @@ g_key_file_parse_data (GKeyFile     *key_file,
     {
       if (data[i] == '\n')
         {
-	  if (i > 0 && data[i - 1] == '\r')
+	  if (key_file->parse_buffer->len > 0
+	      && (key_file->parse_buffer->str[key_file->parse_buffer->len - 1]
+		  == '\r'))
 	    g_string_erase (key_file->parse_buffer,
 			    key_file->parse_buffer->len - 1,
 			    1);
@@ -1630,8 +1633,6 @@ g_key_file_set_locale_string (GKeyFile     *key_file,
   g_free (value);
 }
 
-extern GSList *_g_compute_locale_variants (const gchar *locale);
-
 /**
  * g_key_file_get_locale_string:
  * @key_file: a #GKeyFile
@@ -1677,16 +1678,7 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
 
   if (locale)
     {
-      GSList *l, *list;
-
-      list = _g_compute_locale_variants (locale);
-
-      languages = g_new (gchar *, g_slist_length (list) + 1);
-      for (l = list, i = 0; l; l = l->next, i++)
-	languages[i] = l->data;
-      languages[i] = NULL;
-
-      g_slist_free (list);
+      languages = g_get_locale_variants (locale);
       free_languages = TRUE;
     }
   else

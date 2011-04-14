@@ -8,7 +8,7 @@
 <link rel="up" href="settings.html" title="Settings">
 <link rel="prev" href="settings.html" title="Settings">
 <link rel="next" href="GSettingsBackend.html" title="GSettingsBackend">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -32,7 +32,7 @@
                   <a href="#GSettings.signals" class="shortcut">Signals</a>
 </td></tr>
 </table>
-<div class="refentry" title="GSettings">
+<div class="refentry">
 <a name="GSettings"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -41,20 +41,20 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GSettings.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GSettings.html#GSettings-struct" title="GSettings">GSettings</a>;
-<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         <a class="link" href="GSettings.html#g-settings-new" title="g_settings_new ()">g_settings_new</a>                      (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>);
-<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         <a class="link" href="GSettings.html#g-settings-new-with-path" title="g_settings_new_with_path ()">g_settings_new_with_path</a>            (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
+<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              <a class="link" href="GSettings.html#g-settings-new" title="g_settings_new ()">g_settings_new</a>                 (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>);
+<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              <a class="link" href="GSettings.html#g-settings-new-with-path" title="g_settings_new_with_path ()">g_settings_new_with_path</a>       (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);
-<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         <a class="link" href="GSettings.html#g-settings-new-with-backend" title="g_settings_new_with_backend ()">g_settings_new_with_backend</a>         (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
+<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              <a class="link" href="GSettings.html#g-settings-new-with-backend" title="g_settings_new_with_backend ()">g_settings_new_with_backend</a>    (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>);
-<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         <a class="link" href="GSettings.html#g-settings-new-with-backend-and-path" title="g_settings_new_with_backend_and_path ()">g_settings_new_with_backend_and_path</a>
+<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              <a class="link" href="GSettings.html#g-settings-new-with-backend-and-path" title="g_settings_new_with_backend_and_path ()">g_settings_new_with_backend_and_path</a>
                                                         (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSettings.html#g-settings-sync" title="g_settings_sync ()">g_settings_sync</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          <a class="link" href="GSettings.html#g-settings-get-value" title="g_settings_get_value ()">g_settings_get_value</a>                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *               <a class="link" href="GSettings.html#g-settings-get-value" title="g_settings_get_value ()">g_settings_get_value</a>           (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSettings.html#g-settings-set-value" title="g_settings_set_value ()">g_settings_set_value</a>                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -65,14 +65,17 @@
 <span class="returnvalue">void</span>                <a class="link" href="GSettings.html#g-settings-apply" title="g_settings_apply ()">g_settings_apply</a>                    (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSettings.html#g-settings-revert" title="g_settings_revert ()">g_settings_revert</a>                   (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSettings.html#g-settings-get-has-unapplied" title="g_settings_get_has_unapplied ()">g_settings_get_has_unapplied</a>        (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);
-<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         <a class="link" href="GSettings.html#g-settings-get-child" title="g_settings_get_child ()">g_settings_get_child</a>                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              <a class="link" href="GSettings.html#g-settings-get-child" title="g_settings_get_child ()">g_settings_get_child</a>           (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSettings.html#g-settings-reset" title="g_settings_reset ()">g_settings_reset</a>                    (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);
 
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="GSettings.html#g-settings-list-keys" title="g_settings_list_keys ()">g_settings_list_keys</a>                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="GSettings.html#g-settings-list-children" title="g_settings_list_children ()">g_settings_list_children</a>            (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          <a class="link" href="GSettings.html#g-settings-get-range" title="g_settings_get_range ()">g_settings_get_range</a>                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> * const * <a class="link" href="GSettings.html#g-settings-list-schemas" title="g_settings_list_schemas ()">g_settings_list_schemas</a>           (<em class="parameter"><code><span class="type">void</span></code></em>);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> * const * <a class="link" href="GSettings.html#g-settings-list-relocatable-schemas" title="g_settings_list_relocatable_schemas ()">g_settings_list_relocatable_schemas</a>
+                                                        (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **                 <a class="link" href="GSettings.html#g-settings-list-keys" title="g_settings_list_keys ()">g_settings_list_keys</a>           (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **                 <a class="link" href="GSettings.html#g-settings-list-children" title="g_settings_list_children ()">g_settings_list_children</a>       (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *               <a class="link" href="GSettings.html#g-settings-get-range" title="g_settings_get_range ()">g_settings_get_range</a>           (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSettings.html#g-settings-range-check" title="g_settings_range_check ()">g_settings_range_check</a>              (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -101,12 +104,12 @@
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSettings.html#g-settings-set-double" title="g_settings_set_double ()">g_settings_set_double</a>               (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> value</code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="GSettings.html#g-settings-get-string" title="g_settings_get_string ()">g_settings_get_string</a>               (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *                  <a class="link" href="GSettings.html#g-settings-get-string" title="g_settings_get_string ()">g_settings_get_string</a>          (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSettings.html#g-settings-set-string" title="g_settings_set_string ()">g_settings_set_string</a>               (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *value</code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="GSettings.html#g-settings-get-strv" title="g_settings_get_strv ()">g_settings_get_strv</a>                 (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **                 <a class="link" href="GSettings.html#g-settings-get-strv" title="g_settings_get_strv ()">g_settings_get_strv</a>            (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GSettings.html#g-settings-set-strv" title="g_settings_set_strv ()">g_settings_set_strv</a>                 (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -160,14 +163,14 @@ enum                <a class="link" href="GSettings.html#GSettingsBindFlags" tit
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GSettings.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GSettings
 </pre>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GSettings.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GSettings.html#GSettings--backend" title='The "backend" property'>backend</a>"                  <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>*     : Read / Write / Construct Only
@@ -177,20 +180,38 @@ enum                <a class="link" href="GSettings.html#GSettingsBindFlags" tit
   "<a class="link" href="GSettings.html#GSettings--schema" title='The "schema" property'>schema</a>"                   <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
 </pre>
 </div>
-<div class="refsect1" title="Signals">
+<div class="refsect1">
 <a name="GSettings.signals"></a><h2>Signals</h2>
 <pre class="synopsis">
-  "<a class="link" href="GSettings.html#GSettings-change-event" title='The "change-event" signal'>change-event</a>"                                   : Run Last
-  "<a class="link" href="GSettings.html#GSettings-changed" title='The "changed" signal'>changed</a>"                                        : Run Last / Has Details
-  "<a class="link" href="GSettings.html#GSettings-writable-change-event" title='The "writable-change-event" signal'>writable-change-event</a>"                          : Run Last
-  "<a class="link" href="GSettings.html#GSettings-writable-changed" title='The "writable-changed" signal'>writable-changed</a>"                               : Run Last / Has Details
+  "<a class="link" href="GSettings.html#GSettings-change-event" title='The "change-event" signal'>change-event</a>"                                   : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
+  "<a class="link" href="GSettings.html#GSettings-changed" title='The "changed" signal'>changed</a>"                                        : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a>
+  "<a class="link" href="GSettings.html#GSettings-writable-change-event" title='The "writable-change-event" signal'>writable-change-event</a>"                          : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
+  "<a class="link" href="GSettings.html#GSettings-writable-changed" title='The "writable-changed" signal'>writable-changed</a>"                               : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a>
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GSettings.description"></a><h2>Description</h2>
 <p>
 The <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> class provides a convenient API for storing and retrieving
 application settings.
+</p>
+<p>
+Reads and writes can be considered to be non-blocking.  Reading
+settings with <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> is typically extremely fast: on
+approximately the same order of magnitude (but slower than) a
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Hash-Tables.html#GHashTable"><span class="type">GHashTable</span></a> lookup.  Writing settings is also extremely fast in terms
+of time to return to your application, but can be extremely expensive
+for other threads and other processes.  Many settings backends
+(including dconf) have lazy initialisation which means in the common
+case of the user using their computer without modifying any settings
+a lot of work can be avoided.  For dconf, the D-Bus service doesn't
+even need to be started in this case.  For this reason, you should
+only ever modify <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> keys in response to explicit user action.
+Particular care should be paid to ensure that modifications are not
+made during startup -- for example, when settings the initial value
+of preferences widgets.  The built-in <a class="link" href="GSettings.html#g-settings-bind" title="g_settings_bind ()"><code class="function">g_settings_bind()</code></a> functionality
+is careful not to write settings in response to notify signals as a
+result of modifications that it makes to widgets.
 </p>
 <p>
 When creating a GSettings instance, you have to specify a schema
@@ -297,14 +318,23 @@ described by the following DTD:
 63
 64
 65
-66</pre></td>
+66
+67
+68
+69
+70
+71
+72
+73</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="symbol">&lt;!</span><span class="usertype">ELEMENT</span><span class="normal"> </span><span class="function">schemalist</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">schema</span><span class="symbol">|</span><span class="keyword">enum</span><span class="symbol">)*</span><span class="normal"> </span><span class="symbol">&gt;</span>
 <span class="symbol">&lt;!</span><span class="normal">ATTLIST </span><span class="usertype">schemalist</span><span class="normal"> gettext</span><span class="symbol">-</span><span class="normal">domain #IMPLIED </span><span class="symbol">&gt;</span>
 
-<span class="symbol">&lt;!</span><span class="usertype">ELEMENT</span><span class="normal"> </span><span class="function">schema</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">key</span><span class="symbol">|</span><span class="normal">child</span><span class="symbol">)*</span><span class="normal"> </span><span class="symbol">&gt;</span>
+<span class="symbol">&lt;!</span><span class="usertype">ELEMENT</span><span class="normal"> </span><span class="function">schema</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">key</span><span class="symbol">|</span><span class="normal">child</span><span class="symbol">|</span><span class="normal">override</span><span class="symbol">)*</span><span class="normal"> </span><span class="symbol">&gt;</span>
 <span class="symbol">&lt;!</span><span class="normal">ATTLIST schema </span><span class="usertype">id</span><span class="normal">             CDATA #REQUIRED</span>
 <span class="normal">                 </span><span class="usertype">path</span><span class="normal">           CDATA #IMPLIED</span>
-<span class="normal">                 gettext</span><span class="symbol">-</span><span class="usertype">domain</span><span class="normal"> CDATA #IMPLIED </span><span class="symbol">&gt;</span>
+<span class="normal">                 gettext</span><span class="symbol">-</span><span class="usertype">domain</span><span class="normal"> CDATA #IMPLIED</span>
+<span class="normal">                 </span><span class="usertype">extends</span><span class="normal">        CDATA #IMPLIED</span>
+<span class="normal">                 list</span><span class="symbol">-</span><span class="usertype">of</span><span class="normal">        CDATA #IMPLIED </span><span class="symbol">&gt;</span>
 
 <span class="symbol">&lt;!--</span><span class="normal"> enumerated and </span><span class="usertype">flags</span><span class="normal"> types </span><span class="symbol">--&gt;</span>
 <span class="symbol">&lt;!--</span><span class="normal"> each value element maps a nick to a </span><span class="usertype">numeric</span><span class="normal"> value </span><span class="symbol">--&gt;</span>
@@ -363,7 +393,12 @@ described by the following DTD:
 
 <span class="symbol">&lt;!</span><span class="normal">ELEMENT </span><span class="usertype">child</span><span class="normal"> EMPTY </span><span class="symbol">&gt;</span>
 <span class="symbol">&lt;!</span><span class="normal">ATTLIST child </span><span class="usertype">name</span><span class="normal">   CDATA #REQUIRED</span>
-<span class="normal">                </span><span class="usertype">schema</span><span class="normal"> CDATA #REQUIRED </span><span class="symbol">&gt;</span></pre></td>
+<span class="normal">                </span><span class="usertype">schema</span><span class="normal"> CDATA #REQUIRED </span><span class="symbol">&gt;</span>
+
+<span class="symbol">&lt;!</span><span class="usertype">ELEMENT</span><span class="normal"> </span><span class="function">override</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">#PCDATA</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">&gt;</span>
+<span class="symbol">&lt;!</span><span class="normal">ATTLIST override </span><span class="usertype">name</span><span class="normal">    CDATA #REQUIRED</span>
+<span class="normal">                   </span><span class="usertype">l10n</span><span class="normal">    CDATA #IMPLIED</span>
+<span class="normal">                   </span><span class="usertype">context</span><span class="normal"> CDATA #IMPLIED </span><span class="symbol">&gt;</span></pre></td>
       </tr>
     </tbody>
   </table>
@@ -372,11 +407,18 @@ described by the following DTD:
 <p>
 </p>
 <p>
+glib-compile-schemas expects schema files to have the extension <code class="filename">.gschema.xml</code>
+</p>
+<p>
 At runtime, schemas are identified by their id (as specified
 in the <code class="sgmltag-attribute">id</code> attribute of the
 <code class="sgmltag-starttag">&lt;schema&gt;</code> element). The
 convention for schema ids is to use a dotted name, similar in
-style to a DBus bus name, e.g. "org.gnome.font-rendering".
+style to a D-Bus bus name, e.g. "org.gnome.SessionManager". In particular,
+if the settings are for a specific service that owns a D-Bus bus name,
+the D-Bus bus name and schema id should match. For schemas which deal
+with settings not associated with one named application, the id should
+not use StudlyCaps, e.g. "org.gnome.font-rendering".
 </p>
 <p>
 In addition to <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> types, keys can have types that have enumerated
@@ -414,7 +456,7 @@ and flags keys.
 16
 17</pre></td>
         <td class="listing_code"><pre class="programlisting"><span class="symbol">&lt;</span><span class="normal">schemalist</span><span class="symbol">&gt;</span>
-<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">schema</span><span class="normal"> id</span><span class="symbol">=</span><span class="string">"org.gtk.test"</span><span class="normal"> path</span><span class="symbol">=</span><span class="string">"/tests/"</span><span class="normal"> gettext</span><span class="symbol">-</span><span class="normal">domain</span><span class="symbol">=</span><span class="string">"test"</span><span class="symbol">&gt;</span>
+<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">schema</span><span class="normal"> id</span><span class="symbol">=</span><span class="string">"org.gtk.Test"</span><span class="normal"> path</span><span class="symbol">=</span><span class="string">"/tests/"</span><span class="normal"> gettext</span><span class="symbol">-</span><span class="normal">domain</span><span class="symbol">=</span><span class="string">"test"</span><span class="symbol">&gt;</span>
 
 <span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">key</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"greeting"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"s"</span><span class="symbol">&gt;</span>
 <span class="normal">      </span><span class="symbol">&lt;</span><span class="keyword">default</span><span class="normal"> l10n</span><span class="symbol">=</span><span class="string">"messages"</span><span class="symbol">&gt;</span><span class="string">"Hello, earthlings"</span><span class="symbol">&lt;/</span><span class="keyword">default</span><span class="symbol">&gt;</span>
@@ -501,7 +543,7 @@ and flags keys.
 <span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">value</span><span class="normal"> nick</span><span class="symbol">=</span><span class="string">"flag3"</span><span class="normal"> value</span><span class="symbol">=</span><span class="string">"4"</span><span class="symbol">/&gt;</span>
 <span class="normal">  </span><span class="symbol">&lt;/</span><span class="keyword">enum</span><span class="symbol">&gt;</span>
 
-<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">schema</span><span class="normal"> id</span><span class="symbol">=</span><span class="string">"org.gtk.test"</span><span class="symbol">&gt;</span>
+<span class="normal">  </span><span class="symbol">&lt;</span><span class="usertype">schema</span><span class="normal"> id</span><span class="symbol">=</span><span class="string">"org.gtk.Test"</span><span class="symbol">&gt;</span>
 
 <span class="normal">    </span><span class="symbol">&lt;</span><span class="usertype">key</span><span class="normal"> name</span><span class="symbol">=</span><span class="string">"key-with-range"</span><span class="normal"> type</span><span class="symbol">=</span><span class="string">"i"</span><span class="symbol">&gt;</span>
 <span class="normal">      </span><span class="symbol">&lt;</span><span class="usertype">range</span><span class="normal"> min</span><span class="symbol">=</span><span class="string">"1"</span><span class="normal"> max</span><span class="symbol">=</span><span class="string">"100"</span><span class="symbol">/&gt;</span>
@@ -538,8 +580,10 @@ and flags keys.
 </div>
 <p><br class="example-break">
 </p>
-<div class="refsect2" title="Vendor overrides">
-<a name="id728880"></a><h3>Vendor overrides</h3>
+<p>
+</p>
+<div class="refsect2">
+<a name="id769833"></a><h3>Vendor overrides</h3>
 <p>
     Default values are defined in the schemas that get installed by
     an application. Sometimes, it is necessary for a vendor or distributor
@@ -568,10 +612,17 @@ and flags keys.
 
 <p>
   </p>
+<p>
+    glib-compile-schemas expects schema files to have the extension
+    <code class="filename">.gschema.override</code>
+  </p>
 </div>
-<hr>
-<div class="refsect2" title="Binding">
-<a name="id728910"></a><h3>Binding</h3>
+<p>
+</p>
+<p>
+</p>
+<div class="refsect2">
+<a name="id769877"></a><h3>Binding</h3>
 <p>
     A very convenient feature of GSettings lets you bind <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> properties
     directly to settings, using <a class="link" href="GSettings.html#g-settings-bind" title="g_settings_bind ()"><code class="function">g_settings_bind()</code></a>. Once a GObject property
@@ -589,19 +640,21 @@ and flags keys.
     <a class="link" href="GSettings.html#G-SETTINGS-BIND-NO-SENSITIVITY:CAPS"><span class="type">G_SETTINGS_BIND_NO_SENSITIVITY</span></a> flag.
   </p>
 </div>
+<p>
+</p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GSettings.details"></a><h2>Details</h2>
-<div class="refsect2" title="GSettings">
+<div class="refsect2">
 <a name="GSettings-struct"></a><h3>GSettings</h3>
 <pre class="programlisting">typedef struct _GSettings GSettings;</pre>
 <p>
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_new ()">
+<div class="refsect2">
 <a name="g-settings-new"></a><h3>g_settings_new ()</h3>
-<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         g_settings_new                      (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              g_settings_new                 (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object with a given schema.
 </p>
@@ -616,22 +669,20 @@ on the context.  See <a href="http://library.gnome.org/devel/glib/unstable/glib-
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>schema</code></em> :</span></p></td>
-<td>the name of the schema
-</td>
+<td>the name of the schema</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_new_with_path ()">
+<div class="refsect2">
 <a name="g-settings-new-with-path"></a><h3>g_settings_new_with_path ()</h3>
-<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         g_settings_new_with_path            (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
+<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              g_settings_new_with_path       (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object with a given schema and path.
@@ -650,27 +701,24 @@ has an explicitly specified path.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>schema</code></em> :</span></p></td>
-<td>the name of the schema
-</td>
+<td>the name of the schema</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the path to use
-</td>
+<td>the path to use</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_new_with_backend ()">
+<div class="refsect2">
 <a name="g-settings-new-with-backend"></a><h3>g_settings_new_with_backend ()</h3>
-<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         g_settings_new_with_backend         (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
+<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              g_settings_new_with_backend    (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>);</pre>
 <p>
 Creates a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object with a given schema and backend.
@@ -687,27 +735,24 @@ settings instead of the settings for this user.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>schema</code></em> :</span></p></td>
-<td>the name of the schema
-</td>
+<td>the name of the schema</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
-<td>the <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> to use
-</td>
+<td>the <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> to use</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_new_with_backend_and_path ()">
+<div class="refsect2">
 <a name="g-settings-new-with-backend-and-path"></a><h3>g_settings_new_with_backend_and_path ()</h3>
-<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         g_settings_new_with_backend_and_path
+<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              g_settings_new_with_backend_and_path
                                                         (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *schema</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);</pre>
@@ -724,30 +769,26 @@ This is a mix of <a class="link" href="GSettings.html#g-settings-new-with-backen
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>schema</code></em> :</span></p></td>
-<td>the name of the schema
-</td>
+<td>the name of the schema</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
-<td>the <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> to use
-</td>
+<td>the <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> to use</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the path to use
-</td>
+<td>the path to use</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a new <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_sync ()">
+<div class="refsect2">
 <a name="g-settings-sync"></a><h3>g_settings_sync ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_sync                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
@@ -767,9 +808,9 @@ time the call is done).
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_value ()">
+<div class="refsect2">
 <a name="g-settings-get-value"></a><h3>g_settings_get_value ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          g_settings_get_value                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *               g_settings_get_value           (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
 <p>
 Gets the value that is stored in <em class="parameter"><code>settings</code></em> for <em class="parameter"><code>key</code></em>.
@@ -783,13 +824,11 @@ schema for <em class="parameter"><code>settings</code></em>.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -801,7 +840,7 @@ schema for <em class="parameter"><code>settings</code></em>.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set_value ()">
+<div class="refsect2">
 <a name="g-settings-set-value"></a><h3>g_settings_set_value ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set_value                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -822,32 +861,28 @@ If <em class="parameter"><code>value</code></em> is floating then this function 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key to set
-</td>
+<td>the name of the key to set</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> of the correct type
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> of the correct type</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if setting the key succeeded,
-    <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_is_writable ()">
+<div class="refsect2">
 <a name="g-settings-is-writable"></a><h3>g_settings_is_writable ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_is_writable              (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>);</pre>
@@ -859,26 +894,23 @@ Finds out if a key can be written or not
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
-<td>the name of a key
-</td>
+<td>the name of a key</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the key <em class="parameter"><code>name</code></em> is writable
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the key <em class="parameter"><code>name</code></em> is writable</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_delay ()">
+<div class="refsect2">
 <a name="g-settings-delay"></a><h3>g_settings_delay ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_delay                    (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);</pre>
 <p>
@@ -890,14 +922,13 @@ backend, but kept locally until <a class="link" href="GSettings.html#g-settings-
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr></tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_apply ()">
+<div class="refsect2">
 <a name="g-settings-apply"></a><h3>g_settings_apply ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_apply                    (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);</pre>
 <p>
@@ -910,13 +941,12 @@ applied immediately.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> instance
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> instance</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_revert ()">
+<div class="refsect2">
 <a name="g-settings-revert"></a><h3>g_settings_revert ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_revert                   (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);</pre>
 <p>
@@ -932,13 +962,12 @@ Change notifications will be emitted for affected keys.
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> instance
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> instance</td>
 </tr></tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_has_unapplied ()">
+<div class="refsect2">
 <a name="g-settings-get-has-unapplied"></a><h3>g_settings_get_has_unapplied ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_get_has_unapplied        (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);</pre>
 <p>
@@ -950,27 +979,25 @@ changes.  This can only be the case if it is in 'delayed-apply' mode.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>settings</code></em> has unapplied changes
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if <em class="parameter"><code>settings</code></em> has unapplied changes</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_child ()">
+<div class="refsect2">
 <a name="g-settings-get-child"></a><h3>g_settings_get_child ()</h3>
-<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *         g_settings_get_child                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<pre class="programlisting"><a class="link" href="GSettings.html" title="GSettings"><span class="returnvalue">GSettings</span></a> *              g_settings_get_child           (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>);</pre>
 <p>
 Creates a 'child' settings object which has a base path of
-<em class="replaceable"><code>base-path</code></em>/<em class="parameter"><code>name</code></em>", where
+<em class="replaceable"><code>base-path</code></em>/<em class="parameter"><code>name</code></em>, where
 <em class="replaceable"><code>base-path</code></em> is the base path of <em class="parameter"><code>settings</code></em>.
 </p>
 <p>
@@ -982,17 +1009,15 @@ in the schema of <em class="parameter"><code>settings</code></em> using a <code 
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
-<td>the name of the 'child' schema
-</td>
+<td>the name of the 'child' schema</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a 'child' settings object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a 'child' settings object. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1000,7 +1025,7 @@ in the schema of <em class="parameter"><code>settings</code></em> using a <code 
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_reset ()">
+<div class="refsect2">
 <a name="g-settings-reset"></a><h3>g_settings_reset ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_reset                    (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
@@ -1017,21 +1042,74 @@ administrator.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of a key
-</td>
+<td>the name of a key</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_list_keys ()">
+<div class="refsect2">
+<a name="g-settings-list-schemas"></a><h3>g_settings_list_schemas ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> * const * g_settings_list_schemas           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Gets a list of the <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> schemas installed on the system.  The
+returned list is exactly the list of schemas for which you may call
+<a class="link" href="GSettings.html#g-settings-new" title="g_settings_new ()"><code class="function">g_settings_new()</code></a> without adverse effects.
+</p>
+<p>
+This function does not list the schemas that do not provide their own
+paths (ie: schemas for which you must use
+<a class="link" href="GSettings.html#g-settings-new-with-path" title="g_settings_new_with_path ()"><code class="function">g_settings_new_with_path()</code></a>).  See
+<a class="link" href="GSettings.html#g-settings-list-relocatable-schemas" title="g_settings_list_relocatable_schemas ()"><code class="function">g_settings_list_relocatable_schemas()</code></a> for that.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a list of <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a>
+schemas that are available.  The list must not be modified or
+freed. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.26</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="g-settings-list-relocatable-schemas"></a><h3>g_settings_list_relocatable_schemas ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> * const * g_settings_list_relocatable_schemas
+                                                        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Gets a list of the relocatable <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> schemas installed on the
+system.  These are schemas that do not provide their own path.  It is
+usual to instantiate these schemas directly, but if you want to you
+can use <a class="link" href="GSettings.html#g-settings-new-with-path" title="g_settings_new_with_path ()"><code class="function">g_settings_new_with_path()</code></a> to specify the path.
+</p>
+<p>
+The output of this function, tTaken together with the output of
+<a class="link" href="GSettings.html#g-settings-list-schemas" title="g_settings_list_schemas ()"><code class="function">g_settings_list_schemas()</code></a> represents the complete list of all
+installed schemas.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a list of relocatable
+<a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> schemas that are available.  The list must not be
+modified or freed. <span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8][<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-settings-list-keys"></a><h3>g_settings_list_keys ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            g_settings_list_keys                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **                 g_settings_list_keys           (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);</pre>
 <p>
 Introspects the list of keys on <em class="parameter"><code>settings</code></em>.
 </p>
@@ -1049,21 +1127,20 @@ with it.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a list of the keys on <em class="parameter"><code>settings</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
+<td>a list of the keys on <em class="parameter"><code>settings</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_list_children ()">
+<div class="refsect2">
 <a name="g-settings-list-children"></a><h3>g_settings_list_children ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            g_settings_list_children            (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **                 g_settings_list_children       (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>);</pre>
 <p>
 Gets the list of children on <em class="parameter"><code>settings</code></em>.
 </p>
@@ -1094,21 +1171,20 @@ with it.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a list of the children on <em class="parameter"><code>settings</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
+<td>a list of the children on <em class="parameter"><code>settings</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> utf8]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_range ()">
+<div class="refsect2">
 <a name="g-settings-get-range"></a><h3>g_settings_get_range ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          g_settings_get_range                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *               g_settings_get_range           (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
 <p>
 Queries the range of a key.
@@ -1173,20 +1249,18 @@ no longer needed.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to query the range of
-</td>
+<td>the key to query the range of</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> describing the range
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> describing the range</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_range_check ()">
+<div class="refsect2">
 <a name="g-settings-range-check"></a><h3>g_settings_range_check ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_range_check              (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1214,13 +1288,11 @@ schema for <em class="parameter"><code>settings</code></em>.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to check
-</td>
+<td>the key to check</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value to check
-</td>
+<td>the value to check</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
@@ -1233,7 +1305,7 @@ schema for <em class="parameter"><code>settings</code></em>.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get ()">
+<div class="refsect2">
 <a name="g-settings-get"></a><h3>g_settings_get ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_get                      (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1256,18 +1328,15 @@ the type given in the schema.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> format string
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> format string</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
@@ -1279,7 +1348,7 @@ the type given in the schema.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set ()">
+<div class="refsect2">
 <a name="g-settings-set"></a><h3>g_settings_set ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set                      (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1302,18 +1371,15 @@ the type given in the schema.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key to set
-</td>
+<td>the name of the key to set</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> format string
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> format string</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>...</code></em> :</span></p></td>
@@ -1324,15 +1390,14 @@ the type given in the schema.
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if setting the key succeeded,
-    <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_boolean ()">
+<div class="refsect2">
 <a name="g-settings-get-boolean"></a><h3>g_settings_get_boolean ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_get_boolean              (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
@@ -1351,25 +1416,22 @@ having a boolean type in the schema for <em class="parameter"><code>settings</co
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a boolean
-</td>
+<td>a boolean</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set_boolean ()">
+<div class="refsect2">
 <a name="g-settings-set-boolean"></a><h3>g_settings_set_boolean ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set_boolean              (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1389,32 +1451,28 @@ having a boolean type in the schema for <em class="parameter"><code>settings</co
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key to set
-</td>
+<td>the name of the key to set</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value to set it to
-</td>
+<td>the value to set it to</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if setting the key succeeded,
-    <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_int ()">
+<div class="refsect2">
 <a name="g-settings-get-int"></a><h3>g_settings_get_int ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_settings_get_int                  (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
@@ -1433,25 +1491,22 @@ having a int32 type in the schema for <em class="parameter"><code>settings</code
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>an integer
-</td>
+<td>an integer</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set_int ()">
+<div class="refsect2">
 <a name="g-settings-set-int"></a><h3>g_settings_set_int ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set_int                  (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1471,32 +1526,28 @@ having a int32 type in the schema for <em class="parameter"><code>settings</code
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key to set
-</td>
+<td>the name of the key to set</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value to set it to
-</td>
+<td>the value to set it to</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if setting the key succeeded,
-    <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_double ()">
+<div class="refsect2">
 <a name="g-settings-get-double"></a><h3>g_settings_get_double ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble"><span class="returnvalue">gdouble</span></a>             g_settings_get_double               (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
@@ -1515,25 +1566,22 @@ having a 'double' type in the schema for <em class="parameter"><code>settings</c
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a double
-</td>
+<td>a double</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set_double ()">
+<div class="refsect2">
 <a name="g-settings-set-double"></a><h3>g_settings_set_double ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set_double               (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1553,34 +1601,30 @@ having a 'double' type in the schema for <em class="parameter"><code>settings</c
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key to set
-</td>
+<td>the name of the key to set</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value to set it to
-</td>
+<td>the value to set it to</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if setting the key succeeded,
-    <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_string ()">
+<div class="refsect2">
 <a name="g-settings-get-string"></a><h3>g_settings_get_string ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             g_settings_get_string               (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *                  g_settings_get_string          (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
 <p>
 Gets the value that is stored at <em class="parameter"><code>key</code></em> in <em class="parameter"><code>settings</code></em>.
@@ -1597,25 +1641,22 @@ having a string type in the schema for <em class="parameter"><code>settings</cod
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly-allocated string
-</td>
+<td>a newly-allocated string</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set_string ()">
+<div class="refsect2">
 <a name="g-settings-set-string"></a><h3>g_settings_set_string ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set_string               (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1635,34 +1676,30 @@ having a string type in the schema for <em class="parameter"><code>settings</cod
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key to set
-</td>
+<td>the name of the key to set</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the value to set it to
-</td>
+<td>the value to set it to</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if setting the key succeeded,
-    <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_strv ()">
+<div class="refsect2">
 <a name="g-settings-get-strv"></a><h3>g_settings_get_strv ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            g_settings_get_strv                 (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **                 g_settings_get_strv            (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
 <p>
 A convenience variant of <a class="link" href="GSettings.html#g-settings-get" title="g_settings_get ()"><code class="function">g_settings_get()</code></a> for string arrays.
@@ -1676,17 +1713,17 @@ having an array of strings type in the schema for <em class="parameter"><code>se
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a newly-allocated, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings
+<td>a
+newly-allocated, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings, the value that
+is stored at <em class="parameter"><code>key</code></em> in <em class="parameter"><code>settings</code></em>. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1694,7 +1731,7 @@ having an array of strings type in the schema for <em class="parameter"><code>se
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set_strv ()">
+<div class="refsect2">
 <a name="g-settings-set-strv"></a><h3>g_settings_set_strv ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set_strv                 (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1715,32 +1752,29 @@ having an array of strings type in the schema for <em class="parameter"><code>se
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key to set
-</td>
+<td>the name of the key to set</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> the value to set it to, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span>
+<td>the value to set it to, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if setting the key succeeded,
-    <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the key was not writable</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_enum ()">
+<div class="refsect2">
 <a name="g-settings-get-enum"></a><h3>g_settings_get_enum ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_settings_get_enum                 (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
@@ -1766,25 +1800,22 @@ default value.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the enum value
-</td>
+<td>the enum value</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set_enum ()">
+<div class="refsect2">
 <a name="g-settings-set-enum"></a><h3>g_settings_set_enum ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set_enum                 (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1808,8 +1839,7 @@ After performing the write, accessing <em class="parameter"><code>key</code></em
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
@@ -1818,20 +1848,18 @@ After performing the write, accessing <em class="parameter"><code>key</code></em
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>an enumerated value
-</td>
+<td>an enumerated value</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, if the set succeeds
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, if the set succeeds</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_flags ()">
+<div class="refsect2">
 <a name="g-settings-get-flags"></a><h3>g_settings_get_flags ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               g_settings_get_flags                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
@@ -1857,25 +1885,22 @@ value.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the flags value
-</td>
+<td>the flags value</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_set_flags ()">
+<div class="refsect2">
 <a name="g-settings-set-flags"></a><h3>g_settings_set_flags ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_settings_set_flags                (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -1900,8 +1925,7 @@ bit in <em class="parameter"><code>value</code></em>.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
@@ -1910,20 +1934,18 @@ bit in <em class="parameter"><code>value</code></em>.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>a flags value
-</td>
+<td>a flags value</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, if the set succeeds
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, if the set succeeds</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GSettingsGetMapping ()">
+<div class="refsect2">
 <a name="GSettingsGetMapping"></a><h3>GSettingsGetMapping ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (*GSettingsGetMapping)              (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> *value</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> *result</code></em>,
@@ -1952,25 +1974,25 @@ must be returned in this case.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>result</code></em> :</span></p></td>
-<td>the result of the mapping
+<td>the result of the mapping. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>the user data that was passed to <a class="link" href="GSettings.html#g-settings-get-mapped" title="g_settings_get_mapped ()"><code class="function">g_settings_get_mapped()</code></a>
+<td>the user data that was passed to
+<a class="link" href="GSettings.html#g-settings-get-mapped" title="g_settings_get_mapped ()"><code class="function">g_settings_get_mapped()</code></a>. <span class="annotation">[<acronym title="This parameter is a 'user_data', for callbacks; many bindings can pass NULL here."><span class="acronym">closure</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the conversion succeeded, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> in case of an error
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the conversion succeeded, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> in case of an error</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_get_mapped ()">
+<div class="refsect2">
 <a name="g-settings-get-mapped"></a><h3>g_settings_get_mapped ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="returnvalue">gpointer</span></a>            g_settings_get_mapped               (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -2015,18 +2037,16 @@ just as any other value would be.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to get the value for
-</td>
+<td>the key to get the value for</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>mapping</code></em> :</span></p></td>
-<td>the function to map the value in the settings database to
-          the value used by the application
+<td>the function to map the value in the
+settings database to the value used by the application. <span class="annotation">[<acronym title="The callback is valid only during the call to the method."><span class="acronym">scope call</span></acronym>]</span>
 </td>
 </tr>
 <tr>
@@ -2036,14 +2056,14 @@ just as any other value would be.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the result, which may be <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the result, which may be <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="enum GSettingsBindFlags">
+<div class="refsect2">
 <a name="GSettingsBindFlags"></a><h3>enum GSettingsBindFlags</h3>
 <pre class="programlisting">typedef enum
 {
@@ -2102,7 +2122,7 @@ directions.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_bind ()">
+<div class="refsect2">
 <a name="g-settings-bind"></a><h3>g_settings_bind ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_bind                     (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -2139,35 +2159,31 @@ binding overrides the first one.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to bind
-</td>
+<td>the key to bind</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>. <span class="annotation">[type GObject.Object]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> GObject.Object]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>property</code></em> :</span></p></td>
-<td>the name of the property to bind
-</td>
+<td>the name of the property to bind</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>flags for the binding
-</td>
+<td>flags for the binding</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_bind_with_mapping ()">
+<div class="refsect2">
 <a name="g-settings-bind-with-mapping"></a><h3>g_settings_bind_with_mapping ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_bind_with_mapping        (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -2197,40 +2213,34 @@ binding overrides the first one.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to bind
-</td>
+<td>the key to bind</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>. <span class="annotation">[type GObject.Object]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> GObject.Object]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>property</code></em> :</span></p></td>
-<td>the name of the property to bind
-</td>
+<td>the name of the property to bind</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>flags for the binding
-</td>
+<td>flags for the binding</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>get_mapping</code></em> :</span></p></td>
 <td>a function that gets called to convert values
-    from <em class="parameter"><code>settings</code></em> to <em class="parameter"><code>object</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to use the default GIO mapping
-</td>
+from <em class="parameter"><code>settings</code></em> to <em class="parameter"><code>object</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to use the default GIO mapping</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>set_mapping</code></em> :</span></p></td>
 <td>a function that gets called to convert values
-    from <em class="parameter"><code>object</code></em> to <em class="parameter"><code>settings</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to use the default GIO mapping
-</td>
+from <em class="parameter"><code>object</code></em> to <em class="parameter"><code>settings</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to use the default GIO mapping</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -2248,7 +2258,7 @@ binding overrides the first one.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_bind_writable ()">
+<div class="refsect2">
 <a name="g-settings-bind-writable"></a><h3>g_settings_bind_writable ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_bind_writable            (<em class="parameter"><code><a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -2283,35 +2293,31 @@ binding overrides the first one.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object
-</td>
+<td>a <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key to bind
-</td>
+<td>the key to bind</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>. <span class="annotation">[type GObject.Object]</span>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a>. <span class="annotation">[<acronym title="Override the parsed C type with given type"><span class="acronym">type</span></acronym> GObject.Object]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>property</code></em> :</span></p></td>
-<td>the name of a boolean property to bind
-</td>
+<td>the name of a boolean property to bind</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>inverted</code></em> :</span></p></td>
-<td>whether to 'invert' the value
-</td>
+<td>whether to 'invert' the value</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_unbind ()">
+<div class="refsect2">
 <a name="g-settings-unbind"></a><h3>g_settings_unbind ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_unbind                   (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> object</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *property</code></em>);</pre>
@@ -2328,20 +2334,18 @@ function.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object</code></em> :</span></p></td>
-<td>the object
-</td>
+<td>the object</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>property</code></em> :</span></p></td>
-<td>the property whose binding is removed
-</td>
+<td>the property whose binding is removed</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="GSettingsBindSetMapping ()">
+<div class="refsect2">
 <a name="GSettingsBindSetMapping"></a><h3>GSettingsBindSetMapping ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          (*GSettingsBindSetMapping)          (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="type">GVariantType</span></a> *expected_type</code></em>,
@@ -2355,30 +2359,26 @@ value to a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.h
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> containing the property value to map
-</td>
+<td>a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> containing the property value to map</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>expected_type</code></em> :</span></p></td>
-<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="type">GVariantType</span></a> to create
-</td>
+<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="type">GVariantType</span></a> to create</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data that was specified when the binding was created
-</td>
+<td>user data that was specified when the binding was created</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>a new <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> holding the data from <em class="parameter"><code>value</code></em>,
-    or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> in case of an error
-</td>
+or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> in case of an error</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="GSettingsBindGetMapping ()">
+<div class="refsect2">
 <a name="GSettingsBindGetMapping"></a><h3>GSettingsBindGetMapping ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (*GSettingsBindGetMapping)          (<em class="parameter"><code><a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> *variant</code></em>,
@@ -2393,8 +2393,7 @@ of the appropriate type.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>return location for the property value
-</td>
+<td>return location for the property value</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>variant</code></em> :</span></p></td>
@@ -2403,28 +2402,26 @@ of the appropriate type.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>user data that was specified when the binding was created
-</td>
+<td>user data that was specified when the binding was created</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
 <td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the conversion succeeded, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> in case of an error
-</td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the conversion succeeded, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> in case of an error</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GSettings.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "backend" property'>
+<div class="refsect2">
 <a name="GSettings--backend"></a><h3>The <code class="literal">"backend"</code> property</h3>
 <pre class="programlisting">  "backend"                  <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>*     : Read / Write / Construct Only</pre>
 <p>The GSettingsBackend for this settings object.</p>
 </div>
 <hr>
-<div class="refsect2" title='The "delay-apply" property'>
+<div class="refsect2">
 <a name="GSettings--delay-apply"></a><h3>The <code class="literal">"delay-apply"</code> property</h3>
 <pre class="programlisting">  "delay-apply"              <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read</pre>
 <p>
@@ -2435,7 +2432,7 @@ Whether the <a class="link" href="GSettings.html" title="GSettings"><span class=
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title='The "has-unapplied" property'>
+<div class="refsect2">
 <a name="GSettings--has-unapplied"></a><h3>The <code class="literal">"has-unapplied"</code> property</h3>
 <pre class="programlisting">  "has-unapplied"            <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read</pre>
 <p>
@@ -2445,7 +2442,7 @@ changes that will be applied when <a class="link" href="GSettings.html#g-setting
 <p>Default value: FALSE</p>
 </div>
 <hr>
-<div class="refsect2" title='The "path" property'>
+<div class="refsect2">
 <a name="GSettings--path"></a><h3>The <code class="literal">"path"</code> property</h3>
 <pre class="programlisting">  "path"                     <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
 <p>
@@ -2454,7 +2451,7 @@ The path within the backend where the settings are stored.
 <p>Default value: NULL</p>
 </div>
 <hr>
-<div class="refsect2" title='The "schema" property'>
+<div class="refsect2">
 <a name="GSettings--schema"></a><h3>The <code class="literal">"schema"</code> property</h3>
 <pre class="programlisting">  "schema"                   <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
 <p>
@@ -2464,14 +2461,14 @@ for this <a class="link" href="GSettings.html" title="GSettings"><span class="ty
 <p>Default value: NULL</p>
 </div>
 </div>
-<div class="refsect1" title="Signal Details">
+<div class="refsect1">
 <a name="GSettings.signal-details"></a><h2>Signal Details</h2>
-<div class="refsect2" title='The "change-event" signal'>
+<div class="refsect2">
 <a name="GSettings-change-event"></a><h3>The <code class="literal">"change-event"</code> signal</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            user_function                      (<a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   keys,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a>       n_keys,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : Run Last</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a></pre>
 <p>
 The "change-event" signal is emitted once per change event that
 affects this settings object.  You should connect to this signal
@@ -2496,25 +2493,22 @@ for each affected key.  If any other connected handler returns
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>the object on which the signal was emitted
-</td>
+<td>the object on which the signal was emitted</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>keys</code></em> :</span></p></td>
-<td>an array of <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>s for the changed keys, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>an array of <a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark"><span class="type">GQuark</span></a>s for the changed keys, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=n_keys][<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> GQuark][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>n_keys</code></em> :</span></p></td>
-<td>the length of the <em class="parameter"><code>keys</code></em> array, or 0
-</td>
+<td>the length of the <em class="parameter"><code>keys</code></em> array, or 0</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>returns</code></em> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> to stop other handlers from being invoked for the
-          event. FALSE to propagate the event further.
-</td>
+event. FALSE to propagate the event further.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -2524,11 +2518,11 @@ for each affected key.  If any other connected handler returns
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title='The "changed" signal'>
+<div class="refsect2">
 <a name="GSettings-changed"></a><h3>The <code class="literal">"changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>     *key,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : Run Last / Has Details</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a></pre>
 <p>
 The "changed" signal is emitted when a key has potentially changed.
 You should call one of the <a class="link" href="GSettings.html#g-settings-get" title="g_settings_get ()"><code class="function">g_settings_get()</code></a> calls to check the new
@@ -2544,13 +2538,11 @@ when key "x" changes.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>the object on which the signal was emitted
-</td>
+<td>the object on which the signal was emitted</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key that changed
-</td>
+<td>the name of the key that changed</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -2560,11 +2552,11 @@ when key "x" changes.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title='The "writable-change-event" signal'>
+<div class="refsect2">
 <a name="GSettings-writable-change-event"></a><h3>The <code class="literal">"writable-change-event"</code> signal</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            user_function                      (<a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>      key,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : Run Last</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a></pre>
 <p>
 The "writable-change-event" signal is emitted once per writability
 change event that affects this settings object.  You should connect
@@ -2592,20 +2584,17 @@ will be supressed.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>the object on which the signal was emitted
-</td>
+<td>the object on which the signal was emitted</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the quark of the key, or 0
-</td>
+<td>the quark of the key, or 0</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>returns</code></em> :</span></p></td>
 <td>
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> to stop other handlers from being invoked for the
-          event. FALSE to propagate the event further.
-</td>
+event. FALSE to propagate the event further.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -2615,11 +2604,11 @@ will be supressed.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title='The "writable-changed" signal'>
+<div class="refsect2">
 <a name="GSettings-writable-changed"></a><h3>The <code class="literal">"writable-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a> *settings,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>     *key,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : Run Last / Has Details</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)      : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a></pre>
 <p>
 The "writable-changed" signal is emitted when the writability of a
 key has potentially changed.  You should call
@@ -2635,13 +2624,11 @@ callbacks when the writability of "x" changes.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>settings</code></em> :</span></p></td>
-<td>the object on which the signal was emitted
-</td>
+<td>the object on which the signal was emitted</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the key
-</td>
+<td>the key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -2654,6 +2641,6 @@ callbacks when the writability of "x" changes.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

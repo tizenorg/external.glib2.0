@@ -8,7 +8,7 @@
 <link rel="up" href="settings.html" title="Settings">
 <link rel="prev" href="GSettings.html" title="GSettings">
 <link rel="next" href="permissions.html" title="Permissions">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -28,7 +28,7 @@
                   <a href="#GSettingsBackend.object-hierarchy" class="shortcut">Object Hierarchy</a>
 </td></tr>
 </table>
-<div class="refentry" title="GSettingsBackend">
+<div class="refentry">
 <a name="GSettingsBackend"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -37,14 +37,15 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GSettingsBackend.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">
 #include &lt;gio/gsettingsbackend.h&gt;
 
                     <a class="link" href="GSettingsBackend.html#GSettingsBackend-struct" title="GSettingsBackend">GSettingsBackend</a>;
-                    <a class="link" href="GSettingsBackend.html#GSettingsBackendClass" title="GSettingsBackendClass">GSettingsBackendClass</a>;
+struct              <a class="link" href="GSettingsBackend.html#GSettingsBackendClass" title="struct GSettingsBackendClass">GSettingsBackendClass</a>;
 #define             <a class="link" href="GSettingsBackend.html#G-SETTINGS-BACKEND-EXTENSION-POINT-NAME:CAPS" title="G_SETTINGS_BACKEND_EXTENSION_POINT_NAME">G_SETTINGS_BACKEND_EXTENSION_POINT_NAME</a>
+<a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *       <a class="link" href="GSettingsBackend.html#g-settings-backend-get-default" title="g_settings_backend_get_default ()">g_settings_backend_get_default</a> (<em class="parameter"><code><span class="type">void</span></code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GSettingsBackend.html#g-settings-backend-changed" title="g_settings_backend_changed ()">g_settings_backend_changed</a>          (<em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> origin_tag</code></em>);
@@ -67,19 +68,21 @@
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> **path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> ***keys</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> ***values</code></em>);
-<a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *  <a class="link" href="GSettingsBackend.html#g-keyfile-settings-backend-new" title="g_keyfile_settings_backend_new ()">g_keyfile_settings_backend_new</a>      (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *filename</code></em>,
+<a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *       <a class="link" href="GSettingsBackend.html#g-keyfile-settings-backend-new" title="g_keyfile_settings_backend_new ()">g_keyfile_settings_backend_new</a> (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *filename</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *root_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *root_group</code></em>);
+<a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *       <a class="link" href="GSettingsBackend.html#g-memory-settings-backend-new" title="g_memory_settings_backend_new ()">g_memory_settings_backend_new</a>  (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *       <a class="link" href="GSettingsBackend.html#g-null-settings-backend-new" title="g_null_settings_backend_new ()">g_null_settings_backend_new</a>    (<em class="parameter"><code><span class="type">void</span></code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GSettingsBackend.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GSettingsBackend
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GSettingsBackend.description"></a><h2>Description</h2>
 <p>
 The <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> interface defines a generic interface for
@@ -106,7 +109,7 @@ suitable trees.
 </p>
 <p>
 </p>
-<div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+<div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
 <h3 class="title">Note</h3>
 <p>
 The <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> API is exported to allow third-party
@@ -119,9 +122,9 @@ C preprocessor symbol <span class="type">G_SETTINGS_ENABLE_BACKEND</span> before
 <p>
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GSettingsBackend.details"></a><h2>Details</h2>
-<div class="refsect2" title="GSettingsBackend">
+<div class="refsect2">
 <a name="GSettingsBackend-struct"></a><h3>GSettingsBackend</h3>
 <pre class="programlisting">typedef struct _GSettingsBackend GSettingsBackend;</pre>
 <p>
@@ -129,9 +132,9 @@ An implementation of a settings storage repository.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="GSettingsBackendClass">
-<a name="GSettingsBackendClass"></a><h3>GSettingsBackendClass</h3>
-<pre class="programlisting">typedef struct {
+<div class="refsect2">
+<a name="GSettingsBackendClass"></a><h3>struct GSettingsBackendClass</h3>
+<pre class="programlisting">struct GSettingsBackendClass {
   GObjectClass parent_class;
 
   GVariant *    (*read)             (GSettingsBackend    *backend,
@@ -163,13 +166,13 @@ An implementation of a settings storage repository.
                                      const gchar         *path);
 
   gpointer padding[24];
-} GSettingsBackendClass;
+};
 </pre>
 <p>
 </p>
 </div>
 <hr>
-<div class="refsect2" title="G_SETTINGS_BACKEND_EXTENSION_POINT_NAME">
+<div class="refsect2">
 <a name="G-SETTINGS-BACKEND-EXTENSION-POINT-NAME:CAPS"></a><h3>G_SETTINGS_BACKEND_EXTENSION_POINT_NAME</h3>
 <pre class="programlisting">#define G_SETTINGS_BACKEND_EXTENSION_POINT_NAME "gsettings-backend"
 </pre>
@@ -178,7 +181,29 @@ Extension point for <a class="link" href="GSettingsBackend.html" title="GSetting
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_backend_changed ()">
+<div class="refsect2">
+<a name="g-settings-backend-get-default"></a><h3>g_settings_backend_get_default ()</h3>
+<pre class="programlisting"><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *       g_settings_backend_get_default (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Returns the default <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>. It is possible to override
+the default by setting the <code class="envar">GSETTINGS_BACKEND</code>
+environment variable to the name of a settings backend.
+</p>
+<p>
+The user gets a reference to the backend.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the default <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
+</div>
+<hr>
+<div class="refsect2">
 <a name="g-settings-backend-changed"></a><h3>g_settings_backend_changed ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_backend_changed          (<em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>,
@@ -216,25 +241,22 @@ value that was passed to that call.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation
-</td>
+<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key
-</td>
+<td>the name of the key</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>origin_tag</code></em> :</span></p></td>
-<td>the origin tag
-</td>
+<td>the origin tag</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_backend_path_changed ()">
+<div class="refsect2">
 <a name="g-settings-backend-path-changed"></a><h3>g_settings_backend_path_changed ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_backend_path_changed     (<em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>,
@@ -271,25 +293,22 @@ single key in the application will be notified of a possible change.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation
-</td>
+<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the path containing the changes
-</td>
+<td>the path containing the changes</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>origin_tag</code></em> :</span></p></td>
-<td>the origin tag
-</td>
+<td>the origin tag</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_backend_keys_changed ()">
+<div class="refsect2">
 <a name="g-settings-backend-keys-changed"></a><h3>g_settings_backend_keys_changed ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_backend_keys_changed     (<em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>,
@@ -327,30 +346,27 @@ keys that were changed) but this is not strictly required.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation
-</td>
+<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the path containing the changes
-</td>
+<td>the path containing the changes</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>items</code></em> :</span></p></td>
-<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated list of changed keys
+<td>the <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated list of changed keys. <span class="annotation">[<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>origin_tag</code></em> :</span></p></td>
-<td>the origin tag
-</td>
+<td>the origin tag</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_backend_path_writable_changed ()">
+<div class="refsect2">
 <a name="g-settings-backend-path-writable-changed"></a><h3>g_settings_backend_path_writable_changed ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_backend_path_writable_changed
                                                         (<em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
@@ -368,20 +384,18 @@ will always be made in response to external events.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation
-</td>
+<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the name of the path
-</td>
+<td>the name of the path</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_backend_writable_changed ()">
+<div class="refsect2">
 <a name="g-settings-backend-writable-changed"></a><h3>g_settings_backend_writable_changed ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_backend_writable_changed (<em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *key</code></em>);</pre>
@@ -397,20 +411,18 @@ will always be made in response to external events.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation
-</td>
+<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>key</code></em> :</span></p></td>
-<td>the name of the key
-</td>
+<td>the name of the key</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_backend_changed_tree ()">
+<div class="refsect2">
 <a name="g-settings-backend-changed-tree"></a><h3>g_settings_backend_changed_tree ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_backend_changed_tree     (<em class="parameter"><code><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> *backend</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Balanced-Binary-Trees.html#GTree"><span class="type">GTree</span></a> *tree</code></em>,
@@ -425,25 +437,22 @@ This call is a convenience wrapper.  It gets the list of changes from
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>backend</code></em> :</span></p></td>
-<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation
-</td>
+<td>a <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a> implementation</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Balanced-Binary-Trees.html#GTree"><span class="type">GTree</span></a> containing the changes
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Balanced-Binary-Trees.html#GTree"><span class="type">GTree</span></a> containing the changes</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>origin_tag</code></em> :</span></p></td>
-<td>the origin tag
-</td>
+<td>the origin tag</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_settings_backend_flatten_tree ()">
+<div class="refsect2">
 <a name="g-settings-backend-flatten-tree"></a><h3>g_settings_backend_flatten_tree ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_settings_backend_flatten_tree     (<em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Balanced-Binary-Trees.html#GTree"><span class="type">GTree</span></a> *tree</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> **path</code></em>,
@@ -464,22 +473,22 @@ You must free the value returned in <em class="parameter"><code>path</code></em>
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tree</code></em> :</span></p></td>
-<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Balanced-Binary-Trees.html#GTree"><span class="type">GTree</span></a> containing the changes
-</td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Balanced-Binary-Trees.html#GTree"><span class="type">GTree</span></a> containing the changes</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td>the location to save the path
+<td>the location to save the path. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>keys</code></em> :</span></p></td>
-<td>the location to save the relative keys
+<td>the
+location to save the relative keys. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>values</code></em> :</span></p></td>
-<td>the location to save the values, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>
+<td>the location to save the values, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>][<acronym title="Free data container after the code is done."><span class="acronym">transfer container</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> zero-terminated=1]</span>
 </td>
 </tr>
 </tbody>
@@ -487,9 +496,9 @@ You must free the value returned in <em class="parameter"><code>path</code></em>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_keyfile_settings_backend_new ()">
+<div class="refsect2">
 <a name="g-keyfile-settings-backend-new"></a><h3>g_keyfile_settings_backend_new ()</h3>
-<pre class="programlisting"><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *  g_keyfile_settings_backend_new      (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *filename</code></em>,
+<pre class="programlisting"><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *       g_keyfile_settings_backend_new (<em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *filename</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *root_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *root_group</code></em>);</pre>
 <p>
@@ -574,36 +583,77 @@ trouble.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>filename</code></em> :</span></p></td>
-<td>the filename of the keyfile
-</td>
+<td>the filename of the keyfile</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>root_path</code></em> :</span></p></td>
-<td>the path under which all settings keys appear
-</td>
+<td>the path under which all settings keys appear</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>root_group</code></em> :</span></p></td>
-<td> the group name corresponding to
-             <em class="parameter"><code>root_path</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>the group name corresponding to
+<em class="parameter"><code>root_path</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a keyfile-backed <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>a keyfile-backed <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
+<hr>
+<div class="refsect2">
+<a name="g-memory-settings-backend-new"></a><h3>g_memory_settings_backend_new ()</h3>
+<pre class="programlisting"><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *       g_memory_settings_backend_new  (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Creates a memory-backed <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>.
+</p>
+<p>
+This backend allows changes to settings, but does not write them
+to any backing storage, so the next time you run your application,
+the memory backend will start out with the default values again.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly created <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
 </div>
-<div class="refsect1" title="See Also">
+<hr>
+<div class="refsect2">
+<a name="g-null-settings-backend-new"></a><h3>g_null_settings_backend_new ()</h3>
+<pre class="programlisting"><a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="returnvalue">GSettingsBackend</span></a> *       g_null_settings_backend_new    (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Creates a readonly <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>.
+</p>
+<p>
+This backend does not allow changes to settings, so all settings
+will always have their default values.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a newly created <a class="link" href="GSettingsBackend.html" title="GSettingsBackend"><span class="type">GSettingsBackend</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+<p class="since">Since 2.28</p>
+</div>
+</div>
+<div class="refsect1">
 <a name="GSettingsBackend.see-also"></a><h2>See Also</h2>
 <a class="link" href="GSettings.html" title="GSettings"><span class="type">GSettings</span></a>, <a class="link" href="gio-Extension-Points.html#GIOExtensionPoint" title="GIOExtensionPoint"><span class="type">GIOExtensionPoint</span></a>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

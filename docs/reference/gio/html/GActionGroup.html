@@ -8,7 +8,7 @@
 <link rel="up" href="application.html" title="Application support">
 <link rel="prev" href="application.html" title="Application support">
 <link rel="next" href="GSimpleActionGroup.html" title="GSimpleActionGroup">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -34,7 +34,7 @@
                   <a href="#GActionGroup.signals" class="shortcut">Signals</a>
 </td></tr>
 </table>
-<div class="refentry" title="GActionGroup">
+<div class="refentry">
 <a name="GActionGroup"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -43,27 +43,28 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GActionGroup.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GActionGroup.html#GActionGroup-struct" title="GActionGroup">GActionGroup</a>;
 
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GActionGroup.html#g-action-group-has-action" title="g_action_group_has_action ()">g_action_group_has_action</a>           (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="GActionGroup.html#g-action-group-list-actions" title="g_action_group_list_actions ()">g_action_group_list_actions</a>         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **                 <a class="link" href="GActionGroup.html#g-action-group-list-actions" title="g_action_group_list_actions ()">g_action_group_list_actions</a>    (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>);
 
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="GActionGroup.html#g-action-group-get-action-enabled" title="g_action_group_get_action_enabled ()">g_action_group_get_action_enabled</a>   (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);
-const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> * <a class="link" href="GActionGroup.html#g-action-group-get-action-parameter-type" title="g_action_group_get_action_parameter_type ()">g_action_group_get_action_parameter_type</a>
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> *     <a class="link" href="GActionGroup.html#g-action-group-get-action-parameter-type" title="g_action_group_get_action_parameter_type ()">g_action_group_get_action_parameter_type</a>
                                                         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);
-const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> * <a class="link" href="GActionGroup.html#g-action-group-get-action-state-type" title="g_action_group_get_action_state_type ()">g_action_group_get_action_state_type</a>
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> *     <a class="link" href="GActionGroup.html#g-action-group-get-action-state-type" title="g_action_group_get_action_state_type ()">g_action_group_get_action_state_type</a>
                                                         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          <a class="link" href="GActionGroup.html#g-action-group-get-action-state-hint" title="g_action_group_get_action_state_hint ()">g_action_group_get_action_state_hint</a>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *               <a class="link" href="GActionGroup.html#g-action-group-get-action-state-hint" title="g_action_group_get_action_state_hint ()">g_action_group_get_action_state_hint</a>
                                                         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);
 
-<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          <a class="link" href="GActionGroup.html#g-action-group-get-action-state" title="g_action_group_get_action_state ()">g_action_group_get_action_state</a>     (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
+<a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *               <a class="link" href="GActionGroup.html#g-action-group-get-action-state" title="g_action_group_get_action_state ()">g_action_group_get_action_state</a>
+                                                        (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GActionGroup.html#g-action-group-change-action-state" title="g_action_group_change_action_state ()">g_action_group_change_action_state</a>  (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>,
@@ -86,35 +87,35 @@ const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.ht
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> *state</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GActionGroup.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   GInterface
    +----GActionGroup
 </pre>
 </div>
-<div class="refsect1" title="Prerequisites">
+<div class="refsect1">
 <a name="GActionGroup.prerequisites"></a><h2>Prerequisites</h2>
 <p>
 GActionGroup requires
  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>.</p>
 </div>
-<div class="refsect1" title="Known Implementations">
+<div class="refsect1">
 <a name="GActionGroup.implementations"></a><h2>Known Implementations</h2>
 <p>
 GActionGroup is implemented by
  <a class="link" href="GApplication.html" title="GApplication">GApplication</a> and  <a class="link" href="GSimpleActionGroup.html" title="GSimpleActionGroup">GSimpleActionGroup</a>.</p>
 </div>
-<div class="refsect1" title="Signals">
+<div class="refsect1">
 <a name="GActionGroup.signals"></a><h2>Signals</h2>
 <pre class="synopsis">
-  "<a class="link" href="GActionGroup.html#GActionGroup-action-added" title='The "action-added" signal'>action-added</a>"                                   : Run Last / Has Details
-  "<a class="link" href="GActionGroup.html#GActionGroup-action-enabled-changed" title='The "action-enabled-changed" signal'>action-enabled-changed</a>"                         : Run Last / Has Details
-  "<a class="link" href="GActionGroup.html#GActionGroup-action-removed" title='The "action-removed" signal'>action-removed</a>"                                 : Run Last / Has Details
-  "<a class="link" href="GActionGroup.html#GActionGroup-action-state-changed" title='The "action-state-changed" signal'>action-state-changed</a>"                           : Run Last / Has Details
+  "<a class="link" href="GActionGroup.html#GActionGroup-action-added" title='The "action-added" signal'>action-added</a>"                                   : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a>
+  "<a class="link" href="GActionGroup.html#GActionGroup-action-enabled-changed" title='The "action-enabled-changed" signal'>action-enabled-changed</a>"                         : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a>
+  "<a class="link" href="GActionGroup.html#GActionGroup-action-removed" title='The "action-removed" signal'>action-removed</a>"                                 : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a>
+  "<a class="link" href="GActionGroup.html#GActionGroup-action-state-changed" title='The "action-state-changed" signal'>action-state-changed</a>"                           : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a>
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GActionGroup.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> represents a group of actions.
@@ -138,16 +139,16 @@ Signals are emitted on the action group in response to state changes
 on individual actions.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GActionGroup.details"></a><h2>Details</h2>
-<div class="refsect2" title="GActionGroup">
+<div class="refsect2">
 <a name="GActionGroup-struct"></a><h3>GActionGroup</h3>
 <pre class="programlisting">typedef struct _GActionGroup GActionGroup;</pre>
 <p>
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_has_action ()">
+<div class="refsect2">
 <a name="g-action-group-has-action"></a><h3>g_action_group_has_action ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_action_group_has_action           (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);</pre>
@@ -164,23 +165,20 @@ Checks if the named action exists within <em class="parameter"><code>action_grou
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of the action to check for
-</td>
+<td>the name of the action to check for</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> whether the named action exists
-
-</td>
+<td>whether the named action exists</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_list_actions ()">
+<div class="refsect2">
 <a name="g-action-group-list-actions"></a><h3>g_action_group_list_actions ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            g_action_group_list_actions         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>);</pre>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **                 g_action_group_list_actions    (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>);</pre>
 <p>
 Lists the actions contained within <em class="parameter"><code>action_group</code></em>.
 </p>
@@ -198,7 +196,7 @@ it is no longer required.
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of the names of the
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of the names of the
 actions in the groupb. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
@@ -207,7 +205,7 @@ actions in the groupb. <span class="annotation">[<acronym title="Free data after
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_get_action_enabled ()">
+<div class="refsect2">
 <a name="g-action-group-get-action-enabled"></a><h3>g_action_group_get_action_enabled ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            g_action_group_get_action_enabled   (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);</pre>
@@ -228,23 +226,20 @@ have its state changed from outside callers.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of the action to query
-</td>
+<td>the name of the action to query</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> whether or not the action is currently enabled
-
-</td>
+<td>whether or not the action is currently enabled</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_get_action_parameter_type ()">
+<div class="refsect2">
 <a name="g-action-group-get-action-parameter-type"></a><h3>g_action_group_get_action_parameter_type ()</h3>
-<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> * g_action_group_get_action_parameter_type
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> *     g_action_group_get_action_parameter_type
                                                         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);</pre>
 <p>
@@ -275,23 +270,20 @@ with the same name but a different parameter type.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of the action to query
-</td>
+<td>the name of the action to query</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the parameter type
-
-</td>
+<td>the parameter type</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_get_action_state_type ()">
+<div class="refsect2">
 <a name="g-action-group-get-action-state-type"></a><h3>g_action_group_get_action_state_type ()</h3>
-<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> * g_action_group_get_action_state_type
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariantType.html#GVariantType"><span class="returnvalue">GVariantType</span></a> *     g_action_group_get_action_state_type
                                                         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);</pre>
 <p>
@@ -324,12 +316,11 @@ with the same name but a different state type.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of the action to query
-</td>
+<td>the name of the action to query</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the state type, if the action is stateful. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the state type, if the action is stateful. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -337,9 +328,9 @@ with the same name but a different state type.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_get_action_state_hint ()">
+<div class="refsect2">
 <a name="g-action-group-get-action-state-hint"></a><h3>g_action_group_get_action_state_hint ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          g_action_group_get_action_state_hint
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *               g_action_group_get_action_state_hint
                                                         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);</pre>
 <p>
@@ -376,12 +367,11 @@ The return value (if non-<a href="http://library.gnome.org/devel/glib/unstable/g
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of the action to query
-</td>
+<td>the name of the action to query</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the state range hint. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+<td>the state range hint. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -389,9 +379,10 @@ The return value (if non-<a href="http://library.gnome.org/devel/glib/unstable/g
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_get_action_state ()">
+<div class="refsect2">
 <a name="g-action-group-get-action-state"></a><h3>g_action_group_get_action_state ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          g_action_group_get_action_state     (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *               g_action_group_get_action_state
+                                                        (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);</pre>
 <p>
 Queries the current state of the named action within <em class="parameter"><code>action_group</code></em>.
@@ -415,12 +406,11 @@ The return value (if non-<a href="http://library.gnome.org/devel/glib/unstable/g
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of the action to query
-</td>
+<td>the name of the action to query</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the current state of the action. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>the current state of the action. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -428,7 +418,7 @@ The return value (if non-<a href="http://library.gnome.org/devel/glib/unstable/g
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_change_action_state ()">
+<div class="refsect2">
 <a name="g-action-group-change-action-state"></a><h3>g_action_group_change_action_state ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_action_group_change_action_state  (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>,
@@ -459,20 +449,18 @@ If the <em class="parameter"><code>value</code></em> GVariant is floating, it is
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of the action to request the change on
-</td>
+<td>the name of the action to request the change on</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the new state
-</td>
+<td>the new state</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_activate_action ()">
+<div class="refsect2">
 <a name="g-action-group-activate-action"></a><h3>g_action_group_activate_action ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_action_group_activate_action      (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>,
@@ -496,12 +484,11 @@ parameters then <em class="parameter"><code>parameter</code></em> must be <a hre
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of the action to activate
-</td>
+<td>the name of the action to activate</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parameter</code></em> :</span></p></td>
-<td> parameters to the activation. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>parameters to the activation. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -509,7 +496,7 @@ parameters then <em class="parameter"><code>parameter</code></em> must be <a hre
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_action_added ()">
+<div class="refsect2">
 <a name="g-action-group-action-added"></a><h3>g_action_group_action_added ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_action_group_action_added         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);</pre>
@@ -529,15 +516,14 @@ This function should only be called by <a class="link" href="GActionGroup.html" 
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of an action in the group
-</td>
+<td>the name of an action in the group</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_action_removed ()">
+<div class="refsect2">
 <a name="g-action-group-action-removed"></a><h3>g_action_group_action_removed ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_action_group_action_removed       (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>);</pre>
@@ -557,15 +543,14 @@ This function should only be called by <a class="link" href="GActionGroup.html" 
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of an action in the group
-</td>
+<td>the name of an action in the group</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_action_enabled_changed ()">
+<div class="refsect2">
 <a name="g-action-group-action-enabled-changed"></a><h3>g_action_group_action_enabled_changed ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_action_group_action_enabled_changed
                                                         (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
@@ -587,20 +572,18 @@ This function should only be called by <a class="link" href="GActionGroup.html" 
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of an action in the group
-</td>
+<td>the name of an action in the group</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>enabled</code></em> :</span></p></td>
-<td>whether or not the action is now enabled
-</td>
+<td>whether or not the action is now enabled</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_action_group_action_state_changed ()">
+<div class="refsect2">
 <a name="g-action-group-action-state-changed"></a><h3>g_action_group_action_state_changed ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_action_group_action_state_changed (<em class="parameter"><code><a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *action_name</code></em>,
@@ -621,26 +604,24 @@ This function should only be called by <a class="link" href="GActionGroup.html" 
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
-<td>the name of an action in the group
-</td>
+<td>the name of an action in the group</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>state</code></em> :</span></p></td>
-<td>the new state of the named action
-</td>
+<td>the new state of the named action</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 </div>
-<div class="refsect1" title="Signal Details">
+<div class="refsect1">
 <a name="GActionGroup.signal-details"></a><h2>Signal Details</h2>
-<div class="refsect2" title='The "action-added" signal'>
+<div class="refsect2">
 <a name="GActionGroup-action-added"></a><h3>The <code class="literal">"action-added"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>        *action_name,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)         : Run Last / Has Details</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)         : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a></pre>
 <p>
 Signals that a new action was just added to the group.  This signal
 is emitted after the action has been added and is now visible.
@@ -650,8 +631,7 @@ is emitted after the action has been added and is now visible.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_group</code></em> :</span></p></td>
-<td>the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that changed
-</td>
+<td>the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that changed</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
@@ -667,12 +647,12 @@ is emitted after the action has been added and is now visible.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title='The "action-enabled-changed" signal'>
+<div class="refsect2">
 <a name="GActionGroup-action-enabled-changed"></a><h3>The <code class="literal">"action-enabled-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>        *action_name,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>      enabled,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)         : Run Last / Has Details</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)         : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a></pre>
 <p>
 Signals that the enabled status of the named action has changed.
 </p>
@@ -681,8 +661,7 @@ Signals that the enabled status of the named action has changed.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_group</code></em> :</span></p></td>
-<td>the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that changed
-</td>
+<td>the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that changed</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
@@ -691,8 +670,7 @@ Signals that the enabled status of the named action has changed.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>enabled</code></em> :</span></p></td>
-<td>whether the action is enabled or not
-</td>
+<td>whether the action is enabled or not</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -703,11 +681,11 @@ Signals that the enabled status of the named action has changed.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title='The "action-removed" signal'>
+<div class="refsect2">
 <a name="GActionGroup-action-removed"></a><h3>The <code class="literal">"action-removed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>        *action_name,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)         : Run Last / Has Details</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)         : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a></pre>
 <p>
 Signals that an action is just about to be removed from the group.
 This signal is emitted before the action is removed, so the action
@@ -718,8 +696,7 @@ is still visible and can be queried from the signal handler.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_group</code></em> :</span></p></td>
-<td>the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that changed
-</td>
+<td>the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that changed</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
@@ -735,12 +712,12 @@ is still visible and can be queried from the signal handler.
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title='The "action-state-changed" signal'>
+<div class="refsect2">
 <a name="GActionGroup-action-state-changed"></a><h3>The <code class="literal">"action-state-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> *action_group,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>        *action_name,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>      value,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)         : Run Last / Has Details</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>     *value,
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>      user_data)         : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-DETAILED:CAPS"><code class="literal">Has Details</code></a></pre>
 <p>
 Signals that the state of the named action has changed.
 </p>
@@ -749,8 +726,7 @@ Signals that the state of the named action has changed.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_group</code></em> :</span></p></td>
-<td>the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that changed
-</td>
+<td>the <a class="link" href="GActionGroup.html" title="GActionGroup"><span class="type">GActionGroup</span></a> that changed</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>action_name</code></em> :</span></p></td>
@@ -759,8 +735,7 @@ Signals that the state of the named action has changed.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>the new value of the state
-</td>
+<td>the new value of the state</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -774,6 +749,6 @@ Signals that the state of the named action has changed.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

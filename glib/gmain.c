@@ -1183,12 +1183,12 @@ g_source_remove_poll (GSource *source,
  * Adds @child_source to @source as a "polled" source; when @source is
  * added to a #GMainContext, @child_source will be automatically added
  * with the same priority, when @child_source is triggered, it will
- * cause @source to dispatch (and won't call @child_source's own
+ * cause @source to dispatch (in addition to calling its own
  * callback), and when @source is destroyed, it will destroy
  * @child_source as well. (@source will also still be dispatched if
  * its own prepare/check functions indicate that it is ready.)
  *
- * If you need @child_source to do anything on its own when it
+ * If you don't need @child_source to do anything on its own when it
  * triggers, you can call g_source_set_dummy_callback() on it to set a
  * callback that does nothing (except return %TRUE if appropriate).
  *
@@ -3796,10 +3796,12 @@ static void
 g_timeout_set_expiration (GTimeoutSource *timeout_source,
                           gint64          current_time)
 {
-  timeout_source->expiration = current_time + timeout_source->interval * 1000;
+  timeout_source->expiration = current_time +
+                               (guint64) timeout_source->interval * 1000;
 
   if (timeout_source->seconds)
     {
+      gint64 remainder;
       static gint timer_perturb = -1;
 
       if (timer_perturb == -1)
@@ -3824,11 +3826,14 @@ g_timeout_set_expiration (GTimeoutSource *timeout_source,
        * always only *increase* the expiration time by adding a full
        * second in the case that the microsecond portion decreases.
        */
-      if (timer_perturb < timeout_source->expiration % 1000000)
+      timeout_source->expiration -= timer_perturb;
+
+      remainder = timeout_source->expiration % 1000000;
+      if (remainder >= 1000000/4)
         timeout_source->expiration += 1000000;
 
-      timeout_source->expiration =
-        ((timeout_source->expiration / 1000000) * 1000000) + timer_perturb;
+      timeout_source->expiration -= remainder;
+      timeout_source->expiration += timer_perturb;
     }
 }
 
@@ -4113,7 +4118,11 @@ g_timeout_add_seconds_full (gint           priority,
  * g_timeout_source_new_seconds() and attaches it to the main loop context 
  * using g_source_attach(). You can do these steps manually if you need 
  * greater control. Also see g_timout_add_seconds_full().
- * 
+ *
+ * Note that the first call of the timer may not be precise for timeouts
+ * of one second. If you need finer precision and have such a timeout,
+ * you may want to use g_timeout_add() instead.
+ *
  * Return value: the ID (greater than 0) of the event source.
  *
  * Since: 2.14

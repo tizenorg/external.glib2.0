@@ -8,7 +8,7 @@
 <link rel="up" href="highlevel-socket.html" title="Highlevel network functionallity">
 <link rel="prev" href="GTcpConnection.html" title="GTcpConnection">
 <link rel="next" href="GSocketListener.html" title="GSocketListener">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -30,7 +30,7 @@
                   <a href="#GTcpWrapperConnection.properties" class="shortcut">Properties</a>
 </td></tr>
 </table>
-<div class="refentry" title="GTcpWrapperConnection">
+<div class="refentry">
 <a name="GTcpWrapperConnection"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -39,7 +39,7 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GTcpWrapperConnection.synopsis"></a><h2>Synopsis</h2>
 <pre class="synopsis">                    <a class="link" href="GTcpWrapperConnection.html#GTcpWrapperConnection-struct" title="GTcpWrapperConnection">GTcpWrapperConnection</a>;
 <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * <a class="link" href="GTcpWrapperConnection.html#g-tcp-wrapper-connection-new" title="g_tcp_wrapper_connection_new ()">g_tcp_wrapper_connection_new</a>        (<em class="parameter"><code><a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a> *base_io_stream</code></em>,
@@ -48,7 +48,7 @@
                                                         (<em class="parameter"><code><a class="link" href="GTcpWrapperConnection.html" title="GTcpWrapperConnection"><span class="type">GTcpWrapperConnection</span></a> *conn</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GTcpWrapperConnection.object-hierarchy"></a><h2>Object Hierarchy</h2>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
@@ -58,13 +58,13 @@
                      +----GTcpWrapperConnection
 </pre>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GTcpWrapperConnection.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
   "<a class="link" href="GTcpWrapperConnection.html#GTcpWrapperConnection--base-io-stream" title='The "base-io-stream" property'>base-io-stream</a>"           <a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a>*            : Read / Write / Construct Only
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GTcpWrapperConnection.description"></a><h2>Description</h2>
 <p>
 A <a class="link" href="GTcpWrapperConnection.html" title="GTcpWrapperConnection"><span class="type">GTcpWrapperConnection</span></a> can be used to wrap a <a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a> that is
@@ -74,16 +74,16 @@ always return a <a class="link" href="GSocketConnection.html" title="GSocketConn
 actually created is not directly a <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>.
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GTcpWrapperConnection.details"></a><h2>Details</h2>
-<div class="refsect2" title="GTcpWrapperConnection">
+<div class="refsect2">
 <a name="GTcpWrapperConnection-struct"></a><h3>GTcpWrapperConnection</h3>
 <pre class="programlisting">typedef struct _GTcpWrapperConnection GTcpWrapperConnection;</pre>
 <p>
 </p>
 </div>
 <hr>
-<div class="refsect2" title="g_tcp_wrapper_connection_new ()">
+<div class="refsect2">
 <a name="g-tcp-wrapper-connection-new"></a><h3>g_tcp_wrapper_connection_new ()</h3>
 <pre class="programlisting"><a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="returnvalue">GSocketConnection</span></a> * g_tcp_wrapper_connection_new        (<em class="parameter"><code><a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a> *base_io_stream</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GSocket.html" title="GSocket"><span class="type">GSocket</span></a> *socket</code></em>);</pre>
@@ -95,8 +95,7 @@ Wraps <em class="parameter"><code>base_io_stream</code></em> and <em class="para
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>base_io_stream</code></em> :</span></p></td>
-<td>the <a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a> to wrap
-</td>
+<td>the <a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a> to wrap</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>socket</code></em> :</span></p></td>
@@ -105,16 +104,14 @@ Wraps <em class="parameter"><code>base_io_stream</code></em> and <em class="para
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> the new <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>.
-
-</td>
+<td>the new <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.28</p>
 </div>
 <hr>
-<div class="refsect2" title="g_tcp_wrapper_connection_get_base_io_stream ()">
+<div class="refsect2">
 <a name="g-tcp-wrapper-connection-get-base-io-stream"></a><h3>g_tcp_wrapper_connection_get_base_io_stream ()</h3>
 <pre class="programlisting"><a class="link" href="GIOStream.html" title="GIOStream"><span class="returnvalue">GIOStream</span></a> *         g_tcp_wrapper_connection_get_base_io_stream
                                                         (<em class="parameter"><code><a class="link" href="GTcpWrapperConnection.html" title="GTcpWrapperConnection"><span class="type">GTcpWrapperConnection</span></a> *conn</code></em>);</pre>
@@ -131,28 +128,29 @@ Get's <em class="parameter"><code>conn</code></em>'s base <a class="link" href="
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <em class="parameter"><code>conn</code></em>'s base <a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+<td>
+<em class="parameter"><code>conn</code></em>'s base <a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a>. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GTcpWrapperConnection.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "base-io-stream" property'>
+<div class="refsect2">
 <a name="GTcpWrapperConnection--base-io-stream"></a><h3>The <code class="literal">"base-io-stream"</code> property</h3>
 <pre class="programlisting">  "base-io-stream"           <a class="link" href="GIOStream.html" title="GIOStream"><span class="type">GIOStream</span></a>*            : Read / Write / Construct Only</pre>
 <p>The wrapped GIOStream.</p>
 </div>
 </div>
-<div class="refsect1" title="See Also">
+<div class="refsect1">
 <a name="GTcpWrapperConnection.see-also"></a><h2>See Also</h2>
 <a class="link" href="GSocketConnection.html" title="GSocketConnection"><span class="type">GSocketConnection</span></a>.
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

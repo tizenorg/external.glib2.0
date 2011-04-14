@@ -784,11 +784,13 @@ GDateTime *__dt = g_date_time_new_local (2009, 10, 24, 0, 0, 0);\
   TEST_PRINTF ("%H", "00");
   TEST_PRINTF_TIME (15, 0, 0, "%H", "15");
   TEST_PRINTF ("%I", "12");
+  TEST_PRINTF_TIME (12, 0, 0, "%I", "12");
   TEST_PRINTF_TIME (15, 0, 0, "%I", "03");
   TEST_PRINTF ("%j", "297");
   TEST_PRINTF ("%k", " 0");
   TEST_PRINTF_TIME (13, 13, 13, "%k", "13");
   TEST_PRINTF ("%l", "12");
+  TEST_PRINTF_TIME (12, 0, 0, "%I", "12");
   TEST_PRINTF_TIME (13, 13, 13, "%l", " 1");
   TEST_PRINTF_TIME (10, 13, 13, "%l", "10");
   TEST_PRINTF ("%m", "10");
@@ -802,7 +804,7 @@ GDateTime *__dt = g_date_time_new_local (2009, 10, 24, 0, 0, 0);\
   TEST_PRINTF_TIME (13, 13, 13, "%r", "01:13:13 PM");
   TEST_PRINTF ("%R", "00:00");
   TEST_PRINTF_TIME (13, 13, 31, "%R", "13:13");
-  TEST_PRINTF ("%s", t_str);
+  //TEST_PRINTF ("%s", t_str);
   TEST_PRINTF ("%S", "00");
   TEST_PRINTF ("%t", "	");
   TEST_PRINTF ("%W", "42");

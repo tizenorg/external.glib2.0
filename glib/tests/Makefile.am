@@ -148,6 +148,10 @@ TEST_PROGS          += gdatetime
 gdatetime_SOURCES    = gdatetime.c
 gdatetime_LDADD      = $(progs_ldadd)
 
+TEST_PROGS          += timeout
+timeout_SOURCES      = timeout.c
+timeout_LDADD        = $(progs_ldadd)
+
 TEST_PROGS       += environment
 environment_LDADD = $(progs_ldadd)
 
@@ -168,6 +172,7 @@ CLEANFILES = \
 EXTRA_DIST += \
 	4096-random-bytes	\
 	keyfiletest.ini		\
+	pages.ini		\
 	bookmarks.xbel
 
 dist-hook:

@@ -47,6 +47,23 @@
  * The #GSettings class provides a convenient API for storing and retrieving
  * application settings.
  *
+ * Reads and writes can be considered to be non-blocking.  Reading
+ * settings with #GSettings is typically extremely fast: on
+ * approximately the same order of magnitude (but slower than) a
+ * #GHashTable lookup.  Writing settings is also extremely fast in terms
+ * of time to return to your application, but can be extremely expensive
+ * for other threads and other processes.  Many settings backends
+ * (including dconf) have lazy initialisation which means in the common
+ * case of the user using their computer without modifying any settings
+ * a lot of work can be avoided.  For dconf, the D-Bus service doesn't
+ * even need to be started in this case.  For this reason, you should
+ * only ever modify #GSettings keys in response to explicit user action.
+ * Particular care should be paid to ensure that modifications are not
+ * made during startup -- for example, when settings the initial value
+ * of preferences widgets.  The built-in g_settings_bind() functionality
+ * is careful not to write settings in response to notify signals as a
+ * result of modifications that it makes to widgets.
+ *
  * When creating a GSettings instance, you have to specify a schema
  * that describes the keys in your settings and their types and default
  * values, as well as some other information.
@@ -79,11 +96,17 @@
  * described by the following DTD:
  * |[<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../../../../gio/gschema.dtd"><xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback></xi:include>]|
  *
+ * glib-compile-schemas expects schema files to have the extension <filename>.gschema.xml</filename>
+ *
  * At runtime, schemas are identified by their id (as specified
  * in the <tag class="attribute">id</tag> attribute of the
  * <tag class="starttag">schema</tag> element). The
  * convention for schema ids is to use a dotted name, similar in
- * style to a DBus bus name, e.g. "org.gnome.font-rendering".
+ * style to a D-Bus bus name, e.g. "org.gnome.SessionManager". In particular,
+ * if the settings are for a specific service that owns a D-Bus bus name,
+ * the D-Bus bus name and schema id should match. For schemas which deal
+ * with settings not associated with one named application, the id should
+ * not use StudlyCaps, e.g. "org.gnome.font-rendering".
  *
  * In addition to #GVariant types, keys can have types that have enumerated
  * types. These can be described by a <tag class="starttag">choice</tag>,
@@ -97,7 +120,7 @@
  * <example id="schema-default-values"><title>Default values</title>
  * <programlisting><![CDATA[
  * <schemalist>
- *   <schema id="org.gtk.test" path="/tests/" gettext-domain="test">
+ *   <schema id="org.gtk.Test" path="/tests/" gettext-domain="test">
  *
  *     <key name="greeting" type="s">
  *       <default l10n="messages">"Hello, earthlings"</default>
@@ -130,7 +153,7 @@
  *     <value nick="flag3" value="4"/>
  *   </enum>
  *
- *   <schema id="org.gtk.test">
+ *   <schema id="org.gtk.Test">
  *
  *     <key name="key-with-range" type="i">
  *       <range min="1" max="100"/>
@@ -178,6 +201,10 @@
  *     key1='string'
  *     key2=1.5
  *     </programlisting></informalexample>
+ *   </para>
+ *   <para>
+ *     glib-compile-schemas expects schema files to have the extension
+ *     <filename>.gschema.override</filename>
  *   </para>
  * </refsect2>
  *
@@ -284,7 +311,17 @@ settings_backend_changed (GObject             *target,
   gboolean ignore_this;
   gint i;
 
-  g_assert (settings->priv->backend == backend);
+  /* We used to assert here:
+   *
+   *   settings->priv->backend == backend
+   *
+   * but it could be the case that a notification is queued for delivery
+   * while someone calls g_settings_delay() (which changes the backend).
+   *
+   * Since the delay backend would just pass that straight through
+   * anyway, it doesn't make sense to try to detect this case.
+   * Therefore, we just accept it.
+   */
 
   for (i = 0; key[i] == settings->priv->path[i]; i++);
 
@@ -308,8 +345,6 @@ settings_backend_path_changed (GObject          *target,
   GSettings *settings = G_SETTINGS (target);
   gboolean ignore_this;
 
-  g_assert (settings->priv->backend == backend);
-
   if (g_str_has_prefix (settings->priv->path, path))
     g_signal_emit (settings, g_settings_signals[SIGNAL_CHANGE_EVENT],
                    0, NULL, 0, &ignore_this);
@@ -325,8 +360,6 @@ settings_backend_keys_changed (GObject             *target,
   GSettings *settings = G_SETTINGS (target);
   gboolean ignore_this;
   gint i;
-
-  g_assert (settings->priv->backend == backend);
 
   for (i = 0; settings->priv->path[i] &&
               settings->priv->path[i] == path[i]; i++);
@@ -368,8 +401,6 @@ settings_backend_writable_changed (GObject          *target,
   gboolean ignore_this;
   gint i;
 
-  g_assert (settings->priv->backend == backend);
-
   for (i = 0; key[i] == settings->priv->path[i]; i++);
 
   if (settings->priv->path[i] == '\0' &&
@@ -385,8 +416,6 @@ settings_backend_path_writable_changed (GObject          *target,
 {
   GSettings *settings = G_SETTINGS (target);
   gboolean ignore_this;
-
-  g_assert (settings->priv->backend == backend);
 
   if (g_str_has_prefix (settings->priv->path, path))
     g_signal_emit (settings, g_settings_signals[SIGNAL_WRITABLE_CHANGE_EVENT],
@@ -567,7 +596,8 @@ g_settings_class_init (GSettingsClass *class)
   /**
    * GSettings::change-event:
    * @settings: the object on which the signal was emitted
-   * @keys: an array of #GQuark<!-- -->s for the changed keys, or %NULL
+   * @keys: (array length=n_keys) (element-type GQuark) (allow-none):
+   *        an array of #GQuark<!-- -->s for the changed keys, or %NULL
    * @n_keys: the length of the @keys array, or 0
    * @returns: %TRUE to stop other handlers from being invoked for the
    *           event. FALSE to propagate the event further.
@@ -612,7 +642,7 @@ g_settings_class_init (GSettingsClass *class)
   g_settings_signals[SIGNAL_WRITABLE_CHANGED] =
     g_signal_new ("writable-changed", G_TYPE_SETTINGS,
                   G_SIGNAL_RUN_LAST | G_SIGNAL_DETAILED,
-                  G_STRUCT_OFFSET (GSettingsClass, changed),
+                  G_STRUCT_OFFSET (GSettingsClass, writable_changed),
                   NULL, NULL, g_cclosure_marshal_VOID__STRING, G_TYPE_NONE,
                   1, G_TYPE_STRING | G_SIGNAL_TYPE_STATIC_SCOPE);
 
@@ -1602,8 +1632,8 @@ g_settings_set (GSettings   *settings,
  * g_settings_get_mapped:
  * @settings: a #GSettings object
  * @key: the key to get the value for
- * @mapping: the function to map the value in the settings database to
- *           the value used by the application
+ * @mapping: (scope call): the function to map the value in the
+ *           settings database to the value used by the application
  * @user_data: user data for @mapping
  * @returns: (transfer full): the result, which may be %NULL
  *
@@ -1901,15 +1931,14 @@ g_settings_set_boolean (GSettings  *settings,
  * g_settings_get_strv:
  * @settings: a #GSettings object
  * @key: the key to get the value for
- * @returns: a newly-allocated, %NULL-terminated array of strings
+ * @returns: (array zero-terminated=1) (transfer full): a
+ * newly-allocated, %NULL-terminated array of strings, the value that
+ * is stored at @key in @settings.
  *
  * A convenience variant of g_settings_get() for string arrays.
  *
  * It is a programmer error to give a @key that isn't specified as
  * having an array of strings type in the schema for @settings.
- *
- * Returns: (array zero-terminated=1) (transfer full): the value that is
- * stored at @key in @settings.
  *
  * Since: 2.26
  */
@@ -2135,7 +2164,7 @@ g_settings_is_writable (GSettings   *settings,
  * @returns: (transfer full): a 'child' settings object
  *
  * Creates a 'child' settings object which has a base path of
- * <replaceable>base-path</replaceable>/@name", where
+ * <replaceable>base-path</replaceable>/@name, where
  * <replaceable>base-path</replaceable> is the base path of @settings.
  *
  * The schema for the child settings object must have been declared
@@ -2625,7 +2654,7 @@ g_settings_bind (GSettings          *settings,
 }
 
 /**
- * g_settings_bind_with_mapping:
+ * g_settings_bind_with_mapping: (skip)
  * @settings: a #GSettings object
  * @key: the key to bind
  * @object: (type GObject.Object): a #GObject

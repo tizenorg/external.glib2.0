@@ -8,7 +8,7 @@
 <link rel="up" href="glib.html" title="GLib Overview">
 <link rel="prev" href="glib-compiling.html" title="Compiling GLib Applications">
 <link rel="next" href="glib-changes.html" title="Changes to GLib">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">GLib Reference Manual</th>
 <td><a accesskey="n" href="glib-changes.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="refentry" title="Running GLib Applications">
+<div class="refentry">
 <a name="glib-running"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -30,31 +30,31 @@ How to run and debug your GLib application
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsect1" title="Running and debugging GLib Applications">
-<a name="id410855"></a><h2>Running and debugging GLib Applications</h2>
-<div class="refsect2" title="Environment variables">
-<a name="id404659"></a><h3>Environment variables</h3>
+<div class="refsect1">
+<a name="id397017"></a><h2>Running and debugging GLib Applications</h2>
+<div class="refsect2">
+<a name="id390654"></a><h3>Environment variables</h3>
 <p> 
 GLib inspects a few of environment variables in addition to standard
 variables like <code class="envar">LANG</code>, <code class="envar">PATH</code> or <code class="envar">HOME</code>. 
 </p>
-<p title="G_FILENAME_ENCODING"><a name="G_FILENAME_ENCODING"></a><b><code class="envar">G_FILENAME_ENCODING</code>. </b>
+<p><a name="G_FILENAME_ENCODING"></a><b><code class="envar">G_FILENAME_ENCODING</code>. </b>
     This environment variable can be set to a comma-separated list of character
     set names. GLib assumes that filenames are encoded in the first character 
     set from that list rather than in UTF-8. The special token "@locale" can be
     used to specify the character set for the current locale.
   </p>
-<p title="G_BROKEN_FILENAMES"><a name="G_BROKEN_FILENAMES"></a><b><code class="envar">G_BROKEN_FILENAMES</code>. </b>
+<p><a name="G_BROKEN_FILENAMES"></a><b><code class="envar">G_BROKEN_FILENAMES</code>. </b>
     If this environment variable is set, GLib assumes that filenames are in 
     the locale encoding rather than in UTF-8. G_FILENAME_ENCODING takes
     priority over G_BROKEN_FILENAMES. 
   </p>
-<p title="G_MESSAGES_PREFIXED"><a name="G_MESSAGES_PREFIXED"></a><b><code class="envar">G_MESSAGES_PREFIXED</code>. </b>
+<p><a name="G_MESSAGES_PREFIXED"></a><b><code class="envar">G_MESSAGES_PREFIXED</code>. </b>
     A list of log levels for which messages should be prefixed by the 
     program name and PID of the application. The default is to prefix
     everything except <code class="literal">G_LOG_LEVEL_MESSAGE</code> and <code class="literal">G_LOG_LEVEL_INFO</code>. 
   </p>
-<p title="G_DEBUG"><a name="G_DEBUG"></a><b><code class="envar">G_DEBUG</code>. </b>
+<p><a name="G_DEBUG"></a><b><code class="envar">G_DEBUG</code>. </b>
     If GLib has been configured with <code class="option">--enable-debug=yes</code>,
     this variable can be set to a list of debug options, which cause GLib
     to print out different types of debugging information.
@@ -110,11 +110,11 @@ variables like <code class="envar">LANG</code>, <code class="envar">PATH</code> 
 </tr>
 </tbody>
 </table></div>
-<p title="G_DEBUG">
+<p>
     The special value all can be used to turn on all debug options. 
     The special value help can be used to print all available options.  
   </p>
-<p title="G_SLICE"><a name="G_SLICE"></a><b><code class="envar">G_SLICE</code>. </b>
+<p><a name="G_SLICE"></a><b><code class="envar">G_SLICE</code>. </b>
 	  This environment variable allows reconfiguration of the GSlice
 	  memory allocator.
 	  </p>
@@ -165,24 +165,24 @@ variables like <code class="envar">LANG</code>, <code class="envar">PATH</code> 
 </tr>
 </tbody>
 </table></div>
-<p title="G_SLICE">
+<p>
           The special value all can be used to turn on all options. 
           The special value help can be used to print all available options.  
 	</p>
-<p title="G_RANDOM_VERSION"><a name="G_RANDOM_VERSION"></a><b><code class="envar">G_RANDOM_VERSION</code>. </b>
+<p><a name="G_RANDOM_VERSION"></a><b><code class="envar">G_RANDOM_VERSION</code>. </b>
     If this environment variable is set to '2.0', the outdated
     pseudo-random number seeding and generation algorithms from
     GLib-2.0 are used instead of the new better ones. Use the GLib-2.0
     algorithms only if you have sequences of numbers generated with
     Glib-2.0 that you need to reproduce exactly.  
   </p>
-<p title="LIBCHARSET_ALIAS_DIR"><a name="LIBCHARSET_ALIAS_DIR"></a><b><code class="envar">LIBCHARSET_ALIAS_DIR</code>. </b>
+<p><a name="LIBCHARSET_ALIAS_DIR"></a><b><code class="envar">LIBCHARSET_ALIAS_DIR</code>. </b>
     Allows to specify a nonstandard location for the 
     <code class="filename">charset.aliases</code> file that is used by the
     character set conversion routines. The default location is the 
     <em class="replaceable"><code>libdir</code></em> specified at compilation time.
   </p>
-<p title="TZDIR"><a name="TZDIR"></a><b><code class="envar">TZDIR</code>. </b>
+<p><a name="TZDIR"></a><b><code class="envar">TZDIR</code>. </b>
     Allows to specify a nonstandard location for the timezone data files
     that are used by the #GDateTime API. The default location is under
     <code class="filename">/usr/share/zoneinfo</code>. For more information,
@@ -190,7 +190,7 @@ variables like <code class="envar">LANG</code>, <code class="envar">PATH</code> 
   </p>
 </div>
 <hr>
-<div class="refsect2" title="Locale">
+<div class="refsect2">
 <a name="setlocale"></a><h3>Locale</h3>
 <p>
 A number of interfaces in GLib depend on the current locale in which
@@ -214,8 +214,8 @@ returned by functions like <code class="function">strftime()</code>.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="Traps and traces">
-<a name="id382665"></a><h3>Traps and traces</h3>
+<div class="refsect2">
+<a name="id377913"></a><h3>Traps and traces</h3>
 <p>
 
 
@@ -255,8 +255,8 @@ is 20.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="Gdb debugging macros">
-<a name="id371147"></a><h3>Gdb debugging macros</h3>
+<div class="refsect2">
+<a name="id370922"></a><h3>Gdb debugging macros</h3>
 <p>
 glib ships with a set of python macros for the gdb debugger. These includes pretty
 printers for lists, hashtables and gobject types. It also has a backtrace filter
@@ -286,8 +286,8 @@ Which would print the contents of each widget in a list of widgets.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="SystemTap">
-<a name="id371181"></a><h3>SystemTap</h3>
+<div class="refsect2">
+<a name="id370956"></a><h3>SystemTap</h3>
 <p>
 <a class="ulink" href="http://sourceware.org/systemtap/" target="_top">SystemTap</a> is a dynamic whole-system
 analysis toolkit.  GLib ships with a file <code class="filename">glib.stp</code> which defines a
@@ -297,8 +297,8 @@ are in your shared SystemTap scripts directory.
 </p>
 </div>
 <hr>
-<div class="refsect2" title="Memory statistics">
-<a name="id371217"></a><h3>Memory statistics</h3>
+<div class="refsect2">
+<a name="id370992"></a><h3>Memory statistics</h3>
 <p>
 g_mem_profile() will output a summary g_malloc() memory usage, if memory
 profiling has been enabled by calling 
@@ -314,6 +314,6 @@ output details about the memory usage of the slice allocator.
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

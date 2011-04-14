@@ -8,7 +8,7 @@
 <link rel="up" href="chapter-gobject.html" title="The GObject base class">
 <link rel="prev" href="gobject-memory.html" title="Object memory management">
 <link rel="next" href="chapter-signal.html" title="The GObject messaging system">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -19,7 +19,7 @@
 <th width="100%" align="center">GObject Reference Manual</th>
 <td><a accesskey="n" href="chapter-signal.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="sect1" title="Object properties">
+<div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="gobject-properties"></a>Object properties</h2></div></div></div>
 <p>
@@ -162,18 +162,18 @@ g_value_unset (&amp;val);
       <code class="function"><a class="link" href="gobject-Generic-values.html#g-value-transform" title="g_value_transform ()">g_value_transform</a></code> will try to transform the input signed char into
       an unsigned int. Of course, the success of the transformation depends on the availability
       of the required transform function. In practice, there will almost always be a transformation
-      <sup>[<a name="id472040" href="#ftn.id472040" class="footnote">4</a>]</sup>
+      <sup>[<a name="id457973" href="#ftn.id457973" class="footnote">4</a>]</sup>
       which matches and conversion will be carried out if needed.
     </p>
 <p>
       After transformation, the <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> is validated by 
       <code class="function"><a class="link" href="gobject-GParamSpec.html#g-param-value-validate" title="g_param_value_validate ()">g_param_value_validate</a></code> which makes sure the user's
       data stored in the <a class="link" href="gobject-Generic-values.html#GValue" title="GValue"><span class="type">GValue</span></a> matches the characteristics specified by
-      the property's <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>.
-      Here, the <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> we 
+      the property's <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="struct GParamSpec"><span class="type">GParamSpec</span></a>.
+      Here, the <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="struct GParamSpec"><span class="type">GParamSpec</span></a> we 
       provided in class_init has a validation function which makes sure that the GValue
       contains a value which respects the minimum and maximum bounds of the 
-      <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a>. In the example above, the client's GValue does not
+      <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="struct GParamSpec"><span class="type">GParamSpec</span></a>. In the example above, the client's GValue does not
       respect these constraints (it is set to 11, while the maximum is 10). As such, the
       <code class="function"><a class="link" href="gobject-The-Base-Object-Type.html#g-object-set-property" title="g_object_set_property ()">g_object_set_property</a></code> function will return with an error.
     </p>
@@ -182,8 +182,8 @@ g_value_unset (&amp;val);
       would have proceeded with calling the object's set_property class method. Here, since our
       implementation of Foo did override this method, the code path would jump to
       <code class="function">foo_set_property</code> after having retrieved from the 
-      <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> the <span class="emphasis"><em>param_id</em></span>
-      <sup>[<a name="id472141" href="#ftn.id472141" class="footnote">5</a>]</sup>
+      <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="struct GParamSpec"><span class="type">GParamSpec</span></a> the <span class="emphasis"><em>param_id</em></span>
+      <sup>[<a name="id458064" href="#ftn.id458064" class="footnote">5</a>]</sup>
       which had been stored by
       <code class="function"><a class="link" href="gobject-The-Base-Object-Type.html#g-object-class-install-property" title="g_object_class_install_property ()">g_object_class_install_property</a></code>.
     </p>
@@ -209,7 +209,7 @@ g_value_unset (&amp;val);
       are meant to be used by language bindings. For application there is an easier way and
       that is described next.
     </p>
-<div class="sect2" title="Accessing multiple properties at once">
+<div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="gobject-multi-properties"></a>Accessing multiple properties at once</h3></div></div></div>
 <p>
@@ -252,12 +252,12 @@ g_object_set (G_OBJECT (foo),
 </div>
 <div class="footnotes">
 <br><hr width="100" align="left">
-<div class="footnote"><p><sup>[<a id="ftn.id472040" href="#id472040" class="para">4</a>] </sup>Its behaviour might not be what you expect but it is up to you to actually avoid
+<div class="footnote"><p><sup>[<a id="ftn.id457973" href="#id457973" class="para">4</a>] </sup>Its behaviour might not be what you expect but it is up to you to actually avoid
           relying on these transformations.
         </p></div>
-<div class="footnote"><p><sup>[<a id="ftn.id472141" href="#id472141" class="para">5</a>] </sup>
+<div class="footnote"><p><sup>[<a id="ftn.id458064" href="#id458064" class="para">5</a>] </sup>
           It should be noted that the param_id used here need only to uniquely identify each 
-          <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="GParamSpec"><span class="type">GParamSpec</span></a> within the <span class="type">FooClass</span> such that the switch
+          <a class="link" href="gobject-GParamSpec.html#GParamSpec" title="struct GParamSpec"><span class="type">GParamSpec</span></a> within the <span class="type">FooClass</span> such that the switch
           used in the set and get methods actually works. Of course, this locally-unique 
           integer is purely an optimization: it would have been possible to use a set of 
           <span class="emphasis"><em>if (strcmp (a, b) == 0) {} else if (strcmp (a, b) == 0) {}</em></span> statements.
@@ -266,6 +266,6 @@ g_object_set (G_OBJECT (foo),
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

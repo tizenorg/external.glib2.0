@@ -629,6 +629,7 @@ g_variant_unref (GVariant *value)
       else
         g_variant_release_children (value);
 
+      memset (value, 0, sizeof (GVariant));
       g_slice_free (GVariant, value);
     }
 }
@@ -903,7 +904,7 @@ g_variant_get_child_value (GVariant *value,
  *
  * The stored data is in machine native byte order but may not be in
  * fully-normalised form if read from an untrusted source.  See
- * g_variant_normalise() for a solution.
+ * g_variant_get_normal_form() for a solution.
  *
  * This function is approximately O(n) in the size of @data.
  *
@@ -937,7 +938,7 @@ g_variant_store (GVariant *value,
  *
  * The main reason to do this is to detect if a given chunk of
  * serialised data is in normal form: load the data into a #GVariant
- * using g_variant_create_from_data() and then use this function to
+ * using g_variant_new_from_data() and then use this function to
  * check.
  *
  * If @value is found to be in normal form then it will be marked as

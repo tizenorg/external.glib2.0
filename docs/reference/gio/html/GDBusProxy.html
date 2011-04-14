@@ -8,7 +8,7 @@
 <link rel="up" href="gdbus-convenience.html" title="Highlevel D-Bus Support">
 <link rel="prev" href="gio-Watching-Bus-Names.html" title="Watching Bus Names">
 <link rel="next" href="settings.html" title="Settings">
-<meta name="generator" content="GTK-Doc V1.15 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -34,7 +34,7 @@
                   <a href="#GDBusProxy.signals" class="shortcut">Signals</a>
 </td></tr>
 </table>
-<div class="refentry" title="GDBusProxy">
+<div class="refentry">
 <a name="GDBusProxy"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -43,17 +43,17 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <a name="GDBusProxy.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
+<a name="GDBusProxyFlags"></a><pre class="synopsis">
 #include &lt;gio/gio.h&gt;
 
-enum                <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags">GDBusProxyFlags</a>;
+enum                <a class="link" href="GDBusProxy.html#GDBusProxyFlags">GDBusProxyFlags</a>;
                     <a class="link" href="GDBusProxy.html#GDBusProxy-struct" title="GDBusProxy">GDBusProxy</a>;
-                    <a class="link" href="GDBusProxy.html#GDBusProxyClass" title="GDBusProxyClass">GDBusProxyClass</a>;
+struct              <a class="link" href="GDBusProxy.html#GDBusProxyClass" title="struct GDBusProxyClass">GDBusProxyClass</a>;
 <span class="returnvalue">void</span>                <a class="link" href="GDBusProxy.html#g-dbus-proxy-new" title="g_dbus_proxy_new ()">g_dbus_proxy_new</a>                    (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
@@ -63,16 +63,16 @@ enum                <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title
 <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-finish" title="g_dbus_proxy_new_finish ()">g_dbus_proxy_new_finish</a>             (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-sync" title="g_dbus_proxy_new_sync ()">g_dbus_proxy_new_sync</a>               (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus" title="g_dbus_proxy_new_for_bus ()">g_dbus_proxy_new_for_bus</a>            (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
+<span class="returnvalue">void</span>                <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus" title="g_dbus_proxy_new_for_bus ()">g_dbus_proxy_new_for_bus</a>            (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
@@ -81,15 +81,15 @@ enum                <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
 <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus-finish" title="g_dbus_proxy_new_for_bus_finish ()">g_dbus_proxy_new_for_bus_finish</a>     (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus-sync" title="g_dbus_proxy_new_for_bus_sync ()">g_dbus_proxy_new_for_bus_sync</a>       (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
+<a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus-sync" title="g_dbus_proxy_new_for_bus_sync ()">g_dbus_proxy_new_for_bus_sync</a>       (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="returnvalue">GDBusProxyFlags</span></a>     <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-flags" title="g_dbus_proxy_get_flags ()">g_dbus_proxy_get_flags</a>              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
+<a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="returnvalue">GDBusProxyFlags</span></a>     <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-flags" title="g_dbus_proxy_get_flags ()">g_dbus_proxy_get_flags</a>              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
 <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="returnvalue">GDBusConnection</span></a> *   <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-connection" title="g_dbus_proxy_get_connection ()">g_dbus_proxy_get_connection</a>         (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
 const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-name" title="g_dbus_proxy_get_name ()">g_dbus_proxy_get_name</a>               (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-name-owner" title="g_dbus_proxy_get_name_owner ()">g_dbus_proxy_get_name_owner</a>         (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
@@ -106,8 +106,8 @@ const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.htm
 <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-cached-property-names" title="g_dbus_proxy_get_cached_property_names ()">g_dbus_proxy_get_cached_property_names</a>
                                                         (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GDBusProxy.html#g-dbus-proxy-set-interface-info" title="g_dbus_proxy_set_interface_info ()">g_dbus_proxy_set_interface_info</a>     (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>);
-<a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="returnvalue">GDBusInterfaceInfo</span></a> * <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-interface-info" title="g_dbus_proxy_get_interface_info ()">g_dbus_proxy_get_interface_info</a>    (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>);
+<a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="returnvalue">GDBusInterfaceInfo</span></a> * <a class="link" href="GDBusProxy.html#g-dbus-proxy-get-interface-info" title="g_dbus_proxy_get_interface_info ()">g_dbus_proxy_get_interface_info</a>    (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);
 <span class="returnvalue">void</span>                <a class="link" href="GDBusProxy.html#g-dbus-proxy-call" title="g_dbus_proxy_call ()">g_dbus_proxy_call</a>                   (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *method_name</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> *parameters</code></em>,
@@ -128,41 +128,45 @@ const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.htm
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
 </pre>
 </div>
-<div class="refsect1" title="Object Hierarchy">
+<div class="refsect1">
 <a name="GDBusProxy.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  GFlags
+   +----GDBusProxyFlags
+</pre>
 <pre class="synopsis">
   <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
    +----GDBusProxy
 </pre>
 </div>
-<div class="refsect1" title="Implemented Interfaces">
+<div class="refsect1">
 <a name="GDBusProxy.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
 <p>
 GDBusProxy implements
  <a class="link" href="GInitable.html" title="GInitable">GInitable</a> and  <a class="link" href="GAsyncInitable.html" title="GAsyncInitable">GAsyncInitable</a>.</p>
 </div>
-<div class="refsect1" title="Properties">
+<div class="refsect1">
 <a name="GDBusProxy.properties"></a><h2>Properties</h2>
 <pre class="synopsis">
-  "<a class="link" href="GDBusProxy.html#GDBusProxy--g-bus-type" title='The "g-bus-type" property'>g-bus-type</a>"               <a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a>              : Write / Construct Only
+  "<a class="link" href="GDBusProxy.html#GDBusProxy--g-bus-type" title='The "g-bus-type" property'>g-bus-type</a>"               <a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a>              : Write / Construct Only
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-connection" title='The "g-connection" property'>g-connection</a>"             <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>*      : Read / Write / Construct Only
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-default-timeout" title='The "g-default-timeout" property'>g-default-timeout</a>"        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct
-  "<a class="link" href="GDBusProxy.html#GDBusProxy--g-flags" title='The "g-flags" property'>g-flags</a>"                  <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a>       : Read / Write / Construct Only
-  "<a class="link" href="GDBusProxy.html#GDBusProxy--g-interface-info" title='The "g-interface-info" property'>g-interface-info</a>"         <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a>*   : Read / Write
+  "<a class="link" href="GDBusProxy.html#GDBusProxy--g-flags" title='The "g-flags" property'>g-flags</a>"                  <a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a>       : Read / Write / Construct Only
+  "<a class="link" href="GDBusProxy.html#GDBusProxy--g-interface-info" title='The "g-interface-info" property'>g-interface-info</a>"         <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a>*   : Read / Write
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-interface-name" title='The "g-interface-name" property'>g-interface-name</a>"         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-name" title='The "g-name" property'>g-name</a>"                   <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-name-owner" title='The "g-name-owner" property'>g-name-owner</a>"             <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read
   "<a class="link" href="GDBusProxy.html#GDBusProxy--g-object-path" title='The "g-object-path" property'>g-object-path</a>"            <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only
 </pre>
 </div>
-<div class="refsect1" title="Signals">
+<div class="refsect1">
 <a name="GDBusProxy.signals"></a><h2>Signals</h2>
 <pre class="synopsis">
-  "<a class="link" href="GDBusProxy.html#GDBusProxy-g-properties-changed" title='The "g-properties-changed" signal'>g-properties-changed</a>"                           : Run Last
-  "<a class="link" href="GDBusProxy.html#GDBusProxy-g-signal" title='The "g-signal" signal'>g-signal</a>"                                       : Run Last
+  "<a class="link" href="GDBusProxy.html#GDBusProxy-g-properties-changed" title='The "g-properties-changed" signal'>g-properties-changed</a>"                           : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
+  "<a class="link" href="GDBusProxy.html#GDBusProxy-g-signal" title='The "g-signal" signal'>g-signal</a>"                                       : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a>
 </pre>
 </div>
-<div class="refsect1" title="Description">
+<div class="refsect1">
 <a name="GDBusProxy.description"></a><h2>Description</h2>
 <p>
 <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> is a base class used for proxies to access a D-Bus
@@ -173,7 +177,7 @@ both well-known and unique names.
 By default, <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> will cache all properties (and listen to
 changes) of the remote object, and proxy all signals that gets
 emitted. This behaviour can be changed by passing suitable
-<a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> when the proxy is created. If the proxy is for a
+<a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> when the proxy is created. If the proxy is for a
 well-known name, the property cache is flushed when the name owner
 vanishes and reloaded when a name owner appears.
 </p>
@@ -197,7 +201,7 @@ way of working with proxies is to subclass <a class="link" href="GDBusProxy.html
 more natural properties and signals in your derived class.
 </p>
 <p>
-See <a class="xref" href="ch29s05.html#gdbus-example-proxy-subclass" title="Example 18. GDBusProxy subclass example">Example 18, “GDBusProxy subclass example”</a> for an example.
+See <a class="xref" href="ch29s05.html#gdbus-example-proxy-subclass" title="Example 19. GDBusProxy subclass example">Example 19, “GDBusProxy subclass example”</a> for an example.
 </p>
 <p>
 </p>
@@ -680,9 +684,9 @@ See <a class="xref" href="ch29s05.html#gdbus-example-proxy-subclass" title="Exam
 <p><br class="example-break">
 </p>
 </div>
-<div class="refsect1" title="Details">
+<div class="refsect1">
 <a name="GDBusProxy.details"></a><h2>Details</h2>
-<div class="refsect2" title="enum GDBusProxyFlags">
+<div class="refsect2">
 <a name="GDBusProxyFlags"></a><h3>enum GDBusProxyFlags</h3>
 <pre class="programlisting">typedef enum
 {
@@ -725,7 +729,7 @@ only be used in proxies for well-known names.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="GDBusProxy">
+<div class="refsect2">
 <a name="GDBusProxy-struct"></a><h3>GDBusProxy</h3>
 <pre class="programlisting">typedef struct _GDBusProxy GDBusProxy;</pre>
 <p>
@@ -735,9 +739,9 @@ should only be accessed using the provided API.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="GDBusProxyClass">
-<a name="GDBusProxyClass"></a><h3>GDBusProxyClass</h3>
-<pre class="programlisting">typedef struct {
+<div class="refsect2">
+<a name="GDBusProxyClass"></a><h3>struct GDBusProxyClass</h3>
+<pre class="programlisting">struct GDBusProxyClass {
   /* Signals */
   void (*g_properties_changed) (GDBusProxy          *proxy,
                                 GVariant            *changed_properties,
@@ -746,7 +750,7 @@ should only be accessed using the provided API.
                                 const gchar         *sender_name,
                                 const gchar         *signal_name,
                                 GVariant            *parameters);
-} GDBusProxyClass;
+};
 </pre>
 <p>
 Class structure for <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
@@ -756,24 +760,22 @@ Class structure for <a class="link" href="GDBusProxy.html" title="GDBusProxy"><s
 <tbody>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GDBusProxyClass.g-properties-changed"></a>g_properties_changed</code></em> ()</span></p></td>
-<td>Signal class handler for the <a class="link" href="GDBusProxy.html#GDBusProxy-g-properties-changed" title='The "g-properties-changed" signal'><span class="type">"g-properties-changed"</span></a> signal.
-</td>
+<td>Signal class handler for the <a class="link" href="GDBusProxy.html#GDBusProxy-g-properties-changed" title='The "g-properties-changed" signal'><span class="type">"g-properties-changed"</span></a> signal.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="structfield"><code><a name="GDBusProxyClass.g-signal"></a>g_signal</code></em> ()</span></p></td>
-<td>Signal class handler for the <a class="link" href="GDBusProxy.html#GDBusProxy-g-signal" title='The "g-signal" signal'><span class="type">"g-signal"</span></a> signal.
-</td>
+<td>Signal class handler for the <a class="link" href="GDBusProxy.html#GDBusProxy-g-signal" title='The "g-signal" signal'><span class="type">"g-signal"</span></a> signal.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_new ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-new"></a><h3>g_dbus_proxy_new ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_new                    (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
@@ -815,55 +817,48 @@ See <a class="xref" href="GDBusProxy.html#gdbus-wellknown-proxy" title="Example�
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.
-</td>
+<td>A <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags used when constructing the proxy.
-</td>
+<td>Flags used when constructing the proxy.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
-<td>A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> specifying the minimal interface that <em class="parameter"><code>proxy</code></em> conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+<td>A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> specifying the minimal interface that <em class="parameter"><code>proxy</code></em> conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
-<td>A bus name (well-known or unique) or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>connection</code></em> is not a message bus connection.
+<td>A bus name (well-known or unique) or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>connection</code></em> is not a message bus connection. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object_path</code></em> :</span></p></td>
-<td>An object path.
-</td>
+<td>An object path.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>interface_name</code></em> :</span></p></td>
-<td>A D-Bus interface name.
-</td>
+<td>A D-Bus interface name.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>Callback function to invoke when the proxy is ready.
-</td>
+<td>Callback function to invoke when the proxy is ready.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>User data to pass to <em class="parameter"><code>callback</code></em>.
-</td>
+<td>User data to pass to <em class="parameter"><code>callback</code></em>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_new_finish ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-new-finish"></a><h3>g_dbus_proxy_new_finish ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        g_dbus_proxy_new_finish             (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -875,30 +870,26 @@ Finishes creating a <a class="link" href="GDBusProxy.html" title="GDBusProxy"><s
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
-<td>A <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> obtained from the <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> function passed to <a class="link" href="GDBusProxy.html#g-dbus-proxy-new" title="g_dbus_proxy_new ()"><code class="function">g_dbus_proxy_new()</code></a>.
-</td>
+<td>A <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> obtained from the <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> function passed to <a class="link" href="GDBusProxy.html#g-dbus-proxy-new" title="g_dbus_proxy_new ()"><code class="function">g_dbus_proxy_new()</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>error</code></em> is set. Free with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
-
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>error</code></em> is set. Free with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_new_sync ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-new-sync"></a><h3>g_dbus_proxy_new_sync ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        g_dbus_proxy_new_sync               (<em class="parameter"><code><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> *connection</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
@@ -933,60 +924,54 @@ See <a class="xref" href="GDBusProxy.html#gdbus-wellknown-proxy" title="Example�
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>connection</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.
-</td>
+<td>A <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags used when constructing the proxy.
-</td>
+<td>Flags used when constructing the proxy.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
-<td> A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> specifying the minimal interface that <em class="parameter"><code>proxy</code></em> conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> specifying the minimal interface that <em class="parameter"><code>proxy</code></em> conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
-<td> A bus name (well-known or unique) or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>connection</code></em> is not a message bus connection. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>A bus name (well-known or unique) or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>connection</code></em> is not a message bus connection. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object_path</code></em> :</span></p></td>
-<td>An object path.
-</td>
+<td>An object path.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>interface_name</code></em> :</span></p></td>
-<td>A D-Bus interface name.
-</td>
+<td>A D-Bus interface name.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td> A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if error is set. Free with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
-
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if error is set. Free with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_new_for_bus ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-new-for-bus"></a><h3>g_dbus_proxy_new_for_bus ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_new_for_bus            (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
+<pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_new_for_bus            (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
@@ -994,7 +979,7 @@ See <a class="xref" href="GDBusProxy.html#gdbus-wellknown-proxy" title="Example�
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> callback</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
 <p>
-Like <a class="link" href="GDBusProxy.html#g-dbus-proxy-new" title="g_dbus_proxy_new ()"><code class="function">g_dbus_proxy_new()</code></a> but takes a <a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> instead of a <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.
+Like <a class="link" href="GDBusProxy.html#g-dbus-proxy-new" title="g_dbus_proxy_new ()"><code class="function">g_dbus_proxy_new()</code></a> but takes a <a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a> instead of a <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.
 </p>
 <p>
 See <a class="xref" href="GDBusProxy.html#gdbus-wellknown-proxy" title="Example 10. GDBusProxy for a well-known-name">Example 10, “GDBusProxy for a well-known-name”</a> for an example of how <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> can be used.
@@ -1004,55 +989,47 @@ See <a class="xref" href="GDBusProxy.html#gdbus-wellknown-proxy" title="Example�
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>bus_type</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a>.
-</td>
+<td>A <a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags used when constructing the proxy.
-</td>
+<td>Flags used when constructing the proxy.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
-<td>A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> specifying the minimal interface that <em class="parameter"><code>proxy</code></em> conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+<td>A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> specifying the minimal interface that <em class="parameter"><code>proxy</code></em> conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
-<td>A bus name (well-known or unique).
-</td>
+<td>A bus name (well-known or unique).</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object_path</code></em> :</span></p></td>
-<td>An object path.
-</td>
+<td>An object path.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>interface_name</code></em> :</span></p></td>
-<td>A D-Bus interface name.
-</td>
+<td>A D-Bus interface name.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
-<td>Callback function to invoke when the proxy is ready.
-</td>
+<td>Callback function to invoke when the proxy is ready.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>User data to pass to <em class="parameter"><code>callback</code></em>.
-</td>
+<td>User data to pass to <em class="parameter"><code>callback</code></em>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_new_for_bus_finish ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-new-for-bus-finish"></a><h3>g_dbus_proxy_new_for_bus_finish ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        g_dbus_proxy_new_for_bus_finish     (<em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
@@ -1064,37 +1041,33 @@ Finishes creating a <a class="link" href="GDBusProxy.html" title="GDBusProxy"><s
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
-<td>A <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> obtained from the <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> function passed to <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus" title="g_dbus_proxy_new_for_bus ()"><code class="function">g_dbus_proxy_new_for_bus()</code></a>.
-</td>
+<td>A <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> obtained from the <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> function passed to <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-for-bus" title="g_dbus_proxy_new_for_bus ()"><code class="function">g_dbus_proxy_new_for_bus()</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>error</code></em> is set. Free with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
-
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>error</code></em> is set. Free with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_new_for_bus_sync ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-new-for-bus-sync"></a><h3>g_dbus_proxy_new_for_bus_sync ()</h3>
-<pre class="programlisting"><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        g_dbus_proxy_new_for_bus_sync       (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
+<pre class="programlisting"><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="returnvalue">GDBusProxy</span></a> *        g_dbus_proxy_new_for_bus_sync       (<em class="parameter"><code><a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a> bus_type</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> flags</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *name</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *object_path</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *interface_name</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> *cancellable</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
-Like <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-sync" title="g_dbus_proxy_new_sync ()"><code class="function">g_dbus_proxy_new_sync()</code></a> but takes a <a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a> instead of a <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.
+Like <a class="link" href="GDBusProxy.html#g-dbus-proxy-new-sync" title="g_dbus_proxy_new_sync ()"><code class="function">g_dbus_proxy_new_sync()</code></a> but takes a <a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a> instead of a <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>.
 </p>
 <p>
 See <a class="xref" href="GDBusProxy.html#gdbus-wellknown-proxy" title="Example 10. GDBusProxy for a well-known-name">Example 10, “GDBusProxy for a well-known-name”</a> for an example of how <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> can be used.
@@ -1104,58 +1077,50 @@ See <a class="xref" href="GDBusProxy.html#gdbus-wellknown-proxy" title="Example�
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>bus_type</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a>.
-</td>
+<td>A <a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags used when constructing the proxy.
-</td>
+<td>Flags used when constructing the proxy.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
-<td>A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> specifying the minimal interface that <em class="parameter"><code>proxy</code></em> conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
+<td>A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> specifying the minimal interface
+that <em class="parameter"><code>proxy</code></em> conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>name</code></em> :</span></p></td>
-<td>A bus name (well-known or unique).
-</td>
+<td>A bus name (well-known or unique).</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>object_path</code></em> :</span></p></td>
-<td>An object path.
-</td>
+<td>An object path.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>interface_name</code></em> :</span></p></td>
-<td>A D-Bus interface name.
-</td>
+<td>A D-Bus interface name.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if error is set. Free with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.
-
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if error is set. Free with <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref"><code class="function">g_object_unref()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_flags ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-flags"></a><h3>g_dbus_proxy_get_flags ()</h3>
-<pre class="programlisting"><a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="returnvalue">GDBusProxyFlags</span></a>     g_dbus_proxy_get_flags              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="returnvalue">GDBusProxyFlags</span></a>     g_dbus_proxy_get_flags              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
 Gets the flags that <em class="parameter"><code>proxy</code></em> was constructed with.
 </p>
@@ -1164,21 +1129,18 @@ Gets the flags that <em class="parameter"><code>proxy</code></em> was constructe
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> Flags from the <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> enumeration.
-
-</td>
+<td>Flags from the <a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> enumeration.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_connection ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-connection"></a><h3>g_dbus_proxy_get_connection ()</h3>
 <pre class="programlisting"><a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="returnvalue">GDBusConnection</span></a> *   g_dbus_proxy_get_connection         (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
@@ -1189,12 +1151,11 @@ Gets the connection <em class="parameter"><code>proxy</code></em> is for.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> owned by <em class="parameter"><code>proxy</code></em>. Do not free. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
+<td>A <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a> owned by <em class="parameter"><code>proxy</code></em>. Do not free. <span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1202,7 +1163,7 @@ Gets the connection <em class="parameter"><code>proxy</code></em> is for.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_name ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-name"></a><h3>g_dbus_proxy_get_name ()</h3>
 <pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_dbus_proxy_get_name               (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
@@ -1213,21 +1174,18 @@ Gets the name that <em class="parameter"><code>proxy</code></em> was constructed
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A string owned by <em class="parameter"><code>proxy</code></em>. Do not free.
-
-</td>
+<td>A string owned by <em class="parameter"><code>proxy</code></em>. Do not free.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_name_owner ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-name-owner"></a><h3>g_dbus_proxy_get_name_owner ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             g_dbus_proxy_get_name_owner         (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
@@ -1241,21 +1199,18 @@ no-one currently owns that name. You may connect to the
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> The name owner or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no name owner exists. Free with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.
-
-</td>
+<td>The name owner or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no name owner exists. Free with <a href="http://library.gnome.org/devel/glib/unstable/glib-Memory-Allocation.html#g-free"><code class="function">g_free()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_object_path ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-object-path"></a><h3>g_dbus_proxy_get_object_path ()</h3>
 <pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_dbus_proxy_get_object_path        (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
@@ -1266,21 +1221,18 @@ Gets the object path <em class="parameter"><code>proxy</code></em> is for.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A string owned by <em class="parameter"><code>proxy</code></em>. Do not free.
-
-</td>
+<td>A string owned by <em class="parameter"><code>proxy</code></em>. Do not free.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_interface_name ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-interface-name"></a><h3>g_dbus_proxy_get_interface_name ()</h3>
 <pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       g_dbus_proxy_get_interface_name     (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
@@ -1291,21 +1243,18 @@ Gets the D-Bus interface name <em class="parameter"><code>proxy</code></em> is f
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A string owned by <em class="parameter"><code>proxy</code></em>. Do not free.
-
-</td>
+<td>A string owned by <em class="parameter"><code>proxy</code></em>. Do not free.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_default_timeout ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-default-timeout"></a><h3>g_dbus_proxy_get_default_timeout ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="returnvalue">gint</span></a>                g_dbus_proxy_get_default_timeout    (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
@@ -1321,21 +1270,18 @@ See the <a class="link" href="GDBusProxy.html#GDBusProxy--g-default-timeout" tit
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> Timeout to use for <em class="parameter"><code>proxy</code></em>.
-
-</td>
+<td>Timeout to use for <em class="parameter"><code>proxy</code></em>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_set_default_timeout ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-set-default-timeout"></a><h3>g_dbus_proxy_set_default_timeout ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_set_default_timeout    (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
                                                          <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> timeout_msec</code></em>);</pre>
@@ -1352,20 +1298,18 @@ See the <a class="link" href="GDBusProxy.html#GDBusProxy--g-default-timeout" tit
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>timeout_msec</code></em> :</span></p></td>
-<td>Timeout in milliseconds.
-</td>
+<td>Timeout in milliseconds.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_cached_property ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-cached-property"></a><h3>g_dbus_proxy_get_cached_property ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          g_dbus_proxy_get_cached_property    (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *property_name</code></em>);</pre>
@@ -1383,28 +1327,24 @@ is checked against it.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>property_name</code></em> :</span></p></td>
-<td>Property name.
-</td>
+<td>Property name.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A reference to the <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> instance that holds the value
+<td>A reference to the <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> instance that holds the value
 for <em class="parameter"><code>property_name</code></em> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the value is not in the cache. The
-returned reference must be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a>.
-
-</td>
+returned reference must be freed with <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_set_cached_property ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-set-cached-property"></a><h3>g_dbus_proxy_set_cached_property ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_set_cached_property    (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *property_name</code></em>,
@@ -1474,12 +1414,11 @@ name)</code>.
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>property_name</code></em> :</span></p></td>
-<td>Property name.
-</td>
+<td>Property name.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td>Value for the property or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to remove it from the cache.
+<td>Value for the property or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to remove it from the cache. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1487,7 +1426,7 @@ name)</code>.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_cached_property_names ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-cached-property-names"></a><h3>g_dbus_proxy_get_cached_property_names ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> **            g_dbus_proxy_get_cached_property_names
                                                         (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
@@ -1499,25 +1438,22 @@ Gets the names of all cached properties on <em class="parameter"><code>proxy</co
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>proxy</code></em> has
-no cached properties. Free the returned array with <a href="http://library.gnome.org/devel/glib/unstable/glib-String-Utility-Functions.html#g-strfreev"><code class="function">g_strfreev()</code></a>.
-
-</td>
+<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>-terminated array of strings or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>proxy</code></em> has
+no cached properties. Free the returned array with <a href="http://library.gnome.org/devel/glib/unstable/glib-String-Utility-Functions.html#g-strfreev"><code class="function">g_strfreev()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_set_interface_info ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-set-interface-info"></a><h3>g_dbus_proxy_set_interface_info ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_set_interface_info     (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>);</pre>
+                                                         <em class="parameter"><code><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> *info</code></em>);</pre>
 <p>
 Ensure that interactions with <em class="parameter"><code>proxy</code></em> conform to the given
 interface.  For example, when completing a method call, if the type
@@ -1538,7 +1474,7 @@ See the <a class="link" href="GDBusProxy.html#GDBusProxy--g-interface-info" titl
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>info</code></em> :</span></p></td>
-<td>Minimum interface this proxy conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to unset.
+<td>Minimum interface this proxy conforms to or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> to unset. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 </tbody>
@@ -1546,11 +1482,11 @@ See the <a class="link" href="GDBusProxy.html#GDBusProxy--g-interface-info" titl
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_get_interface_info ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-get-interface-info"></a><h3>g_dbus_proxy_get_interface_info ()</h3>
-<pre class="programlisting"><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="returnvalue">GDBusInterfaceInfo</span></a> * g_dbus_proxy_get_interface_info    (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
+<pre class="programlisting"><a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="returnvalue">GDBusInterfaceInfo</span></a> * g_dbus_proxy_get_interface_info    (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>);</pre>
 <p>
-Returns the <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a>, if any, specifying the minimal
+Returns the <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a>, if any, specifying the minimal
 interface that <em class="parameter"><code>proxy</code></em> conforms to.
 </p>
 <p>
@@ -1566,17 +1502,15 @@ See the <a class="link" href="GDBusProxy.html#GDBusProxy--g-interface-info" titl
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. Do not unref the returned
-object, it is owned by <em class="parameter"><code>proxy</code></em>.
-
-</td>
+<td>A <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. Do not unref the returned
+object, it is owned by <em class="parameter"><code>proxy</code></em>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_call ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-call"></a><h3>g_dbus_proxy_call ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                g_dbus_proxy_call                   (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *method_name</code></em>,
@@ -1651,52 +1585,45 @@ version of this method.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>method_name</code></em> :</span></p></td>
-<td>Name of method to invoke.
-</td>
+<td>Name of method to invoke.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
-<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with parameters for the signal or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if not passing parameters.
+<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with parameters for the signal or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if not passing parameters. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags from the <a class="link" href="GDBusConnection.html#GDBusCallFlags" title="enum GDBusCallFlags"><span class="type">GDBusCallFlags</span></a> enumeration.
-</td>
+<td>Flags from the <a class="link" href="GDBusConnection.html#GDBusCallFlags" title="enum GDBusCallFlags"><span class="type">GDBusCallFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>timeout_msec</code></em> :</span></p></td>
 <td>The timeout in milliseconds (with <a href="http://library.gnome.org/devel/glib/unstable/glib-Limits-of-Basic-Types.html#G-MAXINT:CAPS"><code class="literal">G_MAXINT</code></a> meaning
-               "infinite") or -1 to use the proxy default timeout.
-</td>
+"infinite") or -1 to use the proxy default timeout.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>callback</code></em> :</span></p></td>
 <td>A <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> to call when the request is satisfied or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if you don't
-care about the result of the method invocation.
-</td>
+care about the result of the method invocation.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
-<td>The data to pass to <em class="parameter"><code>callback</code></em>.
-</td>
+<td>The data to pass to <em class="parameter"><code>callback</code></em>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_call_finish ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-call-finish"></a><h3>g_dbus_proxy_call_finish ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          g_dbus_proxy_call_finish            (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
                                                          <em class="parameter"><code><a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> *res</code></em>,
@@ -1709,32 +1636,28 @@ Finishes an operation started with <a class="link" href="GDBusProxy.html#g-dbus-
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>res</code></em> :</span></p></td>
-<td>A <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> obtained from the <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> passed to <a class="link" href="GDBusProxy.html#g-dbus-proxy-call" title="g_dbus_proxy_call ()"><code class="function">g_dbus_proxy_call()</code></a>.
-</td>
+<td>A <a class="link" href="GAsyncResult.html" title="GAsyncResult"><span class="type">GAsyncResult</span></a> obtained from the <a class="link" href="GAsyncResult.html#GAsyncReadyCallback" title="GAsyncReadyCallback ()"><span class="type">GAsyncReadyCallback</span></a> passed to <a class="link" href="GDBusProxy.html#g-dbus-proxy-call" title="g_dbus_proxy_call ()"><code class="function">g_dbus_proxy_call()</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>error</code></em> is set. Otherwise a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with
-return values. Free with <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a>.
-
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>error</code></em> is set. Otherwise a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with
+return values. Free with <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title="g_dbus_proxy_call_sync ()">
+<div class="refsect2">
 <a name="g-dbus-proxy-call-sync"></a><h3>g_dbus_proxy_call_sync ()</h3>
 <pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="returnvalue">GVariant</span></a> *          g_dbus_proxy_call_sync              (<em class="parameter"><code><a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy</code></em>,
                                                          <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *method_name</code></em>,
@@ -1802,57 +1725,51 @@ method.
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.
-</td>
+<td>A <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>method_name</code></em> :</span></p></td>
-<td>Name of method to invoke.
-</td>
+<td>Name of method to invoke.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
-<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with parameters for the signal or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if not passing parameters.
+<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with parameters for the signal
+or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if not passing parameters. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td>Flags from the <a class="link" href="GDBusConnection.html#GDBusCallFlags" title="enum GDBusCallFlags"><span class="type">GDBusCallFlags</span></a> enumeration.
-</td>
+<td>Flags from the <a class="link" href="GDBusConnection.html#GDBusCallFlags" title="enum GDBusCallFlags"><span class="type">GDBusCallFlags</span></a> enumeration.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>timeout_msec</code></em> :</span></p></td>
 <td>The timeout in milliseconds (with <a href="http://library.gnome.org/devel/glib/unstable/glib-Limits-of-Basic-Types.html#G-MAXINT:CAPS"><code class="literal">G_MAXINT</code></a> meaning
-               "infinite") or -1 to use the proxy default timeout.
-</td>
+"infinite") or -1 to use the proxy default timeout.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cancellable</code></em> :</span></p></td>
-<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>A <a class="link" href="GCancellable.html" title="GCancellable"><span class="type">GCancellable</span></a> or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.
-</td>
+<td>Return location for error or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>.</td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>error</code></em> is set. Otherwise a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with
-return values. Free with <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a>.
-
-</td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if <em class="parameter"><code>error</code></em> is set. Otherwise a <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with
+return values. Free with <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#g-variant-unref"><code class="function">g_variant_unref()</code></a>.</td>
 </tr>
 </tbody>
 </table></div>
 <p class="since">Since 2.26</p>
 </div>
 </div>
-<div class="refsect1" title="Property Details">
+<div class="refsect1">
 <a name="GDBusProxy.property-details"></a><h2>Property Details</h2>
-<div class="refsect2" title='The "g-bus-type" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-bus-type"></a><h3>The <code class="literal">"g-bus-type"</code> property</h3>
-<pre class="programlisting">  "g-bus-type"               <a class="link" href="GDBusConnection.html#GBusType" title="enum GBusType"><span class="type">GBusType</span></a>              : Write / Construct Only</pre>
+<pre class="programlisting">  "g-bus-type"               <a class="link" href="GDBusConnection.html#GBusType"><span class="type">GBusType</span></a>              : Write / Construct Only</pre>
 <p>
 If this property is not <a class="link" href="GDBusConnection.html#G-BUS-TYPE-NONE:CAPS"><code class="literal">G_BUS_TYPE_NONE</code></a>, then
 <a class="link" href="GDBusProxy.html#GDBusProxy--g-connection" title='The "g-connection" property'><span class="type">"g-connection"</span></a> must be <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> and will be set to the
@@ -1863,7 +1780,7 @@ of this property.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-connection" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-connection"></a><h3>The <code class="literal">"g-connection"</code> property</h3>
 <pre class="programlisting">  "g-connection"             <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span class="type">GDBusConnection</span></a>*      : Read / Write / Construct Only</pre>
 <p>
@@ -1872,7 +1789,7 @@ The <a class="link" href="GDBusConnection.html" title="GDBusConnection"><span cl
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-default-timeout" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-default-timeout"></a><h3>The <code class="literal">"g-default-timeout"</code> property</h3>
 <pre class="programlisting">  "g-default-timeout"        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a>                  : Read / Write / Construct</pre>
 <p>
@@ -1891,18 +1808,18 @@ the default timeout (typically 25 seconds) is used. If set to
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-flags" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-flags"></a><h3>The <code class="literal">"g-flags"</code> property</h3>
-<pre class="programlisting">  "g-flags"                  <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a>       : Read / Write / Construct Only</pre>
+<pre class="programlisting">  "g-flags"                  <a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a>       : Read / Write / Construct Only</pre>
 <p>
-Flags from the <a class="link" href="GDBusProxy.html#GDBusProxyFlags" title="enum GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> enumeration.
+Flags from the <a class="link" href="GDBusProxy.html#GDBusProxyFlags"><span class="type">GDBusProxyFlags</span></a> enumeration.
 </p>
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-interface-info" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-interface-info"></a><h3>The <code class="literal">"g-interface-info"</code> property</h3>
-<pre class="programlisting">  "g-interface-info"         <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo" title="GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a>*   : Read / Write</pre>
+<pre class="programlisting">  "g-interface-info"         <a class="link" href="gio-D-Bus-Introspection-Data.html#GDBusInterfaceInfo"><span class="type">GDBusInterfaceInfo</span></a>*   : Read / Write</pre>
 <p>
 Ensure that interactions with this proxy conform to the given
 interface.  For example, when completing a method call, if the
@@ -1913,7 +1830,7 @@ simply dropped.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-interface-name" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-interface-name"></a><h3>The <code class="literal">"g-interface-name"</code> property</h3>
 <pre class="programlisting">  "g-interface-name"         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
 <p>
@@ -1923,7 +1840,7 @@ The D-Bus interface name the proxy is for.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-name" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-name"></a><h3>The <code class="literal">"g-name"</code> property</h3>
 <pre class="programlisting">  "g-name"                   <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
 <p>
@@ -1933,7 +1850,7 @@ The well-known or unique name that the proxy is for.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-name-owner" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-name-owner"></a><h3>The <code class="literal">"g-name-owner"</code> property</h3>
 <pre class="programlisting">  "g-name-owner"             <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read</pre>
 <p>
@@ -1945,7 +1862,7 @@ track changes to this property.
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-object-path" property'>
+<div class="refsect2">
 <a name="GDBusProxy--g-object-path"></a><h3>The <code class="literal">"g-object-path"</code> property</h3>
 <pre class="programlisting">  "g-object-path"            <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write / Construct Only</pre>
 <p>
@@ -1955,14 +1872,14 @@ The object path the proxy is for.
 <p class="since">Since 2.26</p>
 </div>
 </div>
-<div class="refsect1" title="Signal Details">
+<div class="refsect1">
 <a name="GDBusProxy.signal-details"></a><h2>Signal Details</h2>
-<div class="refsect2" title='The "g-properties-changed" signal'>
+<div class="refsect2">
 <a name="GDBusProxy-g-properties-changed"></a><h3>The <code class="literal">"g-properties-changed"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>    changed_properties,
-                                                        <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Boxed-Types.html#GStrv"><span class="type">GStrv</span></a>      *invalidated_properties,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>    user_data)                   : Run Last</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>   *changed_properties,
+                                                        <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Boxed-Types.html#GStrv"><span class="type">GStrv</span></a>       invalidated_properties,
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>    user_data)                   : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a></pre>
 <p>
 Emitted when one or more D-Bus properties on <em class="parameter"><code>proxy</code></em> changes. The
 local cache has already been updated when this signal fires. Note
@@ -1979,18 +1896,15 @@ This signal corresponds to the
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>The <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> emitting the signal.
-</td>
+<td>The <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> emitting the signal.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>changed_properties</code></em> :</span></p></td>
-<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> containing the properties that changed
-</td>
+<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> containing the properties that changed</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>invalidated_properties</code></em> :</span></p></td>
-<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated array of properties that was invalidated
-</td>
+<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> terminated array of properties that was invalidated</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -2001,13 +1915,13 @@ This signal corresponds to the
 <p class="since">Since 2.26</p>
 </div>
 <hr>
-<div class="refsect2" title='The "g-signal" signal'>
+<div class="refsect2">
 <a name="GDBusProxy-g-signal"></a><h3>The <code class="literal">"g-signal"</code> signal</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>                user_function                      (<a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> *proxy,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>      *sender_name,
                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>      *signal_name,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>    parameters,
-                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>    user_data)        : Run Last</pre>
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a>   *parameters,
+                                                        <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>    user_data)        : <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS"><code class="literal">Run Last</code></a></pre>
 <p>
 Emitted when a signal from the remote object and interface that <em class="parameter"><code>proxy</code></em> is for, has been received.
 </p>
@@ -2016,23 +1930,19 @@ Emitted when a signal from the remote object and interface that <em class="param
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>proxy</code></em> :</span></p></td>
-<td>The <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> emitting the signal.
-</td>
+<td>The <a class="link" href="GDBusProxy.html" title="GDBusProxy"><span class="type">GDBusProxy</span></a> emitting the signal.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>sender_name</code></em> :</span></p></td>
-<td>The sender of the signal or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the connection is not a bus connection.
-</td>
+<td>The sender of the signal or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if the connection is not a bus connection.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>signal_name</code></em> :</span></p></td>
-<td>The name of the signal.
-</td>
+<td>The name of the signal.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parameters</code></em> :</span></p></td>
-<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with parameters for the signal.
-</td>
+<td>A <a href="http://library.gnome.org/devel/glib/unstable/glib-GVariant.html#GVariant"><span class="type">GVariant</span></a> tuple with parameters for the signal.</td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
@@ -2046,6 +1956,6 @@ Emitted when a signal from the remote object and interface that <em class="param
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.15</div>
+          Generated by GTK-Doc V1.17</div>
 </body>
 </html>

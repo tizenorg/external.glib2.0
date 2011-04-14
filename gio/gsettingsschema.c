@@ -267,6 +267,8 @@ g_settings_schema_new (const gchar *name)
   GvdbTable *table = NULL;
   GSList *source;
 
+  g_return_val_if_fail (name != NULL, NULL);
+
   initialise_schema_sources ();
 
   for (source = schema_sources; source; source = source->next)
@@ -304,7 +306,8 @@ g_settings_schema_get_value (GSettingsSchema *schema,
   value = gvdb_table_get_raw_value (schema->priv->table, key);
 
   if G_UNLIKELY (value == NULL)
-    g_error ("schema does not contain a key named '%s'", key);
+    g_error ("Settings schema '%s' does not contain a key named '%s'",
+             schema->priv->name, key);
 
   iter = g_variant_iter_new (value);
   g_variant_unref (value);

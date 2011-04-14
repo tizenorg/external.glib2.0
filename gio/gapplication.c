@@ -38,7 +38,7 @@
 #include <string.h>
 
 /**
- * SECTION: gapplication
+ * SECTION:gapplication
  * @title: GApplication
  * @short_description: Core application class
  *
@@ -64,6 +64,22 @@
  * For details on valid application identifiers, see
  * g_application_id_is_valid().
  *
+ * The application identifier is claimed by the application as a
+ * well-known bus name on the user's session bus.  This means that the
+ * uniqueness of your application is scoped to the current session.  It
+ * also means that your application may provide additional services
+ * (through registration of other object paths) at that bus name.
+ *
+ * The registration of these object paths should be done with the shared
+ * GDBus session bus.  Note that due to the internal architecture of
+ * GDBus, method calls can be dispatched at any time (even if a main
+ * loop is not running).  For this reason, you must ensure that any
+ * object paths that you wish to register are registered before
+ * #GApplication attempts to acquire the bus name of your application
+ * (which happens in g_application_register()).  Unfortunately, this
+ * means that you can not use g_application_get_is_remote() to decide if
+ * you want to register object paths.
+ *
  * GApplication provides convenient life cycle management by maintaining
  * a <firstterm>use count</firstterm> for the primary application instance.
  * The use count can be changed using g_application_hold() and
@@ -78,10 +94,37 @@
  * <itemizedlist>
  * <listitem>via 'Activate' (i.e. just starting the application)</listitem>
  * <listitem>via 'Open' (i.e. opening some files)</listitem>
+ * <listitem>by handling a command-line</listitem>
  * <listitem>via activating an action</listitem>
  * </itemizedlist>
  * The #GApplication::startup signal lets you handle the application
  * initialization for all of these in a single place.
+ *
+ * Regardless of which of these entry points is used to start the application,
+ * GApplication passes some <firstterm id="platform-data">platform
+ * data</firstterm> from the launching instance to the primary instance,
+ * in the form of a #GVariant dictionary mapping strings to variants.
+ * To use platform data, override the @before_emit or @after_emit virtual
+ * functions in your #GApplication subclass. When dealing with
+ * #GApplicationCommandline objects, the platform data is directly
+ * available via g_application_command_line_get_cwd(),
+ * g_application_command_line_get_environ() and
+ * g_application_command_line_get_platform_data().
+ *
+ * As the name indicates, the platform data may vary depending on the
+ * operating system, but it always includes the current directory (key
+ * "cwd"), and optionally the environment (ie the set of environment
+ * variables and their values) of the calling process (key "environ").
+ * The environment is only added to the platform data if the
+ * #G_APPLICATION_SEND_ENVIONMENT flag is set. GApplication subclasses
+ * can add their own platform data by overriding the @add_platform_data
+ * virtual function. For instance, #GtkApplication adds startup notification
+ * data in this way.
+ *
+ * To parse commandline arguments you may handle the
+ * #GApplication::command-line signal or override the local_command_line()
+ * vfunc, to parse them in either the primary instance or the local instance,
+ * respectively.
  *
  * <example id="gapplication-example-open"><title>Opening files with a GApplication</title>
  * <programlisting>
@@ -170,7 +213,8 @@ g_application_real_activate (GApplication *application)
 {
   if (!g_signal_has_handler_pending (application,
                                      g_application_signals[SIGNAL_ACTIVATE],
-                                     0, TRUE))
+                                     0, TRUE) &&
+      G_APPLICATION_GET_CLASS (application)->activate == g_application_real_activate)
     {
       static gboolean warned;
 
@@ -192,7 +236,8 @@ g_application_real_open (GApplication  *application,
 {
   if (!g_signal_has_handler_pending (application,
                                      g_application_signals[SIGNAL_OPEN],
-                                     0, TRUE))
+                                     0, TRUE) &&
+      G_APPLICATION_GET_CLASS (application)->open == g_application_real_open)
     {
       static gboolean warned;
 
@@ -210,18 +255,24 @@ static int
 g_application_real_command_line (GApplication            *application,
                                  GApplicationCommandLine *cmdline)
 {
-  static gboolean warned;
+  if (!g_signal_has_handler_pending (application,
+                                     g_application_signals[SIGNAL_COMMAND_LINE],
+                                     0, TRUE) &&
+      G_APPLICATION_GET_CLASS (application)->command_line == g_application_real_command_line)
+    {
+      static gboolean warned;
 
-  if (warned) 
+      if (warned) 
+        return 1;
+
+      g_warning ("Your application claims to support custom command line "
+                 "handling but does not implement g_application_command_line() "
+                 "and has no handlers connected to the 'command-line' signal.");
+
+      warned = TRUE;
+    }
+
     return 1;
-
-  g_warning ("Your application claims to support custom command line "
-             "handling but does not implement g_application_command_line() "
-             "and has no handlers connected to the 'command-line' signal.");
-
-  warned = TRUE;
-
-  return 1;
 }
 
 static gboolean
@@ -522,7 +573,7 @@ g_application_class_init (GApplicationClass *class)
    * @application: the application
    *
    * The ::startup signal is emitted on the primary instance immediately
-   * after registration. See g_activation_register().
+   * after registration. See g_application_register().
    */
   g_application_signals[SIGNAL_STARTUP] =
     g_signal_new ("startup", G_TYPE_APPLICATION, G_SIGNAL_RUN_LAST,
@@ -565,8 +616,11 @@ g_application_class_init (GApplicationClass *class)
    *     passed commandline
    *
    * The ::command-line signal is emitted on the primary instance when
-   * a commandline is not handled locally. See g_application_run() for
-   * more information.
+   * a commandline is not handled locally. See g_application_run() and
+   * the #GApplicationCommandline documentation for more information.
+   *
+   * Returns: An integer that is set as the exit status for the calling
+   *   process. See g_application_command_line_set_exit_status().
    */
   g_application_signals[SIGNAL_COMMAND_LINE] =
     g_signal_new ("command-line", G_TYPE_APPLICATION, G_SIGNAL_RUN_LAST,
@@ -629,9 +683,9 @@ get_platform_data (GApplication *application)
  * For convenience, the restrictions on application identifiers are
  * reproduced here:
  * <itemizedlist>
- *   <listitem>Application identifiers must contain only the ASCII characters "[A-Z][a-z][0-9]_-" and must not begin with a digit.</listitem>
- *   <listitem>Application identifiers must contain at least one '.' (period) character (and thus at least two elements).</listitem>
- *   <listitem>Application identifiers must not begin with a '.' (period) character.</listitem>
+ *   <listitem>Application identifiers must contain only the ASCII characters "[A-Z][a-z][0-9]_-." and must not begin with a digit.</listitem>
+ *   <listitem>Application identifiers must contain at least one '.' (period) character (and thus at least three elements).</listitem>
+ *   <listitem>Application identifiers must not begin or end with a '.' (period) character.</listitem>
  *   <listitem>Application identifiers must not contain consecutive '.' (period) characters.</listitem>
  *   <listitem>Application identifiers must not exceed 255 characters.</listitem>
  * </itemizedlist>
@@ -639,27 +693,43 @@ get_platform_data (GApplication *application)
 gboolean
 g_application_id_is_valid (const gchar *application_id)
 {
+  gsize len;
   gboolean allow_dot;
+  gboolean has_dot;
 
-  if (strlen (application_id) > 255)
+  len = strlen (application_id);
+
+  if (len > 255)
     return FALSE;
 
-  if (!g_ascii_isalpha (*application_id))
+  if (!g_ascii_isalpha (application_id[0]))
+    return FALSE;
+
+  if (application_id[len-1] == '.')
     return FALSE;
 
   application_id++;
-  allow_dot = FALSE;
+  allow_dot = TRUE;
+  has_dot = FALSE;
   for (; *application_id; application_id++)
     {
       if (g_ascii_isalnum (*application_id) ||
           (*application_id == '-') ||
           (*application_id == '_'))
-        allow_dot = TRUE;
+        {
+          allow_dot = TRUE;
+        }
       else if (allow_dot && *application_id == '.')
-        allow_dot = FALSE;
+        {
+          has_dot = TRUE;
+          allow_dot = FALSE;
+        }
       else
         return FALSE;
     }
+
+  if (!has_dot)
+    return FALSE;
 
   return TRUE;
 }
@@ -902,7 +972,14 @@ g_application_get_is_remote (GApplication *application)
  *
  * This is the point at which the application discovers if it is the
  * primary instance or merely acting as a remote for an already-existing
- * primary instance.
+ * primary instance.  This is implemented by attempting to acquire the
+ * application identifier as a unique bus name on the session bus using
+ * GDBus.
+ *
+ * Due to the internal architecture of GDBus, method calls can be
+ * dispatched at any time (even if a main loop is not running).  For
+ * this reason, you must ensure that any object paths that you wish to
+ * register are registered before calling this function.
  *
  * If the application has already been registered then %TRUE is
  * returned with no work performed.
@@ -1093,20 +1170,40 @@ g_application_open (GApplication  *application,
 /**
  * g_application_run:
  * @application: a #GApplication
- * @argc: the argc from main()
- * @argv: (array length=argc): the argv from main()
+ * @argc: the argc from main() (or 0 if @argv is %NULL)
+ * @argv: (array length=argc): the argv from main(), or %NULL
  * @returns: the exit status
  *
  * Runs the application.
  *
  * This function is intended to be run from main() and its return value
- * is intended to be returned by main().
+ * is intended to be returned by main(). Although you are expected to pass
+ * the @argc, @argv parameters from main() to this function, it is possible
+ * to pass %NULL if @argv is not available or commandline handling is not
+ * required.
  *
- * First, the local_command_line() virtual function is invoked.  This
- * function always runs on the local instance.  If that function returns
- * %FALSE then the application is registered and the #GApplication::command-line
- * signal is emitted in the primary instance (which may or may not be
- * this instance).
+ * First, the local_command_line() virtual function is invoked.
+ * This function always runs on the local instance. It gets passed a pointer
+ * to a %NULL-terminated copy of @argv and is expected to remove the arguments
+ * that it handled (shifting up remaining arguments). See
+ * <xref linkend="gapplication-example-cmdline2"/> for an example of
+ * parsing @argv manually. Alternatively, you may use the #GOptionContext API,
+ * after setting <literal>argc = g_strv_length (argv);</literal>.
+ *
+ * The last argument to local_command_line() is a pointer to the @status
+ * variable which can used to set the exit status that is returned from
+ * g_application_run().
+ *
+ * If local_command_line() returns %TRUE, the command line is expected
+ * to be completely handled, including possibly registering as the primary
+ * instance, calling g_application_activate() or g_application_open(), etc.
+ *
+ * If local_command_line() returns %FALSE then the application is registered
+ * and the #GApplication::command-line signal is emitted in the primary
+ * instance (which may or may not be this instance). The signal handler
+ * gets passed a #GApplicationCommandline object that (among other things)
+ * contains the remaining commandline arguments that have not been handled
+ * by local_command_line().
  *
  * If the application has the %G_APPLICATION_HANDLES_COMMAND_LINE
  * flag set then the default implementation of local_command_line()
@@ -1122,9 +1219,17 @@ g_application_open (GApplication  *application,
  * given and the %G_APPLICATION_HANDLES_OPEN flag is set then they
  * are assumed to be filenames and g_application_open() is called.
  *
+ * If you need to handle commandline arguments that are not filenames,
+ * and you don't mind commandline handling to happen in the primary
+ * instance, you should set %G_APPLICATION_HANDLED_COMMAND_LINE and
+ * process the commandline arguments in your #GApplication::command-line
+ * signal handler, either manually or using the #GOptionContext API.
+ *
  * If you are interested in doing more complicated local handling of the
  * commandline then you should implement your own #GApplication subclass
- * and override local_command_line(). See
+ * and override local_command_line(). In this case, you most likely want
+ * to return %TRUE from your local_command_line() implementation to
+ * suppress the default handling. See
  * <xref linkend="gapplication-example-cmdline2"/> for an example.
  *
  * If, after the above is done, the use count of the application is zero
@@ -1280,7 +1385,8 @@ g_application_get_action_enabled (GActionGroup *action_group,
 {
   GApplication *application = G_APPLICATION (action_group);
 
-  g_return_val_if_fail (application->priv->actions != NULL, FALSE);
+  g_return_val_if_fail (application->priv->remote_actions != NULL ||
+                        application->priv->actions != NULL, FALSE);
   g_return_val_if_fail (application->priv->is_registered, FALSE);
 
   if (application->priv->remote_actions)
@@ -1303,7 +1409,8 @@ g_application_get_action_parameter_type (GActionGroup *action_group,
 {
   GApplication *application = G_APPLICATION (action_group);
 
-  g_return_val_if_fail (application->priv->actions != NULL, NULL);
+  g_return_val_if_fail (application->priv->remote_actions != NULL ||
+                        application->priv->actions != NULL, NULL);
   g_return_val_if_fail (application->priv->is_registered, NULL);
 
   if (application->priv->remote_actions)
@@ -1329,7 +1436,8 @@ g_application_get_action_state_type (GActionGroup *action_group,
 {
   GApplication *application = G_APPLICATION (action_group);
 
-  g_return_val_if_fail (application->priv->actions != NULL, NULL);
+  g_return_val_if_fail (application->priv->remote_actions != NULL ||
+                        application->priv->actions != NULL, NULL);
   g_return_val_if_fail (application->priv->is_registered, NULL);
 
   if (application->priv->remote_actions)
@@ -1355,7 +1463,8 @@ g_application_get_action_state (GActionGroup *action_group,
 {
   GApplication *application = G_APPLICATION (action_group);
 
-  g_return_val_if_fail (application->priv->actions != NULL, NULL);
+  g_return_val_if_fail (application->priv->remote_actions != NULL ||
+                        application->priv->actions != NULL, NULL);
   g_return_val_if_fail (application->priv->is_registered, NULL);
 
   if (application->priv->remote_actions)
@@ -1382,6 +1491,8 @@ g_application_change_action_state (GActionGroup *action_group,
 {
   GApplication *application = G_APPLICATION (action_group);
 
+  g_return_if_fail (application->priv->is_remote ||
+                    application->priv->actions != NULL);
   g_return_if_fail (application->priv->is_registered);
 
   if (application->priv->is_remote)
@@ -1401,6 +1512,8 @@ g_application_activate_action (GActionGroup *action_group,
 {
   GApplication *application = G_APPLICATION (action_group);
 
+  g_return_if_fail (application->priv->is_remote ||
+                    application->priv->actions != NULL);
   g_return_if_fail (application->priv->is_registered);
 
   if (application->priv->is_remote)

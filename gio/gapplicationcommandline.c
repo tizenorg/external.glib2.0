@@ -46,13 +46,34 @@ G_DEFINE_TYPE (GApplicationCommandLine, g_application_command_line, G_TYPE_OBJEC
  * invocation) or remote (ie: some other process forwarded the
  * commandline to this process).
  *
+ * The GApplicationCommandLine object can provide the @argc and @argv
+ * parameters for use with the #GOptionContext command-line parsing API,
+ * with the g_application_command_line_get_arguments() function. See
+ * <xref linkend="gapplication-example-cmdline3"/> for an example.
+ *
  * The exit status of the originally-invoked process may be set and
  * messages can be printed to stdout or stderr of that process.  The
  * lifecycle of the originally-invoked process is tied to the lifecycle
  * of this object (ie: the process exits when the last reference is
  * dropped).
  *
+ * The main use for #GApplicationCommandline (and the
+ * #GApplication::command-line signal) is 'Emacs server' like use cases:
+ * You can set the <envar>EDITOR</envar> environment variable to have
+ * e.g. git use your favourite editor to edit commit messages, and if you
+ * already have an instance of the editor running, the editing will happen
+ * in the running instance, instead of opening a new one. An important
+ * aspect of this use case is that the process that gets started by git
+ * does not return until the editing is done.
+ *
  * <example id="gapplication-example-cmdline"><title>Handling commandline arguments with GApplication</title>
+ * <para>
+ * A simple example where the commandline is completely handled
+ * in the #GApplication::command-line handler. The launching instance exits
+ * once the signal handler in the primary instance has returned, and the
+ * return value of the signal handler becomes the exit status of the launching
+ * instance.
+ * </para>
  * <programlisting>
  * <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../../../../gio/tests/gapplication-example-cmdline.c">
  *   <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
@@ -60,9 +81,38 @@ G_DEFINE_TYPE (GApplicationCommandLine, g_application_command_line, G_TYPE_OBJEC
  * </programlisting>
  * </example>
  *
- * <example id="gapplication-example-cmdline2"><title>Complicated commandline handling</title>
+ * <example id="gapplication-example-cmdline2"><title>Split commandline handling</title>
+ * <para>
+ * An example of split commandline handling. Options that start with
+ * <literal>--local-</literal> are handled locally, all other options are
+ * passed to the #GApplication::command-line handler which runs in the primary
+ * instance.
+ * </para>
  * <programlisting>
  * <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../../../../gio/tests/gapplication-example-cmdline2.c">
+ *   <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
+ * </xi:include>
+ * </programlisting>
+ * </example>
+ *
+ * <example id="gapplication-example-cmdline3"><title>Deferred commandline handling</title>
+ * <para>
+ * An example of deferred commandline handling. Here, the commandline is
+ * not completely handled before the #GApplication::command-line handler
+ * returns. Instead, we keep a reference to the GApplicationCommandline
+ * object and handle it later(in this example, in an idle). Note that it
+ * is necessary to hold the application until you are done with the
+ * commandline.
+ * </para>
+ * <para>
+ * This example also shows how to use #GOptionContext for parsing the
+ * commandline arguments. Note that it is necessary to disable the
+ * built-in help-handling of #GOptionContext, since it calls exit()
+ * after printing help, which is not what you want to happen in
+ * the primary instance.
+ * </para>
+ * <programlisting>
+ * <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" parse="text" href="../../../../gio/tests/gapplication-example-cmdline3.c">
  *   <xi:fallback>FIXME: MISSING XINCLUDE CONTENT</xi:fallback>
  * </xi:include>
  * </programlisting>
@@ -284,8 +334,8 @@ g_application_command_line_get_arguments (GApplicationCommandLine *cmdline,
  * g_application_command_line_get_cwd:
  * @cmdline: a #GApplicationCommandLine
  *
- * Gets the working directory of the command line invocation.  The
- * string may contain non-utf8 data.
+ * Gets the working directory of the command line invocation.
+ * The string may contain non-utf8 data.
  *
  * It is possible that the remote application did not send a working
  * directory, so this may be %NULL.
@@ -311,8 +361,9 @@ g_application_command_line_get_cwd (GApplicationCommandLine *cmdline)
  * @cmdline: a #GApplicationCommandLine
  *
  * Gets the contents of the 'environ' variable of the command line
- * invocation, as would be returned by g_get_environ().  The strings may
- * contain non-utf8 data.
+ * invocation, as would be returned by g_get_environ(), ie as a
+ * %NULL-terminated list of strings in the form 'NAME=VALUE'.
+ * The strings may contain non-utf8 data.
  *
  * The remote application usually does not send an environment.  Use
  * %G_APPLICATION_SEND_ENVIRONMENT to affect that.  Even with this flag
@@ -321,6 +372,9 @@ g_application_command_line_get_cwd (GApplicationCommandLine *cmdline)
  *
  * The return value should not be modified or freed and is valid for as
  * long as @cmdline exists.
+ *
+ * See g_application_command_line_getenv() if you are only interested
+ * in the value of a single environment variable.
  *
  * Returns: (array zero-terminated=1) (transfer none): the environment
  * strings, or %NULL if they were not sent

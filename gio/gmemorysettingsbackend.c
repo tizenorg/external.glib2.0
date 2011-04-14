@@ -21,9 +21,8 @@
 
 #include "config.h"
 
-#include "gmemorysettingsbackend.h"
 #include "gsimplepermission.h"
-#include "gsettingsbackend.h"
+#include "gsettingsbackendinternal.h"
 #include "giomodule.h"
 
 
@@ -173,4 +172,23 @@ g_memory_settings_backend_class_init (GMemorySettingsBackendClass *class)
   backend_class->get_writable = g_memory_settings_backend_get_writable;
   backend_class->get_permission = g_memory_settings_backend_get_permission;
   object_class->finalize = g_memory_settings_backend_finalize;
+}
+
+/**
+ * g_memory_settings_backend_new:
+ *
+ * Creates a memory-backed #GSettingsBackend.
+ *
+ * This backend allows changes to settings, but does not write them
+ * to any backing storage, so the next time you run your application,
+ * the memory backend will start out with the default values again.
+ *
+ * Returns: (transfer full): a newly created #GSettingsBackend
+ *
+ * Since: 2.28
+ */
+GSettingsBackend *
+g_memory_settings_backend_new (void)
+{
+  return g_object_new (G_TYPE_MEMORY_SETTINGS_BACKEND, NULL);
 }
