@@ -39,49 +39,51 @@ contained (const gchar * const *items,
 }
 
 static gboolean
-is_schema (const gchar *schema)
+is_relocatable_schema (GSettingsSchema *schema)
 {
-  return contained (g_settings_list_schemas (), schema);
+  return g_settings_schema_get_path (schema) == NULL;
 }
 
 static gboolean
-is_relocatable_schema (const gchar *schema)
+check_relocatable_schema (GSettingsSchema *schema,
+                          const gchar     *schema_id)
 {
-  return contained (g_settings_list_relocatable_schemas (), schema);
+  if (schema == NULL)
+    {
+      g_printerr (_("No such schema '%s'\n"), schema_id);
+      return FALSE;
+    }
+
+  if (!is_relocatable_schema (schema))
+    {
+      g_printerr (_("Schema '%s' is not relocatable "
+                    "(path must not be specified)\n"),
+                  schema_id);
+      return FALSE;
+    }
+
+  return TRUE;
 }
 
 static gboolean
-check_relocatable_schema (const gchar *schema)
+check_schema (GSettingsSchema *schema,
+              const gchar *schema_id)
 {
+  if (schema == NULL)
+    {
+      g_printerr (_("No such schema '%s'\n"), schema_id);
+      return FALSE;
+    }
+
   if (is_relocatable_schema (schema))
-    return TRUE;
+    {
+      g_printerr (_("Schema '%s' is relocatable "
+                    "(path must be specified)\n"),
+                  schema_id);
+      return FALSE;
+    }
 
-  if (is_schema (schema))
-    g_printerr (_("Schema '%s' is not relocatable "
-                  "(path must not be specified)\n"),
-                schema);
-
-  else
-    g_printerr (_("No such schema '%s'\n"), schema);
-
-  return FALSE;
-}
-
-static gboolean
-check_schema (const gchar *schema)
-{
-  if (is_schema (schema))
-    return TRUE;
-
-  if (is_relocatable_schema (schema))
-    g_printerr (_("Schema '%s' is relocatable "
-                  "(path must be specified)\n"),
-                schema);
-
-  else
-    g_printerr (_("No such schema '%s'\n"), schema);
-
-  return FALSE;
+  return TRUE;
 }
 
 static gboolean
@@ -187,22 +189,22 @@ gsettings_list_children (GSettings   *settings,
   for (i = 0; children[i]; i++)
     {
       GSettings *child;
-      gchar *schema;
+      GSettingsSchema *schema;
       gchar *path;
 
       child = g_settings_get_child (settings, children[i]);
       g_object_get (child,
-                    "schema", &schema,
+                    "settings-schema", &schema,
                     "path", &path,
                     NULL);
 
-      if (is_schema (schema))
-        g_print ("%-*s   %s\n", max, children[i], schema);
+      if (g_settings_schema_get_path (schema) != NULL)
+        g_print ("%-*s   %s\n", max, children[i], g_settings_schema_get_id (schema));
       else
-        g_print ("%-*s   %s:%s\n", max, children[i], schema, path);
+        g_print ("%-*s   %s:%s\n", max, children[i], g_settings_schema_get_id (schema), path);
 
       g_object_unref (child);
-      g_free (schema);
+      g_settings_schema_unref (schema);
       g_free (path);
     }
 
@@ -240,29 +242,43 @@ gsettings_list_recursively (GSettings   *settings,
                             const gchar *key,
                             const gchar *value)
 {
-  gchar **children;
-  gint i;
-
-  enumerate (settings);
-
-  children = g_settings_list_children (settings);
-
-  for (i = 0; children[i]; i++)
+  if (settings)
     {
-      GSettings *child;
-      gchar *schema;
+      gchar **children;
+      gint i;
 
-      child = g_settings_get_child (settings, children[i]);
-      g_object_get (child, "schema", &schema, NULL);
+      enumerate (settings);
+      children = g_settings_list_children (settings);
+      for (i = 0; children[i]; i++)
+        {
+          GSettings *child;
+          GSettingsSchema *schema;
 
-      if (is_schema (schema))
-        enumerate (child);
+          child = g_settings_get_child (settings, children[i]);
+          g_object_get (child, "settings-schema", &schema, NULL);
 
-      g_object_unref (child);
-      g_free (schema);
+          enumerate (child);
+
+          g_object_unref (child);
+          g_settings_schema_unref (schema);
+        }
+
+      g_strfreev (children);
     }
+  else
+    {
+      const gchar * const *schemas;
+      gint i;
 
-  g_strfreev (children);
+      schemas = g_settings_list_schemas ();
+
+      for (i = 0; schemas[i]; i++)
+        {
+          settings = g_settings_new (schemas[i]);
+          enumerate (settings);
+          g_object_unref (settings);
+        }
+    }
 }
 
 static void
@@ -343,6 +359,49 @@ gsettings_reset (GSettings   *settings,
 }
 
 static void
+reset_all_keys (GSettings   *settings)
+{
+  gchar **keys;
+  gint i;
+
+  keys = g_settings_list_keys (settings);
+  for (i = 0; keys[i]; i++)
+    {
+      g_settings_reset (settings, keys[i]);
+    }
+
+  g_strfreev (keys);
+}
+
+static void
+gsettings_reset_recursively (GSettings   *settings,
+                             const gchar *key,
+                             const gchar *value)
+{
+  gchar **children;
+  gint i;
+
+  g_settings_delay (settings);
+
+  reset_all_keys (settings);
+  children = g_settings_list_children (settings);
+  for (i = 0; children[i]; i++)
+    {
+      GSettings *child;
+      child = g_settings_get_child (settings, children[i]);
+
+      reset_all_keys (child);
+
+      g_object_unref (child);
+    }
+
+  g_strfreev (children);
+
+  g_settings_apply (settings);
+  g_settings_sync ();
+}
+
+static void
 gsettings_writable (GSettings   *settings,
                     const gchar *key,
                     const gchar *value)
@@ -401,22 +460,37 @@ gsettings_set (GSettings   *settings,
 
   new = g_variant_parse (type, value, NULL, NULL, &error);
 
-  /* A common error is to specify a string with single quotes
-   * (or use completion for that), and forget that the shell
-   * will eat one level of quoting, resulting in 'unknown keyword'
-   * error from the gvariant parser.
-   * To handle this case, try to parse again with an extra level
-   * of quotes.
+  /* If that didn't work and the type is string then we should assume
+   * that the user is just trying to set a string directly and forgot
+   * the quotes (or had them consumed by the shell).
+   *
+   * If the user started with a quote then we assume that some deeper
+   * problem is at play and we want the failure in that case.
+   *
+   * Consider:
+   *
+   *   gsettings set x.y.z key "'i don't expect this to work'"
+   *
+   * Note that we should not just add quotes and try parsing again, but
+   * rather assume that the user is providing us with a bare string.
+   * Assume we added single quotes, then consider this case:
+   *
+   *   gsettings set x.y.z key "i'd expect this to work"
+   *
+   * A similar example could be given for double quotes.
+   *
+   * Avoid that whole mess by just using g_variant_new_string().
    */
   if (new == NULL &&
-      g_error_matches (error, G_VARIANT_PARSE_ERROR,
-                       G_VARIANT_PARSE_ERROR_UNKNOWN_KEYWORD))
+      g_variant_type_equal (type, G_VARIANT_TYPE_STRING) &&
+      value[0] != '\'' && value[0] != '"')
     {
-      value = freeme = g_strdup_printf ("\"%s\"", value);
-      new = g_variant_parse (type, value, NULL, NULL, NULL);
-      if (new != NULL)
-        g_clear_error (&error);
+      g_clear_error (&error);
+      new = g_variant_new_string (value);
     }
+
+  /* we're done with 'type' now, so we can free 'existing' */
+  g_variant_unref (existing);
 
   if (new == NULL)
     {
@@ -432,8 +506,6 @@ gsettings_set (GSettings   *settings,
     }
 
   g_settings_set_value (settings, key, new);
-  g_variant_unref (existing);
-  g_variant_unref (new);
 
   g_settings_sync ();
 
@@ -485,8 +557,9 @@ gsettings_help (gboolean     requested,
 
   else if (strcmp (command, "list-recursively") == 0)
     {
-      description = _("List keys and values, recursively");
-      synopsis = N_("SCHEMA[:PATH]");
+      description = _("List keys and values, recursively\n"
+                      "If no SCHEMA is given, list all keys\n");
+      synopsis = N_("[SCHEMA[:PATH]]");
     }
 
   else if (strcmp (command, "get") == 0)
@@ -513,6 +586,12 @@ gsettings_help (gboolean     requested,
       synopsis = N_("SCHEMA[:PATH] KEY");
     }
 
+  else if (strcmp (command, "reset-recursively") == 0)
+    {
+      description = _("Reset all keys in SCHEMA to their defaults");
+      synopsis = N_("SCHEMA[:PATH]");
+    }
+
   else if (strcmp (command, "writable") == 0)
     {
       description = _("Check if KEY is writable");
@@ -537,7 +616,7 @@ gsettings_help (gboolean     requested,
     {
       g_string_append (string,
       _("Usage:\n"
-        "  gsettings COMMAND [ARGS...]\n"
+        "  gsettings [--schemadir SCHEMADIR] COMMAND [ARGS...]\n"
         "\n"
         "Commands:\n"
         "  help                      Show this information\n"
@@ -550,6 +629,7 @@ gsettings_help (gboolean     requested,
         "  get                       Get the value of a key\n"
         "  set                       Set the value of a key\n"
         "  reset                     Reset the value of a key\n"
+        "  reset-recursively         Reset all values in a given schema\n"
         "  writable                  Check if a key is writable\n"
         "  monitor                   Watch for changes\n"
         "\n"
@@ -557,42 +637,42 @@ gsettings_help (gboolean     requested,
     }
   else
     {
-      g_string_append_printf (string, _("Usage:\n  gsettings %s %s\n\n%s\n\n"),
-                              command, _(synopsis), description);
+      g_string_append_printf (string, _("Usage:\n  gsettings [--schemadir SCHEMADIR] %s %s\n\n%s\n\n"),
+                              command, synopsis[0] ? _(synopsis) : "", description);
 
-      if (synopsis[0])
-        {
-          g_string_append (string, _("Arguments:\n"));
+      g_string_append (string, _("Arguments:\n"));
 
-          if (strstr (synopsis, "[COMMAND]"))
-            g_string_append (string,
-                           _("  COMMAND   The (optional) command to explain\n"));
+      g_string_append (string,
+                       _("  SCHEMADIR A directory to search for additional schemas\n"));
 
-          else if (strstr (synopsis, "SCHEMA"))
-            g_string_append (string,
-                           _("  SCHEMA    The name of the schema\n"
-                             "  PATH      The path, for relocatable schemas\n"));
+      if (strstr (synopsis, "[COMMAND]"))
+        g_string_append (string,
+                       _("  COMMAND   The (optional) command to explain\n"));
 
-          if (strstr (synopsis, "[KEY]"))
-            g_string_append (string,
-                           _("  KEY       The (optional) key within the schema\n"));
+      else if (strstr (synopsis, "SCHEMA"))
+        g_string_append (string,
+                       _("  SCHEMA    The name of the schema\n"
+                         "  PATH      The path, for relocatable schemas\n"));
 
-          else if (strstr (synopsis, "KEY"))
-            g_string_append (string,
-                           _("  KEY       The key within the schema\n"));
+      if (strstr (synopsis, "[KEY]"))
+        g_string_append (string,
+                       _("  KEY       The (optional) key within the schema\n"));
 
-          if (strstr (synopsis, "VALUE"))
-            g_string_append (string,
-                           _("  VALUE     The value to set\n"));
+      else if (strstr (synopsis, "KEY"))
+        g_string_append (string,
+                       _("  KEY       The key within the schema\n"));
 
-          g_string_append (string, "\n");
-        }
+      if (strstr (synopsis, "VALUE"))
+        g_string_append (string,
+                       _("  VALUE     The value to set\n"));
+
+      g_string_append (string, "\n");
     }
 
   if (requested)
     g_print ("%s", string->str);
   else
-    g_printerr ("%s", string->str);
+    g_printerr ("%s\n", string->str);
 
   g_string_free (string, TRUE);
 
@@ -604,15 +684,58 @@ int
 main (int argc, char **argv)
 {
   void (* function) (GSettings *, const gchar *, const gchar *);
+  GSettingsSchemaSource *schema_source;
+  GSettingsSchema *schema;
   GSettings *settings;
   const gchar *key;
 
+#ifdef G_OS_WIN32
+  extern gchar *_glib_get_locale_dir (void);
+  gchar *tmp;
+#endif
+
   setlocale (LC_ALL, "");
+  textdomain (GETTEXT_PACKAGE);
+
+#ifdef G_OS_WIN32
+  tmp = _glib_get_locale_dir ();
+  bindtextdomain (GETTEXT_PACKAGE, tmp);
+  g_free (tmp);
+#else
+  bindtextdomain (GETTEXT_PACKAGE, GLIB_LOCALE_DIR);
+#endif
+
+#ifdef HAVE_BIND_TEXTDOMAIN_CODESET
+  bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+#endif
 
   if (argc < 2)
     return gsettings_help (FALSE, NULL);
 
-  else if (strcmp (argv[1], "help") == 0)
+  schema_source = g_settings_schema_source_ref (g_settings_schema_source_get_default ());
+
+  if (argc > 3 && g_str_equal (argv[1], "--schemadir"))
+    {
+      GSettingsSchemaSource *parent = schema_source;
+      GError *error = NULL;
+
+      schema_source = g_settings_schema_source_new_from_directory (argv[2], parent, FALSE, &error);
+      g_settings_schema_source_unref (parent);
+
+      if (schema_source == NULL)
+        {
+          g_printerr ("Could not load schemas from %s: %s\n", argv[2], error->message);
+          g_clear_error (&error);
+
+          return 1;
+        }
+
+      /* shift remaining arguments (not correct wrt argv[0], but doesn't matter) */
+      argv = argv + 2;
+      argc -= 2;
+    }
+
+  if (strcmp (argv[1], "help") == 0)
     return gsettings_help (TRUE, argv[2]);
 
   else if (argc == 2 && strcmp (argv[1], "list-schemas") == 0)
@@ -627,7 +750,7 @@ main (int argc, char **argv)
   else if (argc == 3 && strcmp (argv[1], "list-children") == 0)
     function = gsettings_list_children;
 
-  else if (argc == 3 && strcmp (argv[1], "list-recursively") == 0)
+  else if ((argc == 2 || argc == 3) && strcmp (argv[1], "list-recursively") == 0)
     function = gsettings_list_recursively;
 
   else if (argc == 4 && strcmp (argv[1], "range") == 0)
@@ -641,6 +764,9 @@ main (int argc, char **argv)
 
   else if (argc == 4 && strcmp (argv[1], "reset") == 0)
     function = gsettings_reset;
+
+  else if (argc == 3 && strcmp (argv[1], "reset-recursively") == 0)
+    function = gsettings_reset_recursively;
 
   else if (argc == 4 && strcmp (argv[1], "writable") == 0)
     function = gsettings_writable;
@@ -659,31 +785,35 @@ main (int argc, char **argv)
 
       if (argv[2][0] == '\0')
         {
-          g_printerr (_("Empty schema name given"));
+          g_printerr (_("Empty schema name given\n"));
           return 1;
         }
 
       parts = g_strsplit (argv[2], ":", 2);
 
+      schema = g_settings_schema_source_lookup (schema_source, parts[0], TRUE);
       if (parts[1])
         {
-          if (!check_relocatable_schema (parts[0]) || !check_path (parts[1]))
+          if (!check_relocatable_schema (schema, parts[0]) || !check_path (parts[1]))
             return 1;
 
-          settings = g_settings_new_with_path (parts[0], parts[1]);
+          settings = g_settings_new_full (schema, NULL, parts[1]);
         }
       else
         {
-          if (!check_schema (parts[0]))
+          if (!check_schema (schema, parts[0]))
             return 1;
 
-          settings = g_settings_new (parts[0]);
+          settings = g_settings_new_full (schema, NULL, NULL);
         }
 
       g_strfreev (parts);
     }
   else
-    settings = NULL;
+    {
+      settings = NULL;
+      schema = NULL;
+    }
 
   if (argc > 3)
     {
@@ -699,6 +829,10 @@ main (int argc, char **argv)
 
   if (settings != NULL)
     g_object_unref (settings);
+  if (schema != NULL)
+    g_settings_schema_unref (schema);
+
+  g_settings_schema_source_unref (schema_source);
 
   return 0;
 }

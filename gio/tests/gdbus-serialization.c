@@ -607,8 +607,8 @@ check_serialization (GVariant *value,
                                                         blob_size,
                                                         G_DBUS_CAPABILITY_FLAGS_NONE,
                                                         &error);
-      g_assert (recovered_message != NULL);
       g_assert_no_error (error);
+      g_assert (recovered_message != NULL);
 
       if (value == NULL)
         {
@@ -736,15 +736,30 @@ message_serialize_complex (void)
 /* ---------------------------------------------------------------------------------------------------- */
 
 static void
+replace (char       *blob,
+         gsize       len,
+	 const char *before,
+	 const char *after)
+{
+  gsize i;
+  gsize slen = strlen (before) + 1;
+
+  g_assert_cmpuint (strlen (before), ==, strlen (after));
+  g_assert_cmpuint (len, >=, slen);
+
+  for (i = 0; i < (len - slen + 1); i++)
+    {
+      if (memcmp (blob + i, before, slen) == 0)
+        memcpy (blob + i, after, slen);
+    }
+}
+
+static void
 message_serialize_invalid (void)
 {
   guint n;
 
-  /* Here we're relying on libdbus-1's DBusMessage type not checking
-   * anything. If that were to change, we'd need to do our own
-   * thing.
-   *
-   * Other things we could check (note that GDBus _does_ check for all
+  /* Other things we could check (note that GDBus _does_ check for all
    * these things - we just don't have test-suit coverage for it)
    *
    *  - array exceeding 64 MiB (2^26 bytes) - unfortunately libdbus-1 checks
@@ -769,9 +784,13 @@ message_serialize_invalid (void)
       DBusMessage *dbus_message;
       char *blob;
       int blob_len;
+      /* these are in pairs with matching length */
+      const gchar *valid_utf8_str = "this is valid...";
       const gchar *invalid_utf8_str = "this is invalid\xff";
-      const gchar *invalid_object_path = "/this/is/not a valid object path";
+      const gchar *valid_signature = "a{sv}a{sv}a{sv}aiai";
       const gchar *invalid_signature = "not valid signature";
+      const gchar *valid_object_path = "/this/is/a/valid/dbus/object/path";
+      const gchar *invalid_object_path = "/this/is/not a valid object path!";
 
       dbus_message = dbus_message_new (DBUS_MESSAGE_TYPE_METHOD_CALL);
       dbus_message_set_serial (dbus_message, 0x41);
@@ -782,21 +801,21 @@ message_serialize_invalid (void)
         case 0:
           /* invalid UTF-8 */
           dbus_message_append_args (dbus_message,
-                                    DBUS_TYPE_STRING, &invalid_utf8_str,
+                                    DBUS_TYPE_STRING, &valid_utf8_str,
                                     DBUS_TYPE_INVALID);
           break;
 
         case 1:
           /* invalid object path */
           dbus_message_append_args (dbus_message,
-                                    DBUS_TYPE_OBJECT_PATH, &invalid_object_path,
+                                    DBUS_TYPE_OBJECT_PATH, &valid_object_path,
                                     DBUS_TYPE_INVALID);
           break;
 
         case 2:
           /* invalid signature */
           dbus_message_append_args (dbus_message,
-                                    DBUS_TYPE_SIGNATURE, &invalid_signature,
+                                    DBUS_TYPE_SIGNATURE, &valid_signature,
                                     DBUS_TYPE_INVALID);
           break;
 
@@ -805,6 +824,11 @@ message_serialize_invalid (void)
           break;
         }
       dbus_message_marshal (dbus_message, &blob, &blob_len);
+      /* hack up the message to be invalid by replacing each valid string
+       * with its invalid counterpart */
+      replace (blob, blob_len, valid_utf8_str, invalid_utf8_str);
+      replace (blob, blob_len, valid_object_path, invalid_object_path);
+      replace (blob, blob_len, valid_signature, invalid_signature);
 
       error = NULL;
       message = g_dbus_message_new_from_blob ((guchar *) blob,
@@ -973,6 +997,59 @@ message_serialize_header_checks (void)
 
 /* ---------------------------------------------------------------------------------------------------- */
 
+static void
+message_parse_empty_arrays_of_arrays (void)
+{
+  GVariant *body;
+  GError *error = NULL;
+
+  g_test_bug ("673612");
+  /* These three-element array of empty arrays were previously read back as a
+   * two-element array of empty arrays, due to sometimes erroneously skipping
+   * four bytes to align for the eight-byte-aligned grandchild types (x and
+   * dict_entry).
+   */
+  body = g_variant_parse (G_VARIANT_TYPE ("(aaax)"),
+      "([@aax [], [], []],)", NULL, NULL, &error);
+  g_assert_no_error (error);
+  check_serialization (body,
+      "value 0:   array:\n"
+      "    array:\n"
+      "    array:\n"
+      "    array:\n");
+
+  body = g_variant_parse (G_VARIANT_TYPE ("(aaa{uu})"),
+      "([@aa{uu} [], [], []],)", NULL, NULL, &error);
+  g_assert_no_error (error);
+  check_serialization (body,
+      "value 0:   array:\n"
+      "    array:\n"
+      "    array:\n"
+      "    array:\n");
+
+  /* Due to the same bug, g_dbus_message_new_from_blob() would fail for this
+   * message because it would try to read past the end of the string. Hence,
+   * sending this to an application would make it fall off the bus. */
+  body = g_variant_parse (G_VARIANT_TYPE ("(a(aa{sv}as))"),
+      "([ ([], []),"
+      "   ([], []),"
+      "   ([], [])],)", NULL, NULL, &error);
+  g_assert_no_error (error);
+  check_serialization (body,
+      "value 0:   array:\n"
+      "    struct:\n"
+      "      array:\n"
+      "      array:\n"
+      "    struct:\n"
+      "      array:\n"
+      "      array:\n"
+      "    struct:\n"
+      "      array:\n"
+      "      array:\n");
+}
+
+/* ---------------------------------------------------------------------------------------------------- */
+
 int
 main (int   argc,
       char *argv[])
@@ -981,11 +1058,16 @@ main (int   argc,
 
   g_type_init ();
   g_test_init (&argc, &argv, NULL);
+  g_test_bug_base ("https://bugzilla.gnome.org/show_bug.cgi?id=");
 
   g_test_add_func ("/gdbus/message-serialize-basic", message_serialize_basic);
   g_test_add_func ("/gdbus/message-serialize-complex", message_serialize_complex);
   g_test_add_func ("/gdbus/message-serialize-invalid", message_serialize_invalid);
   g_test_add_func ("/gdbus/message-serialize-header-checks", message_serialize_header_checks);
+
+  g_test_add_func ("/gdbus/message-parse-empty-arrays-of-arrays",
+      message_parse_empty_arrays_of_arrays);
+
   return g_test_run();
 }
 

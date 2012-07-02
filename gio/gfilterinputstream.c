@@ -23,7 +23,6 @@
 #include "config.h"
 #include "gfilterinputstream.h"
 #include "ginputstream.h"
-#include "gsimpleasyncresult.h"
 #include "glibintl.h"
 
 
@@ -77,8 +76,6 @@ G_DEFINE_ABSTRACT_TYPE (GFilterInputStream, g_filter_input_stream, G_TYPE_INPUT_
 typedef struct
 {
   gboolean close_base;
-  GAsyncReadyCallback outstanding_callback;
-  gpointer outstanding_user_data;
 } GFilterInputStreamPrivate;
 
 static void
@@ -113,7 +110,7 @@ g_filter_input_stream_class_init (GFilterInputStreamClass *klass)
                                    g_param_spec_boolean ("close-base-stream",
                                                          P_("Close Base Stream"),
                                                          P_("If the base stream should be closed when the filter stream is closed."),
-                                                         TRUE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | 
+                                                         TRUE, G_PARAM_READWRITE | G_PARAM_CONSTRUCT |
                                                          G_PARAM_STATIC_NAME|G_PARAM_STATIC_NICK|G_PARAM_STATIC_BLURB));
 }
 

@@ -42,9 +42,10 @@
  * @include: gio/gio.h
  *
  * A content type is a platform specific string that defines the type
- * of a file. On unix it is a mime type, on win32 it is an extension string
- * like ".doc", ".txt" or a percieved string like "audio". Such strings
- * can be looked up in the registry at HKEY_CLASSES_ROOT.
+ * of a file. On UNIX it is a <ulink url="http://www.wikipedia.org/wiki/Internet_media_type">mime type</ulink> like "text/plain" or "image/png".
+ * On Win32 it is an extension string like ".doc", ".txt" or a perceived
+ * string like "audio". Such strings can be looked up in the registry at
+ * HKEY_CLASSES_ROOT.
  **/
 
 #ifdef G_OS_WIN32
@@ -1062,8 +1063,7 @@ enumerate_mimetypes_dir (const char *dir,
  * Gets a list of strings containing all the registered content types
  * known to the system. The list and its data should be freed using
  * <programlisting>
- * g_list_foreach (list, g_free, NULL);
- * g_list_free (list);
+ * g_list_free_full (list, g_free);
  * </programlisting>
  *
  * Returns: (element-type utf8) (transfer full): #GList of the registered content types
@@ -1129,8 +1129,7 @@ typedef struct
 static void
 tree_matchlet_free (TreeMatchlet *matchlet)
 {
-  g_list_foreach (matchlet->matches, (GFunc)tree_matchlet_free, NULL);
-  g_list_free (matchlet->matches);
+  g_list_free_full (matchlet->matches, (GDestroyNotify) tree_matchlet_free);
   g_free (matchlet->path);
   g_free (matchlet->mimetype);
   g_slice_free (TreeMatchlet, matchlet);
@@ -1139,8 +1138,7 @@ tree_matchlet_free (TreeMatchlet *matchlet)
 static void
 tree_match_free (TreeMatch *match)
 {
-  g_list_foreach (match->matches, (GFunc)tree_matchlet_free, NULL);
-  g_list_free (match->matches);
+  g_list_free_full (match->matches, (GDestroyNotify) tree_matchlet_free);
   g_free (match->contenttype);
   g_slice_free (TreeMatch, match);
 }
@@ -1329,8 +1327,7 @@ xdg_mime_reload (void *user_data)
 static void
 tree_magic_shutdown (void)
 {
-  g_list_foreach (tree_matches, (GFunc)tree_match_free, NULL);
-  g_list_free (tree_matches);
+  g_list_free_full (tree_matches, (GDestroyNotify) tree_match_free);
   tree_matches = NULL;
 }
 
@@ -1652,7 +1649,7 @@ match_match (TreeMatch    *match,
  * g_mount_guess_content_type().
  *
  * Returns: (transfer full) (array zero-terminated=1): an %NULL-terminated
- *     array of zero or more content types, or %NULL. Free with g_strfreev()
+ *     array of zero or more content types. Free with g_strfreev()
  *
  * Since: 2.18
  */
