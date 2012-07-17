@@ -12,7 +12,8 @@ BuildRequires: pkgconfig
 BuildRequires: gettext-tools
 BuildRequires: libattr-devel
 BuildRequires: zlib-devel
-BuildRequires: python-devel
+BuildRequires: python
+BuildRequires: python-xml
 BuildRequires: libffi-devel
 BuildRequires: elfutils-libelf-devel
 
