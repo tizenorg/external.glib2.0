@@ -3568,8 +3568,6 @@ gio/inotify/Makefile
 gio/fen/Makefile
 gio/fam/Makefile
 gio/win32/Makefile
-gio/tests/Makefile
-gio/tests/gdbus-object-manager-example/Makefile
 po/Makefile.in
 docs/Makefile
 docs/reference/Makefile
