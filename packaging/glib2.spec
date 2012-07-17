@@ -32,7 +32,6 @@ Requires: %{name} = %{version}-%{release}
 %description devel
 The glib2-devel package includes the header files for the GLib library.
 
-
 # anaconda needs static libs, see RH bug #193143
 %package static
 Summary: A library of handy utility functions
