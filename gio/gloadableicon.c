@@ -27,7 +27,6 @@
 #include "gloadableicon.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gloadableicon
@@ -63,15 +62,16 @@ g_loadable_icon_default_init (GLoadableIconIface *iface)
  * g_loadable_icon_load:
  * @icon: a #GLoadableIcon.
  * @size: an integer.
- * @type:  a location to store the type of the loaded icon, %NULL to ignore.
- * @cancellable: optional #GCancellable object, %NULL to ignore. 
- * @error: a #GError location to store the error occuring, or %NULL to 
+ * @type: (out) (allow-none): a location to store the type of the
+ *        loaded icon, %NULL to ignore.
+ * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore. 
+ * @error: a #GError location to store the error occurring, or %NULL to 
  * ignore.
  * 
  * Loads a loadable icon. For the asynchronous version of this function, 
  * see g_loadable_icon_load_async().
  * 
- * Returns: a #GInputStream to read the icon from.
+ * Returns: (transfer full): a #GInputStream to read the icon from.
  **/
 GInputStream *
 g_loadable_icon_load (GLoadableIcon  *icon,
@@ -93,9 +93,10 @@ g_loadable_icon_load (GLoadableIcon  *icon,
  * g_loadable_icon_load_async:
  * @icon: a #GLoadableIcon.
  * @size: an integer.
- * @cancellable: optional #GCancellable object, %NULL to ignore. 
- * @callback: a #GAsyncReadyCallback to call when the request is satisfied
- * @user_data: the data to pass to callback function
+ * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore. 
+ * @callback: (scope async): a #GAsyncReadyCallback to call when the
+ *            request is satisfied
+ * @user_data: (closure): the data to pass to callback function
  * 
  * Loads an icon asynchronously. To finish this function, see 
  * g_loadable_icon_load_finish(). For the synchronous, blocking 
@@ -122,12 +123,12 @@ g_loadable_icon_load_async (GLoadableIcon       *icon,
  * @icon: a #GLoadableIcon.
  * @res: a #GAsyncResult.
  * @type: a location to store the type of the loaded icon, %NULL to ignore.
- * @error: a #GError location to store the error occuring, or %NULL to 
+ * @error: a #GError location to store the error occurring, or %NULL to 
  * ignore.
  * 
  * Finishes an asynchronous icon load started in g_loadable_icon_load_async().
  * 
- * Returns: a #GInputStream to read the icon from.
+ * Returns: (transfer full): a #GInputStream to read the icon from.
  **/
 GInputStream *
 g_loadable_icon_load_finish (GLoadableIcon  *icon,
@@ -189,8 +190,7 @@ load_async_thread (GSimpleAsyncResult *res,
 
   if (stream == NULL)
     {
-      g_simple_async_result_set_from_error (res, error);
-      g_error_free (error);
+      g_simple_async_result_take_error (res, error);
     }
   else
     {
@@ -239,6 +239,3 @@ g_loadable_icon_real_load_finish (GLoadableIcon        *icon,
 
   return g_object_ref (data->stream);
 }
-
-#define __G_LOADABLE_ICON_C__
-#include "gioaliasdef.c"

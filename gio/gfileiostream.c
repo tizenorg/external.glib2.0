@@ -32,7 +32,6 @@
 #include "gfileoutputstream.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gfileiostream
@@ -116,7 +115,7 @@ g_file_io_stream_init (GFileIOStream *stream)
  * g_file_io_stream_query_info:
  * @stream: a #GFileIOStream.
  * @attributes: a file attribute query string.
- * @cancellable: optional #GCancellable object, %NULL to ignore.
+ * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
  * @error: a #GError, %NULL to ignore.
  *
  * Queries a file io stream for the given @attributes.
@@ -137,7 +136,7 @@ g_file_io_stream_init (GFileIOStream *stream)
  * was cancelled, the error %G_IO_ERROR_CANCELLED will be set, and %NULL will
  * be returned.
  *
- * Returns: a #GFileInfo for the @stream, or %NULL on error.
+ * Returns: (transfer full): a #GFileInfo for the @stream, or %NULL on error.
  *
  * Since: 2.22
  **/
@@ -197,9 +196,9 @@ async_ready_callback_wrapper (GObject *source_object,
  * @attributes: a file attribute query string.
  * @io_priority: the <link linkend="gio-GIOScheduler">I/O priority</link>
  *     of the request.
- * @cancellable: optional #GCancellable object, %NULL to ignore.
- * @callback: callback to call when the request is satisfied
- * @user_data: the data to pass to callback function
+ * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
+ * @callback: (scope async): callback to call when the request is satisfied
+ * @user_data: (closure): the data to pass to callback function
  *
  * Asynchronously queries the @stream for a #GFileInfo. When completed,
  * @callback will be called with a #GAsyncResult which can be used to
@@ -228,11 +227,10 @@ g_file_io_stream_query_info_async (GFileIOStream     *stream,
 
   if (!g_io_stream_set_pending (io_stream, &error))
     {
-      g_simple_async_report_gerror_in_idle (G_OBJECT (stream),
+      g_simple_async_report_take_gerror_in_idle (G_OBJECT (stream),
 					    callback,
 					    user_data,
 					    error);
-      g_error_free (error);
       return;
     }
 
@@ -253,7 +251,7 @@ g_file_io_stream_query_info_async (GFileIOStream     *stream,
  * Finalizes the asynchronous query started
  * by g_file_io_stream_query_info_async().
  *
- * Returns: A #GFileInfo for the finished query.
+ * Returns: (transfer full): A #GFileInfo for the finished query.
  *
  * Since: 2.22
  **/
@@ -672,6 +670,3 @@ g_file_io_stream_class_init (GFileIOStreamClass *klass)
   klass->query_info_finish = g_file_io_stream_real_query_info_finish;
   klass->get_etag = g_file_io_stream_real_get_etag;
 }
-
-#define __G_FILE_IO_STREAM_C__
-#include "gioaliasdef.c"

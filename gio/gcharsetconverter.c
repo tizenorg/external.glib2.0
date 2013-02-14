@@ -22,16 +22,15 @@
 
 #include "config.h"
 
+#include "gcharsetconverter.h"
+
 #include <errno.h>
 
 #include "gcontenttypeprivate.h"
-#include "gcharsetconverter.h"
-#include "glib.h"
 #include "ginitable.h"
 #include "gioerror.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 enum {
   PROP_0,
@@ -452,7 +451,7 @@ g_charset_converter_initable_init (GInitable *initable,
   conv->iconv =
     g_iconv_open (conv->to, conv->from);
 
-  if (conv->iconv == NULL)
+  if (conv->iconv == (GIConv)-1)
     {
       if (errno == EINVAL)
 	g_set_error (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
@@ -473,6 +472,3 @@ g_charset_converter_initable_iface_init (GInitableIface *iface)
 {
   iface->init = g_charset_converter_initable_init;
 }
-
-#define __G_CHARSET_CONVERTER_C__
-#include "gioaliasdef.c"

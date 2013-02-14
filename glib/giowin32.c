@@ -84,7 +84,6 @@
 #include "gstdio.h"
 #include "glibintl.h"
 
-#include "galias.h"
 
 typedef struct _GIOWin32Channel GIOWin32Channel;
 typedef struct _GIOWin32Watch GIOWin32Watch;
@@ -199,8 +198,8 @@ g_win32_print_gioflags (GIOFlags flags)
     g_print ("%sNONBLOCK", bar), bar = "|";
   if (flags & G_IO_FLAG_IS_READABLE)
     g_print ("%sREADABLE", bar), bar = "|";
-  if (flags & G_IO_FLAG_IS_WRITEABLE)
-    g_print ("%sWRITEABLE", bar), bar = "|";
+  if (flags & G_IO_FLAG_IS_WRITABLE)
+    g_print ("%sWRITABLE", bar), bar = "|";
   if (flags & G_IO_FLAG_IS_SEEKABLE)
     g_print ("%sSEEKABLE", bar), bar = "|";
 }
@@ -1167,6 +1166,7 @@ g_io_win32_msg_create_watch (GIOChannel   *channel,
   GSource *source;
 
   source = g_source_new (&g_io_watch_funcs, sizeof (GIOWin32Watch));
+  g_source_set_name (source, "GIOChannel (Win32)");
   watch = (GIOWin32Watch *)source;
   
   watch->channel = channel;
@@ -2239,6 +2239,3 @@ g_io_channel_win32_new_stream_socket (int socket)
 }
 
 #endif
-
-#define __G_IO_WIN32_C__
-#include "galiasdef.c"

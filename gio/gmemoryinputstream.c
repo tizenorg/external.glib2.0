@@ -29,7 +29,6 @@
 #include "gioerror.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gmemoryinputstream
@@ -141,8 +140,7 @@ g_memory_input_stream_class_init (GMemoryInputStreamClass *klass)
 }
 
 static void
-free_chunk (gpointer data, 
-            gpointer user_data)
+free_chunk (gpointer data)
 {
   Chunk *chunk = data;
 
@@ -161,8 +159,7 @@ g_memory_input_stream_finalize (GObject *object)
   stream = G_MEMORY_INPUT_STREAM (object);
   priv = stream->priv;
 
-  g_slist_foreach (priv->chunks, free_chunk, NULL);
-  g_slist_free (priv->chunks);
+  g_slist_free_full (priv->chunks, free_chunk);
 
   G_OBJECT_CLASS (g_memory_input_stream_parent_class)->finalize (object);
 }
@@ -204,9 +201,9 @@ g_memory_input_stream_new (void)
 
 /**
  * g_memory_input_stream_new_from_data:
- * @data: input data
+ * @data: (array length=len) (element-type guint8) (transfer full): input data
  * @len: length of the data, may be -1 if @data is a nul-terminated string
- * @destroy: function that is called to free @data, or %NULL
+ * @destroy: (allow-none): function that is called to free @data, or %NULL
  *
  * Creates a new #GMemoryInputStream with data in memory of a given size.
  * 
@@ -230,9 +227,9 @@ g_memory_input_stream_new_from_data (const void     *data,
 /**
  * g_memory_input_stream_add_data:
  * @stream: a #GMemoryInputStream
- * @data: input data
+ * @data: (array length=len) (element-type guint8) (transfer full): input data
  * @len: length of the data, may be -1 if @data is a nul-terminated string
- * @destroy: function that is called to free @data, or %NULL
+ * @destroy: (allow-none): function that is called to free @data, or %NULL
  *
  * Appends @data to data that can be read from the input stream
  */
@@ -346,14 +343,22 @@ g_memory_input_stream_read_async (GInputStream        *stream,
                                   gpointer             user_data)
 {
   GSimpleAsyncResult *simple;
+  GError *error = NULL;
   gssize nread;
 
-  nread = g_memory_input_stream_read (stream, buffer, count, cancellable, NULL);
+  nread = G_INPUT_STREAM_GET_CLASS (stream)->read_fn (stream,
+						      buffer,
+						      count,
+						      cancellable,
+						      &error);
   simple = g_simple_async_result_new (G_OBJECT (stream),
 				      callback,
 				      user_data,
 				      g_memory_input_stream_read_async);
-  g_simple_async_result_set_op_res_gssize (simple, nread);
+  if (error)
+    g_simple_async_result_take_error (simple, error);
+  else
+    g_simple_async_result_set_op_res_gssize (simple, nread);
   g_simple_async_result_complete_in_idle (simple);
   g_object_unref (simple);
 }
@@ -384,7 +389,7 @@ g_memory_input_stream_skip_async (GInputStream        *stream,
   GSimpleAsyncResult *simple;
   gssize nskipped;
 
-  nskipped = g_memory_input_stream_skip (stream, count, cancellable, NULL);
+  nskipped = g_input_stream_skip (stream, count, cancellable, NULL);
   simple = g_simple_async_result_new (G_OBJECT (stream),
                                       callback,
                                       user_data,
@@ -521,6 +526,3 @@ g_memory_input_stream_truncate (GSeekable     *seekable,
                        _("Cannot truncate GMemoryInputStream"));
   return FALSE;
 }
-
-#define __G_MEMORY_INPUT_STREAM_C__
-#include "gioaliasdef.c"

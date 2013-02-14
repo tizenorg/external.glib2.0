@@ -24,7 +24,6 @@
 #include <errno.h>
 #include "gioerror.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gioerror
@@ -200,11 +199,53 @@ g_io_error_from_errno (gint err_no)
       break;
 #endif
 
+#ifdef EHOSTUNREACH
+    case EHOSTUNREACH:
+      return G_IO_ERROR_HOST_UNREACHABLE;
+      break;
+#endif
+
+#ifdef ENETUNREACH
+    case ENETUNREACH:
+      return G_IO_ERROR_NETWORK_UNREACHABLE;
+      break;
+#endif
+
+#ifdef ECONNREFUSED
+    case ECONNREFUSED:
+      return G_IO_ERROR_CONNECTION_REFUSED;
+      break;
+#endif
+
     default:
       return G_IO_ERROR_FAILED;
       break;
     }
 }
 
-#define __G_IO_ERROR_C__
-#include "gioaliasdef.c"
+#ifdef G_OS_WIN32
+
+/**
+ * g_io_error_from_win32_error:
+ * @error_code: Windows error number.
+ *
+ * Converts some common error codes into GIO error codes. The
+ * fallback value G_IO_ERROR_FAILED is returned for error codes not
+ * handled.
+ *
+ * Returns: #GIOErrorEnum value for the given error number.
+ *
+ * Since: 2.26
+ **/
+GIOErrorEnum
+g_io_error_from_win32_error (gint error_code)
+{
+  switch (error_code)
+    {
+    default:
+      return G_IO_ERROR_FAILED;
+      break;
+    }
+}
+
+#endif

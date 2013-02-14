@@ -3,43 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>glib-mkenums</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="rn02.html" title="Tools Reference">
 <link rel="prev" href="rn02.html" title="Tools Reference">
 <link rel="next" href="glib-genmarshal.html" title="glib-genmarshal">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="preface" href="pr01.html" title="Introduction">
-<link rel="part" href="pt01.html" title="Part I. Concepts">
-<link rel="chapter" href="chapter-intro.html" title="Background">
-<link rel="chapter" href="chapter-gtype.html" title="The GLib Dynamic Type System">
-<link rel="chapter" href="chapter-gobject.html" title="The GObject base class">
-<link rel="chapter" href="chapter-signal.html" title="The GObject messaging system">
-<link rel="reference" href="rn01.html" title="API Reference">
-<link rel="reference" href="rn02.html" title="Tools Reference">
-<link rel="part" href="pt02.html" title="Part IV. Tutorial">
-<link rel="chapter" href="howto-gobject.html" title="How to define and implement a new GObject">
-<link rel="chapter" href="howto-interface.html" title="How to define and implement interfaces">
-<link rel="chapter" href="howto-signals.html" title="How to create and use signals">
-<link rel="part" href="pt03.html" title="Part V. Related Tools">
-<link rel="chapter" href="tools-vala.html" title="Vala">
-<link rel="chapter" href="tools-gob.html" title="GObject builder">
-<link rel="chapter" href="tools-ginspector.html" title="Graphical inspection of GObjects">
-<link rel="chapter" href="tools-refdb.html" title="Debugging reference count problems">
-<link rel="chapter" href="tools-gtkdoc.html" title="Writing API docs">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
@@ -49,7 +19,7 @@
 <th width="100%" align="center">GObject Reference Manual</th>
 <td><a accesskey="n" href="glib-genmarshal.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="refentry" title="glib-mkenums">
+<div lang="en" class="refentry">
 <a name="glib-mkenums"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
@@ -58,12 +28,12 @@
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv" title="Synopsis">
+<div class="refsynopsisdiv">
 <h2>Synopsis</h2>
 <div class="cmdsynopsis"><p><code class="command">glib-mkenums</code>  [options...] [files...]</p></div>
 </div>
-<div class="refsect1" title="Description">
-<a name="id568789"></a><h2>Description</h2>
+<div class="refsect1">
+<a name="id606613"></a><h2>Description</h2>
 <p><span class="command"><strong>glib-mkenums</strong></span> is a small perl-script utility that parses C
 code to extract enum definitions and produces enum descriptions based on text
 templates specified by the user. Most frequently this script is used to 
@@ -71,15 +41,15 @@ produce C code that contains enum values as strings so programs can provide
 value name strings for introspection.
 </p>
 </div>
-<div class="refsect1" title="Invocation">
-<a name="id620529"></a><h2>Invocation</h2>
+<div class="refsect1">
+<a name="id614872"></a><h2>Invocation</h2>
 <p><span class="command"><strong>glib-mkenums</strong></span> takes a list of valid C code files as
 input. The options specified control the text that is output, certain 
 substitutions are performed on the text templates for keywords enclosed 
 in @ characters.
 </p>
-<div class="refsect2" title="Options">
-<a name="id590584"></a><h3>Options</h3>
+<div class="refsect2">
+<a name="id583670"></a><h3>Options</h3>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
@@ -158,6 +128,28 @@ where section may be <code class="literal">file-header</code>,
 </td>
 </tr>
 <tr>
+<td><p><span class="term"><code class="option">--identifier-prefix</code> <em class="replaceable"><code>prefix</code></em></span></p></td>
+<td><p>
+Indicates what portion of the enum name should be intepreted as the
+prefix (eg, the "<code class="literal">Gtk</code>" in
+"<code class="literal">GtkDirectionType</code>"). Normally this will be figured
+out automatically, but you may need to override the default if your
+namespace is capitalized oddly.
+</p></td>
+</tr>
+<tr>
+<td><p><span class="term"><code class="option">--symbol-prefix</code> <em class="replaceable"><code>prefix</code></em></span></p></td>
+<td><p>
+Indicates what prefix should be used to correspond to the identifier
+prefix in related C function names (eg, the "<code class="literal">gtk</code>"
+in "<code class="literal">gtk_direction_type_get_type</code>". Equivalently,
+this is the lowercase version of the prefix component of the enum
+value names (eg, the "<code class="literal">GTK</code>" in
+"<code class="literal">GTK_DIR_UP</code>". The default value is the identifier
+prefix, converted to lowercase.
+</p></td>
+</tr>
+<tr>
 <td><p><span class="term"><code class="option">--help</code></span></p></td>
 <td><p>
 Print brief help and exit.
@@ -173,8 +165,8 @@ Print version and exit.
 </table></div>
 </div>
 <hr>
-<div class="refsect2" title="Production text substitutions">
-<a name="id574325"></a><h3>Production text substitutions</h3>
+<div class="refsect2">
+<a name="id591323"></a><h3>Production text substitutions</h3>
 <p>
 Certain keywords enclosed in @ characters will be substituted in the 
 emitted text. For the substitution examples of the keywords below, 
@@ -240,6 +232,17 @@ minus (e.g. the-xvalue).
 </p></td>
 </tr>
 <tr>
+<td><p><span class="term">@valuenum@</span></p></td>
+<td><p>
+The integer value for the enum value currently being processed.  This is
+calculated by using <span class="command"><strong>perl</strong></span> to attempt to evaluate the
+expression as it appears in the C source code.  If evaluation fails then
+<span class="command"><strong>glib-mkenums</strong></span> will exit with an error status, but this
+only happens if <code class="literal">@valuenum@</code> appears in your value
+production template.  (Since: 2.26)
+</p></td>
+</tr>
+<tr>
 <td><p><span class="term">@type@</span></p></td>
 <td><p>
 This is substituted either by "enum" or "flags", depending on whether the 
@@ -276,8 +279,8 @@ The base name of the input file currently being processed (e.g. foo.h). (Since: 
 </p>
 </div>
 <hr>
-<div class="refsect2" title="Trigraph extensions">
-<a name="id612404"></a><h3>Trigraph extensions</h3>
+<div class="refsect2">
+<a name="id560698"></a><h3>Trigraph extensions</h3>
 <p>
 Some C comments are treated specially in the parsed enum definitions, 
 such comments start out with the trigraph sequence <code class="literal">/*&lt;</code> 
@@ -285,9 +288,9 @@ and end with the trigraph sequence <code class="literal">&gt;*/</code>.
 Per enum definition, the options "skip" and "flags" can be specified, to 
 indicate this enum definition to be skipped, or for it to be treated as 
 a flags definition, or to specify the common prefix to be stripped from 
-all values to generate value nicknames, respectively. The "lowercase_name"
+all values to generate value nicknames, respectively. The "underscore_name"
 option can be used to specify the word separation used in the *_get_type()
-function. For instance, /*&lt; lowercase_name=gnome_vfs_uri_hide_options &gt;*/.
+function. For instance, /*&lt; underscore_name=gnome_vfs_uri_hide_options &gt;*/.
 </p>
 <p>
 Per value definition, the options "skip" and "nick" are supported. 
@@ -312,14 +315,15 @@ typedef enum /*&lt; flags,prefix=PREFIX &gt;*/
 </p>
 </div>
 </div>
-<div class="refsect1" title="See also">
-<a name="id583130"></a><h2>See also</h2>
-<p><span class="command"><strong>glib-genmarshal</strong></span>(1)
+<div class="refsect1">
+<a name="id586542"></a><h2>See also</h2>
+<p>
+<span class="citerefentry"><span class="refentrytitle">glib-genmarshal</span>(1)</span>
 </p>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.18</div>
 </body>
 </html>

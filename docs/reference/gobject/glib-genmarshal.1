@@ -1,13 +1,22 @@
 '\" t
 .\"     Title: glib-genmarshal
 .\"    Author: [see the "Author" section]
-.\" Generator: DocBook XSL Stylesheets v1.74.2 <http://docbook.sf.net/>
-.\"      Date: 03/13/2009
-.\"    Manual: [FIXME: manual]
-.\"    Source: [FIXME: source]
+.\" Generator: DocBook XSL Stylesheets v1.76.1 <http://docbook.sf.net/>
+.\"      Date: 05/14/2012
+.\"    Manual: User Commands
+.\"    Source: User Commands
 .\"  Language: English
 .\"
-.TH "GLIB\-GENMARSHAL" "1" "03/13/2009" "[FIXME: source]" "[FIXME: manual]"
+.TH "GLIB\-GENMARSHAL" "1" "05/14/2012" "User Commands" "User Commands"
+.\" -----------------------------------------------------------------
+.\" * Define some portability stuff
+.\" -----------------------------------------------------------------
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.\" http://bugs.debian.org/507673
+.\" http://lists.gnu.org/archive/html/groff/2009-02/msg00013.html
+.\" ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.ie \n(.g .ds Aq \(aq
+.el       .ds Aq '
 .\" -----------------------------------------------------------------
 .\" * set default formatting
 .\" -----------------------------------------------------------------
@@ -46,7 +55,7 @@ Generate C code file contents of the marshallers\&.
 \fB\-\-prefix=string\fR, \fB\-\-prefix string\fR
 .RS 4
 Specify marshaller prefix\&. The default prefix is
-`g_cclosure_marshal\'\&.
+`g_cclosure_marshal\*(Aq\&.
 .RE
 .PP
 \fB\-\-skip\-source\fR
@@ -59,6 +68,21 @@ Skip source location remarks in generated comments\&.
 Do not use the standard marshallers of the GObject library, and skip
 gmarshal\&.h
 include directive in generated header files\&.
+.RE
+.PP
+\fB\-\-internal\fR
+.RS 4
+Mark generated functions as internal, using G_GNUC_INTERNAL\&.
+.RE
+.PP
+\fB\-\-valist\-marshallers\fR
+.RS 4
+Generate valist marshallers, for use with g_signal_set_va_marshaller()\&.
+.RE
+.PP
+\fB\-v\fR, \fB\-\-version\fR
+.RS 4
+Print version information\&.
 .RE
 .PP
 \fB\-\-g\-fatal\-warnings\fR
@@ -108,8 +132,8 @@ or a marshaller specification of the form
 .PP
 The
 \fIRTYPE\fR
-part specifies the callback\'s return type and the
-\fIPTYPE\fRs right to the colon specify the callback\'s parameter list, except for the first and the last arguments which are always pointers\&.
+part specifies the callback\*(Aqs return type and the
+\fIPTYPE\fRs right to the colon specify the callback\*(Aqs parameter list, except for the first and the last arguments which are always pointers\&.
 .SS "Parameter types"
 .PP
 Currently, the following types are supported:
@@ -209,6 +233,11 @@ for anonymous pointer types (gpointer)
 \fIOBJECT\fR
 .RS 4
 for GObject or derived types (GObject*)
+.RE
+.PP
+\fIVARIANT\fR
+.RS 4
+for GVariant types (GVariant*)
 .RE
 .PP
 \fINONE\fR

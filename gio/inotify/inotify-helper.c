@@ -38,9 +38,6 @@
 #include "inotify-path.h"
 #include "inotify-diag.h"
 
-#include "gioalias.h"
-
-
 static gboolean ih_debug_enabled = FALSE;
 #define IH_W if (ih_debug_enabled) g_warning 
 
@@ -86,7 +83,6 @@ _ih_startup (void)
   result = _ip_startup (ih_event_callback);
   if (!result)
     {
-      g_warning ("Could not initialize inotify\n");
       G_UNLOCK (inotify_lock);
       return FALSE;
     }
@@ -139,7 +135,7 @@ _ih_sub_cancel (inotify_sub *sub)
 }
 
 static char *
-_ih_fullpath_from_event (ik_event_t *event, char *dirname)
+_ih_fullpath_from_event (ik_event_t *event, const char *dirname)
 {
   char *fullpath;
 
@@ -171,19 +167,17 @@ ih_event_callback (ik_event_t  *event,
 {
   gchar *fullpath;
   GFileMonitorEvent eflags;
-  GFile* parent;
   GFile* child;
   GFile* other;
-  
+
   eflags = ih_mask_to_EventFlags (event->mask);
-  parent = g_file_new_for_path (sub->dirname);
   fullpath = _ih_fullpath_from_event (event, sub->dirname);
   child = g_file_new_for_path (fullpath);
   g_free (fullpath);
 
   if (ih_event_is_paired_move (event) && sub->pair_moves)
     {
-      char *parent_dir = _ip_get_path_for_wd (event->pair->wd);
+      const char *parent_dir = (char *) _ip_get_path_for_wd (event->pair->wd);
       fullpath = _ih_fullpath_from_event (event->pair, parent_dir);
       other = g_file_new_for_path (fullpath);
       g_free (fullpath);
@@ -196,8 +190,31 @@ ih_event_callback (ik_event_t  *event,
   g_file_monitor_emit_event (G_FILE_MONITOR (sub->user_data),
 			     child, other, eflags);
 
+  /* For paired moves or moves whose mask has been changed from IN_MOVED_TO to
+   * IN_CREATE, notify also that it's probably the last change to the file,
+   * emitting CHANGES_DONE_HINT.
+   * The first (first part of the if's guard below) is the case of a normal
+   * move within the monitored tree and in the same mounted volume.
+   * The latter (second part of the guard) is the case of a move within the
+   * same mounted volume, but from a not monitored directory.
+   *
+   * It's not needed in cases like moves across mounted volumes as the IN_CREATE
+   * will be followed by a IN_MODIFY and IN_CLOSE_WRITE events.
+   * Also not needed if sub->pair_moves is set as EVENT_MOVED will be emitted
+   * instead of EVENT_CREATED which implies no further modification will be
+   * applied to the file
+   * See: https://bugzilla.gnome.org/show_bug.cgi?id=640077
+   */
+  if ((!sub->pair_moves &&
+        event->is_second_in_pair && (event->mask & IN_MOVED_TO)) ||
+      (!ih_event_is_paired_move (event) &&
+       (event->original_mask & IN_MOVED_TO) && (event->mask & IN_CREATE)))
+    {
+      g_file_monitor_emit_event (G_FILE_MONITOR (sub->user_data),
+          child, NULL, G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT);
+    }
+
   g_object_unref (child);
-  g_object_unref (parent);
   if (other)
     g_object_unref (other);
 }
@@ -208,10 +225,7 @@ ih_not_missing_callback (inotify_sub *sub)
   gchar *fullpath;
   GFileMonitorEvent eflags;
   guint32 mask;
-  GFile* parent;
   GFile* child;
-  
-  parent = g_file_new_for_path (sub->dirname);
 
   if (sub->filename)
     {
@@ -238,7 +252,6 @@ ih_not_missing_callback (inotify_sub *sub)
 			     child, NULL, eflags);
 
   g_object_unref (child);
-  g_object_unref (parent);
 }
 
 /* Transforms a inotify event to a GVFS event. */

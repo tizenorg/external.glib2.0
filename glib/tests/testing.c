@@ -45,6 +45,23 @@ test_assertions (void)
   g_assert_cmpstr ("foo", <, "fzz");
   g_assert_cmpstr ("fzz", >, "faa");
   g_assert_cmpstr ("fzz", ==, "fzz");
+
+  if (g_test_undefined ())
+    {
+      if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
+        {
+          g_assert_cmpstr ("fzz", !=, "fzz");
+        }
+      g_test_trap_assert_failed ();
+      g_test_trap_assert_stderr ("*assertion failed*");
+
+      if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
+        {
+          g_assert_cmpint (4, !=, 4);
+        }
+      g_test_trap_assert_failed ();
+      g_test_trap_assert_stderr ("*assertion failed*");
+    }
 }
 
 /* test g_test_timer* API */
@@ -66,6 +83,9 @@ test_timer (void)
 static void
 test_fork_fail (void)
 {
+  if (!g_test_undefined ())
+    return;
+
   if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
     {
       g_assert_not_reached();
@@ -93,6 +113,9 @@ test_fork_patterns (void)
 static void
 test_fork_timeout (void)
 {
+  if (!g_test_undefined ())
+    return;
+
   /* allow child to run for only a fraction of a second */
   if (g_test_trap_fork (0.11 * 1000000, 0))
     {
@@ -201,18 +224,26 @@ fatal_handler (const gchar    *log_domain,
 }
 
 static void
-test_log_handler (void)
+test_fatal_log_handler (void)
 {
+  if (!g_test_undefined ())
+    return;
+
   g_test_log_set_fatal_handler (fatal_handler, NULL);
-  g_str_has_prefix (NULL, "file://");
-  g_critical ("Test passing");
+  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
+    {
+      g_str_has_prefix (NULL, "file://");
+      g_critical ("Test passing");
+      exit (0);
+    }
+  g_test_trap_assert_passed ();
 
   g_test_log_set_fatal_handler (NULL, NULL);
-  if (g_test_trap_fork (0, 0))
+  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
     g_error ("Test failing");
   g_test_trap_assert_failed ();
 
-  if (g_test_trap_fork (0, 0))
+  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
     g_str_has_prefix (NULL, "file://");
   g_test_trap_assert_failed ();
 }
@@ -235,7 +266,7 @@ main (int   argc,
   g_test_add_func ("/forking/patterns", test_fork_patterns);
   if (g_test_slow())
     g_test_add_func ("/forking/timeout", test_fork_timeout);
-  g_test_add_func ("/misc/log-handler", test_log_handler);
+  g_test_add_func ("/misc/fatal-log-handler", test_fatal_log_handler);
 
   return g_test_run();
 }

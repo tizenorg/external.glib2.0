@@ -24,10 +24,10 @@
  * Modified by the GLib Team and others 1997-2000.  See the AUTHORS
  * file for a list of people on the GLib Team.  See the ChangeLog
  * files for a list of changes.  These files are distributed with
- * GLib at ftp://ftp.gtk.org/pub/gtk/. 
+ * GLib at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-/* 
+/*
  * MT safe
  */
 
@@ -43,8 +43,12 @@
 #include <string.h>
 #include <fcntl.h>
 
-#include "glib.h"
-#include "galias.h"
+#include "giochannel.h"
+
+#include "gerror.h"
+#include "gfileutils.h"
+#include "gstrfuncs.h"
+#include "gtestutils.h"
 
 /*
  * Unix IO Channels
@@ -344,6 +348,7 @@ g_io_unix_create_watch (GIOChannel   *channel,
 
 
   source = g_source_new (&g_io_watch_funcs, sizeof (GIOUnixWatch));
+  g_source_set_name (source, "GIOChannel (Unix)");
   watch = (GIOUnixWatch *)source;
   
   watch->channel = channel;
@@ -449,7 +454,10 @@ g_io_channel_new_file (const gchar *filename,
     MODE_R = 1 << 0,
     MODE_W = 1 << 1,
     MODE_A = 1 << 2,
-    MODE_PLUS = 1 << 3
+    MODE_PLUS = 1 << 3,
+    MODE_R_PLUS = MODE_R | MODE_PLUS,
+    MODE_W_PLUS = MODE_W | MODE_PLUS,
+    MODE_A_PLUS = MODE_A | MODE_PLUS
   } mode_num;
   struct stat buffer;
 
@@ -500,22 +508,29 @@ g_io_channel_new_file (const gchar *filename,
       case MODE_A:
         flags = O_WRONLY | O_APPEND | O_CREAT;
         break;
-      case MODE_R | MODE_PLUS:
+      case MODE_R_PLUS:
         flags = O_RDWR;
         break;
-      case MODE_W | MODE_PLUS:
+      case MODE_W_PLUS:
         flags = O_RDWR | O_TRUNC | O_CREAT;
         break;
-      case MODE_A | MODE_PLUS:
+      case MODE_A_PLUS:
         flags = O_RDWR | O_APPEND | O_CREAT;
         break;
+      case MODE_PLUS:
       default:
         g_assert_not_reached ();
         flags = 0;
     }
 
   create_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH;
-  fid = open (filename, flags, create_mode);
+
+  do
+    {
+      fid = open (filename, flags, create_mode);
+    }
+  while (fid == -1 && errno == EINTR);
+
   if (fid == -1)
     {
       int err = errno;
@@ -551,12 +566,13 @@ g_io_channel_new_file (const gchar *filename,
         channel->is_readable = FALSE;
         channel->is_writeable = TRUE;
         break;
-      case MODE_R | MODE_PLUS:
-      case MODE_W | MODE_PLUS:
-      case MODE_A | MODE_PLUS:
+      case MODE_R_PLUS:
+      case MODE_W_PLUS:
+      case MODE_A_PLUS:
         channel->is_readable = TRUE;
         channel->is_writeable = TRUE;
         break;
+      case MODE_PLUS:
       default:
         g_assert_not_reached ();
     }
@@ -640,6 +656,3 @@ g_io_channel_unix_get_fd (GIOChannel *channel)
   GIOUnixChannel *unix_channel = (GIOUnixChannel *)channel;
   return unix_channel->fd;
 }
-
-#define __G_IO_UNIX_C__
-#include "galiasdef.c"

@@ -32,7 +32,7 @@
 #include <sys/inotify.h>
 
 /* Timings for pairing MOVED_TO / MOVED_FROM events */
-#define PROCESS_EVENTS_TIME 1000 /* 1 millisecond (1 hz) */
+#define PROCESS_EVENTS_TIME 1000 /* 1000 milliseconds (1 hz) */
 #define DEFAULT_HOLD_UNTIL_TIME 0 /* 0 millisecond */
 #define MOVE_HOLD_UNTIL_TIME 500 /* 500 microseconds or 0.5 milliseconds */
 
@@ -208,6 +208,7 @@ gboolean _ik_startup (void (*cb)(ik_event_t *event))
   g_io_channel_set_flags (inotify_read_ioc, G_IO_FLAG_NONBLOCK, NULL);
 
   source = g_source_new (&ik_source_funcs, sizeof (GSource));
+  g_source_set_name (source, "GIO Inotify");
   g_source_add_poll (source, &ik_poll_fd);
   g_source_set_callback (source, ik_read_callback, NULL, NULL);
   g_source_attach (source, NULL);
@@ -515,6 +516,7 @@ ik_pair_events (ik_event_internal_t *event1,
   /* Pair the internal structures and the ik_event_t structures */
   event1->pair = event2;
   event1->event->pair = event2->event;
+  event2->event->is_second_in_pair = TRUE;
   
   if (g_timeval_lt (&event1->hold_until, &event2->hold_until))
     event1->hold_until = event2->hold_until;
@@ -633,7 +635,8 @@ ik_process_events (void)
 	   * the event masks */
 	  /* Changeing MOVED_FROM to DELETE and MOVED_TO to create lets us make
 	   * the gaurantee that you will never see a non-matched MOVE event */
-	  
+	  event->event->original_mask = event->event->mask;
+
 	  if (event->event->mask & IN_MOVED_FROM)
 	    {
 	      event->event->mask = IN_DELETE|(event->event->mask & IN_ISDIR);

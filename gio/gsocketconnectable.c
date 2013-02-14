@@ -22,7 +22,6 @@
 #include "gsocketconnectable.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gsocketconnectable
@@ -91,35 +90,13 @@
  * ]|
  */
 
-GType
-g_socket_connectable_get_type (void)
+
+typedef GSocketConnectableIface GSocketConnectableInterface;
+G_DEFINE_INTERFACE (GSocketConnectable, g_socket_connectable, G_TYPE_OBJECT)
+
+static void
+g_socket_connectable_default_init (GSocketConnectableInterface *iface)
 {
-  static volatile gsize g_define_type_id__volatile = 0;
-
-  if (g_once_init_enter (&g_define_type_id__volatile))
-    {
-      const GTypeInfo connectable_info =
-      {
-        sizeof (GSocketConnectableIface), /* class_size */
-	NULL,		/* base_init */
-	NULL,		/* base_finalize */
-	NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	0,
-	0,              /* n_preallocs */
-	NULL
-      };
-      GType g_define_type_id =
-	g_type_register_static (G_TYPE_INTERFACE, I_("GSocketConnectable"),
-				&connectable_info, 0);
-
-      g_type_interface_add_prerequisite (g_define_type_id, G_TYPE_OBJECT);
-
-      g_once_init_leave (&g_define_type_id__volatile, g_define_type_id);
-    }
-
-  return g_define_type_id__volatile;
 }
 
 /**
@@ -128,7 +105,7 @@ g_socket_connectable_get_type (void)
  *
  * Creates a #GSocketAddressEnumerator for @connectable.
  *
- * Return value: a new #GSocketAddressEnumerator.
+ * Return value: (transfer full): a new #GSocketAddressEnumerator.
  *
  * Since: 2.22
  */
@@ -144,5 +121,33 @@ g_socket_connectable_enumerate (GSocketConnectable *connectable)
   return (* iface->enumerate) (connectable);
 }
 
-#define __G_SOCKET_CONNECTABLE_C__
-#include "gioaliasdef.c"
+/**
+ * g_socket_connectable_proxy_enumerate:
+ * @connectable: a #GSocketConnectable
+ *
+ * Creates a #GSocketAddressEnumerator for @connectable that will
+ * return #GProxyAddress<!-- -->es for addresses that you must connect
+ * to via a proxy.
+ *
+ * If @connectable does not implement
+ * g_socket_connectable_proxy_enumerate(), this will fall back to
+ * calling g_socket_connectable_enumerate().
+ *
+ * Return value: (transfer full): a new #GSocketAddressEnumerator.
+ *
+ * Since: 2.26
+ */
+GSocketAddressEnumerator *
+g_socket_connectable_proxy_enumerate (GSocketConnectable *connectable)
+{
+  GSocketConnectableIface *iface;
+
+  g_return_val_if_fail (G_IS_SOCKET_CONNECTABLE (connectable), NULL);
+
+  iface = G_SOCKET_CONNECTABLE_GET_IFACE (connectable);
+
+  if (iface->proxy_enumerate)
+    return (* iface->proxy_enumerate) (connectable);
+  else
+    return (* iface->enumerate) (connectable);
+}

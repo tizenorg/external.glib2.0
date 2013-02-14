@@ -41,33 +41,40 @@
 #else /* !G_OS_WIN32 */
 
 #include <sys/types.h>
-#include <arpa/inet.h>
-#include <arpa/nameser.h>
-#if defined(HAVE_ARPA_NAMESER_COMPAT_H) && !defined(GETSHORT)
-#include <arpa/nameser_compat.h>
-#endif
 
-#ifndef T_SRV
-#define T_SRV 33
-#endif
-
-/* We're supposed to define _GNU_SOURCE to get EAI_NODATA, but that
- * won't actually work since <features.h> has already been included at
- * this point. So we define __USE_GNU instead.
- */
-#define __USE_GNU
 #include <netdb.h>
-#undef __USE_GNU
 #include <netinet/in.h>
 #include <netinet/tcp.h>
 #include <resolv.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <arpa/inet.h>
+#include <arpa/nameser.h>
+#if defined(HAVE_ARPA_NAMESER_COMPAT_H) && !defined(GETSHORT)
+#include <arpa/nameser_compat.h>
+#endif
+#include <net/if.h>
+
+#ifndef T_SRV
+#define T_SRV 33
+#endif
 
 #ifndef _PATH_RESCONF
 #define _PATH_RESCONF "/etc/resolv.conf"
 #endif
 
+#ifndef CMSG_LEN
+/* CMSG_LEN and CMSG_SPACE are defined by RFC 2292, but missing on
+ * some older platforms.
+ */
+#define CMSG_LEN(len) ((size_t)CMSG_DATA((struct cmsghdr *)NULL) + (len))
+
+/* CMSG_SPACE must add at least as much padding as CMSG_NXTHDR()
+ * adds. We overestimate here.
+ */
+#define ALIGN_TO_SIZEOF(len, obj) (((len) + sizeof (obj) - 1) & ~(sizeof (obj) - 1))
+#define CMSG_SPACE(len) ALIGN_TO_SIZEOF (CMSG_LEN (len), struct cmsghdr)
+#endif
 #endif
 
 G_BEGIN_DECLS
@@ -99,6 +106,15 @@ GList *_g_resolver_targets_from_DnsQuery   (const gchar      *rrname,
 					    DNS_RECORD       *results,
 					    GError          **error);
 #endif
+
+gboolean _g_uri_parse_authority            (const char       *uri,
+					    char            **host,
+					    guint16          *port,
+					    char            **userinfo);
+gchar *  _g_uri_from_authority             (const gchar      *protocol,
+					    const gchar      *host,
+					    guint             port,
+					    const gchar      *userinfo);
 
 G_END_DECLS
 

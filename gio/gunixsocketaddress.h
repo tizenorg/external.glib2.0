@@ -55,10 +55,16 @@ struct _GUnixSocketAddressClass
 GType           g_unix_socket_address_get_type    (void) G_GNUC_CONST;
 
 GSocketAddress *g_unix_socket_address_new             (const gchar        *path);
+GLIB_DEPRECATED_FOR(g_unix_socket_address_new_with_type)
 GSocketAddress *g_unix_socket_address_new_abstract    (const gchar        *path,
-						       int                 path_len);
+                                                       gint                path_len);
+GSocketAddress *g_unix_socket_address_new_with_type   (const gchar            *path,
+                                                       gint                    path_len,
+                                                       GUnixSocketAddressType  type);
 const char *    g_unix_socket_address_get_path        (GUnixSocketAddress *address);
 gsize           g_unix_socket_address_get_path_len    (GUnixSocketAddress *address);
+GUnixSocketAddressType g_unix_socket_address_get_address_type (GUnixSocketAddress *address);
+GLIB_DEPRECATED
 gboolean        g_unix_socket_address_get_is_abstract (GUnixSocketAddress *address);
 
 gboolean        g_unix_socket_address_abstract_names_supported (void);

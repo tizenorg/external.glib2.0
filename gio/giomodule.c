@@ -29,12 +29,22 @@
 #include "glocalfilemonitor.h"
 #include "glocaldirectorymonitor.h"
 #include "gnativevolumemonitor.h"
+#include "gproxyresolver.h"
+#include "gproxy.h"
+#include "gsettingsbackendinternal.h"
+#include "gsocks4proxy.h"
+#include "gsocks4aproxy.h"
+#include "gsocks5proxy.h"
+#include "gtlsbackend.h"
 #include "gvfs.h"
+#ifdef G_OS_WIN32
+#include "gregistrysettingsbackend.h"
+#endif
+#include <glib/gstdio.h>
+
 #ifdef G_OS_UNIX
 #include "gdesktopappinfo.h"
 #endif
-#include "gioalias.h"
-#include <glib/gstdio.h>
 
 /**
  * SECTION:giomodule
@@ -89,8 +99,111 @@
  *  it uses the implementations that have been associated with it.
  *  Depending on the use case, it may use all implementations, or
  *  only the one with the highest priority, or pick a specific
- *  one by name. 
+ *  one by name.
+ *
+ *  To avoid opening all modules just to find out what extension
+ *  points they implement, GIO makes use of a caching mechanism,
+ *  see <link linkend="gio-querymodules">gio-querymodules</link>.
+ *  You are expected to run this command after installing a
+ *  GIO module.
+ *
+ *  The <envar>GIO_EXTRA_MODULES</envar> environment variable can be
+ *  used to specify additional directories to automatically load modules
+ *  from. This environment variable has the same syntax as the
+ *  <envar>PATH</envar>. If two modules have the same base name in different
+ *  directories, then the latter one will be ignored. If additional
+ *  directories are specified GIO will load modules from the built-in
+ *  directory last.
  */
+
+/**
+ * GIOModuleScope:
+ *
+ * Represents a scope for loading IO modules. A scope can be used for blocking
+ * duplicate modules, or blocking a module you don't want to load.
+ *
+ * The scope can be used with g_io_modules_load_all_in_directory_with_scope()
+ * or g_io_modules_scan_all_in_directory_with_scope().
+ *
+ * Since: 2.30
+ */
+struct _GIOModuleScope {
+  GIOModuleScopeFlags flags;
+  GHashTable *basenames;
+};
+
+/**
+ * g_io_module_scope_new:
+ * @flags: flags for the new scope
+ *
+ * Create a new scope for loading of IO modules. A scope can be used for
+ * blocking duplicate modules, or blocking a module you don't want to load.
+ *
+ * Specify the %G_IO_MODULE_SCOPE_BLOCK_DUPLICATES flag to block modules
+ * which have the same base name as a module that has already been seen
+ * in this scope.
+ *
+ * Returns: (transfer full): the new module scope
+ *
+ * Since: 2.30
+ */
+GIOModuleScope *
+g_io_module_scope_new (GIOModuleScopeFlags flags)
+{
+  GIOModuleScope *scope = g_new0 (GIOModuleScope, 1);
+  scope->flags = flags;
+  scope->basenames = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  return scope;
+}
+
+/**
+ * g_io_module_scope_free:
+ * @scope: a module loading scope
+ *
+ * Free a module scope.
+ *
+ * Since: 2.30
+ */
+void
+g_io_module_scope_free (GIOModuleScope *scope)
+{
+  if (!scope)
+    return;
+  g_hash_table_destroy (scope->basenames);
+  g_free (scope);
+}
+
+/**
+ * g_io_module_scope_block:
+ * @scope: a module loading scope
+ * @basename: the basename to block
+ *
+ * Block modules with the given @basename from being loaded when
+ * this scope is used with g_io_modules_scan_all_in_directory_with_scope()
+ * or g_io_modules_load_all_in_directory_with_scope().
+ *
+ * Since: 2.30
+ */
+void
+g_io_module_scope_block (GIOModuleScope *scope,
+                         const gchar    *basename)
+{
+  gchar *key;
+
+  g_return_if_fail (scope != NULL);
+  g_return_if_fail (basename != NULL);
+
+  key = g_strdup (basename);
+  g_hash_table_insert (scope->basenames, key, key);
+}
+
+static gboolean
+_g_io_module_scope_contains (GIOModuleScope *scope,
+                             const gchar    *basename)
+{
+  return g_hash_table_lookup (scope->basenames, basename) ? TRUE : FALSE;
+}
+
 struct _GIOModule {
   GTypeModule parent_instance;
 
@@ -235,20 +348,36 @@ g_io_module_new (const gchar *filename)
 }
 
 static gboolean
-is_valid_module_name (const gchar *basename)
+is_valid_module_name (const gchar        *basename,
+                      GIOModuleScope     *scope)
 {
+  gboolean result;
+
 #if !defined(G_OS_WIN32) && !defined(G_WITH_CYGWIN)
-  return
-    g_str_has_prefix (basename, "lib") &&
-    g_str_has_suffix (basename, ".so");
+  if (!g_str_has_prefix (basename, "lib") ||
+      !g_str_has_suffix (basename, ".so"))
+    return FALSE;
 #else
-  return g_str_has_suffix (basename, ".dll");
+  if (!g_str_has_suffix (basename, ".dll"))
+    return FALSE;
 #endif
+
+  result = TRUE;
+  if (scope)
+    {
+      result = _g_io_module_scope_contains (scope, basename) ? FALSE : TRUE;
+      if (result && (scope->flags & G_IO_MODULE_SCOPE_BLOCK_DUPLICATES))
+        g_io_module_scope_block (scope, basename);
+    }
+
+  return result;
 }
 
+
 /**
- * g_io_modules_scan_all_in_directory:
+ * g_io_modules_scan_all_in_directory_with_scope:
  * @dirname: pathname for a directory containing modules to scan.
+ * @scope: a scope to use when scanning the modules
  *
  * Scans all the modules in the specified directory, ensuring that
  * any extension point implemented by a module is registered.
@@ -260,21 +389,18 @@ is_valid_module_name (const gchar *basename)
  * g_io_extension_point_get_extension_by_name().
  *
  * If you need to guarantee that all types are loaded in all the modules,
- * use g_io_modules_scan_all_in_directory().
+ * use g_io_modules_load_all_in_directory().
  *
- * Since: 2.24
+ * Since: 2.30
  **/
 void
-g_io_modules_scan_all_in_directory (const char *dirname)
+g_io_modules_scan_all_in_directory_with_scope (const char     *dirname,
+                                               GIOModuleScope *scope)
 {
   const gchar *name;
   char *filename;
   GDir *dir;
-#ifdef G_OS_WIN32
-  struct _g_stat_struct statbuf;
-#else
-  struct stat statbuf;
-#endif
+  GStatBuf statbuf;
   char *data;
   time_t cache_mtime;
   GHashTable *cache;
@@ -339,7 +465,7 @@ g_io_modules_scan_all_in_directory (const char *dirname)
 
   while ((name = g_dir_read_name (dir)))
     {
-      if (is_valid_module_name (name))
+      if (is_valid_module_name (name, scope))
 	{
 	  GIOExtensionPoint *extension_point;
 	  GIOModule *module;
@@ -390,10 +516,34 @@ g_io_modules_scan_all_in_directory (const char *dirname)
   g_free (filename);
 }
 
+/**
+ * g_io_modules_scan_all_in_directory:
+ * @dirname: pathname for a directory containing modules to scan.
+ *
+ * Scans all the modules in the specified directory, ensuring that
+ * any extension point implemented by a module is registered.
+ *
+ * This may not actually load and initialize all the types in each
+ * module, some modules may be lazily loaded and initialized when
+ * an extension point it implementes is used with e.g.
+ * g_io_extension_point_get_extensions() or
+ * g_io_extension_point_get_extension_by_name().
+ *
+ * If you need to guarantee that all types are loaded in all the modules,
+ * use g_io_modules_load_all_in_directory().
+ *
+ * Since: 2.24
+ **/
+void
+g_io_modules_scan_all_in_directory (const char *dirname)
+{
+  g_io_modules_scan_all_in_directory_with_scope (dirname, NULL);
+}
 
 /**
- * g_io_modules_load_all_in_directory:
+ * g_io_modules_load_all_in_directory_with_scope:
  * @dirname: pathname for a directory containing modules to load.
+ * @scope: a scope to use when scanning the modules.
  *
  * Loads all the modules in the specified directory.
  *
@@ -401,14 +551,18 @@ g_io_modules_scan_all_in_directory (const char *dirname)
  * all gtypes) then you can use g_io_modules_scan_all_in_directory()
  * which allows delayed/lazy loading of modules.
  *
- * Returns: a list of #GIOModules loaded from the directory,
+ * Returns: (element-type GIOModule) (transfer full): a list of #GIOModules loaded
+ *      from the directory,
  *      All the modules are loaded into memory, if you want to
  *      unload them (enabling on-demand loading) you must call
  *      g_type_module_unuse() on all the modules. Free the list
  *      with g_list_free().
+ *
+ * Since: 2.30
  **/
 GList *
-g_io_modules_load_all_in_directory (const char *dirname)
+g_io_modules_load_all_in_directory_with_scope (const char     *dirname,
+                                               GIOModuleScope *scope)
 {
   const gchar *name;
   GDir        *dir;
@@ -424,7 +578,7 @@ g_io_modules_load_all_in_directory (const char *dirname)
   modules = NULL;
   while ((name = g_dir_read_name (dir)))
     {
-      if (is_valid_module_name (name))
+      if (is_valid_module_name (name, scope))
         {
           GIOModule *module;
           gchar     *path;
@@ -451,6 +605,156 @@ g_io_modules_load_all_in_directory (const char *dirname)
   return modules;
 }
 
+/**
+ * g_io_modules_load_all_in_directory:
+ * @dirname: pathname for a directory containing modules to load.
+ *
+ * Loads all the modules in the specified directory.
+ *
+ * If don't require all modules to be initialized (and thus registering
+ * all gtypes) then you can use g_io_modules_scan_all_in_directory()
+ * which allows delayed/lazy loading of modules.
+ *
+ * Returns: (element-type GIOModule) (transfer full): a list of #GIOModules loaded
+ *      from the directory,
+ *      All the modules are loaded into memory, if you want to
+ *      unload them (enabling on-demand loading) you must call
+ *      g_type_module_unuse() on all the modules. Free the list
+ *      with g_list_free().
+ **/
+GList *
+g_io_modules_load_all_in_directory (const char *dirname)
+{
+  return g_io_modules_load_all_in_directory_with_scope (dirname, NULL);
+}
+
+GRecMutex default_modules_lock;
+GHashTable *default_modules;
+
+static gpointer
+try_implementation (GIOExtension         *extension,
+		    GIOModuleVerifyFunc   verify_func)
+{
+  GType type = g_io_extension_get_type (extension);
+  gpointer impl;
+
+  if (g_type_is_a (type, G_TYPE_INITABLE))
+    return g_initable_new (type, NULL, NULL, NULL);
+  else
+    {
+      impl = g_object_new (type, NULL);
+      if (!verify_func || verify_func (impl))
+	return impl;
+
+      g_object_unref (impl);
+      return NULL;
+    }
+}
+
+/**
+ * _g_io_module_get_default:
+ * @extension_point: the name of an extension point
+ * @envvar: (allow-none): the name of an environment variable to
+ *     override the default implementation.
+ * @verify_func: (allow-none): a function to call to verify that
+ *     a given implementation is usable in the current environment.
+ *
+ * Retrieves the default object implementing @extension_point.
+ *
+ * If @envvar is not %NULL, and the environment variable with that
+ * name is set, then the implementation it specifies will be tried
+ * first. After that, or if @envvar is not set, all other
+ * implementations will be tried in order of decreasing priority.
+ *
+ * If an extension point implementation implements #GInitable, then
+ * that implementation will only be used if it initializes
+ * successfully. Otherwise, if @verify_func is not %NULL, then it will
+ * be called on each candidate implementation after construction, to
+ * check if it is actually usable or not.
+ *
+ * The result is cached after it is generated the first time, and
+ * the function is thread-safe.
+ *
+ * Return value: (transfer none): an object implementing
+ *     @extension_point, or %NULL if there are no usable
+ *     implementations.
+ */
+gpointer
+_g_io_module_get_default (const gchar         *extension_point,
+			  const gchar         *envvar,
+			  GIOModuleVerifyFunc  verify_func)
+{
+  const char *use_this;
+  GList *l;
+  GIOExtensionPoint *ep;
+  GIOExtension *extension, *preferred;
+  gpointer impl;
+
+  g_rec_mutex_lock (&default_modules_lock);
+  if (default_modules)
+    {
+      gpointer key;
+
+      if (g_hash_table_lookup_extended (default_modules, extension_point,
+					&key, &impl))
+	{
+	  g_rec_mutex_unlock (&default_modules_lock);
+	  return impl;
+	}
+    }
+  else
+    {
+      default_modules = g_hash_table_new (g_str_hash, g_str_equal);
+    }
+
+  _g_io_modules_ensure_loaded ();
+  ep = g_io_extension_point_lookup (extension_point);
+
+  if (!ep)
+    {
+      g_warn_if_reached ();
+      g_rec_mutex_unlock (&default_modules_lock);
+      return NULL;
+    }
+
+  use_this = envvar ? g_getenv (envvar) : NULL;
+  if (use_this)
+    {
+      preferred = g_io_extension_point_get_extension_by_name (ep, use_this);
+      if (preferred)
+	{
+	  impl = try_implementation (preferred, verify_func);
+	  if (impl)
+	    goto done;
+	}
+      else
+	g_warning ("Can't find module '%s' specified in %s", use_this, envvar);
+    }
+  else
+    preferred = NULL;
+
+  for (l = g_io_extension_point_get_extensions (ep); l != NULL; l = l->next)
+    {
+      extension = l->data;
+      if (extension == preferred)
+	continue;
+
+      impl = try_implementation (extension, verify_func);
+      if (impl)
+	goto done;
+    }
+
+  impl = NULL;
+
+ done:
+  g_hash_table_insert (default_modules,
+		       g_strdup (extension_point),
+		       impl ? g_object_ref (impl) : NULL);
+  g_rec_mutex_unlock (&default_modules_lock);
+
+  return impl;
+}
+
 G_LOCK_DEFINE_STATIC (registered_extensions);
 G_LOCK_DEFINE_STATIC (loaded_dirs);
 
@@ -464,6 +768,13 @@ extern GType _g_local_vfs_get_type (void);
 extern GType _g_win32_volume_monitor_get_type (void);
 extern GType g_win32_directory_monitor_get_type (void);
 extern GType _g_winhttp_vfs_get_type (void);
+
+extern GType _g_dummy_proxy_resolver_get_type (void);
+extern GType _g_dummy_tls_backend_get_type (void);
+extern GType g_network_monitor_base_get_type (void);
+#ifdef HAVE_NETLINK
+extern GType _g_network_monitor_netlink_get_type (void);
+#endif
 
 #ifdef G_PLATFORM_WIN32
 
@@ -482,6 +793,12 @@ DllMain (HINSTANCE hinstDLL,
       gio_dll = hinstDLL;
 
   return TRUE;
+}
+
+void *
+_g_io_win32_get_module (void)
+{
+  return gio_dll;
 }
 
 #endif
@@ -511,8 +828,12 @@ _g_io_modules_ensure_extension_points_registered (void)
       registered_extensions = TRUE;
       
 #ifdef G_OS_UNIX
+#if !GLIB_CHECK_VERSION (3, 0, 0)
       ep = g_io_extension_point_register (G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME);
+      G_GNUC_BEGIN_IGNORE_DEPRECATIONS
       g_io_extension_point_set_required_type (ep, G_TYPE_DESKTOP_APP_INFO_LOOKUP);
+      G_GNUC_END_IGNORE_DEPRECATIONS
+#endif
 #endif
       
       ep = g_io_extension_point_register (G_LOCAL_DIRECTORY_MONITOR_EXTENSION_POINT_NAME);
@@ -532,16 +853,29 @@ _g_io_modules_ensure_extension_points_registered (void)
 
       ep = g_io_extension_point_register ("gsettings-backend");
       g_io_extension_point_set_required_type (ep, G_TYPE_OBJECT);
+
+      ep = g_io_extension_point_register (G_PROXY_RESOLVER_EXTENSION_POINT_NAME);
+      g_io_extension_point_set_required_type (ep, G_TYPE_PROXY_RESOLVER);
+
+      ep = g_io_extension_point_register (G_PROXY_EXTENSION_POINT_NAME);
+      g_io_extension_point_set_required_type (ep, G_TYPE_PROXY);
+
+      ep = g_io_extension_point_register (G_TLS_BACKEND_EXTENSION_POINT_NAME);
+      g_io_extension_point_set_required_type (ep, G_TYPE_TLS_BACKEND);
+
+      ep = g_io_extension_point_register (G_NETWORK_MONITOR_EXTENSION_POINT_NAME);
+      g_io_extension_point_set_required_type (ep, G_TYPE_NETWORK_MONITOR);
     }
   
   G_UNLOCK (registered_extensions);
- }
+}
 
 void
 _g_io_modules_ensure_loaded (void)
 {
   static gboolean loaded_dirs = FALSE;
   const char *module_path;
+  GIOModuleScope *scope;
 
   _g_io_modules_ensure_extension_points_registered ();
   
@@ -550,25 +884,33 @@ _g_io_modules_ensure_loaded (void)
   if (!loaded_dirs)
     {
       loaded_dirs = TRUE;
+      scope = g_io_module_scope_new (G_IO_MODULE_SCOPE_BLOCK_DUPLICATES);
 
-      g_io_modules_scan_all_in_directory (GIO_MODULE_DIR);
-
+      /* First load any overrides, extras */
       module_path = g_getenv ("GIO_EXTRA_MODULES");
-
       if (module_path)
 	{
 	  gchar **paths;
 	  int i;
 
-	  paths = g_strsplit (module_path, ":", 0);
+	  paths = g_strsplit (module_path, G_SEARCHPATH_SEPARATOR_S, 0);
 
 	  for (i = 0; paths[i] != NULL; i++)
-	    g_io_modules_scan_all_in_directory (paths[i]);
+	    {
+	      g_io_modules_scan_all_in_directory_with_scope (paths[i], scope);
+	    }
 
 	  g_strfreev (paths);
 	}
 
+      /* Then load the compiled in path */
+      g_io_modules_scan_all_in_directory_with_scope (GIO_MODULE_DIR, scope);
+
+      g_io_module_scope_free (scope);
+
       /* Initialize types from built-in "modules" */
+      g_null_settings_backend_get_type ();
+      g_memory_settings_backend_get_type ();
 #if defined(HAVE_SYS_INOTIFY_H) || defined(HAVE_LINUX_INOTIFY_H)
       _g_inotify_directory_monitor_get_type ();
       _g_inotify_file_monitor_get_type ();
@@ -580,6 +922,10 @@ _g_io_modules_ensure_loaded (void)
 #ifdef G_OS_WIN32
       _g_win32_volume_monitor_get_type ();
       g_win32_directory_monitor_get_type ();
+      g_registry_backend_get_type ();
+#endif
+#ifdef HAVE_CARBON
+      g_nextstep_settings_backend_get_type ();
 #endif
 #ifdef G_OS_UNIX
       _g_unix_volume_monitor_get_type ();
@@ -588,6 +934,15 @@ _g_io_modules_ensure_loaded (void)
       _g_winhttp_vfs_get_type ();
 #endif
       _g_local_vfs_get_type ();
+      _g_dummy_proxy_resolver_get_type ();
+      _g_socks4a_proxy_get_type ();
+      _g_socks4_proxy_get_type ();
+      _g_socks5_proxy_get_type ();
+      _g_dummy_tls_backend_get_type ();
+      g_network_monitor_base_get_type ();
+#ifdef HAVE_NETLINK
+      _g_network_monitor_netlink_get_type ();
+#endif
     }
 
   G_UNLOCK (loaded_dirs);
@@ -606,8 +961,8 @@ g_io_extension_point_free (GIOExtensionPoint *ep)
  *
  * Registers an extension point.
  *
- * Returns: the new #GIOExtensionPoint. This object is owned by GIO
- *    and should not be freed
+ * Returns: (transfer none): the new #GIOExtensionPoint. This object is
+ *    owned by GIO and should not be freed.
  */
 GIOExtensionPoint *
 g_io_extension_point_register (const char *name)
@@ -644,8 +999,8 @@ g_io_extension_point_register (const char *name)
  *
  * Looks up an existing extension point.
  *
- * Returns: the #GIOExtensionPoint, or %NULL if there is no
- *    registered extension point with the given name
+ * Returns: (transfer none): the #GIOExtensionPoint, or %NULL if there
+ *    is no registered extension point with the given name.
  */
 GIOExtensionPoint *
 g_io_extension_point_lookup (const char *name)
@@ -693,7 +1048,7 @@ g_io_extension_point_get_required_type (GIOExtensionPoint *extension_point)
   return extension_point->required_type;
 }
 
-void
+static void
 lazy_load_modules (GIOExtensionPoint *extension_point)
 {
   GIOModule *module;
@@ -720,9 +1075,10 @@ lazy_load_modules (GIOExtensionPoint *extension_point)
  *
  * Gets a list of all extensions that implement this extension point.
  * The list is sorted by priority, beginning with the highest priority.
- * 
- * Returns: a #GList of #GIOExtension<!-- -->s. The list is owned by
- *   GIO and should not be modified
+ *
+ * Returns: (element-type GIOExtension) (transfer none): a #GList of
+ * #GIOExtension<!-- -->s. The list is owned by GIO and should not be
+ * modified.
  */
 GList *
 g_io_extension_point_get_extensions (GIOExtensionPoint *extension_point)
@@ -738,7 +1094,7 @@ g_io_extension_point_get_extensions (GIOExtensionPoint *extension_point)
  *
  * Finds a #GIOExtension for an extension point by name.
  *
- * Returns: the #GIOExtension for @extension_point that has the
+ * Returns: (transfer none): the #GIOExtension for @extension_point that has the
  *    given name, or %NULL if there is no extension with that name
  */
 GIOExtension *
@@ -766,7 +1122,13 @@ extension_prio_compare (gconstpointer  a,
 {
   const GIOExtension *extension_a = a, *extension_b = b;
 
-  return extension_b->priority - extension_a->priority;
+  if (extension_a->priority > extension_b->priority)
+    return -1;
+
+  if (extension_b->priority > extension_a->priority)
+    return 1;
+
+  return 0;
 }
 
 /**
@@ -782,7 +1144,7 @@ extension_prio_compare (gconstpointer  a,
  * If @type has already been registered as an extension for this 
  * extension point, the existing #GIOExtension object is returned.
  *
- * Returns: a #GIOExtension object for #GType
+ * Returns: (transfer none): a #GIOExtension object for #GType
  */
 GIOExtension *
 g_io_extension_point_implement (const char *extension_point_name,
@@ -840,7 +1202,7 @@ g_io_extension_point_implement (const char *extension_point_name,
  * Gets a reference to the class for the type that is 
  * associated with @extension.
  *
- * Returns: the #GTypeClass for the type of @extension
+ * Returns: (transfer full): the #GTypeClass for the type of @extension
  */
 GTypeClass *
 g_io_extension_ref_class (GIOExtension *extension)
@@ -892,6 +1254,3 @@ g_io_extension_get_priority (GIOExtension *extension)
 {
   return extension->priority;
 }
-
-#define __G_IO_MODULE_C__
-#include "gioaliasdef.c"

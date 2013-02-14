@@ -3,49 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>GObject Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="next" href="pr01.html" title="Introduction">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="preface" href="pr01.html" title="Introduction">
-<link rel="part" href="pt01.html" title="Part I. Concepts">
-<link rel="chapter" href="chapter-intro.html" title="Background">
-<link rel="chapter" href="chapter-gtype.html" title="The GLib Dynamic Type System">
-<link rel="chapter" href="chapter-gobject.html" title="The GObject base class">
-<link rel="chapter" href="chapter-signal.html" title="The GObject messaging system">
-<link rel="reference" href="rn01.html" title="API Reference">
-<link rel="reference" href="rn02.html" title="Tools Reference">
-<link rel="part" href="pt02.html" title="Part IV. Tutorial">
-<link rel="chapter" href="howto-gobject.html" title="How to define and implement a new GObject">
-<link rel="chapter" href="howto-interface.html" title="How to define and implement interfaces">
-<link rel="chapter" href="howto-signals.html" title="How to create and use signals">
-<link rel="part" href="pt03.html" title="Part V. Related Tools">
-<link rel="chapter" href="tools-vala.html" title="Vala">
-<link rel="chapter" href="tools-gob.html" title="GObject builder">
-<link rel="chapter" href="tools-ginspector.html" title="Graphical inspection of GObjects">
-<link rel="chapter" href="tools-refdb.html" title="Debugging reference count problems">
-<link rel="chapter" href="tools-gtkdoc.html" title="Writing API docs">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<div class="book" title="GObject Reference Manual">
+<div class="book">
 <div class="titlepage">
 <div>
 <div><table class="navigation" id="top" width="100%" cellpadding="2" cellspacing="0"><tr><th valign="middle"><p class="title">GObject Reference Manual</p></th></tr></table></div>
 <div><p class="releaseinfo">
-      for GObject 2.24.0
+      for GObject 2.32.3
 
       The latest version of this documentation can be found on-line at
       <a class="ulink" href="http://library.gnome.org/devel/gobject/unstable/" target="_top">http://library.gnome.org/devel/gobject/unstable/</a>.
@@ -59,7 +29,7 @@
 <dd><dl>
 <dt><span class="chapter"><a href="chapter-intro.html">Background</a></span></dt>
 <dd><dl>
-<dt><span class="sect1"><a href="chapter-intro.html#id589065">Data types and programming</a></span></dt>
+<dt><span class="sect1"><a href="chapter-intro.html#id577272">Data types and programming</a></span></dt>
 <dt><span class="sect1"><a href="ch01s02.html">Exporting a C API</a></span></dt>
 </dl></dd>
 <dt><span class="chapter"><a href="chapter-gtype.html">The GLib Dynamic Type System</a></span></dt>
@@ -91,8 +61,8 @@
 <dd><dl>
 <dt><span class="sect1"><a href="chapter-signal.html#closure">Closures</a></span></dt>
 <dd><dl>
-<dt><span class="sect2"><a href="chapter-signal.html#id570574">C Closures</a></span></dt>
-<dt><span class="sect2"><a href="chapter-signal.html#id582370">Non-C closures (for the fearless)</a></span></dt>
+<dt><span class="sect2"><a href="chapter-signal.html#id513179">C Closures</a></span></dt>
+<dt><span class="sect2"><a href="chapter-signal.html#id578851">Non-C closures (for the fearless)</a></span></dt>
 </dl></dd>
 <dt><span class="sect1"><a href="signal.html">Signals</a></span></dt>
 <dd><dl>
@@ -116,7 +86,7 @@
 <span class="refentrytitle"><a href="GTypeModule.html">GTypeModule</a></span><span class="refpurpose"> — Type loading modules</span>
 </dt>
 <dt>
-<span class="refentrytitle"><a href="gobject-The-Base-Object-Type.html">The Base Object Type</a></span><span class="refpurpose"> — The base object type</span>
+<span class="refentrytitle"><a href="gobject-The-Base-Object-Type.html">GObject</a></span><span class="refpurpose"> — The base object type</span>
 </dt>
 <dt>
 <span class="refentrytitle"><a href="gobject-Enumeration-and-Flag-Types.html">Enumeration and Flag Types</a></span><span class="refpurpose"> — Enumeration and flags types</span>
@@ -149,6 +119,9 @@
 <span class="refentrytitle"><a href="gobject-Value-arrays.html">Value arrays</a></span><span class="refpurpose"> — A container structure to maintain an array of
     generic values</span>
 </dt>
+<dt>
+<span class="refentrytitle"><a href="GBinding.html">GBinding</a></span><span class="refpurpose"> — Bind two object properties</span>
+</dt>
 </dl></dd>
 <dt><span class="reference"><a href="rn02.html">III. Tools Reference</a></span></dt>
 <dd><dl>
@@ -172,9 +145,9 @@
 <dt><span class="sect1"><a href="howto-gobject-destruction.html">Object Destruction</a></span></dt>
 <dt><span class="sect1"><a href="howto-gobject-methods.html">Object methods</a></span></dt>
 <dd><dl>
-<dt><span class="sect2"><a href="howto-gobject-methods.html#id662702">Non-virtual public methods</a></span></dt>
-<dt><span class="sect2"><a href="howto-gobject-methods.html#id662727">Virtual public methods</a></span></dt>
-<dt><span class="sect2"><a href="howto-gobject-methods.html#id662811">Virtual private Methods</a></span></dt>
+<dt><span class="sect2"><a href="howto-gobject-methods.html#id674523">Non-virtual public methods</a></span></dt>
+<dt><span class="sect2"><a href="howto-gobject-methods.html#id653133">Virtual public methods</a></span></dt>
+<dt><span class="sect2"><a href="howto-gobject-methods.html#id653216">Virtual private Methods</a></span></dt>
 </dl></dd>
 <dt><span class="sect1"><a href="howto-gobject-chainup.html">Chaining up</a></span></dt>
 </dl></dd>
@@ -208,10 +181,15 @@
 <dt><span class="index"><a href="api-index-2-18.html">Index of new symbols in 2.18</a></span></dt>
 <dt><span class="index"><a href="api-index-2-22.html">Index of new symbols in 2.22</a></span></dt>
 <dt><span class="index"><a href="api-index-2-24.html">Index of new symbols in 2.24</a></span></dt>
+<dt><span class="index"><a href="api-index-2-26.html">Index of new symbols in 2.26</a></span></dt>
+<dt><span class="index"><a href="api-index-2-28.html">Index of new symbols in 2.28</a></span></dt>
+<dt><span class="index"><a href="api-index-2-30.html">Index of new symbols in 2.30</a></span></dt>
+<dt><span class="index"><a href="api-index-2-32.html">Index of new symbols in 2.32</a></span></dt>
+<dt><span class="glossary"><a href="annotation-glossary.html">Annotation Glossary</a></span></dt>
 </dl></div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.18</div>
 </body>
 </html>
