@@ -3,43 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>How to define and implement interfaces</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="pt02.html" title="Part IV. Tutorial">
 <link rel="prev" href="howto-gobject-chainup.html" title="Chaining up">
 <link rel="next" href="howto-interface-implement.html" title="How To define implement an Interface?">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="preface" href="pr01.html" title="Introduction">
-<link rel="part" href="pt01.html" title="Part I. Concepts">
-<link rel="chapter" href="chapter-intro.html" title="Background">
-<link rel="chapter" href="chapter-gtype.html" title="The GLib Dynamic Type System">
-<link rel="chapter" href="chapter-gobject.html" title="The GObject base class">
-<link rel="chapter" href="chapter-signal.html" title="The GObject messaging system">
-<link rel="reference" href="rn01.html" title="API Reference">
-<link rel="reference" href="rn02.html" title="Tools Reference">
-<link rel="part" href="pt02.html" title="Part IV. Tutorial">
-<link rel="chapter" href="howto-gobject.html" title="How to define and implement a new GObject">
-<link rel="chapter" href="howto-interface.html" title="How to define and implement interfaces">
-<link rel="chapter" href="howto-signals.html" title="How to create and use signals">
-<link rel="part" href="pt03.html" title="Part V. Related Tools">
-<link rel="chapter" href="tools-vala.html" title="Vala">
-<link rel="chapter" href="tools-gob.html" title="GObject builder">
-<link rel="chapter" href="tools-ginspector.html" title="Graphical inspection of GObjects">
-<link rel="chapter" href="tools-refdb.html" title="Debugging reference count problems">
-<link rel="chapter" href="tools-gtkdoc.html" title="Writing API docs">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
@@ -49,7 +19,7 @@
 <th width="100%" align="center">GObject Reference Manual</th>
 <td><a accesskey="n" href="howto-interface-implement.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="chapter" title="How to define and implement interfaces">
+<div class="chapter">
 <div class="titlepage"><div><div><h2 class="title">
 <a name="howto-interface"></a>How to define and implement interfaces</h2></div></div></div>
 <div class="toc"><dl>
@@ -58,7 +28,7 @@
 <dt><span class="sect1"><a href="ch06s03.html">Interface definition prerequisites</a></span></dt>
 <dt><span class="sect1"><a href="howto-interface-properties.html">Interface Properties</a></span></dt>
 </dl></div>
-<div class="sect1" title="How to define interfaces">
+<div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="howto-interface-define"></a>How to define interfaces</h2></div></div></div>
 <p>
@@ -97,14 +67,14 @@ void maman_ibaz_do_action (MamanIbaz *self);
 #endif /* __MAMAN_IBAZ_H__ */
 </pre>
 <p>
-    This code is the same as the code for a normal <span class="type"><a class="link" href="gobject-Type-Information.html#GType" title="GType">GType</a></span>
-    which derives from a <span class="type"><a class="link" href="gobject-The-Base-Object-Type.html#GObject">GObject</a></span> except for a few details:
+    This code is the same as the code for a normal <a class="link" href="gobject-Type-Information.html#GType" title="GType"><span class="type">GType</span></a>
+    which derives from a <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> except for a few details:
     </p>
 <div class="itemizedlist"><ul class="itemizedlist" type="disc">
 <li class="listitem"><p>
         The <code class="function">_GET_CLASS</code> macro is called <code class="function">_GET_INTERFACE</code>
-                  and not implemented with <code class="function">G_TYPE_INSTANCE_GET_CLASS</code>
-                  but with <code class="function">G_TYPE_INSTANCE_GET_INTERFACE</code>.
+                  and not implemented with <code class="function"><a class="link" href="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-CLASS:CAPS" title="G_TYPE_INSTANCE_GET_CLASS()">G_TYPE_INSTANCE_GET_CLASS</a></code>
+                  but with <code class="function"><a class="link" href="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-INTERFACE:CAPS" title="G_TYPE_INSTANCE_GET_INTERFACE()">G_TYPE_INSTANCE_GET_INTERFACE</a></code>.
       </p></li>
 <li class="listitem"><p>
         The instance type, <span class="type">MamanIbaz</span> is not fully defined: it is
@@ -158,7 +128,7 @@ maman_ibaz_get_type (void)
   static GType iface_type = 0;
   if (iface_type == 0)
     {
-      static const GTypeInfo info = {
+      const GTypeInfo info = {
         sizeof (MamanIbazInterface),
         maman_ibaz_base_init,   /* base_init */
         NULL,   /* base_finalize */
@@ -185,6 +155,6 @@ maman_ibaz_do_action (MamanIbaz *self)
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.18</div>
 </body>
 </html>

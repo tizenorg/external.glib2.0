@@ -24,7 +24,6 @@
 #include "gasyncresult.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gasyncresult
@@ -52,9 +51,11 @@
  * "enumerate children" operation). If the result or error status of the
  * operation is not needed, there is no need to call the "_finish()"
  * function; GIO will take care of cleaning up the result and error
- * information after the #GAsyncReadyCallback returns. Applications may
- * also take a reference to the #GAsyncResult and call "_finish()"
- * later; however, the "_finish()" function may be called at most once.
+ * information after the #GAsyncReadyCallback returns. You can pass
+ * %NULL for the #GAsyncReadyCallback if you don't need to take any
+ * action at all after the operation completes. Applications may also
+ * take a reference to the #GAsyncResult and call "_finish()" later;
+ * however, the "_finish()" function may be called at most once.
  *
  * Example of a typical asynchronous operation flow:
  * |[
@@ -101,12 +102,6 @@
  * The callback for an asynchronous operation is called only once, and is
  * always called, even in the case of a cancelled operation. On cancellation
  * the result is a %G_IO_ERROR_CANCELLED error.
- *
- * Some asynchronous operations are implemented using synchronous calls.
- * These are run in a separate thread, if #GThread has been initialized, but
- * otherwise they are sent to the Main Event Loop and processed in an idle
- * function. So, if you truly need asynchronous operations, make sure to
- * initialize #GThread.
  **/
 
 typedef GAsyncResultIface GAsyncResultInterface;
@@ -123,7 +118,7 @@ g_async_result_default_init (GAsyncResultInterface *iface)
  *
  * Gets the user data from a #GAsyncResult.
  *
- * Returns: the user data for @res.
+ * Returns: (transfer full): the user data for @res.
  **/
 gpointer
 g_async_result_get_user_data (GAsyncResult *res)
@@ -143,7 +138,7 @@ g_async_result_get_user_data (GAsyncResult *res)
  *
  * Gets the source object from a #GAsyncResult.
  *
- * Returns: a new reference to the source object for the @res,
+ * Returns: (transfer full): a new reference to the source object for the @res,
  *    or %NULL if there is none.
  */
 GObject *
@@ -157,6 +152,3 @@ g_async_result_get_source_object (GAsyncResult *res)
 
   return (* iface->get_source_object) (res);
 }
-
-#define __G_ASYNC_RESULT_C__
-#include "gioaliasdef.c"

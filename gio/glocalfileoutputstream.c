@@ -36,9 +36,12 @@
 #include "glibintl.h"
 #include "gioerror.h"
 #include "gcancellable.h"
-#include "gfiledescriptorbased.h"
 #include "glocalfileoutputstream.h"
 #include "glocalfileinfo.h"
+
+#ifdef G_OS_UNIX
+#include "gfiledescriptorbased.h"
+#endif
 
 #ifdef G_OS_WIN32
 #include <io.h>
@@ -54,13 +57,20 @@
 #define O_BINARY 0
 #endif
 
-#include "gioalias.h"
 
+#ifdef G_OS_UNIX
 static void       g_file_descriptor_based_iface_init   (GFileDescriptorBasedIface *iface);
+#endif
+
 #define g_local_file_output_stream_get_type _g_local_file_output_stream_get_type
+#ifdef G_OS_UNIX
 G_DEFINE_TYPE_WITH_CODE (GLocalFileOutputStream, g_local_file_output_stream, G_TYPE_FILE_OUTPUT_STREAM,
 			 G_IMPLEMENT_INTERFACE (G_TYPE_FILE_DESCRIPTOR_BASED,
-						g_file_descriptor_based_iface_init));
+						g_file_descriptor_based_iface_init)
+                           );
+#else
+G_DEFINE_TYPE_WITH_CODE (GLocalFileOutputStream, g_local_file_output_stream, G_TYPE_FILE_OUTPUT_STREAM,);
+#endif
 
 
 /* Some of the file replacement code was based on the code from gedit,
@@ -104,7 +114,9 @@ static gboolean   g_local_file_output_stream_truncate     (GFileOutputStream  *s
 							   goffset             size,
 							   GCancellable       *cancellable,
 							   GError            **error);
+#ifdef G_OS_UNIX
 static int        g_local_file_output_stream_get_fd       (GFileDescriptorBased *stream);
+#endif
 
 static void
 g_local_file_output_stream_finalize (GObject *object)
@@ -144,11 +156,13 @@ g_local_file_output_stream_class_init (GLocalFileOutputStreamClass *klass)
   file_stream_class->truncate_fn = g_local_file_output_stream_truncate;
 }
 
+#ifdef G_OS_UNIX
 static void
 g_file_descriptor_based_iface_init (GFileDescriptorBasedIface *iface)
 {
   iface->get_fd = g_local_file_output_stream_get_fd;
 }
+#endif
 
 static void
 g_local_file_output_stream_init (GLocalFileOutputStream *stream)
@@ -527,6 +541,16 @@ g_local_file_output_stream_query_info (GFileOutputStream  *stream,
 }
 
 GFileOutputStream *
+_g_local_file_output_stream_new (int fd)
+{
+  GLocalFileOutputStream *stream;
+
+  stream = g_object_new (G_TYPE_LOCAL_FILE_OUTPUT_STREAM, NULL);
+  stream->priv->fd = fd;
+  return G_FILE_OUTPUT_STREAM (stream);
+}
+
+GFileOutputStream *
 _g_local_file_output_stream_open  (const char        *filename,
 				   gboolean          readable,
 				   GCancellable      *cancellable,
@@ -816,7 +840,7 @@ handle_overwrite_open (const char    *filename,
       char *display_name = g_filename_display_name (filename);
       g_set_error (error, G_IO_ERROR,
 		   g_io_error_from_errno (errsv),
-		   _("Error stating file '%s': %s"),
+		   _("Error when getting information for file '%s': %s"),
 		   display_name, g_strerror (errsv));
       g_free (display_name);
       goto err_out;
@@ -895,10 +919,16 @@ handle_overwrite_open (const char    *filename,
 	    )
 	  )
 	{
-	  struct stat tmp_statbuf;
-	  
+          GLocalFileStat tmp_statbuf;
+          int tres;
+
+#ifdef G_OS_WIN32
+          tres = _fstati64 (tmpfd, &tmp_statbuf);
+#else
+          tres = fstat (tmpfd, &tmp_statbuf);
+#endif
 	  /* Check that we really needed to change something */
-	  if (fstat (tmpfd, &tmp_statbuf) != 0 ||
+	  if (tres != 0 ||
 	      original_stat.st_uid != tmp_statbuf.st_uid ||
 	      original_stat.st_gid != tmp_statbuf.st_gid ||
 	      original_stat.st_mode != tmp_statbuf.st_mode)
@@ -1159,11 +1189,18 @@ _g_local_file_output_stream_replace (const char        *filename,
   return G_FILE_OUTPUT_STREAM (stream);
 }
 
+gint
+_g_local_file_output_stream_get_fd (GLocalFileOutputStream *stream)
+{
+  g_return_val_if_fail (G_IS_LOCAL_FILE_OUTPUT_STREAM (stream), -1);
+  return stream->priv->fd;
+}
+
+#ifdef G_OS_UNIX
 static int
 g_local_file_output_stream_get_fd (GFileDescriptorBased *fd_based)
 {
   GLocalFileOutputStream *stream = G_LOCAL_FILE_OUTPUT_STREAM (fd_based);
-
-  return stream->priv->fd;
+  return _g_local_file_output_stream_get_fd (stream);
 }
-
+#endif

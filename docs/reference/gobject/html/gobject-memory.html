@@ -3,43 +3,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Object memory management</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="chapter-gobject.html" title="The GObject base class">
 <link rel="prev" href="chapter-gobject.html" title="The GObject base class">
 <link rel="next" href="gobject-properties.html" title="Object properties">
-<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="preface" href="pr01.html" title="Introduction">
-<link rel="part" href="pt01.html" title="Part I. Concepts">
-<link rel="chapter" href="chapter-intro.html" title="Background">
-<link rel="chapter" href="chapter-gtype.html" title="The GLib Dynamic Type System">
-<link rel="chapter" href="chapter-gobject.html" title="The GObject base class">
-<link rel="chapter" href="chapter-signal.html" title="The GObject messaging system">
-<link rel="reference" href="rn01.html" title="API Reference">
-<link rel="reference" href="rn02.html" title="Tools Reference">
-<link rel="part" href="pt02.html" title="Part IV. Tutorial">
-<link rel="chapter" href="howto-gobject.html" title="How to define and implement a new GObject">
-<link rel="chapter" href="howto-interface.html" title="How to define and implement interfaces">
-<link rel="chapter" href="howto-signals.html" title="How to create and use signals">
-<link rel="part" href="pt03.html" title="Part V. Related Tools">
-<link rel="chapter" href="tools-vala.html" title="Vala">
-<link rel="chapter" href="tools-gob.html" title="GObject builder">
-<link rel="chapter" href="tools-ginspector.html" title="Graphical inspection of GObjects">
-<link rel="chapter" href="tools-refdb.html" title="Debugging reference count problems">
-<link rel="chapter" href="tools-gtkdoc.html" title="Writing API docs">
-<link rel="index" href="api-index-full.html" title="Index">
-<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
-<link rel="index" href="api-index-2-2.html" title="Index of new symbols in 2.2">
-<link rel="index" href="api-index-2-4.html" title="Index of new symbols in 2.4">
-<link rel="index" href="api-index-2-6.html" title="Index of new symbols in 2.6">
-<link rel="index" href="api-index-2-8.html" title="Index of new symbols in 2.8">
-<link rel="index" href="api-index-2-10.html" title="Index of new symbols in 2.10">
-<link rel="index" href="api-index-2-12.html" title="Index of new symbols in 2.12">
-<link rel="index" href="api-index-2-14.html" title="Index of new symbols in 2.14">
-<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
-<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
-<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
@@ -49,7 +19,7 @@
 <th width="100%" align="center">GObject Reference Manual</th>
 <td><a accesskey="n" href="gobject-properties.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
 </tr></table>
-<div class="sect1" title="Object memory management">
+<div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
 <a name="gobject-memory"></a>Object memory management</h2></div></div></div>
 <p>
@@ -89,7 +59,7 @@ void g_object_run_dispose         (GObject     *object);
 </pre>
 <p>
     </p>
-<div class="sect2" title="Reference count">
+<div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="gobject-memory-refcount"></a>Reference count</h3></div></div></div>
 <p>
@@ -189,7 +159,7 @@ void g_object_run_dispose         (GObject     *object);
 <p><br class="table-break">                
       </p>
 </div>
-<div class="sect2" title="Weak References">
+<div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="gobject-memory-weakref"></a>Weak References</h3></div></div></div>
 <p>
@@ -211,7 +181,7 @@ void g_object_run_dispose         (GObject     *object);
         when object is finalized.
       </p>
 </div>
-<div class="sect2" title="Reference counts and cycles">
+<div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="gobject-memory-cycles"></a>Reference counts and cycles</h3></div></div></div>
 <p>
@@ -229,7 +199,7 @@ void g_object_run_dispose         (GObject     *object);
 <p>
         This two-step destruction process is very useful to break reference counting cycles.
         While the detection of the cycles is up to the external code, once the cycles have been
-        detected, the external code can invoke <code class="function">g_object_dispose</code> which 
+        detected, the external code can invoke <code class="function"><a class="link" href="gobject-The-Base-Object-Type.html#g-object-run-dispose" title="g_object_run_dispose ()">g_object_run_dispose</a></code> which 
         will indeed break any existing cycles since it will run the dispose handler associated
         to the object and thus release all references to other objects.
       </p>
@@ -238,7 +208,7 @@ void g_object_run_dispose         (GObject     *object);
         we stated a bit sooner: the dispose handler can be invoked multiple times. Let's say we
         have a reference count cycle: object A references B which itself references object A.
         Let's say we have detected the cycle and we want to destroy the two objects. One way to 
-        do this would be to invoke <code class="function">g_object_dispose</code> on one of the 
+        do this would be to invoke <code class="function"><a class="link" href="gobject-The-Base-Object-Type.html#g-object-run-dispose" title="g_object_run_dispose ()">g_object_run_dispose</a></code> on one of the 
         objects.
       </p>
 <p>
@@ -259,6 +229,6 @@ void g_object_run_dispose         (GObject     *object);
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.13</div>
+          Generated by GTK-Doc V1.18</div>
 </body>
 </html>

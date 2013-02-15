@@ -24,16 +24,19 @@
 #include "gfiledescriptorbased.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gfiledescriptorbased
  * @short_description: Interface for file descriptor based IO
- * @include: gio/gio.h
+ * @include: gio/gfiledescriptorbased.h
  * @see_also: #GInputStream, #GOutputStream
  *
  * #GFileDescriptorBased is implemented by streams (implementations of
  * #GInputStream or #GOutputStream) that are based on file descriptors.
+ *
+ * Note that <filename>&lt;gio/gfiledescriptorbased.h&gt;</filename> belongs to
+ * the UNIX-specific GIO interfaces, thus you have to use the
+ * <filename>gio-unix-2.0.pc</filename> pkg-config file when using it.
  *
  * Since: 2.24
  *
@@ -68,7 +71,3 @@ g_file_descriptor_based_get_fd (GFileDescriptorBased *fd_based)
 
   return (* iface->get_fd) (fd_based);
 }
-
-
-#define __G_FILE_DESCRIPTOR_BASED_C__
-#include "gioaliasdef.c"

@@ -19,10 +19,9 @@
  */
 
 #include "config.h"
+#include "glibconfig.h"
 
 #define G_STDIO_NO_WRAP_ON_UNIX
-
-#include "glib.h"
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -45,7 +44,6 @@
 
 #include "gstdio.h"
 
-#include "galias.h"
 
 #if !defined (G_OS_UNIX) && !defined (G_OS_WIN32) && !defined (G_OS_BEOS)
 #error Please port this to your operating system
@@ -427,6 +425,14 @@ g_chdir (const gchar *path)
 }
 
 /**
+ * GStatBuf:
+ *
+ * A type corresponding to the appropriate struct type for the stat
+ * system call, depending on the platform and/or compiler being used.
+ *
+ * See g_stat() for more information.
+ **/
+/**
  * g_stat: 
  * @filename: a pathname in the GLib file name encoding (UTF-8 on Windows)
  * @buf: a pointer to a <structname>stat</structname> struct, which
@@ -438,6 +444,20 @@ g_chdir (const gchar *path)
  * not look at the ACL at all. Thus on Windows the protection bits in
  * the st_mode field are a fabrication of little use.
  * 
+ * On Windows the Microsoft C libraries have several variants of the
+ * <structname>stat</structname> struct and stat() function with names
+ * like "_stat", "_stat32", "_stat32i64" and "_stat64i32". The one
+ * used here is for 32-bit code the one with 32-bit size and time
+ * fields, specifically called "_stat32".
+ *
+ * In Microsoft's compiler, by default "struct stat" means one with
+ * 64-bit time fields while in MinGW "struct stat" is the legacy one
+ * with 32-bit fields. To hopefully clear up this messs, the gstdio.h
+ * header defines a type GStatBuf which is the appropriate struct type
+ * depending on the platform and/or compiler being used. On POSIX it
+ * is just "struct stat", but note that even on POSIX platforms,
+ * "stat" might be a macro.
+ *
  * See your C library manual for more details about stat().
  *
  * Returns: 0 if the information was successfully retrieved, -1 if an error 
@@ -446,13 +466,8 @@ g_chdir (const gchar *path)
  * Since: 2.6
  */
 int
-g_stat (const gchar           *filename,
-#ifdef G_OS_WIN32
-	struct _g_stat_struct *buf
-#else
-	struct stat           *buf
-#endif
-				  )
+g_stat (const gchar *filename,
+	GStatBuf    *buf)
 {
 #ifdef G_OS_WIN32
   wchar_t *wfilename = g_utf8_to_utf16 (filename, -1, NULL, NULL, NULL);
@@ -505,13 +520,8 @@ g_stat (const gchar           *filename,
  * Since: 2.6
  */
 int
-g_lstat (const gchar           *filename,
-#ifdef G_OS_WIN32
-	 struct _g_stat_struct *buf
-#else
-	 struct stat           *buf
-#endif
-				   )
+g_lstat (const gchar *filename,
+	 GStatBuf    *buf)
 {
 #ifdef HAVE_LSTAT
   /* This can't be Win32, so don't do the widechar dance. */
@@ -727,14 +737,14 @@ g_fopen (const gchar *filename,
  * @filename: a pathname in the GLib file name encoding (UTF-8 on Windows)
  * @mode: a string describing the mode in which the file should be 
  *   opened
- * @stream: an existing stream which will be reused, or %NULL
+ * @stream: (allow-none): an existing stream which will be reused, or %NULL
  *
  * A wrapper for the POSIX freopen() function. The freopen() function
  * opens a file and associates it with an existing stream.
  * 
  * See your C library manual for more details about freopen().
  *
- * Returns: A <type>FILE</type> pointer if the file was successfully
+ * Returns: A <literal>FILE</literal> pointer if the file was successfully
  *    opened, or %NULL if an error occurred.
  * 
  * Since: 2.6
@@ -820,6 +830,3 @@ g_utime (const gchar    *filename,
   return utime (filename, utb);
 #endif
 }
-
-#define __G_STDIO_C__
-#include "galiasdef.c"

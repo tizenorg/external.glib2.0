@@ -24,7 +24,7 @@
  * GLib at ftp://ftp.gtk.org/pub/gtk/.
  */
 
-#if defined(G_DISABLE_SINGLE_INCLUDES) && !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
+#if !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
 #error "Only <glib.h> can be included directly."
 #endif
 
@@ -50,6 +50,8 @@ GList*   g_list_alloc                   (void) G_GNUC_WARN_UNUSED_RESULT;
 void     g_list_free                    (GList            *list);
 void     g_list_free_1                  (GList            *list);
 #define  g_list_free1                   g_list_free_1
+void     g_list_free_full               (GList            *list,
+					 GDestroyNotify    free_func);
 GList*   g_list_append                  (GList            *list,
 					 gpointer          data) G_GNUC_WARN_UNUSED_RESULT;
 GList*   g_list_prepend                 (GList            *list,
@@ -109,11 +111,6 @@ gpointer g_list_nth_data                (GList            *list,
 
 #define g_list_previous(list)	        ((list) ? (((GList *)(list))->prev) : NULL)
 #define g_list_next(list)	        ((list) ? (((GList *)(list))->next) : NULL)
-
-#ifndef G_DISABLE_DEPRECATED
-void     g_list_push_allocator          (gpointer          allocator);
-void     g_list_pop_allocator           (void);
-#endif
 
 G_END_DECLS
 

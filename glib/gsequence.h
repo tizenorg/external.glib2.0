@@ -18,7 +18,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#if defined(G_DISABLE_SINGLE_INCLUDES) && !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
+#if !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
 #error "Only <glib.h> can be included directly."
 #endif
 
@@ -96,6 +96,14 @@ GSequenceIter *g_sequence_search             (GSequence                *seq,
                                               GCompareDataFunc          cmp_func,
                                               gpointer                  cmp_data);
 GSequenceIter *g_sequence_search_iter        (GSequence                *seq,
+                                              gpointer                  data,
+                                              GSequenceIterCompareFunc  iter_cmp,
+                                              gpointer                  cmp_data);
+GSequenceIter *g_sequence_lookup             (GSequence                *seq,
+                                              gpointer                  data,
+                                              GCompareDataFunc          cmp_func,
+                                              gpointer                  cmp_data);
+GSequenceIter *g_sequence_lookup_iter        (GSequence                *seq,
                                               gpointer                  data,
                                               GSequenceIterCompareFunc  iter_cmp,
                                               gpointer                  cmp_data);

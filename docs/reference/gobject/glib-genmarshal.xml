@@ -1,8 +1,9 @@
-<refentry id="glib-genmarshal">
+<refentry id="glib-genmarshal" lang="en">
 
 <refmeta>
 <refentrytitle>glib-genmarshal</refentrytitle>
 <manvolnum>1</manvolnum>
+<refmiscinfo class="manual">User Commands</refmiscinfo>
 </refmeta>
 
 <refnamediv>
@@ -72,6 +73,27 @@ Skip source location remarks in generated comments.
 <listitem><para>
 Do not use the standard marshallers of the GObject library, and skip 
 <filename>gmarshal.h</filename> include directive in generated header files.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--internal</option></term>
+<listitem><para>
+Mark generated functions as internal, using G_GNUC_INTERNAL.
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>--valist-marshallers</option></term>
+<listitem><para>
+Generate valist marshallers, for use with g_signal_set_va_marshaller().
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><option>-v</option>, <option>--version</option></term>
+<listitem><para>
+Print version information.
 </para></listitem>
 </varlistentry>
 
@@ -257,6 +279,13 @@ for anonymous pointer types (gpointer)
 <term><replaceable>OBJECT</replaceable></term>
 <listitem><para>
 for GObject or derived types (GObject*)
+</para></listitem>
+</varlistentry>
+
+<varlistentry>
+<term><replaceable>VARIANT</replaceable></term>
+<listitem><para>
+for GVariant types (GVariant*)
 </para></listitem>
 </varlistentry>
 

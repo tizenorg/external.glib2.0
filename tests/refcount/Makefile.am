@@ -1,17 +1,15 @@
 include $(top_srcdir)/Makefile.decl
 
 INCLUDES =					\
-	-I$(top_srcdir)				\
-	-I$(top_srcdir)/glib			\
-	-I$(top_srcdir)/gmodule			\
+	$(gmodule_INCLUDES) 			\
+	-DGLIB_DISABLE_DEPRECATION_WARNINGS	\
 	$(GLIB_DEBUG_FLAGS)
 
 libglib = $(top_builddir)/glib/libglib-2.0.la
-libgthread = $(top_builddir)/gthread/libgthread-2.0.la
 libgmodule = $(top_builddir)/gmodule/libgmodule-2.0.la
 libgobject = $(top_builddir)/gobject/libgobject-2.0.la
 
-LDADD = $(libglib) $(libgobject) $(libgthread) $(G_THREAD_LIBS)
+LDADD = $(libglib) $(libgobject)
 
 test_programs = 				\
 	closures				\
@@ -19,6 +17,8 @@ test_programs = 				\
 	objects2				\
 	properties				\
 	properties2				\
+	properties3				\
+	properties4				\
 	signal1					\
 	signal2					\
 	signal3

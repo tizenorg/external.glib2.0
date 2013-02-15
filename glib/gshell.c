@@ -24,17 +24,16 @@
 
 #include <string.h>
 
-#include "glib.h"
+#include "gshell.h"
 
-#ifdef _
-#warning "FIXME remove gettext hack"
-#endif
-
+#include "gslist.h"
+#include "gstrfuncs.h"
+#include "gstring.h"
+#include "gtestutils.h"
 #include "glibintl.h"
-#include "galias.h"
 
 /**
- * SECTION: shell
+ * SECTION:shell
  * @title: Shell-related Utilities
  * @short_description: shell-like commandline handling
  **/
@@ -433,7 +432,7 @@ tokenize_command_line (const gchar *command_line,
   const gchar *p;
   GString *current_token = NULL;
   GSList *retval = NULL;
-  gboolean quoted;;
+  gboolean quoted;
 
   current_quote = '\0';
   quoted = FALSE;
@@ -588,12 +587,8 @@ tokenize_command_line (const gchar *command_line,
 
  error:
   g_assert (error == NULL || *error != NULL);
-  
-  if (retval)
-    {
-      g_slist_foreach (retval, (GFunc)g_free, NULL);
-      g_slist_free (retval);
-    }
+
+  g_slist_free_full (retval, g_free);
 
   return NULL;
 }
@@ -601,8 +596,8 @@ tokenize_command_line (const gchar *command_line,
 /**
  * g_shell_parse_argv:
  * @command_line: command line to parse
- * @argcp: return location for number of args
- * @argvp: return location for array of args
+ * @argcp: (out): return location for number of args
+ * @argvp: (out) (array length=argcp zero-terminated=1): return location for array of args
  * @error: return location for error
  * 
  * Parses a command line into an argument vector, in much the same way
@@ -668,8 +663,7 @@ g_shell_parse_argv (const gchar *command_line,
       ++i;
     }
   
-  g_slist_foreach (tokens, (GFunc)g_free, NULL);
-  g_slist_free (tokens);
+  g_slist_free_full (tokens, g_free);
   
   if (argcp)
     *argcp = argc;
@@ -685,11 +679,7 @@ g_shell_parse_argv (const gchar *command_line,
 
   g_assert (error == NULL || *error != NULL);
   g_strfreev (argv);
-  g_slist_foreach (tokens, (GFunc) g_free, NULL);
-  g_slist_free (tokens);
+  g_slist_free_full (tokens, g_free);
   
   return FALSE;
 }
-
-#define __G_SHELL_C__
-#include "galiasdef.c"
