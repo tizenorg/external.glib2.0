@@ -26,7 +26,6 @@
 #include "gsimpleasyncresult.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gasyncinitable
@@ -46,9 +45,102 @@
  * directly, or indirectly via a foo_thing_new_async() wrapper. This will call
  * g_async_initable_init_async() under the cover, calling back with %NULL and
  * a set %GError on failure.
+ *
+ * A typical implementation might look something like this:
+ *
+ * |[
+ * enum {
+ *    NOT_INITIALIZED,
+ *    INITIALIZING,
+ *    INITIALIZED
+ * };
+ *
+ * static void
+ * _foo_ready_cb (Foo *self)
+ * {
+ *   GList *l;
+ *
+ *   self->priv->state = INITIALIZED;
+ *
+ *   for (l = self->priv->init_results; l != NULL; l = l->next)
+ *     {
+ *       GSimpleAsyncResult *simple = l->data;
+ *
+ *       if (!self->priv->success)
+ *         g_simple_async_result_set_error (simple, ...);
+ *
+ *       g_simple_async_result_complete (simple);
+ *       g_object_unref (simple);
+ *     }
+ *
+ *   g_list_free (self->priv->init_results);
+ *   self->priv->init_results = NULL;
+ * }
+ *
+ * static void
+ * foo_init_async (GAsyncInitable       *initable,
+ *                 int                   io_priority,
+ *                 GCancellable         *cancellable,
+ *                 GAsyncReadyCallback   callback,
+ *                 gpointer              user_data)
+ * {
+ *   Foo *self = FOO (initable);
+ *   GSimpleAsyncResult *simple;
+ *
+ *   simple = g_simple_async_result_new (G_OBJECT (initable)
+ *                                       callback,
+ *                                       user_data,
+ *                                       foo_init_async);
+ *
+ *   switch (self->priv->state)
+ *     {
+ *       case NOT_INITIALIZED:
+ *         _foo_get_ready (self);
+ *         self->priv->init_results = g_list_append (self->priv->init_results,
+ *                                                   simple);
+ *         self->priv->state = INITIALIZING;
+ *         break;
+ *       case INITIALIZING:
+ *         self->priv->init_results = g_list_append (self->priv->init_results,
+ *                                                   simple);
+ *         break;
+ *       case INITIALIZED:
+ *         if (!self->priv->success)
+ *           g_simple_async_result_set_error (simple, ...);
+ *
+ *         g_simple_async_result_complete_in_idle (simple);
+ *         g_object_unref (simple);
+ *         break;
+ *     }
+ * }
+ *
+ * static gboolean
+ * foo_init_finish (GAsyncInitable       *initable,
+ *                  GAsyncResult         *result,
+ *                  GError              **error)
+ * {
+ *   g_return_val_if_fail (g_simple_async_result_is_valid (result,
+ *       G_OBJECT (initable), foo_init_async), FALSE);
+ *
+ *   if (g_simple_async_result_propagate_error (G_SIMPLE_ASYNC_RESULT (result),
+ *           error))
+ *     return FALSE;
+ *
+ *   return TRUE;
+ * }
+ *
+ * static void
+ * foo_async_initable_iface_init (gpointer g_iface,
+ *                                gpointer data)
+ * {
+ *   GAsyncInitableIface *iface = g_iface;
+ *
+ *   iface->init_async = foo_init_async;
+ *   iface->init_finish = foo_init_finish;
+ * }
+ * ]|
  */
 
-static void     g_async_initable_base_init        (gpointer              g_iface);
 static void     g_async_initable_real_init_async  (GAsyncInitable       *initable,
 						   int                   io_priority,
 						   GCancellable         *cancellable,
@@ -58,42 +150,14 @@ static gboolean g_async_initable_real_init_finish (GAsyncInitable       *initabl
 						   GAsyncResult         *res,
 						   GError              **error);
 
-GType
-g_async_initable_get_type (void)
-{
-  static volatile gsize g_define_type_id__volatile = 0;
 
-  if (g_once_init_enter (&g_define_type_id__volatile))
-    {
-      const GTypeInfo initable_info =
-      {
-	sizeof (GAsyncInitableIface), /* class_size */
-	g_async_initable_base_init,   /* base_init */
-	NULL,		/* base_finalize */
-	NULL,
-	NULL,		/* class_finalize */
-	NULL,		/* class_data */
-	0,
-	0,              /* n_preallocs */
-	NULL
-      };
-      GType g_define_type_id =
-	g_type_register_static (G_TYPE_INTERFACE, I_("GAsyncInitable"),
-				&initable_info, 0);
+typedef GAsyncInitableIface GAsyncInitableInterface;
+G_DEFINE_INTERFACE (GAsyncInitable, g_async_initable, G_TYPE_OBJECT)
 
-      g_type_interface_add_prerequisite (g_define_type_id, G_TYPE_OBJECT);
-
-      g_once_init_leave (&g_define_type_id__volatile, g_define_type_id);
-    }
-
-  return g_define_type_id__volatile;
-}
 
 static void
-g_async_initable_base_init (gpointer g_iface)
+g_async_initable_default_init (GAsyncInitableInterface *iface)
 {
-  GAsyncInitableIface *iface = g_iface;
-
   iface->init_async = g_async_initable_real_init_async;
   iface->init_finish = g_async_initable_real_init_finish;
 }
@@ -123,9 +187,11 @@ g_async_initable_base_init (gpointer g_iface)
  * the object doesn't support cancellable initialization, the error
  * %G_IO_ERROR_NOT_SUPPORTED will be returned.
  *
- * If this function is not called, or returns with an error, then all
- * operations on the object should fail, generally returning the
- * error %G_IO_ERROR_NOT_INITIALIZED.
+ * As with #GInitable, if the object is not initialized, or initialization
+ * returns with an error, then all operations on the object except
+ * g_object_ref() and g_object_unref() are considered to be invalid, and
+ * have undefined behaviour. They will often fail with g_critical() or
+ * g_warning(), but this must not be relied on.
  *
  * Implementations of this method must be idempotent: i.e. multiple calls
  * to this function with the same argument should return the same results.
@@ -161,7 +227,7 @@ g_async_initable_init_async (GAsyncInitable      *initable,
  * g_async_initable_init_finish:
  * @initable: a #GAsyncInitable.
  * @res: a #GAsyncResult.
- * @error: a #GError location to store the error occuring, or %NULL to
+ * @error: a #GError location to store the error occurring, or %NULL to
  * ignore.
  *
  * Finishes asynchronous initialization and returns the result.
@@ -201,11 +267,8 @@ async_init_thread (GSimpleAsyncResult *res,
 {
   GError *error = NULL;
 
-  if (!g_initable_init (G_INITABLE (res), cancellable, &error))
-    {
-      g_simple_async_result_set_from_error (res, error);
-      g_error_free (error);
-    }
+  if (!g_initable_init (G_INITABLE (object), cancellable, &error))
+    g_simple_async_result_take_error (res, error);
 }
 
 static void
@@ -231,7 +294,19 @@ g_async_initable_real_init_finish (GAsyncInitable  *initable,
 				   GAsyncResult    *res,
 				   GError         **error)
 {
-  return TRUE; /* Errors handled by base impl */
+  /* Although g_async_initable_init_finish() does this error handling
+   * as well, we do it here too, so that a class that reimplements
+   * GAsyncInitable can properly run its parent class's implementation
+   * by directly invoking its ->init_async() and ->init_finish().
+   */
+  if (G_IS_SIMPLE_ASYNC_RESULT (res))
+    {
+      GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (res);
+      if (g_simple_async_result_propagate_error (simple, error))
+	return FALSE;
+    }
+
+  return TRUE;
 }
 
 /**
@@ -243,12 +318,12 @@ g_async_initable_real_init_finish (GAsyncInitable  *initable,
  * @callback: a #GAsyncReadyCallback to call when the initialization is
  *     finished
  * @user_data: the data to pass to callback function
- * @first_property_name: the name of the first property, or %NULL if no
+ * @first_property_name: (allow-none): the name of the first property, or %NULL if no
  *     properties
  * @...:  the value of the first property, followed by other property
  *    value pairs, and ended by %NULL.
  *
- * Helper function for constructing #GAsyncInitiable object. This is
+ * Helper function for constructing #GAsyncInitable object. This is
  * similar to g_object_new() but also initializes the object asynchronously.
  *
  * When the initialization is finished, @callback will be called. You can
@@ -288,7 +363,7 @@ g_async_initable_new_async (GType                object_type,
  *     finished
  * @user_data: the data to pass to callback function
  *
- * Helper function for constructing #GAsyncInitiable object. This is
+ * Helper function for constructing #GAsyncInitable object. This is
  * similar to g_object_newv() but also initializes the object asynchronously.
  *
  * When the initialization is finished, @callback will be called. You can
@@ -330,7 +405,7 @@ g_async_initable_newv_async (GType                object_type,
  *     finished
  * @user_data: the data to pass to callback function
  *
- * Helper function for constructing #GAsyncInitiable object. This is
+ * Helper function for constructing #GAsyncInitable object. This is
  * similar to g_object_new_valist() but also initializes the object
  * asynchronously.
  *
@@ -366,15 +441,14 @@ g_async_initable_new_valist_async (GType                object_type,
 /**
  * g_async_initable_new_finish:
  * @initable: the #GAsyncInitable from the callback
- * @res: the #GAsyncResult.from the callback
- * @error: a #GError location to store the error occuring, or %NULL to
- *     ignore.
+ * @res: the #GAsyncResult from the callback
+ * @error: return location for errors, or %NULL to ignore
  *
- * Finishes the async construction for the various g_async_initable_new calls,
- * returning the created object or %NULL on error.
+ * Finishes the async construction for the various g_async_initable_new
+ * calls, returning the created object or %NULL on error.
  *
- * Returns: a newly created #GObject, or %NULL on error. Free with
- *     g_object_unref().
+ * Returns: (transfer full): a newly created #GObject, or %NULL on error.
+ *     Free with g_object_unref().
  *
  * Since: 2.22
  */
@@ -388,6 +462,3 @@ g_async_initable_new_finish (GAsyncInitable  *initable,
   else
     return NULL;
 }
-
-#define __G_ASYNC_INITABLE_C__
-#include "gioaliasdef.c"

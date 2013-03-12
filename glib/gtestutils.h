@@ -18,7 +18,7 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#if defined(G_DISABLE_SINGLE_INCLUDES) && !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
+#if !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
 #error "Only <glib.h> can be included directly."
 #endif
 
@@ -27,7 +27,6 @@
 
 #include <glib/gmessages.h>
 #include <glib/gstring.h>
-#include <glib/gtypes.h>
 #include <glib/gerror.h>
 #include <glib/gslist.h>
 
@@ -35,6 +34,10 @@ G_BEGIN_DECLS
 
 typedef struct GTestCase  GTestCase;
 typedef struct GTestSuite GTestSuite;
+typedef void (*GTestFunc)        (void);
+typedef void (*GTestDataFunc)    (gconstpointer user_data);
+typedef void (*GTestFixtureFunc) (gpointer      fixture,
+                                  gconstpointer user_data);
 
 /* assertion API */
 #define g_assert_cmpstr(s1, cmp, s2)    do { const char *__s1 = (s1), *__s2 = (s2); \
@@ -95,14 +98,19 @@ void    g_test_init                     (int            *argc,
 #define g_test_perf()                   (g_test_config_vars->test_perf)
 #define g_test_verbose()                (g_test_config_vars->test_verbose)
 #define g_test_quiet()                  (g_test_config_vars->test_quiet)
+#define g_test_undefined()              (g_test_config_vars->test_undefined)
 /* run all tests under toplevel suite (path: /) */
 int     g_test_run                      (void);
 /* hook up a test functions under test path */
 void    g_test_add_func                 (const char     *testpath,
-                                         void          (*test_func) (void));
+                                         GTestFunc       test_func);
+
 void    g_test_add_data_func            (const char     *testpath,
                                          gconstpointer   test_data,
-                                         void          (*test_func) (gconstpointer));
+                                         GTestDataFunc   test_func);
+/* tell about failure */
+void    g_test_fail                     (void);
+
 /* hook up a test with fixture under test path */
 #define g_test_add(testpath, Fixture, tdata, fsetup, ftest, fteardown) \
 					G_STMT_START {			\
@@ -159,13 +167,13 @@ double   g_test_rand_double_range       (double          range_start,
                                          double          range_end);
 
 /* semi-internal API */
-GTestCase*    g_test_create_case        (const char     *test_name,
-                                         gsize           data_size,
-                                         gconstpointer   test_data,
-                                         void          (*data_setup) (void),
-                                         void          (*data_test) (void),
-                                         void          (*data_teardown) (void));
-GTestSuite*   g_test_create_suite       (const char     *suite_name);
+GTestCase*    g_test_create_case        (const char       *test_name,
+                                         gsize             data_size,
+                                         gconstpointer     test_data,
+                                         GTestFixtureFunc  data_setup,
+                                         GTestFixtureFunc  data_test,
+                                         GTestFixtureFunc  data_teardown);
+GTestSuite*   g_test_create_suite       (const char       *suite_name);
 GTestSuite*   g_test_get_root           (void);
 void          g_test_suite_add          (GTestSuite     *suite,
                                          GTestCase      *test_case);
@@ -212,21 +220,22 @@ void    g_assertion_message_error       (const char     *domain,
                                          int             line,
                                          const char     *func,
                                          const char     *expr,
-                                         GError         *error,
+                                         const GError   *error,
                                          GQuark          error_domain,
                                          int             error_code) G_GNUC_NORETURN;
 void    g_test_add_vtable               (const char     *testpath,
                                          gsize           data_size,
                                          gconstpointer   test_data,
-                                         void          (*data_setup)    (void),
-                                         void          (*data_test)     (void),
-                                         void          (*data_teardown) (void));
+                                         GTestFixtureFunc  data_setup,
+                                         GTestFixtureFunc  data_test,
+                                         GTestFixtureFunc  data_teardown);
 typedef struct {
   gboolean      test_initialized;
   gboolean      test_quick;     /* disable thorough tests */
   gboolean      test_perf;      /* run performance tests */
   gboolean      test_verbose;   /* extra info */
   gboolean      test_quiet;     /* reduce output */
+  gboolean      test_undefined; /* run tests that are meant to assert */
 } GTestConfig;
 GLIB_VAR const GTestConfig * const g_test_config_vars;
 

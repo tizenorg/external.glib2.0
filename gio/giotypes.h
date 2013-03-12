@@ -43,8 +43,24 @@ typedef struct _GConverter                    GConverter;
 typedef struct _GConverterInputStream         GConverterInputStream;
 typedef struct _GConverterOutputStream        GConverterOutputStream;
 typedef struct _GDataInputStream              GDataInputStream;
+typedef struct _GSimplePermission             GSimplePermission;
 typedef struct _GZlibCompressor               GZlibCompressor;
 typedef struct _GZlibDecompressor             GZlibDecompressor;
+
+typedef struct _GSimpleActionGroup            GSimpleActionGroup;
+typedef struct _GRemoteActionGroup            GRemoteActionGroup;
+typedef struct _GDBusActionGroup              GDBusActionGroup;
+typedef struct _GActionMap                    GActionMap;
+typedef struct _GActionGroup                  GActionGroup;
+typedef struct _GSimpleAction                 GSimpleAction;
+typedef struct _GAction                       GAction;
+typedef struct _GApplication                  GApplication;
+typedef struct _GApplicationCommandLine       GApplicationCommandLine;
+typedef struct _GSettingsBackend              GSettingsBackend;
+typedef struct _GSettings                     GSettings;
+typedef struct _GPermission                   GPermission;
+
+typedef struct _GMenuModel                    GMenuModel;
 
 /**
  * GDrive:
@@ -85,6 +101,7 @@ typedef struct _GFilenameCompleter            GFilenameCompleter;
 
 typedef struct _GIcon                         GIcon; /* Dummy typedef */
 typedef struct _GInetAddress                  GInetAddress;
+typedef struct _GInetAddressMask              GInetAddressMask;
 typedef struct _GInetSocketAddress            GInetSocketAddress;
 typedef struct _GInputStream                  GInputStream;
 typedef struct _GInitable                     GInitable;
@@ -95,9 +112,10 @@ typedef struct _GIOExtension                  GIOExtension;
 /**
  * GIOSchedulerJob:
  *
- * Opaque class for definining and scheduling IO jobs.
+ * Opaque class for defining and scheduling IO jobs.
  **/
 typedef struct _GIOSchedulerJob               GIOSchedulerJob;
+typedef struct _GIOStreamAdapter              GIOStreamAdapter;
 typedef struct _GLoadableIcon                 GLoadableIcon; /* Dummy typedef */
 typedef struct _GMemoryInputStream            GMemoryInputStream;
 typedef struct _GMemoryOutputStream           GMemoryOutputStream;
@@ -110,10 +128,21 @@ typedef struct _GMemoryOutputStream           GMemoryOutputStream;
 typedef struct _GMount                        GMount; /* Dummy typedef */
 typedef struct _GMountOperation               GMountOperation;
 typedef struct _GNetworkAddress               GNetworkAddress;
+typedef struct _GNetworkMonitor               GNetworkMonitor;
 typedef struct _GNetworkService               GNetworkService;
 typedef struct _GOutputStream                 GOutputStream;
 typedef struct _GIOStream                     GIOStream;
+typedef struct _GPollableInputStream          GPollableInputStream; /* Dummy typedef */
+typedef struct _GPollableOutputStream         GPollableOutputStream; /* Dummy typedef */
 typedef struct _GResolver                     GResolver;
+/**
+ * GResource:
+ *
+ * A resource bundle.
+ *
+ * Since: 2.32
+ */
+typedef struct _GResource                     GResource;
 typedef struct _GSeekable                     GSeekable;
 typedef struct _GSimpleAsyncResult            GSimpleAsyncResult;
 
@@ -150,7 +179,7 @@ typedef struct _GSocketClient                               GSocketClient;
  **/
 typedef struct _GSocketConnection                           GSocketConnection;
 /**
- * GSocketClient:
+ * GSocketListener:
  *
  * A helper class for network servers to listen for and accept connections.
  *
@@ -178,17 +207,38 @@ typedef struct _GSrvTarget                    GSrvTarget;
  * Since: 2.22
  **/
 typedef struct _GTcpConnection                              GTcpConnection;
+typedef struct _GTcpWrapperConnection                       GTcpWrapperConnection;
 /**
  * GThreadedSocketService:
  *
- * A helper class for handling accepting incomming connections in the
+ * A helper class for handling accepting incoming connections in the
  * glib mainloop and handling them in a thread.
  *
  * Since: 2.22
  **/
 typedef struct _GThreadedSocketService                      GThreadedSocketService;
 typedef struct _GThemedIcon                   GThemedIcon;
+typedef struct _GTlsCertificate               GTlsCertificate;
+typedef struct _GTlsClientConnection          GTlsClientConnection; /* Dummy typedef */
+typedef struct _GTlsConnection                GTlsConnection;
+typedef struct _GTlsDatabase                  GTlsDatabase;
+typedef struct _GTlsFileDatabase              GTlsFileDatabase;
+typedef struct _GTlsInteraction               GTlsInteraction;
+typedef struct _GTlsPassword                  GTlsPassword;
+typedef struct _GTlsServerConnection          GTlsServerConnection; /* Dummy typedef */
 typedef struct _GVfs                          GVfs; /* Dummy typedef */
+
+/**
+ * GProxyResolver:
+ *
+ * A helper class to enumerate proxies base on URI.
+ *
+ * Since: 2.26
+ **/
+typedef struct _GProxyResolver                GProxyResolver;
+typedef struct _GProxy			      GProxy;
+typedef struct _GProxyAddress		      GProxyAddress;
+typedef struct _GProxyAddressEnumerator	      GProxyAddressEnumerator;
 
 /**
  * GVolume:
@@ -250,10 +300,6 @@ typedef gboolean (* GFileReadMoreCallback) (const char *file_contents,
  * @user_data: the data to pass to callback function
  *
  * I/O Job function.
- *
- * Note that depending on whether threads are available, the
- * #GIOScheduler may run jobs in separate threads or in an idle
- * in the mainloop.
  *
  * Long-running jobs should periodically check the @cancellable
  * to see if they have been cancelled.
@@ -333,6 +379,91 @@ struct _GOutputVector {
   gsize size;
 };
 
+typedef struct _GCredentials                  GCredentials;
+typedef struct _GUnixCredentialsMessage       GUnixCredentialsMessage;
+typedef struct _GUnixFDList                   GUnixFDList;
+typedef struct _GDBusMessage                  GDBusMessage;
+typedef struct _GDBusConnection               GDBusConnection;
+typedef struct _GDBusProxy                    GDBusProxy;
+typedef struct _GDBusMethodInvocation         GDBusMethodInvocation;
+typedef struct _GDBusServer                   GDBusServer;
+typedef struct _GDBusAuthObserver             GDBusAuthObserver;
+typedef struct _GDBusErrorEntry               GDBusErrorEntry;
+typedef struct _GDBusInterfaceVTable          GDBusInterfaceVTable;
+typedef struct _GDBusSubtreeVTable            GDBusSubtreeVTable;
+typedef struct _GDBusAnnotationInfo           GDBusAnnotationInfo;
+typedef struct _GDBusArgInfo                  GDBusArgInfo;
+typedef struct _GDBusMethodInfo               GDBusMethodInfo;
+typedef struct _GDBusSignalInfo               GDBusSignalInfo;
+typedef struct _GDBusPropertyInfo             GDBusPropertyInfo;
+typedef struct _GDBusInterfaceInfo            GDBusInterfaceInfo;
+typedef struct _GDBusNodeInfo                 GDBusNodeInfo;
+
+/**
+ * GCancellableSourceFunc:
+ * @cancellable: the #GCancellable
+ * @user_data: data passed in by the user.
+ *
+ * This is the function type of the callback used for the #GSource
+ * returned by g_cancellable_source_new().
+ *
+ * Returns: it should return %FALSE if the source should be removed.
+ *
+ * Since: 2.28
+ */
+typedef gboolean (*GCancellableSourceFunc) (GCancellable *cancellable,
+					    gpointer      user_data);
+
+/**
+ * GPollableSourceFunc:
+ * @pollable_stream: the #GPollableInputStream or #GPollableOutputStream
+ * @user_data: data passed in by the user.
+ *
+ * This is the function type of the callback used for the #GSource
+ * returned by g_pollable_input_stream_create_source() and
+ * g_pollable_output_stream_create_source().
+ *
+ * Returns: it should return %FALSE if the source should be removed.
+ *
+ * Since: 2.28
+ */
+typedef gboolean (*GPollableSourceFunc) (GObject  *pollable_stream,
+					 gpointer  user_data);
+
+typedef struct _GDBusInterface              GDBusInterface; /* Dummy typedef */
+typedef struct _GDBusInterfaceSkeleton      GDBusInterfaceSkeleton;
+typedef struct _GDBusObject                 GDBusObject;  /* Dummy typedef */
+typedef struct _GDBusObjectSkeleton         GDBusObjectSkeleton;
+typedef struct _GDBusObjectProxy            GDBusObjectProxy;
+typedef struct _GDBusObjectManager          GDBusObjectManager;  /* Dummy typedef */
+typedef struct _GDBusObjectManagerClient    GDBusObjectManagerClient;
+typedef struct _GDBusObjectManagerServer    GDBusObjectManagerServer;
+
+/**
+ * GDBusProxyTypeFunc:
+ * @manager: A #GDBusObjectManagerClient.
+ * @object_path: The object path of the remote object.
+ * @interface_name: (allow-none): The interface name of the remote object or %NULL if a #GDBusObjectProxy #GType is requested.
+ * @user_data: User data.
+ *
+ * Function signature for a function used to determine the #GType to
+ * use for an interface proxy (if @interface_name is not %NULL) or
+ * object proxy (if @interface_name is %NULL).
+ *
+ * This function is called in the
+ * <link linkend="g-main-context-push-thread-default">thread-default main loop</link>
+ * that @manager was constructed in.
+ *
+ * Returns: A #GType to use for the remote object. The returned type
+ *   must be a #GDBusProxy<!-- -->- or #GDBusObjectProxy<!-- -->-derived
+ *   type.
+ *
+ * Since: 2.30
+ */
+typedef GType (*GDBusProxyTypeFunc) (GDBusObjectManagerClient   *manager,
+                                     const gchar                *object_path,
+                                     const gchar                *interface_name,
+                                     gpointer                    user_data);
 
 G_END_DECLS
 

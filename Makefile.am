@@ -1,7 +1,10 @@
 ## Process this file with automake to produce Makefile.in
 include $(top_srcdir)/Makefile.decl
 
-AUTOMAKE_OPTIONS = 1.7
+# http://people.gnome.org/~walters/docs/build-api.txt
+.buildapi-allow-builddir:
+
+ACLOCAL_AMFLAGS = -I m4macros ${ACLOCAL_FLAGS}
 
 SUBDIRS = . m4macros glib gmodule gthread gobject gio tests po docs
 DIST_SUBDIRS = $(SUBDIRS) build
@@ -36,12 +39,10 @@ EXTRA_DIST += 			\
 	INSTALL.in		\
 	README.win32		\
 	HACKING			\
-	MAINTAINERS		\
 	autogen.sh		\
 	Makefile.decl		\
 	mkinstalldirs		\
 	makefile.msc		\
-	glibconfig.h.win32.in	\
 	msvc_recommended_pragmas.h \
 	config.h.win32.in	\
         po/po2tbl.sed.in        \
@@ -53,13 +54,7 @@ EXTRA_DIST += 			\
 	gthread-2.0.pc.in	\
 	gio-2.0.pc.in		\
 	gio-unix-2.0.pc.in	\
-	glib-2.0-uninstalled.pc.in 	\
-	gobject-2.0-uninstalled.pc.in 	\
-	gmodule-2.0-uninstalled.pc.in	\
-	gthread-2.0-uninstalled.pc.in	\
-	gmodule-no-export-2.0-uninstalled.pc.in \
-	gio-2.0-uninstalled.pc.in		\
-	gio-unix-2.0-uninstalled.pc.in
+	gio-windows-2.0.pc.in
 
 
 # These may be in the builddir too
@@ -67,29 +62,13 @@ BUILT_EXTRA_DIST = 		\
 	README			\
 	INSTALL			\
 	ChangeLog		\
-	glibconfig.h.win32	\
 	config.h.win32		\
 	gtk-doc.make
 
-configexecincludedir = $(libdir)/glib-2.0/include
-configexecinclude_DATA = glibconfig.h
-
-uninstall-local:
-	rm -f $(DESTDIR)$(configexecincludedir)/glibconfig.h
-
 CONFIGURE_DEPENDENCIES = acglib.m4
 
-BUILT_SOURCES = stamp-gc-h #note: not glibconfig.h
-glibconfig.h: stamp-gc-h
-	@if test -f glibconfig.h; then :; \
-	else rm -f stamp-gc-h; $(MAKE) stamp-gc-h; fi
-stamp-gc-h: config.status
-	cd $(top_builddir) && $(SHELL) ./config.status glibconfig.h
-	echo timestamp > stamp-gc-h
-
 ChangeLog:
-	@echo Creating $@
-	@if test -d "$(srcdir)/.git"; then \
+	$(AM_V_GEN) if test -d "$(srcdir)/.git"; then \
 	  (GIT_DIR=$(top_srcdir)/.git ./missing --run git log GLIB_2_20_0^^.. --stat) | fmt --split-only > $@.tmp \
 	  && mv -f $@.tmp $@ \
 	  || ($(RM) $@.tmp; \
@@ -108,6 +87,10 @@ if OS_UNIX
 pkgconfig_DATA += gio-unix-2.0.pc
 endif
 
+if OS_WIN32
+pkgconfig_DATA += gio-windows-2.0.pc
+endif
+
 $(pkgconfig_DATA): config.status
 
 # install mkinstalldirs for glib-gettextize's benefit
@@ -115,11 +98,11 @@ gettextdir = $(datadir)/glib-2.0/gettext
 gettext_SCRIPTS = mkinstalldirs
 
 # build documentation when doing distcheck
-DISTCHECK_CONFIGURE_FLAGS = --enable-debug --enable-gtk-doc --enable-man
+DISTCHECK_CONFIGURE_FLAGS = --enable-debug --enable-gtk-doc --enable-man --disable-maintainer-mode
 
-DISTCLEANFILES = glibconfig-sysdefs.h glibconfig.h stamp-gc-h config.lt
+DISTCLEANFILES = config.lt
 
-distclean-local:
+distclean-local: lcov-clean
 	if test $(srcdir) = .; then :; else \
 	    rm -f $(BUILT_EXTRA_DIST); \
 	fi

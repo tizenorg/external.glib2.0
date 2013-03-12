@@ -51,7 +51,6 @@ G_BEGIN_DECLS
 
 /**
  * GVolumeMonitor:
- * @parent_instance: The parent instance.
  *
  * A Volume Monitor that watches for volume events.
  **/
@@ -142,9 +141,8 @@ GVolume *       g_volume_monitor_get_volume_for_uuid  (GVolumeMonitor *volume_mo
 GMount *        g_volume_monitor_get_mount_for_uuid   (GVolumeMonitor *volume_monitor,
                                                        const char     *uuid);
 
-#ifndef G_DISABLE_DEPRECATED
+GLIB_DEPRECATED
 GVolume *       g_volume_monitor_adopt_orphan_mount   (GMount         *mount);
-#endif
 
 G_END_DECLS
 

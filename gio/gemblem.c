@@ -29,7 +29,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "gioalias.h"
 
 /**
  * SECTION:gemblem
@@ -221,8 +220,8 @@ g_emblem_new_with_origin (GIcon         *icon,
  *
  * Gives back the icon from @emblem.
  *
- * Returns: a #GIcon. The returned object belongs to the emblem
- *    and should not be modified or freed.
+ * Returns: (transfer none): a #GIcon. The returned object belongs to
+ *          the emblem and should not be modified or freed.
  *
  * Since: 2.18
  */
@@ -241,7 +240,7 @@ g_emblem_get_icon (GEmblem *emblem)
  *
  * Gets the origin of the emblem.
  *
- * Returns: the origin of the emblem
+ * Returns: (transfer none): the origin of the emblem
  *
  * Since: 2.18
  */
@@ -358,6 +357,3 @@ g_emblem_iface_init (GIconIface *iface)
   iface->to_tokens = g_emblem_to_tokens;
   iface->from_tokens = g_emblem_from_tokens;
 }
-
-#define __G_EMBLEM_C__
-#include "gioaliasdef.c"

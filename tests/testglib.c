@@ -448,6 +448,8 @@ binary_tree_test (void)
       g_tree_foreach (tree, my_traverse, NULL);
       g_print ("\n");
     }
+
+  g_tree_unref (tree);
 }
 
 static gboolean
@@ -509,12 +511,13 @@ find_first_that(gpointer key,
 static void
 test_g_parse_debug_string (void)
 {
-  GDebugKey keys[3] = { 
+  GDebugKey keys[] = { 
     { "foo", 1 },
     { "bar", 2 },
-    { "baz", 4 }
+    { "baz", 4 },
+    { "weird", 8 },
   };
-  guint n_keys = 3;
+  guint n_keys = G_N_ELEMENTS (keys);
   guint result;
   
   result = g_parse_debug_string ("bar:foo:blubb", keys, n_keys);
@@ -528,6 +531,22 @@ test_g_parse_debug_string (void)
 
   result = g_parse_debug_string (" : ", keys, n_keys);
   g_assert (result == 0);
+
+  result = g_parse_debug_string ("all", keys, n_keys);
+  g_assert_cmpuint (result, ==, (1 << n_keys) - 1);
+
+  /* Test subtracting debug flags from "all" */
+  result = g_parse_debug_string ("all:foo", keys, n_keys);
+  g_assert_cmpuint (result, ==, 2 | 4 | 8);
+
+  result = g_parse_debug_string ("foo baz,all", keys, n_keys);
+  g_assert_cmpuint (result, ==, 2 | 8);
+
+  result = g_parse_debug_string ("all,fooo,baz", keys, n_keys);
+  g_assert_cmpuint (result, ==, 1 | 2 | 8);
+
+  result = g_parse_debug_string ("all:weird", keys, n_keys);
+  g_assert_cmpuint (result, ==, 1 | 2 | 4);
 }
 
 static void
@@ -672,8 +691,10 @@ test_info (void)
 {
   const gchar *un, *rn, *hn;
   const gchar *tmpdir, *homedir, *userdatadir, *uconfdir, *ucachedir;
-  const gchar *uddesktop, *udddocs, *uddpubshare;
+  const gchar *uddesktop, *udddocs, *uddpubshare, *uruntimedir;
   gchar **sv, *cwd, *sdatadirs, *sconfdirs, *langnames;
+  const gchar *charset;
+  gboolean charset_is_utf8;
   if (g_test_verbose())
     g_print ("TestGLib v%u.%u.%u (i:%u b:%u)\n",
              glib_major_version,
@@ -695,6 +716,10 @@ test_info (void)
     }
   g_free (cwd);
 
+  /* reload, just for fun */
+  g_reload_user_special_dirs_cache ();
+  g_reload_user_special_dirs_cache ();
+
   tmpdir = g_get_tmp_dir();
   g_assert (tmpdir != NULL);
   homedir = g_get_home_dir ();
@@ -710,6 +735,8 @@ test_info (void)
   g_assert (uddesktop != NULL);
   udddocs = g_get_user_special_dir (G_USER_DIRECTORY_DOCUMENTS);
   uddpubshare = g_get_user_special_dir (G_USER_DIRECTORY_PUBLIC_SHARE);
+  uruntimedir = g_get_user_runtime_dir ();
+  g_assert (uruntimedir != NULL);
 
   sv = (gchar **) g_get_system_data_dirs ();
   sdatadirs = g_strjoinv (G_SEARCHPATH_SEPARATOR_S, sv);
@@ -725,6 +752,7 @@ test_info (void)
       g_print ("user_data: %s\n", userdatadir);
       g_print ("user_config: %s\n", uconfdir);
       g_print ("user_cache: %s\n", ucachedir);
+      g_print ("user_runtime: %s\n", uruntimedir);
       g_print ("system_data: %s\n", sdatadirs);
       g_print ("system_config: %s\n", sconfdirs);
       g_print ("languages: %s\n", langnames);
@@ -735,15 +763,19 @@ test_info (void)
   g_free (sdatadirs);
   g_free (sconfdirs);
   g_free (langnames);
-  
+
+  charset_is_utf8 = g_get_charset ((const char**)&charset);
+
   if (g_test_verbose())
     {
-      const gchar *charset;
-      if (g_get_charset ((G_CONST_RETURN char**)&charset))
+      if (charset_is_utf8)
         g_print ("current charset is UTF-8: %s\n", charset);
       else
         g_print ("current charset is not UTF-8: %s\n", charset);
+    }
 
+  if (g_test_verbose())
+    {
 #ifdef G_PLATFORM_WIN32
       g_print ("current locale: %s\n", g_win32_getlocale ());
 
@@ -886,7 +918,8 @@ test_file_functions (void)
   fd = g_mkstemp (template);
   if (g_test_verbose() && fd != -1)
     g_print ("g_mkstemp works even if template doesn't end in XXXXXX\n");
-  close (fd);
+  if (fd != -1)
+    close (fd);
   strcpy (template, "fooXXXXXX");
   fd = g_mkstemp (template);
   if (fd == -1)
@@ -912,6 +945,7 @@ test_file_functions (void)
   remove (template);
 
   error = NULL;
+  name_used = NULL;
   strcpy (template, "zap" G_DIR_SEPARATOR_S "barXXXXXX");
   fd = g_file_open_tmp (template, &name_used, &error);
   if (g_test_verbose())
@@ -921,10 +955,13 @@ test_file_functions (void)
       else
         g_print ("g_file_open_tmp correctly returns error: %s\n", error->message);
     }
-  close (fd);
+  if (fd != -1)
+    close (fd);
   g_clear_error (&error);
+  g_free (name_used);
 
 #ifdef G_OS_WIN32
+  name_used = NULL;
   strcpy (template, "zap/barXXXXXX");
   fd = g_file_open_tmp (template, &name_used, &error);
   if (g_test_verbose())
@@ -936,9 +973,11 @@ test_file_functions (void)
     }
   close (fd);
   g_clear_error (&error);
+  g_free (name_used);
 #endif
 
   strcpy (template, "zapXXXXXX");
+  name_used = NULL;
   fd = g_file_open_tmp (template, &name_used, &error);
   if (fd == -1)
     g_error ("g_file_open_tmp didn't work for template '%s': %s\n", template, error->message);
@@ -947,13 +986,16 @@ test_file_functions (void)
   close (fd);
   g_clear_error (&error);
   remove (name_used);
+  g_free (name_used);
 
+  name_used = NULL;
   fd = g_file_open_tmp (NULL, &name_used, &error);
   if (fd == -1)
     g_error ("g_file_open_tmp didn't work for a NULL template: %s\n", error->message);
   close (fd);
   g_clear_error (&error);
   remove (name_used);
+  g_free (name_used);
 }
 
 static void
@@ -1037,6 +1079,7 @@ hash_table_tests (void)
   g_hash_table_destroy (hash_table);
 }
 
+#ifndef G_DISABLE_DEPRECATED
 static void
 relation_test (void)
 {
@@ -1109,6 +1152,7 @@ relation_test (void)
 
   relation = NULL;
 }
+#endif
 
 static void
 gstring_tests (void)
@@ -1255,7 +1299,7 @@ various_string_tests (void)
   GTimeVal ref_date, date;
   gchar *tmp_string = NULL, *tmp_string_2, *string, *date_str;
   guint i;
-  gchar *tz;
+  const gchar *tz;
 
   if (g_test_verbose())
     g_print ("checking string chunks...");
@@ -1283,6 +1327,7 @@ various_string_tests (void)
 
 #define REF_INVALID1      "Wed Dec 19 17:20:20 GMT 2007"
 #define REF_INVALID2      "1980-02-22T10:36:00Zulu"
+#define REF_INVALID3      "1980-02-22T"
 #define REF_SEC_UTC       320063760
 #define REF_STR_UTC       "1980-02-22T10:36:00Z"
 #define REF_STR_LOCAL     "1980-02-22T13:36:00"
@@ -1294,6 +1339,7 @@ various_string_tests (void)
 #define REF_STR_USEC_CEST "19800222T123600.050000000+0200"
 #define REF_STR_USEC_EST  "1980-02-22T05:36:00,05-05:00"
 #define REF_STR_USEC_NST  "19800222T070600,0500-0330"
+#define REF_STR_DATE_ONLY "1980-02-22"
 
   if (g_test_verbose())
     g_print ("checking g_time_val_from_iso8601...\n");
@@ -1301,6 +1347,8 @@ various_string_tests (void)
   ref_date.tv_usec = 0;
   g_assert (g_time_val_from_iso8601 (REF_INVALID1, &date) == FALSE);
   g_assert (g_time_val_from_iso8601 (REF_INVALID2, &date) == FALSE);
+  g_assert (g_time_val_from_iso8601 (REF_INVALID3, &date) == FALSE);
+  g_assert (g_time_val_from_iso8601 (REF_STR_DATE_ONLY, &date) != FALSE);
   g_assert (g_time_val_from_iso8601 (REF_STR_UTC, &date) != FALSE);
   if (g_test_verbose())
     g_print ("\t=> UTC stamp = %ld.%06ld (should be: %ld.%06ld) (%ld.%06ld off)\n",
@@ -1515,6 +1563,8 @@ test_mem_chunks (void)
     }
   for (i = 0; i < 10000; i++)
     g_mem_chunk_free (mem_chunk, mem[i]);
+
+  g_mem_chunk_destroy (mem_chunk);
 }
 #endif
 
@@ -1534,7 +1584,9 @@ main (int   argc,
   g_test_add_func ("/testglib/GTree", binary_tree_test);
   g_test_add_func ("/testglib/Arrays", test_arrays);
   g_test_add_func ("/testglib/GHashTable", hash_table_tests);
-  g_test_add_func ("/testglib/Relation", relation_test);
+#ifndef G_DISABLE_DEPRECATED
+  g_test_add_func ("/testglib/Relation (deprecated)", relation_test);
+#endif
   g_test_add_func ("/testglib/File Paths", test_paths);
   g_test_add_func ("/testglib/File Functions", test_file_functions);
   g_test_add_func ("/testglib/Parse Debug Strings", test_g_parse_debug_string);

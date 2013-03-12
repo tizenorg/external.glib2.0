@@ -28,7 +28,7 @@
 #include "gvalue.h"
 #include "gvaluecollector.h"
 #include "gbsearcharray.h"
-#include "gobjectalias.h"
+#include "gtype-private.h"
 
 
 /**
@@ -74,9 +74,9 @@
  * main (int   argc,
  *       char *argv[])
  * {
- *   /&ast; GValues must start zero-filled &ast;/
- *   GValue a = {0};
- *   GValue b = {0};
+ *   /&ast; GValues must be initialized &ast;/
+ *   GValue a = G_VALUE_INIT;
+ *   GValue b = G_VALUE_INIT;
  *   const gchar *message;
  *
  *   g_type_init ();
@@ -140,7 +140,7 @@ static GBSearchConfig transform_bconfig = {
 
 /* --- functions --- */
 void
-g_value_c_init (void)
+_g_value_c_init (void)
 {
   transform_array = g_bsearch_array_create (&transform_bconfig);
 }
@@ -160,7 +160,7 @@ value_meminit (GValue *value,
  *
  * Initializes @value with the default value of @type.
  *
- * Returns: the #GValue structure that has been passed in
+ * Returns: (transfer none): the #GValue structure that has been passed in
  */
 GValue*
 g_value_init (GValue *value,
@@ -302,11 +302,10 @@ g_value_fits_pointer (const GValue *value)
  * g_value_peek_pointer:
  * @value: An initialized #GValue structure.
  *
- * Return the value contents as pointer. This function asserts that
- * g_value_fits_pointer() returned %TRUE for the passed in value.
- * This is an internal function introduced mainly for C marshallers.
- *
- * Returns: %TRUE if @value will fit inside a pointer value.
+ * Returns: (transfer none): the value contents as pointer. This
+ * function asserts that g_value_fits_pointer() returned %TRUE for the
+ * passed in value.  This is an internal function introduced mainly
+ * for C marshallers.
  */
 gpointer
 g_value_peek_pointer (const GValue *value)
@@ -328,7 +327,7 @@ g_value_peek_pointer (const GValue *value)
 /**
  * g_value_set_instance:
  * @value: An initialized #GValue structure.
- * @instance: the instance
+ * @instance: (allow-none): the instance
  *
  * Sets @value from an instantiatable type via the
  * value_table's collect_value() function.
@@ -425,7 +424,7 @@ transform_entries_cmp (gconstpointer bsearch_node1,
 }
 
 /**
- * g_value_register_transform_func:
+ * g_value_register_transform_func: (skip)
  * @src_type: Source type.
  * @dest_type: Target type.
  * @transform_func: a function which transforms values of type @src_type
@@ -554,6 +553,3 @@ g_value_transform (const GValue *src_value,
     }
   return FALSE;
 }
-
-#define __G_VALUE_C__
-#include "gobjectaliasdef.c"

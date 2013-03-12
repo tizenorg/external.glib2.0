@@ -163,12 +163,28 @@ G_BEGIN_DECLS
  * Returns: %TRUE on success.
  */
 #define G_VALUE_HOLDS_GTYPE(value)	 (G_TYPE_CHECK_VALUE_TYPE ((value), G_TYPE_GTYPE))
+/**
+ * G_VALUE_HOLDS_VARIANT:
+ * @value: a valid #GValue structure
+ *
+ * Checks whether the given #GValue can hold values of type %G_TYPE_VARIANT.
+ *
+ * Returns: %TRUE on success.
+ *
+ * Since: 2.26
+ */
+#define G_VALUE_HOLDS_VARIANT(value)     (G_TYPE_CHECK_VALUE_TYPE ((value), G_TYPE_VARIANT))
 
 
 /* --- prototypes --- */
-void		      g_value_set_char		(GValue	      *value,
-						 gchar	       v_char);
-gchar		      g_value_get_char		(const GValue *value);
+GLIB_DEPRECATED_IN_2_32_FOR(g_value_set_schar)
+void                  g_value_set_char          (GValue       *value,
+                                                 gchar         v_char);
+GLIB_DEPRECATED_IN_2_32_FOR(g_value_get_schar)
+gchar                 g_value_get_char          (const GValue *value);
+void		      g_value_set_schar		(GValue	      *value,
+						 gint8	       v_char);
+gint8		      g_value_get_schar		(const GValue *value);
 void		      g_value_set_uchar		(GValue	      *value,
 						 guchar	       v_uchar);
 guchar		      g_value_get_uchar		(const GValue *value);
@@ -203,7 +219,7 @@ void		      g_value_set_string	(GValue	      *value,
 						 const gchar  *v_string);
 void		      g_value_set_static_string (GValue	      *value,
 						 const gchar  *v_string);
-G_CONST_RETURN gchar* g_value_get_string	(const GValue *value);
+const gchar *         g_value_get_string	(const GValue *value);
 gchar*		      g_value_dup_string	(const GValue *value);
 void		      g_value_set_pointer	(GValue	      *value,
 						 gpointer      v_pointer);
@@ -212,6 +228,12 @@ GType		      g_gtype_get_type		(void);
 void		      g_value_set_gtype	        (GValue	      *value,
 						 GType         v_gtype);
 GType	              g_value_get_gtype	        (const GValue *value);
+void		      g_value_set_variant	(GValue	      *value,
+						 GVariant     *variant);
+void		      g_value_take_variant	(GValue	      *value,
+						 GVariant     *variant);
+GVariant*	      g_value_get_variant	(const GValue *value);
+GVariant*	      g_value_dup_variant	(const GValue *value);
 
 
 /* Convenience for registering new pointer types */
@@ -223,10 +245,9 @@ gchar*                g_strdup_value_contents   (const GValue *value);
 
 void g_value_take_string		        (GValue		   *value,
 						 gchar		   *v_string);
-#ifndef G_DISABLE_DEPRECATED
-void g_value_set_string_take_ownership		(GValue		   *value,
-						 gchar		   *v_string);
-#endif
+GLIB_DEPRECATED_FOR(g_value_take_string)
+void g_value_set_string_take_ownership          (GValue            *value,
+                                                 gchar             *v_string);
 
 
 /* humpf, need a C representable type name for G_TYPE_STRING */

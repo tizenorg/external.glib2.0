@@ -26,9 +26,9 @@
 #include <string.h>
 
 #include "genums.h"
+#include "gtype-private.h"
 #include "gvalue.h"
 #include "gvaluecollector.h"
-#include "gobjectalias.h"
 
 
 /**
@@ -75,7 +75,7 @@ static gchar*	value_flags_enum_lcopy_value	(const GValue	*value,
 
 /* --- functions --- */
 void
-g_enum_types_init (void)
+_g_enum_types_init (void)
 {
   static gboolean initialized = FALSE;
   static const GTypeValueTable flags_enum_value_table = {
@@ -88,7 +88,7 @@ g_enum_types_init (void)
     "p",			    /* lcopy_format */
     value_flags_enum_lcopy_value,   /* lcopy_value */
   };
-  static GTypeInfo info = {
+  GTypeInfo info = {
     0,                          /* class_size */
     NULL,                       /* base_init */
     NULL,                       /* base_destroy */
@@ -260,7 +260,7 @@ g_flags_register_static (const gchar	   *name,
  *  enumeration values. The array is terminated by a struct with all
  *  members being 0.
  *
- * This function is meant to be called from the complete_type_info()
+ * This function is meant to be called from the <literal>complete_type_info</literal>
  * function of a #GTypePlugin implementation, as in the following
  * example:
  *
@@ -619,6 +619,3 @@ g_value_get_flags (const GValue *value)
   
   return value->data[0].v_ulong;
 }
-
-#define __G_ENUMS_C__
-#include "gobjectaliasdef.c"

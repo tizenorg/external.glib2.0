@@ -229,7 +229,7 @@ typedef void (*GObjectFinalizeFunc)     (GObject      *object);
  * A #GWeakNotify function can be added to an object as a callback that gets
  * triggered when the object is finalized. Since the object is already being
  * finalized when the #GWeakNotify is called, there's not much you could do 
- * with the object, apart from e.g. using its adress as hash-index or the like. 
+ * with the object, apart from e.g. using its address as hash-index or the like. 
  */
 typedef void (*GWeakNotify)		(gpointer      data,
 					 GObject      *where_the_object_was);
@@ -317,7 +317,7 @@ struct  _GObjectClass
   GSList      *construct_properties;
 
   /*< public >*/
-  /* seldomly overidden */
+  /* seldom overidden */
   GObject*   (*constructor)     (GType                  type,
                                  guint                  n_construct_properties,
                                  GObjectConstructParam *construct_properties);
@@ -332,7 +332,7 @@ struct  _GObjectClass
                                          GParamSpec     *pspec);
   void       (*dispose)			(GObject        *object);
   void       (*finalize)		(GObject        *object);
-  /* seldomly overidden */
+  /* seldom overidden */
   void       (*dispatch_properties_changed) (GObject      *object,
 					     guint	   n_pspecs,
 					     GParamSpec  **pspecs);
@@ -390,6 +390,9 @@ GParamSpec**g_object_class_list_properties    (GObjectClass   *oclass,
 void        g_object_class_override_property  (GObjectClass   *oclass,
 					       guint           property_id,
 					       const gchar    *name);
+void        g_object_class_install_properties (GObjectClass   *oclass,
+                                               guint           n_pspecs,
+                                               GParamSpec    **pspecs);
 
 void        g_object_interface_install_property (gpointer     g_iface,
 						 GParamSpec  *pspec);
@@ -435,6 +438,8 @@ void        g_object_get_property             (GObject        *object,
 void        g_object_freeze_notify            (GObject        *object);
 void        g_object_notify                   (GObject        *object,
 					       const gchar    *property_name);
+void        g_object_notify_by_pspec          (GObject        *object,
+					       GParamSpec     *pspec);
 void        g_object_thaw_notify              (GObject        *object);
 gboolean    g_object_is_floating    	      (gpointer        object);
 gpointer    g_object_ref_sink       	      (gpointer	       object);
@@ -521,15 +526,13 @@ void        g_object_run_dispose	      (GObject	      *object);
 
 void        g_value_take_object               (GValue         *value,
 					       gpointer        v_object);
-#ifndef G_DISABLE_DEPRECATED
+GLIB_DEPRECATED_FOR(g_value_take_object)
 void        g_value_set_object_take_ownership (GValue         *value,
-					       gpointer        v_object);
-#endif
+                                               gpointer        v_object);
 
-#if !defined(G_DISABLE_DEPRECATED) || defined(GTK_COMPILATION)
+GLIB_DEPRECATED
 gsize	    g_object_compat_control	      (gsize	       what,
 					       gpointer	       data);
-#endif
 
 /* --- implementation macros --- */
 #define G_OBJECT_WARN_INVALID_PSPEC(object, pname, property_id, pspec) \
@@ -556,6 +559,35 @@ G_STMT_START { \
  */
 #define G_OBJECT_WARN_INVALID_PROPERTY_ID(object, property_id, pspec) \
     G_OBJECT_WARN_INVALID_PSPEC ((object), "property", (property_id), (pspec))
+
+void    g_clear_object (volatile GObject **object_ptr);
+#define g_clear_object(object_ptr) \
+  G_STMT_START {                                                             \
+    G_STATIC_ASSERT (sizeof *(object_ptr) == sizeof (gpointer));             \
+    /* Only one access, please */                                            \
+    gpointer *_p = (gpointer *) (object_ptr);                                \
+    gpointer _o;                                                             \
+                                                                             \
+    (void) (0 ? (gpointer) *(object_ptr) : 0);                               \
+    do                                                                       \
+      _o = g_atomic_pointer_get (_p);                                        \
+    while G_UNLIKELY (!g_atomic_pointer_compare_and_exchange (_p, _o, NULL));\
+                                                                             \
+    if (_o)                                                                  \
+      g_object_unref (_o);                                                   \
+  } G_STMT_END
+
+typedef struct {
+    /*<private>*/
+    union { gpointer p; } priv;
+} GWeakRef;
+
+void     g_weak_ref_init       (GWeakRef *weak_ref,
+                                gpointer  object);
+void     g_weak_ref_clear      (GWeakRef *weak_ref);
+gpointer g_weak_ref_get        (GWeakRef *weak_ref);
+void     g_weak_ref_set        (GWeakRef *weak_ref,
+                                gpointer  object);
 
 G_END_DECLS
 

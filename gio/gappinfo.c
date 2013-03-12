@@ -26,21 +26,20 @@
 #include <gioerror.h>
 #include <gfile.h>
 
-#include "gioalias.h"
 
 /**
  * SECTION:gappinfo
  * @short_description: Application information and launch contexts
  * @include: gio/gio.h
  * 
- * #GAppInfo and #GAppLaunchContext are used for describing and launching 
+ * #GAppInfo and #GAppLaunchContext are used for describing and launching
  * applications installed on the system.
  *
  * As of GLib 2.20, URIs will always be converted to POSIX paths
  * (using g_file_get_path()) when using g_app_info_launch() even if
  * the application requested an URI and not a POSIX path. For example
  * for an desktop-file based application with Exec key <literal>totem
- * %%U</literal> and a single URI,
+ * &percnt;U</literal> and a single URI,
  * <literal>sftp://foo/file.avi</literal>, then
  * <literal>/home/user/.gvfs/sftp on foo/file.avi</literal> will be
  * passed. This will only work if a set of suitable GIO extensions
@@ -101,7 +100,7 @@ g_app_info_default_init (GAppInfoInterface *iface)
  * 
  * Creates a duplicate of a #GAppInfo.
  *
- * Returns: a duplicate of @appinfo.
+ * Returns: (transfer full): a duplicate of @appinfo.
  **/
 GAppInfo *
 g_app_info_dup (GAppInfo *appinfo)
@@ -117,9 +116,9 @@ g_app_info_dup (GAppInfo *appinfo)
 
 /**
  * g_app_info_equal:
- * @appinfo1: the first #GAppInfo.  
+ * @appinfo1: the first #GAppInfo.
  * @appinfo2: the second #GAppInfo.
- * 
+ *
  * Checks if two #GAppInfo<!-- -->s are equal.
  *
  * Returns: %TRUE if @appinfo1 is equal to @appinfo2. %FALSE otherwise.
@@ -309,6 +308,33 @@ g_app_info_set_as_default_for_type (GAppInfo    *appinfo,
   return (* iface->set_as_default_for_type) (appinfo, content_type, error);
 }
 
+/**
+ * g_app_info_set_as_last_used_for_type:
+ * @appinfo: a #GAppInfo.
+ * @content_type: the content type.
+ * @error: a #GError.
+ *
+ * Sets the application as the last used application for a given type.
+ * This will make the application appear as first in the list returned
+ * by g_app_info_get_recommended_for_type(), regardless of the default
+ * application for that content type.
+ *
+ * Returns: %TRUE on success, %FALSE on error.
+ **/
+gboolean
+g_app_info_set_as_last_used_for_type (GAppInfo    *appinfo,
+                                      const char  *content_type,
+                                      GError     **error)
+{
+  GAppInfoIface *iface;
+  
+  g_return_val_if_fail (G_IS_APP_INFO (appinfo), FALSE);
+  g_return_val_if_fail (content_type != NULL, FALSE);
+
+  iface = G_APP_INFO_GET_IFACE (appinfo);
+
+  return (* iface->set_as_last_used_for_type) (appinfo, content_type, error);
+}
 
 /**
  * g_app_info_set_as_default_for_extension:
@@ -439,7 +465,8 @@ g_app_info_remove_supports_type (GAppInfo    *appinfo,
  * 
  * Gets the icon for the application.
  *
- * Returns: the default #GIcon for @appinfo.
+ * Returns: (transfer none): the default #GIcon for @appinfo or %NULL
+ * if there is no default icon.
  **/
 GIcon *
 g_app_info_get_icon (GAppInfo *appinfo)
@@ -457,27 +484,40 @@ g_app_info_get_icon (GAppInfo *appinfo)
 /**
  * g_app_info_launch:
  * @appinfo: a #GAppInfo
- * @files: a #GList of #GFile objects
- * @launch_context: a #GAppLaunchContext or %NULL
+ * @files: (element-type GFile): a #GList of #GFile objects
+ * @launch_context: (allow-none): a #GAppLaunchContext or %NULL
  * @error: a #GError
  * 
- * Launches the application. Passes @files to the launched application 
+ * Launches the application. Passes @files to the launched application
  * as arguments, using the optional @launch_context to get information
  * about the details of the launcher (like what screen it is on).
  * On error, @error will be set accordingly.
  *
- * To lauch the application without arguments pass a %NULL @files list.
+ * To launch the application without arguments pass a %NULL @files list.
  *
  * Note that even if the launch is successful the application launched
  * can fail to start if it runs into problems during startup. There is
  * no way to detect this.
  *
  * Some URIs can be changed when passed through a GFile (for instance
- * unsupported uris with strange formats like mailto:), so if you have
- * a textual uri you want to pass in as argument, consider using
+ * unsupported URIs with strange formats like mailto:), so if you have
+ * a textual URI you want to pass in as argument, consider using
  * g_app_info_launch_uris() instead.
- * 
- * Returns: %TRUE on successful launch, %FALSE otherwise. 
+ *
+ * The launched application inherits the environment of the launching
+ * process, but it can be modified with g_app_launch_context_setenv() and
+ * g_app_launch_context_unsetenv().
+ *
+ * On UNIX, this function sets the <envar>GIO_LAUNCHED_DESKTOP_FILE</envar>
+ * environment variable with the path of the launched desktop file and
+ * <envar>GIO_LAUNCHED_DESKTOP_FILE_PID</envar> to the process
+ * id of the launched process. This can be used to ignore
+ * <envar>GIO_LAUNCHED_DESKTOP_FILE</envar>, should it be inherited
+ * by further processes. The <envar>DISPLAY</envar> and
+ * <envar>DESKTOP_STARTUP_ID</envar> environment variables are also
+ * set, based on information provided in @launch_context.
+ *
+ * Returns: %TRUE on successful launch, %FALSE otherwise.
  **/
 gboolean
 g_app_info_launch (GAppInfo           *appinfo,
@@ -540,22 +580,22 @@ g_app_info_supports_files (GAppInfo *appinfo)
 /**
  * g_app_info_launch_uris:
  * @appinfo: a #GAppInfo
- * @uris: a #GList containing URIs to launch. 
- * @launch_context: a #GAppLaunchContext or %NULL
+ * @uris: (element-type utf8): a #GList containing URIs to launch.
+ * @launch_context: (allow-none): a #GAppLaunchContext or %NULL
  * @error: a #GError
  * 
- * Launches the application. Passes @uris to the launched application 
+ * Launches the application. This passes the @uris to the launched application
  * as arguments, using the optional @launch_context to get information
  * about the details of the launcher (like what screen it is on).
  * On error, @error will be set accordingly.
  *
- * To lauch the application without arguments pass a %NULL @uris list.
+ * To launch the application without arguments pass a %NULL @uris list.
  *
  * Note that even if the launch is successful the application launched
  * can fail to start if it runs into problems during startup. There is
  * no way to detect this.
  *
- * Returns: %TRUE on successful launch, %FALSE otherwise. 
+ * Returns: %TRUE on successful launch, %FALSE otherwise.
  **/
 gboolean
 g_app_info_launch_uris (GAppInfo           *appinfo,
@@ -597,10 +637,10 @@ g_app_info_should_show (GAppInfo *appinfo)
 /**
  * g_app_info_launch_default_for_uri:
  * @uri: the uri to show
- * @launch_context: an optional #GAppLaunchContext.
+ * @launch_context: (allow-none): an optional #GAppLaunchContext.
  * @error: a #GError.
  *
- * Utility function that launches the default application 
+ * Utility function that launches the default application
  * registered to handle the specified uri. Synchronous I/O
  * is done on the uri to detect the type of the file if
  * required.
@@ -673,7 +713,8 @@ g_app_info_can_delete (GAppInfo *appinfo)
  * On some platforms, there may be a difference between user-defined
  * #GAppInfo<!-- -->s which can be deleted, and system-wide ones which
  * cannot. See g_app_info_can_delete().
- * 
+ *
+ * Virtual: do_delete
  * Returns: %TRUE if @appinfo has been deleted
  *
  * Since: 2.20
@@ -696,6 +737,10 @@ g_app_info_delete (GAppInfo *appinfo)
 
 G_DEFINE_TYPE (GAppLaunchContext, g_app_launch_context, G_TYPE_OBJECT);
 
+struct _GAppLaunchContextPrivate {
+  char **envp;
+};
+
 /**
  * g_app_launch_context_new:
  * 
@@ -711,27 +756,110 @@ g_app_launch_context_new (void)
 }
 
 static void
-g_app_launch_context_class_init (GAppLaunchContextClass *klass)
+g_app_launch_context_finalize (GObject *object)
 {
+  GAppLaunchContext *context = G_APP_LAUNCH_CONTEXT (object);
+
+  g_strfreev (context->priv->envp);
+
+  G_OBJECT_CLASS (g_app_launch_context_parent_class)->finalize (object);
 }
 
 static void
-g_app_launch_context_init (GAppLaunchContext *launch_context)
+g_app_launch_context_class_init (GAppLaunchContextClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+
+  g_type_class_add_private (klass, sizeof (GAppLaunchContextPrivate));
+
+  object_class->finalize = g_app_launch_context_finalize;
+}
+
+static void
+g_app_launch_context_init (GAppLaunchContext *context)
+{
+  context->priv = G_TYPE_INSTANCE_GET_PRIVATE (context, G_TYPE_APP_LAUNCH_CONTEXT, GAppLaunchContextPrivate);
+}
+
+/**
+ * g_app_launch_context_setenv:
+ * @context: a #GAppLaunchContext
+ * @variable: the environment variable to set
+ * @value: the value for to set the variable to.
+ *
+ * Arranges for @variable to be set to @value in the child's
+ * environment when @context is used to launch an application.
+ *
+ * Since: 2.32
+ */
+void
+g_app_launch_context_setenv (GAppLaunchContext *context,
+                             const char        *variable,
+                             const char        *value)
+{
+  if (!context->priv->envp)
+    context->priv->envp = g_get_environ ();
+
+  context->priv->envp =
+    g_environ_setenv (context->priv->envp, variable, value, TRUE);
+}
+
+/**
+ * g_app_launch_context_unsetenv:
+ * @context: a #GAppLaunchContext
+ * @variable: the environment variable to remove
+ *
+ * Arranges for @variable to be unset in the child's environment
+ * when @context is used to launch an application.
+ *
+ * Since: 2.32
+ */
+void
+g_app_launch_context_unsetenv (GAppLaunchContext *context,
+                               const char        *variable)
+{
+  if (!context->priv->envp)
+    context->priv->envp = g_get_environ ();
+
+  context->priv->envp =
+    g_environ_unsetenv (context->priv->envp, variable);
+}
+
+/**
+ * g_app_launch_context_get_environment:
+ * @context: a #GAppLaunchContext
+ *
+ * Gets the complete environment variable list to be passed to
+ * the child process when @context is used to launch an application.
+ * This is a %NULL-terminated array of strings, where each string has
+ * the form <literal>KEY=VALUE</literal>.
+ *
+ * Return value: (array zero-terminated=1) (transfer full): the
+ *     child's environment
+ *
+ * Since: 2.32
+ */
+char **
+g_app_launch_context_get_environment (GAppLaunchContext *context)
+{
+  if (!context->priv->envp)
+    context->priv->envp = g_get_environ ();
+
+  return g_strdupv (context->priv->envp);
 }
 
 /**
  * g_app_launch_context_get_display:
  * @context: a #GAppLaunchContext
  * @info: a #GAppInfo
- * @files: a #GList of #GFile objects
+ * @files: (element-type GFile): a #GList of #GFile objects
  *
- * Gets the display string for the display. This is used to ensure new
- * applications are started on the same display as the launching 
- * application.
- * 
+ * Gets the display string for the @context. This is used to ensure new
+ * applications are started on the same display as the launching
+ * application, by setting the <envar>DISPLAY</envar> environment variable.
+ *
  * Returns: a display string for the display.
- **/
+ */
 char *
 g_app_launch_context_get_display (GAppLaunchContext *context,
 				  GAppInfo          *info,
@@ -754,16 +882,17 @@ g_app_launch_context_get_display (GAppLaunchContext *context,
  * g_app_launch_context_get_startup_notify_id:
  * @context: a #GAppLaunchContext
  * @info: a #GAppInfo
- * @files: a #GList of of #GFile objects
+ * @files: (element-type GFile): a #GList of of #GFile objects
  * 
  * Initiates startup notification for the application and returns the
- * DESKTOP_STARTUP_ID for the launched operation, if supported.
+ * <envar>DESKTOP_STARTUP_ID</envar> for the launched operation,
+ * if supported.
  *
  * Startup notification IDs are defined in the <ulink
  * url="http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt">
  * FreeDesktop.Org Startup Notifications standard</ulink>.
  *
- * Returns: a startup notification ID for the application, or %NULL if 
+ * Returns: a startup notification ID for the application, or %NULL if
  *     not supported.
  **/
 char *
@@ -808,7 +937,3 @@ g_app_launch_context_launch_failed (GAppLaunchContext *context,
   if (class->launch_failed != NULL)
     class->launch_failed (context, startup_notify_id);
 }
-
-
-#define __G_APP_INFO_C__
-#include "gioaliasdef.c"

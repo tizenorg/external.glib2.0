@@ -110,12 +110,13 @@ verify_iostream (GFileIOStream *file_iostream)
   res = g_output_stream_write_all (out, new_data, strlen (new_data),
 				   &n_bytes, NULL, &error);
   g_assert (!res);
-  g_assert (error != NULL);
-  g_assert (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CLOSED));
+  g_assert_error (error, G_IO_ERROR, G_IO_ERROR_CLOSED);
+  g_error_free (error);
 
   error = NULL;
   res = g_io_stream_close (iostream, NULL, &error);
-  g_assert (res && error == NULL);
+  g_assert (res);
+  g_assert_no_error (error);
 
   g_free (modified_data);
 }
@@ -154,6 +155,7 @@ test_g_file_open_readwrite (void)
   error = NULL;
   file_iostream = g_file_open_readwrite (file, NULL, &error);
   g_assert (file_iostream != NULL);
+  g_object_unref (file);
 
   verify_iostream (file_iostream);
 
@@ -184,7 +186,8 @@ test_g_file_create_readwrite (void)
   error = NULL;
   file_iostream = g_file_create_readwrite (file, 0, NULL, &error);
   g_assert (file_iostream == NULL);
-  g_assert (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_EXISTS));
+  g_assert_error (error, G_IO_ERROR, G_IO_ERROR_EXISTS);
+  g_error_free (error);
 
   g_unlink (tmp_file);
   file_iostream = g_file_create_readwrite (file, 0, NULL, &error);
@@ -204,6 +207,7 @@ test_g_file_create_readwrite (void)
   verify_iostream (file_iostream);
 
   g_object_unref (file_iostream);
+  g_object_unref (file);
 
   g_unlink (tmp_file);
   g_free (tmp_file);
@@ -259,6 +263,7 @@ test_g_file_replace_readwrite (void)
   verify_iostream (file_iostream);
 
   g_object_unref (file_iostream);
+  g_object_unref (file);
 
   backup = g_strconcat (tmp_file, "~", NULL);
   res = g_file_get_contents (backup,

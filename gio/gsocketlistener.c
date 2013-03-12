@@ -38,10 +38,9 @@
 #include <gio/ginetsocketaddress.h>
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
- * SECTION: gsocketlistener
+ * SECTION:gsocketlistener
  * @title: GSocketListener
  * @short_description: Helper for accepting network client connections
  * @see_also: #GThreadedSocketService, #GSocketService.
@@ -200,7 +199,7 @@ check_listener (GSocketListener *listener,
  * g_socket_listener_add_socket:
  * @listener: a #GSocketListener
  * @socket: a listening #GSocket
- * @source_object: Optional #GObject identifying this source
+ * @source_object: (allow-none): Optional #GObject identifying this source
  * @error: #GError for error reporting, or %NULL to ignore.
  *
  * Adds @socket to the set of sockets that we try to accept
@@ -254,8 +253,8 @@ g_socket_listener_add_socket (GSocketListener  *listener,
  * @address: a #GSocketAddress
  * @type: a #GSocketType
  * @protocol: a #GSocketProtocol
- * @source_object: Optional #GObject identifying this source
- * @effective_address: location to store the address that was bound to, or %NULL.
+ * @source_object: (allow-none): Optional #GObject identifying this source
+ * @effective_address: (out) (allow-none): location to store the address that was bound to, or %NULL.
  * @error: #GError for error reporting, or %NULL to ignore.
  *
  * Creates a socket of type @type and protocol @protocol, binds
@@ -264,7 +263,7 @@ g_socket_listener_add_socket (GSocketListener  *listener,
  *
  * Note that adding an IPv6 address, depending on the platform,
  * may or may not result in a listener that also accepts IPv4
- * connections.  For more determinstic behaviour, see
+ * connections.  For more deterministic behavior, see
  * g_socket_listener_add_inet_port().
  *
  * @source_object will be passed out in the various calls
@@ -273,7 +272,7 @@ g_socket_listener_add_socket (GSocketListener  *listener,
  * different things depending on what address is connected to.
  *
  * If successful and @effective_address is non-%NULL then it will
- * be set to the address that the binding actually occured at.  This
+ * be set to the address that the binding actually occurred at.  This
  * is helpful for determining the port number that was used for when
  * requesting a binding to port 0 (ie: "any port").  This address, if
  * requested, belongs to the caller and must be freed.
@@ -345,7 +344,7 @@ g_socket_listener_add_address (GSocketListener  *listener,
  * g_socket_listener_add_inet_port:
  * @listener: a #GSocketListener
  * @port: an IP port number (non-zero)
- * @source_object: Optional #GObject identifying this source
+ * @source_object: (allow-none): Optional #GObject identifying this source
  * @error: #GError for error reporting, or %NULL to ignore.
  *
  * Helper function for g_socket_listener_add_address() that
@@ -563,8 +562,8 @@ accept_callback (GSocket      *socket,
 /**
  * g_socket_listener_accept_socket:
  * @listener: a #GSocketListener
- * @source_object: location where #GObject pointer will be stored, or %NULL
- * @cancellable: optional #GCancellable object, %NULL to ignore.
+ * @source_object: (out) (transfer none) (allow-none): location where #GObject pointer will be stored, or %NULL.
+ * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
  * @error: #GError for error reporting, or %NULL to ignore.
  *
  * Blocks waiting for a client to connect to any of the sockets added
@@ -582,7 +581,7 @@ accept_callback (GSocket      *socket,
  * triggering the cancellable object from another thread. If the operation
  * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
  *
- * Returns: a #GSocket on success, %NULL on error.
+ * Returns: (transfer full): a #GSocket on success, %NULL on error.
  *
  * Since: 2.22
  */
@@ -640,8 +639,8 @@ g_socket_listener_accept_socket (GSocketListener  *listener,
 /**
  * g_socket_listener_accept:
  * @listener: a #GSocketListener
- * @source_object: location where #GObject pointer will be stored, or %NULL
- * @cancellable: optional #GCancellable object, %NULL to ignore.
+ * @source_object: (out) (transfer none) (allow-none): location where #GObject pointer will be stored, or %NULL
+ * @cancellable: (allow-none): optional #GCancellable object, %NULL to ignore.
  * @error: #GError for error reporting, or %NULL to ignore.
  *
  * Blocks waiting for a client to connect to any of the sockets added
@@ -656,7 +655,7 @@ g_socket_listener_accept_socket (GSocketListener  *listener,
  * triggering the cancellable object from another thread. If the operation
  * was cancelled, the error %G_IO_ERROR_CANCELLED will be returned.
  *
- * Returns: a #GSocketConnection on success, %NULL on error.
+ * Returns: (transfer full): a #GSocketConnection on success, %NULL on error.
  *
  * Since: 2.22
  */
@@ -711,8 +710,7 @@ accept_ready (GSocket      *accept_socket,
     }
   else
     {
-      g_simple_async_result_set_from_error (data->simple, error);
-      g_error_free (error);
+      g_simple_async_result_take_error (data->simple, error);
     }
 
   g_simple_async_result_complete_in_idle (data->simple);
@@ -726,9 +724,9 @@ accept_ready (GSocket      *accept_socket,
 /**
  * g_socket_listener_accept_socket_async:
  * @listener: a #GSocketListener
- * @cancellable: a #GCancellable, or %NULL
- * @callback: a #GAsyncReadyCallback
- * @user_data: user data for the callback
+ * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @callback: (scope async): a #GAsyncReadyCallback
+ * @user_data: (closure): user data for the callback
  *
  * This is the asynchronous version of g_socket_listener_accept_socket().
  *
@@ -749,10 +747,9 @@ g_socket_listener_accept_socket_async (GSocketListener     *listener,
 
   if (!check_listener (listener, &error))
     {
-      g_simple_async_report_gerror_in_idle (G_OBJECT (listener),
+      g_simple_async_report_take_gerror_in_idle (G_OBJECT (listener),
 					    callback, user_data,
 					    error);
-      g_error_free (error);
       return;
     }
 
@@ -772,13 +769,13 @@ g_socket_listener_accept_socket_async (GSocketListener     *listener,
  * g_socket_listener_accept_socket_finish:
  * @listener: a #GSocketListener
  * @result: a #GAsyncResult.
- * @source_object: Optional #GObject identifying this source
- * @error: a #GError location to store the error occuring, or %NULL to
+ * @source_object: (out) (transfer none) (allow-none): Optional #GObject identifying this source
+ * @error: a #GError location to store the error occurring, or %NULL to
  * ignore.
  *
  * Finishes an async accept operation. See g_socket_listener_accept_socket_async()
  *
- * Returns: a #GSocket on success, %NULL on error.
+ * Returns: (transfer full): a #GSocket on success, %NULL on error.
  *
  * Since: 2.22
  */
@@ -791,7 +788,7 @@ g_socket_listener_accept_socket_finish (GSocketListener  *listener,
   GSocket *socket;
   GSimpleAsyncResult *simple;
 
-  g_return_val_if_fail (G_IS_SOCKET_LISTENER (listener), FALSE);
+  g_return_val_if_fail (G_IS_SOCKET_LISTENER (listener), NULL);
 
   simple = G_SIMPLE_ASYNC_RESULT (result);
 
@@ -811,9 +808,9 @@ g_socket_listener_accept_socket_finish (GSocketListener  *listener,
 /**
  * g_socket_listener_accept_async:
  * @listener: a #GSocketListener
- * @cancellable: a #GCancellable, or %NULL
- * @callback: a #GAsyncReadyCallback
- * @user_data: user data for the callback
+ * @cancellable: (allow-none): a #GCancellable, or %NULL
+ * @callback: (scope async): a #GAsyncReadyCallback
+ * @user_data: (closure): user data for the callback
  *
  * This is the asynchronous version of g_socket_listener_accept().
  *
@@ -839,13 +836,13 @@ g_socket_listener_accept_async (GSocketListener     *listener,
  * g_socket_listener_accept_finish:
  * @listener: a #GSocketListener
  * @result: a #GAsyncResult.
- * @source_object: Optional #GObject identifying this source
- * @error: a #GError location to store the error occuring, or %NULL to
+ * @source_object: (out) (transfer none) (allow-none): Optional #GObject identifying this source
+ * @error: a #GError location to store the error occurring, or %NULL to
  * ignore.
  *
  * Finishes an async accept operation. See g_socket_listener_accept_async()
  *
- * Returns: a #GSocketConnection on success, %NULL on error.
+ * Returns: (transfer full): a #GSocketConnection on success, %NULL on error.
  *
  * Since: 2.22
  */
@@ -930,12 +927,12 @@ g_socket_listener_close (GSocketListener *listener)
 /**
  * g_socket_listener_add_any_inet_port:
  * @listener: a #GSocketListener
- * @source_object: Optional #GObject identifying this source
- * @error: a #GError location to store the error occuring, or %NULL to
+ * @source_object: (allow-none): Optional #GObject identifying this source
+ * @error: a #GError location to store the error occurring, or %NULL to
  * ignore.
  *
  * Listens for TCP connections on any available port number for both
- * IPv6 and IPv4 (if each are available).
+ * IPv6 and IPv4 (if each is available).
  *
  * This is useful if you need to have a socket for incoming connections
  * but don't care about the specific port number.
@@ -1151,6 +1148,3 @@ g_socket_listener_add_any_inet_port (GSocketListener  *listener,
 
   return candidate_port;
 }
-
-#define __G_SOCKET_LISTENER_C__
-#include "gioaliasdef.c"

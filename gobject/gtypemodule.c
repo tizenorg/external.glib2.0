@@ -23,7 +23,6 @@
 
 #include "gtypeplugin.h"
 #include "gtypemodule.h"
-#include "gobjectalias.h"
 
 
 /**
@@ -50,7 +49,7 @@
  * types and interface implementations are in use, the module is kept
  * loaded. When the types and interfaces are gone, the module may be
  * unloaded. If the types and interfaces become used again, the module
- * will be reloaded. Note that the last unref can not happen in module
+ * will be reloaded. Note that the last unref cannot happen in module
  * code, since that would lead to the caller's code being unloaded before
  * g_object_unref() returns to it.
  *
@@ -109,8 +108,8 @@ g_type_module_dispose (GObject *object)
   
   if (module->type_infos || module->interface_infos)
     {
-      g_warning (G_STRLOC ": unsolicitated invocation of g_object_dispose() on GTypeModule");
-	     
+      g_warning (G_STRLOC ": unsolicitated invocation of g_object_run_dispose() on GTypeModule");
+
       g_object_ref (object);
     }
 
@@ -154,7 +153,7 @@ g_type_module_get_type (void)
 
   if (!type_module_type)
     {
-      static const GTypeInfo type_module_info = {
+      const GTypeInfo type_module_info = {
         sizeof (GTypeModuleClass),
         NULL,           /* base_init */
         NULL,           /* base_finalize */
@@ -165,7 +164,7 @@ g_type_module_get_type (void)
         0,              /* n_preallocs */
         NULL,           /* instance_init */
       };
-      static const GInterfaceInfo iface_info = {
+      const GInterfaceInfo iface_info = {
         (GInterfaceInitFunc) g_type_module_iface_init,
         NULL,               /* interface_finalize */
         NULL,               /* interface_data */
@@ -580,7 +579,3 @@ g_type_module_register_flags (GTypeModule      *module,
   return g_type_module_register_type (G_TYPE_MODULE (module),
                                       G_TYPE_FLAGS, name, &flags_type_info, 0);
 }
-
-
-#define __G_TYPE_MODULE_C__
-#include "gobjectaliasdef.c"

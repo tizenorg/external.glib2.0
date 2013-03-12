@@ -40,12 +40,11 @@ static int nlookups = 0;
 static void G_GNUC_NORETURN
 usage (void)
 {
-	fprintf (stderr, "Usage: resolver [-t] [-s] [hostname | IP | service/protocol/domain ] ...\n");
-	fprintf (stderr, "       resolver [-t] [-s] -c [hostname | IP | service/protocol/domain ]\n");
-	fprintf (stderr, "       Use -t to enable threading.\n");
+	fprintf (stderr, "Usage: resolver [-s] [hostname | IP | service/protocol/domain ] ...\n");
+	fprintf (stderr, "       resolver [-s] -c NUMBER [hostname | IP | service/protocol/domain ]\n");
 	fprintf (stderr, "       Use -s to do synchronous lookups.\n");
-	fprintf (stderr, "       Both together will result in simultaneous lookups in multiple threads\n");
-	fprintf (stderr, "       Use -c (and only a single resolvable argument) to test GSocketConnectable.\n");
+	fprintf (stderr, "       Use -c NUMBER (and only a single resolvable argument) to test GSocketConnectable.\n");
+	fprintf (stderr, "       The given NUMBER determines how many times the connectable will be enumerated.\n");
 	exit (1);
 }
 
@@ -197,21 +196,16 @@ lookup_thread (gpointer arg)
 }
 
 static void
-start_threaded_lookups (char **argv, int argc)
-{
-  int i;
-
-  for (i = 0; i < argc; i++)
-    g_thread_create (lookup_thread, argv[i], FALSE, NULL);
-}
-
-static void
 start_sync_lookups (char **argv, int argc)
 {
   int i;
 
   for (i = 0; i < argc; i++)
-    lookup_one_sync (argv[i]);
+    {
+      GThread *thread;
+      thread = g_thread_new ("lookup", lookup_thread, argv[i]);
+      g_thread_unref (thread);
+    }
 }
 
 static void
@@ -360,7 +354,7 @@ do_async_connectable (GSocketAddressEnumerator *enumerator)
 }
 
 static void
-do_connectable (const char *arg, gboolean synchronous)
+do_connectable (const char *arg, gboolean synchronous, guint count)
 {
   char **parts;
   GSocketConnectable *connectable;
@@ -400,13 +394,17 @@ do_connectable (const char *arg, gboolean synchronous)
         connectable = g_network_address_new (arg, port);
     }
 
-  enumerator = g_socket_connectable_enumerate (connectable);
-  g_object_unref (connectable);
+  while (count--)
+    {
+      enumerator = g_socket_connectable_enumerate (connectable);
 
-  if (synchronous)
-    do_sync_connectable (enumerator);
-  else
-    do_async_connectable (enumerator);
+      if (synchronous)
+        do_sync_connectable (enumerator);
+      else
+        do_async_connectable (enumerator);
+    }
+  
+  g_object_unref (connectable);
 }
 
 #ifdef G_OS_UNIX
@@ -433,36 +431,34 @@ async_cancel (GIOChannel *source, GIOCondition cond, gpointer cancel)
 int
 main (int argc, char **argv)
 {
-  gboolean threaded = FALSE, synchronous = FALSE;
-  gboolean use_connectable = FALSE;
+  gboolean synchronous = FALSE;
+  guint connectable_count = 0;
 #ifdef G_OS_UNIX
   GIOChannel *chan;
   guint watch;
 #endif
 
-  /* We can't use GOptionContext because we use the arguments to
-   * decide whether or not to call g_thread_init().
-   */
+  g_type_init ();
+
+  /* FIXME: use GOptionContext */
   while (argc >= 2 && argv[1][0] == '-')
     {
-      if (!strcmp (argv[1], "-t"))
-        {
-          g_thread_init (NULL);
-          threaded = TRUE;
-        }
-      else if (!strcmp (argv[1], "-s"))
+      if (!strcmp (argv[1], "-s"))
         synchronous = TRUE;
       else if (!strcmp (argv[1], "-c"))
-        use_connectable = TRUE;
+        {
+          connectable_count = atoi (argv[2]);
+          argv++;
+          argc--;
+        }
       else
         usage ();
 
       argv++;
       argc--;
     }
-  g_type_init ();
 
-  if (argc < 2 || (argc > 2 && use_connectable))
+  if (argc < 2 || (argc > 2 && connectable_count))
     usage ();
 
   resolver = g_resolver_get_default ();
@@ -488,13 +484,14 @@ main (int argc, char **argv)
   nlookups = argc - 1;
   loop = g_main_loop_new (NULL, TRUE);
 
-  if (use_connectable)
-    do_connectable (argv[1], synchronous);
+  if (connectable_count)
+    {
+      nlookups = connectable_count;
+      do_connectable (argv[1], synchronous, connectable_count);
+    }
   else
     {
-      if (threaded && synchronous)
-        start_threaded_lookups (argv + 1, argc - 1);
-      else if (synchronous)
+      if (synchronous)
         start_sync_lookups (argv + 1, argc - 1);
       else
         start_async_lookups (argv + 1, argc - 1);

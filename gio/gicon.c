@@ -33,7 +33,6 @@
 
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /* There versioning of this is implicit, version 1 would be ".1 " */
 #define G_ICON_SERIALIZATION_MAGIC0 ". "
@@ -76,7 +75,8 @@ g_icon_default_init (GIconInterface *iface)
  * @icon: #gconstpointer to an icon object.
  * 
  * Gets a hash for an icon.
- * 
+ *
+ * Virtual: hash
  * Returns: a #guint containing a hash for the @icon, suitable for 
  * use in a #GHashTable or similar data structure.
  **/
@@ -94,8 +94,8 @@ g_icon_hash (gconstpointer icon)
 
 /**
  * g_icon_equal:
- * @icon1: pointer to the first #GIcon.
- * @icon2: pointer to the second #GIcon.
+ * @icon1: (allow-none): pointer to the first #GIcon.
+ * @icon2: (allow-none): pointer to the second #GIcon.
  * 
  * Checks if two icons are equal.
  * 
@@ -124,7 +124,6 @@ g_icon_equal (GIcon *icon1,
 static gboolean
 g_icon_to_string_tokenized (GIcon *icon, GString *s)
 {
-  char *ret;
   GPtrArray *tokens;
   gint version;
   GIconIface *icon_iface;
@@ -132,8 +131,6 @@ g_icon_to_string_tokenized (GIcon *icon, GString *s)
 
   g_return_val_if_fail (icon != NULL, FALSE);
   g_return_val_if_fail (G_IS_ICON (icon), FALSE);
-
-  ret = NULL;
 
   icon_iface = G_ICON_GET_IFACE (icon);
   if (icon_iface->to_tokens == NULL)
@@ -191,7 +188,7 @@ g_icon_to_string_tokenized (GIcon *icon, GString *s)
  *     (such as <literal>/path/to/my icon.png</literal>) without escaping
  *     if the #GFile for @icon is a native file.  If the file is not
  *     native, the returned string is the result of g_file_get_uri()
- *     (such as <literal>sftp://path/to/my%%20icon.png</literal>).
+ *     (such as <literal>sftp://path/to/my&percnt;20icon.png</literal>).
  * </para></listitem>
  * <listitem><para>
  *    If @icon is a #GThemedIcon with exactly one name, the encoding is
@@ -199,6 +196,7 @@ g_icon_to_string_tokenized (GIcon *icon, GString *s)
  * </para></listitem>
  * </itemizedlist>
  *
+ * Virtual: to_tokens
  * Returns: An allocated NUL-terminated UTF8 string or %NULL if @icon can't
  * be serialized. Use g_free() to free.
  *
@@ -382,6 +380,7 @@ ensure_builtin_icon_types (void)
   t = g_file_icon_get_type ();
   t = g_emblemed_icon_get_type ();
   t = g_emblem_get_type ();
+  (t); /* To avoid -Wunused-but-set-variable */
 }
 
 /**
@@ -396,8 +395,8 @@ ensure_builtin_icon_types (void)
  * implementations you need to ensure that each #GType is registered
  * with the type system prior to calling g_icon_new_for_string().
  *
- * Returns: An object implementing the #GIcon interface or %NULL if
- * @error is set.
+ * Returns: (transfer full): An object implementing the #GIcon
+ *          interface or %NULL if @error is set.
  *
  * Since: 2.20
  **/
@@ -450,7 +449,3 @@ g_icon_new_for_string (const gchar   *str,
 
   return icon;
 }
-
-
-#define __G_ICON_C__
-#include "gioaliasdef.c"

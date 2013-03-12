@@ -33,7 +33,6 @@
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
 #endif
-#define _GNU_SOURCE
 #include <fcntl.h>
 #include <errno.h>
 #ifdef HAVE_GRP_H
@@ -94,12 +93,6 @@
 #include "gcontenttype.h"
 #include "gcontenttypeprivate.h"
 
-#include "gioalias.h"
-
-/* See gstdio.h */
-#ifndef G_OS_WIN32
-#define _g_stat_struct stat
-#endif
 
 struct ThumbMD5Context {
 	guint32 buf[4];
@@ -125,18 +118,18 @@ static GHashTable *gid_cache = NULL;
 char *
 _g_local_file_info_create_etag (GLocalFileStat *statbuf)
 {
-  GTimeVal tv;
-  
-  tv.tv_sec = statbuf->st_mtime;
+  glong sec, usec;
+
+  sec = statbuf->st_mtime;
 #if defined (HAVE_STRUCT_STAT_ST_MTIMENSEC)
-  tv.tv_usec = statbuf->st_mtimensec / 1000;
+  usec = statbuf->st_mtimensec / 1000;
 #elif defined (HAVE_STRUCT_STAT_ST_MTIM_TV_NSEC)
-  tv.tv_usec = statbuf->st_mtim.tv_nsec / 1000;
+  usec = statbuf->st_mtim.tv_nsec / 1000;
 #else
-  tv.tv_usec = 0;
+  usec = 0;
 #endif
 
-  return g_strdup_printf ("%lu:%lu", tv.tv_sec, tv.tv_usec);
+  return g_strdup_printf ("%lu:%lu", sec, usec);
 }
 
 static char *
@@ -793,7 +786,7 @@ _g_local_file_info_get_parent_info (const char            *dir,
 				    GFileAttributeMatcher *attribute_matcher,
 				    GLocalParentFileInfo  *parent_info)
 {
-  struct _g_stat_struct statbuf;
+  GStatBuf statbuf;
   int res;
 
   parent_info->extra_data = NULL;
@@ -1221,19 +1214,19 @@ get_content_type (const char          *basename,
 {
   if (is_symlink &&
       (symlink_broken || (flags & G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS)))
-    return g_strdup  ("inode/symlink");
-  else if (S_ISDIR(statbuf->st_mode))
+    return g_strdup ("inode/symlink");
+  else if (statbuf != NULL && S_ISDIR(statbuf->st_mode))
     return g_strdup ("inode/directory");
 #ifndef G_OS_WIN32
-  else if (S_ISCHR(statbuf->st_mode))
+  else if (statbuf != NULL && S_ISCHR(statbuf->st_mode))
     return g_strdup ("inode/chardevice");
-  else if (S_ISBLK(statbuf->st_mode))
+  else if (statbuf != NULL && S_ISBLK(statbuf->st_mode))
     return g_strdup ("inode/blockdevice");
-  else if (S_ISFIFO(statbuf->st_mode))
+  else if (statbuf != NULL && S_ISFIFO(statbuf->st_mode))
     return g_strdup ("inode/fifo");
 #endif
 #ifdef S_ISSOCK
-  else if (S_ISSOCK(statbuf->st_mode))
+  else if (statbuf != NULL && S_ISSOCK(statbuf->st_mode))
     return g_strdup ("inode/socket");
 #endif
   else
@@ -1413,138 +1406,14 @@ win32_get_file_user_info (const gchar  *filename,
 }
 #endif /* G_OS_WIN32 */
 
-GFileInfo *
-_g_local_file_info_get (const char             *basename,
-			const char             *path,
-			GFileAttributeMatcher  *attribute_matcher,
-			GFileQueryInfoFlags     flags,
-			GLocalParentFileInfo   *parent_info,
-			GError                **error)
+void
+_g_local_file_info_get_nostat (GFileInfo              *info,
+                               const char             *basename,
+			       const char             *path,
+                               GFileAttributeMatcher  *attribute_matcher)
 {
-  GFileInfo *info;
-  GLocalFileStat statbuf;
-#ifdef S_ISLNK
-  struct stat statbuf2;
-#endif
-  int res;
-  gboolean is_symlink, symlink_broken;
-#ifdef G_OS_WIN32
-  DWORD dos_attributes;
-#endif
-  char *symlink_target;
-  GVfs *vfs;
-  GVfsClass *class;
-  guint64 device;
-
-  info = g_file_info_new ();
-
-  /* Make sure we don't set any unwanted attributes */
-  g_file_info_set_attribute_mask (info, attribute_matcher);
-  
   g_file_info_set_name (info, basename);
 
-  /* Avoid stat in trivial case */
-  if (attribute_matcher == NULL)
-    return info;
-
-#ifndef G_OS_WIN32
-  res = g_lstat (path, &statbuf);
-#else
-  {
-    wchar_t *wpath = g_utf8_to_utf16 (path, -1, NULL, NULL, error);
-    int len;
-
-    if (wpath == NULL)
-      {
-        g_object_unref (info);
-        return NULL;
-      }
-
-    len = wcslen (wpath);
-    while (len > 0 && G_IS_DIR_SEPARATOR (wpath[len-1]))
-      len--;
-    if (len > 0 &&
-        (!g_path_is_absolute (path) || len > g_path_skip_root (path) - path))
-      wpath[len] = '\0';
-
-    res = _wstati64 (wpath, &statbuf);
-    dos_attributes = GetFileAttributesW (wpath);
-
-    g_free (wpath);
-  }
-#endif
-
-  if (res == -1)
-    {
-      int errsv = errno;
-      char *display_name = g_filename_display_name (path);
-      g_object_unref (info);
-      g_set_error (error, G_IO_ERROR,
-		   g_io_error_from_errno (errsv),
-		   _("Error stating file '%s': %s"),
-		   display_name, g_strerror (errsv));
-      g_free (display_name);
-      return NULL;
-    }
-
-  device = statbuf.st_dev;
-
-#ifdef S_ISLNK
-  is_symlink = S_ISLNK (statbuf.st_mode);
-#else
-  is_symlink = FALSE;
-#endif
-  symlink_broken = FALSE;
-#ifdef S_ISLNK
-  if (is_symlink)
-    {
-      g_file_info_set_is_symlink (info, TRUE);
-
-      /* Unless NOFOLLOW was set we default to following symlinks */
-      if (!(flags & G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS))
-	{
-	  res = stat (path, &statbuf2);
-
-	    /* Report broken links as symlinks */
-	  if (res != -1)
-	    statbuf = statbuf2;
-	  else
-	    symlink_broken = TRUE;
-	}
-    }
-#endif
-
-  set_info_from_stat (info, &statbuf, attribute_matcher);
-  
-#ifndef G_OS_WIN32
-  if (basename != NULL && basename[0] == '.')
-    g_file_info_set_is_hidden (info, TRUE);
-
-  if (basename != NULL && basename[strlen (basename) -1] == '~' &&
-      S_ISREG (statbuf.st_mode))
-    _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_STANDARD_IS_BACKUP, TRUE);
-#else
-  if (dos_attributes & FILE_ATTRIBUTE_HIDDEN)
-    g_file_info_set_is_hidden (info, TRUE);
-
-  if (dos_attributes & FILE_ATTRIBUTE_ARCHIVE)
-    _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_DOS_IS_ARCHIVE, TRUE);
-
-  if (dos_attributes & FILE_ATTRIBUTE_SYSTEM)
-    _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_DOS_IS_SYSTEM, TRUE);
-#endif
-
-  symlink_target = NULL;
-#ifdef S_ISLNK
-  if (is_symlink)
-    {
-      symlink_target = read_link (path);
-      if (symlink_target &&
-          _g_file_attribute_matcher_matches_id (attribute_matcher,
-                                                G_FILE_ATTRIBUTE_ID_STANDARD_SYMLINK_TARGET))
-        g_file_info_set_symlink_target (info, symlink_target);
-    }
-#endif
   if (_g_file_attribute_matcher_matches_id (attribute_matcher,
 					    G_FILE_ATTRIBUTE_ID_STANDARD_DISPLAY_NAME))
     {
@@ -1578,13 +1447,164 @@ _g_local_file_info_get (const char             *basename,
 	_g_file_info_set_attribute_string_by_id (info, G_FILE_ATTRIBUTE_ID_STANDARD_COPY_NAME, copy_name);
       g_free (copy_name);
     }
+}
 
+GFileInfo *
+_g_local_file_info_get (const char             *basename,
+			const char             *path,
+			GFileAttributeMatcher  *attribute_matcher,
+			GFileQueryInfoFlags     flags,
+			GLocalParentFileInfo   *parent_info,
+			GError                **error)
+{
+  GFileInfo *info;
+  GLocalFileStat statbuf;
+#ifdef S_ISLNK
+  struct stat statbuf2;
+#endif
+  int res;
+  gboolean stat_ok;
+  gboolean is_symlink, symlink_broken;
+#ifdef G_OS_WIN32
+  DWORD dos_attributes;
+#endif
+  char *symlink_target;
+  GVfs *vfs;
+  GVfsClass *class;
+  guint64 device;
+
+  info = g_file_info_new ();
+
+  /* Make sure we don't set any unwanted attributes */
+  g_file_info_set_attribute_mask (info, attribute_matcher);
+  
+  _g_local_file_info_get_nostat (info, basename, path, attribute_matcher);
+
+  if (attribute_matcher == NULL)
+    {
+      g_file_info_unset_attribute_mask (info);
+      return info;
+    }
+
+#ifndef G_OS_WIN32
+  res = g_lstat (path, &statbuf);
+#else
+  {
+    wchar_t *wpath = g_utf8_to_utf16 (path, -1, NULL, NULL, error);
+    int len;
+
+    if (wpath == NULL)
+      {
+        g_object_unref (info);
+        return NULL;
+      }
+
+    len = wcslen (wpath);
+    while (len > 0 && G_IS_DIR_SEPARATOR (wpath[len-1]))
+      len--;
+    if (len > 0 &&
+        (!g_path_is_absolute (path) || len > g_path_skip_root (path) - path))
+      wpath[len] = '\0';
+
+    res = _wstati64 (wpath, &statbuf);
+    dos_attributes = GetFileAttributesW (wpath);
+
+    g_free (wpath);
+  }
+#endif
+
+  if (res == -1)
+    {
+      int errsv = errno;
+
+      /* Don't bail out if we get Permission denied (SELinux?) */
+      if (errsv != EACCES)
+        {
+          char *display_name = g_filename_display_name (path);
+          g_object_unref (info);
+          g_set_error (error, G_IO_ERROR,
+		       g_io_error_from_errno (errsv),
+		       _("Error when getting information for file '%s': %s"),
+		       display_name, g_strerror (errsv));
+          g_free (display_name);
+          return NULL;
+        }
+    }
+
+  /* Even if stat() fails, try to get as much as other attributes possible */
+  stat_ok = res != -1;
+
+  if (stat_ok)
+    device = statbuf.st_dev;
+  else
+    device = 0;
+
+#ifdef S_ISLNK
+  is_symlink = stat_ok && S_ISLNK (statbuf.st_mode);
+#else
+  is_symlink = FALSE;
+#endif
+  symlink_broken = FALSE;
+#ifdef S_ISLNK
+  if (is_symlink)
+    {
+      g_file_info_set_is_symlink (info, TRUE);
+
+      /* Unless NOFOLLOW was set we default to following symlinks */
+      if (!(flags & G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS))
+	{
+	  res = stat (path, &statbuf2);
+
+	  /* Report broken links as symlinks */
+	  if (res != -1)
+	    {
+	      statbuf = statbuf2;
+	      stat_ok = TRUE;
+	    }
+	  else
+	    symlink_broken = TRUE;
+	}
+    }
+#endif
+
+  if (stat_ok)
+    set_info_from_stat (info, &statbuf, attribute_matcher);
+
+#ifndef G_OS_WIN32
+  if (basename != NULL && basename[0] == '.')
+    g_file_info_set_is_hidden (info, TRUE);
+
+  if (basename != NULL && basename[strlen (basename) -1] == '~' &&
+      (stat_ok && S_ISREG (statbuf.st_mode)))
+    _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_STANDARD_IS_BACKUP, TRUE);
+#else
+  if (dos_attributes & FILE_ATTRIBUTE_HIDDEN)
+    g_file_info_set_is_hidden (info, TRUE);
+
+  if (dos_attributes & FILE_ATTRIBUTE_ARCHIVE)
+    _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_DOS_IS_ARCHIVE, TRUE);
+
+  if (dos_attributes & FILE_ATTRIBUTE_SYSTEM)
+    _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_DOS_IS_SYSTEM, TRUE);
+#endif
+
+  symlink_target = NULL;
+#ifdef S_ISLNK
+  if (is_symlink)
+    {
+      symlink_target = read_link (path);
+      if (symlink_target &&
+          _g_file_attribute_matcher_matches_id (attribute_matcher,
+                                                G_FILE_ATTRIBUTE_ID_STANDARD_SYMLINK_TARGET))
+        g_file_info_set_symlink_target (info, symlink_target);
+    }
+#endif
   if (_g_file_attribute_matcher_matches_id (attribute_matcher,
 					    G_FILE_ATTRIBUTE_ID_STANDARD_CONTENT_TYPE) ||
       _g_file_attribute_matcher_matches_id (attribute_matcher,
 					    G_FILE_ATTRIBUTE_ID_STANDARD_ICON))
     {
-      char *content_type = get_content_type (basename, path, &statbuf, is_symlink, symlink_broken, flags, FALSE);
+      char *content_type = get_content_type (basename, path, stat_ok ? &statbuf : NULL, is_symlink, symlink_broken, flags, FALSE);
 
       if (content_type)
 	{
@@ -1641,7 +1661,7 @@ _g_local_file_info_get (const char             *basename,
   if (_g_file_attribute_matcher_matches_id (attribute_matcher,
 					    G_FILE_ATTRIBUTE_ID_STANDARD_FAST_CONTENT_TYPE))
     {
-      char *content_type = get_content_type (basename, path, &statbuf, is_symlink, symlink_broken, flags, TRUE);
+      char *content_type = get_content_type (basename, path, stat_ok ? &statbuf : NULL, is_symlink, symlink_broken, flags, TRUE);
       
       if (content_type)
 	{
@@ -1658,7 +1678,8 @@ _g_local_file_info_get (const char             *basename,
 #ifdef G_OS_WIN32
       win32_get_file_user_info (path, NULL, &name, NULL);
 #else
-      name = get_username_from_uid (statbuf.st_uid);
+      if (stat_ok)
+        name = get_username_from_uid (statbuf.st_uid);
 #endif
       if (name)
 	_g_file_info_set_attribute_string_by_id (info, G_FILE_ATTRIBUTE_ID_OWNER_USER, name);
@@ -1672,7 +1693,8 @@ _g_local_file_info_get (const char             *basename,
 #ifdef G_OS_WIN32
       win32_get_file_user_info (path, NULL, NULL, &name);
 #else
-      name = get_realname_from_uid (statbuf.st_uid);
+      if (stat_ok)
+        name = get_realname_from_uid (statbuf.st_uid);
 #endif
       if (name)
 	_g_file_info_set_attribute_string_by_id (info, G_FILE_ATTRIBUTE_ID_OWNER_USER_REAL, name);
@@ -1686,19 +1708,21 @@ _g_local_file_info_get (const char             *basename,
 #ifdef G_OS_WIN32
       win32_get_file_user_info (path, &name, NULL, NULL);
 #else
-      name = get_groupname_from_gid (statbuf.st_gid);
+      if (stat_ok)
+        name = get_groupname_from_gid (statbuf.st_gid);
 #endif
       if (name)
 	_g_file_info_set_attribute_string_by_id (info, G_FILE_ATTRIBUTE_ID_OWNER_GROUP, name);
       g_free (name);
     }
 
-  if (parent_info && parent_info->device != 0 &&
+  if (stat_ok && parent_info && parent_info->device != 0 &&
       _g_file_attribute_matcher_matches_id (attribute_matcher, G_FILE_ATTRIBUTE_ID_UNIX_IS_MOUNTPOINT) &&
       statbuf.st_dev != parent_info->device) 
     _g_file_info_set_attribute_boolean_by_id (info, G_FILE_ATTRIBUTE_ID_UNIX_IS_MOUNTPOINT, TRUE);
   
-  get_access_rights (attribute_matcher, info, path, &statbuf, parent_info);
+  if (stat_ok)
+    get_access_rights (attribute_matcher, info, path, &statbuf, parent_info);
   
 #ifdef HAVE_SELINUX
   get_selinux_context (path, info, attribute_matcher, (flags & G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS) == 0);
@@ -1752,7 +1776,7 @@ _g_local_file_info_get_from_fd (int         fd,
 
       g_set_error (error, G_IO_ERROR,
 		   g_io_error_from_errno (errsv),
-		   _("Error stating file descriptor: %s"),
+		   _("Error when getting information for file descriptor: %s"),
 		   g_strerror (errsv));
       return NULL;
     }
@@ -1869,7 +1893,7 @@ set_unix_mode (char                       *filename,
 	       const GFileAttributeValue  *value,
 	       GError                    **error)
 {
-  guint32 val;
+  guint32 val = 0;
   int res = 0;
   
   if (!get_uint32 (value, &val, error))
@@ -1920,7 +1944,7 @@ set_unix_uid_gid (char                       *filename,
 		  GError                    **error)
 {
   int res;
-  guint32 val;
+  guint32 val = 0;
   uid_t uid;
   gid_t gid;
   
@@ -2056,8 +2080,8 @@ set_mtime_atime (char                       *filename,
 		 GError                    **error)
 {
   int res;
-  guint64 val;
-  guint32 val_usec;
+  guint64 val = 0;
+  guint32 val_usec = 0;
   struct stat statbuf;
   gboolean got_stat = FALSE;
   struct timeval times[2] = { {0, 0}, {0, 0} };

@@ -31,7 +31,6 @@
 #include "gioerror.h"
 #include "glibintl.h"
 
-#include "gioalias.h"
 
 /**
  * SECTION:gconverteroutputstream
@@ -228,7 +227,7 @@ g_converter_output_stream_new (GOutputStream *base_stream,
 }
 
 static gsize
-buffer_available (Buffer *buffer)
+buffer_data_size (Buffer *buffer)
 {
   return buffer->end - buffer->start;
 }
@@ -259,7 +258,7 @@ compact_buffer (Buffer *buffer)
 {
   gsize in_buffer;
 
-  in_buffer = buffer_available (buffer);
+  in_buffer = buffer_data_size (buffer);
   memmove (buffer->data,
 	   buffer->data + buffer->start,
 	   in_buffer);
@@ -279,7 +278,7 @@ grow_buffer (Buffer *buffer)
     size = buffer->size * 2;
 
   data = g_malloc (size);
-  in_buffer = buffer_available (buffer);
+  in_buffer = buffer_data_size (buffer);
 
   memcpy (data,
 	  buffer->data + buffer->start,
@@ -291,13 +290,15 @@ grow_buffer (Buffer *buffer)
   buffer->size = size;
 }
 
+/* Ensures that the buffer can fit at_least_size bytes,
+ * *including* the current in-buffer data */
 static void
 buffer_ensure_space (Buffer *buffer,
 		     gsize at_least_size)
 {
   gsize in_buffer, left_to_fill;
 
-  in_buffer = buffer_available (buffer);
+  in_buffer = buffer_data_size (buffer);
 
   if (in_buffer >= at_least_size)
     return;
@@ -330,7 +331,7 @@ buffer_append (Buffer *buffer,
 	       gsize data_size)
 {
   buffer_ensure_space (buffer,
-		       buffer_available (buffer) + data_size);
+		       buffer_data_size (buffer) + data_size);
   memcpy (buffer->data + buffer->end, data, data_size);
   buffer->end += data_size;
 }
@@ -352,7 +353,7 @@ flush_buffer (GConverterOutputStream *stream,
 
   base_stream = G_FILTER_OUTPUT_STREAM (stream)->base_stream;
 
-  available = buffer_available (&priv->converted_buffer);
+  available = buffer_data_size (&priv->converted_buffer);
   if (available > 0)
     {
       res = g_output_stream_write_all (base_stream,
@@ -398,12 +399,12 @@ g_converter_output_stream_write (GOutputStream *stream,
     return 0;
 
   /* Convert as much as possible */
-  if (buffer_available (&priv->output_buffer) > 0)
+  if (buffer_data_size (&priv->output_buffer) > 0)
     {
       converting_from_buffer = TRUE;
       buffer_append (&priv->output_buffer, buffer, count);
       to_convert = buffer_data (&priv->output_buffer);
-      to_convert_size = buffer_available (&priv->output_buffer);
+      to_convert_size = buffer_data_size (&priv->output_buffer);
     }
   else
     {
@@ -418,12 +419,16 @@ g_converter_output_stream_write (GOutputStream *stream,
   converted_bytes = 0;
   while (!priv->finished && converted_bytes < to_convert_size)
     {
+      /* Ensure we have *some* target space */
+      if (buffer_tailspace (&priv->converted_buffer) == 0)
+	grow_buffer (&priv->converted_buffer);
+
       /* Try to convert to our buffer */
       my_error = NULL;
       res = g_converter_convert (priv->converter,
 				 to_convert + converted_bytes,
 				 to_convert_size - converted_bytes,
-				 buffer_data (&priv->converted_buffer),
+				 buffer_data (&priv->converted_buffer) + buffer_data_size (&priv->converted_buffer),
 				 buffer_tailspace (&priv->converted_buffer),
 				 0,
 				 &bytes_read,
@@ -472,6 +477,7 @@ g_converter_output_stream_write (GOutputStream *stream,
 		buffer_append (&priv->output_buffer, buffer, count);
 	      /* in the converting_from_buffer case we already appended this */
 
+              g_error_free (my_error);
 	      return count; /* consume everything */
 	    }
 
@@ -529,12 +535,16 @@ g_converter_output_stream_flush (GOutputStream  *stream,
   flushed = FALSE;
   while (!priv->finished && !flushed)
     {
+      /* Ensure we have *some* target space */
+      if (buffer_tailspace (&priv->converted_buffer) == 0)
+	grow_buffer (&priv->converted_buffer);
+
       /* Try to convert to our buffer */
       my_error = NULL;
       res = g_converter_convert (priv->converter,
 				 buffer_data (&priv->output_buffer),
-				 buffer_available (&priv->output_buffer),
-				 buffer_data (&priv->converted_buffer),
+				 buffer_data_size (&priv->output_buffer),
+				 buffer_data (&priv->converted_buffer) + buffer_data_size (&priv->converted_buffer),
 				 buffer_tailspace (&priv->converted_buffer),
 				 is_closing ? G_CONVERTER_INPUT_AT_END : G_CONVERTER_FLUSH,
 				 &bytes_read,
@@ -552,7 +562,7 @@ g_converter_output_stream_flush (GOutputStream  *stream,
 	      res == G_CONVERTER_FLUSHED)
 	    {
 	      /* Should not have retured FLUSHED with input left */
-	      g_assert (buffer_available (&priv->output_buffer) == 0);
+	      g_assert (buffer_data_size (&priv->output_buffer) == 0);
 	      flushed = TRUE;
 	    }
 	}
@@ -575,7 +585,7 @@ g_converter_output_stream_flush (GOutputStream  *stream,
 	  /* Any other error, including PARTIAL_INPUT can't be fixed by now
 	     and is an error */
 	  g_propagate_error (error, my_error);
-	  return -1;
+	  return FALSE;
 	}
     }
 
@@ -592,7 +602,7 @@ g_converter_output_stream_flush (GOutputStream  *stream,
  *
  * Gets the #GConverter that is used by @converter_stream.
  *
- * Returns: the converter of the converter output stream
+ * Returns: (transfer none): the converter of the converter output stream
  *
  * Since: 2.24
  */
@@ -601,6 +611,3 @@ g_converter_output_stream_get_converter (GConverterOutputStream *converter_strea
 {
   return converter_stream->priv->converter;
 }
-
-#define __G_CONVERTER_OUTPUT_STREAM_C__
-#include "gioaliasdef.c"
