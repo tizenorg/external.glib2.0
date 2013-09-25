@@ -56,6 +56,9 @@ make %{?_smp_mflags}
 %install
 rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
+# license
+mkdir -p %{buildroot}/usr/share/license
+cp COPYING %{buildroot}/usr/share/license/%{name}
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 rm -f $RPM_BUILD_ROOT%{_libdir}/gio/modules/*.{a,la}
@@ -146,4 +149,4 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(-, root, root, -)
 %{_libdir}/lib*.a
-
+/usr/share/license/%{name}
