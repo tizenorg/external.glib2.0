@@ -2,7 +2,6 @@ Summary: A library of handy utility functions
 Name: glib2
 Version: 2.32.3
 Release: 6
-VCS:     external/glib2.0#glib2_2.32.3-slp2+s6-4-g7f2828b8c65343ee3b4b55efbce84e6c196bed2d
 License: LGPLv2+
 Group: System/Libraries
 URL: http://www.gtk.org
