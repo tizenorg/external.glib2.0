@@ -863,3 +863,41 @@ g_tls_connection_emit_accept_certificate (GTlsConnection       *conn,
 		 peer_cert, errors, &accept);
   return accept;
 }
+
+/**
+ * g_tls_connection_set_next_protocols:
+ * @conn: a #GTlsConnection
+ * @protocol: the protocols to set the next protocol
+ *
+ * Used by #GTlsConnection implementations to set
+ * the desired protocols before npn handshaking.
+ *
+ * Since: 2.32.2
+ *
+ */
+void g_tls_connection_set_next_protocols (GTlsConnection  *conn,
+						const gchar        *protocols)
+{
+	g_return_if_fail (G_IS_TLS_CONNECTION (conn));
+
+	G_TLS_CONNECTION_GET_CLASS (conn)->set_next_protocols (conn, protocols);
+}
+
+/**
+ * g_tls_connection_get_next_protocol:
+ * @conn: a #GTlsConnection
+ *
+ * Used by #GTlsConnection implementations to get
+ * the negotiated protocol after handshaking.
+ *
+ * Return value: the next protocol it received
+ *
+ * Since: 2.32.2
+ *
+ */
+const gchar *g_tls_connection_get_next_protocol (GTlsConnection *conn)
+{
+	g_return_val_if_fail (G_IS_TLS_CONNECTION (conn), NULL);
+
+	return G_TLS_CONNECTION_GET_CLASS (conn)->get_next_protocol (conn);
+}

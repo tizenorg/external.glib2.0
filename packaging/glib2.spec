@@ -1,14 +1,15 @@
-Summary: A library of handy utility functions
-Name: glib2
-Version: 2.32.3
-Release: 1%{?dist}
-License: LGPLv2+
-Group: System/Libraries
-URL: http://www.gtk.org
-Source: %{name}-%{version}.tar.gz
+Summary:       A library of handy utility functions
+Name:          glib2
+Version:       2.32.3
+Release:       7
+License:       LGPL-2.0+
+Group:         System/Libraries
+URL:           http://www.gtk.org
+Source:        %{name}-%{version}.tar.gz
 #Source: http://download.gnome.org/sources/glib/2.32/%{name}-%{version}.tar.gz
+Source1001:     %{name}.manifest
 
-BuildRequires: pkgconfig 
+BuildRequires: pkgconfig
 BuildRequires: gettext-tools
 BuildRequires: libattr-devel
 BuildRequires: zlib-devel
@@ -27,7 +28,7 @@ as an event loop, threads, dynamic loading, and an object system.
 %package devel
 Summary: A library of handy utility functions
 Group: Development/Libraries
-Requires: pkgconfig 
+Requires: pkgconfig
 Requires: %{name} = %{version}-%{release}
 
 %description devel
@@ -47,7 +48,8 @@ The glib2-static package includes static libraries of the GLib library.
 %setup -q
 
 %build
-%configure --disable-gtk-doc --enable-static --disable-selinux --disable-visibility --enable-debug=yes
+cp %{SOURCE1001} .
+%configure --disable-gtk-doc --enable-static --disable-selinux --disable-visibility --enable-debug=yes --disable-man
 
 make %{?_smp_mflags}
 
@@ -62,10 +64,24 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gdbus-codegen/*.{pyc,pyo}
 
 touch $RPM_BUILD_ROOT%{_libdir}/gio/modules/giomodule.cache
 
-# MeeGo does not provide bash completion
+# Tizen does not provide bash completion
 rm -rf ${RPM_BUILD_ROOT}%{_sysconfdir}/bash_completion.d
 
-%find_lang glib20
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/locale_tmp
+cp -a $RPM_BUILD_ROOT%{_datadir}/locale/en_GB $RPM_BUILD_ROOT%{_datadir}/locale_tmp
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/*
+cp -a $RPM_BUILD_ROOT%{_datadir}/locale_tmp/en_GB $RPM_BUILD_ROOT%{_datadir}/locale
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale_tmp
+
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/license
+for keyword in LICENSE COPYING COPYRIGHT;
+do
+	for file in `find %{_builddir} -name $keyword`;
+	do
+		cat $file >> $RPM_BUILD_ROOT%{_datadir}/license/%{name};
+		echo "";
+	done;
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -74,9 +90,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %postun -p /sbin/ldconfig
 
-%files -f glib20.lang
+%files
+%manifest %{name}.manifest
 %defattr(-, root, root, -)
 %doc AUTHORS COPYING NEWS README
+%{_datadir}/license/%{name}
+%{_datadir}/locale/*/LC_MESSAGES/glib20.mo
 %{_libdir}/libglib-2.0.so.*
 %{_libdir}/libgthread-2.0.so.*
 %{_libdir}/libgmodule-2.0.so.*

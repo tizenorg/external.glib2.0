@@ -68,6 +68,10 @@ struct _GTlsConnectionClass
 				  GAsyncResult         *result,
 				  GError              **error);
 
+  void (*set_next_protocols) (GTlsConnection  *conn,
+                                               char           *protocols);
+  const char* (*get_next_protocol) (GTlsConnection *conn);
+
   /*< private >*/
   /* Padding for future expansion */
   gpointer padding[8];
@@ -116,6 +120,11 @@ void                  g_tls_connection_handshake_async             (GTlsConnecti
 gboolean              g_tls_connection_handshake_finish            (GTlsConnection       *conn,
 								    GAsyncResult         *result,
 								    GError              **error);
+
+void                  g_tls_connection_set_next_protocols (GTlsConnection  *conn,
+						            const gchar          *protocols);
+const gchar          *g_tls_connection_get_next_protocol (GTlsConnection *conn);
+
 
 /**
  * G_TLS_ERROR:
