@@ -33,6 +33,8 @@ static void
 push_value (gint value)
 {
   g_mutex_lock (&mutex);
+  while (next != 0)
+    g_cond_wait (&cond, &mutex);
   next = value;
   if (g_test_verbose ())
     g_print ("Thread %p producing next value: %d\n", g_thread_self (), value);
@@ -57,6 +59,7 @@ pop_value (void)
     }
   value = next;
   next = 0;
+  g_cond_broadcast (&cond);
   if (g_test_verbose ())
     g_print ("Thread %p consuming value %d\n", g_thread_self (), value);
   g_mutex_unlock (&mutex);
@@ -76,11 +79,9 @@ produce_values (gpointer data)
     {
       total += i;
       push_value (i);
-      g_usleep (1000);
     }
 
   push_value (-1);
-  g_usleep (1000);
   push_value (-1);
 
   if (g_test_verbose ())
@@ -170,6 +171,13 @@ barrier_wait (Barrier *barrier)
   return ret;
 }
 
+static void
+barrier_clear (Barrier *barrier)
+{
+  g_mutex_clear (&barrier->mutex);
+  g_cond_clear (&barrier->cond);
+}
+
 static Barrier b;
 static gint check;
 
@@ -220,6 +228,46 @@ test_cond2 (void)
     g_thread_join (threads[i]);
 
   g_assert_cmpint (g_atomic_int_get (&check), ==, 10);
+
+  barrier_clear (&b);
+}
+
+static void
+test_wait_until (void)
+{
+  gint64 until;
+  GMutex lock;
+  GCond cond;
+
+  /* This test will make sure we don't wait too much or too little.
+   *
+   * We check the 'too long' with a timeout of 60 seconds.
+   *
+   * We check the 'too short' by verifying a guarantee of the API: we
+   * should not wake up until the specified time has passed.
+   */
+  g_mutex_init (&lock);
+  g_cond_init (&cond);
+
+  until = g_get_monotonic_time () + G_TIME_SPAN_SECOND;
+
+  /* Could still have spurious wakeups, so we must loop... */
+  g_mutex_lock (&lock);
+  while (g_cond_wait_until (&cond, &lock, until))
+    ;
+  g_mutex_unlock (&lock);
+
+  /* Make sure it's after the until time */
+  g_assert_cmpint (until, <=, g_get_monotonic_time ());
+
+  /* Make sure it returns FALSE on timeout */
+  until = g_get_monotonic_time () + G_TIME_SPAN_SECOND / 50;
+  g_mutex_lock (&lock);
+  g_assert (g_cond_wait_until (&cond, &lock, until) == FALSE);
+  g_mutex_unlock (&lock);
+
+  g_mutex_clear (&lock);
+  g_cond_clear (&cond);
 }
 
 int
@@ -229,6 +277,7 @@ main (int argc, char *argv[])
 
   g_test_add_func ("/thread/cond1", test_cond1);
   g_test_add_func ("/thread/cond2", test_cond2);
+  g_test_add_func ("/thread/cond/wait-until", test_wait_until);
 
   return g_test_run ();
 }

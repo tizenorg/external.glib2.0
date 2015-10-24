@@ -17,7 +17,8 @@ test_listenv (void)
 
       parts = g_strsplit (list[i], "=", 2);
       g_assert (g_hash_table_lookup (table, parts[0]) == NULL);
-      g_hash_table_insert (table, parts[0], parts[1]);
+      if (g_strcmp0 (parts[0], ""))
+        g_hash_table_insert (table, parts[0], parts[1]);
       g_free (parts);
     }
   g_strfreev (list);
@@ -96,6 +97,25 @@ test_environ_array (void)
   g_strfreev (env);
 }
 
+static void
+test_environ_null (void)
+{
+  gchar **env;
+  const gchar *value;
+
+  env = NULL;
+
+  value = g_environ_getenv (env, "foo");
+  g_assert (value == NULL);
+
+  env = g_environ_setenv (NULL, "foo", "bar", TRUE);
+  g_assert (env != NULL);
+  g_strfreev (env);
+
+  env = g_environ_unsetenv (NULL, "foo");
+  g_assert (env == NULL);
+}
+
 int
 main (int argc, char **argv)
 {
@@ -104,6 +124,7 @@ main (int argc, char **argv)
   g_test_add_func ("/environ/listenv", test_listenv);
   g_test_add_func ("/environ/setenv", test_setenv);
   g_test_add_func ("/environ/array", test_environ_array);
+  g_test_add_func ("/environ/null", test_environ_null);
 
   return g_test_run ();
 }

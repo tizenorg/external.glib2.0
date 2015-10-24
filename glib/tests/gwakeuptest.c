@@ -1,9 +1,11 @@
-#include <unistd.h>
 #include <glib.h>
 #include <glib/gwakeup.h>
+#ifdef G_OS_UNIX
+#include <unistd.h>
+#endif
 
 #ifdef _WIN32
-void alarm (int sec) { }
+static void alarm (int sec) { }
 #endif
 
 static gboolean
@@ -107,6 +109,7 @@ context_clear (struct context *ctx)
   g_assert (ctx->pending_tokens == NULL);
   g_assert (ctx->quit);
 
+  g_mutex_clear (&ctx->lock);
   g_wakeup_free (ctx->wakeup);
 }
 

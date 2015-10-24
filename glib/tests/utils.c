@@ -24,6 +24,7 @@
 #define GLIB_DISABLE_DEPRECATION_WARNINGS
 
 #include "glib.h"
+#include "glib-private.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -225,8 +226,8 @@ test_swap (void)
 
   g_assert_cmpint (GUINT32_SWAP_LE_BE (a32), ==, b32);
 
-  a64 = 0xaaaaaaaabbbbbbbb;
-  b64 = 0xbbbbbbbbaaaaaaaa;
+  a64 = G_GUINT64_CONSTANT(0xaaaaaaaabbbbbbbb);
+  b64 = G_GUINT64_CONSTANT(0xbbbbbbbbaaaaaaaa);
 
   g_assert_cmpint (GUINT64_SWAP_LE_BE (a64), ==, b64);
 }
@@ -236,6 +237,7 @@ test_find_program (void)
 {
   gchar *res;
 
+#ifdef G_OS_UNIX
   res = g_find_program_in_path ("sh");
   g_assert (res != NULL);
   g_free (res);
@@ -243,6 +245,11 @@ test_find_program (void)
   res = g_find_program_in_path ("/bin/sh");
   g_assert (res != NULL);
   g_free (res);
+#else
+  /* There's not a lot we can search for that would reliably work both
+   * on real Windows and mingw.
+   */
+#endif
 
   res = g_find_program_in_path ("this_program_does_not_exit");
   g_assert (res == NULL);
@@ -288,12 +295,13 @@ test_debug (void)
   res = g_parse_debug_string ("all", keys, G_N_ELEMENTS (keys));
   g_assert_cmpint (res, ==, 7);
 
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDERR))
+  if (g_test_subprocess ())
     {
       res = g_parse_debug_string ("help", keys, G_N_ELEMENTS (keys));
       g_assert_cmpint (res, ==, 0);
-      exit (0);
+      return;
     }
+  g_test_trap_subprocess (NULL, 0, 0);
   g_test_trap_assert_passed ();
   g_test_trap_assert_stderr ("*Supported debug values: key1 key2 key3 all help*");
 }
@@ -310,6 +318,21 @@ test_codeset (void)
   g_assert_cmpstr (c, ==, c2);
 
   g_free (c);
+}
+
+static void
+test_codeset2 (void)
+{
+  if (g_test_subprocess ())
+    {
+      const gchar *c;
+      g_setenv ("CHARSET", "UTF-8", TRUE);
+      g_get_charset (&c);
+      g_assert_cmpstr (c, ==, "UTF-8");
+      return;
+    }
+  g_test_trap_subprocess (NULL, 0, 0);
+  g_test_trap_assert_passed ();
 }
 
 static void
@@ -340,6 +363,230 @@ test_gettext (void)
   g_assert_cmpstr (am2, ==, am3);
 }
 
+static void
+test_username (void)
+{
+  const gchar *name;
+
+  name = g_get_user_name ();
+
+  g_assert (name != NULL);
+}
+
+static void
+test_realname (void)
+{
+  const gchar *name;
+
+  name = g_get_real_name ();
+
+  g_assert (name != NULL);
+}
+
+static void
+test_hostname (void)
+{
+  const gchar *name;
+
+  name = g_get_host_name ();
+
+  g_assert (name != NULL);
+}
+
+#ifdef G_OS_UNIX
+static void
+test_xdg_dirs (void)
+{
+  gchar *xdg;
+  const gchar *dir;
+  const gchar * const *dirs;
+  gchar *s;
+
+  xdg = g_strdup (g_getenv ("XDG_CONFIG_HOME"));
+  if (!xdg)
+    xdg = g_build_filename (g_get_home_dir (), ".config", NULL);
+
+  dir = g_get_user_config_dir ();
+
+  g_assert_cmpstr (dir, ==, xdg);
+  g_free (xdg);
+
+  xdg = g_strdup (g_getenv ("XDG_DATA_HOME"));
+  if (!xdg)
+    xdg = g_build_filename (g_get_home_dir (), ".local", "share", NULL);
+
+  dir = g_get_user_data_dir ();
+
+  g_assert_cmpstr (dir, ==, xdg);
+  g_free (xdg);
+
+  xdg = g_strdup (g_getenv ("XDG_CACHE_HOME"));
+  if (!xdg)
+    xdg = g_build_filename (g_get_home_dir (), ".cache", NULL);
+
+  dir = g_get_user_cache_dir ();
+
+  g_assert_cmpstr (dir, ==, xdg);
+  g_free (xdg);
+
+  xdg = g_strdup (g_getenv ("XDG_RUNTIME_DIR"));
+  if (!xdg)
+    xdg = g_strdup (g_get_user_cache_dir ());
+
+  dir = g_get_user_runtime_dir ();
+
+  g_assert_cmpstr (dir, ==, xdg);
+  g_free (xdg);
+
+  xdg = (gchar *)g_getenv ("XDG_CONFIG_DIRS");
+  if (!xdg)
+    xdg = "/etc/xdg";
+
+  dirs = g_get_system_config_dirs ();
+
+  s = g_strjoinv (":", (gchar **)dirs);
+
+  g_assert_cmpstr (s, ==, xdg);
+
+  g_free (s);
+}
+#endif
+
+static void
+test_special_dir (void)
+{
+  const gchar *dir, *dir2;
+
+  dir = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
+  g_reload_user_special_dirs_cache ();
+  dir2 = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
+
+  g_assert_cmpstr (dir, ==, dir2);
+}
+
+static void
+test_desktop_special_dir (void)
+{
+  const gchar *dir, *dir2;
+
+  dir = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
+  g_assert (dir != NULL);
+
+  g_reload_user_special_dirs_cache ();
+  dir2 = g_get_user_special_dir (G_USER_DIRECTORY_DESKTOP);
+  g_assert (dir2 != NULL);
+}
+
+static void
+test_clear_pointer (void)
+{
+  gpointer a;
+
+  a = g_malloc (5);
+  g_clear_pointer (&a, g_free);
+  g_assert (a == NULL);
+
+  a = g_malloc (5);
+  (g_clear_pointer) (&a, g_free);
+  g_assert (a == NULL);
+}
+
+static int obj_count;
+
+static void
+get_obj (gpointer *obj_out)
+{
+  gpointer obj = g_malloc (5);
+  obj_count++;
+
+  if (obj_out)
+    *obj_out = g_steal_pointer (&obj);
+
+  if (obj)
+    {
+      g_free (obj);
+      obj_count--;
+    }
+}
+
+static void
+test_take_pointer (void)
+{
+  gpointer a;
+  gpointer b;
+
+  get_obj (NULL);
+
+  get_obj (&a);
+  g_assert (a);
+
+  /* ensure that it works to skip the macro */
+  b = (g_steal_pointer) (&a);
+  g_assert (!a);
+  obj_count--;
+  g_free (b);
+
+  g_assert (!obj_count);
+}
+
+static void
+test_misc_mem (void)
+{
+  gpointer a;
+
+  a = g_try_malloc (0);
+  g_assert (a == NULL);
+
+  a = g_try_malloc0 (0);
+  g_assert (a == NULL);
+
+  a = g_malloc (16);
+  a = g_try_realloc (a, 20);
+  a = g_try_realloc (a, 0);
+
+  g_assert (a == NULL);
+}
+
+static void
+test_nullify (void)
+{
+  gpointer p = &test_nullify;
+
+  g_assert (p != NULL);
+
+  g_nullify_pointer (&p);
+
+  g_assert (p == NULL);
+}
+
+static void
+atexit_func (void)
+{
+  g_print ("atexit called");
+}
+
+static void
+test_atexit (void)
+{
+  if (g_test_subprocess ())
+    {
+      g_atexit (atexit_func);
+      return;
+    }
+  g_test_trap_subprocess (NULL, 0, 0);
+  g_test_trap_assert_passed ();
+  g_test_trap_assert_stdout ("*atexit called*");
+}
+
+static void
+test_check_setuid (void)
+{
+  gboolean res;
+
+  res = GLIB_PRIVATE_CALL(g_check_setuid) ();
+  g_assert (!res);
+}
+
 int
 main (int   argc,
       char *argv[])
@@ -350,6 +597,13 @@ main (int   argc,
   g_setenv ("TMPDIR", "", TRUE);
   g_unsetenv ("TMP");
   g_unsetenv ("TEMP");
+
+  /* g_test_init() only calls g_set_prgname() if g_get_prgname()
+   * returns %NULL, but g_get_prgname() on Windows never returns NULL.
+   * So we need to do this by hand to make test_appname() work on
+   * Windows.
+   */
+  g_set_prgname (argv[0]);
 
   g_test_init (&argc, &argv, NULL);
   g_test_bug_base ("http://bugzilla.gnome.org/");
@@ -364,8 +618,23 @@ main (int   argc,
   g_test_add_func ("/utils/find-program", test_find_program);
   g_test_add_func ("/utils/debug", test_debug);
   g_test_add_func ("/utils/codeset", test_codeset);
+  g_test_add_func ("/utils/codeset2", test_codeset2);
   g_test_add_func ("/utils/basename", test_basename);
   g_test_add_func ("/utils/gettext", test_gettext);
+  g_test_add_func ("/utils/username", test_username);
+  g_test_add_func ("/utils/realname", test_realname);
+  g_test_add_func ("/utils/hostname", test_hostname);
+#ifdef G_OS_UNIX
+  g_test_add_func ("/utils/xdgdirs", test_xdg_dirs);
+#endif
+  g_test_add_func ("/utils/specialdir", test_special_dir);
+  g_test_add_func ("/utils/specialdir/desktop", test_desktop_special_dir);
+  g_test_add_func ("/utils/clear-pointer", test_clear_pointer);
+  g_test_add_func ("/utils/take-pointer", test_take_pointer);
+  g_test_add_func ("/utils/misc-mem", test_misc_mem);
+  g_test_add_func ("/utils/nullify", test_nullify);
+  g_test_add_func ("/utils/atexit", test_atexit);
+  g_test_add_func ("/utils/check-setuid", test_check_setuid);
 
-  return g_test_run();
+  return g_test_run ();
 }

@@ -586,6 +586,49 @@ assert_menus_equal (GMenuModel *a,
     }
 }
 
+static void
+assert_menuitem_equal (GMenuItem  *item,
+                       GMenuModel *model,
+                       gint        index)
+{
+  GMenuAttributeIter *attr_iter;
+  GMenuLinkIter *link_iter;
+  const gchar *name;
+  GVariant *value;
+  GMenuModel *linked_model;
+
+  /* NOTE we can't yet test whether item has attributes or links that
+   * are not in the model, because there's no iterator API for menu
+   * items */
+
+  attr_iter = g_menu_model_iterate_item_attributes (model, index);
+  while (g_menu_attribute_iter_get_next (attr_iter, &name, &value))
+    {
+      GVariant *item_value;
+
+      item_value = g_menu_item_get_attribute_value (item, name, g_variant_get_type (value));
+      g_assert (item_value && g_variant_equal (item_value, value));
+
+      g_variant_unref (item_value);
+      g_variant_unref (value);
+    }
+
+  link_iter = g_menu_model_iterate_item_links (model, index);
+  while (g_menu_link_iter_get_next (link_iter, &name, &linked_model))
+    {
+      GMenuModel *item_linked_model;
+
+      item_linked_model = g_menu_item_get_link (item, name);
+      g_assert (linked_model == item_linked_model);
+
+      g_object_unref (item_linked_model);
+      g_object_unref (linked_model);
+    }
+
+  g_object_unref (attr_iter);
+  g_object_unref (link_iter);
+}
+
 /* Test cases {{{1 */
 static void
 test_equality (void)
@@ -839,6 +882,7 @@ test_dbus_subscriptions (void)
   g_object_unref (menu);
 
   g_main_loop_unref (loop);
+  g_object_unref (bus);
 }
 
 static gpointer
@@ -923,12 +967,15 @@ test_attributes (void)
   item = g_menu_item_new ("test", NULL);
   g_menu_item_set_attribute_value (item, "boolean", g_variant_new_boolean (FALSE));
   g_menu_item_set_attribute_value (item, "string", g_variant_new_string ("bla"));
-  g_menu_item_set_attribute_value (item, "double", g_variant_new_double (1.5));
+
+  g_menu_item_set_attribute (item, "double", "d", 1.5);
   v = g_variant_new_parsed ("[('one', 1), ('two', %i), (%s, 3)]", 2, "three");
   g_menu_item_set_attribute_value (item, "complex", v);
   g_menu_item_set_attribute_value (item, "test-123", g_variant_new_string ("test-123"));
 
   g_menu_append_item (menu, item);
+
+  g_menu_item_set_attribute (item, "double", "d", G_PI);
 
   g_assert_cmpint (g_menu_model_get_n_items (G_MENU_MODEL (menu)), ==, 1);
 
@@ -948,7 +995,71 @@ test_attributes (void)
   g_assert (g_variant_is_of_type (v, G_VARIANT_TYPE("a(si)")));
   g_variant_unref (v);
 
+  g_menu_remove_all (menu);
+
   g_object_unref (menu);
+  g_object_unref (item);
+}
+
+static void
+test_attribute_iter (void)
+{
+  GMenu *menu;
+  GMenuItem *item;
+  const gchar *name;
+  GVariant *v;
+  GMenuAttributeIter *iter;
+  GHashTable *found;
+
+  menu = g_menu_new ();
+
+  item = g_menu_item_new ("test", NULL);
+  g_menu_item_set_attribute_value (item, "boolean", g_variant_new_boolean (FALSE));
+  g_menu_item_set_attribute_value (item, "string", g_variant_new_string ("bla"));
+
+  g_menu_item_set_attribute (item, "double", "d", 1.5);
+  v = g_variant_new_parsed ("[('one', 1), ('two', %i), (%s, 3)]", 2, "three");
+  g_menu_item_set_attribute_value (item, "complex", v);
+  g_menu_item_set_attribute_value (item, "test-123", g_variant_new_string ("test-123"));
+
+  g_menu_append_item (menu, item);
+
+  g_menu_item_set_attribute (item, "double", "d", G_PI);
+
+  g_assert_cmpint (g_menu_model_get_n_items (G_MENU_MODEL (menu)), ==, 1);
+
+  found = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify)g_variant_unref); 
+
+  iter = g_menu_model_iterate_item_attributes (G_MENU_MODEL (menu), 0);
+  while (g_menu_attribute_iter_get_next (iter, &name, &v))
+    g_hash_table_insert (found, g_strdup (name), v);
+
+  g_assert_cmpint (g_hash_table_size (found), ==, 6);
+  
+  v = g_hash_table_lookup (found, "label");
+  g_assert (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING));
+
+  v = g_hash_table_lookup (found, "boolean");
+  g_assert (g_variant_is_of_type (v, G_VARIANT_TYPE_BOOLEAN));
+ 
+  v = g_hash_table_lookup (found, "string");
+  g_assert (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING));
+
+  v = g_hash_table_lookup (found, "double");
+  g_assert (g_variant_is_of_type (v, G_VARIANT_TYPE_DOUBLE));
+
+  v = g_hash_table_lookup (found, "complex");
+  g_assert (g_variant_is_of_type (v, G_VARIANT_TYPE("a(si)")));
+
+  v = g_hash_table_lookup (found, "test-123");
+  g_assert (g_variant_is_of_type (v, G_VARIANT_TYPE_STRING));
+
+  g_hash_table_unref (found);
+
+  g_menu_remove_all (menu);
+
+  g_object_unref (menu);
+  g_object_unref (item);
 }
 
 static void
@@ -964,17 +1075,17 @@ test_links (void)
 
   menu = g_menu_new ();
 
-  item = g_menu_item_new ("test1", NULL);
-  g_menu_item_set_link (item, "section", m);
-  g_menu_append_item (menu, item);
-
   item = g_menu_item_new ("test2", NULL);
   g_menu_item_set_link (item, "submenu", m);
-  g_menu_append_item (menu, item);
+  g_menu_prepend_item (menu, item);
+
+  item = g_menu_item_new ("test1", NULL);
+  g_menu_item_set_link (item, "section", m);
+  g_menu_insert_item (menu, 0, item);
 
   item = g_menu_item_new ("test3", NULL);
   g_menu_item_set_link (item, "wallet", m);
-  g_menu_append_item (menu, item);
+  g_menu_insert_item (menu, 1000, item);
 
   item = g_menu_item_new ("test4", NULL);
   g_menu_item_set_link (item, "purse", m);
@@ -1017,6 +1128,92 @@ test_mutable (void)
   g_object_unref (menu);
 }
 
+static void
+test_convenience (void)
+{
+  GMenu *m1, *m2;
+  GMenu *sub;
+  GMenuItem *item;
+
+  m1 = g_menu_new ();
+  m2 = g_menu_new ();
+  sub = g_menu_new ();
+
+  g_menu_prepend (m1, "label1", "do::something");
+  g_menu_insert (m2, 0, "label1", "do::something");
+
+  g_menu_append (m1, "label2", "do::somethingelse");
+  g_menu_insert (m2, -1, "label2", "do::somethingelse");
+
+  g_menu_insert_section (m1, 10, "label3", G_MENU_MODEL (sub));
+  item = g_menu_item_new_section ("label3", G_MENU_MODEL (sub));
+  g_menu_insert_item (m2, 10, item);
+  g_object_unref (item);
+
+  g_menu_prepend_section (m1, "label4", G_MENU_MODEL (sub));
+  g_menu_insert_section (m2, 0, "label4", G_MENU_MODEL (sub));
+
+  g_menu_append_section (m1, "label5", G_MENU_MODEL (sub));
+  g_menu_insert_section (m2, -1, "label5", G_MENU_MODEL (sub));
+
+  g_menu_insert_submenu (m1, 5, "label6", G_MENU_MODEL (sub));
+  item = g_menu_item_new_submenu ("label6", G_MENU_MODEL (sub));
+  g_menu_insert_item (m2, 5, item);
+  g_object_unref (item);
+
+  g_menu_prepend_submenu (m1, "label7", G_MENU_MODEL (sub));
+  g_menu_insert_submenu (m2, 0, "label7", G_MENU_MODEL (sub));
+
+  g_menu_append_submenu (m1, "label8", G_MENU_MODEL (sub));
+  g_menu_insert_submenu (m2, -1, "label8", G_MENU_MODEL (sub));
+
+  assert_menus_equal (G_MENU_MODEL (m1), G_MENU_MODEL (m2));
+
+  g_object_unref (m1);
+  g_object_unref (m2);
+}
+
+static void
+test_menuitem (void)
+{
+  GMenu *menu;
+  GMenu *submenu;
+  GMenuItem *item;
+  GIcon *icon;
+  gboolean b;
+  gchar *s;
+
+  menu = g_menu_new ();
+  submenu = g_menu_new ();
+
+  item = g_menu_item_new ("label", "action");
+  g_menu_item_set_attribute (item, "attribute", "b", TRUE);
+  g_menu_item_set_link (item, G_MENU_LINK_SUBMENU, G_MENU_MODEL (submenu));
+  g_menu_append_item (menu, item);
+
+  icon = g_themed_icon_new ("bla");
+  g_menu_item_set_icon (item, icon);
+  g_object_unref (icon);
+
+  g_assert (g_menu_item_get_attribute (item, "attribute", "b", &b));
+  g_assert (b);
+
+  g_menu_item_set_action_and_target (item, "action", "(bs)", TRUE, "string");
+  g_assert (g_menu_item_get_attribute (item, "target", "(bs)", &b, &s));
+  g_assert (b);
+  g_assert_cmpstr (s, ==, "string");
+  g_free (s);
+
+  g_object_unref (item);
+
+  item = g_menu_item_new_from_model (G_MENU_MODEL (menu), 0);
+  assert_menuitem_equal (item, G_MENU_MODEL (menu), 0);
+  g_object_unref (item);
+
+  g_object_unref (menu);
+  g_object_unref (submenu);
+}
+
 /* Epilogue {{{1 */
 int
 main (int argc, char **argv)
@@ -1024,10 +1221,6 @@ main (int argc, char **argv)
   gboolean ret;
 
   g_test_init (&argc, &argv, NULL);
-  g_type_init ();
-
-  g_unsetenv ("DISPLAY");
-  g_setenv ("DBUS_SESSION_BUS_ADDRESS", session_bus_get_temporary_address (), TRUE);
 
   session_bus_up ();
 
@@ -1037,8 +1230,11 @@ main (int argc, char **argv)
   g_test_add_func ("/gmenu/dbus/subscriptions", test_dbus_subscriptions);
   g_test_add_func ("/gmenu/dbus/threaded", test_dbus_threaded);
   g_test_add_func ("/gmenu/attributes", test_attributes);
+  g_test_add_func ("/gmenu/attributes/iterate", test_attribute_iter);
   g_test_add_func ("/gmenu/links", test_links);
   g_test_add_func ("/gmenu/mutable", test_mutable);
+  g_test_add_func ("/gmenu/convenience", test_convenience);
+  g_test_add_func ("/gmenu/menuitem", test_menuitem);
 
   ret = g_test_run ();
 

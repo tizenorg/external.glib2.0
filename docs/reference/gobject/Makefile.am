@@ -1,5 +1,4 @@
 ## Process this file with automake to produce Makefile.in
-include $(top_srcdir)/Makefile.decl
 
 AUTOMAKE_OPTIONS = 1.6
 
@@ -7,7 +6,7 @@ AUTOMAKE_OPTIONS = 1.6
 DOC_MODULE=gobject
 
 # The top-level SGML file.
-DOC_MAIN_SGML_FILE=gobject-docs.sgml
+DOC_MAIN_SGML_FILE=gobject-docs.xml
 
 # The directory containing the source code. Relative to $(srcdir)
 DOC_SOURCE_DIR=$(top_srcdir)/gobject
@@ -17,7 +16,7 @@ SCAN_OPTIONS=--deprecated-guards="G_DISABLE_DEPRECATED" \
              --ignore-decorators="G_GNUC_INTERNAL|G_GNUC_WARN_UNUSED_RESULT"
 
 # Extra options to supply to gtkdoc-mkdb
-MKDB_OPTIONS=--sgml-mode --output-format=xml --name-space=g
+MKDB_OPTIONS=--output-format=xml --name-space=g
 
 # Used for dependencies
 HFILE_GLOB=$(top_srcdir)/gobject/*.h
@@ -26,17 +25,18 @@ CFILE_GLOB=$(top_srcdir)/gobject/*.c
 # Headers to ignore
 IGNORE_HFILES = \
 	tests			\
+	gatomicarray.h		\
 	gobject_trace.h		\
-	gatomicarray.h
-
+	gtype-private.h
 
 # CFLAGS and LDFLAGS for compiling scan program. Only needed
 # if $(DOC_MODULE).types is non-empty.
-INCLUDES = \
+AM_CPPFLAGS = 				\
 	-I$(srcdir) 			\
 	$(gobject_INCLUDES) 		\
 	$(GLIB_DEBUG_FLAGS)
-GTKDOC_LIBS = \
+
+GTKDOC_LIBS = 					\
 	$(top_builddir)/glib/libglib-2.0.la	\
 	$(top_builddir)/gobject/libgobject-2.0.la
 
@@ -68,36 +68,35 @@ EXTRA_DIST += 		\
 
 ########################################################################
 
-man_MANS = 			\
+man_MANS =
+
+if ENABLE_MAN
+
+man_MANS += 			\
 	glib-mkenums.1 		\
 	glib-genmarshal.1 	\
 	gobject-query.1
 
-if ENABLE_MAN
+
+XSLTPROC_FLAGS = \
+        --nonet \
+        --stringparam man.output.quietly 1 \
+        --stringparam funcsynopsis.style ansi \
+        --stringparam man.th.extra1.suppress 1 \
+        --stringparam man.authors.section.enabled 0 \
+        --stringparam man.copyright.section.enabled 0
 
 .xml.1:
-	@XSLTPROC@ -nonet http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
-
-dist-local-check-mans-enabled:
-	if grep "Man generation disabled" $(man_MANS) >/dev/null; then $(RM) $(man_MANS); fi
-
-else
-
-$(man_MANS):
-	echo Man generation disabled.  Creating dummy $@.  Configure with --enable-man to enable it.
-	echo Man generation disabled.  Remove this file, configure with --enable-man, and rebuild > $@
-
-dist-local-check-mans-enabled:
-	echo "*** --enable-man must be used in order to make dist"
-	false
+	$(AM_V_GEN) $(XSLTPROC) $(XSLTPROC_FLAGS) http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl $<
 
 endif
 
-MAINTAINERCLEANFILES = $(man_MANS) $(BUILT_SOURCES)
+CLEANFILES ?=
+CLEANFILES += $(man_MANS)
 
 EXTRA_DIST += $(man_MANS)
 
-dist-hook-local: dist-local-check-mans-enabled all-local
+dist-hook-local: all-local
 
 gobject-docs-clean: clean
 	cd $(srcdir) && rm -rf xml html

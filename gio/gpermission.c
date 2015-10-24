@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Ryan Lortie <desrt@desrt.ca>
  */
@@ -22,14 +20,20 @@
 #include "config.h"
 
 #include "gpermission.h"
+
+#include "gioerror.h"
+#include "gioenums.h"
+#include "gasyncresult.h"
+#include "gsimpleasyncresult.h"
 #include "glibintl.h"
 
 
 /**
  * SECTION:gpermission
  * @title: GPermission
- * @short_description: An object representing the permission to perform
- *                     a certain action
+ * @short_description: An object representing the permission
+ *     to perform a certain action
+ * @include: gio/gio.h
  *
  * A #GPermission represents the status of the caller's permission to
  * perform a certain action.
@@ -55,8 +59,6 @@
  * using the following functions.
  **/
 
-G_DEFINE_ABSTRACT_TYPE (GPermission, g_permission, G_TYPE_OBJECT)
-
 struct _GPermissionPrivate
 {
   gboolean allowed;
@@ -70,6 +72,8 @@ enum  {
   PROP_CAN_ACQUIRE,
   PROP_CAN_RELEASE
 };
+
+G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (GPermission, g_permission, G_TYPE_OBJECT)
 
 /**
  * g_permission_acquire:
@@ -102,6 +106,7 @@ g_permission_acquire (GPermission   *permission,
                       GCancellable  *cancellable,
                       GError       **error)
 {
+  g_return_val_if_fail (G_IS_PERMISSION (permission), FALSE);
   return G_PERMISSION_GET_CLASS (permission)
     ->acquire (permission, cancellable, error);
 }
@@ -126,6 +131,7 @@ g_permission_acquire_async (GPermission         *permission,
                             GAsyncReadyCallback  callback,
                             gpointer             user_data)
 {
+  g_return_if_fail (G_IS_PERMISSION (permission));
   G_PERMISSION_GET_CLASS (permission)
     ->acquire_async (permission, cancellable, callback, user_data);
 }
@@ -151,6 +157,7 @@ g_permission_acquire_finish (GPermission   *permission,
                              GAsyncResult  *result,
                              GError       **error)
 {
+  g_return_val_if_fail (G_IS_PERMISSION (permission), FALSE);
   return G_PERMISSION_GET_CLASS (permission)
     ->acquire_finish (permission, result, error);
 }
@@ -186,6 +193,7 @@ g_permission_release (GPermission   *permission,
                       GCancellable  *cancellable,
                       GError       **error)
 {
+  g_return_val_if_fail (G_IS_PERMISSION (permission), FALSE);
   return G_PERMISSION_GET_CLASS (permission)
     ->release (permission, cancellable, error);
 }
@@ -210,6 +218,7 @@ g_permission_release_async (GPermission         *permission,
                             GAsyncReadyCallback  callback,
                             gpointer             user_data)
 {
+  g_return_if_fail (G_IS_PERMISSION (permission));
   G_PERMISSION_GET_CLASS (permission)
     ->release_async (permission, cancellable, callback, user_data);
 }
@@ -235,6 +244,7 @@ g_permission_release_finish (GPermission   *permission,
                              GAsyncResult  *result,
                              GError       **error)
 {
+  g_return_val_if_fail (G_IS_PERMISSION (permission), FALSE);
   return G_PERMISSION_GET_CLASS (permission)
     ->release_finish (permission, result, error);
 }
@@ -254,6 +264,7 @@ g_permission_release_finish (GPermission   *permission,
 gboolean
 g_permission_get_allowed (GPermission *permission)
 {
+  g_return_val_if_fail (G_IS_PERMISSION (permission), FALSE);
   return permission->priv->allowed;
 }
 
@@ -272,6 +283,7 @@ g_permission_get_allowed (GPermission *permission)
 gboolean
 g_permission_get_can_acquire (GPermission *permission)
 {
+  g_return_val_if_fail (G_IS_PERMISSION (permission), FALSE);
   return permission->priv->can_acquire;
 }
 
@@ -290,6 +302,7 @@ g_permission_get_can_acquire (GPermission *permission)
 gboolean
 g_permission_get_can_release (GPermission *permission)
 {
+  g_return_val_if_fail (G_IS_PERMISSION (permission), FALSE);
   return permission->priv->can_release;
 }
 
@@ -314,25 +327,31 @@ g_permission_impl_update (GPermission *permission,
                           gboolean     can_acquire,
                           gboolean     can_release)
 {
-  GObject *object = G_OBJECT (permission);
+  GObject *object;
 
+  g_return_if_fail (G_IS_PERMISSION (permission));
+
+  object = G_OBJECT (permission);
   g_object_freeze_notify (object);
 
+  allowed = allowed != FALSE;
   if (allowed != permission->priv->allowed)
     {
-      permission->priv->allowed = !!allowed;
+      permission->priv->allowed = allowed;
       g_object_notify (object, "allowed");
     }
 
+  can_acquire = can_acquire != FALSE;
   if (can_acquire != permission->priv->can_acquire)
     {
-      permission->priv->can_acquire = !!can_acquire;
+      permission->priv->can_acquire = can_acquire;
       g_object_notify (object, "can-acquire");
     }
 
+  can_release = can_release != FALSE;
   if (can_release != permission->priv->can_release)
     {
-      permission->priv->can_release = !!can_release;
+      permission->priv->can_release = can_release;
       g_object_notify (object, "can-release");
     }
 
@@ -367,9 +386,39 @@ g_permission_get_property (GObject *object, guint prop_id,
 static void
 g_permission_init (GPermission *permission)
 {
-  permission->priv = G_TYPE_INSTANCE_GET_PRIVATE (permission,
-                                                  G_TYPE_PERMISSION,
-                                                  GPermissionPrivate);
+  permission->priv = g_permission_get_instance_private (permission);
+}
+
+static gboolean
+acquire_or_release (GPermission   *permission,
+                    GCancellable  *cancellable,
+                    GError       **error)
+{
+  g_set_error_literal  (error,
+                        G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                        "Can't acquire or release permission");
+  return FALSE;
+}
+
+static void
+acquire_or_release_async (GPermission         *permission,
+                          GCancellable        *cancellable,
+                          GAsyncReadyCallback  callback,
+                          gpointer             user_data)
+{
+  g_simple_async_report_error_in_idle (G_OBJECT (permission),
+                                       callback, user_data,
+                                       G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                                       "Can't acquire or release permission");
+}
+
+static gboolean
+acquire_or_release_finish (GPermission   *permission,
+                           GAsyncResult  *result,
+                           GError       **error)
+{
+  g_async_result_legacy_propagate_error (result, error);
+  return FALSE;
 }
 
 static void
@@ -378,6 +427,13 @@ g_permission_class_init (GPermissionClass *class)
   GObjectClass *object_class = G_OBJECT_CLASS (class);
 
   object_class->get_property = g_permission_get_property;
+
+  class->acquire = acquire_or_release;
+  class->release = acquire_or_release;
+  class->acquire_async = acquire_or_release_async;
+  class->release_async = acquire_or_release_async;
+  class->acquire_finish = acquire_or_release_finish;
+  class->release_finish = acquire_or_release_finish;
 
   /**
    * GPermission:allowed:
@@ -417,6 +473,4 @@ g_permission_class_init (GPermissionClass *class)
                            P_("If calling g_permission_release() makes sense"),
                            FALSE,
                            G_PARAM_STATIC_STRINGS | G_PARAM_READABLE));
-
-  g_type_class_add_private (class, sizeof (GPermissionPrivate));
 }

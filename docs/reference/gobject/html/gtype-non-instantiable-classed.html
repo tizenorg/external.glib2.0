@@ -2,22 +2,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Non-instantiable classed types: interfaces</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+<title>Non-instantiable classed types: interfaces: GObject Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="GObject Reference Manual">
 <link rel="up" href="chapter-gtype.html" title="The GLib Dynamic Type System">
 <link rel="prev" href="gtype-instantiable-classed.html" title="Instantiable classed types: objects">
 <link rel="next" href="chapter-gobject.html" title="The GObject base class">
-<meta name="generator" content="GTK-Doc V1.18 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.21.1 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2"><tr valign="middle">
-<td><a accesskey="p" href="gtype-instantiable-classed.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="chapter-gtype.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">GObject Reference Manual</th>
-<td><a accesskey="n" href="chapter-gobject.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts"></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="chapter-gtype.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="gtype-instantiable-classed.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="chapter-gobject.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
 </tr></table>
 <div class="sect1">
 <div class="titlepage"><div><div><h2 class="title" style="clear: both">
@@ -32,37 +32,72 @@
           classed type which derives from 
           <a class="link" href="gobject-Type-Information.html#GTypeInterface" title="struct GTypeInterface"><span class="type">GTypeInterface</span></a>. The following piece of code declares such an interface.
 </p>
-<pre class="programlisting">
-#define MAMAN_TYPE_IBAZ                (maman_ibaz_get_type ())
-#define MAMAN_IBAZ(obj)                (G_TYPE_CHECK_INSTANCE_CAST ((obj), MAMAN_TYPE_IBAZ, MamanIbaz))
-#define MAMAN_IS_IBAZ(obj)             (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MAMAN_TYPE_IBAZ))
-#define MAMAN_IBAZ_GET_INTERFACE(inst) (G_TYPE_INSTANCE_GET_INTERFACE ((inst), MAMAN_TYPE_IBAZ, MamanIbazInterface))
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="preproc">#define</span><span class="normal"> </span><span class="function">MAMAN_TYPE_IBAZ</span><span class="normal">                </span><span class="symbol">(</span><span class="function">maman_ibaz_get_type</span><span class="normal"> </span><span class="symbol">())</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">MAMAN_IBAZ</span><span class="symbol">(</span><span class="normal">obj</span><span class="symbol">)</span><span class="normal">                </span><span class="symbol">(</span><span class="function"><a href="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE-CAST:CAPS">G_TYPE_CHECK_INSTANCE_CAST</a></span><span class="normal"> </span><span class="symbol">((</span><span class="normal">obj</span><span class="symbol">),</span><span class="normal"> MAMAN_TYPE_IBAZ</span><span class="symbol">,</span><span class="normal"> MamanIbaz</span><span class="symbol">))</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">MAMAN_IS_IBAZ</span><span class="symbol">(</span><span class="normal">obj</span><span class="symbol">)</span><span class="normal">             </span><span class="symbol">(</span><span class="function"><a href="gobject-Type-Information.html#G-TYPE-CHECK-INSTANCE-TYPE:CAPS">G_TYPE_CHECK_INSTANCE_TYPE</a></span><span class="normal"> </span><span class="symbol">((</span><span class="normal">obj</span><span class="symbol">),</span><span class="normal"> MAMAN_TYPE_IBAZ</span><span class="symbol">))</span>
+<span class="preproc">#define</span><span class="normal"> </span><span class="function">MAMAN_IBAZ_GET_INTERFACE</span><span class="symbol">(</span><span class="normal">inst</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="gobject-Type-Information.html#G-TYPE-INSTANCE-GET-INTERFACE:CAPS">G_TYPE_INSTANCE_GET_INTERFACE</a></span><span class="normal"> </span><span class="symbol">((</span><span class="normal">inst</span><span class="symbol">),</span><span class="normal"> MAMAN_TYPE_IBAZ</span><span class="symbol">,</span><span class="normal"> MamanIbazInterface</span><span class="symbol">))</span>
 
-typedef struct _MamanIbaz MamanIbaz; /* dummy object */
-typedef struct _MamanIbazInterface MamanIbazInterface;
+<span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="classname">_MamanIbaz</span><span class="normal"> MamanIbaz</span><span class="symbol">;</span><span class="normal"> </span><span class="comment">/* dummy object */</span>
+<span class="keyword">typedef</span><span class="normal"> </span><span class="keyword">struct</span><span class="normal"> </span><span class="classname">_MamanIbazInterface</span><span class="normal"> MamanIbazInterface</span><span class="symbol">;</span>
 
-struct _MamanIbazInterface {
-  GTypeInterface parent;
+<span class="keyword">struct</span><span class="normal"> </span><span class="classname">_MamanIbazInterface</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GTypeInterface</span><span class="normal"> parent</span><span class="symbol">;</span>
 
-  void (*do_action) (MamanIbaz *self);
-};
+<span class="normal">  </span><span class="type">void</span><span class="normal"> </span><span class="symbol">(*</span><span class="normal">do_action</span><span class="symbol">)</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MamanIbaz</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self</span><span class="symbol">);</span>
+<span class="cbracket">}</span><span class="symbol">;</span>
 
-GType maman_ibaz_get_type (void);
+<span class="usertype">GType</span><span class="normal"> </span><span class="function">maman_ibaz_get_type</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">);</span>
 
-void maman_ibaz_do_action (MamanIbaz *self);
-</pre>
+<span class="type">void</span><span class="normal"> </span><span class="function">maman_ibaz_do_action</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MamanIbaz</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self</span><span class="symbol">);</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
           The interface function, <code class="function">maman_ibaz_do_action</code> is implemented
           in a pretty simple way:
 </p>
-<pre class="programlisting">
-void maman_ibaz_do_action (MamanIbaz *self)
-{
-  MAMAN_IBAZ_GET_INTERFACE (self)-&gt;do_action (self);
-}
-</pre>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="type">void</span><span class="normal"> </span><span class="function">maman_ibaz_do_action</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MamanIbaz</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="function">MAMAN_IBAZ_GET_INTERFACE</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">)-&gt;</span><span class="function">do_action</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">self</span><span class="symbol">);</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
-         <code class="function">maman_ibaz_get_type</code> registers a type named <span class="emphasis"><em>MamanIBaz</em></span>
+         <code class="function">maman_ibaz_get_type</code> registers a type named <span class="emphasis"><em>MamanIbaz</em></span>
          which inherits from G_TYPE_INTERFACE. All interfaces must be children of G_TYPE_INTERFACE in the 
          inheritance tree.
         </p>
@@ -78,90 +113,190 @@ void maman_ibaz_do_action (MamanIbaz *self)
           Once an interface type is registered, you must register implementations for these
           interfaces. The function named <code class="function">maman_baz_get_type</code> registers
           a new GType named MamanBaz which inherits from <a class="link" href="gobject-The-Base-Object-Type.html#GObject"><span class="type">GObject</span></a> and which
-          implements the interface <span class="type">MamanIBaz</span>.
+          implements the interface <span class="type">MamanIbaz</span>.
 </p>
-<pre class="programlisting">
-static void maman_baz_do_action (MamanIbaz *self)
-{
-  g_print ("Baz implementation of IBaz interface Action.\n");
-}
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span><span class="normal"> </span><span class="function">maman_baz_do_action</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MamanIbaz</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"Baz implementation of Ibaz interface Action.</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">);</span>
+<span class="cbracket">}</span>
 
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">baz_interface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">gpointer</span><span class="normal">         g_iface</span><span class="symbol">,</span>
+<span class="normal">                    </span><span class="usertype">gpointer</span><span class="normal">         iface_data</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">MamanIbazInterface</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">iface </span><span class="symbol">=</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MamanIbazInterface </span><span class="symbol">*)</span><span class="normal">g_iface</span><span class="symbol">;</span>
+<span class="normal">  iface</span><span class="symbol">-&gt;</span><span class="normal">do_action </span><span class="symbol">=</span><span class="normal"> maman_baz_do_action</span><span class="symbol">;</span>
+<span class="cbracket">}</span>
 
-static void
-baz_interface_init (gpointer         g_iface,
-                    gpointer         iface_data)
-{
-  MamanIbazInterface *iface = (MamanIbazInterface *)g_iface;
-  iface-&gt;do_action = maman_baz_do_action;
-}
+<span class="normal"><a href="gobject-Type-Information.html#GType">GType</a> </span>
+<span class="function">maman_baz_get_type</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="keyword">static</span><span class="normal"> </span><span class="usertype">GType</span><span class="normal"> type </span><span class="symbol">=</span><span class="normal"> </span><span class="number">0</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">type </span><span class="symbol">==</span><span class="normal"> </span><span class="number">0</span><span class="symbol">)</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">GTypeInfo</span><span class="normal"> info </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">      </span><span class="keyword">sizeof</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MamanBazClass</span><span class="symbol">),</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* base_init */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* base_finalize */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* class_init */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* class_finalize */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* class_data */</span>
+<span class="normal">      </span><span class="keyword">sizeof</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MamanBaz</span><span class="symbol">),</span>
+<span class="normal">      </span><span class="number">0</span><span class="symbol">,</span><span class="normal">      </span><span class="comment">/* n_preallocs */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a>    </span><span class="comment">/* instance_init */</span>
+<span class="normal">    </span><span class="cbracket">}</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">GInterfaceInfo</span><span class="normal"> ibaz_info </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">      </span><span class="symbol">(</span><span class="normal"><a href="gobject-Type-Information.html#GInterfaceInitFunc">GInterfaceInitFunc</a></span><span class="symbol">)</span><span class="normal"> baz_interface_init</span><span class="symbol">,</span><span class="normal">    </span><span class="comment">/* interface_init */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">               </span><span class="comment">/* interface_finalize */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a>          </span><span class="comment">/* interface_data */</span>
+<span class="normal">    </span><span class="cbracket">}</span><span class="symbol">;</span>
+<span class="normal">    type </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gobject-Type-Information.html#g-type-register-static">g_type_register_static</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="gobject-Type-Information.html#G-TYPE-OBJECT:CAPS">G_TYPE_OBJECT</a></span><span class="symbol">,</span>
+<span class="normal">                                   </span><span class="string">"MamanBazType"</span><span class="symbol">,</span>
+<span class="normal">                                   </span><span class="symbol">&amp;</span><span class="normal">info</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="gobject-Type-Information.html#g-type-add-interface-static">g_type_add_interface_static</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">type</span><span class="symbol">,</span>
+<span class="normal">                                 MAMAN_TYPE_IBAZ</span><span class="symbol">,</span>
+<span class="normal">                                 </span><span class="symbol">&amp;</span><span class="normal">ibaz_info</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="cbracket">}</span>
+<span class="normal">  </span><span class="keyword">return</span><span class="normal"> type</span><span class="symbol">;</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-GType 
-maman_baz_get_type (void)
-{
-  static GType type = 0;
-  if (type == 0) {
-    const GTypeInfo info = {
-      sizeof (MamanBazInterface),
-      NULL,   /* base_init */
-      NULL,   /* base_finalize */
-      NULL,   /* class_init */
-      NULL,   /* class_finalize */
-      NULL,   /* class_data */
-      sizeof (MamanBaz),
-      0,      /* n_preallocs */
-      NULL    /* instance_init */
-    };
-    const GInterfaceInfo ibaz_info = {
-      (GInterfaceInitFunc) baz_interface_init,    /* interface_init */
-      NULL,               /* interface_finalize */
-      NULL          /* interface_data */
-    };
-    type = g_type_register_static (G_TYPE_OBJECT,
-                                   "MamanBazType",
-                                   &amp;info, 0);
-    g_type_add_interface_static (type,
-                                 MAMAN_TYPE_IBAZ,
-                                 &amp;ibaz_info);
-  }
-  return type;
-}
-</pre>
 <p>
         </p>
 <p>
-          <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-add-interface-static" title="g_type_add_interface_static ()">g_type_add_interface_static</a></code> records in the type system that
+          <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-add-interface-static" title="g_type_add_interface_static ()">g_type_add_interface_static</a></code> records in the type system that
           a given type implements also <span class="type">FooInterface</span> 
           (<code class="function">foo_interface_get_type</code> returns the type of 
           <span class="type">FooInterface</span>).
                 The <a class="link" href="gobject-Type-Information.html#GInterfaceInfo" title="struct GInterfaceInfo"><span class="type">GInterfaceInfo</span></a> structure holds
           information about the implementation of the interface:
 </p>
-<pre class="programlisting">
-struct _GInterfaceInfo
-{
-  GInterfaceInitFunc     interface_init;
-  GInterfaceFinalizeFunc interface_finalize;
-  gpointer               interface_data;
-};
-</pre>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">struct</span><span class="normal"> </span><span class="classname">_GInterfaceInfo</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="usertype">GInterfaceInitFunc</span><span class="normal">     interface_init</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">GInterfaceFinalizeFunc</span><span class="normal"> interface_finalize</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="usertype">gpointer</span><span class="normal">               interface_data</span><span class="symbol">;</span>
+<span class="cbracket">}</span><span class="symbol">;</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
         </p>
 <p>
-        When having no special requirements you also can use the <code class="function">G_DEFINE_INTERFACE</code> macro:
+        If you have no special requirements you can use the
+        <a class="link" href="gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS" title="G_IMPLEMENT_INTERFACE()">G_IMPLEMENT_INTERFACE</a> macro
+        to implement an interface:
 </p>
-<pre class="programlisting">
-G_DEFINE_INTERFACE (MamanBaz, maman_baz, G_TYPE_OBJECT)
-</pre>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">maman_baz_do_action</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MamanIbaz</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">self</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Warnings-and-Assertions.html#g-print">g_print</a></span><span class="normal"> </span><span class="symbol">(</span><span class="string">"Baz implementation of Ibaz interface Action.</span><span class="specialchar">\n</span><span class="string">"</span><span class="symbol">);</span>
+<span class="cbracket">}</span>
+
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">maman_ibaz_interface_init</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MamanIbazInterface</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">iface</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  iface</span><span class="symbol">-&gt;</span><span class="normal">do_action </span><span class="symbol">=</span><span class="normal"> maman_baz_do_action</span><span class="symbol">;</span>
+<span class="cbracket">}</span>
+
+<span class="function"><a href="gobject-Type-Information.html#G-DEFINE-TYPE-WITH-CODE:CAPS">G_DEFINE_TYPE_WITH_CODE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MamanBaz</span><span class="symbol">,</span><span class="normal"> maman_baz</span><span class="symbol">,</span><span class="normal"> <a href="gobject-Type-Information.html#G-TYPE-OBJECT:CAPS">G_TYPE_OBJECT</a></span><span class="symbol">,</span>
+<span class="normal">                         </span><span class="function"><a href="gobject-Type-Information.html#G-IMPLEMENT-INTERFACE:CAPS">G_IMPLEMENT_INTERFACE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MAMAN_TYPE_IBAZ</span><span class="symbol">,</span>
+<span class="normal">                                                maman_ibaz_interface_init</span><span class="symbol">));</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
         </p>
 <div class="sect2">
 <div class="titlepage"><div><div><h3 class="title">
 <a name="gtype-non-instantiable-classed-init"></a>Interface Initialization</h3></div></div></div>
 <p>
-            When an instantiable classed type which registered an interface 
-            implementation is created for the first time, its class structure 
-            is initialized following the process
-            described in <a class="xref" href="gtype-instantiable-classed.html" title="Instantiable classed types: objects">the section called “Instantiable classed types: objects”</a>. 
+            When an instantiable classed type which implements an interface
+            (either directly or by inheriting an implementation from a superclass)
+            is created for the first time, its class structure is initialized
+            following the process described in <a class="xref" href="gtype-instantiable-classed.html" title="Instantiable classed types: objects">the section called “Instantiable classed types: objects”</a>.
             After that, the interface implementations associated with
             the type are initialized.
           </p>
@@ -175,30 +310,118 @@ G_DEFINE_INTERFACE (MamanBaz, maman_baz, G_TYPE_OBJECT)
             this interface.
           </p>
 <p>
-            Finally, the interface' most-derived <code class="function">base_init</code> function and then 
+            The interface's <code class="function">base_init</code> function is called,
+            and then the interface's <code class="function">default_init</code> is invoked.
+            Finally if the type has registered an implementation of the interface,
             the implementation's <code class="function">interface_init</code>
-            function are invoked. It is important to understand that if there are multiple 
-            implementations of an interface the <code class="function">base_init</code> and 
-            <code class="function">interface_init</code> functions will be
-            invoked once for each implementation initialized.
+            function is invoked. If there are multiple implementations of an
+            interface the <code class="function">base_init</code> and
+            <code class="function">interface_init</code> functions will be invoked once
+            for each implementation initialized.
           </p>
 <p>
-            It is thus common for base_init functions to hold a local static boolean variable
-            which makes sure that the interface type is initialized only once even if there are 
-            multiple implementations of the interface:
+            It is thus recommended to use a <code class="function">default_init</code> function to
+            initialize an interface. This function is called only once for the interface no
+            matter how many implementations there are. The
+            <code class="function">default_init</code> function is declared by
+            <a class="link" href="gobject-Type-Information.html#G-DEFINE-INTERFACE:CAPS" title="G_DEFINE_INTERFACE()">G_DEFINE_INTERFACE</a>
+            which can be used to define the interface:
 </p>
-<pre class="programlisting">
-static void
-maman_ibaz_base_init (gpointer g_iface)
-{
-  static gboolean initialized = FALSE;
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="function"><a href="gobject-Type-Information.html#G-DEFINE-INTERFACE:CAPS">G_DEFINE_INTERFACE</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MamanIbaz</span><span class="symbol">,</span><span class="normal"> maman_ibaz</span><span class="symbol">,</span><span class="normal"> <a href="gobject-Type-Information.html#G-TYPE-OBJECT:CAPS">G_TYPE_OBJECT</a></span><span class="symbol">);</span>
 
-  if (!initialized) {
-    /* create interface signals here. */
-    initialized = TRUE;
-  }
-}
-</pre>
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">maman_ibaz_default_init</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MamanIbazInterface</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">iface</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="comment">/* add properties and signals here, will only called once */</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>
+          </p>
+<p>
+            Or you can do that yourself in a GType function for your interface:
+</p>
+<div class="informalexample">
+  <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
+    <tbody>
+      <tr>
+        <td class="listing_lines" align="right"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="normal"><a href="gobject-Type-Information.html#GType">GType</a></span>
+<span class="function">maman_ibaz_get_type</span><span class="normal"> </span><span class="symbol">(</span><span class="type">void</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="keyword">static</span><span class="normal"> </span><span class="keyword">volatile</span><span class="normal"> </span><span class="usertype">gsize</span><span class="normal"> type_id </span><span class="symbol">=</span><span class="normal"> </span><span class="number">0</span><span class="symbol">;</span>
+<span class="normal">  </span><span class="keyword">if</span><span class="normal"> </span><span class="symbol">(</span><span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Threads.html#g-once-init-enter">g_once_init_enter</a></span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">type_id</span><span class="symbol">))</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">    </span><span class="keyword">const</span><span class="normal"> </span><span class="usertype">GTypeInfo</span><span class="normal"> info </span><span class="symbol">=</span><span class="normal"> </span><span class="cbracket">{</span>
+<span class="normal">      </span><span class="keyword">sizeof</span><span class="normal"> </span><span class="symbol">(</span><span class="normal">MamanIbazInterface</span><span class="symbol">),</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* base_init */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* base_finalize */</span>
+<span class="normal">      maman_ibaz_default_init</span><span class="symbol">,</span><span class="normal"> </span><span class="comment">/* class_init */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* class_finalize */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a></span><span class="symbol">,</span><span class="normal">   </span><span class="comment">/* class_data */</span>
+<span class="normal">      </span><span class="number">0</span><span class="symbol">,</span><span class="normal">      </span><span class="comment">/* instance_size */</span>
+<span class="normal">      </span><span class="number">0</span><span class="symbol">,</span><span class="normal">      </span><span class="comment">/* n_preallocs */</span>
+<span class="normal">      <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS">NULL</a>    </span><span class="comment">/* instance_init */</span>
+<span class="normal">    </span><span class="cbracket">}</span><span class="symbol">;</span>
+<span class="normal">    </span><span class="usertype">GType</span><span class="normal"> type </span><span class="symbol">=</span><span class="normal"> </span><span class="function"><a href="gobject-Type-Information.html#g-type-register-static">g_type_register_static</a></span><span class="normal"> </span><span class="symbol">(</span><span class="normal"><a href="gobject-Type-Information.html#G-TYPE-INTERFACE:CAPS">G_TYPE_INTERFACE</a></span><span class="symbol">,</span>
+<span class="normal">                                        </span><span class="string">"MamanIbaz"</span><span class="symbol">,</span>
+<span class="normal">                                        </span><span class="symbol">&amp;</span><span class="normal">info</span><span class="symbol">,</span><span class="normal"> </span><span class="number">0</span><span class="symbol">);</span>
+<span class="normal">    </span><span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Threads.html#g-once-init-leave">g_once_init_leave</a></span><span class="normal"> </span><span class="symbol">(&amp;</span><span class="normal">type_id</span><span class="symbol">,</span><span class="normal"> type</span><span class="symbol">);</span>
+<span class="normal">  </span><span class="cbracket">}</span>
+<span class="normal">  </span><span class="keyword">return</span><span class="normal"> type_id</span><span class="symbol">;</span>
+<span class="cbracket">}</span>
+
+<span class="keyword">static</span><span class="normal"> </span><span class="type">void</span>
+<span class="function">maman_ibaz_default_init</span><span class="normal"> </span><span class="symbol">(</span><span class="usertype">MamanIbazInterface</span><span class="normal"> </span><span class="symbol">*</span><span class="normal">iface</span><span class="symbol">)</span>
+<span class="cbracket">{</span>
+<span class="normal">  </span><span class="comment">/* add properties and signals here, will only called once */</span>
+<span class="cbracket">}</span></pre></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
 <p>
           </p>
 <p>
@@ -207,7 +430,6 @@ maman_ibaz_base_init (gpointer g_iface)
           about interfaces:          
         </p>
 <p>
-            The above process can be summarized as follows:
           </p>
 <div class="table">
 <a name="ginterface-init-table"></a><p class="title"><b>Table 2. Interface Initialization</b></p>
@@ -225,21 +447,31 @@ maman_ibaz_base_init (gpointer g_iface)
 </tr></thead>
 <tbody>
 <tr>
-<td rowspan="2" align="left">First call to <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-create-instance" title="g_type_create_instance ()">g_type_create_instance</a></code> for type
-                    implementing interface
+<td align="left">First call to <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-create-instance" title="g_type_create_instance ()">g_type_create_instance</a></code>
+                    for <span class="emphasis"><em>any</em></span> type implementing interface
                    </td>
-<td align="left">interface' base_init function</td>
-<td align="left">On interface' vtable</td>
-<td>Register interface' signals here (use a local static 
-                    boolean variable as described above to make sure not to register them
-                    twice.).</td>
+<td align="left">interface's <code class="function">base_init</code> function</td>
+<td align="left">On interface's vtable</td>
+<td>Rarely necessary to use this. Called once per instantiated classed type implementing the interface.</td>
 </tr>
 <tr>
-<td align="left">interface' interface_init function</td>
-<td align="left">On interface' vtable</td>
+<td align="left">First call to <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-create-instance" title="g_type_create_instance ()">g_type_create_instance</a></code>
+                    for <span class="emphasis"><em>each</em></span> type implementing interface
+                   </td>
+<td align="left">interface's <code class="function">default_init</code> function</td>
+<td align="left">On interface's vtable</td>
+<td>Register interface's signals, properties, etc. here. Will be called once.</td>
+</tr>
+<tr>
+<td align="left">First call to <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-create-instance" title="g_type_create_instance ()">g_type_create_instance</a></code>
+                    for <span class="emphasis"><em>any</em></span> type implementing interface
+                   </td>
+<td align="left">implementation's <code class="function">interface_init</code> function</td>
+<td align="left">On interface's vtable</td>
 <td>
-                    Initialize interface' implementation. That is, initialize the interface 
-                    method pointers in the interface structure to the function's implementation.
+                    Initialize interface implementation. Called for each class that that
+                    implements the interface. Initialize the interface method pointers
+                    in the interface structure to the implementing class's implementation.
                   </td>
 </tr>
 </tbody>
@@ -292,7 +524,7 @@ maman_ibaz_base_init (gpointer g_iface)
 </tr></thead>
 <tbody>
 <tr>
-<td rowspan="2" align="left">Last call to <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-free-instance" title="g_type_free_instance ()">g_type_free_instance</a></code> for type
+<td rowspan="2" align="left">Last call to <code class="function"><a class="link" href="gobject-Type-Information.html#g-type-free-instance" title="g_type_free_instance ()">g_type_free_instance</a></code> for type
                     implementing interface
                    </td>
 <td align="left">interface' interface_finalize function</td>
@@ -311,6 +543,6 @@ maman_ibaz_base_init (gpointer g_iface)
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.18</div>
+          Generated by GTK-Doc V1.21.1</div>
 </body>
 </html>

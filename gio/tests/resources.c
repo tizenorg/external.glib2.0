@@ -13,11 +13,10 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <string.h>
 #include <gio/gio.h>
 #include "gconstructor.h"
 #include "test_resources2.h"
@@ -148,7 +147,7 @@ test_resource_file (void)
   g_assert_error (error, G_FILE_ERROR, G_FILE_ERROR_NOENT);
   g_clear_error (&error);
 
-  resource = g_resource_load ("test.gresource", &error);
+  resource = g_resource_load (g_test_get_filename (G_TEST_BUILT, "test.gresource", NULL), &error);
   g_assert (resource != NULL);
   g_assert_no_error (error);
 
@@ -166,8 +165,8 @@ test_resource_data (void)
   gsize content_size;
   GBytes *data;
 
-  loaded_file = g_file_get_contents ("test.gresource", &content, &content_size,
-				     NULL);
+  loaded_file = g_file_get_contents (g_test_get_filename (G_TEST_BUILT, "test.gresource", NULL),
+                                     &content, &content_size, NULL);
   g_assert (loaded_file);
 
   data = g_bytes_new_take (content, content_size);
@@ -182,7 +181,7 @@ test_resource_data (void)
 }
 
 static void
-test_resource_registred (void)
+test_resource_registered (void)
 {
   GResource *resource;
   GError *error = NULL;
@@ -194,7 +193,7 @@ test_resource_registred (void)
   GInputStream *in;
   char buffer[128];
 
-  resource = g_resource_load ("test.gresource", &error);
+  resource = g_resource_load (g_test_get_filename (G_TEST_BUILT, "test.gresource", NULL), &error);
   g_assert (resource != NULL);
   g_assert_no_error (error);
 
@@ -360,6 +359,30 @@ test_resource_manual (void)
 }
 
 static void
+test_resource_manual2 (void)
+{
+  GResource *resource;
+  GBytes *data;
+  gsize size;
+  GError *error = NULL;
+
+  resource = _g_test2_get_resource ();
+
+  data = g_resource_lookup_data (resource,
+                                 "/manual_loaded/test1.txt",
+				 G_RESOURCE_LOOKUP_FLAGS_NONE,
+				 &error);
+  g_assert (data != NULL);
+  g_assert_no_error (error);
+  size = g_bytes_get_size (data);
+  g_assert_cmpint (size, ==, 6);
+  g_assert_cmpstr (g_bytes_get_data (data, NULL), ==, "test1\n");
+  g_bytes_unref (data);
+
+  g_resource_unref (resource);
+}
+
+static void
 test_resource_module (void)
 {
   GIOModule *module;
@@ -371,14 +394,8 @@ test_resource_module (void)
 
   if (g_module_supported ())
     {
-      char *dir, *path;
-
-      dir = g_get_current_dir ();
-
-      path = g_strconcat (dir, G_DIR_SEPARATOR_S "libresourceplugin",  NULL);
-      module = g_io_module_new (path);
-      g_free (path);
-      g_free (dir);
+      /* For in-tree, this will find the .la file and use it to get to the .so in .libs/ */
+      module = g_io_module_new (g_test_get_filename (G_TEST_BUILT, "libresourceplugin",  NULL));
 
       error = NULL;
 
@@ -431,10 +448,10 @@ test_uri_query_info (void)
   GBytes *data;
   GFile *file;
   GFileInfo *info;
-  const char *content_type;
+  const char *content_type, *mime_type;
 
-  loaded_file = g_file_get_contents ("test.gresource", &content, &content_size,
-                                     NULL);
+  loaded_file = g_file_get_contents (g_test_get_filename (G_TEST_BUILT, "test.gresource", NULL),
+                                     &content, &content_size, NULL);
   g_assert (loaded_file);
 
   data = g_bytes_new_take (content, content_size);
@@ -449,13 +466,157 @@ test_uri_query_info (void)
 
   info = g_file_query_info (file, "*", 0, NULL, &error);
   g_assert_no_error (error);
-  g_object_unref (file);
 
   content_type = g_file_info_get_content_type (info);
   g_assert (content_type);
-  g_assert_cmpstr (content_type, ==, "text/plain");
+  mime_type = g_content_type_get_mime_type (content_type);
+  g_assert (mime_type);
+  g_assert_cmpstr (mime_type, ==, "text/plain");
 
   g_object_unref (info);
+
+  g_assert_cmpuint  (g_file_hash (file), !=, 0);
+
+  g_object_unref (file);
+
+  g_resources_unregister (resource);
+  g_resource_unref (resource);
+}
+
+static void
+test_uri_file (void)
+{
+  GResource *resource;
+  GError *error = NULL;
+  gboolean loaded_file;
+  char *content;
+  gsize content_size;
+  GBytes *data;
+  GFile *file;
+  GFileInfo *info;
+  gchar *name;
+  GFile *file2, *parent;
+  GFileEnumerator *enumerator;
+  gchar *scheme;
+  GFileAttributeInfoList *attrs;
+  GInputStream *stream;
+  gchar buf[1024];
+  gboolean ret;
+  gssize skipped;
+
+  loaded_file = g_file_get_contents (g_test_get_filename (G_TEST_BUILT, "test.gresource", NULL),
+                                     &content, &content_size, NULL);
+  g_assert (loaded_file);
+
+  data = g_bytes_new_take (content, content_size);
+  resource = g_resource_new_from_data (data, &error);
+  g_bytes_unref (data);
+  g_assert (resource != NULL);
+  g_assert_no_error (error);
+
+  g_resources_register (resource);
+
+  file = g_file_new_for_uri ("resource://" "/a_prefix/test2-alias.txt");
+
+  g_assert (g_file_get_path (file) == NULL);
+
+  name = g_file_get_parse_name (file);
+  g_assert_cmpstr (name, ==, "resource:///a_prefix/test2-alias.txt");
+  g_free (name);
+
+  name = g_file_get_uri (file);
+  g_assert_cmpstr (name, ==, "resource:///a_prefix/test2-alias.txt");
+  g_free (name);
+
+  g_assert (!g_file_is_native (file));
+  g_assert (!g_file_has_uri_scheme (file, "http"));
+  g_assert (g_file_has_uri_scheme (file, "resource"));
+  scheme = g_file_get_uri_scheme (file);
+  g_assert_cmpstr (scheme, ==, "resource");
+  g_free (scheme);
+
+  file2 = g_file_dup (file);
+  g_assert (g_file_equal (file, file2));
+  g_object_unref (file2);
+
+  parent = g_file_get_parent (file);
+  enumerator = g_file_enumerate_children (parent, G_FILE_ATTRIBUTE_STANDARD_NAME, 0, NULL, &error);
+  g_assert_no_error (error);
+
+  file2 = g_file_get_child_for_display_name (parent, "test2-alias.txt", &error);
+  g_assert_no_error (error);
+  g_assert (g_file_equal (file, file2));
+  g_object_unref (file2);
+
+  info = g_file_enumerator_next_file (enumerator, NULL, &error);
+  g_assert_no_error (error);
+  g_assert (info != NULL);
+  g_object_unref (info);
+
+  info = g_file_enumerator_next_file (enumerator, NULL, &error);
+  g_assert_no_error (error);
+  g_assert (info != NULL);
+  g_object_unref (info);
+
+  info = g_file_enumerator_next_file (enumerator, NULL, &error);
+  g_assert_no_error (error);
+  g_assert (info == NULL);
+
+  g_file_enumerator_close (enumerator, NULL, &error);
+  g_assert_no_error (error);
+  g_object_unref (enumerator);
+
+  file2 = g_file_new_for_uri ("resource://" "a_prefix/../a_prefix//test2-alias.txt");
+  g_assert (g_file_equal (file, file2));
+
+  g_assert (g_file_has_prefix (file, parent));
+
+  name = g_file_get_relative_path (parent, file);
+  g_assert_cmpstr (name, ==, "test2-alias.txt");
+  g_free (name);
+
+  g_object_unref (parent);
+
+  attrs = g_file_query_settable_attributes (file, NULL, &error);
+  g_assert_no_error (error);
+  g_file_attribute_info_list_unref (attrs);
+
+  attrs = g_file_query_writable_namespaces (file, NULL, &error);
+  g_assert_no_error (error);
+  g_file_attribute_info_list_unref (attrs);
+
+  stream = G_INPUT_STREAM (g_file_read (file, NULL, &error));
+  g_assert_no_error (error);
+  g_assert_cmpint (g_seekable_tell (G_SEEKABLE (stream)), ==, 0);
+  g_assert (g_seekable_can_seek (G_SEEKABLE (G_SEEKABLE (stream))));
+  ret = g_seekable_seek (G_SEEKABLE (stream), 1, G_SEEK_SET, NULL, &error);
+  g_assert (ret);
+  g_assert_no_error (error);
+  skipped = g_input_stream_skip (stream, 1, NULL, &error);
+  g_assert_cmpint (skipped, ==, 1);
+  g_assert_no_error (error);
+
+  memset (buf, 0, 1024);
+  ret = g_input_stream_read_all (stream, &buf, 1024, NULL, NULL, &error);
+  g_assert (ret);
+  g_assert_no_error (error);
+  g_assert_cmpstr (buf, ==, "st2\n");
+  info = g_file_input_stream_query_info (G_FILE_INPUT_STREAM (stream),
+                                         G_FILE_ATTRIBUTE_STANDARD_SIZE,
+                                         NULL,
+                                         &error);
+  g_assert_no_error (error);
+  g_assert (info != NULL);
+  g_assert_cmpint (g_file_info_get_size (info), ==, 6);
+  g_object_unref (info);
+
+  ret = g_input_stream_close (stream, NULL, &error);
+  g_assert (ret);
+  g_assert_no_error (error);
+  g_object_unref (stream);
+
+  g_object_unref (file);
+  g_object_unref (file2);
 
   g_resources_unregister (resource);
   g_resource_unref (resource);
@@ -465,21 +626,22 @@ int
 main (int   argc,
       char *argv[])
 {
-  g_type_init ();
   g_test_init (&argc, &argv, NULL);
 
   _g_test2_register_resource ();
 
   g_test_add_func ("/resource/file", test_resource_file);
   g_test_add_func ("/resource/data", test_resource_data);
-  g_test_add_func ("/resource/registred", test_resource_registred);
+  g_test_add_func ("/resource/registered", test_resource_registered);
   g_test_add_func ("/resource/manual", test_resource_manual);
+  g_test_add_func ("/resource/manual2", test_resource_manual2);
 #ifdef G_HAS_CONSTRUCTORS
   g_test_add_func ("/resource/automatic", test_resource_automatic);
   /* This only uses automatic resources too, so it tests the constructors and destructors */
   g_test_add_func ("/resource/module", test_resource_module);
 #endif
   g_test_add_func ("/resource/uri/query-info", test_uri_query_info);
+  g_test_add_func ("/resource/uri/file", test_uri_file);
 
   return g_test_run();
 }

@@ -13,19 +13,17 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Alexander Larsson <alexl@redhat.com>
  */
 
+#ifndef __GIO_ENUMS_H__
+#define __GIO_ENUMS_H__
+
 #if !defined (__GIO_GIO_H_INSIDE__) && !defined (GIO_COMPILATION)
 #error "Only <gio/gio.h> can be included directly."
 #endif
-
-#ifndef __GIO_ENUMS_H__
-#define __GIO_ENUMS_H__
 
 #include <glib-object.h>
 
@@ -211,6 +209,29 @@ typedef enum {
   G_FILE_CREATE_REPLACE_DESTINATION = (1 << 1)
 } GFileCreateFlags;
 
+/**
+ * GFileMeasureFlags:
+ * @G_FILE_MEASURE_NONE: No flags set.
+ * @G_FILE_MEASURE_REPORT_ANY_ERROR: Report any error encountered
+ *   while traversing the directory tree.  Normally errors are only
+ *   reported for the toplevel file.
+ * @G_FILE_MEASURE_APPARENT_SIZE: Tally usage based on apparent file
+ *   sizes.  Normally, the block-size is used, if available, as this is a
+ *   more accurate representation of disk space used.
+ *   Compare with `du --apparent-size`.
+ * @G_FILE_MEASURE_NO_XDEV: Do not cross mount point boundaries.
+ *   Compare with `du -x`.
+ *
+ * Flags that can be used with g_file_measure_disk_usage().
+ *
+ * Since: 2.38
+ **/
+typedef enum {
+  G_FILE_MEASURE_NONE                 = 0,
+  G_FILE_MEASURE_REPORT_ANY_ERROR     = (1 << 1),
+  G_FILE_MEASURE_APPARENT_SIZE        = (1 << 2),
+  G_FILE_MEASURE_NO_XDEV              = (1 << 3)
+} GFileMeasureFlags;
 
 /**
  * GMountMountFlags:
@@ -308,13 +329,16 @@ typedef enum {
  *   event instead (NB: not supported on all backends; the default
  *   behaviour -without specifying this flag- is to send single DELETED
  *   and CREATED events).
+ * @G_FILE_MONITOR_WATCH_HARD_LINKS: Watch for changes to the file made
+ *   via another hard link. Since 2.36.
  *
  * Flags used to set what a #GFileMonitor will watch for.
  */
 typedef enum {
-  G_FILE_MONITOR_NONE         = 0,
-  G_FILE_MONITOR_WATCH_MOUNTS = (1 << 0),
-  G_FILE_MONITOR_SEND_MOVED   = (1 << 1)
+  G_FILE_MONITOR_NONE             = 0,
+  G_FILE_MONITOR_WATCH_MOUNTS     = (1 << 0),
+  G_FILE_MONITOR_SEND_MOVED       = (1 << 1),
+  G_FILE_MONITOR_WATCH_HARD_LINKS = (1 << 2)
 } GFileMonitorFlags;
 
 
@@ -392,7 +416,8 @@ typedef enum {
  */
 /**
  * GIOErrorEnum:
- * @G_IO_ERROR_FAILED: Generic error condition for when any operation fails.
+ * @G_IO_ERROR_FAILED: Generic error condition for when an operation fails
+ *     and no more specific #GIOErrorEnum value is defined.
  * @G_IO_ERROR_NOT_FOUND: File not found.
  * @G_IO_ERROR_EXISTS: File already exists.
  * @G_IO_ERROR_IS_DIRECTORY: File is a directory.
@@ -407,7 +432,7 @@ typedef enum {
  * @G_IO_ERROR_NO_SPACE: No space left on drive.
  * @G_IO_ERROR_INVALID_ARGUMENT: Invalid argument.
  * @G_IO_ERROR_PERMISSION_DENIED: Permission denied.
- * @G_IO_ERROR_NOT_SUPPORTED: Operation not supported for the current backend.
+ * @G_IO_ERROR_NOT_SUPPORTED: Operation (or one of its parameters) not supported
  * @G_IO_ERROR_NOT_MOUNTED: File isn't mounted.
  * @G_IO_ERROR_ALREADY_MOUNTED: File is already mounted.
  * @G_IO_ERROR_CLOSED: File was closed.
@@ -430,7 +455,7 @@ typedef enum {
  * @G_IO_ERROR_NOT_INITIALIZED: The object has not been initialized. Since 2.22
  * @G_IO_ERROR_ADDRESS_IN_USE: The requested address is already in use. Since 2.22
  * @G_IO_ERROR_PARTIAL_INPUT: Need more input to finish operation. Since 2.24
- * @G_IO_ERROR_INVALID_DATA: There input data was invalid. Since 2.24
+ * @G_IO_ERROR_INVALID_DATA: The input data was invalid. Since 2.24
  * @G_IO_ERROR_DBUS_ERROR: A remote object generated an error that
  *     doesn't correspond to a locally registered #GError error
  *     domain. Use g_dbus_error_get_remote_error() to extract the D-Bus
@@ -444,9 +469,29 @@ typedef enum {
  * @G_IO_ERROR_PROXY_NEED_AUTH: Proxy server needs authentication. Since 2.26
  * @G_IO_ERROR_PROXY_NOT_ALLOWED: Proxy connection is not allowed by ruleset.
  *     Since 2.26
+ * @G_IO_ERROR_BROKEN_PIPE: Broken pipe. Since 2.36
+ * @G_IO_ERROR_CONNECTION_CLOSED: Connection closed by peer. Note that this
+ *     is the same code as %G_IO_ERROR_BROKEN_PIPE; before 2.44 some
+ *     "connection closed" errors returned %G_IO_ERROR_BROKEN_PIPE, but others
+ *     returned %G_IO_ERROR_FAILED. Now they should all return the same
+ *     value, which has this more logical name. Since 2.44.
+ * @G_IO_ERROR_NOT_CONNECTED: Transport endpoint is not connected. Since 2.44
  *
  * Error codes returned by GIO functions.
  *
+ * Note that this domain may be extended in future GLib releases. In
+ * general, new error codes either only apply to new APIs, or else
+ * replace %G_IO_ERROR_FAILED in cases that were not explicitly
+ * distinguished before. You should therefore avoid writing code like
+ * |[<!-- language="C" -->
+ * if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_FAILED))
+ *   {
+ *     // Assume that this is EPRINTERONFIRE
+ *     ...
+ *   }
+ * ]|
+ * but should instead treat all unrecognized error codes the same as
+ * #G_IO_ERROR_FAILED.
  **/
 typedef enum {
   G_IO_ERROR_FAILED,
@@ -492,7 +537,10 @@ typedef enum {
   G_IO_ERROR_PROXY_FAILED,
   G_IO_ERROR_PROXY_AUTH_FAILED,
   G_IO_ERROR_PROXY_NEED_AUTH,
-  G_IO_ERROR_PROXY_NOT_ALLOWED
+  G_IO_ERROR_PROXY_NOT_ALLOWED,
+  G_IO_ERROR_BROKEN_PIPE,
+  G_IO_ERROR_CONNECTION_CLOSED = G_IO_ERROR_BROKEN_PIPE,
+  G_IO_ERROR_NOT_CONNECTED
 } GIOErrorEnum;
 
 
@@ -629,6 +677,49 @@ typedef enum {
   G_RESOLVER_ERROR_TEMPORARY_FAILURE,
   G_RESOLVER_ERROR_INTERNAL
 } GResolverError;
+
+/**
+ * GResolverRecordType:
+ * @G_RESOLVER_RECORD_SRV: lookup DNS SRV records for a domain
+ * @G_RESOLVER_RECORD_MX: lookup DNS MX records for a domain
+ * @G_RESOLVER_RECORD_TXT: lookup DNS TXT records for a name
+ * @G_RESOLVER_RECORD_SOA: lookup DNS SOA records for a zone
+ * @G_RESOLVER_RECORD_NS: lookup DNS NS records for a domain
+ *
+ * The type of record that g_resolver_lookup_records() or
+ * g_resolver_lookup_records_async() should retrieve. The records are returned
+ * as lists of #GVariant tuples. Each record type has different values in
+ * the variant tuples returned.
+ *
+ * %G_RESOLVER_RECORD_SRV records are returned as variants with the signature
+ * '(qqqs)', containing a guint16 with the priority, a guint16 with the
+ * weight, a guint16 with the port, and a string of the hostname.
+ *
+ * %G_RESOLVER_RECORD_MX records are returned as variants with the signature
+ * '(qs)', representing a guint16 with the preference, and a string containing
+ * the mail exchanger hostname.
+ *
+ * %G_RESOLVER_RECORD_TXT records are returned as variants with the signature
+ * '(as)', representing an array of the strings in the text record.
+ *
+ * %G_RESOLVER_RECORD_SOA records are returned as variants with the signature
+ * '(ssuuuuu)', representing a string containing the primary name server, a
+ * string containing the administrator, the serial as a guint32, the refresh
+ * interval as guint32, the retry interval as a guint32, the expire timeout
+ * as a guint32, and the ttl as a guint32.
+ *
+ * %G_RESOLVER_RECORD_NS records are returned as variants with the signature
+ * '(s)', representing a string of the hostname of the name server.
+ *
+ * Since: 2.34
+ */
+typedef enum {
+  G_RESOLVER_RECORD_SRV = 1,
+  G_RESOLVER_RECORD_MX,
+  G_RESOLVER_RECORD_TXT,
+  G_RESOLVER_RECORD_SOA,
+  G_RESOLVER_RECORD_NS
+} GResolverRecordType;
 
 /**
  * GResourceError:
@@ -798,12 +889,11 @@ typedef enum {
  * or a socket created with socketpair()).
  *
  * For abstract sockets, there are two incompatible ways of naming
- * them; the man pages suggest using the entire <literal>struct
- * sockaddr_un</literal> as the name, padding the unused parts of the
- * %sun_path field with zeroes; this corresponds to
- * %G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED. However, many programs
- * instead just use a portion of %sun_path, and pass an appropriate
- * smaller length to bind() or connect(). This is
+ * them; the man pages suggest using the entire `struct sockaddr_un`
+ * as the name, padding the unused parts of the %sun_path field with
+ * zeroes; this corresponds to %G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED.
+ * However, many programs instead just use a portion of %sun_path, and
+ * pass an appropriate smaller length to bind() or connect(). This is
  * %G_UNIX_SOCKET_ADDRESS_ABSTRACT.
  *
  * Since: 2.26
@@ -838,7 +928,7 @@ typedef enum
 /**
  * GBusNameOwnerFlags:
  * @G_BUS_NAME_OWNER_FLAGS_NONE: No flags set.
- * @G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT: Allow another message bus connection to claim the the name.
+ * @G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT: Allow another message bus connection to claim the name.
  * @G_BUS_NAME_OWNER_FLAGS_REPLACE: If another message bus connection owns the name and have
  * specified #G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT, then take the name from the other connection.
  *
@@ -879,6 +969,10 @@ typedef enum
  * then request the bus to launch an owner for the name if no-one owns the name. This flag can
  * only be used in proxies for well-known names.
  * @G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES: If set, the property value for any <emphasis>invalidated property</emphasis> will be (asynchronously) retrieved upon receiving the <ulink url="http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-properties">PropertiesChanged</ulink> D-Bus signal and the property will not cause emission of the #GDBusProxy::g-properties-changed signal. When the value is received the #GDBusProxy::g-properties-changed signal is emitted for the property along with the retrieved value. Since 2.32.
+ * @G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION: If the proxy is for a well-known name,
+ * do not ask the bus to launch an owner during proxy initialization, but allow it to be
+ * autostarted by a method call. This flag is only meaningful in proxies for well-known names,
+ * and only if %G_DBUS_PROXY_FLAGS_DO_NOT_AUTOSTART is not also specified.
  *
  * Flags used when constructing an instance of a #GDBusProxy derived class.
  *
@@ -890,7 +984,8 @@ typedef enum
   G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES = (1<<0),
   G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS = (1<<1),
   G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START = (1<<2),
-  G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES = (1<<3)
+  G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES = (1<<3),
+  G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START_AT_CONSTRUCTION = (1<<4)
 } GDBusProxyFlags;
 
 /**
@@ -943,6 +1038,14 @@ typedef enum
  * Existing file and the operation you're using does not silently overwrite.
  * @G_DBUS_ERROR_UNKNOWN_METHOD:
  * Method name you invoked isn't known by the object you invoked it on.
+ * @G_DBUS_ERROR_UNKNOWN_OBJECT:
+ * Object you invoked a method on isn't known. Since 2.42
+ * @G_DBUS_ERROR_UNKNOWN_INTERFACE:
+ * Interface you invoked a method on isn't known by the object. Since 2.42
+ * @G_DBUS_ERROR_UNKNOWN_PROPERTY:
+ * Property you tried to access isn't known by the object. Since 2.42
+ * @G_DBUS_ERROR_PROPERTY_READ_ONLY:
+ * Property you tried to set is read-only. Since 2.42
  * @G_DBUS_ERROR_TIMED_OUT:
  * Certain timeout errors, e.g. while starting a service. Warning: this is
  * confusingly-named given that %G_DBUS_ERROR_TIMEOUT also exists. We
@@ -1035,7 +1138,11 @@ typedef enum
   G_DBUS_ERROR_INVALID_FILE_CONTENT,             /* org.freedesktop.DBus.Error.InvalidFileContent */
   G_DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN, /* org.freedesktop.DBus.Error.SELinuxSecurityContextUnknown */
   G_DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN,           /* org.freedesktop.DBus.Error.AdtAuditDataUnknown */
-  G_DBUS_ERROR_OBJECT_PATH_IN_USE                /* org.freedesktop.DBus.Error.ObjectPathInUse */
+  G_DBUS_ERROR_OBJECT_PATH_IN_USE,               /* org.freedesktop.DBus.Error.ObjectPathInUse */
+  G_DBUS_ERROR_UNKNOWN_OBJECT,                   /* org.freedesktop.DBus.Error.UnknownObject */
+  G_DBUS_ERROR_UNKNOWN_INTERFACE,                /* org.freedesktop.DBus.Error.UnknownInterface */
+  G_DBUS_ERROR_UNKNOWN_PROPERTY,                 /* org.freedesktop.DBus.Error.UnknownProperty */
+  G_DBUS_ERROR_PROPERTY_READ_ONLY                /* org.freedesktop.DBus.Error.PropertyReadOnly */
 } GDBusError;
 /* Remember to update g_dbus_error_quark() in gdbuserror.c if you extend this enumeration */
 
@@ -1224,6 +1331,11 @@ typedef enum
  * @G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE: Don't actually send the AddMatch
  * D-Bus call for this signal subscription.  This gives you more control
  * over which match rules you add (but you must add them manually).
+ * @G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_NAMESPACE: Match first arguments that
+ * contain a bus or interface name with the given namespace.
+ * @G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_PATH: Match first arguments that
+ * contain an object path that is either equivalent to the given path,
+ * or one of the paths is a subpath of the other.
  *
  * Flags used when subscribing to signals via g_dbus_connection_signal_subscribe().
  *
@@ -1232,7 +1344,9 @@ typedef enum
 typedef enum /*< flags >*/
 {
   G_DBUS_SIGNAL_FLAGS_NONE = 0,
-  G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE = (1<<0)
+  G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE = (1<<0),
+  G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_NAMESPACE = (1<<1),
+  G_DBUS_SIGNAL_FLAGS_MATCH_ARG0_PATH = (1<<2)
 } GDBusSignalFlags;
 
 /**
@@ -1242,7 +1356,7 @@ typedef enum /*< flags >*/
  * assign a serial number from the #GDBusConnection object when
  * sending a message.
  *
- * Flags used when sending #GDBusMessage<!-- -->s on a #GDBusConnection.
+ * Flags used when sending #GDBusMessages on a #GDBusConnection.
  *
  * Since: 2.26
  */
@@ -1259,6 +1373,8 @@ typedef enum
  * @G_CREDENTIALS_TYPE_LINUX_UCRED: The native credentials type is a <type>struct ucred</type>.
  * @G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED: The native credentials type is a <type>struct cmsgcred</type>.
  * @G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED: The native credentials type is a <type>struct sockpeercred</type>. Added in 2.30.
+ * @G_CREDENTIALS_TYPE_SOLARIS_UCRED: The native credentials type is a <type>ucred_t</type>. Added in 2.40.
+ * @G_CREDENTIALS_TYPE_NETBSD_UNPCBID: The native credentials type is a <type>struct unpcbid</type>.
  *
  * Enumeration describing different kinds of native credential types.
  *
@@ -1269,7 +1385,9 @@ typedef enum
   G_CREDENTIALS_TYPE_INVALID,
   G_CREDENTIALS_TYPE_LINUX_UCRED,
   G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED,
-  G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
+  G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED,
+  G_CREDENTIALS_TYPE_SOLARIS_UCRED,
+  G_CREDENTIALS_TYPE_NETBSD_UNPCBID
 } GCredentialsType;
 
 /**
@@ -1291,8 +1409,9 @@ typedef enum
  * GApplicationFlags:
  * @G_APPLICATION_FLAGS_NONE: Default
  * @G_APPLICATION_IS_SERVICE: Run as a service. In this mode, registration
- *      fails if the service is already running, and the application will
- *      stay around for a while when the use count falls to zero.
+ *      fails if the service is already running, and the application
+ *      will initially wait up to 10 seconds for an initial activation
+ *      message to arrive.
  * @G_APPLICATION_IS_LAUNCHER: Don't try to become the primary instance.
  * @G_APPLICATION_HANDLES_OPEN: This application handles opening files (in
  *     the primary instance). Note that this flag only affects the default
@@ -1545,6 +1664,20 @@ typedef enum {
 } GTlsDatabaseLookupFlags;
 
 /**
+ * GTlsCertificateRequestFlags:
+ * @G_TLS_CERTIFICATE_REQUEST_NONE: No flags
+ *
+ * Flags for g_tls_interaction_request_certificate(),
+ * g_tls_interaction_request_certificate_async(), and
+ * g_tls_interaction_invoke_request_certificate().
+ *
+ * Since: 2.40
+ */
+typedef enum {
+  G_TLS_CERTIFICATE_REQUEST_NONE = 0
+} GTlsCertificateRequestFlags;
+
+/**
  * GIOModuleScopeFlags:
  * @G_IO_MODULE_SCOPE_NONE: No module scan flags
  * @G_IO_MODULE_SCOPE_BLOCK_DUPLICATES: When using this scope to load or
@@ -1597,6 +1730,118 @@ typedef enum {
   G_SOCKET_CLIENT_TLS_HANDSHAKED,
   G_SOCKET_CLIENT_COMPLETE
 } GSocketClientEvent;
+
+/**
+ * GTestDBusFlags:
+ * @G_TEST_DBUS_NONE: No flags.
+ *
+ * Flags to define future #GTestDBus behaviour.
+ *
+ * Since: 2.34
+ */
+typedef enum /*< flags >*/ {
+  G_TEST_DBUS_NONE = 0
+} GTestDBusFlags;
+
+/**
+ * GSubprocessFlags:
+ * @G_SUBPROCESS_FLAGS_NONE: No flags.
+ * @G_SUBPROCESS_FLAGS_STDIN_PIPE: create a pipe for the stdin of the
+ *   spawned process that can be accessed with
+ *   g_subprocess_get_stdin_pipe().
+ * @G_SUBPROCESS_FLAGS_STDIN_INHERIT: stdin is inherited from the
+ *   calling process.
+ * @G_SUBPROCESS_FLAGS_STDOUT_PIPE: create a pipe for the stdout of the
+ *   spawned process that can be accessed with
+ *   g_subprocess_get_stdout_pipe().
+ * @G_SUBPROCESS_FLAGS_STDOUT_SILENCE: silence the stdout of the spawned
+ *   process (ie: redirect to /dev/null).
+ * @G_SUBPROCESS_FLAGS_STDERR_PIPE: create a pipe for the stderr of the
+ *   spawned process that can be accessed with
+ *   g_subprocess_get_stderr_pipe().
+ * @G_SUBPROCESS_FLAGS_STDERR_SILENCE: silence the stderr of the spawned
+ *   process (ie: redirect to /dev/null).
+ * @G_SUBPROCESS_FLAGS_STDERR_MERGE: merge the stderr of the spawned
+ *   process with whatever the stdout happens to be.  This is a good way
+ *   of directing both streams to a common log file, for example.
+ * @G_SUBPROCESS_FLAGS_INHERIT_FDS: spawned processes will inherit the
+ *   file descriptors of their parent, unless those descriptors have
+ *   been explicitly marked as close-on-exec.  This flag has no effect
+ *   over the "standard" file descriptors (stdin, stdout, stderr).
+ *
+ * Flags to define the behaviour of a #GSubprocess.
+ *
+ * Note that the default for stdin is to redirect from /dev/null.  For
+ * stdout and stderr the default are for them to inherit the
+ * corresponding descriptor from the calling process.
+ *
+ * Note that it is a programmer error to mix 'incompatible' flags.  For
+ * example, you may not request both %G_SUBPROCESS_FLAGS_STDOUT_PIPE and
+ * %G_SUBPROCESS_FLAGS_STDOUT_SILENCE.
+ *
+ * Since: 2.40
+ **/
+typedef enum {
+  G_SUBPROCESS_FLAGS_NONE                  = 0,
+  G_SUBPROCESS_FLAGS_STDIN_PIPE            = (1u << 0),
+  G_SUBPROCESS_FLAGS_STDIN_INHERIT         = (1u << 1),
+  G_SUBPROCESS_FLAGS_STDOUT_PIPE           = (1u << 2),
+  G_SUBPROCESS_FLAGS_STDOUT_SILENCE        = (1u << 3),
+  G_SUBPROCESS_FLAGS_STDERR_PIPE           = (1u << 4),
+  G_SUBPROCESS_FLAGS_STDERR_SILENCE        = (1u << 5),
+  G_SUBPROCESS_FLAGS_STDERR_MERGE          = (1u << 6),
+  G_SUBPROCESS_FLAGS_INHERIT_FDS           = (1u << 7)
+} GSubprocessFlags;
+
+/**
+ * GNotificationPriority:
+ * @G_NOTIFICATION_PRIORITY_LOW: for notifications that do not require
+ *   immediate attention - typically used for contextual background
+ *   information, such as contact birthdays or local weather
+ * @G_NOTIFICATION_PRIORITY_NORMAL: the default priority, to be used for the
+ *   majority of notifications (for example email messages, software updates,
+ *   completed download/sync operations)
+ * @G_NOTIFICATION_PRIORITY_HIGH: for events that require more attention,
+ *   usually because responses are time-sensitive (for example chat and SMS
+ *   messages or alarms)
+ * @G_NOTIFICATION_PRIORITY_URGENT: for urgent notifications, or notifications
+ *   that require a response in a short space of time (for example phone calls
+ *   or emergency warnings)
+ *
+ * Priority levels for #GNotifications.
+ *
+ * Since: 2.42
+ */
+typedef enum {
+  G_NOTIFICATION_PRIORITY_NORMAL,
+  G_NOTIFICATION_PRIORITY_LOW,
+  G_NOTIFICATION_PRIORITY_HIGH,
+  G_NOTIFICATION_PRIORITY_URGENT
+} GNotificationPriority;
+
+/**
+ * GNetworkConnectivity:
+ * @G_NETWORK_CONNECTIVITY_LOCAL: The host is not configured with a
+ *   route to the Internet; it may or may not be connected to a local
+ *   network.
+ * @G_NETWORK_CONNECTIVITY_LIMITED: The host is connected to a network, but
+ *   does not appear to be able to reach the full Internet, perhaps
+ *   due to upstream network problems.
+ * @G_NETWORK_CONNECTIVITY_PORTAL: The host is behind a captive portal and
+ *   cannot reach the full Internet.
+ * @G_NETWORK_CONNECTIVITY_FULL: The host is connected to a network, and
+ *   appears to be able to reach the full Internet.
+ *
+ * The host's network connectivity state, as reported by #GNetworkMonitor.
+ *
+ * Since: 2.44
+ */
+typedef enum {
+  G_NETWORK_CONNECTIVITY_LOCAL       = 1,
+  G_NETWORK_CONNECTIVITY_LIMITED     = 2,
+  G_NETWORK_CONNECTIVITY_PORTAL      = 3,
+  G_NETWORK_CONNECTIVITY_FULL        = 4
+} GNetworkConnectivity;
 
 G_END_DECLS
 

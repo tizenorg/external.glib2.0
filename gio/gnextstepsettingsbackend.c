@@ -12,18 +12,20 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: William Hua <william@attente.ca>
  */
+
+#include "config.h"
 
 #include "gsettingsbackendinternal.h"
 #include "gsimplepermission.h"
 #include "giomodule.h"
 
 #import <Foundation/Foundation.h>
+
+GType g_nextstep_settings_backend_get_type (void);
 
 #define G_NEXTSTEP_SETTINGS_BACKEND(obj) (G_TYPE_CHECK_INSTANCE_CAST ((obj), g_nextstep_settings_backend_get_type (), GNextstepSettingsBackend))
 

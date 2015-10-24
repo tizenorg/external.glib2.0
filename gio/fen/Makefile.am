@@ -1,8 +1,6 @@
-include $(top_srcdir)/Makefile.decl
+include $(top_srcdir)/glib.mk
 
-NULL =
-
-noinst_LTLIBRARIES = libfen.la
+noinst_LTLIBRARIES += libfen.la
 
 libfen_la_SOURCES = 		\
 	fen-dump.c		\
@@ -20,6 +18,7 @@ libfen_la_SOURCES = 		\
 	$(NULL)
 
 libfen_la_CFLAGS = \
+	$(GLIB_HIDDEN_VISIBILITY_CFLAGS)	\
 	-DG_LOG_DOMAIN=\"GLib-GIO\"	\
 	$(gio_INCLUDES) 			\
 	$(GLIB_DEBUG_FLAGS)		\

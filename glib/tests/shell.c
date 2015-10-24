@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 /*
@@ -59,12 +57,15 @@ static CmdlineTest cmdline_tests[] =
   { "foo \"yada yada \\$\\\"\"", 2, { "foo", "yada yada $\"", NULL }, -1 },
   { "foo \"c:\\\\\"", 2, { "foo", "c:\\", NULL }, -1 },
   { "foo # bla bla bla\n bar", 2, { "foo", "bar", NULL }, -1 },
+  { "foo a#b", 2, { "foo", "a#b", NULL }, -1 },
+  { "#foo", 0, { NULL }, G_SHELL_ERROR_EMPTY_STRING },
   { "foo bar \\", 0, { NULL }, G_SHELL_ERROR_BAD_QUOTING },
   { "foo 'bar baz", 0, { NULL }, G_SHELL_ERROR_BAD_QUOTING },
   { "foo '\"bar\" baz", 0, { NULL }, G_SHELL_ERROR_BAD_QUOTING },
   { "", 0, { NULL }, G_SHELL_ERROR_EMPTY_STRING },
   { "  ", 0, { NULL }, G_SHELL_ERROR_EMPTY_STRING },
-  { "# foo bar", 0, { NULL }, G_SHELL_ERROR_EMPTY_STRING }
+  { "# foo bar", 0, { NULL }, G_SHELL_ERROR_EMPTY_STRING },
+  {"foo '/bar/summer'\\''09 tours.pdf'", 2, {"foo", "/bar/summer'09 tours.pdf", NULL}, -1}
 };
 
 static gboolean
@@ -92,6 +93,7 @@ do_cmdline_test (gconstpointer d)
   gboolean res;
 
   err = NULL;
+g_print ("test cmdline: %s\n", test->cmdline);
   res = g_shell_parse_argv (test->cmdline, &argc, &argv, &err);
   if (test->error_code == -1)
     {

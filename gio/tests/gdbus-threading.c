@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: David Zeuthen <davidz@redhat.com>
  */
@@ -297,7 +295,8 @@ test_sleep_in_thread_func (gpointer _data)
                              (GAsyncReadyCallback) sleep_cb,
                              data);
           g_main_loop_run (data->thread_loop);
-          g_print ("A");
+          if (!g_test_quiet ())
+            g_print ("A");
           //g_debug ("done invoking async (%p)", g_thread_self ());
         }
       else
@@ -314,7 +313,8 @@ test_sleep_in_thread_func (gpointer _data)
                                            -1,
                                            NULL,
                                            &error);
-          g_print ("S");
+          if (!g_test_quiet ())
+            g_print ("S");
           //g_debug ("done invoking sync (%p)", g_thread_self ());
           g_assert_no_error (error);
           g_assert (result != NULL);
@@ -406,9 +406,10 @@ test_method_calls_on_proxy (GDBusProxy *proxy)
 
       /* elapsed_msec should be 4000 msec +/- change for overhead/inaccuracy */
       g_assert_cmpint (elapsed_msec, >=, 3950);
-      g_assert_cmpint (elapsed_msec,  <, 6000);
+      g_assert_cmpint (elapsed_msec,  <, 8000);
 
-      g_print (" ");
+      if (!g_test_quiet ())
+        g_print (" ");
     }
 }
 
@@ -444,6 +445,9 @@ test_method_calls_in_thread (void)
 
   g_object_unref (proxy);
   g_object_unref (connection);
+
+  if (!g_test_quiet ())
+    g_print ("\n");
 }
 
 #define SLEEP_MIN_USEC 1
@@ -465,7 +469,7 @@ ensure_connection_works (GDBusConnection *conn)
   g_variant_unref (v);
 }
 
-/*
+/**
  * get_sync_in_thread:
  * @data: (type guint): delay in microseconds
  *
@@ -581,25 +585,16 @@ main (int   argc,
 {
   GError *error;
   gint ret;
+  gchar *path;
 
-  g_type_init ();
   g_test_init (&argc, &argv, NULL);
-
-  /* all the tests use a session bus with a well-known address that we can bring up and down
-   * using session_bus_up() and session_bus_down().
-   */
-  g_unsetenv ("DISPLAY");
-  g_setenv ("DBUS_SESSION_BUS_ADDRESS", session_bus_get_temporary_address (), TRUE);
 
   session_bus_up ();
 
-  /* TODO: wait a bit for the bus to come up.. ideally session_bus_up() won't return
-   * until one can connect to the bus but that's not how things work right now
-   */
-  usleep (500 * 1000);
-
   /* this is safe; testserver will exit once the bus goes away */
-  g_assert (g_spawn_command_line_async (SRCDIR "/gdbus-testserver.py", NULL));
+  path = g_test_build_filename (G_TEST_BUILT, "gdbus-testserver", NULL);
+  g_assert (g_spawn_command_line_async (path, NULL));
+  g_free (path);
 
   /* wait for the service to come up */
   usleep (500 * 1000);

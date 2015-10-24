@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <stdlib.h>
@@ -615,28 +613,24 @@ base2_object_init (Base2Object *object)
 static void
 test_not_overridden (void)
 {
+  Base2Object *object;
+
   if (!g_test_undefined ())
     return;
 
   g_test_bug ("637738");
 
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT|G_TEST_TRAP_SILENCE_STDERR))
-    {
-      Base2Object *object;
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*Base2Object doesn't implement property 'prop3' from interface 'TestIface'*");
+  object = g_object_new (BASE2_TYPE_OBJECT, NULL);
+  g_test_assert_expected_messages ();
 
-      object = g_object_new (BASE2_TYPE_OBJECT, NULL);
-      g_object_unref (object);
-      exit (0);
-    }
-  g_test_trap_assert_failed ();
-  g_test_trap_assert_stderr ("*Base2Object doesn't implement property 'prop3' from interface 'TestIface'*");
+  g_object_unref (object);
 }
 
 int
 main (int argc, char *argv[])
 {
-  g_type_init ();
-
   g_test_init (&argc, &argv, NULL);
   g_test_bug_base ("http://bugzilla.gnome.org/");
 

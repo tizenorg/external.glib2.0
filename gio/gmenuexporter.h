@@ -12,9 +12,7 @@
  *  Lesser General Public License for more details.
  *
  *  You should have received a copy of the GNU Lesser General Public
- *  License along with this library; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
- *  USA.
+ *  License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Ryan Lortie <desrt@desrt.ca>
  */
@@ -27,11 +25,13 @@
 
 G_BEGIN_DECLS
 
+GLIB_AVAILABLE_IN_2_32
 guint                   g_dbus_connection_export_menu_model             (GDBusConnection  *connection,
                                                                          const gchar      *object_path,
                                                                          GMenuModel       *menu,
                                                                          GError          **error);
 
+GLIB_AVAILABLE_IN_2_32
 void                    g_dbus_connection_unexport_menu_model           (GDBusConnection  *connection,
                                                                          guint             export_id);
 

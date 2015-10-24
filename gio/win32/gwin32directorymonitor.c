@@ -13,15 +13,11 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Vlad Grecescu <b100dian@gmail.com>
  * 
  */
-
-#define _WIN32_WINNT 0x0400
 
 #include "config.h"
 #include "gwin32directorymonitor.h"
@@ -183,7 +179,6 @@ g_win32_directory_monitor_constructor (GType                  type,
   GObjectClass *parent_class;
   GWin32DirectoryMonitor *self;
   wchar_t *wdirname;
-  gboolean result;
 
   klass = G_WIN32_DIRECTORY_MONITOR_CLASS (g_type_class_peek (G_TYPE_WIN32_DIRECTORY_MONITOR));
   parent_class = G_OBJECT_CLASS (g_type_class_peek_parent (klass));
@@ -206,17 +201,17 @@ g_win32_directory_monitor_constructor (GType                  type,
       return obj;
     }
 
-  result = ReadDirectoryChangesW (self->priv->hDirectory,
-				  (gpointer)self->priv->file_notify_buffer,
-				  self->priv->buffer_allocated_bytes,
-				  FALSE, 
-				  FILE_NOTIFY_CHANGE_FILE_NAME |
-				  FILE_NOTIFY_CHANGE_DIR_NAME |
-				  FILE_NOTIFY_CHANGE_ATTRIBUTES |
-				  FILE_NOTIFY_CHANGE_SIZE,
-				  &self->priv->buffer_filled_bytes,
-				  &self->priv->overlapped,
-				  g_win32_directory_monitor_callback);
+  ReadDirectoryChangesW (self->priv->hDirectory,
+                         (gpointer)self->priv->file_notify_buffer,
+                         self->priv->buffer_allocated_bytes,
+                         FALSE,
+                         FILE_NOTIFY_CHANGE_FILE_NAME |
+                         FILE_NOTIFY_CHANGE_DIR_NAME |
+                         FILE_NOTIFY_CHANGE_ATTRIBUTES |
+                         FILE_NOTIFY_CHANGE_SIZE,
+                         &self->priv->buffer_filled_bytes,
+                         &self->priv->overlapped,
+                         g_win32_directory_monitor_callback);
   /* Ignore errors */
 
   return obj;

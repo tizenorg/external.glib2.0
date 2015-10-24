@@ -1,4 +1,5 @@
 #include <glib.h>
+#include <stdlib.h>
 
 #define SIZE       50
 #define NUMBER_MIN 0000
@@ -388,6 +389,34 @@ test_list_copy (void)
   g_list_free (l2);
 }
 
+static gpointer
+multiply_value (gconstpointer value, gpointer data)
+{
+  return GINT_TO_POINTER (GPOINTER_TO_INT (value) * GPOINTER_TO_INT (data));
+}
+
+static void
+test_list_copy_deep (void)
+{
+  GList *l, *l2;
+  GList *u, *v;
+
+  l = NULL;
+  l = g_list_append (l, GINT_TO_POINTER (1));
+  l = g_list_append (l, GINT_TO_POINTER (2));
+  l = g_list_append (l, GINT_TO_POINTER (3));
+
+  l2 = g_list_copy_deep (l, multiply_value, GINT_TO_POINTER (2));
+
+  for (u = l, v = l2; u && v; u = u->next, v = v->next)
+    {
+      g_assert_cmpint (GPOINTER_TO_INT (u->data) * 2, ==, GPOINTER_TO_INT (v->data));
+    }
+
+  g_list_free (l);
+  g_list_free (l2);
+}
+
 static void
 test_delete_link (void)
 {
@@ -460,6 +489,33 @@ test_position (void)
   g_list_free (ll);
 }
 
+static void
+test_double_free (void)
+{
+  GList *list, *link;
+  GList  intruder = { NULL, (gpointer)0xDEADBEEF, (gpointer)0xDEADBEEF };
+
+  if (g_test_subprocess ())
+    {
+      list = NULL;
+      list = g_list_append (list, "a");
+      link = list = g_list_append (list, "b");
+      list = g_list_append (list, "c");
+
+      list = g_list_remove_link (list, link);
+      link->prev = list;
+      link->next = &intruder;
+      list = g_list_remove_link (list, link);
+
+      g_list_free (list);
+      return;
+    }
+
+  g_test_trap_subprocess (NULL, 0, 0);
+  g_test_trap_assert_failed ();
+  g_test_trap_assert_stderr ("*corrupted double-linked list detected*");
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -484,9 +540,11 @@ main (int argc, char *argv[])
   g_test_add_func ("/list/insert", test_list_insert);
   g_test_add_func ("/list/free-full", test_free_full);
   g_test_add_func ("/list/copy", test_list_copy);
+  g_test_add_func ("/list/copy-deep", test_list_copy_deep);
   g_test_add_func ("/list/delete-link", test_delete_link);
   g_test_add_func ("/list/prepend", test_prepend);
   g_test_add_func ("/list/position", test_position);
+  g_test_add_func ("/list/double-free", test_double_free);
 
   return g_test_run ();
 }

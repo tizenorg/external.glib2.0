@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Alexander Larsson <alexl@redhat.com>
  */
@@ -253,7 +251,7 @@ g_zlib_compressor_class_init (GZlibCompressorClass *klass)
    *
    * If set to a non-%NULL #GFileInfo object, and #GZlibCompressor:format is
    * %G_ZLIB_COMPRESSOR_FORMAT_GZIP, the compressor will write the file name
-   * and modification time from the file info to the the GZIP header.
+   * and modification time from the file info to the GZIP header.
    *
    * Since: 2.26
    */

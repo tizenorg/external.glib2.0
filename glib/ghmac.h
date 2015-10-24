@@ -13,17 +13,15 @@
  * Library General Public License for more details.
  *
  * You should have received a copy of the GNU Library General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
+
+#ifndef __G_HMAC_H__
+#define __G_HMAC_H__
 
 #if !defined (__GLIB_H_INSIDE__) && !defined (GLIB_COMPILATION)
 #error "Only <glib.h> can be included directly."
 #endif
-
-#ifndef __G_HMAC_H__
-#define __G_HMAC_H__
 
 #include <glib/gtypes.h>
 #include "gchecksum.h"
@@ -41,25 +39,34 @@ G_BEGIN_DECLS
  */
 typedef struct _GHmac       GHmac;
 
+GLIB_AVAILABLE_IN_2_30
 GHmac *               g_hmac_new                    (GChecksumType  digest_type,
                                                      const guchar  *key,
                                                      gsize          key_len);
+GLIB_AVAILABLE_IN_2_30
 GHmac *               g_hmac_copy                   (const GHmac   *hmac);
+GLIB_AVAILABLE_IN_2_30
 GHmac *               g_hmac_ref                    (GHmac         *hmac);
+GLIB_AVAILABLE_IN_2_30
 void                  g_hmac_unref                  (GHmac         *hmac);
+GLIB_AVAILABLE_IN_2_30
 void                  g_hmac_update                 (GHmac         *hmac,
                                                      const guchar  *data,
                                                      gssize         length);
+GLIB_AVAILABLE_IN_2_30
 const gchar *         g_hmac_get_string             (GHmac         *hmac);
+GLIB_AVAILABLE_IN_2_30
 void                  g_hmac_get_digest             (GHmac         *hmac,
                                                      guint8        *buffer,
                                                      gsize         *digest_len);
 
+GLIB_AVAILABLE_IN_2_30
 gchar                *g_compute_hmac_for_data       (GChecksumType  digest_type,
                                                      const guchar  *key,
                                                      gsize          key_len,
                                                      const guchar  *data,
                                                      gsize          length);
+GLIB_AVAILABLE_IN_2_30
 gchar                *g_compute_hmac_for_string     (GChecksumType  digest_type,
                                                      const guchar  *key,
                                                      gsize          key_len,

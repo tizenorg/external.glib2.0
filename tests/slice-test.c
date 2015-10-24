@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 #include <glib.h>
 
@@ -264,8 +262,6 @@ main (int   argc,
       seedp = &seed32;
     }
 
-  g_thread_init (NULL);
-
   if (argc <= 1)
     usage();
 
@@ -297,7 +293,7 @@ main (int   argc,
         for (i = 0; i < n_chunks; i++)
           {
             gint64 *vals = g_slice_get_config_state (G_SLICE_CONFIG_CONTENTION_COUNTER, i, &n);
-            g_print ("  %9llu   |  %9llu   |  %9llu\n", vals[0], vals[2], vals[1]);
+            g_print ("  %9" G_GINT64_FORMAT "   |  %9" G_GINT64_FORMAT "   |  %9" G_GINT64_FORMAT "\n", vals[0], vals[2], vals[1]);
             g_free (vals);
           }
       }

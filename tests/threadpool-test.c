@@ -5,8 +5,13 @@
 
 #include <glib.h>
 
-#define DEBUG_MSG(x)
-/* #define DEBUG_MSG(args) g_printerr args ; g_printerr ("\n");  */
+/* #define DEBUG 1 */
+
+#ifdef DEBUG
+# define DEBUG_MSG(args) g_printerr args ; g_printerr ("\n");
+#else
+# define DEBUG_MSG(x)
+#endif
 
 #define WAIT                5    /* seconds */
 #define MAX_THREADS         10
@@ -128,9 +133,11 @@ test_thread_stop_unused (void)
 static void
 test_thread_pools_entry_func (gpointer data, gpointer user_data)
 {
+#ifdef DEBUG
   guint id = 0;
 
   id = GPOINTER_TO_UINT (data);
+#endif
 
   DEBUG_MSG (("[pool] ---> [%3.3d] entered thread.", id));
 
@@ -293,9 +300,11 @@ test_thread_sort (gboolean sort)
 static void
 test_thread_idle_time_entry_func (gpointer data, gpointer user_data)
 {
+#ifdef DEBUG
   guint thread_id;
 
   thread_id = GPOINTER_TO_UINT (data);
+#endif
 
   DEBUG_MSG (("[idle] ---> entered thread:%2.2d", thread_id));
 
@@ -307,10 +316,7 @@ test_thread_idle_time_entry_func (gpointer data, gpointer user_data)
 static gboolean
 test_thread_idle_timeout (gpointer data)
 {
-  guint interval;
   gint i;
-
-  interval = GPOINTER_TO_UINT (data);
 
   for (i = 0; i < 2; i++) {
     g_thread_pool_push (idle_pool, GUINT_TO_POINTER (100 + i), NULL);
@@ -326,7 +332,7 @@ test_thread_idle_timeout (gpointer data)
 }
 
 static void
-test_thread_idle_time ()
+test_thread_idle_time (void)
 {
   guint limit = 50;
   guint interval = 10000;
@@ -334,13 +340,15 @@ test_thread_idle_time ()
 
   idle_pool = g_thread_pool_new (test_thread_idle_time_entry_func,
 				 NULL,
-				 MAX_THREADS,
+				 0,
 				 FALSE,
 				 NULL);
 
+  g_thread_pool_set_max_threads (idle_pool, MAX_THREADS, NULL);
   g_thread_pool_set_max_unused_threads (MAX_UNUSED_THREADS);
   g_thread_pool_set_max_idle_time (interval);
 
+  g_assert (g_thread_pool_get_max_threads (idle_pool) == MAX_THREADS);
   g_assert (g_thread_pool_get_max_unused_threads () == MAX_UNUSED_THREADS);
   g_assert (g_thread_pool_get_max_idle_time () == interval);
 
@@ -352,6 +360,8 @@ test_thread_idle_time ()
 		g_thread_pool_get_num_threads (idle_pool),
 		g_thread_pool_unprocessed (idle_pool)));
   }
+
+  g_assert_cmpint (g_thread_pool_unprocessed (idle_pool), <=, limit);
 
   g_timeout_add ((interval - 1000),
 		 test_thread_idle_timeout,
@@ -442,13 +452,13 @@ test_check_start_and_stop (gpointer user_data)
 int
 main (int argc, char *argv[])
 {
-  g_thread_init (NULL);
-
   DEBUG_MSG (("Starting... (in one second)"));
   g_timeout_add (1000, test_check_start_and_stop, NULL);
 
   main_loop = g_main_loop_new (NULL, FALSE);
   g_main_loop_run (main_loop);
+  g_main_loop_unref (main_loop);
 
+  g_thread_pool_free (idle_pool, FALSE, TRUE);
   return 0;
 }

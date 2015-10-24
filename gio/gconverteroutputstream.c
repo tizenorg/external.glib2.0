@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Alexander Larsson <alexl@redhat.com>
  */
@@ -25,6 +23,7 @@
 #include <string.h>
 
 #include "gconverteroutputstream.h"
+#include "gpollableoutputstream.h"
 #include "gsimpleasyncresult.h"
 #include "gcancellable.h"
 #include "gioenumtypes.h"
@@ -41,6 +40,8 @@
  * Converter output stream implements #GOutputStream and allows
  * conversion of data of various types during reading.
  *
+ * As of GLib 2.34, #GConverterOutputStream implements
+ * #GPollableOutputStream.
  **/
 
 #define INITIAL_BUFFER_SIZE 4096
@@ -96,17 +97,30 @@ static gboolean g_converter_output_stream_flush      (GOutputStream  *stream,
 						      GCancellable   *cancellable,
 						      GError        **error);
 
-G_DEFINE_TYPE (GConverterOutputStream,
-	       g_converter_output_stream,
-	       G_TYPE_FILTER_OUTPUT_STREAM)
+static gboolean g_converter_output_stream_can_poll          (GPollableOutputStream *stream);
+static gboolean g_converter_output_stream_is_writable       (GPollableOutputStream *stream);
+static gssize   g_converter_output_stream_write_nonblocking (GPollableOutputStream  *stream,
+							     const void             *buffer,
+							     gsize                  size,
+							     GError               **error);
+
+static GSource *g_converter_output_stream_create_source     (GPollableOutputStream *stream,
+							     GCancellable          *cancellable);
+
+static void g_converter_output_stream_pollable_iface_init (GPollableOutputStreamInterface *iface);
+
+G_DEFINE_TYPE_WITH_CODE (GConverterOutputStream,
+			 g_converter_output_stream,
+			 G_TYPE_FILTER_OUTPUT_STREAM,
+                         G_ADD_PRIVATE (GConverterOutputStream)
+			 G_IMPLEMENT_INTERFACE (G_TYPE_POLLABLE_OUTPUT_STREAM,
+						g_converter_output_stream_pollable_iface_init))
 
 static void
 g_converter_output_stream_class_init (GConverterOutputStreamClass *klass)
 {
   GObjectClass *object_class;
   GOutputStreamClass *istream_class;
-
-  g_type_class_add_private (klass, sizeof (GConverterOutputStreamPrivate));
 
   object_class = G_OBJECT_CLASS (klass);
   object_class->get_property = g_converter_output_stream_get_property;
@@ -127,6 +141,15 @@ g_converter_output_stream_class_init (GConverterOutputStreamClass *klass)
 							G_PARAM_CONSTRUCT_ONLY|
 							G_PARAM_STATIC_STRINGS));
 
+}
+
+static void
+g_converter_output_stream_pollable_iface_init (GPollableOutputStreamInterface *iface)
+{
+  iface->can_poll = g_converter_output_stream_can_poll;
+  iface->is_writable = g_converter_output_stream_is_writable;
+  iface->write_nonblocking = g_converter_output_stream_write_nonblocking;
+  iface->create_source = g_converter_output_stream_create_source;
 }
 
 static void
@@ -196,9 +219,7 @@ g_converter_output_stream_get_property (GObject    *object,
 static void
 g_converter_output_stream_init (GConverterOutputStream *stream)
 {
-  stream->priv = G_TYPE_INSTANCE_GET_PRIVATE (stream,
-					      G_TYPE_CONVERTER_OUTPUT_STREAM,
-					      GConverterOutputStreamPrivate);
+  stream->priv = g_converter_output_stream_get_instance_private (stream);
 }
 
 /**
@@ -339,7 +360,7 @@ buffer_append (Buffer *buffer,
 
 static gboolean
 flush_buffer (GConverterOutputStream *stream,
-	      Buffer                 *buffer,
+	      gboolean                blocking,
 	      GCancellable           *cancellable,
 	      GError                **error)
 {
@@ -356,12 +377,13 @@ flush_buffer (GConverterOutputStream *stream,
   available = buffer_data_size (&priv->converted_buffer);
   if (available > 0)
     {
-      res = g_output_stream_write_all (base_stream,
-				       buffer_data (&priv->converted_buffer),
-				       available,
-				       &nwritten,
-				       cancellable,
-				       error);
+      res = g_pollable_stream_write_all (base_stream,
+					 buffer_data (&priv->converted_buffer),
+					 available,
+					 blocking,
+					 &nwritten,
+					 cancellable,
+					 error);
       buffer_consumed (&priv->converted_buffer, nwritten);
       return res;
     }
@@ -370,11 +392,12 @@ flush_buffer (GConverterOutputStream *stream,
 
 
 static gssize
-g_converter_output_stream_write (GOutputStream *stream,
-				 const void   *buffer,
-				 gsize         count,
-				 GCancellable *cancellable,
-				 GError      **error)
+write_internal (GOutputStream  *stream,
+		const void     *buffer,
+		gsize           count,
+		gboolean        blocking,
+		GCancellable   *cancellable,
+		GError        **error)
 {
   GConverterOutputStream *cstream;
   GConverterOutputStreamPrivate *priv;
@@ -392,7 +415,7 @@ g_converter_output_stream_write (GOutputStream *stream,
 
   /* Write out all available pre-converted data and fail if
      not possible */
-  if (!flush_buffer (cstream, &priv->converted_buffer, cancellable, error))
+  if (!flush_buffer (cstream, blocking, cancellable, error))
     return -1;
 
   if (priv->finished)
@@ -499,9 +522,19 @@ g_converter_output_stream_write (GOutputStream *stream,
      even if writing this to the base stream fails. If it does we'll just
      stop early and report this error when we try again on the next
      write call. */
-  flush_buffer (cstream, &priv->converted_buffer, cancellable, NULL);
+  flush_buffer (cstream, blocking, cancellable, NULL);
 
   return retval;
+}
+
+static gssize
+g_converter_output_stream_write (GOutputStream  *stream,
+				 const void     *buffer,
+				 gsize           count,
+				 GCancellable   *cancellable,
+				 GError        **error)
+{
+  return write_internal (stream, buffer, count, TRUE, cancellable, error);
 }
 
 static gboolean
@@ -525,7 +558,7 @@ g_converter_output_stream_flush (GOutputStream  *stream,
 
   /* Write out all available pre-converted data and fail if
      not possible */
-  if (!flush_buffer (cstream, &priv->converted_buffer, cancellable, error))
+  if (!flush_buffer (cstream, TRUE, cancellable, error))
     return FALSE;
 
   /* Ensure we have *some* initial target space */
@@ -590,10 +623,52 @@ g_converter_output_stream_flush (GOutputStream  *stream,
     }
 
   /* Now write all converted data to base stream */
-  if (!flush_buffer (cstream, &priv->converted_buffer, cancellable, error))
+  if (!flush_buffer (cstream, TRUE, cancellable, error))
     return FALSE;
 
   return TRUE;
+}
+
+static gboolean
+g_converter_output_stream_can_poll (GPollableOutputStream *stream)
+{
+  GOutputStream *base_stream = G_FILTER_OUTPUT_STREAM (stream)->base_stream;
+
+  return (G_IS_POLLABLE_OUTPUT_STREAM (base_stream) &&
+	  g_pollable_output_stream_can_poll (G_POLLABLE_OUTPUT_STREAM (base_stream)));
+}
+
+static gboolean
+g_converter_output_stream_is_writable (GPollableOutputStream *stream)
+{
+  GOutputStream *base_stream = G_FILTER_OUTPUT_STREAM (stream)->base_stream;
+
+  return g_pollable_output_stream_is_writable (G_POLLABLE_OUTPUT_STREAM (base_stream));
+}
+
+static gssize
+g_converter_output_stream_write_nonblocking (GPollableOutputStream  *stream,
+					     const void             *buffer,
+					     gsize                   count,
+					     GError                **error)
+{
+  return write_internal (G_OUTPUT_STREAM (stream), buffer, count, FALSE,
+			 NULL, error);
+}
+
+static GSource *
+g_converter_output_stream_create_source (GPollableOutputStream *stream,
+					 GCancellable          *cancellable)
+{
+  GOutputStream *base_stream = G_FILTER_OUTPUT_STREAM (stream)->base_stream;
+  GSource *base_source, *pollable_source;
+
+  base_source = g_pollable_output_stream_create_source (G_POLLABLE_OUTPUT_STREAM (base_stream), NULL);
+  pollable_source = g_pollable_source_new_full (stream, base_source,
+						cancellable);
+  g_source_unref (base_source);
+
+  return pollable_source;
 }
 
 /**

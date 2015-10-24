@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Authors: Alexander Larsson <alexl@redhat.com>
  */
@@ -38,7 +36,7 @@ struct _GResource
   GvdbTable *table;
 };
 
-static void register_lazy_static_resources ();
+static void register_lazy_static_resources (void);
 
 G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
 
@@ -47,12 +45,13 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  * @short_description: Resource framework
  * @include: gio/gio.h
  *
- * Applications and libraries often contain binary or textual data that is really part of the
- * application, rather than user data. For instance #GtkBuilder .ui files, splashscreen images,
- * GMenu markup xml, CSS files, icons, etc. These are often shipped as files in <filename>$datadir/appname</filename>, or
+ * Applications and libraries often contain binary or textual data that is
+ * really part of the application, rather than user data. For instance
+ * #GtkBuilder .ui files, splashscreen images, GMenu markup xml, CSS files,
+ * icons, etc. These are often shipped as files in `$datadir/appname`, or
  * manually included as literal strings in the code.
  *
- * The #GResource API and the <link linkend="glib-compile-resources">glib-compile-resources</link> program
+ * The #GResource API and the [glib-compile-resources][glib-compile-resources] program
  * provide a convenient and efficient alternative to this which has some nice properties. You
  * maintain the files as normal files, so its easy to edit them, but during the build the files
  * are combined into a binary bundle that is linked into the executable. This means that loading
@@ -65,27 +64,28 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  * is very useful e.g. for larger text files that are parsed once (or rarely) and then thrown away.
  *
  * Resource files can also be marked to be preprocessed, by setting the value of the
- * <literal>preprocess</literal> attribute to a comma-separated list of preprocessing options.
+ * `preprocess` attribute to a comma-separated list of preprocessing options.
  * The only options currently supported are:
  *
- * <literal>xml-stripblanks</literal> which will use <command>xmllint</command> to strip
- * ignorable whitespace from the xml file. For this to work, the <envar>XMLLINT</envar>
- * environment variable must be set to the full path to the xmllint executable, or xmllint
- * must be in the PATH; otherwise the preprocessing step is skipped.
+ * `xml-stripblanks` which will use the xmllint command
+ * to strip ignorable whitespace from the xml file. For this to work,
+ * the `XMLLINT` environment variable must be set to the full path to
+ * the xmllint executable, or xmllint must be in the `PATH`; otherwise
+ * the preprocessing step is skipped.
  *
- * <literal>to-pixdata</literal> which will use <command>gdk-pixbuf-pixdata</command> to convert
+ * `to-pixdata` which will use the gdk-pixbuf-pixdata command to convert
  * images to the GdkPixdata format, which allows you to create pixbufs directly using the data inside
  * the resource file, rather than an (uncompressed) copy if it. For this, the gdk-pixbuf-pixdata
- * program must be in the PATH, or the <envar>GDK_PIXBUF_PIXDATA</envar> environment variable must be
+ * program must be in the PATH, or the `GDK_PIXBUF_PIXDATA` environment variable must be
  * set to the full path to the gdk-pixbuf-pixdata executable; otherwise the resource compiler will
  * abort.
  *
- * Resource bundles are created by the <link linkend="glib-compile-resources">glib-compile-resources</link> program
+ * Resource bundles are created by the [glib-compile-resources][glib-compile-resources] program
  * which takes an xml file that describes the bundle, and a set of files that the xml references. These
  * are combined into a binary resource bundle.
  *
- * <example id="resource-example"><title>Example resource description</title>
- * <programlisting><![CDATA[
+ * An example resource description:
+ * |[
  * <?xml version="1.0" encoding="UTF-8"?>
  * <gresources>
  *   <gresource prefix="/org/gtk/Example">
@@ -94,19 +94,19 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  *     <file preprocess="xml-stripblanks">menumarkup.xml</file>
  *   </gresource>
  * </gresources>
- * ]]></programlisting></example>
+ * ]|
  *
  * This will create a resource bundle with the following files:
- * <programlisting><![CDATA[
+ * |[
  * /org/gtk/Example/data/splashscreen.png
  * /org/gtk/Example/dialog.ui
  * /org/gtk/Example/menumarkup.xml
- * ]]></programlisting>
+ * ]|
  *
  * Note that all resources in the process share the same namespace, so use java-style
  * path prefixes (like in the above example) to avoid conflicts.
  *
- * You can then use <link linkend="glib-compile-resources">glib-compile-resources</link> to compile the xml to a
+ * You can then use [glib-compile-resources][glib-compile-resources] to compile the xml to a
  * binary bundle that you can load with g_resource_load(). However, its more common to use the --generate-source and
  * --generate-header arguments to create a source file and header to link directly into your application.
  *
@@ -130,19 +130,22 @@ G_DEFINE_BOXED_TYPE (GResource, g_resource, g_resource_ref, g_resource_unref)
  */
 
 /**
+ * GStaticResource:
+ *
+ * #GStaticResource is an opaque data structure and can only be accessed
+ * using the following functions.
+ **/
+
+/**
  * g_resource_error_quark:
  *
  * Gets the #GResource Error Quark.
  *
- * Return value: a #GQuark
+ * Returns: a #GQuark
  *
  * Since: 2.32
  */
-GQuark
-g_resource_error_quark (void)
-{
-  return g_quark_from_static_string ("g-resource-error-quark");
-}
+G_DEFINE_QUARK (g-resource-error-quark, g_resource_error)
 
 /**
  * g_resource_ref:
@@ -183,7 +186,7 @@ g_resource_unref (GResource *resource)
     }
 }
 
-/*
+/*< internal >
  * g_resource_new_from_table:
  * @table: (transfer full): a GvdbTable
  *
@@ -213,7 +216,7 @@ g_resource_new_from_table (GvdbTable *table)
  * If you want to use this resource in the global resource namespace you need
  * to register it with g_resources_register().
  *
- * Return value: (transfer full): a new #GResource, or %NULL on error
+ * Returns: (transfer full): a new #GResource, or %NULL on error
  *
  * Since: 2.32
  **/
@@ -248,7 +251,7 @@ g_resource_new_from_data (GBytes  *data,
  * If you want to use this resource in the global resource namespace you need
  * to register it with g_resources_register().
  *
- * Return value: (transfer full): a new #GResource, or %NULL on error
+ * Returns: (transfer full): a new #GResource, or %NULL on error
  *
  * Since: 2.32
  **/
@@ -583,7 +586,7 @@ g_resources_unregister_unlocked (GResource *resource)
 {
   if (g_list_find (registered_resources, resource) == NULL)
     {
-      g_warning ("Tried to remove not registred resource");
+      g_warning ("Tried to remove not registered resource");
     }
   else
     {
@@ -633,7 +636,7 @@ g_resources_unregister (GResource *resource)
  * @error: return location for a #GError, or %NULL
  *
  * Looks for a file at the specified @path in the set of
- * globally registred resources and returns a #GInputStream
+ * globally registered resources and returns a #GInputStream
  * that lets you read the data.
  *
  * @lookup_flags controls the behaviour of the lookup.
@@ -693,7 +696,7 @@ g_resources_open_stream (const gchar           *path,
  * @error: return location for a #GError, or %NULL
  *
  * Looks for a file at the specified @path in the set of
- * globally registred resources and returns a #GBytes that
+ * globally registered resources and returns a #GBytes that
  * lets you directly access the data in memory.
  *
  * The data is always followed by a zero byte, so you
@@ -762,7 +765,7 @@ g_resources_lookup_data (const gchar           *path,
  * @error: return location for a #GError, or %NULL
  *
  * Returns all the names of children at the specified @path in the set of
- * globally registred resources.
+ * globally registered resources.
  * The return result is a %NULL terminated list of strings which should
  * be released with g_strfreev().
  *
@@ -843,7 +846,7 @@ g_resources_enumerate_children (const gchar           *path,
  * @error: return location for a #GError, or %NULL
  *
  * Looks for a file at the specified @path in the set of
- * globally registred resources and if found returns information about it.
+ * globally registered resources and if found returns information about it.
  *
  * @lookup_flags controls the behaviour of the lookup.
  *
@@ -959,7 +962,7 @@ register_lazy_static_resources (void)
  * GStaticResource.
  *
  * This is normally used by code generated by
- * <link linkend="glib-compile-resources">glib-compile-resources</link>
+ * [glib-compile-resources][glib-compile-resources]
  * and is not typically used by other code.
  *
  * Since: 2.32
@@ -984,7 +987,7 @@ g_static_resource_init (GStaticResource *static_resource)
  * Finalized a GResource initialized by g_static_resource_init().
  *
  * This is normally used by code generated by
- * <link linkend="glib-compile-resources">glib-compile-resources</link>
+ * [glib-compile-resources][glib-compile-resources]
  * and is not typically used by other code.
  *
  * Since: 2.32
@@ -1013,13 +1016,13 @@ g_static_resource_fini (GStaticResource *static_resource)
  * g_static_resource_get_resource:
  * @static_resource: pointer to a static #GStaticResource
  *
- * Gets the GResource that was registred by a call to g_static_resource_init().
+ * Gets the GResource that was registered by a call to g_static_resource_init().
  *
  * This is normally used by code generated by
- * <link linkend="glib-compile-resources">glib-compile-resources</link>
+ * [glib-compile-resources][glib-compile-resources]
  * and is not typically used by other code.
  *
- * Return value:  (transfer none): a #GResource
+ * Returns:  (transfer none): a #GResource
  *
  * Since: 2.32
  **/

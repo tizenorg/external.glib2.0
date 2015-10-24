@@ -1,0 +1,51 @@
+diff -Nur glib2.0/gio/Makefile.am glib2.0_patch/gio/Makefile.am
+--- glib2.0/gio/Makefile.am	2015-04-16 11:11:28.772594763 +0900
++++ glib2.0_patch/gio/Makefile.am	2015-04-16 19:08:39.096299302 +0900
+@@ -708,6 +708,7 @@
+ 	$(top_builddir)/gmodule/libgmodule-2.0.la	\
+ 	$(top_builddir)/glib/libglib-2.0.la		\
+ 	$(NULL)
++gio_querymodules_LDFLAGS = -pie 
+ 
+ gconstructor_as_data.h: $(top_srcdir)/glib/gconstructor.h data-to-c.pl
+ 	$(AM_V_GEN) $(srcdir)/data-to-c.pl $(top_srcdir)/glib/gconstructor.h gconstructor_code > $@.tmp && mv $@.tmp $@
+@@ -719,12 +720,14 @@
+ 	gvdb/gvdb-builder.h		\
+ 	gvdb/gvdb-builder.c		\
+ 	glib-compile-schemas.c
++glib_compile_schemas_LDFLAGS = -pie 
+ 
+ gsettings_LDADD = libgio-2.0.la 			\
+ 	$(top_builddir)/gobject/libgobject-2.0.la	\
+ 	$(top_builddir)/glib/libglib-2.0.la		\
+ 	$(NULL)
+ gsettings_SOURCES = gsettings-tool.c
++gsettings_LDFLAGS = -pie 
+ 
+ schemadir = $(datadir)/glib-2.0/schemas
+ dist_schema_DATA = gschema.dtd
+@@ -738,6 +741,7 @@
+ 	$(top_builddir)/gobject/libgobject-2.0.la	\
+ 	$(top_builddir)/glib/libglib-2.0.la		\
+ 	$(NULL)
++gdbus_LDFLAGS = -pie 
+ 
+ if OS_UNIX
+ # ------------------------------------------------------------------------
+@@ -748,6 +752,7 @@
+ 	$(top_builddir)/gobject/libgobject-2.0.la	\
+ 	$(top_builddir)/glib/libglib-2.0.la		\
+ 	$(NULL)
++gapplication_LDFLAGS = -pie 
+ endif
+ 
+ completiondir = $(datadir)/bash-completion/completions
+@@ -768,6 +773,8 @@
+ 	$(top_builddir)/gobject/libgobject-2.0.la	\
+ 	$(top_builddir)/glib/libglib-2.0.la		\
+ 	$(LIBELF_LIBS)
++gresource_LDFLAGS = -pie 
++
+ 
+ # ------------------------------------------------------------------------
+ 

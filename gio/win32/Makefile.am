@@ -1,8 +1,6 @@
-include $(top_srcdir)/Makefile.decl
+include $(top_srcdir)/glib.mk
 
-NULL =
-
-noinst_LTLIBRARIES = libgiowin32.la
+noinst_LTLIBRARIES += libgiowin32.la
 
 libgiowin32_la_SOURCES =			\
 	gwin32directorymonitor.c		\
@@ -19,6 +17,7 @@ libgiowin32_la_SOURCES =			\
 	$(NULL)
 
 libgiowin32_la_CFLAGS = \
+	$(GLIB_HIDDEN_VISIBILITY_CFLAGS)	\
 	-DG_LOG_DOMAIN=\"GLib-GIO\"	\
 	$(gio_INCLUDES)			\
 	$(GLIB_DEBUG_FLAGS)		\

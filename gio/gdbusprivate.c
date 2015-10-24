@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: David Zeuthen <davidz@redhat.com>
  */
@@ -24,9 +22,6 @@
 
 #include <stdlib.h>
 #include <string.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
 
 #include "giotypes.h"
 #include "gsocket.h"
@@ -39,11 +34,20 @@
 #include "ginputstream.h"
 #include "gmemoryinputstream.h"
 #include "giostream.h"
+#include "glib/gstdio.h"
 #include "gsocketcontrolmessage.h"
 #include "gsocketconnection.h"
 #include "gsocketoutputstream.h"
 
 #ifdef G_OS_UNIX
+
+#ifdef KDBUS_TRANSPORT
+#include "gkdbusconnection.h"
+#ifdef POLICY_IN_LIB
+#include <dbus-1.0/dbus/dbus-policy.h>
+#endif
+#endif
+
 #include "gunixfdmessage.h"
 #include "gunixconnection.h"
 #include "gunixcredentialsmessage.h"
@@ -56,6 +60,7 @@
 #include "glibintl.h"
 
 static gboolean _g_dbus_worker_do_initial_read (gpointer data);
+static void schedule_pending_close (GDBusWorker *worker);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
@@ -115,6 +120,107 @@ typedef struct
 
   gboolean from_mainloop;
 } ReadWithControlData;
+
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+typedef struct
+{
+  GKdbus *kdbus;
+  GCancellable *cancellable;
+
+  GSimpleAsyncResult *simple;
+
+  gboolean from_mainloop;
+} ReadKdbusData;
+
+static void
+read_kdbus_data_free (ReadKdbusData *data)
+{
+  g_object_unref (data->kdbus);
+  if (data->cancellable != NULL)
+    g_object_unref (data->cancellable);
+  g_object_unref (data->simple);
+  g_free (data);
+}
+
+static gboolean
+_g_kdbus_read_ready (GKdbus       *kdbus,
+                     GIOCondition  condition,
+                     gpointer      user_data)
+{
+  ReadKdbusData *data = user_data;
+  GError *error;
+  gssize result;
+
+  error = NULL;
+
+  result = g_kdbus_receive (data->kdbus,
+                            data->cancellable,
+                            &error);
+  if (result >= 0)
+    {
+      g_simple_async_result_set_op_res_gssize (data->simple, result);
+    }
+  else
+    {
+      g_assert (error != NULL);
+      g_simple_async_result_take_error (data->simple, error);
+    }
+
+  if (data->from_mainloop)
+    g_simple_async_result_complete (data->simple);
+  else
+    g_simple_async_result_complete_in_idle (data->simple);
+
+  return FALSE;
+}
+
+static void
+_g_kdbus_read (GKdbus                  *kdbus,
+               GCancellable            *cancellable,
+               GAsyncReadyCallback      callback,
+               gpointer                 user_data)
+{
+  ReadKdbusData *data;
+  GSource *source;
+
+  data = g_new0 (ReadKdbusData, 1);
+  data->kdbus = g_object_ref (kdbus);
+  data->cancellable = cancellable != NULL ? g_object_ref (cancellable) : NULL;
+
+  data->simple = g_simple_async_result_new (G_OBJECT (kdbus),
+                                            callback,
+                                            user_data,
+                                            _g_kdbus_read);
+  g_simple_async_result_set_check_cancellable (data->simple, cancellable);
+
+  data->from_mainloop = TRUE;
+  source = _g_kdbus_create_source (data->kdbus,
+                                   G_IO_IN,
+                                   cancellable);
+  g_source_set_callback (source,
+                         (GSourceFunc) _g_kdbus_read_ready,
+                         data,
+                         (GDestroyNotify) read_kdbus_data_free);
+  g_source_attach (source, g_main_context_get_thread_default ());
+  g_source_unref (source);
+}
+
+static gssize
+_g_kdbus_read_finish (GKdbus        *kdbus,
+                      GAsyncResult  *result,
+                      GError       **error)
+{
+  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (result);
+
+  g_return_val_if_fail (G_IS_KDBUS (kdbus), -1);
+  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == _g_kdbus_read);
+
+  if (g_simple_async_result_propagate_error (simple, error))
+    return -1;
+  else
+    return g_simple_async_result_get_op_res_gssize (simple);
+}
+#endif
 
 static void
 read_with_control_data_free (ReadWithControlData *data)
@@ -299,7 +405,7 @@ _g_dbus_shared_thread_ref (void)
 
       data = g_new0 (SharedThreadData, 1);
       data->refcount = 0;
-      
+
       data->context = g_main_context_new ();
       data->loop = g_main_loop_new (data->context, FALSE);
       data->thread = g_thread_new ("gdbus",
@@ -365,6 +471,9 @@ struct GDBusWorker
 
   /* if not NULL, stream is GSocketConnection */
   GSocket *socket;
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+  GKdbus  *kdbus;
+#endif
 
   /* used for reading */
   GMutex                              read_lock;
@@ -469,7 +578,6 @@ _g_dbus_worker_unref (GDBusWorker *worker)
       g_queue_free_full (worker->received_messages_while_frozen, (GDestroyNotify) g_object_unref);
       g_mutex_clear (&worker->write_lock);
       g_queue_free_full (worker->write_queue, (GDestroyNotify) message_to_write_data_free);
-      g_free (worker->read_buffer);
 
       g_free (worker);
     }
@@ -505,7 +613,7 @@ _g_dbus_worker_emit_message_about_to_be_sent (GDBusWorker  *worker,
 }
 
 /* can only be called from private thread with read-lock held - takes ownership of @message */
-static void
+void
 _g_dbus_worker_queue_or_deliver_received_message (GDBusWorker  *worker,
                                                   GDBusMessage *message)
 {
@@ -558,6 +666,7 @@ _g_dbus_worker_unfreeze (GDBusWorker *worker)
                          unfreeze_in_idle_cb,
                          _g_dbus_worker_ref (worker),
                          (GDestroyNotify) _g_dbus_worker_unref);
+  g_source_set_name (idle_source, "[gio] unfreeze_in_idle_cb");
   g_source_attach (idle_source, worker->shared_thread_data->context);
   g_source_unref (idle_source);
 }
@@ -583,7 +692,29 @@ _g_dbus_worker_do_read_cb (GInputStream  *input_stream,
     goto out;
 
   error = NULL;
-  if (worker->socket == NULL)
+
+  if (FALSE)
+    {
+    }
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+  else if (G_IS_KDBUS_CONNECTION (worker->stream))
+    {
+      bytes_read = 0;
+      bytes_read = _g_kdbus_read_finish (worker->kdbus,
+                                         res,
+                                         &error);
+      /* Set read_buffer pointer to KDBUS memory pool */
+      worker->read_buffer = g_kdbus_get_msg_buffer_ptr (worker->kdbus);
+
+      /* Attach fds (if any) to worker->read_fd_list */
+      g_kdbus_attach_fds_to_msg (worker->kdbus, &worker->read_fd_list);
+
+      /* For KDBUS transport we don't have to read message header */
+      worker->read_buffer_bytes_wanted = bytes_read;
+
+    }
+#endif
+  else if (worker->socket == NULL)
     bytes_read = g_input_stream_read_finish (g_io_stream_get_input_stream (worker->stream),
                                              res,
                                              &error);
@@ -621,7 +752,7 @@ _g_dbus_worker_do_read_cb (GInputStream  *input_stream,
                     {
                       /* TODO: really want a append_steal() */
                       g_unix_fd_list_append (worker->read_fd_list, fds[n], NULL);
-                      close (fds[n]);
+                      (void) g_close (fds[n], NULL);
                     }
                 }
               g_free (fds);
@@ -709,6 +840,20 @@ _g_dbus_worker_do_read_cb (GInputStream  *input_stream,
   /* TODO: hmm, hmm... */
   if (bytes_read == 0)
     {
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+      if (G_IS_KDBUS_CONNECTION (worker->stream))
+        {
+          /* TODO Kdbus message was received, but it had no normal payload data.
+           * It happened when broadcasts were received incorrectly to test
+           * match-in-lib filtering.
+           * To avoid crashing upper layers, just continue listening for new
+           * messages. */
+          worker->read_buffer_bytes_wanted = 0;
+          worker->read_buffer_cur_size = 0;
+          _g_dbus_worker_do_read_unlocked (worker);
+          goto out;
+        }
+#endif
       g_set_error (&error,
                    G_IO_ERROR,
                    G_IO_ERROR_FAILED,
@@ -734,7 +879,7 @@ _g_dbus_worker_do_read_cb (GInputStream  *input_stream,
                                                      &error);
           if (message_len == -1)
             {
-              g_warning ("_g_dbus_worker_do_read_cb: error determing bytes needed: %s", error->message);
+              g_warning ("_g_dbus_worker_do_read_cb: error determining bytes needed: %s", error->message);
               _g_dbus_worker_emit_disconnected (worker, FALSE, error);
               g_error_free (error);
               goto out;
@@ -747,6 +892,7 @@ _g_dbus_worker_do_read_cb (GInputStream  *input_stream,
         {
           GDBusMessage *message;
           error = NULL;
+          message = NULL;
 
           /* TODO: use connection->priv->auth to decode the message */
 
@@ -770,6 +916,23 @@ _g_dbus_worker_do_read_cb (GInputStream  *input_stream,
               g_error_free (error);
               goto out;
             }
+
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+#ifdef POLICY_IN_LIB
+          if (G_IS_KDBUS_CONNECTION (worker->stream))
+          {
+            if(!policy_check_can_receive(_g_kdbus_get_policy (worker->kdbus), message))
+              {
+                send_cant_recv_error(G_DBUS_CONNECTION(worker->user_data), message, worker->kdbus);
+                g_object_unref (message);
+                worker->read_buffer_bytes_wanted = 0;
+                worker->read_buffer_cur_size = 0;
+                _g_dbus_worker_do_read_unlocked (worker);
+                goto out;
+              }
+          }
+#endif
+#endif
 
 #ifdef G_OS_UNIX
           if (worker->read_fd_list != NULL)
@@ -803,6 +966,11 @@ _g_dbus_worker_do_read_cb (GInputStream  *input_stream,
           /* yay, got a message, go deliver it */
           _g_dbus_worker_queue_or_deliver_received_message (worker, message);
 
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+          if (G_IS_KDBUS_CONNECTION (worker->stream))
+            g_kdbus_release_kmsg (worker->kdbus, worker->read_buffer_cur_size);
+#endif
+
           /* start reading another message! */
           worker->read_buffer_bytes_wanted = 0;
           worker->read_buffer_cur_size = 0;
@@ -820,6 +988,9 @@ _g_dbus_worker_do_read_cb (GInputStream  *input_stream,
 
   /* gives up the reference acquired when calling g_input_stream_read_async() */
   _g_dbus_worker_unref (worker);
+
+  /* check if there is any pending close */
+  schedule_pending_close (worker);
 }
 
 /* called in private thread shared by all GDBusConnection instances (with read-lock held) */
@@ -830,22 +1001,43 @@ _g_dbus_worker_do_read_unlocked (GDBusWorker *worker)
    * true, because only failing a read causes us to signal 'closed'.
    */
 
-  /* if bytes_wanted is zero, it means start reading a message */
-  if (worker->read_buffer_bytes_wanted == 0)
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+  /* For KDBUS transport we don't have to alloc buffer, instead of it we use kdbus memory pool.
+   * On connection stage KDBUS client have to register a memory pool, large enough to carry all
+   * backlog of data enqueued for the connection.
+   */
+  if (!G_IS_KDBUS_CONNECTION (worker->stream))
     {
-      worker->read_buffer_cur_size = 0;
-      worker->read_buffer_bytes_wanted = 16;
-    }
+#endif
+      /* if bytes_wanted is zero, it means start reading a message */
+      if (worker->read_buffer_bytes_wanted == 0)
+        {
+          worker->read_buffer_cur_size = 0;
+          worker->read_buffer_bytes_wanted = 16;
+        }
 
-  /* ensure we have a (big enough) buffer */
-  if (worker->read_buffer == NULL || worker->read_buffer_bytes_wanted > worker->read_buffer_allocated_size)
+      /* ensure we have a (big enough) buffer */
+      if (worker->read_buffer == NULL || worker->read_buffer_bytes_wanted > worker->read_buffer_allocated_size)
+        {
+          /* TODO: 4096 is randomly chosen; might want a better chosen default minimum */
+          worker->read_buffer_allocated_size = MAX (worker->read_buffer_bytes_wanted, 4096);
+          worker->read_buffer = g_realloc (worker->read_buffer, worker->read_buffer_allocated_size);
+        }
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+    }
+#endif
+
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+  if (G_IS_KDBUS_CONNECTION (worker->stream))
     {
-      /* TODO: 4096 is randomly chosen; might want a better chosen default minimum */
-      worker->read_buffer_allocated_size = MAX (worker->read_buffer_bytes_wanted, 4096);
-      worker->read_buffer = g_realloc (worker->read_buffer, worker->read_buffer_allocated_size);
-    }
-
+      _g_kdbus_read(worker->kdbus,
+                    worker->cancellable,
+                    (GAsyncReadyCallback) _g_dbus_worker_do_read_cb,
+                    _g_dbus_worker_ref (worker));
+  } else if (worker->socket == NULL)
+#else
   if (worker->socket == NULL)
+#endif
     g_input_stream_read_async (g_io_stream_get_input_stream (worker->stream),
                                worker->read_buffer + worker->read_buffer_cur_size,
                                worker->read_buffer_bytes_wanted - worker->read_buffer_cur_size,
@@ -963,6 +1155,7 @@ write_message_async_cb (GObject      *source_object,
  * write-lock is not held on entry
  * output_pending is PENDING_WRITE on entry
  */
+#ifdef G_OS_UNIX
 static gboolean
 on_socket_ready (GSocket      *socket,
                  GIOCondition  condition,
@@ -972,6 +1165,7 @@ on_socket_ready (GSocket      *socket,
   write_message_continue_writing (data);
   return FALSE; /* remove source */
 }
+#endif
 
 /* called in private thread shared by all GDBusConnection instances
  *
@@ -982,131 +1176,162 @@ static void
 write_message_continue_writing (MessageToWriteData *data)
 {
   GOutputStream *ostream;
-  GSimpleAsyncResult *simple;
 #ifdef G_OS_UNIX
   GUnixFDList *fd_list;
-#endif
-
-  /* Note: we can't access data->simple after calling g_async_result_complete () because the
-   * callback can free @data and we're not completing in idle. So use a copy of the pointer.
-   */
+  GSimpleAsyncResult *simple;
   simple = data->simple;
-
-  ostream = g_io_stream_get_output_stream (data->worker->stream);
-#ifdef G_OS_UNIX
-  fd_list = g_dbus_message_get_unix_fd_list (data->message);
 #endif
 
-  g_assert (!g_output_stream_has_pending (ostream));
-  g_assert_cmpint (data->total_written, <, data->blob_size);
-
-  if (FALSE)
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+  if (G_IS_KDBUS_CONNECTION (data->worker->stream))
     {
-    }
-#ifdef G_OS_UNIX
-  else if (G_IS_SOCKET_OUTPUT_STREAM (ostream) && data->total_written == 0)
-    {
-      GOutputVector vector;
-      GSocketControlMessage *control_message;
-      gssize bytes_written;
       GError *error;
-
-      vector.buffer = data->blob;
-      vector.size = data->blob_size;
-
-      control_message = NULL;
-      if (fd_list != NULL && g_unix_fd_list_get_length (fd_list) > 0)
-        {
-          if (!(data->worker->capabilities & G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING))
-            {
-              g_simple_async_result_set_error (simple,
-                                               G_IO_ERROR,
-                                               G_IO_ERROR_FAILED,
-                                               "Tried sending a file descriptor but remote peer does not support this capability");
-              g_simple_async_result_complete (simple);
-              g_object_unref (simple);
-              goto out;
-            }
-          control_message = g_unix_fd_message_new_with_fd_list (fd_list);
-        }
-
       error = NULL;
-      bytes_written = g_socket_send_message (data->worker->socket,
-                                             NULL, /* address */
-                                             &vector,
-                                             1,
-                                             control_message != NULL ? &control_message : NULL,
-                                             control_message != NULL ? 1 : 0,
-                                             G_SOCKET_MSG_NONE,
-                                             data->worker->cancellable,
-                                             &error);
-      if (control_message != NULL)
-        g_object_unref (control_message);
-
-      if (bytes_written == -1)
+      data->total_written = g_kdbus_send_message(data->worker,
+                                                 data->worker->kdbus,
+                                                 data->message,
+                                                 data->blob,
+                                                 data->blob_size,
+                                                 data->worker->cancellable,
+                                                 &error);
+      if (data->total_written == -1)
         {
-          /* Handle WOULD_BLOCK by waiting until there's room in the buffer */
-          if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_WOULD_BLOCK))
-            {
-              GSource *source;
-              source = g_socket_create_source (data->worker->socket,
-                                               G_IO_OUT | G_IO_HUP | G_IO_ERR,
-                                               data->worker->cancellable);
-              g_source_set_callback (source,
-                                     (GSourceFunc) on_socket_ready,
-                                     data,
-                                     NULL); /* GDestroyNotify */
-              g_source_attach (source, g_main_context_get_thread_default ());
-              g_source_unref (source);
-              g_error_free (error);
-              goto out;
-            }
           g_simple_async_result_take_error (simple, error);
           g_simple_async_result_complete (simple);
           g_object_unref (simple);
           goto out;
         }
-      g_assert (bytes_written > 0); /* zero is never returned */
 
-      write_message_print_transport_debug (bytes_written, data);
+      write_message_print_transport_debug (data->total_written, data);
 
-      data->total_written += bytes_written;
-      g_assert (data->total_written <= data->blob_size);
-      if (data->total_written == data->blob_size)
-        {
-          g_simple_async_result_complete (simple);
-          g_object_unref (simple);
-          goto out;
-        }
-
-      write_message_continue_writing (data);
+      g_assert (data->total_written == data->blob_size);
+      g_simple_async_result_complete (simple);
+      g_object_unref (simple);
     }
-#endif
   else
     {
+#endif
+      ostream = g_io_stream_get_output_stream (data->worker->stream);
 #ifdef G_OS_UNIX
-      if (fd_list != NULL)
-        {
-          g_simple_async_result_set_error (simple,
-                                           G_IO_ERROR,
-                                           G_IO_ERROR_FAILED,
-                                           "Tried sending a file descriptor on unsupported stream of type %s",
-                                           g_type_name (G_TYPE_FROM_INSTANCE (ostream)));
-          g_simple_async_result_complete (simple);
-          g_object_unref (simple);
-          goto out;
-        }
+      fd_list = g_dbus_message_get_unix_fd_list (data->message);
 #endif
 
-      g_output_stream_write_async (ostream,
-                                   (const gchar *) data->blob + data->total_written,
-                                   data->blob_size - data->total_written,
-                                   G_PRIORITY_DEFAULT,
-                                   data->worker->cancellable,
-                                   write_message_async_cb,
-                                   data);
+      g_assert (!g_output_stream_has_pending (ostream));
+      g_assert_cmpint (data->total_written, <, data->blob_size);
+
+      if (FALSE)
+        {
+        }
+#ifdef G_OS_UNIX
+      else if (G_IS_SOCKET_OUTPUT_STREAM (ostream) && data->total_written == 0)
+        {
+           GOutputVector vector;
+           GSocketControlMessage *control_message;
+           gssize bytes_written;
+           GError *error;
+
+           vector.buffer = data->blob;
+           vector.size = data->blob_size;
+
+           control_message = NULL;
+           if (fd_list != NULL && g_unix_fd_list_get_length (fd_list) > 0)
+             {
+               if (!(data->worker->capabilities & G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING))
+                 {
+                   g_simple_async_result_set_error (simple,
+                                                    G_IO_ERROR,
+                                                    G_IO_ERROR_FAILED,
+                                                    "Tried sending a file descriptor but remote peer does not support this capability");
+                   g_simple_async_result_complete (simple);
+                   g_object_unref (simple);
+                   goto out;
+                 }
+                control_message = g_unix_fd_message_new_with_fd_list (fd_list);
+              }
+
+            error = NULL;
+            bytes_written = g_socket_send_message (data->worker->socket,
+                                                  NULL, /* address */
+                                                  &vector,
+                                                  1,
+                                                  control_message != NULL ? &control_message : NULL,
+                                                  control_message != NULL ? 1 : 0,
+                                                  G_SOCKET_MSG_NONE,
+                                                  data->worker->cancellable,
+                                                  &error);
+           if (control_message != NULL)
+             g_object_unref (control_message);
+
+           if (bytes_written == -1)
+             {
+               /* Handle WOULD_BLOCK by waiting until there's room in the buffer */
+               if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_WOULD_BLOCK))
+                 {
+                   GSource *source;
+                   source = g_socket_create_source (data->worker->socket,
+                                                    G_IO_OUT | G_IO_HUP | G_IO_ERR,
+                                                    data->worker->cancellable);
+                   g_source_set_callback (source,
+                                          (GSourceFunc) on_socket_ready,
+                                          data,
+                                          NULL); /* GDestroyNotify */
+                   g_source_attach (source, g_main_context_get_thread_default ());
+                   g_source_unref (source);
+                   g_error_free (error);
+                   goto out;
+                 }
+               g_simple_async_result_take_error (simple, error);
+               g_simple_async_result_complete (simple);
+               g_object_unref (simple);
+               goto out;
+             }
+           g_assert (bytes_written > 0); /* zero is never returned */
+
+           write_message_print_transport_debug (bytes_written, data);
+
+           data->total_written += bytes_written;
+           g_assert (data->total_written <= data->blob_size);
+           if (data->total_written == data->blob_size)
+             {
+               g_simple_async_result_complete (simple);
+               g_object_unref (simple);
+               goto out;
+             }
+
+           write_message_continue_writing (data);
+         }
+#endif
+       else
+         {
+#ifdef G_OS_UNIX
+           if (fd_list != NULL)
+             {
+               g_simple_async_result_set_error (simple,
+                                                G_IO_ERROR,
+                                                G_IO_ERROR_FAILED,
+                                                "Tried sending a file descriptor on unsupported stream of type %s",
+                                                g_type_name (G_TYPE_FROM_INSTANCE (ostream)));
+               g_simple_async_result_complete (simple);
+               g_object_unref (simple);
+               goto out;
+             }
+#endif
+
+            g_output_stream_write_async (ostream,
+                                        (const gchar *) data->blob + data->total_written,
+                                        data->blob_size - data->total_written,
+                                        G_PRIORITY_DEFAULT,
+                                        data->worker->cancellable,
+                                        write_message_async_cb,
+                                        data);
+         }
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
     }
+#endif
+
+#ifdef G_OS_UNIX
  out:
+#endif
   ;
 }
 
@@ -1236,6 +1461,28 @@ start_flush (FlushAsyncData *data)
                                data);
 }
 
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+static void
+kdbus_start_flush (FlushAsyncData *data)
+{
+  g_assert (data->flushers != NULL);
+  flush_data_list_complete(data->flushers, NULL);
+  g_list_free (data->flushers);
+
+  g_mutex_lock (&data->worker->write_lock);
+  data->worker->write_num_messages_flushed = data->worker->write_num_messages_written;
+  g_assert (data->worker->output_pending == PENDING_FLUSH);
+  data->worker->output_pending = PENDING_NONE;
+  g_mutex_unlock (&data->worker->write_lock);
+
+  /* OK, cool, finally kick off the next write */
+  continue_writing (data->worker);
+
+  _g_dbus_worker_unref (data->worker);
+  g_free (data);
+}
+#endif
+
 /* called in private thread shared by all GDBusConnection instances
  *
  * write-lock is held on entry
@@ -1351,22 +1598,14 @@ write_message_cb (GObject       *source_object,
   message_to_write_data_free (data);
 }
 
-/* called in private thread shared by all GDBusConnection instances
- *
- * write-lock is not held on entry
- * output_pending is PENDING_CLOSE on entry
- */
 static void
-iostream_close_cb (GObject      *source_object,
-                   GAsyncResult *res,
-                   gpointer      user_data)
+clear_worker (GObject      *source_object,
+              GAsyncResult *res,
+              GDBusWorker  *worker,
+              GError       *error)
 {
-  GDBusWorker *worker = user_data;
-  GError *error = NULL;
   GList *pending_close_attempts, *pending_flush_attempts;
   GQueue *send_queue;
-
-  g_io_stream_close_finish (worker->stream, res, &error);
 
   g_mutex_lock (&worker->write_lock);
 
@@ -1422,6 +1661,37 @@ iostream_close_cb (GObject      *source_object,
 /* called in private thread shared by all GDBusConnection instances
  *
  * write-lock is not held on entry
+ * output_pending is PENDING_CLOSE on entry
+ */
+static void
+iostream_close_cb (GObject      *source_object,
+                   GAsyncResult *res,
+                   gpointer      user_data)
+{
+  GError *error = NULL;
+  GDBusWorker *worker = user_data;
+
+  g_io_stream_close_finish (worker->stream, res, &error);
+  clear_worker(source_object, res, worker, error);
+}
+
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+static void
+kdbus_connection_close_cb (GObject      *source_object,
+                           GAsyncResult *res,
+                           gpointer      user_data)
+{
+  GError *error = NULL;
+  GDBusWorker *worker = user_data;
+
+  g_kdbus_connection_close_finish (worker->stream, res, &error);
+  clear_worker(source_object, res, worker, error);
+}
+#endif
+
+/* called in private thread shared by all GDBusConnection instances
+ *
+ * write-lock is not held on entry
  * output_pending must be PENDING_NONE on entry
  */
 static void
@@ -1442,12 +1712,29 @@ continue_writing (GDBusWorker *worker)
   /* if we want to close the connection, that takes precedence */
   if (worker->pending_close_attempts != NULL)
     {
-      worker->close_expected = TRUE;
-      worker->output_pending = PENDING_CLOSE;
+      if (FALSE)
+        {
+        }
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+      else if (G_IS_KDBUS_CONNECTION (worker->stream))
+        {
+          worker->close_expected = TRUE;
+          worker->output_pending = PENDING_CLOSE;
 
-      g_io_stream_close_async (worker->stream, G_PRIORITY_DEFAULT,
-                               NULL, iostream_close_cb,
-                               _g_dbus_worker_ref (worker));
+          g_kdbus_connection_close_async (worker->stream, G_PRIORITY_DEFAULT,
+                                          NULL, kdbus_connection_close_cb,
+                                          _g_dbus_worker_ref (worker));
+        }
+#endif
+      else if (!g_input_stream_has_pending (g_io_stream_get_input_stream (worker->stream)))
+        {
+          worker->close_expected = TRUE;
+          worker->output_pending = PENDING_CLOSE;
+
+          g_io_stream_close_async (worker->stream, G_PRIORITY_DEFAULT,
+                                   NULL, iostream_close_cb,
+                                   _g_dbus_worker_ref (worker));
+        }
     }
   else
     {
@@ -1475,7 +1762,17 @@ continue_writing (GDBusWorker *worker)
 
   if (flush_async_data != NULL)
     {
-      start_flush (flush_async_data);
+
+      if (FALSE)
+        {
+        }
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+      else if (G_IS_KDBUS_CONNECTION (worker->stream))
+        kdbus_start_flush (flush_async_data);
+#endif
+      else
+        start_flush (flush_async_data);
+
       g_assert (data == NULL);
     }
   else if (data != NULL)
@@ -1594,9 +1891,19 @@ schedule_writing_unlocked (GDBusWorker        *worker,
                              continue_writing_in_idle_cb,
                              _g_dbus_worker_ref (worker),
                              (GDestroyNotify) _g_dbus_worker_unref);
+      g_source_set_name (idle_source, "[gio] continue_writing_in_idle_cb");
       g_source_attach (idle_source, worker->shared_thread_data->context);
       g_source_unref (idle_source);
     }
+}
+
+static void
+schedule_pending_close (GDBusWorker *worker)
+{
+  if (!worker->pending_close_attempts)
+    return;
+
+  schedule_writing_unlocked (worker, NULL, NULL, NULL);
 }
 
 /* ---------------------------------------------------------------------------------------------------- */
@@ -1670,6 +1977,11 @@ _g_dbus_worker_new (GIOStream                              *stream,
   if (G_IS_SOCKET_CONNECTION (worker->stream))
     worker->socket = g_socket_connection_get_socket (G_SOCKET_CONNECTION (worker->stream));
 
+#if defined (G_OS_UNIX) && (KDBUS_TRANSPORT)
+  if (G_IS_KDBUS_CONNECTION (worker->stream))
+    worker->kdbus = g_kdbus_connection_get_kdbus (G_KDBUS_CONNECTION (worker->stream));
+#endif
+
   worker->shared_thread_data = _g_dbus_shared_thread_ref ();
 
   /* begin reading */
@@ -1679,6 +1991,7 @@ _g_dbus_worker_new (GIOStream                              *stream,
                          _g_dbus_worker_do_initial_read,
                          _g_dbus_worker_ref (worker),
                          (GDestroyNotify) _g_dbus_worker_unref);
+  g_source_set_name (idle_source, "[gio] _g_dbus_worker_do_initial_read");
   g_source_attach (idle_source, worker->shared_thread_data->context);
   g_source_unref (idle_source);
 
@@ -1731,7 +2044,7 @@ _g_dbus_worker_stop (GDBusWorker *worker)
    */
   _g_dbus_worker_close (worker, NULL, NULL);
 
-  /* _g_dbus_worker_close holds a ref until after an idle in the the worker
+  /* _g_dbus_worker_close holds a ref until after an idle in the worker
    * thread has run, so we no longer need to unref in an idle like in
    * commit 322e25b535
    */
@@ -1903,7 +2216,7 @@ _g_dbus_debug_print_unlock (void)
   G_UNLOCK (print_lock);
 }
 
-/*
+/**
  * _g_dbus_initialize:
  *
  * Does various one-time init things such as
@@ -2149,12 +2462,11 @@ write_message_print_transport_debug (gssize bytes_written,
   g_print ("========================================================================\n"
            "GDBus-debug:Transport:\n"
            "  >>>> WROTE %" G_GSIZE_FORMAT " bytes of message with serial %d and\n"
-           "       size %" G_GSIZE_FORMAT " from offset %" G_GSIZE_FORMAT " on a %s\n",
+           "       size %" G_GSIZE_FORMAT " from offset %" G_GSIZE_FORMAT "\n",
            bytes_written,
            g_dbus_message_get_serial (data->message),
            data->blob_size,
-           data->total_written,
-           g_type_name (G_TYPE_FROM_INSTANCE (g_io_stream_get_output_stream (data->worker->stream))));
+           data->total_written);
   _g_dbus_debug_print_unlock ();
  out:
   ;
@@ -2200,12 +2512,11 @@ read_message_print_transport_debug (gssize bytes_read,
   g_print ("========================================================================\n"
            "GDBus-debug:Transport:\n"
            "  <<<< READ %" G_GSIZE_FORMAT " bytes of message with serial %d and\n"
-           "       size %d to offset %" G_GSIZE_FORMAT " from a %s\n",
+           "       size %d to offset %" G_GSIZE_FORMAT "\n",
            bytes_read,
            serial,
            message_length,
-           worker->read_buffer_cur_size,
-           g_type_name (G_TYPE_FROM_INSTANCE (g_io_stream_get_input_stream (worker->stream))));
+           worker->read_buffer_cur_size);
   _g_dbus_debug_print_unlock ();
  out:
   ;

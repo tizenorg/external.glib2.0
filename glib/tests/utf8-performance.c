@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <string.h>
@@ -184,19 +182,17 @@ int
 main (int argc, char **argv)
 {
   g_test_init (&argc, &argv, NULL);
-  g_test_add_data_func ("/utf8/perf/get_char",
-      grind_get_char, perform);
-  g_test_add_data_func ("/utf8/perf/get_char-backwards",
-      grind_get_char_backwards, perform);
-  g_test_add_data_func ("/utf8/perf/get_char_validated",
-      grind_get_char_validated, perform);
-  g_test_add_data_func ("/utf8/perf/utf8_to_ucs4",
-      grind_utf8_to_ucs4, perform);
-  g_test_add_data_func ("/utf8/perf/utf8_to_ucs4-sized",
-      grind_utf8_to_ucs4_sized, perform);
-  g_test_add_data_func ("/utf8/perf/utf8_to_ucs4_fast",
-      grind_utf8_to_ucs4_fast, perform);
-  g_test_add_data_func ("/utf8/perf/utf8_to_ucs4_fast-sized",
-      grind_utf8_to_ucs4_fast_sized, perform);
+
+  if (g_test_perf ())
+    {
+      g_test_add_data_func ("/utf8/perf/get_char", grind_get_char, perform);
+      g_test_add_data_func ("/utf8/perf/get_char-backwards", grind_get_char_backwards, perform);
+      g_test_add_data_func ("/utf8/perf/get_char_validated", grind_get_char_validated, perform);
+      g_test_add_data_func ("/utf8/perf/utf8_to_ucs4", grind_utf8_to_ucs4, perform);
+      g_test_add_data_func ("/utf8/perf/utf8_to_ucs4-sized", grind_utf8_to_ucs4_sized, perform);
+      g_test_add_data_func ("/utf8/perf/utf8_to_ucs4_fast", grind_utf8_to_ucs4_fast, perform);
+      g_test_add_data_func ("/utf8/perf/utf8_to_ucs4_fast-sized", grind_utf8_to_ucs4_fast_sized, perform);
+    }
+
   return g_test_run ();
 }

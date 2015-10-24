@@ -16,6 +16,7 @@
  * SECTION:gsocketcontrolmessage
  * @title: GSocketControlMessage
  * @short_description: A GSocket control message
+ * @include: gio/gio.h
  * @see_also: #GSocket.
  *
  * A #GSocketControlMessage is a special-purpose utility message that
@@ -24,7 +25,7 @@
  *
  * The message can represent some sort of special instruction to or
  * information from the socket or can represent a special kind of
- * transfer to the peer (for example, sending a file description over
+ * transfer to the peer (for example, sending a file descriptor over
  * a UNIX socket).
  *
  * These messages are sent with g_socket_send_message() and received
@@ -177,15 +178,11 @@ g_socket_control_message_deserialize (int      level,
   GType *message_types;
   guint n_message_types;
   int i;
-#ifndef G_OS_WIN32
-  volatile GType a_type;
-#endif
 
   /* Ensure we know about the built in types */
 #ifndef G_OS_WIN32
-  a_type = g_unix_credentials_message_get_type ();
-  a_type = g_unix_fd_message_get_type ();
-  (a_type); /* To avoid -Wunused-but-set-variable */
+  g_type_ensure (G_TYPE_UNIX_CREDENTIALS_MESSAGE);
+  g_type_ensure (G_TYPE_UNIX_FD_MESSAGE);
 #endif
 
   message_types = g_type_children (G_TYPE_SOCKET_CONTROL_MESSAGE, &n_message_types);

@@ -85,8 +85,8 @@ int length = -1;
 /* PCRE_UTF16 has the same value as PCRE_UTF8. */
 BOOL utf = (options & PCRE_UTF8) != 0;
 BOOL had_recurse = FALSE;
-register int branchlength = 0;
-register pcre_uchar *cc = (pcre_uchar *)code + 1 + LINK_SIZE;
+int branchlength = 0;
+pcre_uchar *cc = (pcre_uchar *)code + 1 + LINK_SIZE;
 
 if (*code == OP_CBRA || *code == OP_SCBRA ||
     *code == OP_CBRAPOS || *code == OP_SCBRAPOS) cc += IMM2_SIZE;
@@ -98,7 +98,7 @@ for (;;)
   {
   int d, min;
   pcre_uchar *cs, *ce;
-  register int op = *cc;
+  int op = *cc;
 
   switch (op)
     {
@@ -631,7 +631,7 @@ static void
 set_type_bits(pcre_uint8 *start_bits, int cbit_type, int table_limit,
   compile_data *cd)
 {
-register int c;
+int c;
 for (c = 0; c < table_limit; c++) start_bits[c] |= cd->cbits[c+cbit_type];
 #if defined SUPPORT_UTF && defined COMPILE_PCRE8
 if (table_limit == 32) return;
@@ -673,7 +673,7 @@ static void
 set_nottype_bits(pcre_uint8 *start_bits, int cbit_type, int table_limit,
   compile_data *cd)
 {
-register int c;
+int c;
 for (c = 0; c < table_limit; c++) start_bits[c] |= ~cd->cbits[c+cbit_type];
 #if defined SUPPORT_UTF && defined COMPILE_PCRE8
 if (table_limit != 32) for (c = 24; c < 32; c++) start_bits[c] = 0xff;
@@ -710,7 +710,7 @@ static int
 set_start_bits(const pcre_uchar *code, pcre_uint8 *start_bits, BOOL utf,
   compile_data *cd)
 {
-register int c;
+int c;
 int yield = SSB_DONE;
 #if defined SUPPORT_UTF && defined COMPILE_PCRE8
 int table_limit = utf? 16:32;
@@ -1123,7 +1123,7 @@ do
         case OP_HSPACE:
         SET_BIT(0x09);
         SET_BIT(0x20);
-#ifdef COMPILE_PCRE8
+#ifdef SUPPORT_UTF
         if (utf)
           {
 #ifdef COMPILE_PCRE8
@@ -1148,7 +1148,7 @@ do
         SET_BIT(0x0B);
         SET_BIT(0x0C);
         SET_BIT(0x0D);
-#ifdef COMPILE_PCRE8
+#ifdef SUPPORT_UTF
         if (utf)
           {
 #ifdef COMPILE_PCRE8
@@ -1418,7 +1418,8 @@ we don't have to change that code. */
 
 if (bits_set || min > 0
 #ifdef SUPPORT_JIT
-    || (options & PCRE_STUDY_JIT_COMPILE) != 0
+    || (options & (PCRE_STUDY_JIT_COMPILE | PCRE_STUDY_JIT_PARTIAL_SOFT_COMPILE
+                 | PCRE_STUDY_JIT_PARTIAL_HARD_COMPILE)) != 0
 #endif
   )
   {
@@ -1478,7 +1479,13 @@ if (bits_set || min > 0
 
 #ifdef SUPPORT_JIT
   extra->executable_jit = NULL;
-  if ((options & PCRE_STUDY_JIT_COMPILE) != 0) PRIV(jit_compile)(re, extra);
+  if ((options & PCRE_STUDY_JIT_COMPILE) != 0)
+    PRIV(jit_compile)(re, extra, JIT_COMPILE);
+  if ((options & PCRE_STUDY_JIT_PARTIAL_SOFT_COMPILE) != 0)
+    PRIV(jit_compile)(re, extra, JIT_PARTIAL_SOFT_COMPILE);
+  if ((options & PCRE_STUDY_JIT_PARTIAL_HARD_COMPILE) != 0)
+    PRIV(jit_compile)(re, extra, JIT_PARTIAL_HARD_COMPILE);
+
   if (study->flags == 0 && (extra->flags & PCRE_EXTRA_EXECUTABLE_JIT) == 0)
     {
 #ifdef COMPILE_PCRE8

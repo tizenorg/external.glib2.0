@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 /*
@@ -35,15 +33,16 @@
  *
  * These functions provide support for outputting messages.
  *
- * The <function>g_return</function> family of macros (g_return_if_fail(),
- * g_return_val_if_fail(), g_return_if_reached(), g_return_val_if_reached())
- * should only be used for programming errors, a typical use case is
- * checking for invalid parameters at the beginning of a public function.
- * They should not be used if you just mean "if (error) return", they
- * should only be used if you mean "if (bug in program) return".
- * The program behavior is generally considered undefined after one
- * of these checks fails. They are not intended for normal control
- * flow, only to give a perhaps-helpful warning before giving up.
+ * The g_return family of macros (g_return_if_fail(),
+ * g_return_val_if_fail(), g_return_if_reached(),
+ * g_return_val_if_reached()) should only be used for programming
+ * errors, a typical use case is checking for invalid parameters at
+ * the beginning of a public function. They should not be used if
+ * you just mean "if (error) return", they should only be used if
+ * you mean "if (bug in program) return". The program behavior is
+ * generally considered undefined after one of these checks fails.
+ * They are not intended for normal control flow, only to give a
+ * perhaps-helpful warning before giving up.
  */
 
 #include "config.h"
@@ -52,14 +51,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
 #include <signal.h>
 #include <locale.h>
 #include <errno.h>
-
-#include "gmessages.h"
 
 #include "glib-init.h"
 #include "gbacktrace.h"
@@ -72,6 +66,11 @@
 #include "gthread.h"
 #include "gstrfuncs.h"
 #include "gstring.h"
+#include "gpattern.h"
+
+#ifdef G_OS_UNIX
+#include <unistd.h>
+#endif
 
 #ifdef G_OS_WIN32
 #include <process.h>		/* For getpid() */
@@ -126,6 +125,12 @@
  * @user_data: user data, set in g_log_set_handler()
  *
  * Specifies the prototype of log handler functions.
+ *
+ * The default log handler, g_log_default_handler(), automatically appends a
+ * new-line character to @message when printing it. It is advised that any
+ * custom log handler functions behave similarly, so that logging calls in user
+ * code do not need modifying to add a new-line character to the message if the
+ * log handler is changed.
  */
 
 /**
@@ -139,7 +144,7 @@
  *     and g_return_val_if_fail().
  * @G_LOG_LEVEL_WARNING: log level for warnings, see g_warning()
  * @G_LOG_LEVEL_MESSAGE: log level for messages, see g_message()
- * @G_LOG_LEVEL_INFO: log level for informational messages
+ * @G_LOG_LEVEL_INFO: log level for informational messages, see g_info()
  * @G_LOG_LEVEL_DEBUG: log level for debug messages, see g_debug()
  * @G_LOG_LEVEL_MASK: a mask including all log levels
  *
@@ -150,11 +155,22 @@
  */
 
 /**
+ * G_LOG_LEVEL_USER_SHIFT:
+ *
+ * Log levels below 1<<G_LOG_LEVEL_USER_SHIFT are used by GLib.
+ * Higher bits can be used for user-defined log levels.
+ */
+
+/**
  * g_message:
  * @...: format string, followed by parameters to insert
  *     into the format string (as with printf())
  *
  * A convenience function/macro to log a normal message.
+ *
+ * If g_log_default_handler() is used as the log handler function, a new-line
+ * character will automatically be appended to @..., and need not be entered
+ * manually.
  */
 
 /**
@@ -164,9 +180,13 @@
  *
  * A convenience function/macro to log a warning message.
  *
- * You can make warnings fatal at runtime by setting the
- * <envar>G_DEBUG</envar> environment variable (see
- * <ulink url="glib-running.html">Running GLib Applications</ulink>).
+ * You can make warnings fatal at runtime by setting the `G_DEBUG`
+ * environment variable (see
+ * [Running GLib Applications](glib-running.html)).
+ *
+ * If g_log_default_handler() is used as the log handler function,
+ * a newline character will automatically be appended to @..., and
+ * need not be entered manually.
  */
 
 /**
@@ -182,8 +202,12 @@
  * example.
  *
  * You can also make critical warnings fatal at runtime by
- * setting the <envar>G_DEBUG</envar> environment variable (see
- * <ulink url="glib-running.html">Running GLib Applications</ulink>).
+ * setting the `G_DEBUG` environment variable (see
+ * [Running GLib Applications](glib-running.html)).
+ *
+ * If g_log_default_handler() is used as the log handler function, a new-line
+ * character will automatically be appended to @..., and need not be entered
+ * manually.
  */
 
 /**
@@ -199,6 +223,27 @@
  * Using this function indicates a bug in your program, i.e.
  * an assertion failure.
  *
+ * If g_log_default_handler() is used as the log handler function, a new-line
+ * character will automatically be appended to @..., and need not be entered
+ * manually.
+ *
+ */
+
+/**
+ * g_info:
+ * @...: format string, followed by parameters to insert
+ *     into the format string (as with printf())
+ *
+ * A convenience function/macro to log an informational message. Seldom used.
+ *
+ * If g_log_default_handler() is used as the log handler function, a new-line
+ * character will automatically be appended to @..., and need not be entered
+ * manually.
+ *
+ * Such messages are suppressed by the g_log_default_handler() unless
+ * the G_MESSAGES_DEBUG environment variable is set appropriately.
+ *
+ * Since: 2.40
  */
 
 /**
@@ -207,6 +252,13 @@
  *     into the format string (as with printf())
  *
  * A convenience function/macro to log a debug message.
+ *
+ * If g_log_default_handler() is used as the log handler function, a new-line
+ * character will automatically be appended to @..., and need not be entered
+ * manually.
+ *
+ * Such messages are suppressed by the g_log_default_handler() unless
+ * the G_MESSAGES_DEBUG environment variable is set appropriately.
  *
  * Since: 2.6
  */
@@ -243,6 +295,28 @@ static GTestLogFatalFunc fatal_log_func = NULL;
 static gpointer          fatal_log_data;
 
 /* --- functions --- */
+
+static void _g_log_abort (gboolean breakpoint);
+
+static void
+_g_log_abort (gboolean breakpoint)
+{
+  if (g_test_subprocess ())
+    {
+      /* If this is a test case subprocess then it probably caused
+       * this error message on purpose, so just exit() rather than
+       * abort()ing, to avoid triggering any system crash-reporting
+       * daemon.
+       */
+      _exit (1);
+    }
+
+  if (breakpoint)
+    G_BREAKPOINT ();
+  else
+    abort ();
+}
+
 #ifdef G_OS_WIN32
 #  include <windows.h>
 static gboolean win32_keep_fatal_message = FALSE;
@@ -280,13 +354,16 @@ static void
 write_string (int          fd,
 	      const gchar *string)
 {
-  write (fd, string, strlen (string));
+  int res;
+  do 
+    res = write (fd, string, strlen (string));
+  while (G_UNLIKELY (res == -1 && errno == EINTR));
 }
 
 static GLogDomain*
 g_log_find_domain_L (const gchar *log_domain)
 {
-  register GLogDomain *domain;
+  GLogDomain *domain;
   
   domain = g_log_domains;
   while (domain)
@@ -301,7 +378,7 @@ g_log_find_domain_L (const gchar *log_domain)
 static GLogDomain*
 g_log_domain_new_L (const gchar *log_domain)
 {
-  register GLogDomain *domain;
+  GLogDomain *domain;
 
   domain = g_new (GLogDomain, 1);
   domain->log_domain = g_strdup (log_domain);
@@ -320,7 +397,7 @@ g_log_domain_check_free_L (GLogDomain *domain)
   if (domain->fatal_mask == G_LOG_FATAL_MASK &&
       domain->handlers == NULL)
     {
-      register GLogDomain *last, *work;
+      GLogDomain *last, *work;
       
       last = NULL;  
 
@@ -350,7 +427,7 @@ g_log_domain_get_handler_L (GLogDomain	*domain,
 {
   if (domain && log_level)
     {
-      register GLogHandler *handler;
+      GLogHandler *handler;
       
       handler = domain->handlers;
       while (handler)
@@ -379,8 +456,8 @@ g_log_domain_get_handler_L (GLogDomain	*domain,
  * %G_LOG_LEVEL_ERROR is always fatal.
  *
  * You can also make some message levels fatal at runtime by setting
- * the <envar>G_DEBUG</envar> environment variable (see
- * <ulink url="glib-running.html">Running GLib Applications</ulink>).
+ * the `G_DEBUG` environment variable (see
+ * [Running GLib Applications](glib-running.html)).
  *
  * Returns: the old fatal mask
  */
@@ -421,7 +498,7 @@ g_log_set_fatal_mask (const gchar   *log_domain,
 		      GLogLevelFlags fatal_mask)
 {
   GLogLevelFlags old_flags;
-  register GLogDomain *domain;
+  GLogDomain *domain;
   
   if (!log_domain)
     log_domain = "";
@@ -466,31 +543,24 @@ g_log_set_fatal_mask (const gchar   *log_domain,
  * you want to set a handler for this log level you must combine it with
  * #G_LOG_FLAG_FATAL.
  *
- * <example>
- * <title>Adding a log handler for all warning messages in the default
- * (application) domain</title>
- * <programlisting>
+ * Here is an example for adding a log handler for all warning messages
+ * in the default domain:
+ * |[<!-- language="C" --> 
  * g_log_set_handler (NULL, G_LOG_LEVEL_WARNING | G_LOG_FLAG_FATAL
  *                    | G_LOG_FLAG_RECURSION, my_log_handler, NULL);
- * </programlisting>
- * </example>
+ * ]|
  *
- * <example>
- * <title>Adding a log handler for all critical messages from GTK+</title>
- * <programlisting>
+ * This example adds a log handler for all critical messages from GTK+:
+ * |[<!-- language="C" --> 
  * g_log_set_handler ("Gtk", G_LOG_LEVEL_CRITICAL | G_LOG_FLAG_FATAL
  *                    | G_LOG_FLAG_RECURSION, my_log_handler, NULL);
- * </programlisting>
- * </example>
+ * ]|
  *
- * <example>
- * <title>Adding a log handler for <emphasis>all</emphasis> messages from
- * GLib</title>
- * <programlisting>
+ * This example adds a log handler for all messages from GLib:
+ * |[<!-- language="C" --> 
  * g_log_set_handler ("GLib", G_LOG_LEVEL_MASK | G_LOG_FLAG_FATAL
  *                    | G_LOG_FLAG_RECURSION, my_log_handler, NULL);
- * </programlisting>
- * </example>
+ * ]|
  *
  * Returns: the id of the new handler
  */
@@ -604,7 +674,7 @@ void
 g_log_remove_handler (const gchar *log_domain,
 		      guint	   handler_id)
 {
-  register GLogDomain *domain;
+  GLogDomain *domain;
   
   g_return_if_fail (handler_id > 0);
   
@@ -637,212 +707,8 @@ g_log_remove_handler (const gchar *log_domain,
 	}
     } 
   g_mutex_unlock (&g_messages_lock);
-  g_warning ("%s: could not find handler with id `%d' for domain \"%s\"",
+  g_warning ("%s: could not find handler with id '%d' for domain \"%s\"",
 	     G_STRLOC, handler_id, log_domain);
-}
-
-/**
- * g_logv:
- * @log_domain: the log domain
- * @log_level: the log level
- * @format: the message format. See the printf() documentation
- * @args: the parameters to insert into the format string
- *
- * Logs an error or debugging message.
- *
- * If the log level has been set as fatal, the abort()
- * function is called to terminate the program.
- */
-void
-g_logv (const gchar   *log_domain,
-	GLogLevelFlags log_level,
-	const gchar   *format,
-	va_list	       args1)
-{
-  gboolean was_fatal = (log_level & G_LOG_FLAG_FATAL) != 0;
-  gboolean was_recursion = (log_level & G_LOG_FLAG_RECURSION) != 0;
-  gint i;
-
-  log_level &= G_LOG_LEVEL_MASK;
-  if (!log_level)
-    return;
-
-  for (i = g_bit_nth_msf (log_level, -1); i >= 0; i = g_bit_nth_msf (log_level, i))
-    {
-      register GLogLevelFlags test_level;
-
-      test_level = 1 << i;
-      if (log_level & test_level)
-	{
-	  GLogDomain *domain;
-	  GLogFunc log_func;
-	  GLogLevelFlags domain_fatal_mask;
-	  gpointer data = NULL;
-          gboolean masquerade_fatal = FALSE;
-          guint depth;
-
-	  if (was_fatal)
-	    test_level |= G_LOG_FLAG_FATAL;
-	  if (was_recursion)
-	    test_level |= G_LOG_FLAG_RECURSION;
-
-	  /* check recursion and lookup handler */
-	  g_mutex_lock (&g_messages_lock);
-          depth = GPOINTER_TO_UINT (g_private_get (&g_log_depth));
-	  domain = g_log_find_domain_L (log_domain ? log_domain : "");
-	  if (depth)
-	    test_level |= G_LOG_FLAG_RECURSION;
-	  depth++;
-	  domain_fatal_mask = domain ? domain->fatal_mask : G_LOG_FATAL_MASK;
-	  if ((domain_fatal_mask | g_log_always_fatal) & test_level)
-	    test_level |= G_LOG_FLAG_FATAL;
-	  if (test_level & G_LOG_FLAG_RECURSION)
-	    log_func = _g_log_fallback_handler;
-	  else
-	    log_func = g_log_domain_get_handler_L (domain, test_level, &data);
-	  domain = NULL;
-	  g_mutex_unlock (&g_messages_lock);
-
-	  g_private_set (&g_log_depth, GUINT_TO_POINTER (depth));
-
-
-	  if (test_level & G_LOG_FLAG_RECURSION)
-	    {
-	      /* we use a stack buffer of fixed size, since we're likely
-	       * in an out-of-memory situation
-	       */
-	      gchar buffer[1025];
-              gsize size G_GNUC_UNUSED;
-              va_list args2;
-
-              G_VA_COPY (args2, args1);
-	      size = _g_vsnprintf (buffer, 1024, format, args2);
-              va_end (args2);
-
-	      log_func (log_domain, test_level, buffer, data);
-	    }
-	  else
-	    {
-	      gchar *msg;
-              va_list args2;
-
-              G_VA_COPY (args2, args1);
-              msg = g_strdup_vprintf (format, args2);
-              va_end (args2);
-
-	      log_func (log_domain, test_level, msg, data);
-
-              if ((test_level & G_LOG_FLAG_FATAL)
-                && !(test_level & G_LOG_LEVEL_ERROR))
-                {
-                  masquerade_fatal = fatal_log_func
-                    && !fatal_log_func (log_domain, test_level, msg, fatal_log_data);
-                }
-
-	      g_free (msg);
-	    }
-
-	  if ((test_level & G_LOG_FLAG_FATAL) && !masquerade_fatal)
-            {
-#ifdef G_OS_WIN32
-	      gchar *locale_msg = g_locale_from_utf8 (fatal_msg_buf, -1, NULL, NULL, NULL);
-	      
-	      MessageBox (NULL, locale_msg, NULL,
-			  MB_ICONERROR|MB_SETFOREGROUND);
-	      if (IsDebuggerPresent () && !(test_level & G_LOG_FLAG_RECURSION))
-		G_BREAKPOINT ();
-	      else
-		abort ();
-#else
-	      if (!(test_level & G_LOG_FLAG_RECURSION))
-		G_BREAKPOINT ();
-	      else
-		abort ();
-#endif /* !G_OS_WIN32 */
-	    }
-	  
-	  depth--;
-	  g_private_set (&g_log_depth, GUINT_TO_POINTER (depth));
-	}
-    }
-}
-
-/**
- * g_log:
- * @log_domain: the log domain, usually #G_LOG_DOMAIN
- * @log_level: the log level, either from #GLogLevelFlags
- *     or a user-defined level
- * @format: the message format. See the printf() documentation
- * @...: the parameters to insert into the format string
- *
- * Logs an error or debugging message.
- *
- * If the log level has been set as fatal, the abort()
- * function is called to terminate the program.
- */
-void
-g_log (const gchar   *log_domain,
-       GLogLevelFlags log_level,
-       const gchar   *format,
-       ...)
-{
-  va_list args;
-  
-  va_start (args, format);
-  g_logv (log_domain, log_level, format, args);
-  va_end (args);
-}
-
-void
-g_return_if_fail_warning (const char *log_domain,
-			  const char *pretty_function,
-			  const char *expression)
-{
-  g_log (log_domain,
-	 G_LOG_LEVEL_CRITICAL,
-	 "%s: assertion `%s' failed",
-	 pretty_function,
-	 expression);
-}
-
-void
-g_warn_message (const char     *domain,
-                const char     *file,
-                int             line,
-                const char     *func,
-                const char     *warnexpr)
-{
-  char *s, lstr[32];
-  g_snprintf (lstr, 32, "%d", line);
-  if (warnexpr)
-    s = g_strconcat ("(", file, ":", lstr, "):",
-                     func, func[0] ? ":" : "",
-                     " runtime check failed: (", warnexpr, ")", NULL);
-  else
-    s = g_strconcat ("(", file, ":", lstr, "):",
-                     func, func[0] ? ":" : "",
-                     " ", "code should not be reached", NULL);
-  g_log (domain, G_LOG_LEVEL_WARNING, "%s", s);
-  g_free (s);
-}
-
-void
-g_assert_warning (const char *log_domain,
-		  const char *file,
-		  const int   line,
-		  const char *pretty_function,
-		  const char *expression)
-{
-  g_log (log_domain,
-	 G_LOG_LEVEL_ERROR,
-	 expression 
-	 ? "file %s: line %d (%s): assertion failed: (%s)"
-	 : "file %s: line %d (%s): should not be reached",
-	 file, 
-	 line, 
-	 pretty_function,
-	 expression);
-  abort ();
 }
 
 #define CHAR_IS_SAFE(wc) (!((wc < 0x20 && wc != '\t' && wc != '\n' && wc != '\r') || \
@@ -1023,10 +889,348 @@ mklevel_prefix (gchar          level_prefix[STRING_BUFFER_SIZE],
     strcat (level_prefix, " **");
 
 #ifdef G_OS_WIN32
-  win32_keep_fatal_message = (log_level & G_LOG_FLAG_FATAL) != 0;
+  if ((log_level & G_LOG_FLAG_FATAL) != 0 && !g_test_initialized ())
+    win32_keep_fatal_message = TRUE;
 #endif
   return to_stdout ? 1 : 2;
 }
+
+typedef struct {
+  gchar          *log_domain;
+  GLogLevelFlags  log_level;
+  gchar          *pattern;
+} GTestExpectedMessage;
+
+static GSList *expected_messages = NULL;
+
+/**
+ * g_logv:
+ * @log_domain: the log domain
+ * @log_level: the log level
+ * @format: the message format. See the printf() documentation
+ * @args: the parameters to insert into the format string
+ *
+ * Logs an error or debugging message.
+ *
+ * If the log level has been set as fatal, the abort()
+ * function is called to terminate the program.
+ *
+ * If g_log_default_handler() is used as the log handler function, a new-line
+ * character will automatically be appended to @..., and need not be entered
+ * manually.
+ */
+void
+g_logv (const gchar   *log_domain,
+	GLogLevelFlags log_level,
+	const gchar   *format,
+	va_list	       args)
+{
+  gboolean was_fatal = (log_level & G_LOG_FLAG_FATAL) != 0;
+  gboolean was_recursion = (log_level & G_LOG_FLAG_RECURSION) != 0;
+  gchar buffer[1025], *msg, *msg_alloc = NULL;
+  gint i;
+
+  log_level &= G_LOG_LEVEL_MASK;
+  if (!log_level)
+    return;
+
+  if (log_level & G_LOG_FLAG_RECURSION)
+    {
+      /* we use a stack buffer of fixed size, since we're likely
+       * in an out-of-memory situation
+       */
+      gsize size G_GNUC_UNUSED;
+
+      size = _g_vsnprintf (buffer, 1024, format, args);
+      msg = buffer;
+    }
+  else
+    msg = msg_alloc = g_strdup_vprintf (format, args);
+
+  if (expected_messages)
+    {
+      GTestExpectedMessage *expected = expected_messages->data;
+
+      if (g_strcmp0 (expected->log_domain, log_domain) == 0 &&
+          ((log_level & expected->log_level) == expected->log_level) &&
+          g_pattern_match_simple (expected->pattern, msg))
+        {
+          expected_messages = g_slist_delete_link (expected_messages,
+                                                   expected_messages);
+          g_free (expected->log_domain);
+          g_free (expected->pattern);
+          g_free (expected);
+          g_free (msg_alloc);
+          return;
+        }
+      else if ((log_level & G_LOG_LEVEL_DEBUG) != G_LOG_LEVEL_DEBUG)
+        {
+          gchar level_prefix[STRING_BUFFER_SIZE];
+          gchar *expected_message;
+
+          mklevel_prefix (level_prefix, expected->log_level);
+          expected_message = g_strdup_printf ("Did not see expected message %s-%s: %s",
+                                              expected->log_domain ? expected->log_domain : "**",
+                                              level_prefix, expected->pattern);
+          g_log_default_handler (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL, expected_message, NULL);
+          g_free (expected_message);
+
+          log_level |= G_LOG_FLAG_FATAL;
+        }
+    }
+
+  for (i = g_bit_nth_msf (log_level, -1); i >= 0; i = g_bit_nth_msf (log_level, i))
+    {
+      GLogLevelFlags test_level;
+
+      test_level = 1 << i;
+      if (log_level & test_level)
+	{
+	  GLogDomain *domain;
+	  GLogFunc log_func;
+	  GLogLevelFlags domain_fatal_mask;
+	  gpointer data = NULL;
+          gboolean masquerade_fatal = FALSE;
+          guint depth;
+
+	  if (was_fatal)
+	    test_level |= G_LOG_FLAG_FATAL;
+	  if (was_recursion)
+	    test_level |= G_LOG_FLAG_RECURSION;
+
+	  /* check recursion and lookup handler */
+	  g_mutex_lock (&g_messages_lock);
+          depth = GPOINTER_TO_UINT (g_private_get (&g_log_depth));
+	  domain = g_log_find_domain_L (log_domain ? log_domain : "");
+	  if (depth)
+	    test_level |= G_LOG_FLAG_RECURSION;
+	  depth++;
+	  domain_fatal_mask = domain ? domain->fatal_mask : G_LOG_FATAL_MASK;
+	  if ((domain_fatal_mask | g_log_always_fatal) & test_level)
+	    test_level |= G_LOG_FLAG_FATAL;
+	  if (test_level & G_LOG_FLAG_RECURSION)
+	    log_func = _g_log_fallback_handler;
+	  else
+	    log_func = g_log_domain_get_handler_L (domain, test_level, &data);
+	  domain = NULL;
+	  g_mutex_unlock (&g_messages_lock);
+
+	  g_private_set (&g_log_depth, GUINT_TO_POINTER (depth));
+
+          log_func (log_domain, test_level, msg, data);
+
+          if ((test_level & G_LOG_FLAG_FATAL)
+              && !(test_level & G_LOG_LEVEL_ERROR))
+            {
+              masquerade_fatal = fatal_log_func
+                && !fatal_log_func (log_domain, test_level, msg, fatal_log_data);
+            }
+
+          if ((test_level & G_LOG_FLAG_FATAL) && !masquerade_fatal)
+            {
+#ifdef G_OS_WIN32
+              if (win32_keep_fatal_message)
+                {
+                  gchar *locale_msg = g_locale_from_utf8 (fatal_msg_buf, -1, NULL, NULL, NULL);
+
+                  MessageBox (NULL, locale_msg, NULL,
+                              MB_ICONERROR|MB_SETFOREGROUND);
+                }
+	      _g_log_abort (IsDebuggerPresent () && !(test_level & G_LOG_FLAG_RECURSION));
+#else
+	      _g_log_abort (!(test_level & G_LOG_FLAG_RECURSION));
+#endif /* !G_OS_WIN32 */
+	    }
+	  
+	  depth--;
+	  g_private_set (&g_log_depth, GUINT_TO_POINTER (depth));
+	}
+    }
+
+  g_free (msg_alloc);
+}
+
+/**
+ * g_log:
+ * @log_domain: the log domain, usually #G_LOG_DOMAIN
+ * @log_level: the log level, either from #GLogLevelFlags
+ *     or a user-defined level
+ * @format: the message format. See the printf() documentation
+ * @...: the parameters to insert into the format string
+ *
+ * Logs an error or debugging message.
+ *
+ * If the log level has been set as fatal, the abort()
+ * function is called to terminate the program.
+ *
+ * If g_log_default_handler() is used as the log handler function, a new-line
+ * character will automatically be appended to @..., and need not be entered
+ * manually.
+ */
+void
+g_log (const gchar   *log_domain,
+       GLogLevelFlags log_level,
+       const gchar   *format,
+       ...)
+{
+  va_list args;
+  
+  va_start (args, format);
+  g_logv (log_domain, log_level, format, args);
+  va_end (args);
+}
+
+void
+g_return_if_fail_warning (const char *log_domain,
+			  const char *pretty_function,
+			  const char *expression)
+{
+  g_log (log_domain,
+	 G_LOG_LEVEL_CRITICAL,
+	 "%s: assertion '%s' failed",
+	 pretty_function,
+	 expression);
+}
+
+void
+g_warn_message (const char     *domain,
+                const char     *file,
+                int             line,
+                const char     *func,
+                const char     *warnexpr)
+{
+  char *s, lstr[32];
+  g_snprintf (lstr, 32, "%d", line);
+  if (warnexpr)
+    s = g_strconcat ("(", file, ":", lstr, "):",
+                     func, func[0] ? ":" : "",
+                     " runtime check failed: (", warnexpr, ")", NULL);
+  else
+    s = g_strconcat ("(", file, ":", lstr, "):",
+                     func, func[0] ? ":" : "",
+                     " ", "code should not be reached", NULL);
+  g_log (domain, G_LOG_LEVEL_WARNING, "%s", s);
+  g_free (s);
+}
+
+void
+g_assert_warning (const char *log_domain,
+		  const char *file,
+		  const int   line,
+		  const char *pretty_function,
+		  const char *expression)
+{
+  if (expression)
+    g_log (log_domain,
+	   G_LOG_LEVEL_ERROR,
+	   "file %s: line %d (%s): assertion failed: (%s)",
+	   file,
+	   line,
+	   pretty_function,
+	   expression);
+  else
+    g_log (log_domain,
+	   G_LOG_LEVEL_ERROR,
+	   "file %s: line %d (%s): should not be reached",
+	   file,
+	   line,
+	   pretty_function);
+  _g_log_abort (FALSE);
+  abort ();
+}
+
+/**
+ * g_test_expect_message:
+ * @log_domain: (allow-none): the log domain of the message
+ * @log_level: the log level of the message
+ * @pattern: a glob-style [pattern][glib-Glob-style-pattern-matching]
+ *
+ * Indicates that a message with the given @log_domain and @log_level,
+ * with text matching @pattern, is expected to be logged. When this
+ * message is logged, it will not be printed, and the test case will
+ * not abort.
+ *
+ * Use g_test_assert_expected_messages() to assert that all
+ * previously-expected messages have been seen and suppressed.
+ *
+ * You can call this multiple times in a row, if multiple messages are
+ * expected as a result of a single call. (The messages must appear in
+ * the same order as the calls to g_test_expect_message().)
+ *
+ * For example:
+ *
+ * |[<!-- language="C" --> 
+ *   // g_main_context_push_thread_default() should fail if the
+ *   // context is already owned by another thread.
+ *   g_test_expect_message (G_LOG_DOMAIN,
+ *                          G_LOG_LEVEL_CRITICAL,
+ *                          "assertion*acquired_context*failed");
+ *   g_main_context_push_thread_default (bad_context);
+ *   g_test_assert_expected_messages ();
+ * ]|
+ *
+ * Note that you cannot use this to test g_error() messages, since
+ * g_error() intentionally never returns even if the program doesn't
+ * abort; use g_test_trap_subprocess() in this case.
+ *
+ * If messages at %G_LOG_LEVEL_DEBUG are emitted, but not explicitly
+ * expected via g_test_expect_message() then they will be ignored.
+ *
+ * Since: 2.34
+ */
+void
+g_test_expect_message (const gchar    *log_domain,
+                       GLogLevelFlags  log_level,
+                       const gchar    *pattern)
+{
+  GTestExpectedMessage *expected;
+
+  g_return_if_fail (log_level != 0);
+  g_return_if_fail (pattern != NULL);
+  g_return_if_fail (~log_level & G_LOG_LEVEL_ERROR);
+
+  expected = g_new (GTestExpectedMessage, 1);
+  expected->log_domain = g_strdup (log_domain);
+  expected->log_level = log_level;
+  expected->pattern = g_strdup (pattern);
+
+  expected_messages = g_slist_append (expected_messages, expected);
+}
+
+void
+g_test_assert_expected_messages_internal (const char     *domain,
+                                          const char     *file,
+                                          int             line,
+                                          const char     *func)
+{
+  if (expected_messages)
+    {
+      GTestExpectedMessage *expected;
+      gchar level_prefix[STRING_BUFFER_SIZE];
+      gchar *message;
+
+      expected = expected_messages->data;
+
+      mklevel_prefix (level_prefix, expected->log_level);
+      message = g_strdup_printf ("Did not see expected message %s-%s: %s",
+                                 expected->log_domain ? expected->log_domain : "**",
+                                 level_prefix, expected->pattern);
+      g_assertion_message (G_LOG_DOMAIN, file, line, func, message);
+      g_free (message);
+    }
+}
+
+/**
+ * g_test_assert_expected_messages:
+ *
+ * Asserts that all messages previously indicated via
+ * g_test_expect_message() have been seen and suppressed.
+ *
+ * If messages at %G_LOG_LEVEL_DEBUG are emitted, but not explicitly
+ * expected via g_test_expect_message() then they will be ignored.
+ *
+ * Since: 2.34
+ */
 
 void
 _g_log_fallback_handler (const gchar   *log_domain,
@@ -1147,27 +1351,20 @@ escape_string (GString *string)
  * allows to install an alternate default log handler.
  * This is used if no log handler has been set for the particular log
  * domain and log level combination. It outputs the message to stderr
- * or stdout and if the log level is fatal it calls abort().
+ * or stdout and if the log level is fatal it calls abort(). It automatically
+ * prints a new-line character after the message, so one does not need to be
+ * manually included in @message.
  *
  * The behavior of this log handler can be influenced by a number of
  * environment variables:
- * <variablelist>
- *   <varlistentry>
- *     <term><envar>G_MESSAGES_PREFIXED</envar></term>
- *     <listitem>
- *       A :-separated list of log levels for which messages should
- *       be prefixed by the program name and PID of the aplication.
- *     </listitem>
- *   </varlistentry>
- *   <varlistentry>
- *     <term><envar>G_MESSAGES_DEBUG</envar></term>
- *     <listitem>
- *       A space-separated list of log domains for which debug and
- *       informational messages are printed. By default these
- *       messages are not printed.
- *     </listitem>
- *   </varlistentry>
- * </variablelist>
+ *
+ * - `G_MESSAGES_PREFIXED`: A :-separated list of log levels for which
+ *   messages should be prefixed by the program name and PID of the
+ *   aplication.
+ *
+ * - `G_MESSAGES_DEBUG`: A space-separated list of log domains for
+ *   which debug and informational messages are printed. By default
+ *   these messages are not printed.
  *
  * stderr is used for levels %G_LOG_LEVEL_ERROR, %G_LOG_LEVEL_CRITICAL,
  * %G_LOG_LEVEL_WARNING and %G_LOG_LEVEL_MESSAGE. stdout is used for
@@ -1289,7 +1486,9 @@ g_set_print_handler (GPrintFunc func)
  * @...: the parameters to insert into the format string
  *
  * Outputs a formatted message via the print handler.
- * The default print handler simply outputs the message to stdout.
+ * The default print handler simply outputs the message to stdout, without
+ * appending a trailing new-line character. Typically, @format should end with
+ * its own new-line character.
  *
  * g_print() should not be used from within libraries for debugging
  * messages, since it may be redirected by applications to special
@@ -1368,7 +1567,9 @@ g_set_printerr_handler (GPrintFunc func)
  * @...: the parameters to insert into the format string
  *
  * Outputs a formatted message via the error message handler.
- * The default handler simply outputs the message to stderr.
+ * The default handler simply outputs the message to stderr, without appending
+ * a trailing new-line character. Typically, @format should end with its own
+ * new-line character.
  *
  * g_printerr() should not be used from within libraries.
  * Instead g_log() should be used, or the convenience functions

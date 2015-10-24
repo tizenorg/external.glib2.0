@@ -15,9 +15,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Authors: Christian Kellner <gicmo@gnome.org>
  *          Samuel Cormier-Iijima <sciyoshi@gmail.com>
@@ -28,7 +26,7 @@
 #include "config.h"
 #include "gsocketlistener.h"
 
-#include <gio/gsimpleasyncresult.h>
+#include <gio/gtask.h>
 #include <gio/gcancellable.h>
 #include <gio/gsocketaddress.h>
 #include <gio/ginetaddress.h>
@@ -43,6 +41,7 @@
  * SECTION:gsocketlistener
  * @title: GSocketListener
  * @short_description: Helper for accepting network client connections
+ * @include: gio/gio.h
  * @see_also: #GThreadedSocketService, #GSocketService.
  *
  * A #GSocketListener is an object that keeps track of a set
@@ -55,8 +54,6 @@
  *
  * Since: 2.22
  */
-
-G_DEFINE_TYPE (GSocketListener, g_socket_listener, G_TYPE_OBJECT);
 
 enum
 {
@@ -75,6 +72,8 @@ struct _GSocketListenerPrivate
   guint               closed : 1;
 };
 
+G_DEFINE_TYPE_WITH_PRIVATE (GSocketListener, g_socket_listener, G_TYPE_OBJECT)
+
 static void
 g_socket_listener_finalize (GObject *object)
 {
@@ -83,9 +82,11 @@ g_socket_listener_finalize (GObject *object)
   if (listener->priv->main_context)
     g_main_context_unref (listener->priv->main_context);
 
-  if (!listener->priv->closed)
-    g_socket_listener_close (listener);
-
+  /* Do not explicitly close the sockets. Instead, let them close themselves if
+   * their final reference is dropped, but keep them open if a reference is
+   * held externally to the GSocketListener (which is possible if
+   * g_socket_listener_add_socket() was used).
+   */
   g_ptr_array_free (listener->priv->sockets, TRUE);
 
   G_OBJECT_CLASS (g_socket_listener_parent_class)
@@ -136,8 +137,6 @@ g_socket_listener_class_init (GSocketListenerClass *klass)
 {
   GObjectClass *gobject_class G_GNUC_UNUSED = G_OBJECT_CLASS (klass);
 
-  g_type_class_add_private (klass, sizeof (GSocketListenerPrivate));
-
   gobject_class->finalize = g_socket_listener_finalize;
   gobject_class->set_property = g_socket_listener_set_property;
   gobject_class->get_property = g_socket_listener_get_property;
@@ -156,9 +155,7 @@ g_socket_listener_class_init (GSocketListenerClass *klass)
 static void
 g_socket_listener_init (GSocketListener *listener)
 {
-  listener->priv = G_TYPE_INSTANCE_GET_PRIVATE (listener,
-						G_TYPE_SOCKET_LISTENER,
-						GSocketListenerPrivate);
+  listener->priv = g_socket_listener_get_instance_private (listener);
   listener->priv->sockets =
     g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
   listener->priv->listen_backlog = 10;
@@ -210,6 +207,11 @@ check_listener (GSocketListener *listener,
  * to accept to identify this particular source, which is
  * useful if you're listening on multiple addresses and do
  * different things depending on what address is connected to.
+ *
+ * The @socket will not be automatically closed when the @listener is finalized
+ * unless the listener held the final reference to the socket. Before GLib 2.42,
+ * the @socket was automatically closed on finalization of the @listener, even
+ * if references to it were held elsewhere.
  *
  * Returns: %TRUE on success, %FALSE on error.
  *
@@ -681,43 +683,32 @@ g_socket_listener_accept (GSocketListener  *listener,
   return connection;
 }
 
-struct AcceptAsyncData {
-  GSimpleAsyncResult *simple;
-  GCancellable *cancellable;
-  GList *sources;
-};
-
 static gboolean
 accept_ready (GSocket      *accept_socket,
 	      GIOCondition  condition,
-	      gpointer      _data)
+	      gpointer      user_data)
 {
-  struct AcceptAsyncData *data = _data;
+  GTask *task = user_data;
   GError *error = NULL;
   GSocket *socket;
   GObject *source_object;
 
-  socket = g_socket_accept (accept_socket, data->cancellable, &error);
+  socket = g_socket_accept (accept_socket, g_task_get_cancellable (task), &error);
   if (socket)
     {
-      g_simple_async_result_set_op_res_gpointer (data->simple, socket,
-						 g_object_unref);
       source_object = g_object_get_qdata (G_OBJECT (accept_socket), source_quark);
       if (source_object)
-	g_object_set_qdata_full (G_OBJECT (data->simple),
+	g_object_set_qdata_full (G_OBJECT (task),
 				 source_quark,
 				 g_object_ref (source_object), g_object_unref);
+      g_task_return_pointer (task, socket, g_object_unref);
     }
   else
     {
-      g_simple_async_result_take_error (data->simple, error);
+      g_task_return_error (task, error);
     }
 
-  g_simple_async_result_complete_in_idle (data->simple);
-  g_object_unref (data->simple);
-  free_sources (data->sources);
-  g_free (data);
-
+  g_object_unref (task);
   return FALSE;
 }
 
@@ -742,27 +733,25 @@ g_socket_listener_accept_socket_async (GSocketListener     *listener,
 				       GAsyncReadyCallback  callback,
 				       gpointer             user_data)
 {
-  struct AcceptAsyncData *data;
+  GTask *task;
+  GList *sources;
   GError *error = NULL;
+
+  task = g_task_new (listener, cancellable, callback, user_data);
 
   if (!check_listener (listener, &error))
     {
-      g_simple_async_report_take_gerror_in_idle (G_OBJECT (listener),
-					    callback, user_data,
-					    error);
+      g_task_return_error (task, error);
+      g_object_unref (task);
       return;
     }
 
-  data = g_new0 (struct AcceptAsyncData, 1);
-  data->simple = g_simple_async_result_new (G_OBJECT (listener),
-					    callback, user_data,
-					    g_socket_listener_accept_socket_async);
-  data->cancellable = cancellable;
-  data->sources = add_sources (listener,
-			       accept_ready,
-			       data,
-			       cancellable,
-			       g_main_context_get_thread_default ());
+  sources = add_sources (listener,
+			 accept_ready,
+			 task,
+			 cancellable,
+			 g_main_context_get_thread_default ());
+  g_task_set_task_data (task, sources, (GDestroyNotify) free_sources);
 }
 
 /**
@@ -785,24 +774,13 @@ g_socket_listener_accept_socket_finish (GSocketListener  *listener,
 					GObject         **source_object,
 					GError          **error)
 {
-  GSocket *socket;
-  GSimpleAsyncResult *simple;
-
   g_return_val_if_fail (G_IS_SOCKET_LISTENER (listener), NULL);
-
-  simple = G_SIMPLE_ASYNC_RESULT (result);
-
-  if (g_simple_async_result_propagate_error (simple, error))
-    return NULL;
-
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == g_socket_listener_accept_socket_async);
-
-  socket = g_simple_async_result_get_op_res_gpointer (simple);
+  g_return_val_if_fail (g_task_is_valid (result, listener), NULL);
 
   if (source_object)
     *source_object = g_object_get_qdata (G_OBJECT (result), source_quark);
 
-  return g_object_ref (socket);
+  return g_task_propagate_pointer (G_TASK (result), error);
 }
 
 /**

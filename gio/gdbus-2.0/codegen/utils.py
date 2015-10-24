@@ -15,9 +15,7 @@
 # Lesser General Public License for more details.
 #
 # You should have received a copy of the GNU Lesser General
-# Public License along with this library; if not, write to the
-# Free Software Foundation, Inc., 59 Temple Place, Suite 330,
-# Boston, MA 02111-1307, USA.
+# Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
 #
 # Author: David Zeuthen <davidz@redhat.com>
 
@@ -97,15 +95,8 @@ def lookup_brief_docs(annotations):
     else:
         return s
 
-# I'm sure this could be a lot more elegant if I was
-# more fluent in python...
-def my_version_cmp(a, b):
-    if len(a[0]) > 0 and len(b[0]) > 0:
-        va = distutils.version.LooseVersion(a[0])
-        vb = distutils.version.LooseVersion(b[0])
-        ret = va.__cmp__(vb)
-    else:
-        ret = cmp(a[0], b[0])
-    if ret != 0:
-        return ret
-    return cmp(a[1], b[1])
+def version_cmp_key(key):
+    # If the 'since' version is empty put a 0 in its place as this will
+    # allow LooseVersion to work and will always compare lower.
+    v = key[0] if key[0] else '0'
+    return (distutils.version.LooseVersion(v), key[1])

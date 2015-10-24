@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 /*
@@ -218,21 +216,22 @@ static GMemVTable array_large_size_mem_vtable = {
 static void
 array_large_size (void)
 {
-  GArray* array;
-
   g_test_bug ("568760");
 
-  array = g_array_new (FALSE, FALSE, sizeof (char));
-
-  if (g_test_trap_fork (5 /* s */ * 1000 /* ms */ * 1000 /* µs */, 0))
+  if (g_test_subprocess ())
     {
+      GArray *array;
+
+      array = g_array_new (FALSE, FALSE, sizeof (char));
+
       g_mem_set_vtable (&array_large_size_mem_vtable);
       g_array_set_size (array, 1073750016);
       g_assert_not_reached ();
+      return;
     }
-  g_test_trap_assert_passed ();
 
-  g_array_free (array, TRUE);
+  g_test_trap_subprocess (NULL, 5000000, 0);
+  g_test_trap_assert_passed ();
 }
 
 static int
@@ -367,6 +366,28 @@ pointer_array_add (void)
 }
 
 static void
+pointer_array_insert (void)
+{
+  GPtrArray *gparray;
+  gint i;
+  gint sum = 0;
+  gint index;
+
+  gparray = g_ptr_array_sized_new (1000);
+
+  for (i = 0; i < 10000; i++)
+    {
+      index = g_random_int_range (-1, i + 1);
+      g_ptr_array_insert (gparray, index, GINT_TO_POINTER (i));
+    }
+
+  g_ptr_array_foreach (gparray, sum_up, &sum);
+  g_assert (sum == 49995000);
+
+  g_ptr_array_free (gparray, TRUE);
+}
+
+static void
 pointer_array_ref_count (void)
 {
   GPtrArray *gparray;
@@ -429,19 +450,23 @@ pointer_array_free_func (void)
   g_ptr_array_add (gparray, g_strdup ("baz"));
   g_ptr_array_remove_index (gparray, 0);
   g_assert_cmpint (num_free_func_invocations, ==, 1);
+  g_ptr_array_remove_index_fast (gparray, 1);
+  g_assert_cmpint (num_free_func_invocations, ==, 2);
   s = g_strdup ("frob");
   g_ptr_array_add (gparray, s);
   g_assert (g_ptr_array_remove (gparray, s));
   g_assert (!g_ptr_array_remove (gparray, "nuun"));
   g_assert (!g_ptr_array_remove_fast (gparray, "mlo"));
-  g_assert_cmpint (num_free_func_invocations, ==, 2);
-  g_ptr_array_set_size (gparray, 1);
   g_assert_cmpint (num_free_func_invocations, ==, 3);
+  s = g_strdup ("frob");
+  g_ptr_array_add (gparray, s);
+  g_ptr_array_set_size (gparray, 1);
+  g_assert_cmpint (num_free_func_invocations, ==, 4);
   g_ptr_array_ref (gparray);
   g_ptr_array_unref (gparray);
-  g_assert_cmpint (num_free_func_invocations, ==, 3);
-  g_ptr_array_unref (gparray);
   g_assert_cmpint (num_free_func_invocations, ==, 4);
+  g_ptr_array_unref (gparray);
+  g_assert_cmpint (num_free_func_invocations, ==, 5);
 
   num_free_func_invocations = 0;
   gparray = g_ptr_array_new_full (10, my_free_func);
@@ -853,6 +878,7 @@ main (int argc, char *argv[])
 
   /* pointer arrays */
   g_test_add_func ("/pointerarray/add", pointer_array_add);
+  g_test_add_func ("/pointerarray/insert", pointer_array_insert);
   g_test_add_func ("/pointerarray/ref-count", pointer_array_ref_count);
   g_test_add_func ("/pointerarray/free-func", pointer_array_free_func);
   g_test_add_func ("/pointerarray/sort", pointer_array_sort);

@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
- * USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Ryan Lortie <desrt@desrt.ca>
  */
@@ -23,12 +21,16 @@
 
 #include "gmenu.h"
 
+#include "gaction.h"
 #include <string.h>
+
+#include "gicon.h"
 
 /**
  * SECTION:gmenu
  * @title: GMenu
  * @short_description: A simple implementation of GMenuModel
+ * @include: gio/gio.h
  *
  * #GMenu is a simple implementation of #GMenuModel.
  * You populate a #GMenu by adding #GMenuItem instances to it.
@@ -255,7 +257,7 @@ g_menu_new (void)
  * @detailed_action: (allow-none): the detailed action string, or %NULL
  *
  * Convenience function for inserting a normal menu item into @menu.
- * Combine g_menu_new() and g_menu_insert_item() for a more flexible
+ * Combine g_menu_item_new() and g_menu_insert_item() for a more flexible
  * alternative.
  *
  * Since: 2.32
@@ -280,7 +282,7 @@ g_menu_insert (GMenu       *menu,
  * @detailed_action: (allow-none): the detailed action string, or %NULL
  *
  * Convenience function for prepending a normal menu item to the start
- * of @menu.  Combine g_menu_new() and g_menu_insert_item() for a more
+ * of @menu.  Combine g_menu_item_new() and g_menu_insert_item() for a more
  * flexible alternative.
  *
  * Since: 2.32
@@ -300,7 +302,7 @@ g_menu_prepend (GMenu       *menu,
  * @detailed_action: (allow-none): the detailed action string, or %NULL
  *
  * Convenience function for appending a normal menu item to the end of
- * @menu.  Combine g_menu_new() and g_menu_insert_item() for a more
+ * @menu.  Combine g_menu_item_new() and g_menu_insert_item() for a more
  * flexible alternative.
  *
  * Since: 2.32
@@ -451,7 +453,7 @@ g_menu_clear_item (struct item *item)
 {
   if (item->attributes != NULL)
     g_hash_table_unref (item->attributes);
-  if (item->links != NULL);
+  if (item->links != NULL)
     g_hash_table_unref (item->links);
 }
 
@@ -483,6 +485,29 @@ g_menu_remove (GMenu *menu,
   g_menu_clear_item (&g_array_index (menu->items, struct item, position));
   g_array_remove_index (menu->items, position);
   g_menu_model_items_changed (G_MENU_MODEL (menu), position, 1, 0);
+}
+
+/**
+ * g_menu_remove_all:
+ * @menu: a #GMenu
+ *
+ * Removes all items in the menu.
+ *
+ * Since: 2.38
+ **/
+void
+g_menu_remove_all (GMenu *menu)
+{
+  gint i, n;
+
+  g_return_if_fail (G_IS_MENU (menu));
+  n = menu->items->len;
+
+  for (i = 0; i < n; i++)
+    g_menu_clear_item (&g_array_index (menu->items, struct item, i));
+  g_array_set_size (menu->items, 0);
+
+  g_menu_model_items_changed (G_MENU_MODEL (menu), 0, n, 0);
 }
 
 static void
@@ -745,6 +770,124 @@ g_menu_item_set_link (GMenuItem   *menu_item,
 }
 
 /**
+ * g_menu_item_get_attribute_value:
+ * @menu_item: a #GMenuItem
+ * @attribute: the attribute name to query
+ * @expected_type: (allow-none): the expected type of the attribute
+ *
+ * Queries the named @attribute on @menu_item.
+ *
+ * If @expected_type is specified and the attribute does not have this
+ * type, %NULL is returned.  %NULL is also returned if the attribute
+ * simply does not exist.
+ *
+ * Returns: (transfer full): the attribute value, or %NULL
+ *
+ * Since: 2.34
+ */
+GVariant *
+g_menu_item_get_attribute_value (GMenuItem          *menu_item,
+                                 const gchar        *attribute,
+                                 const GVariantType *expected_type)
+{
+  GVariant *value;
+
+  g_return_val_if_fail (G_IS_MENU_ITEM (menu_item), NULL);
+  g_return_val_if_fail (attribute != NULL, NULL);
+
+  value = g_hash_table_lookup (menu_item->attributes, attribute);
+
+  if (value != NULL)
+    {
+      if (expected_type == NULL || g_variant_is_of_type (value, expected_type))
+        g_variant_ref (value);
+      else
+        value = NULL;
+    }
+
+  return value;
+}
+
+/**
+ * g_menu_item_get_attribute:
+ * @menu_item: a #GMenuItem
+ * @attribute: the attribute name to query
+ * @format_string: a #GVariant format string
+ * @...: positional parameters, as per @format_string
+ *
+ * Queries the named @attribute on @menu_item.
+ *
+ * If the attribute exists and matches the #GVariantType corresponding
+ * to @format_string then @format_string is used to deconstruct the
+ * value into the positional parameters and %TRUE is returned.
+ *
+ * If the attribute does not exist, or it does exist but has the wrong
+ * type, then the positional parameters are ignored and %FALSE is
+ * returned.
+ *
+ * Returns: %TRUE if the named attribute was found with the expected
+ *     type
+ *
+ * Since: 2.34
+ */
+gboolean
+g_menu_item_get_attribute (GMenuItem   *menu_item,
+                           const gchar *attribute,
+                           const gchar *format_string,
+                           ...)
+{
+  GVariant *value;
+  va_list ap;
+
+  g_return_val_if_fail (G_IS_MENU_ITEM (menu_item), FALSE);
+  g_return_val_if_fail (attribute != NULL, FALSE);
+  g_return_val_if_fail (format_string != NULL, FALSE);
+
+  value = g_hash_table_lookup (menu_item->attributes, attribute);
+
+  if (value == NULL)
+    return FALSE;
+
+  if (!g_variant_check_format_string (value, format_string, FALSE))
+    return FALSE;
+
+  va_start (ap, format_string);
+  g_variant_get_va (value, format_string, NULL, &ap);
+  va_end (ap);
+
+  return TRUE;
+}
+
+/**
+ * g_menu_item_get_link:
+ * @menu_item: a #GMenuItem
+ * @link: the link name to query
+ *
+ * Queries the named @link on @menu_item.
+ *
+ * Returns: (transfer full): the link, or %NULL
+ *
+ * Since: 2.34
+ */
+GMenuModel *
+g_menu_item_get_link (GMenuItem   *menu_item,
+                      const gchar *link)
+{
+  GMenuModel *model;
+
+  g_return_val_if_fail (G_IS_MENU_ITEM (menu_item), NULL);
+  g_return_val_if_fail (link != NULL, NULL);
+  g_return_val_if_fail (valid_attribute_name (link), NULL);
+
+  model = g_hash_table_lookup (menu_item->links, link);
+
+  if (model)
+    g_object_ref (model);
+
+  return model;
+}
+
+/**
  * g_menu_item_set_label:
  * @menu_item: a #GMenuItem
  * @label: (allow-none): the label to set, or %NULL to unset
@@ -938,14 +1081,8 @@ g_menu_item_set_action_and_target (GMenuItem   *menu_item,
  *
  * Sets the "action" and possibly the "target" attribute of @menu_item.
  *
- * If @detailed_action contains a double colon ("::") then it is used as
- * a separator between an action name and a target string.  In this
- * case, this call is equivalent to calling
- * g_menu_item_set_action_and_target() with the part before the "::" and
- * with a string-type #GVariant containing the part following the "::".
- *
- * If @detailed_action doesn't contain "::" then the action is set to
- * the given string (verbatim) and the target value is unset.
+ * The format of @detailed_action is the same format parsed by
+ * g_action_parse_detailed_name().
  *
  * See g_menu_item_set_action_and_target() or
  * g_menu_item_set_action_and_target_value() for more flexible (but
@@ -960,21 +1097,17 @@ void
 g_menu_item_set_detailed_action (GMenuItem   *menu_item,
                                  const gchar *detailed_action)
 {
-  const gchar *sep;
+  GError *error = NULL;
+  GVariant *target;
+  gchar *name;
 
-  sep = strstr (detailed_action, "::");
+  if (!g_action_parse_detailed_name (detailed_action, &name, &target, &error))
+    g_error ("g_menu_item_set_detailed_action: %s", error->message);
 
-  if (sep != NULL)
-    {
-      gchar *action;
-
-      action = g_strndup (detailed_action, sep - detailed_action);
-      g_menu_item_set_action_and_target (menu_item, action, "s", sep + 2);
-      g_free (action);
-    }
-
-  else
-    g_menu_item_set_action_and_target_value (menu_item, detailed_action, NULL);
+  g_menu_item_set_action_and_target_value (menu_item, name, target);
+  if (target)
+    g_variant_unref (target);
+  g_free (name);
 }
 
 /**
@@ -1070,8 +1203,7 @@ g_menu_item_new_submenu (const gchar *label,
  * second with the "Cut", "Copy" and "Paste" items.  The first and
  * second menus would then be added as submenus of the third.  In XML
  * format, this would look something like the following:
- *
- * <informalexample><programlisting><![CDATA[
+ * |[
  * <menu id='edit-menu'>
  *   <section>
  *     <item label='Undo'/>
@@ -1083,7 +1215,7 @@ g_menu_item_new_submenu (const gchar *label,
  *     <item label='Paste'/>
  *   </section>
  * </menu>
- * ]]></programlisting></informalexample>
+ * ]|
  *
  * The following example is exactly equivalent.  It is more illustrative
  * of the exact relationship between the menus and items (keeping in
@@ -1091,8 +1223,7 @@ g_menu_item_new_submenu (const gchar *label,
  * containing one).  The style of the second example is more verbose and
  * difficult to read (and therefore not recommended except for the
  * purpose of understanding what is really going on).
- *
- * <informalexample><programlisting><![CDATA[
+ * |[
  * <menu id='edit-menu'>
  *   <item>
  *     <link name='section'>
@@ -1108,7 +1239,7 @@ g_menu_item_new_submenu (const gchar *label,
  *     </link>
  *   </item>
  * </menu>
- * ]]></programlisting></informalexample>
+ * ]|
  *
  * Returns: a new #GMenuItem
  *
@@ -1128,4 +1259,130 @@ g_menu_item_new_section (const gchar *label,
   g_menu_item_set_section (menu_item, section);
 
   return menu_item;
+}
+
+/**
+ * g_menu_item_new_from_model:
+ * @model: a #GMenuModel
+ * @item_index: the index of an item in @model
+ *
+ * Creates a #GMenuItem as an exact copy of an existing menu item in a
+ * #GMenuModel.
+ *
+ * @item_index must be valid (ie: be sure to call
+ * g_menu_model_get_n_items() first).
+ *
+ * Returns: a new #GMenuItem.
+ *
+ * Since: 2.34
+ */
+GMenuItem *
+g_menu_item_new_from_model (GMenuModel *model,
+                            gint        item_index)
+{
+  GMenuModelClass *class = G_MENU_MODEL_GET_CLASS (model);
+  GMenuItem *menu_item;
+
+  menu_item = g_object_new (G_TYPE_MENU_ITEM, NULL);
+
+  /* With some trickery we can be pretty efficient.
+   *
+   * A GMenuModel must either implement iterate_item_attributes() or
+   * get_item_attributes().  If it implements get_item_attributes() then
+   * we are in luck -- we can just take a reference on the returned
+   * hashtable and mark ourselves as copy-on-write.
+   *
+   * In the case that the model is based on get_item_attributes (which
+   * is the case for both GMenu and GDBusMenuModel) then this is
+   * basically just g_hash_table_ref().
+   */
+  if (class->get_item_attributes)
+    {
+      GHashTable *attributes = NULL;
+
+      class->get_item_attributes (model, item_index, &attributes);
+      if (attributes)
+        {
+          g_hash_table_unref (menu_item->attributes);
+          menu_item->attributes = attributes;
+          menu_item->cow = TRUE;
+        }
+    }
+  else
+    {
+      GMenuAttributeIter *iter;
+      const gchar *attribute;
+      GVariant *value;
+
+      iter = g_menu_model_iterate_item_attributes (model, item_index);
+      while (g_menu_attribute_iter_get_next (iter, &attribute, &value))
+        g_hash_table_insert (menu_item->attributes, g_strdup (attribute), value);
+      g_object_unref (iter);
+    }
+
+  /* Same story for the links... */
+  if (class->get_item_links)
+    {
+      GHashTable *links = NULL;
+
+      class->get_item_links (model, item_index, &links);
+      if (links)
+        {
+          g_hash_table_unref (menu_item->links);
+          menu_item->links = links;
+          menu_item->cow = TRUE;
+        }
+    }
+  else
+    {
+      GMenuLinkIter *iter;
+      const gchar *link;
+      GMenuModel *value;
+
+      iter = g_menu_model_iterate_item_links (model, item_index);
+      while (g_menu_link_iter_get_next (iter, &link, &value))
+        g_hash_table_insert (menu_item->links, g_strdup (link), value);
+      g_object_unref (iter);
+    }
+
+  return menu_item;
+}
+
+/**
+ * g_menu_item_set_icon:
+ * @menu_item: a #GMenuItem
+ * @icon: a #GIcon, or %NULL
+ *
+ * Sets (or unsets) the icon on @menu_item.
+ *
+ * This call is the same as calling g_icon_serialize() and using the
+ * result as the value to g_menu_item_set_attribute_value() for
+ * %G_MENU_ATTRIBUTE_ICON.
+ *
+ * This API is only intended for use with "noun" menu items; things like
+ * bookmarks or applications in an "Open With" menu.  Don't use it on
+ * menu items corresponding to verbs (eg: stock icons for 'Save' or
+ * 'Quit').
+ *
+ * If @icon is %NULL then the icon is unset.
+ *
+ * Since: 2.38
+ **/
+void
+g_menu_item_set_icon (GMenuItem *menu_item,
+                      GIcon     *icon)
+{
+  GVariant *value;
+
+  g_return_if_fail (G_IS_MENU_ITEM (menu_item));
+  g_return_if_fail (G_IS_ICON (icon));
+
+  if (icon != NULL)
+    value = g_icon_serialize (icon);
+  else
+    value = NULL;
+
+  g_menu_item_set_attribute_value (menu_item, G_MENU_ATTRIBUTE_ICON, value);
+  if (value)
+    g_variant_unref (value);
 }

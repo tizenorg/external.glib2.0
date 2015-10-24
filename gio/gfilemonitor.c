@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Alexander Larsson <alexl@redhat.com>
  */
@@ -47,9 +45,9 @@ static void file_change_free (FileChange *change);
  *
  * To get informed about changes to the file or directory you are
  * monitoring, connect to the #GFileMonitor::changed signal. The
- * signal will be emitted in the <link
- * linkend="g-main-context-push-thread-default">thread-default main
- * context</link> of the thread that the monitor was created in
+ * signal will be emitted in the
+ * [thread-default main context][g-main-context-push-thread-default]
+ * of the thread that the monitor was created in
  * (though if the global default main context is blocked, this may
  * cause notifications to be blocked even if the thread-default
  * context is still running).
@@ -61,11 +59,6 @@ enum {
   CHANGED,
   LAST_SIGNAL
 };
-
-/* work around a limitation of the aliasing foo */
-#undef g_file_monitor
-
-G_DEFINE_ABSTRACT_TYPE (GFileMonitor, g_file_monitor, G_TYPE_OBJECT);
 
 typedef struct {
   GFile *file;
@@ -81,6 +74,7 @@ struct _GFileMonitorPrivate {
   /* Rate limiting change events */
   GHashTable *rate_limiter;
 
+  GMutex mutex;
   GSource *pending_file_change_source;
   GSList *pending_file_changes; /* FileChange */
 
@@ -93,8 +87,14 @@ struct _GFileMonitorPrivate {
 enum {
   PROP_0,
   PROP_RATE_LIMIT,
-  PROP_CANCELLED
+  PROP_CANCELLED,
+  PROP_CONTEXT
 };
+
+/* work around a limitation of the aliasing foo */
+#undef g_file_monitor
+
+G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (GFileMonitor, g_file_monitor, G_TYPE_OBJECT)
 
 static void
 g_file_monitor_set_property (GObject      *object,
@@ -110,6 +110,12 @@ g_file_monitor_set_property (GObject      *object,
     {
     case PROP_RATE_LIMIT:
       g_file_monitor_set_rate_limit (monitor, g_value_get_int (value));
+      break;
+
+    case PROP_CONTEXT:
+      monitor->priv->context = g_value_dup_boxed (value);
+      if (monitor->priv->context == NULL)
+        monitor->priv->context = g_main_context_ref_thread_default ();
       break;
 
     default:
@@ -176,6 +182,7 @@ g_file_monitor_finalize (GObject *object)
   g_hash_table_destroy (monitor->priv->rate_limiter);
 
   g_main_context_unref (monitor->priv->context);
+  g_mutex_clear (&monitor->priv->mutex);
 
   G_OBJECT_CLASS (g_file_monitor_parent_class)->finalize (object);
 }
@@ -208,9 +215,7 @@ static void
 g_file_monitor_class_init (GFileMonitorClass *klass)
 {
   GObjectClass *object_class;
-  
-  g_type_class_add_private (klass, sizeof (GFileMonitorPrivate));
-  
+
   object_class = G_OBJECT_CLASS (klass);
   object_class->finalize = g_file_monitor_finalize;
   object_class->dispose = g_file_monitor_dispose;
@@ -260,18 +265,24 @@ g_file_monitor_class_init (GFileMonitorClass *klass)
                                                          FALSE,
                                                          G_PARAM_READABLE|
                                                          G_PARAM_STATIC_NAME|G_PARAM_STATIC_NICK|G_PARAM_STATIC_BLURB));
+
+  g_object_class_install_property (object_class,
+                                   PROP_CONTEXT,
+                                   g_param_spec_boxed ("context",
+                                                       P_("Context"),
+                                                       P_("The main context to dispatch from"),
+                                                       G_TYPE_MAIN_CONTEXT, G_PARAM_WRITABLE |
+                                                       G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
 }
 
 static void
 g_file_monitor_init (GFileMonitor *monitor)
 {
-  monitor->priv = G_TYPE_INSTANCE_GET_PRIVATE (monitor,
-					       G_TYPE_FILE_MONITOR,
-					       GFileMonitorPrivate);
+  monitor->priv = g_file_monitor_get_instance_private (monitor);
   monitor->priv->rate_limit_msec = DEFAULT_RATE_LIMIT_MSECS;
   monitor->priv->rate_limiter = g_hash_table_new_full (g_file_hash, (GEqualFunc)g_file_equal,
 						       NULL, (GDestroyNotify) rate_limiter_free);
-  monitor->priv->context = g_main_context_ref_thread_default ();
+  g_mutex_init (&monitor->priv->mutex);
 }
 
 /**
@@ -374,7 +385,8 @@ emit_cb (gpointer data)
 {
   GFileMonitor *monitor = G_FILE_MONITOR (data);
   GSList *pending, *iter;
-  
+
+  g_mutex_lock (&monitor->priv->mutex);
   pending = g_slist_reverse (monitor->priv->pending_file_changes);
   monitor->priv->pending_file_changes = NULL;
   if (monitor->priv->pending_file_change_source)
@@ -382,11 +394,13 @@ emit_cb (gpointer data)
       g_source_unref (monitor->priv->pending_file_change_source);
       monitor->priv->pending_file_change_source = NULL;
     }
+  g_mutex_unlock (&monitor->priv->mutex);
 
   g_object_ref (monitor);
   for (iter = pending; iter; iter = iter->next)
     {
        FileChange *change = iter->data;
+
        g_signal_emit (monitor, signals[CHANGED], 0,
 	  	      change->child, change->other_file, change->event_type);
        file_change_free (change);
@@ -418,6 +432,7 @@ emit_in_idle (GFileMonitor      *monitor,
     change->other_file = NULL;
   change->event_type = event_type;
 
+  g_mutex_lock (&monitor->priv->mutex);
   if (!priv->pending_file_change_source)
     {
       source = g_idle_source_new ();
@@ -428,10 +443,12 @@ emit_in_idle (GFileMonitor      *monitor,
        * pending idles.
        */
       g_source_set_callback (source, emit_cb, monitor, NULL);
+      g_source_set_name (source, "[gio] emit_cb");
       g_source_attach (source, monitor->priv->context);
     }
   /* We reverse this in the processor */
   priv->pending_file_changes = g_slist_prepend (priv->pending_file_changes, change);
+  g_mutex_unlock (&monitor->priv->mutex);
 }
 
 static guint32
@@ -654,9 +671,8 @@ update_rate_limiter_timeout (GFileMonitor *monitor,
  * has taken place. Should be called from file monitor 
  * implementations only.
  *
- * The signal will be emitted from an idle handler (in the <link
- * linkend="g-main-context-push-thread-default">thread-default main
- * context</link>).
+ * The signal will be emitted from an idle handler (in the
+ * [thread-default main context][g-main-context-push-thread-default]).
  **/
 void
 g_file_monitor_emit_event (GFileMonitor      *monitor,

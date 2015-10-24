@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Ryan Lortie <desrt@desrt.ca>
  */
@@ -29,12 +27,12 @@
 #include <stdio.h>
 #include <locale.h>
 
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-
 #include "gvdb/gvdb-builder.h"
 #include "strinfo.c"
+
+#ifdef G_OS_WIN32
+#include "glib/glib-private.h"
+#endif
 
 static void
 strip_string (GString *string)
@@ -794,7 +792,7 @@ is_valid_keyname (const gchar  *key,
         {
           g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
                        _("invalid name '%s': invalid character '%c'; "
-                         "only lowercase letters, numbers and dash ('-') "
+                         "only lowercase letters, numbers and hyphen ('-') "
                          "are permitted."), key, key[i]);
           return FALSE;
         }
@@ -802,7 +800,7 @@ is_valid_keyname (const gchar  *key,
       if (key[i] == '-' && key[i + 1] == '-')
         {
           g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
-                       _("invalid name '%s': two successive dashes ('--') "
+                       _("invalid name '%s': two successive hyphens ('--') "
                          "are not permitted."), key);
           return FALSE;
         }
@@ -812,7 +810,7 @@ is_valid_keyname (const gchar  *key,
     {
       g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_INVALID_CONTENT,
                    _("invalid name '%s': the last character may not be a "
-                     "dash ('-')."), key);
+                     "hyphen ('-')."), key);
       return FALSE;
     }
 
@@ -1122,8 +1120,8 @@ parse_state_start_schema (ParseState  *state,
         {
           g_set_error (error, G_MARKUP_ERROR,
                        G_MARKUP_ERROR_INVALID_CONTENT,
-                       _("<schema id='%s'> extends not yet "
-                         "existing schema '%s'"), id, extends_name);
+                       _("<schema id='%s'> extends not yet existing "
+                         "schema '%s'"), id, extends_name);
           return;
         }
     }
@@ -1138,8 +1136,8 @@ parse_state_start_schema (ParseState  *state,
         {
           g_set_error (error, G_MARKUP_ERROR,
                        G_MARKUP_ERROR_INVALID_CONTENT,
-                       _("<schema id='%s'> is list of not yet "
-                         "existing schema '%s'"), id, list_of);
+                       _("<schema id='%s'> is list of not yet existing "
+                         "schema '%s'"), id, list_of);
           return;
         }
 
@@ -1456,7 +1454,7 @@ start_element (GMarkupParseContext  *context,
                  element_name, container);
   else
     g_set_error (error, G_MARKUP_ERROR, G_MARKUP_ERROR_UNKNOWN_ELEMENT,
-                 _("Element <%s> not allowed at toplevel"), element_name);
+                 _("Element <%s> not allowed at the top level"), element_name);
 }
 /* 2}}} */
 /* End element {{{2 */
@@ -1724,7 +1722,8 @@ parse_gschema_files (gchar    **files,
 
       context = g_markup_parse_context_new (&parser,
                                             G_MARKUP_TREAT_CDATA_AS_TEXT |
-                                            G_MARKUP_PREFIX_ERROR_POSITION,
+                                            G_MARKUP_PREFIX_ERROR_POSITION |
+                                            G_MARKUP_IGNORE_QUALIFIED,
                                             &state, NULL);
 
 
@@ -1857,8 +1856,8 @@ set_overrides (GHashTable  *schema_table,
 
               if (state == NULL)
                 {
-                  fprintf (stderr, _("No such key `%s' in schema `%s' as "
-                                     "specified in override file `%s'"),
+                  fprintf (stderr, _("No such key '%s' in schema '%s' as "
+                                     "specified in override file '%s'"),
                            key, group, filename);
 
                   if (!strict)
@@ -1883,9 +1882,9 @@ set_overrides (GHashTable  *schema_table,
 
               if (value == NULL)
                 {
-                  fprintf (stderr, _("error parsing key `%s' in schema `%s' "
-                                     "as specified in override file `%s': "
-                                     "%s.  "),
+                  fprintf (stderr, _("error parsing key '%s' in schema '%s' "
+                                     "as specified in override file '%s': "
+                                     "%s."),
                            key, group, filename, error->message);
 
                   g_clear_error (&error);
@@ -1911,8 +1910,8 @@ set_overrides (GHashTable  *schema_table,
                       g_variant_compare (value, state->maximum) > 0)
                     {
                       fprintf (stderr,
-                               _("override for key `%s' in schema `%s' in "
-                                 "override file `%s' is out of the range "
+                               _("override for key '%s' in schema '%s' in "
+                                 "override file '%s' is outside the range "
                                  "given in the schema"),
                                key, group, filename);
 
@@ -1939,8 +1938,8 @@ set_overrides (GHashTable  *schema_table,
                   if (!is_valid_choices (value, state->strinfo))
                     {
                       fprintf (stderr,
-                               _("override for key `%s' in schema `%s' in "
-                                 "override file `%s' is not in the list "
+                               _("override for key '%s' in schema '%s' in "
+                                 "override file '%s' is not in the list "
                                  "of valid choices"),
                                key, group, filename);
 
@@ -2003,7 +2002,6 @@ main (int argc, char **argv)
   };
 
 #ifdef G_OS_WIN32
-  extern gchar *_glib_get_locale_dir (void);
   gchar *tmp;
 #endif
 

@@ -14,12 +14,17 @@
 static void
 test_types (void)
 {
+  const gint *csp;
+  const gint * const *cspp;
   guint u, u2;
   gint s, s2;
   gpointer vp, vp2;
   int *ip, *ip2;
   gsize gs, gs2;
   gboolean res;
+
+  csp = &s;
+  cspp = &csp;
 
   g_atomic_int_set (&u, 5);
   u2 = g_atomic_int_get (&u);
@@ -100,6 +105,9 @@ test_types (void)
   g_assert (gs2 == 12);
   g_assert (gs == 8);
 
+  g_assert (g_atomic_int_get (csp) == s);
+  g_assert (g_atomic_pointer_get (cspp) == csp);
+
   /* repeat, without the macros */
 #undef g_atomic_int_set
 #undef g_atomic_int_get
@@ -162,6 +170,11 @@ test_types (void)
   s2 = g_atomic_int_xor ((guint*)&s, 4);
   g_assert_cmpint (s2, ==, 12);
   g_assert_cmpint (s, ==, 8);
+G_GNUC_BEGIN_IGNORE_DEPRECATIONS
+  s2 = g_atomic_int_exchange_and_add ((gint*)&s, 1);
+G_GNUC_END_IGNORE_DEPRECATIONS
+  g_assert_cmpint (s2, ==, 8);
+  g_assert_cmpint (s, ==, 9);
 
   g_atomic_pointer_set (&vp, 0);
   vp2 = g_atomic_pointer_get (&vp);
@@ -195,6 +208,9 @@ test_types (void)
   gs2 = g_atomic_pointer_xor (&gs, 4);
   g_assert (gs2 == 12);
   g_assert (gs == 8);
+
+  g_assert (g_atomic_int_get (csp) == s);
+  g_assert (g_atomic_pointer_get (cspp) == csp);
 }
 
 #define THREADS 10

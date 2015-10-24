@@ -52,7 +52,11 @@ supporting internal functions that are not used by other modules. */
 
 #include "pcre_internal.h"
 
+#ifdef GLIB_COMPILATION
 #include "gstrfuncs.h"
+#else
+#include <glib.h>
+#endif
 
 /* When PCRE_DEBUG is defined, we need the pcre(16)_printint() function, which
 is also used by pcretest. PCRE_DEBUG is not defined when building a production
@@ -490,6 +494,9 @@ static const char error_texts[] =
   "too many forward references\0"
   "disallowed Unicode code point (>= 0xd800 && <= 0xdfff)\0"
   "invalid UTF-16 string\0"
+  /* 75 */
+  "name is too long in (*MARK), (*PRUNE), (*SKIP), or (*THEN)\0"
+  "character value in \\u.... sequence is too large\0"
   ;
 
 /* Table to identify digits and hex digits. This is used when compiling
@@ -822,7 +829,7 @@ else
         c = 0;
         for (i = 0; i < 4; ++i)
           {
-          register int cc = *(++ptr);
+          int cc = *(++ptr);
 #ifndef EBCDIC  /* ASCII/UTF-8 coding */
           if (cc >= CHAR_a) cc -= 32;               /* Convert to upper case */
           c = (c << 4) + cc - ((cc < CHAR_A)? CHAR_0 : (CHAR_A - 10));
@@ -831,6 +838,18 @@ else
           c = (c << 4) + cc - ((cc >= CHAR_0)? CHAR_0 : (CHAR_A - 10));
 #endif
           }
+
+#ifdef COMPILE_PCRE8
+        if (c > (utf ? 0x10ffff : 0xff))
+#else
+#ifdef COMPILE_PCRE16
+        if (c > (utf ? 0x10ffff : 0xffff))
+#endif
+#endif
+          {
+          *errorcodeptr = ERR76;
+          }
+        else if (utf && c >= 0xd800 && c <= 0xdfff) *errorcodeptr = ERR73;
         }
       }
     else
@@ -1020,7 +1039,7 @@ else
         c = 0;
         for (i = 0; i < 2; ++i)
           {
-          register int cc = *(++ptr);
+          int cc = *(++ptr);
 #ifndef EBCDIC  /* ASCII/UTF-8 coding */
           if (cc >= CHAR_a) cc -= 32;               /* Convert to upper case */
           c = (c << 4) + cc - ((cc < CHAR_A)? CHAR_0 : (CHAR_A - 10));
@@ -1040,7 +1059,7 @@ else
       c = 0;
       while (MAX_255(*pt) && g_ascii_isxdigit(*pt) != 0)
         {
-        register int cc = *pt++;
+        int cc = *pt++;
         if (c == 0 && cc == CHAR_0) continue;     /* Leading zeroes */
 
 #ifndef EBCDIC  /* ASCII/UTF-8 coding */
@@ -1702,8 +1721,8 @@ find_fixedlength(pcre_uchar *code, BOOL utf, BOOL atend, compile_data *cd)
 {
 int length = -1;
 
-register int branchlength = 0;
-register pcre_uchar *cc = code + 1 + LINK_SIZE;
+int branchlength = 0;
+pcre_uchar *cc = code + 1 + LINK_SIZE;
 
 /* Scan along the opcodes for this branch. If we get to the end of the
 branch, check the length against that of the other branches. */
@@ -1712,7 +1731,7 @@ for (;;)
   {
   int d;
   pcre_uchar *ce, *cs;
-  register int op = *cc;
+  int op = *cc;
 
   switch (op)
     {
@@ -2026,7 +2045,7 @@ PRIV(find_bracket)(const pcre_uchar *code, BOOL utf, int number)
 {
 for (;;)
   {
-  register int c = *code;
+  int c = *code;
 
   if (c == OP_END) return NULL;
 
@@ -2164,7 +2183,7 @@ find_recurse(const pcre_uchar *code, BOOL utf)
 {
 for (;;)
   {
-  register int c = *code;
+  int c = *code;
   if (c == OP_END) return NULL;
   if (c == OP_RECURSE) return code;
 
@@ -2227,32 +2246,60 @@ for (;;)
       {
       case OP_CHAR:
       case OP_CHARI:
+      case OP_NOT:
+      case OP_NOTI:
       case OP_EXACT:
       case OP_EXACTI:
+      case OP_NOTEXACT:
+      case OP_NOTEXACTI:
       case OP_UPTO:
       case OP_UPTOI:
+      case OP_NOTUPTO:
+      case OP_NOTUPTOI:
       case OP_MINUPTO:
       case OP_MINUPTOI:
+      case OP_NOTMINUPTO:
+      case OP_NOTMINUPTOI:
       case OP_POSUPTO:
       case OP_POSUPTOI:
+      case OP_NOTPOSUPTO:
+      case OP_NOTPOSUPTOI:
       case OP_STAR:
       case OP_STARI:
+      case OP_NOTSTAR:
+      case OP_NOTSTARI:
       case OP_MINSTAR:
       case OP_MINSTARI:
+      case OP_NOTMINSTAR:
+      case OP_NOTMINSTARI:
       case OP_POSSTAR:
       case OP_POSSTARI:
+      case OP_NOTPOSSTAR:
+      case OP_NOTPOSSTARI:
       case OP_PLUS:
       case OP_PLUSI:
+      case OP_NOTPLUS:
+      case OP_NOTPLUSI:
       case OP_MINPLUS:
       case OP_MINPLUSI:
+      case OP_NOTMINPLUS:
+      case OP_NOTMINPLUSI:
       case OP_POSPLUS:
       case OP_POSPLUSI:
+      case OP_NOTPOSPLUS:
+      case OP_NOTPOSPLUSI:
       case OP_QUERY:
       case OP_QUERYI:
+      case OP_NOTQUERY:
+      case OP_NOTQUERYI:
       case OP_MINQUERY:
       case OP_MINQUERYI:
+      case OP_NOTMINQUERY:
+      case OP_NOTMINQUERYI:
       case OP_POSQUERY:
       case OP_POSQUERYI:
+      case OP_NOTPOSQUERY:
+      case OP_NOTPOSQUERYI:
       if (HAS_EXTRALEN(code[-1])) code += GET_EXTRALEN(code[-1]);
       break;
       }
@@ -2290,7 +2337,7 @@ static BOOL
 could_be_empty_branch(const pcre_uchar *code, const pcre_uchar *endcode,
   BOOL utf, compile_data *cd)
 {
-register int c;
+int c;
 for (code = first_significant_code(code + PRIV(OP_lengths)[*code], TRUE);
      code < endcode;
      code = first_significant_code(code + PRIV(OP_lengths)[c], TRUE))
@@ -2690,7 +2737,7 @@ static int
 check_posix_name(const pcre_uchar *ptr, int len)
 {
 const char *pn = posix_names;
-register int yield = 0;
+int yield = 0;
 while (posix_name_lengths[yield] != 0)
   {
   if (len == posix_name_lengths[yield] &&
@@ -3071,22 +3118,28 @@ if (next >= 0) switch(op_code)
 #endif  /* SUPPORT_UTF */
   return (c != TABLE_GET((unsigned int)next, cd->fcc, next));  /* Non-UTF-8 mode */
 
-  /* For OP_NOT and OP_NOTI, the data is always a single-byte character. These
-  opcodes are not used for multi-byte characters, because they are coded using
-  an XCLASS instead. */
-
   case OP_NOT:
-  return (c = *previous) == next;
+#ifdef SUPPORT_UTF
+  GETCHARTEST(c, previous);
+#else
+  c = *previous;
+#endif
+  return c == next;
 
   case OP_NOTI:
-  if ((c = *previous) == next) return TRUE;
+#ifdef SUPPORT_UTF
+  GETCHARTEST(c, previous);
+#else
+  c = *previous;
+#endif
+  if (c == next) return TRUE;
 #ifdef SUPPORT_UTF
   if (utf)
     {
     unsigned int othercase;
     if (next < 128) othercase = cd->fcc[next]; else
 #ifdef SUPPORT_UCP
-    othercase = UCD_OTHERCASE(next);
+    othercase = UCD_OTHERCASE((unsigned int)next);
 #else
     othercase = NOTACHAR;
 #endif
@@ -3094,28 +3147,28 @@ if (next >= 0) switch(op_code)
     }
   else
 #endif  /* SUPPORT_UTF */
-  return (c == (int)(TABLE_GET((unsigned int)next, cd->fcc, next)));  /* Non-UTF-8 mode */
+  return (c == TABLE_GET((unsigned int)next, cd->fcc, next));  /* Non-UTF-8 mode */
 
   /* Note that OP_DIGIT etc. are generated only when PCRE_UCP is *not* set.
   When it is set, \d etc. are converted into OP_(NOT_)PROP codes. */
 
   case OP_DIGIT:
-  return next > 127 || (cd->ctypes[next] & ctype_digit) == 0;
+  return next > 255 || (cd->ctypes[next] & ctype_digit) == 0;
 
   case OP_NOT_DIGIT:
-  return next <= 127 && (cd->ctypes[next] & ctype_digit) != 0;
+  return next <= 255 && (cd->ctypes[next] & ctype_digit) != 0;
 
   case OP_WHITESPACE:
-  return next > 127 || (cd->ctypes[next] & ctype_space) == 0;
+  return next > 255 || (cd->ctypes[next] & ctype_space) == 0;
 
   case OP_NOT_WHITESPACE:
-  return next <= 127 && (cd->ctypes[next] & ctype_space) != 0;
+  return next <= 255 && (cd->ctypes[next] & ctype_space) != 0;
 
   case OP_WORDCHAR:
-  return next > 127 || (cd->ctypes[next] & ctype_word) == 0;
+  return next > 255 || (cd->ctypes[next] & ctype_word) == 0;
 
   case OP_NOT_WORDCHAR:
-  return next <= 127 && (cd->ctypes[next] & ctype_word) != 0;
+  return next <= 255 && (cd->ctypes[next] & ctype_word) != 0;
 
   case OP_HSPACE:
   case OP_NOT_HSPACE:
@@ -3193,22 +3246,22 @@ switch(op_code)
   switch(-next)
     {
     case ESC_d:
-    return c > 127 || (cd->ctypes[c] & ctype_digit) == 0;
+    return c > 255 || (cd->ctypes[c] & ctype_digit) == 0;
 
     case ESC_D:
-    return c <= 127 && (cd->ctypes[c] & ctype_digit) != 0;
+    return c <= 255 && (cd->ctypes[c] & ctype_digit) != 0;
 
     case ESC_s:
-    return c > 127 || (cd->ctypes[c] & ctype_space) == 0;
+    return c > 255 || (cd->ctypes[c] & ctype_space) == 0;
 
     case ESC_S:
-    return c <= 127 && (cd->ctypes[c] & ctype_space) != 0;
+    return c <= 255 && (cd->ctypes[c] & ctype_space) != 0;
 
     case ESC_w:
-    return c > 127 || (cd->ctypes[c] & ctype_word) == 0;
+    return c > 255 || (cd->ctypes[c] & ctype_word) == 0;
 
     case ESC_W:
-    return c <= 127 && (cd->ctypes[c] & ctype_word) != 0;
+    return c <= 255 && (cd->ctypes[c] & ctype_word) != 0;
 
     case ESC_h:
     case ESC_H:
@@ -3317,10 +3370,10 @@ switch(op_code)
   return next == -ESC_d;
 
   case OP_WHITESPACE:
-  return next == -ESC_S || next == -ESC_d || next == -ESC_w || next == -ESC_R;
+  return next == -ESC_S || next == -ESC_d || next == -ESC_w;
 
   case OP_NOT_WHITESPACE:
-  return next == -ESC_s || next == -ESC_h || next == -ESC_v;
+  return next == -ESC_s || next == -ESC_h || next == -ESC_v || next == -ESC_R;
 
   case OP_HSPACE:
   return next == -ESC_S || next == -ESC_H || next == -ESC_d ||
@@ -3396,8 +3449,8 @@ pcre_int32 req_caseopt, reqvary, tempreqvary;
 int options = *optionsptr;               /* May change dynamically */
 int after_manual_callout = 0;
 int length_prevgroup = 0;
-register int c;
-register pcre_uchar *code = *codeptr;
+int c;
+pcre_uchar *code = *codeptr;
 pcre_uchar *last_code = code;
 pcre_uchar *orig_code = code;
 pcre_uchar *tempcode;
@@ -3843,7 +3896,7 @@ for (;; ptr++)
         {
         BOOL local_negate = FALSE;
         int posix_class, taboffset, tabopt;
-        register const pcre_uint8 *cbits = cd->cbits;
+        const pcre_uint8 *cbits = cd->cbits;
         pcre_uint8 pbits[32];
 
         if (ptr[1] != CHAR_COLON)
@@ -3970,7 +4023,7 @@ for (;; ptr++)
 
         if (c < 0)
           {
-          register const pcre_uint8 *cbits = cd->cbits;
+          const pcre_uint8 *cbits = cd->cbits;
           /* Every class contains at least two < 256 characters. */
           class_has_8bitchar++;
           /* Every class contains at least two characters. */
@@ -4484,42 +4537,35 @@ for (;; ptr++)
       LONE_SINGLE_CHARACTER:
 
       /* Only the value of 1 matters for class_single_char. */
+
       if (class_single_char < 2) class_single_char++;
 
       /* If class_charcount is 1, we saw precisely one character. As long as
-      there were no negated characters >= 128 and there was no use of \p or \P,
-      in other words, no use of any XCLASS features, we can optimize.
-
-      In UTF-8 mode, we can optimize the negative case only if there were no
-      characters >= 128 because OP_NOT and the related opcodes like OP_NOTSTAR
-      operate on single-bytes characters only. This is an historical hangover.
-      Maybe one day we can tidy these opcodes to handle multi-byte characters.
+      there was no use of \p or \P, in other words, no use of any XCLASS
+      features, we can optimize.
 
       The optimization throws away the bit map. We turn the item into a
       1-character OP_CHAR[I] if it's positive, or OP_NOT[I] if it's negative.
-      Note that OP_NOT[I] does not support multibyte characters. In the positive
-      case, it can cause firstchar to be set. Otherwise, there can be no first
-      char if this item is first, whatever repeat count may follow. In the case
-      of reqchar, save the previous value for reinstating. */
+      In the positive case, it can cause firstchar to be set. Otherwise, there
+      can be no first char if this item is first, whatever repeat count may
+      follow. In the case of reqchar, save the previous value for reinstating. */
 
-#ifdef SUPPORT_UTF
-      if (class_single_char == 1 && ptr[1] == CHAR_RIGHT_SQUARE_BRACKET
-        && (!utf || !negate_class || c < (MAX_VALUE_FOR_SINGLE_CHAR + 1)))
-#else
       if (class_single_char == 1 && ptr[1] == CHAR_RIGHT_SQUARE_BRACKET)
-#endif
         {
         ptr++;
         zeroreqchar = reqchar;
-
-        /* The OP_NOT[I] opcodes work on single characters only. */
 
         if (negate_class)
           {
           if (firstchar == REQ_UNSET) firstchar = REQ_NONE;
           zerofirstchar = firstchar;
           *code++ = ((options & PCRE_CASELESS) != 0)? OP_NOTI: OP_NOT;
-          *code++ = c;
+#ifdef SUPPORT_UTF
+          if (utf && c > MAX_VALUE_FOR_SINGLE_CHAR)
+            code += PRIV(ord2utf)(c, code);
+          else
+#endif
+            *code++ = c;
           goto NOT_CHAR;
           }
 
@@ -4777,15 +4823,23 @@ for (;; ptr++)
 
     /* Now handle repetition for the different types of item. */
 
-    /* If previous was a character match, abolish the item and generate a
-    repeat item instead. If a char item has a minumum of more than one, ensure
-    that it is set in reqchar - it might not be if a sequence such as x{3} is
-    the first thing in a branch because the x will have gone into firstchar
-    instead.  */
+    /* If previous was a character or negated character match, abolish the item
+    and generate a repeat item instead. If a char item has a minimum of more
+    than one, ensure that it is set in reqchar - it might not be if a sequence
+    such as x{3} is the first thing in a branch because the x will have gone
+    into firstchar instead.  */
 
-    if (*previous == OP_CHAR || *previous == OP_CHARI)
+    if (*previous == OP_CHAR || *previous == OP_CHARI
+        || *previous == OP_NOT || *previous == OP_NOTI)
       {
-      op_type = (*previous == OP_CHAR)? 0 : OP_STARI - OP_STAR;
+      switch (*previous)
+        {
+        default: /* Make compiler happy. */
+        case OP_CHAR:  op_type = OP_STAR - OP_STAR; break;
+        case OP_CHARI: op_type = OP_STARI - OP_STAR; break;
+        case OP_NOT:   op_type = OP_NOTSTAR - OP_STAR; break;
+        case OP_NOTI:  op_type = OP_NOTSTARI - OP_STAR; break;
+        }
 
       /* Deal with UTF characters that take up more than one character. It's
       easier to write this out separately than try to macrify it. Use c to
@@ -4808,7 +4862,8 @@ for (;; ptr++)
       with UTF disabled, or for a single character UTF character. */
         {
         c = code[-1];
-        if (repeat_min > 1) reqchar = c | req_caseopt | cd->req_varyopt;
+        if (*previous <= OP_CHARI && repeat_min > 1)
+          reqchar = c | req_caseopt | cd->req_varyopt;
         }
 
       /* If the repetition is unlimited, it pays to see if the next thing on
@@ -4825,26 +4880,6 @@ for (;; ptr++)
         }
 
       goto OUTPUT_SINGLE_REPEAT;   /* Code shared with single character types */
-      }
-
-    /* If previous was a single negated character ([^a] or similar), we use
-    one of the special opcodes, replacing it. The code is shared with single-
-    character repeats by setting opt_type to add a suitable offset into
-    repeat_type. We can also test for auto-possessification. OP_NOT and OP_NOTI
-    are currently used only for single-byte chars. */
-
-    else if (*previous == OP_NOT || *previous == OP_NOTI)
-      {
-      op_type = ((*previous == OP_NOT)? OP_NOTSTAR : OP_NOTSTARI) - OP_STAR;
-      c = previous[1];
-      if (!possessive_quantifier &&
-          repeat_max < 0 &&
-          check_auto_possessive(previous, utf, ptr + 1, options, cd))
-        {
-        repeat_type = 0;    /* Force greedy */
-        possessive_quantifier = TRUE;
-        }
-      goto OUTPUT_SINGLE_REPEAT;
       }
 
     /* If previous was a character type match (\d or similar), abolish it and
@@ -5076,7 +5111,7 @@ for (;; ptr++)
 
     else if (*previous >= OP_ASSERT && *previous <= OP_COND)
       {
-      register int i;
+      int i;
       int len = (int)(code - previous);
       pcre_uchar *bralink = NULL;
       pcre_uchar *brazeroptr = NULL;
@@ -5587,6 +5622,11 @@ for (;; ptr++)
         arg = ++ptr;
         while (*ptr != 0 && *ptr != CHAR_RIGHT_PARENTHESIS) ptr++;
         arglen = (int)(ptr - arg);
+        if (arglen > (int)MAX_MARK)
+          {
+          *errorcodeptr = ERR75;
+          goto FAILED;
+          }
         }
 
       if (*ptr != CHAR_RIGHT_PARENTHESIS)
@@ -6838,10 +6878,13 @@ for (;; ptr++)
       /* For the rest (including \X when Unicode properties are supported), we
       can obtain the OP value by negating the escape value in the default
       situation when PCRE_UCP is not set. When it *is* set, we substitute
-      Unicode property tests. */
+      Unicode property tests. Note that \b and \B do a one-character
+      lookbehind. */
 
       else
         {
+        if ((-c == ESC_b || -c == ESC_B) && cd->max_lookbehind == 0)
+          cd->max_lookbehind = 1;
 #ifdef SUPPORT_UCP
         if (-c >= ESC_DU && -c <= ESC_wu)
           {
@@ -7149,7 +7192,12 @@ for (;;)
         *ptrptr = ptr;
         return FALSE;
         }
-      else { PUT(reverse_count, 0, fixed_length); }
+      else
+        {
+        if (fixed_length > cd->max_lookbehind)
+          cd->max_lookbehind = fixed_length;
+        PUT(reverse_count, 0, fixed_length);
+        }
       }
     }
 
@@ -7292,13 +7340,13 @@ Returns:     TRUE or FALSE
 */
 
 static BOOL
-is_anchored(register const pcre_uchar *code, unsigned int bracket_map,
+is_anchored(const pcre_uchar *code, unsigned int bracket_map,
   unsigned int backref_map)
 {
 do {
    const pcre_uchar *scode = first_significant_code(
      code + PRIV(OP_lengths)[*code], FALSE);
-   register int op = *scode;
+   int op = *scode;
 
    /* Non-capturing brackets */
 
@@ -7375,7 +7423,7 @@ is_startline(const pcre_uchar *code, unsigned int bracket_map,
 do {
    const pcre_uchar *scode = first_significant_code(
      code + PRIV(OP_lengths)[*code], FALSE);
-   register int op = *scode;
+   int op = *scode;
 
    /* If we are at the start of a conditional assertion group, *both* the
    conditional assertion *and* what follows the condition must satisfy the test
@@ -7474,14 +7522,14 @@ Returns:     -1 or the fixed first char
 static int
 find_firstassertedchar(const pcre_uchar *code, BOOL inassert)
 {
-register int c = -1;
+int c = -1;
 do {
    int d;
    int xl = (*code == OP_CBRA || *code == OP_SCBRA ||
              *code == OP_CBRAPOS || *code == OP_SCBRAPOS)? IMM2_SIZE:0;
    const pcre_uchar *scode = first_significant_code(code + 1+LINK_SIZE + xl,
      TRUE);
-   register int op = *scode;
+   int op = *scode;
 
    switch(op)
      {
@@ -7819,6 +7867,7 @@ cd->start_pattern = (const pcre_uchar *)pattern;
 cd->end_pattern = (const pcre_uchar *)(pattern + STRLEN_UC((const pcre_uchar *)pattern));
 cd->req_varyopt = 0;
 cd->assert_depth = 0;
+cd->max_lookbehind = 0;
 cd->external_options = options;
 cd->external_flags = 0;
 cd->open_caps = NULL;
@@ -7869,7 +7918,6 @@ re->magic_number = MAGIC_NUMBER;
 re->size = (int)size;
 re->options = cd->external_options;
 re->flags = cd->external_flags;
-re->dummy1 = 0;
 re->first_char = 0;
 re->req_char = 0;
 re->name_table_offset = sizeof(REAL_PCRE) / sizeof(pcre_uchar);
@@ -7889,6 +7937,7 @@ field; this time it's used for remembering forward references to subpatterns.
 cd->final_bracount = cd->bracount;  /* Save for checking forward references */
 cd->assert_depth = 0;
 cd->bracount = 0;
+cd->max_lookbehind = 0;
 cd->names_found = 0;
 cd->name_table = (pcre_uchar *)re + re->name_table_offset;
 codestart = cd->name_table + re->name_entry_size * re->name_count;
@@ -7910,6 +7959,7 @@ code = (pcre_uchar *)codestart;
   &firstchar, &reqchar, NULL, cd, NULL);
 re->top_bracket = cd->bracount;
 re->top_backref = cd->top_backref;
+re->max_lookbehind = cd->max_lookbehind;
 re->flags = cd->external_flags | PCRE_MODE;
 
 if (cd->had_accept) reqchar = REQ_NONE;   /* Must disable after (*ACCEPT) */
@@ -7997,6 +8047,7 @@ if (cd->check_lookbehind)
                     (fixed_length == -4)? ERR70 : ERR25;
         break;
         }
+      if (fixed_length > cd->max_lookbehind) cd->max_lookbehind = fixed_length;
       PUT(cc, 1, fixed_length);
       }
     cc += 1 + LINK_SIZE;

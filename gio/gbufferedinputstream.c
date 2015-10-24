@@ -14,9 +14,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Christian Kellner <gicmo@gnome.org>
  */
@@ -26,7 +24,8 @@
 #include "ginputstream.h"
 #include "gcancellable.h"
 #include "gasyncresult.h"
-#include "gsimpleasyncresult.h"
+#include "gtask.h"
+#include "gseekable.h"
 #include "gioerror.h"
 #include <string.h>
 #include "glibintl.h"
@@ -100,16 +99,6 @@ static gssize g_buffered_input_stream_read             (GInputStream          *s
                                                         gsize                  count,
                                                         GCancellable          *cancellable,
                                                         GError               **error);
-static void   g_buffered_input_stream_read_async       (GInputStream          *stream,
-                                                        void                  *buffer,
-                                                        gsize                  count,
-                                                        int                    io_priority,
-                                                        GCancellable          *cancellable,
-                                                        GAsyncReadyCallback    callback,
-                                                        gpointer               user_data);
-static gssize g_buffered_input_stream_read_finish      (GInputStream          *stream,
-                                                        GAsyncResult          *result,
-                                                        GError               **error);
 static gssize g_buffered_input_stream_real_fill        (GBufferedInputStream  *stream,
                                                         gssize                 count,
                                                         GCancellable          *cancellable,
@@ -124,12 +113,28 @@ static gssize g_buffered_input_stream_real_fill_finish (GBufferedInputStream  *s
                                                         GAsyncResult          *result,
                                                         GError               **error);
 
+static void     g_buffered_input_stream_seekable_iface_init (GSeekableIface  *iface);
+static goffset  g_buffered_input_stream_tell                (GSeekable       *seekable);
+static gboolean g_buffered_input_stream_can_seek            (GSeekable       *seekable);
+static gboolean g_buffered_input_stream_seek                (GSeekable       *seekable,
+							     goffset          offset,
+							     GSeekType        type,
+							     GCancellable    *cancellable,
+							     GError         **error);
+static gboolean g_buffered_input_stream_can_truncate        (GSeekable       *seekable);
+static gboolean g_buffered_input_stream_truncate            (GSeekable       *seekable,
+							     goffset          offset,
+							     GCancellable    *cancellable,
+							     GError         **error);
+
 static void compact_buffer (GBufferedInputStream *stream);
 
-G_DEFINE_TYPE (GBufferedInputStream,
-               g_buffered_input_stream,
-               G_TYPE_FILTER_INPUT_STREAM)
-
+G_DEFINE_TYPE_WITH_CODE (GBufferedInputStream,
+			 g_buffered_input_stream,
+			 G_TYPE_FILTER_INPUT_STREAM,
+                         G_ADD_PRIVATE (GBufferedInputStream)
+			 G_IMPLEMENT_INTERFACE (G_TYPE_SEEKABLE,
+						g_buffered_input_stream_seekable_iface_init))
 
 static void
 g_buffered_input_stream_class_init (GBufferedInputStreamClass *klass)
@@ -137,8 +142,6 @@ g_buffered_input_stream_class_init (GBufferedInputStreamClass *klass)
   GObjectClass *object_class;
   GInputStreamClass *istream_class;
   GBufferedInputStreamClass *bstream_class;
-
-  g_type_class_add_private (klass, sizeof (GBufferedInputStreamPrivate));
 
   object_class = G_OBJECT_CLASS (klass);
   object_class->get_property = g_buffered_input_stream_get_property;
@@ -150,8 +153,6 @@ g_buffered_input_stream_class_init (GBufferedInputStreamClass *klass)
   istream_class->skip_async  = g_buffered_input_stream_skip_async;
   istream_class->skip_finish = g_buffered_input_stream_skip_finish;
   istream_class->read_fn = g_buffered_input_stream_read;
-  istream_class->read_async  = g_buffered_input_stream_read_async;
-  istream_class->read_finish = g_buffered_input_stream_read_finish;
 
   bstream_class = G_BUFFERED_INPUT_STREAM_CLASS (klass);
   bstream_class->fill = g_buffered_input_stream_real_fill;
@@ -299,11 +300,19 @@ g_buffered_input_stream_finalize (GObject *object)
 }
 
 static void
+g_buffered_input_stream_seekable_iface_init (GSeekableIface *iface)
+{
+  iface->tell         = g_buffered_input_stream_tell;
+  iface->can_seek     = g_buffered_input_stream_can_seek;
+  iface->seek         = g_buffered_input_stream_seek;
+  iface->can_truncate = g_buffered_input_stream_can_truncate;
+  iface->truncate_fn  = g_buffered_input_stream_truncate;
+}
+
+static void
 g_buffered_input_stream_init (GBufferedInputStream *stream)
 {
-  stream->priv = G_TYPE_INSTANCE_GET_PRIVATE (stream,
-                                              G_TYPE_BUFFERED_INPUT_STREAM,
-                                              GBufferedInputStreamPrivate);
+  stream->priv = g_buffered_input_stream_get_instance_private (stream);
 }
 
 
@@ -445,8 +454,7 @@ async_fill_callback_wrapper (GObject      *source_object,
  * g_buffered_input_stream_fill_async:
  * @stream: a #GBufferedInputStream
  * @count: the number of bytes that will be read from the stream
- * @io_priority: the <link linkend="io-priority">I/O priority</link>
- *     of the request
+ * @io_priority: the [I/O priority][io-priority] of the request
  * @cancellable: (allow-none): optional #GCancellable object
  * @callback: (scope async): a #GAsyncReadyCallback
  * @user_data: (closure): a #gpointer
@@ -467,39 +475,36 @@ g_buffered_input_stream_fill_async (GBufferedInputStream *stream,
                                     gpointer              user_data)
 {
   GBufferedInputStreamClass *class;
-  GSimpleAsyncResult *simple;
   GError *error = NULL;
 
   g_return_if_fail (G_IS_BUFFERED_INPUT_STREAM (stream));
 
   if (count == 0)
     {
-      simple = g_simple_async_result_new (G_OBJECT (stream),
-                                          callback,
-                                          user_data,
-                                          g_buffered_input_stream_fill_async);
-      g_simple_async_result_complete_in_idle (simple);
-      g_object_unref (simple);
+      GTask *task;
+
+      task = g_task_new (stream, cancellable, callback, user_data);
+      g_task_set_source_tag (task, g_buffered_input_stream_fill_async);
+      g_task_return_int (task, 0);
+      g_object_unref (task);
       return;
     }
 
   if (count < -1)
     {
-      g_simple_async_report_error_in_idle (G_OBJECT (stream),
-                                           callback,
-                                           user_data,
-                                           G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
-                                           _("Too large count value passed to %s"),
-                                           G_STRFUNC);
+      g_task_report_new_error (stream, callback, user_data,
+                               g_buffered_input_stream_fill_async,
+                               G_IO_ERROR, G_IO_ERROR_INVALID_ARGUMENT,
+			       _("Too large count value passed to %s"),
+			       G_STRFUNC);
       return;
     }
 
   if (!g_input_stream_set_pending (G_INPUT_STREAM (stream), &error))
     {
-      g_simple_async_report_take_gerror_in_idle (G_OBJECT (stream),
-                                            callback,
-                                            user_data,
-                                            error);
+      g_task_report_error (stream, callback, user_data,
+                           g_buffered_input_stream_fill_async,
+                           error);
       return;
     }
 
@@ -526,22 +531,15 @@ g_buffered_input_stream_fill_finish (GBufferedInputStream  *stream,
                                      GAsyncResult          *result,
                                      GError               **error)
 {
-  GSimpleAsyncResult *simple;
   GBufferedInputStreamClass *class;
 
   g_return_val_if_fail (G_IS_BUFFERED_INPUT_STREAM (stream), -1);
   g_return_val_if_fail (G_IS_ASYNC_RESULT (result), -1);
 
-  if (G_IS_SIMPLE_ASYNC_RESULT (result))
-    {
-      simple = G_SIMPLE_ASYNC_RESULT (result);
-      if (g_simple_async_result_propagate_error (simple, error))
-        return -1;
-
-      /* Special case read of 0 bytes */
-      if (g_simple_async_result_get_source_tag (simple) == g_buffered_input_stream_fill_async)
-        return 0;
-    }
+  if (g_async_result_legacy_propagate_error (result, error))
+    return -1;
+  else if (g_async_result_is_tagged (result, g_buffered_input_stream_fill_async))
+    return g_task_propagate_int (G_TASK (result), error);
 
   class = G_BUFFERED_INPUT_STREAM_GET_CLASS (stream);
   return class->fill_finish (stream, result, error);
@@ -638,7 +636,7 @@ compact_buffer (GBufferedInputStream *stream)
 
   current_size = priv->end - priv->pos;
 
-  g_memmove (priv->buffer, priv->buffer + priv->pos, current_size);
+  memmove (priv->buffer, priv->buffer + priv->pos, current_size);
 
   priv->pos = 0;
   priv->end = current_size;
@@ -838,6 +836,108 @@ g_buffered_input_stream_read (GInputStream *stream,
   return bytes_read;
 }
 
+static goffset
+g_buffered_input_stream_tell (GSeekable *seekable)
+{
+  GBufferedInputStream        *bstream;
+  GBufferedInputStreamPrivate *priv;
+  GInputStream *base_stream;
+  GSeekable    *base_stream_seekable;
+  gsize available;
+  goffset base_offset;
+  
+  bstream = G_BUFFERED_INPUT_STREAM (seekable);
+  priv = bstream->priv;
+
+  base_stream = G_FILTER_INPUT_STREAM (seekable)->base_stream;
+  if (!G_IS_SEEKABLE (base_stream))
+    return 0;
+  base_stream_seekable = G_SEEKABLE (base_stream);
+  
+  available = priv->end - priv->pos;
+  base_offset = g_seekable_tell (base_stream_seekable);
+
+  return base_offset - available;
+}
+
+static gboolean
+g_buffered_input_stream_can_seek (GSeekable *seekable)
+{
+  GInputStream *base_stream;
+  
+  base_stream = G_FILTER_INPUT_STREAM (seekable)->base_stream;
+  return G_IS_SEEKABLE (base_stream) && g_seekable_can_seek (G_SEEKABLE (base_stream));
+}
+
+static gboolean
+g_buffered_input_stream_seek (GSeekable     *seekable,
+			      goffset        offset,
+			      GSeekType      type,
+			      GCancellable  *cancellable,
+			      GError       **error)
+{
+  GBufferedInputStream        *bstream;
+  GBufferedInputStreamPrivate *priv;
+  GInputStream *base_stream;
+  GSeekable *base_stream_seekable;
+
+  bstream = G_BUFFERED_INPUT_STREAM (seekable);
+  priv = bstream->priv;
+
+  base_stream = G_FILTER_INPUT_STREAM (seekable)->base_stream;
+  if (!G_IS_SEEKABLE (base_stream))
+    {
+      g_set_error_literal (error, G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                           _("Seek not supported on base stream"));
+      return FALSE;
+    }
+
+  base_stream_seekable = G_SEEKABLE (base_stream);
+  
+  if (type == G_SEEK_CUR)
+    {
+      if (offset <= priv->end - priv->pos && offset >= -priv->pos)
+	{
+	  priv->pos += offset;
+	  return TRUE;
+	}
+      else
+	{
+	  offset -= priv->end - priv->pos;
+	}
+    }
+
+  if (g_seekable_seek (base_stream_seekable, offset, type, cancellable, error))
+    {
+      priv->pos = 0;
+      priv->end = 0;
+      return TRUE;
+    }
+  else
+    {
+      return FALSE;
+    }
+}
+
+static gboolean
+g_buffered_input_stream_can_truncate (GSeekable *seekable)
+{
+  return FALSE;
+}
+
+static gboolean
+g_buffered_input_stream_truncate (GSeekable     *seekable,
+				  goffset        offset,
+				  GCancellable  *cancellable,
+				  GError       **error)
+{
+  g_set_error_literal (error,
+		       G_IO_ERROR,
+		       G_IO_ERROR_NOT_SUPPORTED,
+		       _("Cannot truncate GBufferedInputStream"));
+  return FALSE;
+}
+
 /**
  * g_buffered_input_stream_read_byte:
  * @stream: a #GBufferedInputStream
@@ -927,38 +1027,28 @@ fill_async_callback (GObject      *source_object,
 {
   GError *error;
   gssize res;
-  GSimpleAsyncResult *simple;
-
-  simple = user_data;
+  GTask *task = user_data;
 
   error = NULL;
   res = g_input_stream_read_finish (G_INPUT_STREAM (source_object),
                                     result, &error);
-
-  g_simple_async_result_set_op_res_gssize (simple, res);
   if (res == -1)
-    {
-      g_simple_async_result_take_error (simple, error);
-    }
+    g_task_return_error (task, error);
   else
     {
+      GBufferedInputStream *stream;
       GBufferedInputStreamPrivate *priv;
-      GObject *object;
 
-      object = g_async_result_get_source_object (G_ASYNC_RESULT (simple));
-      priv = G_BUFFERED_INPUT_STREAM (object)->priv;
+      stream = g_task_get_source_object (task);
+      priv = G_BUFFERED_INPUT_STREAM (stream)->priv;
 
       g_assert_cmpint (priv->end + res, <=, priv->len);
       priv->end += res;
 
-      g_object_unref (object);
+      g_task_return_int (task, res);
     }
 
-  /* Complete immediately, not in idle, since we're already
-   * in a mainloop callout
-   */
-  g_simple_async_result_complete (simple);
-  g_object_unref (simple);
+  g_object_unref (task);
 }
 
 static void
@@ -971,7 +1061,7 @@ g_buffered_input_stream_real_fill_async (GBufferedInputStream *stream,
 {
   GBufferedInputStreamPrivate *priv;
   GInputStream *base_stream;
-  GSimpleAsyncResult *simple;
+  GTask *task;
   gsize in_buffer;
 
   priv = stream->priv;
@@ -988,9 +1078,7 @@ g_buffered_input_stream_real_fill_async (GBufferedInputStream *stream,
   if (priv->len - priv->end < count)
     compact_buffer (stream);
 
-  simple = g_simple_async_result_new (G_OBJECT (stream),
-                                      callback, user_data,
-                                      g_buffered_input_stream_real_fill_async);
+  task = g_task_new (stream, cancellable, callback, user_data);
 
   base_stream = G_FILTER_INPUT_STREAM (stream)->base_stream;
   g_input_stream_read_async (base_stream,
@@ -999,7 +1087,7 @@ g_buffered_input_stream_real_fill_async (GBufferedInputStream *stream,
                              io_priority,
                              cancellable,
                              fill_async_callback,
-                             simple);
+                             task);
 }
 
 static gssize
@@ -1007,197 +1095,9 @@ g_buffered_input_stream_real_fill_finish (GBufferedInputStream *stream,
                                           GAsyncResult         *result,
                                           GError              **error)
 {
-  GSimpleAsyncResult *simple;
-  gssize nread;
+  g_return_val_if_fail (g_task_is_valid (result, stream), -1);
 
-  simple = G_SIMPLE_ASYNC_RESULT (result);
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == g_buffered_input_stream_real_fill_async);
-
-  nread = g_simple_async_result_get_op_res_gssize (simple);
-  return nread;
-}
-
-typedef struct
-{
-  gssize bytes_read;
-  gssize count;
-  void *buffer;
-} ReadAsyncData;
-
-static void
-free_read_async_data (gpointer _data)
-{
-  ReadAsyncData *data = _data;
-  g_slice_free (ReadAsyncData, data);
-}
-
-static void
-large_read_callback (GObject *source_object,
-                     GAsyncResult *result,
-                     gpointer user_data)
-{
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (user_data);
-  ReadAsyncData *data;
-  GError *error;
-  gssize nread;
-
-  data = g_simple_async_result_get_op_res_gpointer (simple);
-
-  error = NULL;
-  nread = g_input_stream_read_finish (G_INPUT_STREAM (source_object),
-                                      result, &error);
-
-  /* Only report the error if we've not already read some data */
-  if (nread < 0 && data->bytes_read == 0)
-    g_simple_async_result_take_error (simple, error);
-  else if (error)
-    g_error_free (error);
-
-  if (nread > 0)
-    data->bytes_read += nread;
-
-  /* Complete immediately, not in idle, since we're already
-   * in a mainloop callout
-   */
-  g_simple_async_result_complete (simple);
-  g_object_unref (simple);
-}
-
-static void
-read_fill_buffer_callback (GObject      *source_object,
-                           GAsyncResult *result,
-                           gpointer      user_data)
-{
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (user_data);
-  GBufferedInputStream *bstream;
-  GBufferedInputStreamPrivate *priv;
-  ReadAsyncData *data;
-  GError *error;
-  gssize nread;
-  gsize available;
-
-  bstream = G_BUFFERED_INPUT_STREAM (source_object);
-  priv = bstream->priv;
-
-  data = g_simple_async_result_get_op_res_gpointer (simple);
-
-  error = NULL;
-  nread = g_buffered_input_stream_fill_finish (bstream,
-                                               result, &error);
-
-  if (nread < 0 && data->bytes_read == 0)
-    g_simple_async_result_take_error (simple, error);
-  else if (error)
-    g_error_free (error);
-
-  if (nread > 0)
-    {
-      available = priv->end - priv->pos;
-      data->count = MIN (data->count, available);
-
-      memcpy ((char *)data->buffer + data->bytes_read, (char *)priv->buffer + priv->pos, data->count);
-      data->bytes_read += data->count;
-      priv->pos += data->count;
-    }
-
-  /* Complete immediately, not in idle, since we're already
-   * in a mainloop callout
-   */
-  g_simple_async_result_complete (simple);
-  g_object_unref (simple);
-}
-
-static void
-g_buffered_input_stream_read_async (GInputStream        *stream,
-                                    void                *buffer,
-                                    gsize                count,
-                                    int                  io_priority,
-                                    GCancellable        *cancellable,
-                                    GAsyncReadyCallback  callback,
-                                    gpointer             user_data)
-{
-  GBufferedInputStream *bstream;
-  GBufferedInputStreamPrivate *priv;
-  GBufferedInputStreamClass *class;
-  GInputStream *base_stream;
-  gsize available;
-  GSimpleAsyncResult *simple;
-  ReadAsyncData *data;
-
-  bstream = G_BUFFERED_INPUT_STREAM (stream);
-  priv = bstream->priv;
-
-  data = g_slice_new (ReadAsyncData);
-  data->buffer = buffer;
-  data->bytes_read = 0;
-  simple = g_simple_async_result_new (G_OBJECT (stream),
-                                      callback, user_data,
-                                      g_buffered_input_stream_read_async);
-  g_simple_async_result_set_op_res_gpointer (simple, data, free_read_async_data);
-
-  available = priv->end - priv->pos;
-
-  if (count <= available)
-    {
-      memcpy (buffer, priv->buffer + priv->pos, count);
-      priv->pos += count;
-      data->bytes_read = count;
-
-      g_simple_async_result_complete_in_idle (simple);
-      g_object_unref (simple);
-      return;
-    }
-
-
-  /* Full request not available, read all currently available
-   * and request refill for more
-   */
-
-  memcpy (buffer, priv->buffer + priv->pos, available);
-  priv->pos = 0;
-  priv->end = 0;
-
-  count -= available;
-
-  data->bytes_read = available;
-  data->count = count;
-
-  if (count > priv->len)
-    {
-      /* Large request, shortcut buffer */
-
-      base_stream = G_FILTER_INPUT_STREAM (stream)->base_stream;
-
-      g_input_stream_read_async (base_stream,
-                                 (char *)buffer + data->bytes_read,
-                                 count,
-                                 io_priority, cancellable,
-                                 large_read_callback,
-                                 simple);
-    }
-  else
-    {
-      class = G_BUFFERED_INPUT_STREAM_GET_CLASS (stream);
-      class->fill_async (bstream, priv->len, io_priority, cancellable,
-                         read_fill_buffer_callback, simple);
-    }
-}
-
-static gssize
-g_buffered_input_stream_read_finish (GInputStream   *stream,
-                                     GAsyncResult   *result,
-                                     GError        **error)
-{
-  GSimpleAsyncResult *simple;
-  ReadAsyncData *data;
-
-  simple = G_SIMPLE_ASYNC_RESULT (result);
-
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == g_buffered_input_stream_read_async);
-
-  data = g_simple_async_result_get_op_res_gpointer (simple);
-
-  return data->bytes_read;
+  return g_task_propagate_int (G_TASK (result), error);
 }
 
 typedef struct
@@ -1218,12 +1118,12 @@ large_skip_callback (GObject      *source_object,
                      GAsyncResult *result,
                      gpointer      user_data)
 {
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (user_data);
+  GTask *task = G_TASK (user_data);
   SkipAsyncData *data;
   GError *error;
   gssize nread;
 
-  data = g_simple_async_result_get_op_res_gpointer (simple);
+  data = g_task_get_task_data (task);
 
   error = NULL;
   nread = g_input_stream_skip_finish (G_INPUT_STREAM (source_object),
@@ -1231,18 +1131,19 @@ large_skip_callback (GObject      *source_object,
 
   /* Only report the error if we've not already read some data */
   if (nread < 0 && data->bytes_skipped == 0)
-    g_simple_async_result_take_error (simple, error);
-  else if (error)
-    g_error_free (error);
+    g_task_return_error (task, error);
+  else
+    {
+      if (error)
+	g_error_free (error);
 
-  if (nread > 0)
-    data->bytes_skipped += nread;
+      if (nread > 0)
+	data->bytes_skipped += nread;
 
-  /* Complete immediately, not in idle, since we're already
-   * in a mainloop callout
-   */
-  g_simple_async_result_complete (simple);
-  g_object_unref (simple);
+      g_task_return_int (task, data->bytes_skipped);
+    }
+
+  g_object_unref (task);
 }
 
 static void
@@ -1250,7 +1151,7 @@ skip_fill_buffer_callback (GObject      *source_object,
                            GAsyncResult *result,
                            gpointer      user_data)
 {
-  GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (user_data);
+  GTask *task = G_TASK (user_data);
   GBufferedInputStream *bstream;
   GBufferedInputStreamPrivate *priv;
   SkipAsyncData *data;
@@ -1261,31 +1162,32 @@ skip_fill_buffer_callback (GObject      *source_object,
   bstream = G_BUFFERED_INPUT_STREAM (source_object);
   priv = bstream->priv;
 
-  data = g_simple_async_result_get_op_res_gpointer (simple);
+  data = g_task_get_task_data (task);
 
   error = NULL;
   nread = g_buffered_input_stream_fill_finish (bstream,
                                                result, &error);
 
   if (nread < 0 && data->bytes_skipped == 0)
-    g_simple_async_result_take_error (simple, error);
-  else if (error)
-    g_error_free (error);
-
-  if (nread > 0)
+    g_task_return_error (task, error);
+  else
     {
-      available = priv->end - priv->pos;
-      data->count = MIN (data->count, available);
+      if (error)
+	g_error_free (error);
 
-      data->bytes_skipped += data->count;
-      priv->pos += data->count;
+      if (nread > 0)
+	{
+	  available = priv->end - priv->pos;
+	  data->count = MIN (data->count, available);
+
+	  data->bytes_skipped += data->count;
+	  priv->pos += data->count;
+	}
+
+      g_task_return_int (task, data->bytes_skipped);
     }
 
-  /* Complete immediately, not in idle, since we're already
-   * in a mainloop callout
-   */
-  g_simple_async_result_complete (simple);
-  g_object_unref (simple);
+  g_object_unref (task);
 }
 
 static void
@@ -1301,7 +1203,7 @@ g_buffered_input_stream_skip_async (GInputStream        *stream,
   GBufferedInputStreamClass *class;
   GInputStream *base_stream;
   gsize available;
-  GSimpleAsyncResult *simple;
+  GTask *task;
   SkipAsyncData *data;
 
   bstream = G_BUFFERED_INPUT_STREAM (stream);
@@ -1309,20 +1211,17 @@ g_buffered_input_stream_skip_async (GInputStream        *stream,
 
   data = g_slice_new (SkipAsyncData);
   data->bytes_skipped = 0;
-  simple = g_simple_async_result_new (G_OBJECT (stream),
-                                      callback, user_data,
-                                      g_buffered_input_stream_skip_async);
-  g_simple_async_result_set_op_res_gpointer (simple, data, free_skip_async_data);
+  task = g_task_new (stream, cancellable, callback, user_data);
+  g_task_set_task_data (task, data, free_skip_async_data);
 
   available = priv->end - priv->pos;
 
   if (count <= available)
     {
       priv->pos += count;
-      data->bytes_skipped = count;
 
-      g_simple_async_result_complete_in_idle (simple);
-      g_object_unref (simple);
+      g_task_return_int (task, count);
+      g_object_unref (task);
       return;
     }
 
@@ -1348,13 +1247,13 @@ g_buffered_input_stream_skip_async (GInputStream        *stream,
                                  count,
                                  io_priority, cancellable,
                                  large_skip_callback,
-                                 simple);
+                                 task);
     }
   else
     {
       class = G_BUFFERED_INPUT_STREAM_GET_CLASS (stream);
       class->fill_async (bstream, priv->len, io_priority, cancellable,
-                         skip_fill_buffer_callback, simple);
+                         skip_fill_buffer_callback, task);
     }
 }
 
@@ -1363,14 +1262,7 @@ g_buffered_input_stream_skip_finish (GInputStream   *stream,
                                      GAsyncResult   *result,
                                      GError        **error)
 {
-  GSimpleAsyncResult *simple;
-  SkipAsyncData *data;
+  g_return_val_if_fail (g_task_is_valid (result, stream), -1);
 
-  simple = G_SIMPLE_ASYNC_RESULT (result);
-
-  g_warn_if_fail (g_simple_async_result_get_source_tag (simple) == g_buffered_input_stream_skip_async);
-
-  data = g_simple_async_result_get_op_res_gpointer (simple);
-
-  return data->bytes_skipped;
+  return g_task_propagate_int (G_TASK (result), error);
 }

@@ -12,12 +12,12 @@
  *  Lesser General Public License for more details.
  *
  *  You should have received a copy of the GNU Lesser General Public
- *  License along with this library; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307,
- *  USA.
+ *  License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Ryan Lortie <desrt@desrt.ca>
  */
+
+#include "config.h"
 
 #include "gmenuexporter.h"
 
@@ -30,6 +30,7 @@
  * SECTION:gmenuexporter
  * @title: GMenuModel exporter
  * @short_description: Export GMenuModels on D-Bus
+ * @include: gio/gio.h
  * @see_also: #GMenuModel, #GDBusMenuModel
  *
  * These functions support exporting a #GMenuModel on D-Bus.
@@ -43,7 +44,7 @@
 /* {{{1 D-Bus Interface description */
 
 /* For documentation of this interface, see
- * http://live.gnome.org/GTK+/GApplication-dbus-apis
+ * https://wiki.gnome.org/Projects/GLib/GApplication/DBusAPI
  */
 
 static GDBusInterfaceInfo *
@@ -357,7 +358,15 @@ g_menu_exporter_group_subscribe (GMenuExporterGroup *group,
       group->prepared = TRUE;
 
       menu = g_hash_table_lookup (group->menus, 0);
-      g_menu_exporter_menu_prepare (menu);
+
+      /* If the group was created by a subscription and does not yet
+       * exist, it won't have a root menu...
+       *
+       * That menu will be prepared if it is ever added (due to
+       * group->prepared == TRUE).
+       */
+      if (menu)
+        g_menu_exporter_menu_prepare (menu);
     }
 
   group->subscribed++;
@@ -468,6 +477,7 @@ g_menu_exporter_remote_subscribe (GMenuExporterRemote *remote,
   count = (gsize) g_hash_table_lookup (remote->watches, GINT_TO_POINTER (group_id));
   g_hash_table_insert (remote->watches, GINT_TO_POINTER (group_id), GINT_TO_POINTER (count + 1));
 
+  /* Group will be created (as empty/unsubscribed if it does not exist) */
   group = g_menu_exporter_lookup_group (remote->exporter, group_id);
   g_menu_exporter_group_subscribe (group, builder);
 }
@@ -556,7 +566,8 @@ g_menu_exporter_name_vanished (GDBusConnection *connection,
 {
   GMenuExporter *exporter = user_data;
 
-  g_assert (exporter->connection == connection);
+  /* connection == NULL when we get called because the connection closed */
+  g_assert (exporter->connection == connection || connection == NULL);
 
   g_hash_table_remove (exporter->remotes, name);
 }
@@ -732,7 +743,7 @@ g_menu_exporter_method_call (GDBusConnection       *connection,
  * The implemented D-Bus API should be considered private.
  * It is subject to change in the future.
  *
- * An object path can only have one action group exported on it. If this
+ * An object path can only have one menu model exported on it. If this
  * constraint is violated, the export will fail and 0 will be
  * returned (with @error set accordingly).
  *

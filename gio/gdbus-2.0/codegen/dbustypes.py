@@ -15,9 +15,7 @@
 # Lesser General Public License for more details.
 #
 # You should have received a copy of the GNU Lesser General
-# Public License along with this library; if not, write to the
-# Free Software Foundation, Inc., 59 Temple Place, Suite 330,
-# Boston, MA 02111-1307, USA.
+# Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
 #
 # Author: David Zeuthen <davidz@redhat.com>
 
@@ -235,11 +233,13 @@ class Method:
         self.since = ''
         self.deprecated = False
 
-    def post_process(self, interface_prefix, cns, cns_upper, cns_lower):
+    def post_process(self, interface_prefix, cns, cns_upper, cns_lower, containing_iface):
         if len(self.doc_string) == 0:
             self.doc_string = utils.lookup_docs(self.annotations)
         if len(self.since) == 0:
             self.since = utils.lookup_since(self.annotations)
+            if len(self.since) == 0:
+                self.since = containing_iface.since
 
         name = self.name
         overridden_name = utils.lookup_annotation(self.annotations, 'org.gtk.GDBus.C.Name')
@@ -272,11 +272,13 @@ class Signal:
         self.since = ''
         self.deprecated = False
 
-    def post_process(self, interface_prefix, cns, cns_upper, cns_lower):
+    def post_process(self, interface_prefix, cns, cns_upper, cns_lower, containing_iface):
         if len(self.doc_string) == 0:
             self.doc_string = utils.lookup_docs(self.annotations)
         if len(self.since) == 0:
             self.since = utils.lookup_since(self.annotations)
+            if len(self.since) == 0:
+                self.since = containing_iface.since
 
         name = self.name
         overridden_name = utils.lookup_annotation(self.annotations, 'org.gtk.GDBus.C.Name')
@@ -319,11 +321,13 @@ class Property:
         self.since = ''
         self.deprecated = False
 
-    def post_process(self, interface_prefix, cns, cns_upper, cns_lower):
+    def post_process(self, interface_prefix, cns, cns_upper, cns_lower, containing_iface):
         if len(self.doc_string) == 0:
             self.doc_string = utils.lookup_docs(self.annotations)
         if len(self.since) == 0:
             self.since = utils.lookup_since(self.annotations)
+            if len(self.since) == 0:
+                self.since = containing_iface.since
 
         name = self.name
         overridden_name = utils.lookup_annotation(self.annotations, 'org.gtk.GDBus.C.Name')
@@ -333,9 +337,10 @@ class Property:
             if overridden_name:
                 name = overridden_name
             self.name_lower = utils.camel_case_to_uscore(name).lower().replace('-', '_')
+        self.name_hyphen = self.name_lower.replace('_', '-')
+        # don't clash with the GType getter, e.g.: GType foo_bar_get_type (void); G_GNUC_CONST
         if self.name_lower == 'type':
             self.name_lower = 'type_'
-        self.name_hyphen = self.name_lower.replace('_', '-')
 
         # recalculate arg
         self.arg.annotations = self.annotations
@@ -410,10 +415,10 @@ class Interface:
             self.deprecated = True
 
         for m in self.methods:
-            m.post_process(interface_prefix, cns, cns_upper, cns_lower)
+            m.post_process(interface_prefix, cns, cns_upper, cns_lower, self)
 
         for s in self.signals:
-            s.post_process(interface_prefix, cns, cns_upper, cns_lower)
+            s.post_process(interface_prefix, cns, cns_upper, cns_lower, self)
 
         for p in self.properties:
-            p.post_process(interface_prefix, cns, cns_upper, cns_lower)
+            p.post_process(interface_prefix, cns, cns_upper, cns_lower, self)

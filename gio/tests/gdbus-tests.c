@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: David Zeuthen <davidz@redhat.com>
  */
@@ -68,9 +66,9 @@ _g_assert_property_notify_run (gpointer     object,
                                  G_CALLBACK (on_property_notify),
                                  &data);
   g_free (s);
-  timeout_id = g_timeout_add (30 * 1000,
-                              on_property_notify_timeout,
-                              &data);
+  timeout_id = g_timeout_add_seconds (30,
+                                      on_property_notify_timeout,
+                                      &data);
   g_main_loop_run (data.loop);
   g_signal_handler_disconnect (object, handler_id);
   g_source_remove (timeout_id);
@@ -117,9 +115,9 @@ _g_assert_signal_received_run (gpointer     object,
                                          signal_name,
                                          G_CALLBACK (on_signal_received),
                                          &data);
-  timeout_id = g_timeout_add (30 * 1000,
-                              on_signal_received_timeout,
-                              &data);
+  timeout_id = g_timeout_add_seconds (30,
+                                      on_signal_received_timeout,
+                                      &data);
   g_main_loop_run (data.loop);
   g_signal_handler_disconnect (object, handler_id);
   g_source_remove (timeout_id);
@@ -155,111 +153,5 @@ _g_bus_get_priv (GBusType            bus_type,
  out:
   return ret;
 }
-
-/* ---------------------------------------------------------------------------------------------------- */
-
-#if 0
-/* toggle refs are not easy to use (maybe not even safe) when multiple
- * threads are involved so implement this by busy-waiting for now
- */
-gboolean
-_g_object_wait_for_single_ref_do (gpointer object)
-{
-  guint num_ms_elapsed;
-  gboolean timed_out;
-
-  timed_out = FALSE;
-  num_ms_elapsed = 0;
-
-  while (TRUE)
-    {
-      if (G_OBJECT (object)->ref_count == 1)
-        goto out;
-
-      if (num_ms_elapsed > 30000)
-        {
-          timed_out = TRUE;
-          goto out;
-        }
-
-      usleep (10 * 1000);
-      num_ms_elapsed += 10;
-    }
-
- out:
-  return timed_out;
-}
-
-#else
-
-typedef struct
-{
-  GMainLoop *loop;
-  gboolean   timed_out;
-} WaitSingleRefData;
-
-static gboolean
-on_wait_single_ref_timeout (gpointer user_data)
-{
-  WaitSingleRefData *data = user_data;
-  data->timed_out = TRUE;
-  g_main_loop_quit (data->loop);
-  return TRUE;
-}
-
-static void
-on_wait_for_single_ref_toggled (gpointer   user_data,
-                                GObject   *object,
-                                gboolean   is_last_ref)
-{
-  WaitSingleRefData *data = user_data;
-  g_main_loop_quit (data->loop);
-}
-
-gboolean
-_g_object_wait_for_single_ref_do (gpointer object)
-{
-  WaitSingleRefData data;
-  guint timeout_id;
-
-  data.timed_out = FALSE;
-
-  if (G_OBJECT (object)->ref_count == 1)
-    goto out;
-
-  data.loop = g_main_loop_new (NULL, FALSE);
-  timeout_id = g_timeout_add (30 * 1000,
-                              on_wait_single_ref_timeout,
-                              &data);
-
-  g_object_add_toggle_ref (G_OBJECT (object),
-                           on_wait_for_single_ref_toggled,
-                           &data);
-  /* the reference could have been removed between us checking the
-   * ref_count and the toggle ref being added
-   */
-  if (G_OBJECT (object)->ref_count == 2)
-    goto single_ref_already;
-
-  g_object_unref (object);
-  g_main_loop_run (data.loop);
-  g_object_ref (object);
-
-single_ref_already:
-  g_object_remove_toggle_ref (object,
-                              on_wait_for_single_ref_toggled,
-                              &data);
-
-  g_source_remove (timeout_id);
-  g_main_loop_unref (data.loop);
-
- out:
-  if (data.timed_out)
-    {
-      g_printerr ("b ref_count is %d\n", G_OBJECT (object)->ref_count);
-    }
-  return data.timed_out;
-}
-#endif
 
 /* ---------------------------------------------------------------------------------------------------- */

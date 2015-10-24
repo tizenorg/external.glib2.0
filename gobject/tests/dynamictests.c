@@ -342,11 +342,14 @@ test_dynamic_interface_properties (void)
 {
   GTypeModule *module;
   DynObj *obj;
+  gint val;
 
   module = test_module_new (mod_register);
   g_assert (module != NULL);
 
   obj = g_object_new (dyn_obj_get_type (), "foo", 1, NULL);
+  g_object_get (obj, "foo", &val, NULL);
+  g_assert_cmpint (val, ==, 1);
 
   g_object_unref (obj);
 }
@@ -356,7 +359,6 @@ main (int   argc,
       char *argv[])
 {
   g_test_init (&argc, &argv, NULL);
-  g_type_init ();
 
   g_test_add_func ("/GObject/threaded-dynamic-ref-unref-init", test_multithreaded_dynamic_type_init);
   g_test_add_func ("/GObject/dynamic-interface-properties", test_dynamic_interface_properties);

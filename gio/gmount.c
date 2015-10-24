@@ -15,9 +15,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: Alexander Larsson <alexl@redhat.com>
  *         David Zeuthen <davidz@redhat.com>
@@ -29,8 +27,9 @@
 
 #include "gmount.h"
 #include "gmountprivate.h"
+#include "gthemedicon.h"
 #include "gasyncresult.h"
-#include "gsimpleasyncresult.h"
+#include "gtask.h"
 #include "gioerror.h"
 #include "glibintl.h"
 
@@ -51,7 +50,7 @@
  * 
  * Unmounting a #GMount instance is an asynchronous operation. For
  * more information about asynchronous operations, see #GAsyncResult
- * and #GSimpleAsyncResult. To unmount a #GMount instance, first call
+ * and #GTask. To unmount a #GMount instance, first call
  * g_mount_unmount_with_operation() with (at least) the #GMount instance and a
  * #GAsyncReadyCallback.  The callback will be fired when the
  * operation has resolved (either with success or failure), and a
@@ -213,6 +212,37 @@ g_mount_get_icon (GMount *mount)
   return (* iface->get_icon) (mount);
 }
 
+
+/**
+ * g_mount_get_symbolic_icon:
+ * @mount: a #GMount.
+ * 
+ * Gets the symbolic icon for @mount.
+ * 
+ * Returns: (transfer full): a #GIcon.
+ *      The returned object should be unreffed with 
+ *      g_object_unref() when no longer needed.
+ *
+ * Since: 2.34
+ **/
+GIcon *
+g_mount_get_symbolic_icon (GMount *mount)
+{
+  GMountIface *iface;
+  GIcon *ret;
+
+  g_return_val_if_fail (G_IS_MOUNT (mount), NULL);
+
+  iface = G_MOUNT_GET_IFACE (mount);
+
+  if (iface->get_symbolic_icon != NULL)
+    ret = iface->get_symbolic_icon (mount);
+  else
+    ret = g_themed_icon_new_with_default_fallbacks ("folder-remote-symbolic");
+
+  return ret;
+}
+
 /**
  * g_mount_get_uuid:
  * @mount: a #GMount.
@@ -354,14 +384,13 @@ g_mount_unmount (GMount              *mount,
 
   if (iface->unmount == NULL)
     {
-      g_simple_async_report_error_in_idle (G_OBJECT (mount),
-					   callback, user_data,
-					   G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-					   /* Translators: This is an error
-					    * message for mount objects that
-					    * don't implement unmount. */
-					   _("mount doesn't implement \"unmount\""));
-
+      g_task_report_new_error (mount, callback, user_data,
+                               g_mount_unmount_with_operation,
+                               G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                               /* Translators: This is an error
+                                * message for mount objects that
+                                * don't implement unmount. */
+                               _("mount doesn't implement \"unmount\""));
       return;
     }
   
@@ -392,12 +421,10 @@ g_mount_unmount_finish (GMount        *mount,
   g_return_val_if_fail (G_IS_MOUNT (mount), FALSE);
   g_return_val_if_fail (G_IS_ASYNC_RESULT (result), FALSE);
 
-  if (G_IS_SIMPLE_ASYNC_RESULT (result))
-    {
-      GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (result);
-      if (g_simple_async_result_propagate_error (simple, error))
-        return FALSE;
-    }
+  if (g_async_result_legacy_propagate_error (result, error))
+    return FALSE;
+  else if (g_async_result_is_tagged (result, g_mount_unmount_with_operation))
+    return g_task_propagate_boolean (G_TASK (result), error);
   
   iface = G_MOUNT_GET_IFACE (mount);
   return (* iface->unmount_finish) (mount, result, error);
@@ -433,14 +460,13 @@ g_mount_eject (GMount              *mount,
 
   if (iface->eject == NULL)
     {
-      g_simple_async_report_error_in_idle (G_OBJECT (mount),
-					   callback, user_data,
-					   G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-					   /* Translators: This is an error
-					    * message for mount objects that
-					    * don't implement eject. */
-					   _("mount doesn't implement \"eject\""));
-      
+      g_task_report_new_error (mount, callback, user_data,
+                               g_mount_eject_with_operation,
+                               G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                               /* Translators: This is an error
+                                * message for mount objects that
+                                * don't implement eject. */
+                               _("mount doesn't implement \"eject\""));
       return;
     }
   
@@ -471,12 +497,10 @@ g_mount_eject_finish (GMount        *mount,
   g_return_val_if_fail (G_IS_MOUNT (mount), FALSE);
   g_return_val_if_fail (G_IS_ASYNC_RESULT (result), FALSE);
 
-  if (G_IS_SIMPLE_ASYNC_RESULT (result))
-    {
-      GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (result);
-      if (g_simple_async_result_propagate_error (simple, error))
-        return FALSE;
-    }
+  if (g_async_result_legacy_propagate_error (result, error))
+    return FALSE;
+  else if (g_async_result_is_tagged (result, g_mount_eject_with_operation))
+    return g_task_propagate_boolean (G_TASK (result), error);
   
   iface = G_MOUNT_GET_IFACE (mount);
   return (* iface->eject_finish) (mount, result, error);
@@ -514,14 +538,13 @@ g_mount_unmount_with_operation (GMount              *mount,
 
   if (iface->unmount == NULL && iface->unmount_with_operation == NULL)
     {
-      g_simple_async_report_error_in_idle (G_OBJECT (mount),
-					   callback, user_data,
-					   G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-					   /* Translators: This is an error
-					    * message for mount objects that
-					    * don't implement any of unmount or unmount_with_operation. */
-					   _("mount doesn't implement \"unmount\" or \"unmount_with_operation\""));
-
+      g_task_report_new_error (mount, callback, user_data,
+                               g_mount_unmount_with_operation,
+                               G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                               /* Translators: This is an error
+                                * message for mount objects that
+                                * don't implement any of unmount or unmount_with_operation. */
+                               _("mount doesn't implement \"unmount\" or \"unmount_with_operation\""));
       return;
     }
 
@@ -555,12 +578,10 @@ g_mount_unmount_with_operation_finish (GMount        *mount,
   g_return_val_if_fail (G_IS_MOUNT (mount), FALSE);
   g_return_val_if_fail (G_IS_ASYNC_RESULT (result), FALSE);
 
-  if (G_IS_SIMPLE_ASYNC_RESULT (result))
-    {
-      GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (result);
-      if (g_simple_async_result_propagate_error (simple, error))
-        return FALSE;
-    }
+  if (g_async_result_legacy_propagate_error (result, error))
+    return FALSE;
+  else if (g_async_result_is_tagged (result, g_mount_unmount_with_operation))
+    return g_task_propagate_boolean (G_TASK (result), error);
 
   iface = G_MOUNT_GET_IFACE (mount);
   if (iface->unmount_with_operation_finish != NULL)
@@ -602,13 +623,13 @@ g_mount_eject_with_operation (GMount              *mount,
 
   if (iface->eject == NULL && iface->eject_with_operation == NULL)
     {
-      g_simple_async_report_error_in_idle (G_OBJECT (mount),
-					   callback, user_data,
-					   G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-					   /* Translators: This is an error
-					    * message for mount objects that
-					    * don't implement any of eject or eject_with_operation. */
-					   _("mount doesn't implement \"eject\" or \"eject_with_operation\""));
+      g_task_report_new_error (mount, callback, user_data,
+                               g_mount_eject_with_operation,
+                               G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                               /* Translators: This is an error
+                                * message for mount objects that
+                                * don't implement any of eject or eject_with_operation. */
+                               _("mount doesn't implement \"eject\" or \"eject_with_operation\""));
       return;
     }
 
@@ -642,12 +663,10 @@ g_mount_eject_with_operation_finish (GMount        *mount,
   g_return_val_if_fail (G_IS_MOUNT (mount), FALSE);
   g_return_val_if_fail (G_IS_ASYNC_RESULT (result), FALSE);
 
-  if (G_IS_SIMPLE_ASYNC_RESULT (result))
-    {
-      GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (result);
-      if (g_simple_async_result_propagate_error (simple, error))
-        return FALSE;
-    }
+  if (g_async_result_legacy_propagate_error (result, error))
+    return FALSE;
+  else if (g_async_result_is_tagged (result, g_mount_eject_with_operation))
+    return g_task_propagate_boolean (G_TASK (result), error);
 
   iface = G_MOUNT_GET_IFACE (mount);
   if (iface->eject_with_operation_finish != NULL)
@@ -692,14 +711,13 @@ g_mount_remount (GMount              *mount,
 
   if (iface->remount == NULL)
     { 
-      g_simple_async_report_error_in_idle (G_OBJECT (mount),
-					   callback, user_data,
-					   G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-					   /* Translators: This is an error
-					    * message for mount objects that
-					    * don't implement remount. */
-					   _("mount doesn't implement \"remount\""));
-      
+      g_task_report_new_error (mount, callback, user_data,
+                               g_mount_remount,
+                               G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                               /* Translators: This is an error
+                                * message for mount objects that
+                                * don't implement remount. */
+                               _("mount doesn't implement \"remount\""));
       return;
     }
   
@@ -728,12 +746,10 @@ g_mount_remount_finish (GMount        *mount,
   g_return_val_if_fail (G_IS_MOUNT (mount), FALSE);
   g_return_val_if_fail (G_IS_ASYNC_RESULT (result), FALSE);
 
-  if (G_IS_SIMPLE_ASYNC_RESULT (result))
-    {
-      GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (result);
-      if (g_simple_async_result_propagate_error (simple, error))
-        return FALSE;
-    }
+  if (g_async_result_legacy_propagate_error (result, error))
+    return FALSE;
+  else if (g_async_result_is_tagged (result, g_mount_remount))
+    return g_task_propagate_boolean (G_TASK (result), error);
   
   iface = G_MOUNT_GET_IFACE (mount);
   return (* iface->remount_finish) (mount, result, error);
@@ -751,7 +767,8 @@ g_mount_remount_finish (GMount        *mount,
  * Tries to guess the type of content stored on @mount. Returns one or
  * more textual identifiers of well-known content types (typically
  * prefixed with "x-content/"), e.g. x-content/image-dcf for camera 
- * memory cards. See the <ulink url="http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec">shared-mime-info</ulink>
+ * memory cards. See the 
+ * [shared-mime-info](http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec)
  * specification for more on x-content types.
  *
  * This is an asynchronous operation (see
@@ -776,14 +793,13 @@ g_mount_guess_content_type (GMount              *mount,
 
   if (iface->guess_content_type == NULL)
     {
-      g_simple_async_report_error_in_idle (G_OBJECT (mount),
-                                           callback, user_data,
-                                           G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
-                                           /* Translators: This is an error
-                                            * message for mount objects that
-                                            * don't implement content type guessing. */
-                                           _("mount doesn't implement content type guessing"));
-
+      g_task_report_new_error (mount, callback, user_data,
+                               g_mount_guess_content_type,
+                               G_IO_ERROR, G_IO_ERROR_NOT_SUPPORTED,
+                               /* Translators: This is an error
+                                * message for mount objects that
+                                * don't implement content type guessing. */
+                               _("mount doesn't implement content type guessing"));
       return;
     }
   
@@ -818,12 +834,10 @@ g_mount_guess_content_type_finish (GMount        *mount,
   g_return_val_if_fail (G_IS_MOUNT (mount), NULL);
   g_return_val_if_fail (G_IS_ASYNC_RESULT (result), NULL);
 
-  if (G_IS_SIMPLE_ASYNC_RESULT (result))
-    {
-      GSimpleAsyncResult *simple = G_SIMPLE_ASYNC_RESULT (result);
-      if (g_simple_async_result_propagate_error (simple, error))
-        return NULL;
-    }
+  if (g_async_result_legacy_propagate_error (result, error))
+    return NULL;
+  else if (g_async_result_is_tagged (result, g_mount_guess_content_type))
+    return g_task_propagate_pointer (G_TASK (result), error);
   
   iface = G_MOUNT_GET_IFACE (mount);
   return (* iface->guess_content_type_finish) (mount, result, error);
@@ -841,7 +855,8 @@ g_mount_guess_content_type_finish (GMount        *mount,
  * Tries to guess the type of content stored on @mount. Returns one or
  * more textual identifiers of well-known content types (typically
  * prefixed with "x-content/"), e.g. x-content/image-dcf for camera 
- * memory cards. See the <ulink url="http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec">shared-mime-info</ulink>
+ * memory cards. See the 
+ * [shared-mime-info](http://www.freedesktop.org/wiki/Specifications/shared-mime-info-spec)
  * specification for more on x-content types.
  *
  * This is an synchronous operation and as such may block doing IO;
@@ -931,10 +946,10 @@ get_private (GMount *mount)
  * situation, a #GVolumeMonitor implementation would create two
  * #GVolume objects (for example, one for the camera functionality of
  * the device and one for a SD card reader on the device) with
- * activation URIs <literal>gphoto2://[usb:001,002]/store1/</literal>
- * and <literal>gphoto2://[usb:001,002]/store2/</literal>. When the
+ * activation URIs `gphoto2://[usb:001,002]/store1/`
+ * and `gphoto2://[usb:001,002]/store2/`. When the
  * underlying mount (with root
- * <literal>gphoto2://[usb:001,002]/</literal>) is mounted, said
+ * `gphoto2://[usb:001,002]/`) is mounted, said
  * #GVolumeMonitor implementation would create two #GMount objects
  * (each with their root matching the corresponding volume activation
  * root) that would shadow the original mount.

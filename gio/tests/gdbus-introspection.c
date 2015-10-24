@@ -13,9 +13,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: David Zeuthen <davidz@redhat.com>
  */
@@ -108,13 +106,6 @@ test_introspection_parser (void)
   GDBusConnection *connection;
   GError *error;
 
-  session_bus_up ();
-
-  /* TODO: wait a bit for the bus to come up.. ideally session_bus_up() won't return
-   * until one can connect to the bus but that's not how things work right now
-   */
-  usleep (500 * 1000);
-
   error = NULL;
   connection = g_bus_get_sync (G_BUS_TYPE_SESSION,
                                NULL,
@@ -132,7 +123,7 @@ test_introspection_parser (void)
   g_assert_no_error (error);
 
   /* this is safe; testserver will exit once the bus goes away */
-  g_assert (g_spawn_command_line_async (SRCDIR "/gdbus-testserver.py", NULL));
+  g_assert (g_spawn_command_line_async (g_test_get_filename (G_TEST_BUILT, "gdbus-testserver", NULL), NULL));
 
   _g_assert_property_notify (proxy, "g-name-owner");
 
@@ -170,7 +161,9 @@ test_generate (void)
   "      <method name='Sleep'>"
   "        <arg type='i' name='timeout' direction='in'/>"
   "      </method>"
-  "      <property name='y' type='y' access='readwrite'/>"
+  "      <property name='y' type='y' access='readwrite'>"
+  "        <annotation name='needs-escaping' value='bar&lt;&gt;&apos;&quot;'/>"
+  "      </property>"
   "    </interface>"
   "  </node>";
 
@@ -266,10 +259,6 @@ test_default_direction (void)
   g_dbus_node_info_unref (info);
 }
 
-#if 0
-/* XXX: need to figure out how generous we want to be here */
-/* test that extraneous attributes are ignored
- */
 static void
 test_extra_data (void)
 {
@@ -277,11 +266,18 @@ test_extra_data (void)
   const gchar *data =
   "  <node>"
   "    <interface name='com.example.Frob' version='1.0'>"
-  "      <annotation name='foo' value='bar' extra='bla'/>"
-  "      <method name='PairReturn' anotherattribute='bla'>"
-  "        <annotation name='org.freedesktop.DBus.GLib.Async' value=''/>"
-  "        <arg type='u' name='somenumber' direction='in' spin='left'/>"
-  "        <arg type='s' name='somestring' direction='out'/>"
+  "      <doc:doc><doc:description><doc:para>Blah blah</doc:para></doc:description></doc:doc>"
+  "      <method name='DownloadPackages'>"
+  "        <arg type='u' name='somenumber' direction='in'>"
+  "          <doc:doc><doc:summary><doc:para>"
+  "            See <doc:ulink url='http:///example.com'>example</doc:ulink>"
+  "          </doc:para></doc:summary></doc:doc>"
+  "        </arg>"
+  "        <arg type='s' name='somestring' direction='out'>"
+  "          <doc:doc><doc:summary><doc:para>"
+  "            More docs"
+  "          </doc:para></doc:summary></doc:doc>"
+  "        </arg>"
   "      </method>"
   "      <signal name='HelloWorld'>"
   "        <arg type='s' name='somestring'/>"
@@ -300,7 +296,6 @@ test_extra_data (void)
 
   g_dbus_node_info_unref (info);
 }
-#endif
 
 /* ---------------------------------------------------------------------------------------------------- */
 
@@ -308,25 +303,22 @@ int
 main (int   argc,
       char *argv[])
 {
-  g_type_init ();
+  gint ret;
+
   g_test_init (&argc, &argv, NULL);
 
   /* all the tests rely on a shared main loop */
   loop = g_main_loop_new (NULL, FALSE);
 
-  /* all the tests use a session bus with a well-known address that we can bring up and down
-   * using session_bus_up() and session_bus_down().
-   */
-  g_unsetenv ("DISPLAY");
-  g_setenv ("DBUS_SESSION_BUS_ADDRESS", session_bus_get_temporary_address (), TRUE);
-
   g_test_add_func ("/gdbus/introspection-parser", test_introspection_parser);
   g_test_add_func ("/gdbus/introspection-generate", test_generate);
   g_test_add_func ("/gdbus/introspection-default-direction", test_default_direction);
-#if 0
-  /* XXX: need to figure out how generous we want to be here */
   g_test_add_func ("/gdbus/introspection-extra-data", test_extra_data);
-#endif
 
-  return g_test_run();
+  ret = session_bus_run ();
+
+  while (g_main_context_iteration (NULL, FALSE));
+  g_main_loop_unref (loop);
+
+  return ret;
 }

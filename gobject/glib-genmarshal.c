@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "config.h"
@@ -23,17 +21,19 @@
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
 #include <sys/types.h>
 #include <sys/stat.h>
+
+#include <glib/gstdio.h>
 
 #undef G_LOG_DOMAIN
 #define G_LOG_DOMAIN "GLib-Genmarshal"
 #include <glib.h>
 #include <glib/gprintf.h>
 
+#ifdef G_OS_UNIX
+#include <unistd.h>
+#endif
 #ifdef G_OS_WIN32
 #include <io.h>
 #endif
@@ -848,7 +848,7 @@ main (int   argc,
 	/* Mostly for Win32. This is equivalent to opening /dev/stdin */
 	fd = dup (0);
       else
-	fd = open (file, O_RDONLY);
+	fd = g_open (file, O_RDONLY, 0);
 
       if (fd < 0)
 	{

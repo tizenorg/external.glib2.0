@@ -12,9 +12,7 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
+ * License along with this library; if not, see <http://www.gnu.org/licenses/>.
  */
 
 /*
@@ -23,8 +21,6 @@
  * files for a list of changes.  These files are distributed with
  * GLib at ftp://ftp.gtk.org/pub/gtk/. 
  */
-
-#include "config.h"
 
 #undef GLIB_COMPILATION
 
@@ -37,7 +33,7 @@
 
 #include <stdlib.h>
 
-#ifdef HAVE_UNISTD_H
+#ifdef G_OS_UNIX
 #include <unistd.h>
 #endif
 
@@ -552,32 +548,30 @@ test_g_parse_debug_string (void)
 static void
 log_warning_error_tests (void)
 {
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT | G_TEST_TRAP_SILENCE_STDERR))
-    {
-      g_message ("this is a g_message test.");
-      g_message ("non-printable UTF-8: \"\xc3\xa4\xda\x85\"");
-      g_message ("unsafe chars: \"\x10\x11\x12\n\t\x7f\x81\x82\x83\"");
-      exit (0);
-    }
-  g_test_trap_assert_passed();
-  g_test_trap_assert_stderr ("*is a g_message test*");
-  g_test_trap_assert_stderr ("*non-printable UTF-8*");
-  g_test_trap_assert_stderr ("*unsafe chars*");
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT | G_TEST_TRAP_SILENCE_STDERR))
-    {
-      g_warning ("harmless warning with parameters: %d %s %#x", 42, "Boo", 12345);
-      exit (0);
-    }
-  g_test_trap_assert_failed(); /* we have fatal-warnings enabled */
-  g_test_trap_assert_stderr ("*harmless warning*");
-  if (g_test_trap_fork (0, G_TEST_TRAP_SILENCE_STDOUT | G_TEST_TRAP_SILENCE_STDERR))
-    {
-      g_print (NULL);
-      exit (0);
-    }
-  g_test_trap_assert_failed(); /* we have fatal-warnings enabled */
-  g_test_trap_assert_stderr ("*g_print*assertion*failed*");
-  g_test_trap_assert_stderr ("*NULL*");
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_MESSAGE,
+                         "*is a g_message test*");
+  g_message ("this is a g_message test.");
+  g_test_assert_expected_messages ();
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_MESSAGE,
+                         "*non-printable UTF-8*");
+  g_message ("non-printable UTF-8: \"\xc3\xa4\xda\x85\"");
+  g_test_assert_expected_messages ();
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_MESSAGE,
+                         "*unsafe chars*");
+  g_message ("unsafe chars: \"\x10\x11\x12\n\t\x7f\x81\x82\x83\"");
+  g_test_assert_expected_messages ();
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_WARNING,
+                         "*harmless warning*");
+  g_warning ("harmless warning with parameters: %d %s %#x", 42, "Boo", 12345);
+  g_test_assert_expected_messages ();
+
+  g_test_expect_message (G_LOG_DOMAIN, G_LOG_LEVEL_CRITICAL,
+                         "*g_print*assertion*failed*");
+  g_print (NULL);
+  g_test_assert_expected_messages ();
 }
 
 static void
@@ -940,8 +934,8 @@ test_file_functions (void)
   chars[n] = 0;
   if (strcmp (chars, hello) != 0)
     g_error ("wrote '%s', but got '%s'\n", hello, chars);
-
-  close (fd);
+  if (fd != -1)
+    close (fd);
   remove (template);
 
   error = NULL;
@@ -971,7 +965,8 @@ test_file_functions (void)
       else
         g_print ("g_file_open_tmp correctly returns error: %s\n", error->message);
     }
-  close (fd);
+  if (fd != -1)
+    close (fd);
   g_clear_error (&error);
   g_free (name_used);
 #endif
@@ -983,7 +978,8 @@ test_file_functions (void)
     g_error ("g_file_open_tmp didn't work for template '%s': %s\n", template, error->message);
   else if (g_test_verbose())
     g_print ("g_file_open_tmp for template '%s' used name '%s'\n", template, name_used);
-  close (fd);
+  if (fd != -1)
+    close (fd);
   g_clear_error (&error);
   remove (name_used);
   g_free (name_used);
@@ -992,7 +988,8 @@ test_file_functions (void)
   fd = g_file_open_tmp (NULL, &name_used, &error);
   if (fd == -1)
     g_error ("g_file_open_tmp didn't work for a NULL template: %s\n", error->message);
-  close (fd);
+  else
+    close (fd);
   g_clear_error (&error);
   remove (name_used);
   g_free (name_used);
@@ -1348,7 +1345,7 @@ various_string_tests (void)
   g_assert (g_time_val_from_iso8601 (REF_INVALID1, &date) == FALSE);
   g_assert (g_time_val_from_iso8601 (REF_INVALID2, &date) == FALSE);
   g_assert (g_time_val_from_iso8601 (REF_INVALID3, &date) == FALSE);
-  g_assert (g_time_val_from_iso8601 (REF_STR_DATE_ONLY, &date) != FALSE);
+  g_assert (g_time_val_from_iso8601 (REF_STR_DATE_ONLY, &date) == FALSE);
   g_assert (g_time_val_from_iso8601 (REF_STR_UTC, &date) != FALSE);
   if (g_test_verbose())
     g_print ("\t=> UTC stamp = %ld.%06ld (should be: %ld.%06ld) (%ld.%06ld off)\n",

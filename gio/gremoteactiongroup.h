@@ -12,19 +12,17 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Authors: Ryan Lortie <desrt@desrt.ca>
  */
 
+#ifndef __G_REMOTE_ACTION_GROUP_H__
+#define __G_REMOTE_ACTION_GROUP_H__
+
 #if !defined (__GIO_GIO_H_INSIDE__) && !defined (GIO_COMPILATION)
 #error "Only <gio/gio.h> can be included directly."
 #endif
-
-#ifndef __G_REMOTE_ACTION_GROUP_H__
-#define __G_REMOTE_ACTION_GROUP_H__
 
 #include <gio/giotypes.h>
 
@@ -57,13 +55,16 @@ struct _GRemoteActionGroupInterface
                                      GVariant           *platform_data);
 };
 
+GLIB_AVAILABLE_IN_2_32
 GType                   g_remote_action_group_get_type                  (void) G_GNUC_CONST;
 
+GLIB_AVAILABLE_IN_2_32
 void                    g_remote_action_group_activate_action_full      (GRemoteActionGroup *remote,
                                                                          const gchar        *action_name,
                                                                          GVariant           *parameter,
                                                                          GVariant           *platform_data);
 
+GLIB_AVAILABLE_IN_2_32
 void                    g_remote_action_group_change_action_state_full  (GRemoteActionGroup *remote,
                                                                          const gchar        *action_name,
                                                                          GVariant           *value,

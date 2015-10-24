@@ -13,19 +13,17 @@
  * Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General
- * Public License along with this library; if not, write to the
- * Free Software Foundation, Inc., 59 Temple Place, Suite 330,
- * Boston, MA 02111-1307, USA.
+ * Public License along with this library; if not, see <http://www.gnu.org/licenses/>.
  *
  * Author: David Zeuthen <davidz@redhat.com>
  */
 
+#ifndef __G_DBUS_PRIVATE_H__
+#define __G_DBUS_PRIVATE_H__
+
 #if !defined (GIO_COMPILATION)
 #error "gdbusprivate.h is a private header file."
 #endif
-
-#ifndef __G_DBUS_PRIVATE_H__
-#define __G_DBUS_PRIVATE_H__
 
 #include <gio/giotypes.h>
 
@@ -81,6 +79,8 @@ void         _g_dbus_worker_close        (GDBusWorker         *worker,
                                           GCancellable        *cancellable,
                                           GSimpleAsyncResult  *result);
 
+void         _g_dbus_worker_queue_or_deliver_received_message (GDBusWorker  *worker,
+                                                               GDBusMessage *message);
 /* ---------------------------------------------------------------------------------------------------- */
 
 void _g_dbus_initialize (void);
@@ -119,15 +119,16 @@ gchar *_g_dbus_enum_to_string (GType enum_type, gint value);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
-GDBusMethodInvocation *_g_dbus_method_invocation_new (const gchar           *sender,
-                                                      const gchar           *object_path,
-                                                      const gchar           *interface_name,
-                                                      const gchar           *method_name,
-                                                      const GDBusMethodInfo *method_info,
-                                                      GDBusConnection       *connection,
-                                                      GDBusMessage          *message,
-                                                      GVariant              *parameters,
-                                                      gpointer               user_data);
+GDBusMethodInvocation *_g_dbus_method_invocation_new (const gchar             *sender,
+                                                      const gchar             *object_path,
+                                                      const gchar             *interface_name,
+                                                      const gchar             *method_name,
+                                                      const GDBusMethodInfo   *method_info,
+                                                      const GDBusPropertyInfo *property_info,
+                                                      GDBusConnection         *connection,
+                                                      GDBusMessage            *message,
+                                                      GVariant                *parameters,
+                                                      gpointer                 user_data);
 
 /* ---------------------------------------------------------------------------------------------------- */
 
@@ -142,6 +143,9 @@ void _g_dbus_object_proxy_add_interface (GDBusObjectProxy *proxy,
                                          GDBusProxy       *interface_proxy);
 void _g_dbus_object_proxy_remove_interface (GDBusObjectProxy *proxy,
                                             const gchar      *interface_name);
+
+/* Implemented in gdbusconnection.c */
+GDBusConnection *_g_bus_get_singleton_if_exists (GBusType bus_type);
 
 G_END_DECLS
 
