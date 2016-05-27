@@ -1529,9 +1529,11 @@ g_dbus_address_get_for_bus_sync (GBusType       bus_type,
   if (G_UNLIKELY (_g_dbus_debug_address ()))
     {
       guint n;
+			gchar *s;
       _g_dbus_debug_print_lock ();
-      g_print ("GDBus-debug:Address: In g_dbus_address_get_for_bus_sync() for bus type '%s'\n",
-               _g_dbus_enum_to_string (G_TYPE_BUS_TYPE, bus_type));
+			s = _g_dbus_enum_to_string (G_TYPE_BUS_TYPE, bus_type);
+      g_print ("GDBus-debug:Address: In g_dbus_address_get_for_bus_sync() for bus type '%s'\n", s);
+			g_free(s);
       for (n = 0; n < 3; n++)
         {
           const gchar *k;
@@ -1633,15 +1635,16 @@ g_dbus_address_get_for_bus_sync (GBusType       bus_type,
       _g_dbus_debug_print_lock ();
       if (ret != NULL)
         {
-          g_print ("GDBus-debug:Address: Returning address '%s' for bus type '%s'\n",
-                   ret,
-                   _g_dbus_enum_to_string (G_TYPE_BUS_TYPE, bus_type));
+					gchar *s = _g_dbus_enum_to_string (G_TYPE_BUS_TYPE, bus_type);
+          g_print ("GDBus-debug:Address: Returning address '%s' for bus type '%s'\n", ret, s);
+					g_free(s);
         }
       else
         {
+					gchar *s = _g_dbus_enum_to_string (G_TYPE_BUS_TYPE, bus_type);
           g_print ("GDBus-debug:Address: Cannot look-up address bus type '%s': %s\n",
-                   _g_dbus_enum_to_string (G_TYPE_BUS_TYPE, bus_type),
-                   local_error ? local_error->message : "");
+									 s, local_error ? local_error->message : "");
+					g_free(s);
         }
       _g_dbus_debug_print_unlock ();
     }
